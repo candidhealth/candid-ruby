@@ -11,7 +11,7 @@ module CandidApiClient
         attr_reader :rendering_providers, :routed_payer_uuid, :routed_billing_provider_id, :additional_properties
 
         # @param rendering_providers [Array<OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID>]
-        # @param routed_payer_uuid [Payers::V3::PAYER_UUID]
+        # @param routed_payer_uuid [Payers::V3::PAYER_String]
         # @param routed_billing_provider_id [OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ExpectedNetworkStatus::V2::InNetworkRenderingProvidersDetail]
@@ -19,7 +19,7 @@ module CandidApiClient
                        additional_properties: nil)
           # @type [Array<OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID>]
           @rendering_providers = rendering_providers
-          # @type [Payers::V3::PAYER_UUID]
+          # @type [Payers::V3::PAYER_String]
           @routed_payer_uuid = routed_payer_uuid
           # @type [OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID]
           @routed_billing_provider_id = routed_billing_provider_id
@@ -58,8 +58,8 @@ module CandidApiClient
         # @return [Void]
         def self.validate_raw(obj:)
           obj.rendering_providers.is_a?(Array) != false || raise("Passed value for field obj.rendering_providers is not the expected type, validation failed.")
-          obj.routed_payer_uuid.is_a?(UUID) != false || raise("Passed value for field obj.routed_payer_uuid is not the expected type, validation failed.")
-          obj.routed_billing_provider_id.is_a?(UUID) != false || raise("Passed value for field obj.routed_billing_provider_id is not the expected type, validation failed.")
+          obj.routed_payer_uuid.is_a?(String) != false || raise("Passed value for field obj.routed_payer_uuid is not the expected type, validation failed.")
+          obj.routed_billing_provider_id.is_a?(String) != false || raise("Passed value for field obj.routed_billing_provider_id is not the expected type, validation failed.")
         end
       end
     end

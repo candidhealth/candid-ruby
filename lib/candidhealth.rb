@@ -22,6 +22,7 @@ require_relative "candidhealth/payers/client"
 require_relative "candidhealth/tasks/client"
 require_relative "candidhealth/write_offs/client"
 require_relative "candidhealth/service_facility/client"
+require_relative "candidhealth/auth/v_2/types/auth_get_token_request"
 
 module CandidApiClient
   class Client
@@ -31,9 +32,11 @@ module CandidApiClient
     # @param environment [Environment]
     # @param max_retries [Long] The number of times to retry a failed request, defaults to 2.
     # @param timeout_in_seconds [Long]
-    # @param token [String]
+    # @param options [CandidApiAuthOptions]
     # @return [Client]
-    def initialize(token:, environment: Environment::PRODUCTION, max_retries: nil, timeout_in_seconds: nil)
+    def initialize(options: nil, environment: Environment::PRODUCTION, max_retries: nil, timeout_in_seconds: nil)
+      token = options.get_token(environment: environment) unless options.nil?
+
       @request_client = RequestClient.new(environment: environment, max_retries: max_retries,
                                           timeout_in_seconds: timeout_in_seconds, token: token)
       @auth = Auth::Client.new(request_client: @request_client)
@@ -65,9 +68,11 @@ module CandidApiClient
     # @param environment [Environment]
     # @param max_retries [Long] The number of times to retry a failed request, defaults to 2.
     # @param timeout_in_seconds [Long]
-    # @param token [String]
+    # @param options [CandidApiAuthOptions]
     # @return [AsyncClient]
-    def initialize(token:, environment: Environment::PRODUCTION, max_retries: nil, timeout_in_seconds: nil)
+    def initialize(options: nil, environment: Environment::PRODUCTION, max_retries: nil, timeout_in_seconds: nil)
+      token = options.get_token(environment: environment) unless options.nil?
+
       @async_request_client = AsyncRequestClient.new(environment: environment, max_retries: max_retries,
                                                      timeout_in_seconds: timeout_in_seconds, token: token)
       @auth = Auth::AsyncClient.new(request_client: @async_request_client)
@@ -91,4 +96,34 @@ module CandidApiClient
       @service_facility = AsyncServiceFacilityClient.new(request_client: @async_request_client)
     end
   end
+
+  class CandidApiAuthOptions
+    attr_reader :token, :client_id, :client_secret
+
+    # @param token [String]
+    # @param client_id [String]
+    # @param client_secret [String]
+    # @return [CandidApiAuthOptions]
+    def initialize(token: nil, client_id: nil, client_secret: nil)
+       # @type [String]
+       @token = token
+       # @type [string]
+       @client_id = client_id
+       # @type [string]
+       @client_secret = client_secret
+     end
+
+
+    # @param environment [Environment]
+    def get_token(environment:)
+      unless @token.nil?
+        return @token
+      end
+
+      unauthed_client = Client.new(environment:environment)
+      response = unauthed_client.auth.v_2.get_token(request: {client_id: @client_id, client_secret: @client_secret})
+      return response.access_token
+    end
+  end
+
 end

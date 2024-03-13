@@ -112,7 +112,7 @@ module CandidApiClient
         # @return [Void]
         def self.validate_raw(obj:)
           obj.patient_payment_id.is_a?(String) != false || raise("Passed value for field obj.patient_payment_id is not the expected type, validation failed.")
-          obj.organization_id.is_a?(UUID) != false || raise("Passed value for field obj.organization_id is not the expected type, validation failed.")
+          obj.organization_id.is_a?(String) != false || raise("Passed value for field obj.organization_id is not the expected type, validation failed.")
           obj.source_internal_id.is_a?(String) != false || raise("Passed value for field obj.source_internal_id is not the expected type, validation failed.")
           obj.source.is_a?(PatientPayments::V3::PatientPaymentSource) != false || raise("Passed value for field obj.source is not the expected type, validation failed.")
           obj.amount_cents.is_a?(Integer) != false || raise("Passed value for field obj.amount_cents is not the expected type, validation failed.")
@@ -122,7 +122,7 @@ module CandidApiClient
           obj.payment_note&.is_a?(String) != false || raise("Passed value for field obj.payment_note is not the expected type, validation failed.")
           obj.patient_external_id&.is_a?(String) != false || raise("Passed value for field obj.patient_external_id is not the expected type, validation failed.")
           obj.encounter_external_id&.is_a?(String) != false || raise("Passed value for field obj.encounter_external_id is not the expected type, validation failed.")
-          obj.service_line_id&.is_a?(UUID) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
+          obj.service_line_id&.is_a?(String) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
         end
       end
     end

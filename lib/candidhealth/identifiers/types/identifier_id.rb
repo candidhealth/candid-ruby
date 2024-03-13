@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Identifiers
-    IDENTIFIER_ID = UUID
+    IDENTIFIER_ID = String
   end
 end

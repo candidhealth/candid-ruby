@@ -3,7 +3,7 @@
 module CandidApiClient
   module OrganizationProviders
     module V2
-      ORGANIZATION_PROVIDER_ID = UUID
+      ORGANIZATION_PROVIDER_ID = String
     end
   end
 end

@@ -115,10 +115,10 @@ module CandidApiClient
       # @param obj [Object]
       # @return [Void]
       def self.validate_raw(obj:)
-        obj.id.is_a?(UUID) != false || raise("Passed value for field obj.id is not the expected type, validation failed.")
+        obj.id.is_a?(String) != false || raise("Passed value for field obj.id is not the expected type, validation failed.")
         obj.created_at.is_a?(DateTime) != false || raise("Passed value for field obj.created_at is not the expected type, validation failed.")
         obj.updated_at.is_a?(DateTime) != false || raise("Passed value for field obj.updated_at is not the expected type, validation failed.")
-        obj.organzation_id.is_a?(UUID) != false || raise("Passed value for field obj.organzation_id is not the expected type, validation failed.")
+        obj.organzation_id.is_a?(String) != false || raise("Passed value for field obj.organzation_id is not the expected type, validation failed.")
         obj.source_id.is_a?(String) != false || raise("Passed value for field obj.source_id is not the expected type, validation failed.")
         obj.source_customer_id.is_a?(String) != false || raise("Passed value for field obj.source_customer_id is not the expected type, validation failed.")
         obj.patient_external_id.is_a?(String) != false || raise("Passed value for field obj.patient_external_id is not the expected type, validation failed.")

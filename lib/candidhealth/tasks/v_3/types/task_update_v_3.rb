@@ -57,7 +57,7 @@ module CandidApiClient
         # @return [Void]
         def self.validate_raw(obj:)
           obj.status&.is_a?(Tasks::Commons::TaskStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
-          obj.assignee_user_id&.is_a?(UUID) != false || raise("Passed value for field obj.assignee_user_id is not the expected type, validation failed.")
+          obj.assignee_user_id&.is_a?(String) != false || raise("Passed value for field obj.assignee_user_id is not the expected type, validation failed.")
           obj.blocks_claim_submission&.is_a?(Boolean) != false || raise("Passed value for field obj.blocks_claim_submission is not the expected type, validation failed.")
         end
       end

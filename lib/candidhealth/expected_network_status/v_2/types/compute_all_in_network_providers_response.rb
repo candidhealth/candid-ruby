@@ -57,7 +57,7 @@ module CandidApiClient
         # @return [Void]
         def self.validate_raw(obj:)
           ExpectedNetworkStatus::V2::ComputeAllInNetworkRenderingProvidersResult.validate_raw(obj: obj.computed_network_status)
-          obj.network_status_check_id.is_a?(UUID) != false || raise("Passed value for field obj.network_status_check_id is not the expected type, validation failed.")
+          obj.network_status_check_id.is_a?(String) != false || raise("Passed value for field obj.network_status_check_id is not the expected type, validation failed.")
         end
       end
     end

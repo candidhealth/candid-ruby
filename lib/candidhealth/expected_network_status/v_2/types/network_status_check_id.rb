@@ -3,7 +3,7 @@
 module CandidApiClient
   module ExpectedNetworkStatus
     module V2
-      NETWORK_STATUS_CHECK_ID = UUID
+      NETWORK_STATUS_CHECK_ID = String
     end
   end
 end

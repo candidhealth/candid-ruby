@@ -23,8 +23,10 @@ gem install candidhealth
 ```ruby
 require "candidhealth"
 
+options = CandidApiClient::CandidApiAuthOptions.new(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
+
 candidhealth = CandidApiClient::Client.new(
-  api_key: 'YOUR_API_KEY',
+  options: options
 )
 ```
 
@@ -34,7 +36,8 @@ The SDK exports an async client that you can use for non-blocking requests.
 ```ruby
 require "candidhealth"
 
-candidhealth = CandidApiClient::AsyncClient.new(api_key: 'YOUR_API_KEY')
+options = CandidApiClient::CandidApiAuthOptions.new(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
+candidhealth = CandidApiClient::AsyncClient.new(options: options)
 
 Sync do
   guarantor = candidhealth.guarantor.v_1.get(guarantor_id: "guarantor-id")

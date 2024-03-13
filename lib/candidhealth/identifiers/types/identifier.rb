@@ -72,7 +72,7 @@ module CandidApiClient
       # @param obj [Object]
       # @return [Void]
       def self.validate_raw(obj:)
-        obj.identifier_id.is_a?(UUID) != false || raise("Passed value for field obj.identifier_id is not the expected type, validation failed.")
+        obj.identifier_id.is_a?(String) != false || raise("Passed value for field obj.identifier_id is not the expected type, validation failed.")
         obj.period.nil? || Commons::DateRangeOptionalEnd.validate_raw(obj: obj.period)
         obj.identifier_code.is_a?(Identifiers::IdentifierCode) != false || raise("Passed value for field obj.identifier_code is not the expected type, validation failed.")
         Identifiers::IdentifierValue.validate_raw(obj: obj.identifier_value)

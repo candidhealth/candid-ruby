@@ -145,7 +145,7 @@ module CandidApiClient
           obj.addresses&.is_a?(Array) != false || raise("Passed value for field obj.addresses is not the expected type, validation failed.")
           obj.employment_start_date&.is_a?(Date) != false || raise("Passed value for field obj.employment_start_date is not the expected type, validation failed.")
           obj.employment_termination_date&.is_a?(Date) != false || raise("Passed value for field obj.employment_termination_date is not the expected type, validation failed.")
-          obj.organization_provider_id.is_a?(UUID) != false || raise("Passed value for field obj.organization_provider_id is not the expected type, validation failed.")
+          obj.organization_provider_id.is_a?(String) != false || raise("Passed value for field obj.organization_provider_id is not the expected type, validation failed.")
           obj.qualifications.is_a?(Array) != false || raise("Passed value for field obj.qualifications is not the expected type, validation failed.")
         end
       end

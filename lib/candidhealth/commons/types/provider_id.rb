@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    PROVIDER_ID = String
+    PROVIDER_ID = UUID
   end
 end

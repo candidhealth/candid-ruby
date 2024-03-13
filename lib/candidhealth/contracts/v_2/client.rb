@@ -91,11 +91,11 @@ module CandidApiClient
         # @param medicare_insurance_types [Contracts::V2::InsuranceTypes] The Medicare plan insurance types this contract applies.
         # @param medicaid_insurance_types [Contracts::V2::InsuranceTypes] The Medicaid plan insurance types this contract applies.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @param contracting_provider_id [Contracts::V2::CONTRACTING_PROVIDER_ID] The String of the provider under agreement to the contract
+        # @param contracting_provider_id [Contracts::V2::CONTRACTING_PROVIDER_ID] The UUID of the provider under agreement to the contract
         # @param rendering_provider_ids [Set<Contracts::V2::RENDERING_PROVIDERID>] A rendering provider isn't contracted directly with the payer but can render
         #   services under the contract held by the contracting provider.
         #   Max items is 100.
-        # @param payer_uuid [String] The String of the insurance company under agreement to the contract
+        # @param payer_uuid [UUID] The UUID of the insurance company under agreement to the contract
         # @param request_options [RequestOptions]
         # @return [Contracts::V2::ContractWithProviders]
         def create(effective_date:, regions:, commercial_insurance_types:, medicare_insurance_types:,
@@ -245,11 +245,11 @@ module CandidApiClient
         # @param medicare_insurance_types [Contracts::V2::InsuranceTypes] The Medicare plan insurance types this contract applies.
         # @param medicaid_insurance_types [Contracts::V2::InsuranceTypes] The Medicaid plan insurance types this contract applies.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @param contracting_provider_id [Contracts::V2::CONTRACTING_PROVIDER_ID] The String of the provider under agreement to the contract
+        # @param contracting_provider_id [Contracts::V2::CONTRACTING_PROVIDER_ID] The UUID of the provider under agreement to the contract
         # @param rendering_provider_ids [Set<Contracts::V2::RENDERING_PROVIDERID>] A rendering provider isn't contracted directly with the payer but can render
         #   services under the contract held by the contracting provider.
         #   Max items is 100.
-        # @param payer_uuid [String] The String of the insurance company under agreement to the contract
+        # @param payer_uuid [UUID] The UUID of the insurance company under agreement to the contract
         # @param request_options [RequestOptions]
         # @return [Contracts::V2::ContractWithProviders]
         def create(effective_date:, regions:, commercial_insurance_types:, medicare_insurance_types:,

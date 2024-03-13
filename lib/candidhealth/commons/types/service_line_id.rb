@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    SERVICE_LINE_ID = String
+    SERVICE_LINE_ID = UUID
   end
 end

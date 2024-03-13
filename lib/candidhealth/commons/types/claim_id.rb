@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    CLAIM_ID = String
+    CLAIM_ID = UUID
   end
 end

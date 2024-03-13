@@ -3,7 +3,7 @@
 module CandidApiClient
   module InsuranceRefunds
     module V1
-      INSURANCE_REFUND_ID = String
+      INSURANCE_REFUND_ID = UUID
     end
   end
 end

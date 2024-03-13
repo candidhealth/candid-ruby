@@ -63,7 +63,7 @@ module CandidApiClient
           when "payer_info"
             Payers::V3::PayerInfo.validate_raw(obj: obj)
           when "payer_uuid"
-            obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
+            obj.is_a?(UUID) != false || raise("Passed value for field obj is not the expected type, validation failed.")
           else
             raise("Passed value matched no type within the union, validation failed.")
           end
@@ -83,7 +83,7 @@ module CandidApiClient
           new(member: member, discriminant: "payer_info")
         end
 
-        # @param member [Payers::V3::PAYER_String]
+        # @param member [Payers::V3::PAYER_UUID]
         # @return [Payers::V3::PayerIdentifier]
         def self.payer_uuid(member:)
           new(member: member, discriminant: "payer_uuid")

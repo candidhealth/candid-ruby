@@ -34,7 +34,7 @@ module CandidApiClient
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
         # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param service_line_id [Commons::SERVICE_LINE_ID]
         # @param claim_id [Commons::CLAIM_ID]
         # @param billing_provider_id [Commons::PROVIDER_ID]
@@ -127,7 +127,7 @@ module CandidApiClient
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
         # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param service_line_id [Commons::SERVICE_LINE_ID]
         # @param claim_id [Commons::CLAIM_ID]
         # @param billing_provider_id [Commons::PROVIDER_ID]

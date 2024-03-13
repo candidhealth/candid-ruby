@@ -13,7 +13,7 @@ module CandidApiClient
 
         # @param error [String]
         # @param explanation [ExpectedNetworkStatus::V2::Explanation]
-        # @param routed_payer_uuid [Payers::V3::PAYER_String]
+        # @param routed_payer_uuid [Payers::V3::PAYER_UUID]
         # @param routed_billing_provider_id [OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ExpectedNetworkStatus::V2::IndeterminateNetworkStatus]
@@ -23,7 +23,7 @@ module CandidApiClient
           @error = error
           # @type [ExpectedNetworkStatus::V2::Explanation]
           @explanation = explanation
-          # @type [Payers::V3::PAYER_String]
+          # @type [Payers::V3::PAYER_UUID]
           @routed_payer_uuid = routed_payer_uuid
           # @type [OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID]
           @routed_billing_provider_id = routed_billing_provider_id
@@ -65,8 +65,8 @@ module CandidApiClient
         def self.validate_raw(obj:)
           obj.error.is_a?(String) != false || raise("Passed value for field obj.error is not the expected type, validation failed.")
           obj.explanation.is_a?(ExpectedNetworkStatus::V2::Explanation) != false || raise("Passed value for field obj.explanation is not the expected type, validation failed.")
-          obj.routed_payer_uuid&.is_a?(String) != false || raise("Passed value for field obj.routed_payer_uuid is not the expected type, validation failed.")
-          obj.routed_billing_provider_id&.is_a?(String) != false || raise("Passed value for field obj.routed_billing_provider_id is not the expected type, validation failed.")
+          obj.routed_payer_uuid&.is_a?(UUID) != false || raise("Passed value for field obj.routed_payer_uuid is not the expected type, validation failed.")
+          obj.routed_billing_provider_id&.is_a?(UUID) != false || raise("Passed value for field obj.routed_billing_provider_id is not the expected type, validation failed.")
         end
       end
     end

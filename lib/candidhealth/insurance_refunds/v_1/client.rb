@@ -34,7 +34,7 @@ module CandidApiClient
         # the current organization_id of the authenticated user.
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param claim_id [Commons::CLAIM_ID]
         # @param service_line_id [Commons::SERVICE_LINE_ID]
         # @param billing_provider_id [Commons::PROVIDER_ID]
@@ -157,7 +157,7 @@ module CandidApiClient
         # the current organization_id of the authenticated user.
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param claim_id [Commons::CLAIM_ID]
         # @param service_line_id [Commons::SERVICE_LINE_ID]
         # @param billing_provider_id [Commons::PROVIDER_ID]

@@ -10,13 +10,13 @@ module CandidApiClient
       class ExpectedNetworkStatusSubscriberInformation
         attr_reader :payer_uuid, :member_id, :insurance_type, :additional_properties
 
-        # @param payer_uuid [Payers::V3::PAYER_String] The String that corresponds with the payer on the patient’s insurance card
+        # @param payer_uuid [Payers::V3::PAYER_UUID] The UUID that corresponds with the payer on the patient’s insurance card
         # @param member_id [String] The member_id on the patient’s insurance card
         # @param insurance_type [ExpectedNetworkStatus::V2::InsuranceType] The insurance information on the patient's insurance card
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ExpectedNetworkStatus::V2::ExpectedNetworkStatusSubscriberInformation]
         def initialize(payer_uuid:, member_id:, insurance_type:, additional_properties: nil)
-          # @type [Payers::V3::PAYER_String] The String that corresponds with the payer on the patient’s insurance card
+          # @type [Payers::V3::PAYER_UUID] The UUID that corresponds with the payer on the patient’s insurance card
           @payer_uuid = payer_uuid
           # @type [String] The member_id on the patient’s insurance card
           @member_id = member_id
@@ -57,7 +57,7 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.payer_uuid.is_a?(String) != false || raise("Passed value for field obj.payer_uuid is not the expected type, validation failed.")
+          obj.payer_uuid.is_a?(UUID) != false || raise("Passed value for field obj.payer_uuid is not the expected type, validation failed.")
           obj.member_id.is_a?(String) != false || raise("Passed value for field obj.member_id is not the expected type, validation failed.")
           ExpectedNetworkStatus::V2::InsuranceType.validate_raw(obj: obj.insurance_type)
         end

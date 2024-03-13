@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    ENCOUNTER_ID = String
+    ENCOUNTER_ID = UUID
   end
 end

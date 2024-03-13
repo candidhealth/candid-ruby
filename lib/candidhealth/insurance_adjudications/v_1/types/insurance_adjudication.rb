@@ -13,7 +13,7 @@ module CandidApiClient
                     :additional_properties
 
         # @param insurance_adjudication_id [InsuranceAdjudications::V1::INSURANCE_ADJUDICATION_ID]
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param post_date [Date]
         # @param check_number [String]
         # @param check_date [Date]
@@ -25,7 +25,7 @@ module CandidApiClient
                        note: nil, additional_properties: nil)
           # @type [InsuranceAdjudications::V1::INSURANCE_ADJUDICATION_ID]
           @insurance_adjudication_id = insurance_adjudication_id
-          # @type [Payers::V3::PAYER_String]
+          # @type [Payers::V3::PAYER_UUID]
           @payer_uuid = payer_uuid
           # @type [Date]
           @post_date = post_date
@@ -85,8 +85,8 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.insurance_adjudication_id.is_a?(String) != false || raise("Passed value for field obj.insurance_adjudication_id is not the expected type, validation failed.")
-          obj.payer_uuid.is_a?(String) != false || raise("Passed value for field obj.payer_uuid is not the expected type, validation failed.")
+          obj.insurance_adjudication_id.is_a?(UUID) != false || raise("Passed value for field obj.insurance_adjudication_id is not the expected type, validation failed.")
+          obj.payer_uuid.is_a?(UUID) != false || raise("Passed value for field obj.payer_uuid is not the expected type, validation failed.")
           obj.post_date&.is_a?(Date) != false || raise("Passed value for field obj.post_date is not the expected type, validation failed.")
           obj.check_number&.is_a?(String) != false || raise("Passed value for field obj.check_number is not the expected type, validation failed.")
           obj.check_date.is_a?(Date) != false || raise("Passed value for field obj.check_date is not the expected type, validation failed.")

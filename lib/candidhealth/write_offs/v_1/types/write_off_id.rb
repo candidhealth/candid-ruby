@@ -3,7 +3,7 @@
 module CandidApiClient
   module WriteOffs
     module V1
-      WRITE_OFF_ID = String
+      WRITE_OFF_ID = UUID
     end
   end
 end

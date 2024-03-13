@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    ORGANIZATION_ID = String
+    ORGANIZATION_ID = UUID
   end
 end

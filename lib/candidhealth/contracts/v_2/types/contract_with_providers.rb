@@ -18,7 +18,7 @@ module CandidApiClient
         attr_reader :rendering_provider_ids, :contract_id, :contracting_provider, :provider_count, :payer,
                     :effective_date, :expiration_date, :regions, :contract_status, :authorized_signatory, :commercial_insurance_types, :medicare_insurance_types, :medicaid_insurance_types, :additional_properties
 
-        # @param rendering_provider_ids [Set<String>] The providers who can render medical services under the contract
+        # @param rendering_provider_ids [Set<UUID>] The providers who can render medical services under the contract
         # @param contract_id [Contracts::V2::CONTRACT_ID]
         # @param contracting_provider [OrganizationProviders::V2::OrganizationProvider] The provider under contract
         # @param provider_count [Integer] The number of linked providers who can render medical services under this contract
@@ -36,7 +36,7 @@ module CandidApiClient
         # @return [Contracts::V2::ContractWithProviders]
         def initialize(rendering_provider_ids:, contract_id:, contracting_provider:, provider_count:, effective_date:,
                        regions:, commercial_insurance_types:, medicare_insurance_types:, medicaid_insurance_types:, payer: nil, expiration_date: nil, contract_status: nil, authorized_signatory: nil, additional_properties: nil)
-          # @type [Set<String>] The providers who can render medical services under the contract
+          # @type [Set<UUID>] The providers who can render medical services under the contract
           @rendering_provider_ids = rendering_provider_ids
           # @type [Contracts::V2::CONTRACT_ID]
           @contract_id = contract_id
@@ -158,7 +158,7 @@ module CandidApiClient
         # @return [Void]
         def self.validate_raw(obj:)
           obj.rendering_provider_ids.is_a?(Set) != false || raise("Passed value for field obj.rendering_provider_ids is not the expected type, validation failed.")
-          obj.contract_id.is_a?(String) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
+          obj.contract_id.is_a?(UUID) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
           OrganizationProviders::V2::OrganizationProvider.validate_raw(obj: obj.contracting_provider)
           obj.provider_count.is_a?(Integer) != false || raise("Passed value for field obj.provider_count is not the expected type, validation failed.")
           obj.payer.nil? || Payers::V3::Payer.validate_raw(obj: obj.payer)

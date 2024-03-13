@@ -10,12 +10,12 @@ module CandidApiClient
       class InNetworkStatus
         attr_reader :routed_payer_uuid, :routed_billing_provider_id, :additional_properties
 
-        # @param routed_payer_uuid [Payers::V3::PAYER_String]
+        # @param routed_payer_uuid [Payers::V3::PAYER_UUID]
         # @param routed_billing_provider_id [OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ExpectedNetworkStatus::V2::InNetworkStatus]
         def initialize(routed_payer_uuid:, routed_billing_provider_id:, additional_properties: nil)
-          # @type [Payers::V3::PAYER_String]
+          # @type [Payers::V3::PAYER_UUID]
           @routed_payer_uuid = routed_payer_uuid
           # @type [OrganizationProviders::V2::ORGANIZATION_PROVIDER_ID]
           @routed_billing_provider_id = routed_billing_provider_id
@@ -48,8 +48,8 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.routed_payer_uuid.is_a?(String) != false || raise("Passed value for field obj.routed_payer_uuid is not the expected type, validation failed.")
-          obj.routed_billing_provider_id.is_a?(String) != false || raise("Passed value for field obj.routed_billing_provider_id is not the expected type, validation failed.")
+          obj.routed_payer_uuid.is_a?(UUID) != false || raise("Passed value for field obj.routed_payer_uuid is not the expected type, validation failed.")
+          obj.routed_billing_provider_id.is_a?(UUID) != false || raise("Passed value for field obj.routed_billing_provider_id is not the expected type, validation failed.")
         end
       end
     end

@@ -103,8 +103,8 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.patient_payment_id.is_a?(String) != false || raise("Passed value for field obj.patient_payment_id is not the expected type, validation failed.")
-          obj.organization_id.is_a?(String) != false || raise("Passed value for field obj.organization_id is not the expected type, validation failed.")
+          obj.patient_payment_id.is_a?(UUID) != false || raise("Passed value for field obj.patient_payment_id is not the expected type, validation failed.")
+          obj.organization_id.is_a?(UUID) != false || raise("Passed value for field obj.organization_id is not the expected type, validation failed.")
           obj.source_internal_id&.is_a?(String) != false || raise("Passed value for field obj.source_internal_id is not the expected type, validation failed.")
           obj.payment_source.is_a?(Financials::PatientTransactionSource) != false || raise("Passed value for field obj.payment_source is not the expected type, validation failed.")
           obj.amount_cents.is_a?(Integer) != false || raise("Passed value for field obj.amount_cents is not the expected type, validation failed.")
@@ -112,7 +112,7 @@ module CandidApiClient
           obj.payment_timestamp&.is_a?(DateTime) != false || raise("Passed value for field obj.payment_timestamp is not the expected type, validation failed.")
           obj.payment_note&.is_a?(String) != false || raise("Passed value for field obj.payment_note is not the expected type, validation failed.")
           obj.allocations.is_a?(Array) != false || raise("Passed value for field obj.allocations is not the expected type, validation failed.")
-          obj.invoice&.is_a?(String) != false || raise("Passed value for field obj.invoice is not the expected type, validation failed.")
+          obj.invoice&.is_a?(UUID) != false || raise("Passed value for field obj.invoice is not the expected type, validation failed.")
         end
       end
     end

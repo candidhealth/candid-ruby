@@ -3,7 +3,7 @@
 module CandidApiClient
   module Payers
     module V3
-      PAYER_String = String
+      PAYER_UUID = UUID
     end
   end
 end

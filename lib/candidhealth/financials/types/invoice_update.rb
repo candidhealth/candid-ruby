@@ -59,7 +59,7 @@ module CandidApiClient
       def self.validate_raw(obj:)
         case obj.type
         when "set"
-          obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
+          obj.is_a?(UUID) != false || raise("Passed value for field obj is not the expected type, validation failed.")
         when "remove"
           # noop
         else

@@ -67,7 +67,7 @@ module CandidApiClient
       # @param obj [Object]
       # @return [Void]
       def self.validate_raw(obj:)
-        obj.service_facility_id.is_a?(String) != false || raise("Passed value for field obj.service_facility_id is not the expected type, validation failed.")
+        obj.service_facility_id.is_a?(UUID) != false || raise("Passed value for field obj.service_facility_id is not the expected type, validation failed.")
         obj.organization_name.is_a?(String) != false || raise("Passed value for field obj.organization_name is not the expected type, validation failed.")
         obj.npi&.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
         Commons::StreetAddressLongZip.validate_raw(obj: obj.address)

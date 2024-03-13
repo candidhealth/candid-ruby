@@ -20,7 +20,7 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param request_options [RequestOptions]
         # @return [Payers::V3::Payer]
         def get(payer_uuid:, request_options: nil)
@@ -63,7 +63,7 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # @param payer_uuid [Payers::V3::PAYER_String]
+        # @param payer_uuid [Payers::V3::PAYER_UUID]
         # @param request_options [RequestOptions]
         # @return [Payers::V3::Payer]
         def get(payer_uuid:, request_options: nil)

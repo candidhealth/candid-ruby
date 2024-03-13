@@ -3,7 +3,7 @@
 module CandidApiClient
   module Guarantor
     module V1
-      GUARANTOR_ID = String
+      GUARANTOR_ID = UUID
     end
   end
 end

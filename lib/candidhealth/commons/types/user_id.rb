@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    USER_ID = String
+    USER_ID = UUID
   end
 end

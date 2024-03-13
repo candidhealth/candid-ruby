@@ -109,8 +109,8 @@ module CandidApiClient
           obj.place_of_service_code.is_a?(Commons::FacilityTypeCode) != false || raise("Passed value for field obj.place_of_service_code is not the expected type, validation failed.")
           ExpectedNetworkStatus::V2::ExpectedNetworkStatusSubscriberInformation.validate_raw(obj: obj.subscriber_information)
           Commons::StreetAddressShortZip.validate_raw(obj: obj.patient_address)
-          obj.billing_provider_id.is_a?(String) != false || raise("Passed value for field obj.billing_provider_id is not the expected type, validation failed.")
-          obj.organization_service_facility_id.is_a?(String) != false || raise("Passed value for field obj.organization_service_facility_id is not the expected type, validation failed.")
+          obj.billing_provider_id.is_a?(UUID) != false || raise("Passed value for field obj.billing_provider_id is not the expected type, validation failed.")
+          obj.organization_service_facility_id.is_a?(UUID) != false || raise("Passed value for field obj.organization_service_facility_id is not the expected type, validation failed.")
           obj.date_of_service.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
         end
       end

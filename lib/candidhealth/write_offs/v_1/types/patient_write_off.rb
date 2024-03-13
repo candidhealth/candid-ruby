@@ -87,13 +87,13 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.write_off_id.is_a?(String) != false || raise("Passed value for field obj.write_off_id is not the expected type, validation failed.")
+          obj.write_off_id.is_a?(UUID) != false || raise("Passed value for field obj.write_off_id is not the expected type, validation failed.")
           obj.write_off_timestamp.is_a?(DateTime) != false || raise("Passed value for field obj.write_off_timestamp is not the expected type, validation failed.")
           obj.write_off_note&.is_a?(String) != false || raise("Passed value for field obj.write_off_note is not the expected type, validation failed.")
           obj.write_off_reason.is_a?(WriteOffs::V1::PatientWriteOffReason) != false || raise("Passed value for field obj.write_off_reason is not the expected type, validation failed.")
-          obj.service_line_id.is_a?(String) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
-          obj.reverts_write_off_id&.is_a?(String) != false || raise("Passed value for field obj.reverts_write_off_id is not the expected type, validation failed.")
-          obj.reverted_by_write_off_id&.is_a?(String) != false || raise("Passed value for field obj.reverted_by_write_off_id is not the expected type, validation failed.")
+          obj.service_line_id.is_a?(UUID) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
+          obj.reverts_write_off_id&.is_a?(UUID) != false || raise("Passed value for field obj.reverts_write_off_id is not the expected type, validation failed.")
+          obj.reverted_by_write_off_id&.is_a?(UUID) != false || raise("Passed value for field obj.reverted_by_write_off_id is not the expected type, validation failed.")
           obj.amount_cents.is_a?(Integer) != false || raise("Passed value for field obj.amount_cents is not the expected type, validation failed.")
         end
       end

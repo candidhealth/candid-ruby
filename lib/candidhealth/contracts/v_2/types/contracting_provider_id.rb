@@ -3,7 +3,7 @@
 module CandidApiClient
   module Contracts
     module V2
-      CONTRACTING_PROVIDER_ID = String
+      CONTRACTING_PROVIDER_ID = UUID
     end
   end
 end

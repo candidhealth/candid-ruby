@@ -58,7 +58,7 @@ module CandidApiClient
         def self.validate_raw(obj:)
           obj.expected_network_status.is_a?(ExpectedNetworkStatus::V1::ExpectedNetworkStatus) != false || raise("Passed value for field obj.expected_network_status is not the expected type, validation failed.")
           obj.explanation.is_a?(String) != false || raise("Passed value for field obj.explanation is not the expected type, validation failed.")
-          obj.contract_id&.is_a?(UUID) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
+          obj.contract_id&.is_a?(String) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
         end
       end
     end

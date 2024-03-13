@@ -3,7 +3,7 @@
 module CandidApiClient
   module PatientPayments
     module V4
-      PATIENT_PAYMENT_ID = UUID
+      PATIENT_PAYMENT_ID = String
     end
   end
 end

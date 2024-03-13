@@ -3,7 +3,7 @@
 module CandidApiClient
   module InsurancePayments
     module V1
-      INSURANCE_PAYMENT_ID = UUID
+      INSURANCE_PAYMENT_ID = String
     end
   end
 end

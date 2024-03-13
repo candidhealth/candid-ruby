@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Individual
-    INDIVIDUAL_ID = UUID
+    INDIVIDUAL_ID = String
   end
 end

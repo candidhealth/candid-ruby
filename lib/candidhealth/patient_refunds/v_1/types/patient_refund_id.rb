@@ -3,7 +3,7 @@
 module CandidApiClient
   module PatientRefunds
     module V1
-      PATIENT_REFUND_ID = UUID
+      PATIENT_REFUND_ID = String
     end
   end
 end

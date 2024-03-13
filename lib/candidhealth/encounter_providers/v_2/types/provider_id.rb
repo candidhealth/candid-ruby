@@ -3,7 +3,7 @@
 module CandidApiClient
   module EncounterProviders
     module V2
-      PROVIDER_ID = UUID
+      PROVIDER_ID = String
     end
   end
 end

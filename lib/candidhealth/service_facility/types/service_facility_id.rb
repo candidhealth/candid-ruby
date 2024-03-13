@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class ServiceFacility
-    SERVICE_FACILITY_ID = UUID
+    SERVICE_FACILITY_ID = String
   end
 end

@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Diagnoses
-    DIAGNOSIS_ID = UUID
+    DIAGNOSIS_ID = String
   end
 end

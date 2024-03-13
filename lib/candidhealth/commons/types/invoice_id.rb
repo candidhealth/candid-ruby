@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    INVOICE_ID = UUID
+    INVOICE_ID = String
   end
 end

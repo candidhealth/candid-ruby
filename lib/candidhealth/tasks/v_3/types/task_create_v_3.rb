@@ -81,11 +81,11 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.encounter_id.is_a?(UUID) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
+          obj.encounter_id.is_a?(String) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
           obj.task_type.is_a?(Tasks::Commons::TaskType) != false || raise("Passed value for field obj.task_type is not the expected type, validation failed.")
           obj.description.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
           obj.blocks_claim_submission&.is_a?(Boolean) != false || raise("Passed value for field obj.blocks_claim_submission is not the expected type, validation failed.")
-          obj.assignee_user_id&.is_a?(UUID) != false || raise("Passed value for field obj.assignee_user_id is not the expected type, validation failed.")
+          obj.assignee_user_id&.is_a?(String) != false || raise("Passed value for field obj.assignee_user_id is not the expected type, validation failed.")
           obj.category&.is_a?(Tasks::Commons::TaskCategory) != false || raise("Passed value for field obj.category is not the expected type, validation failed.")
           obj.work_queue_id.is_a?(String) != false || raise("Passed value for field obj.work_queue_id is not the expected type, validation failed.")
         end

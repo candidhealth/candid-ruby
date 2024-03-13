@@ -3,7 +3,7 @@
 module CandidApiClient
   module BillingNotes
     module V2
-      BILLING_NOTE_ID = UUID
+      BILLING_NOTE_ID = String
     end
   end
 end

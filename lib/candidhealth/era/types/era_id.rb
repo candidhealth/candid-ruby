@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Era
-    ERA_ID = UUID
+    ERA_ID = String
   end
 end

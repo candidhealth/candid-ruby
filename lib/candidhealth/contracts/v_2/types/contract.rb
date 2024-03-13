@@ -146,7 +146,7 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.contract_id.is_a?(UUID) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
+          obj.contract_id.is_a?(String) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
           OrganizationProviders::V2::OrganizationProvider.validate_raw(obj: obj.contracting_provider)
           obj.provider_count.is_a?(Integer) != false || raise("Passed value for field obj.provider_count is not the expected type, validation failed.")
           obj.payer.nil? || Payers::V3::Payer.validate_raw(obj: obj.payer)

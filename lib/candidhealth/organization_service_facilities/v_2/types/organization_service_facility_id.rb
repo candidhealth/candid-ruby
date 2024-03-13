@@ -3,7 +3,7 @@
 module CandidApiClient
   module OrganizationServiceFacilities
     module V2
-      ORGANIZATION_SERVICE_FACILITY_ID = UUID
+      ORGANIZATION_SERVICE_FACILITY_ID = String
     end
   end
 end

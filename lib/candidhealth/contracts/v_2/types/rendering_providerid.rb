@@ -3,7 +3,7 @@
 module CandidApiClient
   module Contracts
     module V2
-      RENDERING_PROVIDERID = UUID
+      RENDERING_PROVIDERID = String
     end
   end
 end

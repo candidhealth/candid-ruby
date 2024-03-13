@@ -2,6 +2,6 @@
 
 module CandidApiClient
   class Commons
-    TASK_NOTE_ID = UUID
+    TASK_NOTE_ID = String
   end
 end

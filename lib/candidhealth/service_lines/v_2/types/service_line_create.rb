@@ -5,6 +5,7 @@ require_relative "../../../commons/types/decimal"
 require_relative "../../../commons/types/service_line_units"
 require_relative "drug_identification"
 require_relative "../../../commons/types/facility_type_code"
+require "date"
 require "json"
 
 module CandidApiClient
@@ -12,7 +13,7 @@ module CandidApiClient
     module V2
       class ServiceLineCreate
         attr_reader :modifiers, :procedure_code, :quantity, :units, :charge_amount_cents, :diagnosis_pointers,
-                    :drug_identification, :place_of_service_code, :description, :additional_properties
+                    :drug_identification, :place_of_service_code, :description, :date_of_service, :end_date_of_service, :additional_properties
 
         # @param modifiers [Array<Commons::ProcedureModifier>]
         # @param procedure_code [String]
@@ -27,10 +28,12 @@ module CandidApiClient
         # @param drug_identification [ServiceLines::V2::DrugIdentification]
         # @param place_of_service_code [Commons::FacilityTypeCode]
         # @param description [String] A free-form description to clarify the related data elements and their content. Maps to SV1-01, C003-07 on the 837-P.
+        # @param date_of_service [Date]
+        # @param end_date_of_service [Date]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ServiceLines::V2::ServiceLineCreate]
         def initialize(procedure_code:, quantity:, units:, diagnosis_pointers:, modifiers: nil,
-                       charge_amount_cents: nil, drug_identification: nil, place_of_service_code: nil, description: nil, additional_properties: nil)
+                       charge_amount_cents: nil, drug_identification: nil, place_of_service_code: nil, description: nil, date_of_service: nil, end_date_of_service: nil, additional_properties: nil)
           # @type [Array<Commons::ProcedureModifier>]
           @modifiers = modifiers
           # @type [String]
@@ -53,6 +56,10 @@ module CandidApiClient
           @place_of_service_code = place_of_service_code
           # @type [String] A free-form description to clarify the related data elements and their content. Maps to SV1-01, C003-07 on the 837-P.
           @description = description
+          # @type [Date]
+          @date_of_service = date_of_service
+          # @type [Date]
+          @end_date_of_service = end_date_of_service
           # @type [OpenStruct] Additional properties unmapped to the current class definition
           @additional_properties = additional_properties
         end
@@ -78,8 +85,12 @@ module CandidApiClient
           end
           place_of_service_code = struct.place_of_service_code
           description = struct.description
+          date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
+          end_date_of_service = unless parsed_json["end_date_of_service"].nil?
+                                  Date.parse(parsed_json["end_date_of_service"])
+                                end
           new(modifiers: modifiers, procedure_code: procedure_code, quantity: quantity, units: units,
-              charge_amount_cents: charge_amount_cents, diagnosis_pointers: diagnosis_pointers, drug_identification: drug_identification, place_of_service_code: place_of_service_code, description: description, additional_properties: struct)
+              charge_amount_cents: charge_amount_cents, diagnosis_pointers: diagnosis_pointers, drug_identification: drug_identification, place_of_service_code: place_of_service_code, description: description, date_of_service: date_of_service, end_date_of_service: end_date_of_service, additional_properties: struct)
         end
 
         # Serialize an instance of ServiceLineCreate to a JSON object
@@ -95,7 +106,9 @@ module CandidApiClient
             "diagnosis_pointers": @diagnosis_pointers,
             "drug_identification": @drug_identification,
             "place_of_service_code": @place_of_service_code,
-            "description": @description
+            "description": @description,
+            "date_of_service": @date_of_service,
+            "end_date_of_service": @end_date_of_service
           }.to_json
         end
 
@@ -113,6 +126,8 @@ module CandidApiClient
           obj.drug_identification.nil? || ServiceLines::V2::DrugIdentification.validate_raw(obj: obj.drug_identification)
           obj.place_of_service_code&.is_a?(Commons::FacilityTypeCode) != false || raise("Passed value for field obj.place_of_service_code is not the expected type, validation failed.")
           obj.description&.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
+          obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
+          obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
         end
       end
     end

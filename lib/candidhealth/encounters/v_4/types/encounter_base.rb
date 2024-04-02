@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "../../../commons/types/encounter_external_id"
-require_relative "../../../commons/types/date"
 require_relative "prior_authorization_number"
 require_relative "medication"
 require_relative "vitals"
@@ -11,6 +10,7 @@ require_relative "synchronicity_type"
 require_relative "billable_status_type"
 require_relative "responsible_party_type"
 require_relative "service_authorization_exception_code"
+require_relative "../../../commons/types/date"
 require_relative "../../../commons/types/delay_reason_code"
 require "json"
 
@@ -18,20 +18,12 @@ module CandidApiClient
   module Encounters
     module V4
       class EncounterBase
-        attr_reader :external_id, :date_of_service, :end_date_of_service, :prior_authorization_number,
-                    :patient_authorized_release, :benefits_assigned_to_provider, :provider_accepts_assignment, :appointment_type, :existing_medications, :vitals, :interventions, :pay_to_address, :synchronicity, :billable_status, :responsible_party, :additional_information, :service_authorization_exception_code, :admission_date, :discharge_date, :onset_of_current_illness_or_symptom_date, :last_menstrual_period_date, :delay_reason_code, :additional_properties
+        attr_reader :external_id, :prior_authorization_number, :patient_authorized_release,
+                    :benefits_assigned_to_provider, :provider_accepts_assignment, :appointment_type, :existing_medications, :vitals, :interventions, :pay_to_address, :synchronicity, :billable_status, :responsible_party, :additional_information, :service_authorization_exception_code, :admission_date, :discharge_date, :onset_of_current_illness_or_symptom_date, :last_menstrual_period_date, :delay_reason_code, :additional_properties
 
         # @param external_id [Commons::ENCOUNTER_EXTERNAL_ID] A client-specified unique ID to associate with this encounter;
         #   for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #   This field should not contain PHI.
-        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #   This date must be the local date in the timezone where the service occurred.
-        #   Box 24a on the CMS-1500 claim form.
-        #   If service occurred over a range of dates, this should be the start date.
-        # @param end_date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        #   This date must be the local date in the timezone where the service occurred.
-        #   If omitted, the Encounter is assumed to be for a single day.
-        #   Must not be temporally before the date_of_service field.
         # @param prior_authorization_number [Encounters::V4::PRIOR_AUTHORIZATION_NUMBER] Box 23 on the CMS-1500 claim form.
         # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
         #   for billing purpose.
@@ -78,22 +70,12 @@ module CandidApiClient
         #   Code indicating the reason why a request was delayed
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [Encounters::V4::EncounterBase]
-        def initialize(external_id:, date_of_service:, patient_authorized_release:, benefits_assigned_to_provider:,
-                       provider_accepts_assignment:, billable_status:, responsible_party:, end_date_of_service: nil, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil)
+        def initialize(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
+                       provider_accepts_assignment:, billable_status:, responsible_party:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil)
           # @type [Commons::ENCOUNTER_EXTERNAL_ID] A client-specified unique ID to associate with this encounter;
           #   for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #   This field should not contain PHI.
           @external_id = external_id
-          # @type [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-          #   This date must be the local date in the timezone where the service occurred.
-          #   Box 24a on the CMS-1500 claim form.
-          #   If service occurred over a range of dates, this should be the start date.
-          @date_of_service = date_of_service
-          # @type [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-          #   This date must be the local date in the timezone where the service occurred.
-          #   If omitted, the Encounter is assumed to be for a single day.
-          #   Must not be temporally before the date_of_service field.
-          @end_date_of_service = end_date_of_service
           # @type [Encounters::V4::PRIOR_AUTHORIZATION_NUMBER] Box 23 on the CMS-1500 claim form.
           @prior_authorization_number = prior_authorization_number
           # @type [Boolean] Whether this patient has authorized the release of medical information
@@ -169,8 +151,6 @@ module CandidApiClient
           struct = JSON.parse(json_object, object_class: OpenStruct)
           parsed_json = JSON.parse(json_object)
           external_id = struct.external_id
-          date_of_service = struct.date_of_service
-          end_date_of_service = struct.end_date_of_service
           prior_authorization_number = struct.prior_authorization_number
           patient_authorized_release = struct.patient_authorized_release
           benefits_assigned_to_provider = struct.benefits_assigned_to_provider
@@ -206,8 +186,8 @@ module CandidApiClient
           onset_of_current_illness_or_symptom_date = struct.onset_of_current_illness_or_symptom_date
           last_menstrual_period_date = struct.last_menstrual_period_date
           delay_reason_code = struct.delay_reason_code
-          new(external_id: external_id, date_of_service: date_of_service, end_date_of_service: end_date_of_service,
-              prior_authorization_number: prior_authorization_number, patient_authorized_release: patient_authorized_release, benefits_assigned_to_provider: benefits_assigned_to_provider, provider_accepts_assignment: provider_accepts_assignment, appointment_type: appointment_type, existing_medications: existing_medications, vitals: vitals, interventions: interventions, pay_to_address: pay_to_address, synchronicity: synchronicity, billable_status: billable_status, responsible_party: responsible_party, additional_information: additional_information, service_authorization_exception_code: service_authorization_exception_code, admission_date: admission_date, discharge_date: discharge_date, onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date, last_menstrual_period_date: last_menstrual_period_date, delay_reason_code: delay_reason_code, additional_properties: struct)
+          new(external_id: external_id, prior_authorization_number: prior_authorization_number,
+              patient_authorized_release: patient_authorized_release, benefits_assigned_to_provider: benefits_assigned_to_provider, provider_accepts_assignment: provider_accepts_assignment, appointment_type: appointment_type, existing_medications: existing_medications, vitals: vitals, interventions: interventions, pay_to_address: pay_to_address, synchronicity: synchronicity, billable_status: billable_status, responsible_party: responsible_party, additional_information: additional_information, service_authorization_exception_code: service_authorization_exception_code, admission_date: admission_date, discharge_date: discharge_date, onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date, last_menstrual_period_date: last_menstrual_period_date, delay_reason_code: delay_reason_code, additional_properties: struct)
         end
 
         # Serialize an instance of EncounterBase to a JSON object
@@ -216,8 +196,6 @@ module CandidApiClient
         def to_json(*_args)
           {
             "external_id": @external_id,
-            "date_of_service": @date_of_service,
-            "end_date_of_service": @end_date_of_service,
             "prior_authorization_number": @prior_authorization_number,
             "patient_authorized_release": @patient_authorized_release,
             "benefits_assigned_to_provider": @benefits_assigned_to_provider,
@@ -246,8 +224,6 @@ module CandidApiClient
         # @return [Void]
         def self.validate_raw(obj:)
           obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
-          obj.date_of_service.is_a?(String) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
-          obj.end_date_of_service&.is_a?(String) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
           obj.prior_authorization_number&.is_a?(String) != false || raise("Passed value for field obj.prior_authorization_number is not the expected type, validation failed.")
           obj.patient_authorized_release.is_a?(Boolean) != false || raise("Passed value for field obj.patient_authorized_release is not the expected type, validation failed.")
           obj.benefits_assigned_to_provider.is_a?(Boolean) != false || raise("Passed value for field obj.benefits_assigned_to_provider is not the expected type, validation failed.")

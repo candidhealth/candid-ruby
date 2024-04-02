@@ -12,6 +12,7 @@ require_relative "../../../commons/types/decimal"
 require_relative "../../../commons/types/service_line_units"
 require_relative "../../../commons/types/claim_id"
 require_relative "../../../commons/types/date_range_optional_end"
+require "date"
 require "json"
 
 module CandidApiClient
@@ -19,7 +20,7 @@ module CandidApiClient
     module V2
       class ServiceLine
         attr_reader :modifiers, :charge_amount_cents, :allowed_amount_cents, :insurance_balance_cents,
-                    :patient_balance_cents, :paid_amount_cents, :patient_responsibility_cents, :diagnosis_id_zero, :diagnosis_id_one, :diagnosis_id_two, :diagnosis_id_three, :service_line_era_data, :service_line_manual_adjustments, :related_invoices, :denial_reason, :place_of_service_code, :service_line_id, :procedure_code, :quantity, :units, :claim_id, :date_of_service_range, :description, :additional_properties
+                    :patient_balance_cents, :paid_amount_cents, :patient_responsibility_cents, :diagnosis_id_zero, :diagnosis_id_one, :diagnosis_id_two, :diagnosis_id_three, :service_line_era_data, :service_line_manual_adjustments, :related_invoices, :denial_reason, :place_of_service_code, :service_line_id, :procedure_code, :quantity, :units, :claim_id, :date_of_service_range, :description, :date_of_service, :end_date_of_service, :additional_properties
 
         # @param modifiers [Array<Commons::ProcedureModifier>]
         # @param charge_amount_cents [Integer]
@@ -47,10 +48,12 @@ module CandidApiClient
         # @param date_of_service_range [Commons::DateRangeOptionalEnd] A range of dates of service for this service line. If the service line is for a single date, the end date
         #   will be empty.
         # @param description [String] A free-form description to clarify the related data elements and their content. Maps to SV1-01, C003-07 on the 837-P.
+        # @param date_of_service [Date]
+        # @param end_date_of_service [Date]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ServiceLines::V2::ServiceLine]
-        def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, modifiers: nil, charge_amount_cents: nil, allowed_amount_cents: nil,
-                       insurance_balance_cents: nil, patient_balance_cents: nil, paid_amount_cents: nil, patient_responsibility_cents: nil, diagnosis_id_zero: nil, diagnosis_id_one: nil, diagnosis_id_two: nil, diagnosis_id_three: nil, service_line_era_data: nil, service_line_manual_adjustments: nil, related_invoices: nil, denial_reason: nil, place_of_service_code: nil, description: nil, additional_properties: nil)
+        def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: nil, charge_amount_cents: nil, allowed_amount_cents: nil,
+                       insurance_balance_cents: nil, patient_balance_cents: nil, paid_amount_cents: nil, patient_responsibility_cents: nil, diagnosis_id_zero: nil, diagnosis_id_one: nil, diagnosis_id_two: nil, diagnosis_id_three: nil, service_line_era_data: nil, service_line_manual_adjustments: nil, related_invoices: nil, denial_reason: nil, place_of_service_code: nil, description: nil, end_date_of_service: nil, additional_properties: nil)
           # @type [Array<Commons::ProcedureModifier>]
           @modifiers = modifiers
           # @type [Integer]
@@ -100,6 +103,10 @@ module CandidApiClient
           @date_of_service_range = date_of_service_range
           # @type [String] A free-form description to clarify the related data elements and their content. Maps to SV1-01, C003-07 on the 837-P.
           @description = description
+          # @type [Date]
+          @date_of_service = date_of_service
+          # @type [Date]
+          @end_date_of_service = end_date_of_service
           # @type [OpenStruct] Additional properties unmapped to the current class definition
           @additional_properties = additional_properties
         end
@@ -155,8 +162,12 @@ module CandidApiClient
             date_of_service_range = Commons::DateRangeOptionalEnd.from_json(json_object: date_of_service_range)
           end
           description = struct.description
+          date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
+          end_date_of_service = unless parsed_json["end_date_of_service"].nil?
+                                  Date.parse(parsed_json["end_date_of_service"])
+                                end
           new(modifiers: modifiers, charge_amount_cents: charge_amount_cents,
-              allowed_amount_cents: allowed_amount_cents, insurance_balance_cents: insurance_balance_cents, patient_balance_cents: patient_balance_cents, paid_amount_cents: paid_amount_cents, patient_responsibility_cents: patient_responsibility_cents, diagnosis_id_zero: diagnosis_id_zero, diagnosis_id_one: diagnosis_id_one, diagnosis_id_two: diagnosis_id_two, diagnosis_id_three: diagnosis_id_three, service_line_era_data: service_line_era_data, service_line_manual_adjustments: service_line_manual_adjustments, related_invoices: related_invoices, denial_reason: denial_reason, place_of_service_code: place_of_service_code, service_line_id: service_line_id, procedure_code: procedure_code, quantity: quantity, units: units, claim_id: claim_id, date_of_service_range: date_of_service_range, description: description, additional_properties: struct)
+              allowed_amount_cents: allowed_amount_cents, insurance_balance_cents: insurance_balance_cents, patient_balance_cents: patient_balance_cents, paid_amount_cents: paid_amount_cents, patient_responsibility_cents: patient_responsibility_cents, diagnosis_id_zero: diagnosis_id_zero, diagnosis_id_one: diagnosis_id_one, diagnosis_id_two: diagnosis_id_two, diagnosis_id_three: diagnosis_id_three, service_line_era_data: service_line_era_data, service_line_manual_adjustments: service_line_manual_adjustments, related_invoices: related_invoices, denial_reason: denial_reason, place_of_service_code: place_of_service_code, service_line_id: service_line_id, procedure_code: procedure_code, quantity: quantity, units: units, claim_id: claim_id, date_of_service_range: date_of_service_range, description: description, date_of_service: date_of_service, end_date_of_service: end_date_of_service, additional_properties: struct)
         end
 
         # Serialize an instance of ServiceLine to a JSON object
@@ -186,7 +197,9 @@ module CandidApiClient
             "units": @units,
             "claim_id": @claim_id,
             "date_of_service_range": @date_of_service_range,
-            "description": @description
+            "description": @description,
+            "date_of_service": @date_of_service,
+            "end_date_of_service": @end_date_of_service
           }.to_json
         end
 
@@ -218,6 +231,8 @@ module CandidApiClient
           obj.claim_id.is_a?(UUID) != false || raise("Passed value for field obj.claim_id is not the expected type, validation failed.")
           Commons::DateRangeOptionalEnd.validate_raw(obj: obj.date_of_service_range)
           obj.description&.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
+          obj.date_of_service.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
+          obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
         end
       end
     end

@@ -70,10 +70,11 @@ module CandidApiClient
         # @param billable_status [Encounters::V4::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party. Examples for when this should be set to NOT_BILLABLE include if the Encounter has not occurred yet or if there is no intention of ever billing the responsible_party.
         # @param responsible_party [Encounters::V4::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim. Use SELF_PAY if you intend to bill self pay/cash pay.
         # @param owner_of_next_action [Encounters::V4::EncounterOwnerOfNextActionType] The party who is responsible for taking the next action on an Encounter, as defined by ownership of open Tasks.
+        # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::EncounterPage]
         def get_all(limit: nil, claim_status: nil, sort: nil, page_token: nil, date_of_service_min: nil,
-                    date_of_service_max: nil, primary_payer_names: nil, search_term: nil, external_id: nil, diagnoses_updated_since: nil, tag_ids: nil, work_queue_id: nil, billable_status: nil, responsible_party: nil, owner_of_next_action: nil, request_options: nil)
+                    date_of_service_max: nil, primary_payer_names: nil, search_term: nil, external_id: nil, diagnoses_updated_since: nil, tag_ids: nil, work_queue_id: nil, billable_status: nil, responsible_party: nil, owner_of_next_action: nil, patient_external_id: nil, request_options: nil)
           response = @request_client.conn.get("/api/encounters/v4") do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -94,7 +95,8 @@ module CandidApiClient
               "work_queue_id": work_queue_id,
               "billable_status": billable_status,
               "responsible_party": responsible_party,
-              "owner_of_next_action": owner_of_next_action
+              "owner_of_next_action": owner_of_next_action,
+              "patient_external_id": patient_external_id
             }.compact
           end
           Encounters::V4::EncounterPage.from_json(json_object: response.body)
@@ -115,14 +117,6 @@ module CandidApiClient
         # @param external_id [Commons::ENCOUNTER_EXTERNAL_ID] A client-specified unique ID to associate with this encounter;
         #   for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #   This field should not contain PHI.
-        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #   This date must be the local date in the timezone where the service occurred.
-        #   Box 24a on the CMS-1500 claim form.
-        #   If service occurred over a range of dates, this should be the start date.
-        # @param end_date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        #   This date must be the local date in the timezone where the service occurred.
-        #   If omitted, the Encounter is assumed to be for a single day.
-        #   Must not be temporally before the date_of_service field.
         # @param prior_authorization_number [Encounters::V4::PRIOR_AUTHORIZATION_NUMBER] Box 23 on the CMS-1500 claim form.
         # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
         #   for billing purpose.
@@ -196,6 +190,17 @@ module CandidApiClient
         # @param delay_reason_code [Commons::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #   Code indicating the reason why a request was delayed
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #   This date must be the local date in the timezone where the service occurred.
+        #   Box 24a on the CMS-1500 claim form.
+        #   If service occurred over a range of dates, this should be the start date.
+        #   date_of_service must be defined on either the encounter or the service lines but not both.
+        #   If there are greater than zero service lines, it is recommended to specify date_of_service on the service_line instead of on the encounter to prepare for future API versions.
+        # @param end_date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
+        #   This date must be the local date in the timezone where the service occurred.
+        #   If omitted, the Encounter is assumed to be for a single day.
+        #   Must not be temporally before the date_of_service field.
+        #   If there are greater than zero service lines, it is recommended to specify end_date_of_service on the service_line instead of on the encounter to prepare for future API versions.
         # @param patient [Hash] Contains the identification information of the individual receiving medical services.Request of type Individual::PatientCreate, as a Hash
         #   * :phone_numbers (Array<Commons::PhoneNumber>)
         #   * :phone_consent (Boolean)
@@ -357,6 +362,8 @@ module CandidApiClient
         #     * :pharmacy_prescription_number (String)
         #   * :place_of_service_code (Commons::FacilityTypeCode)
         #   * :description (String)
+        #   * :date_of_service (Date)
+        #   * :end_date_of_service (Date)
         # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type Guarantor::V1::GuarantorCreate, as a Hash
         #   * :phone_numbers (Array<Commons::PhoneNumber>)
         #   * :phone_consent (Boolean)
@@ -381,8 +388,8 @@ module CandidApiClient
         #   * :submission_records (Array<ClaimSubmission::V1::ClaimSubmissionRecordCreate>)
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::Encounter]
-        def create(external_id:, date_of_service:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, end_date_of_service: nil, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, request_options: nil)
+        def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
+                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, request_options: nil)
           response = @request_client.conn.post("/api/encounters/v4") do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -390,8 +397,6 @@ module CandidApiClient
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               external_id: external_id,
-              date_of_service: date_of_service,
-              end_date_of_service: end_date_of_service,
               prior_authorization_number: prior_authorization_number,
               patient_authorized_release: patient_authorized_release,
               benefits_assigned_to_provider: benefits_assigned_to_provider,
@@ -412,6 +417,8 @@ module CandidApiClient
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
               additional_properties: additional_properties,
+              date_of_service: date_of_service,
+              end_date_of_service: end_date_of_service,
               patient: patient,
               billing_provider: billing_provider,
               rendering_provider: rendering_provider,
@@ -441,6 +448,7 @@ module CandidApiClient
         #   This date must be the local date in the timezone where the service occurred.
         #   Box 24a on the CMS-1500 claim form.
         #   If service occurred over a range of dates, this should be the start date.
+        #   If service lines have distinct date_of_service values, updating the encounter's date_of_service will fail. If all service line date_of_service values are the same, updating the encounter's date_of_service will update all service line date_of_service values.
         # @param diagnosis_ids [Array<Diagnoses::DIAGNOSIS_ID>] Ideally, this field should contain no more than 12 diagnoses. However, more diagnoses
         #   may be submitted at this time, and coders will later prioritize the 12 that will be
         #   submitted to the payor.
@@ -466,6 +474,7 @@ module CandidApiClient
         #   This date must be the local date in the timezone where the service occurred.
         #   If omitted, the Encounter is assumed to be for a single day.
         #   Must not be temporally before the date_of_service field.
+        #   If service lines have distinct end_date_of_service values, updating the encounter's end_date_of_service will fail. If all service line end_date_of_service values are the same, updating the encounter's end_date_of_service will update all service line date_of_service values.
         # @param subscriber_primary [Hash] Contains details of the primary insurance subscriber.Request of type Individual::SubscriberCreate, as a Hash
         #   * :insurance_card (Hash)
         #     * :member_id (String)
@@ -605,10 +614,11 @@ module CandidApiClient
         # @param billable_status [Encounters::V4::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party. Examples for when this should be set to NOT_BILLABLE include if the Encounter has not occurred yet or if there is no intention of ever billing the responsible_party.
         # @param responsible_party [Encounters::V4::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim. Use SELF_PAY if you intend to bill self pay/cash pay.
         # @param owner_of_next_action [Encounters::V4::EncounterOwnerOfNextActionType] The party who is responsible for taking the next action on an Encounter, as defined by ownership of open Tasks.
+        # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::EncounterPage]
         def get_all(limit: nil, claim_status: nil, sort: nil, page_token: nil, date_of_service_min: nil,
-                    date_of_service_max: nil, primary_payer_names: nil, search_term: nil, external_id: nil, diagnoses_updated_since: nil, tag_ids: nil, work_queue_id: nil, billable_status: nil, responsible_party: nil, owner_of_next_action: nil, request_options: nil)
+                    date_of_service_max: nil, primary_payer_names: nil, search_term: nil, external_id: nil, diagnoses_updated_since: nil, tag_ids: nil, work_queue_id: nil, billable_status: nil, responsible_party: nil, owner_of_next_action: nil, patient_external_id: nil, request_options: nil)
           Async do
             response = @request_client.conn.get("/api/encounters/v4") do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -630,7 +640,8 @@ module CandidApiClient
                 "work_queue_id": work_queue_id,
                 "billable_status": billable_status,
                 "responsible_party": responsible_party,
-                "owner_of_next_action": owner_of_next_action
+                "owner_of_next_action": owner_of_next_action,
+                "patient_external_id": patient_external_id
               }.compact
             end
             Encounters::V4::EncounterPage.from_json(json_object: response.body)
@@ -654,14 +665,6 @@ module CandidApiClient
         # @param external_id [Commons::ENCOUNTER_EXTERNAL_ID] A client-specified unique ID to associate with this encounter;
         #   for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #   This field should not contain PHI.
-        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #   This date must be the local date in the timezone where the service occurred.
-        #   Box 24a on the CMS-1500 claim form.
-        #   If service occurred over a range of dates, this should be the start date.
-        # @param end_date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        #   This date must be the local date in the timezone where the service occurred.
-        #   If omitted, the Encounter is assumed to be for a single day.
-        #   Must not be temporally before the date_of_service field.
         # @param prior_authorization_number [Encounters::V4::PRIOR_AUTHORIZATION_NUMBER] Box 23 on the CMS-1500 claim form.
         # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
         #   for billing purpose.
@@ -735,6 +738,17 @@ module CandidApiClient
         # @param delay_reason_code [Commons::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #   Code indicating the reason why a request was delayed
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #   This date must be the local date in the timezone where the service occurred.
+        #   Box 24a on the CMS-1500 claim form.
+        #   If service occurred over a range of dates, this should be the start date.
+        #   date_of_service must be defined on either the encounter or the service lines but not both.
+        #   If there are greater than zero service lines, it is recommended to specify date_of_service on the service_line instead of on the encounter to prepare for future API versions.
+        # @param end_date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
+        #   This date must be the local date in the timezone where the service occurred.
+        #   If omitted, the Encounter is assumed to be for a single day.
+        #   Must not be temporally before the date_of_service field.
+        #   If there are greater than zero service lines, it is recommended to specify end_date_of_service on the service_line instead of on the encounter to prepare for future API versions.
         # @param patient [Hash] Contains the identification information of the individual receiving medical services.Request of type Individual::PatientCreate, as a Hash
         #   * :phone_numbers (Array<Commons::PhoneNumber>)
         #   * :phone_consent (Boolean)
@@ -896,6 +910,8 @@ module CandidApiClient
         #     * :pharmacy_prescription_number (String)
         #   * :place_of_service_code (Commons::FacilityTypeCode)
         #   * :description (String)
+        #   * :date_of_service (Date)
+        #   * :end_date_of_service (Date)
         # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type Guarantor::V1::GuarantorCreate, as a Hash
         #   * :phone_numbers (Array<Commons::PhoneNumber>)
         #   * :phone_consent (Boolean)
@@ -920,8 +936,8 @@ module CandidApiClient
         #   * :submission_records (Array<ClaimSubmission::V1::ClaimSubmissionRecordCreate>)
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::Encounter]
-        def create(external_id:, date_of_service:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, end_date_of_service: nil, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, request_options: nil)
+        def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
+                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, request_options: nil)
           Async do
             response = @request_client.conn.post("/api/encounters/v4") do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -930,8 +946,6 @@ module CandidApiClient
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 external_id: external_id,
-                date_of_service: date_of_service,
-                end_date_of_service: end_date_of_service,
                 prior_authorization_number: prior_authorization_number,
                 patient_authorized_release: patient_authorized_release,
                 benefits_assigned_to_provider: benefits_assigned_to_provider,
@@ -952,6 +966,8 @@ module CandidApiClient
                 last_menstrual_period_date: last_menstrual_period_date,
                 delay_reason_code: delay_reason_code,
                 additional_properties: additional_properties,
+                date_of_service: date_of_service,
+                end_date_of_service: end_date_of_service,
                 patient: patient,
                 billing_provider: billing_provider,
                 rendering_provider: rendering_provider,
@@ -982,6 +998,7 @@ module CandidApiClient
         #   This date must be the local date in the timezone where the service occurred.
         #   Box 24a on the CMS-1500 claim form.
         #   If service occurred over a range of dates, this should be the start date.
+        #   If service lines have distinct date_of_service values, updating the encounter's date_of_service will fail. If all service line date_of_service values are the same, updating the encounter's date_of_service will update all service line date_of_service values.
         # @param diagnosis_ids [Array<Diagnoses::DIAGNOSIS_ID>] Ideally, this field should contain no more than 12 diagnoses. However, more diagnoses
         #   may be submitted at this time, and coders will later prioritize the 12 that will be
         #   submitted to the payor.
@@ -1007,6 +1024,7 @@ module CandidApiClient
         #   This date must be the local date in the timezone where the service occurred.
         #   If omitted, the Encounter is assumed to be for a single day.
         #   Must not be temporally before the date_of_service field.
+        #   If service lines have distinct end_date_of_service values, updating the encounter's end_date_of_service will fail. If all service line end_date_of_service values are the same, updating the encounter's end_date_of_service will update all service line date_of_service values.
         # @param subscriber_primary [Hash] Contains details of the primary insurance subscriber.Request of type Individual::SubscriberCreate, as a Hash
         #   * :insurance_card (Hash)
         #     * :member_id (String)

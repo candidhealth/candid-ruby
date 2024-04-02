@@ -5,7 +5,6 @@ module CandidApiClient
     module V1
       class ClaimFrequencyTypeCode
         ORIGINAL = "1"
-        CORRECTED = "6"
         REPLACEMENT = "7"
         VOID = "8"
       end

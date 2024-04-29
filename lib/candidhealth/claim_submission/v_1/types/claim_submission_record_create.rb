@@ -3,6 +3,7 @@
 require "date"
 require_relative "claim_frequency_type_code"
 require_relative "../../../commons/types/claim_submission_payer_responsibility_type"
+require_relative "../../../commons/types/intended_submission_medium"
 require "json"
 
 module CandidApiClient
@@ -10,20 +11,27 @@ module CandidApiClient
     module V1
       # Data about each external submission.
       class ClaimSubmissionRecordCreate
-        attr_reader :submitted_at, :claim_frequency_code, :payer_responsibility, :additional_properties
+        attr_reader :submitted_at, :claim_frequency_code, :payer_responsibility, :intended_submission_medium,
+                    :additional_properties
 
         # @param submitted_at [DateTime] When the claim was submitted to the payer.
         # @param claim_frequency_code [ClaimSubmission::V1::ClaimFrequencyTypeCode]
         # @param payer_responsibility [Commons::ClaimSubmissionPayerResponsibilityType]
+        # @param intended_submission_medium [Commons::IntendedSubmissionMedium] The medium by which the claim was submitted to the payer: paper or electronic.
+        #   If omitted, defaults to electronic.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [ClaimSubmission::V1::ClaimSubmissionRecordCreate]
-        def initialize(submitted_at:, claim_frequency_code: nil, payer_responsibility: nil, additional_properties: nil)
+        def initialize(submitted_at:, claim_frequency_code: nil, payer_responsibility: nil,
+                       intended_submission_medium: nil, additional_properties: nil)
           # @type [DateTime] When the claim was submitted to the payer.
           @submitted_at = submitted_at
           # @type [ClaimSubmission::V1::ClaimFrequencyTypeCode]
           @claim_frequency_code = claim_frequency_code
           # @type [Commons::ClaimSubmissionPayerResponsibilityType]
           @payer_responsibility = payer_responsibility
+          # @type [Commons::IntendedSubmissionMedium] The medium by which the claim was submitted to the payer: paper or electronic.
+          #   If omitted, defaults to electronic.
+          @intended_submission_medium = intended_submission_medium
           # @type [OpenStruct] Additional properties unmapped to the current class definition
           @additional_properties = additional_properties
         end
@@ -38,8 +46,9 @@ module CandidApiClient
           submitted_at = (DateTime.parse(parsed_json["submitted_at"]) unless parsed_json["submitted_at"].nil?)
           claim_frequency_code = struct.claim_frequency_code
           payer_responsibility = struct.payer_responsibility
+          intended_submission_medium = struct.intended_submission_medium
           new(submitted_at: submitted_at, claim_frequency_code: claim_frequency_code,
-              payer_responsibility: payer_responsibility, additional_properties: struct)
+              payer_responsibility: payer_responsibility, intended_submission_medium: intended_submission_medium, additional_properties: struct)
         end
 
         # Serialize an instance of ClaimSubmissionRecordCreate to a JSON object
@@ -49,7 +58,8 @@ module CandidApiClient
           {
             "submitted_at": @submitted_at,
             "claim_frequency_code": @claim_frequency_code,
-            "payer_responsibility": @payer_responsibility
+            "payer_responsibility": @payer_responsibility,
+            "intended_submission_medium": @intended_submission_medium
           }.to_json
         end
 
@@ -61,6 +71,7 @@ module CandidApiClient
           obj.submitted_at.is_a?(DateTime) != false || raise("Passed value for field obj.submitted_at is not the expected type, validation failed.")
           obj.claim_frequency_code&.is_a?(ClaimSubmission::V1::ClaimFrequencyTypeCode) != false || raise("Passed value for field obj.claim_frequency_code is not the expected type, validation failed.")
           obj.payer_responsibility&.is_a?(Commons::ClaimSubmissionPayerResponsibilityType) != false || raise("Passed value for field obj.payer_responsibility is not the expected type, validation failed.")
+          obj.intended_submission_medium&.is_a?(Commons::IntendedSubmissionMedium) != false || raise("Passed value for field obj.intended_submission_medium is not the expected type, validation failed.")
         end
       end
     end

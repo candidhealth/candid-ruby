@@ -32,7 +32,7 @@ module CandidApiClient
         # @param medicaid_insurance_types [Contracts::V2::InsuranceTypes] The Medicaid plan insurance types this contract applies.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [Contracts::V2::Contract]
-        def initialize(contract_id:, contracting_provider:, provider_count:, effective_date:, regions:, commercial_insurance_types:, medicare_insurance_types:, medicaid_insurance_types:, payer: nil,
+        def initialize(contract_id:, contracting_provider:, provider_count:, payer:, effective_date:, regions:, commercial_insurance_types:, medicare_insurance_types:, medicaid_insurance_types:,
                        expiration_date: nil, contract_status: nil, authorized_signatory: nil, additional_properties: nil)
           # @type [Contracts::V2::CONTRACT_ID]
           @contract_id = contract_id
@@ -149,7 +149,7 @@ module CandidApiClient
           obj.contract_id.is_a?(UUID) != false || raise("Passed value for field obj.contract_id is not the expected type, validation failed.")
           OrganizationProviders::V2::OrganizationProvider.validate_raw(obj: obj.contracting_provider)
           obj.provider_count.is_a?(Integer) != false || raise("Passed value for field obj.provider_count is not the expected type, validation failed.")
-          obj.payer.nil? || Payers::V3::Payer.validate_raw(obj: obj.payer)
+          Payers::V3::Payer.validate_raw(obj: obj.payer)
           obj.effective_date.is_a?(String) != false || raise("Passed value for field obj.effective_date is not the expected type, validation failed.")
           obj.expiration_date&.is_a?(String) != false || raise("Passed value for field obj.expiration_date is not the expected type, validation failed.")
           Commons::Regions.validate_raw(obj: obj.regions)

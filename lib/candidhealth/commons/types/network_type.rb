@@ -2,9 +2,7 @@
 
 module CandidApiClient
   class Commons
-    class SourceOfPaymentCode
-      SELF_PAY = "09"
-      OTHER_NON_FEDERAL_PROGRAMS = "11"
+    class NetworkType
       PPO = "12"
       POS = "13"
       EPO = "14"
@@ -12,11 +10,8 @@ module CandidApiClient
       HMO_MEDICARE_RISK = "16"
       DMO = "17"
       AUTO = "AM"
-      BLUE_CROSS_BLUE_SHIELD = "BL"
       CHAMPUS = "CH"
-      COMMERCIAL_INSURANCE_CO = "CI"
       DISABILITY = "DS"
-      FEDERAL_EMPLOYEES = "FI"
       HMO = "HM"
       LIABILITY = "LM"
       MEDICARE_PART_A = "MA"

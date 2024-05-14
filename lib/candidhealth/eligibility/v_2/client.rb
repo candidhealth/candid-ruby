@@ -55,6 +55,10 @@ module CandidApiClient
         #
         # - Note Availity requires a free developer account to access this documentation.
         #
+        # Check connection status of Availity API and partners here:
+        #
+        # - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
+        #
         # @param request_options [RequestOptions]
         # @return [Object]
         def submit_eligibility_check_availity(request_options: nil)
@@ -117,6 +121,10 @@ module CandidApiClient
         # A schema of the response object can be found here: [Availity Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
         #
         # - Note Availity requires a free developer account to access this documentation.
+        #
+        # Check connection status of Availity API and partners here:
+        #
+        # - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #
         # @param request_options [RequestOptions]
         # @return [Object]

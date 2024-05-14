@@ -386,10 +386,11 @@ module CandidApiClient
         #   * :claim_created_at (DateTime)
         #   * :patient_control_number (String)
         #   * :submission_records (Array<ClaimSubmission::V1::ClaimSubmissionRecordCreate>)
+        # @param tag_ids [Array<Tags::TAG_ID>] Names of tags that should be on the encounter.
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::Encounter]
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, request_options: nil)
           response = @request_client.conn.post("/api/encounters/v4") do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -433,7 +434,8 @@ module CandidApiClient
               patient_histories: patient_histories,
               service_lines: service_lines,
               guarantor: guarantor,
-              external_claim_submission: external_claim_submission
+              external_claim_submission: external_claim_submission,
+              tag_ids: tag_ids
             }.compact
           end
           Encounters::V4::Encounter.from_json(json_object: response.body)
@@ -452,7 +454,7 @@ module CandidApiClient
         # @param diagnosis_ids [Array<Diagnoses::DIAGNOSIS_ID>] Ideally, this field should contain no more than 12 diagnoses. However, more diagnoses
         #   may be submitted at this time, and coders will later prioritize the 12 that will be
         #   submitted to the payor.
-        # @param tag_ids [Array<Tags::TAG_ID>] Names of tags that should be on the encounter.
+        # @param tag_ids [Array<Tags::TAG_ID>] Names of tags that should be on the encounter.  Note all tags on encounter will be overriden with this list.
         # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during patient encounters.Request of type Array<Encounters::V4::ClinicalNoteCategoryCreate>, as a Hash
         #   * :category (Encounters::V4::NoteCategory)
         #   * :notes (Array<Encounters::V4::ClinicalNote>)
@@ -547,10 +549,13 @@ module CandidApiClient
         #   Required when, in the judgment of the provider, the services on this claim are related to the patient's pregnancy.
         # @param delay_reason_code [Commons::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #   Code indicating the reason why a request was delayed
+        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
+        #   for billing purpose.
+        #   Box 12 on the CMS-1500 claim form.
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::Encounter]
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, request_options: nil)
           response = @request_client.conn.patch("/api/encounters/v4/#{encounter_id}") do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -580,7 +585,8 @@ module CandidApiClient
               discharge_date: discharge_date,
               onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
               last_menstrual_period_date: last_menstrual_period_date,
-              delay_reason_code: delay_reason_code
+              delay_reason_code: delay_reason_code,
+              patient_authorized_release: patient_authorized_release
             }.compact
           end
           Encounters::V4::Encounter.from_json(json_object: response.body)
@@ -934,10 +940,11 @@ module CandidApiClient
         #   * :claim_created_at (DateTime)
         #   * :patient_control_number (String)
         #   * :submission_records (Array<ClaimSubmission::V1::ClaimSubmissionRecordCreate>)
+        # @param tag_ids [Array<Tags::TAG_ID>] Names of tags that should be on the encounter.
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::Encounter]
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, request_options: nil)
           Async do
             response = @request_client.conn.post("/api/encounters/v4") do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -982,7 +989,8 @@ module CandidApiClient
                 patient_histories: patient_histories,
                 service_lines: service_lines,
                 guarantor: guarantor,
-                external_claim_submission: external_claim_submission
+                external_claim_submission: external_claim_submission,
+                tag_ids: tag_ids
               }.compact
             end
             Encounters::V4::Encounter.from_json(json_object: response.body)
@@ -1002,7 +1010,7 @@ module CandidApiClient
         # @param diagnosis_ids [Array<Diagnoses::DIAGNOSIS_ID>] Ideally, this field should contain no more than 12 diagnoses. However, more diagnoses
         #   may be submitted at this time, and coders will later prioritize the 12 that will be
         #   submitted to the payor.
-        # @param tag_ids [Array<Tags::TAG_ID>] Names of tags that should be on the encounter.
+        # @param tag_ids [Array<Tags::TAG_ID>] Names of tags that should be on the encounter.  Note all tags on encounter will be overriden with this list.
         # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during patient encounters.Request of type Array<Encounters::V4::ClinicalNoteCategoryCreate>, as a Hash
         #   * :category (Encounters::V4::NoteCategory)
         #   * :notes (Array<Encounters::V4::ClinicalNote>)
@@ -1097,10 +1105,13 @@ module CandidApiClient
         #   Required when, in the judgment of the provider, the services on this claim are related to the patient's pregnancy.
         # @param delay_reason_code [Commons::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #   Code indicating the reason why a request was delayed
+        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
+        #   for billing purpose.
+        #   Box 12 on the CMS-1500 claim form.
         # @param request_options [RequestOptions]
         # @return [Encounters::V4::Encounter]
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch("/api/encounters/v4/#{encounter_id}") do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1131,7 +1142,8 @@ module CandidApiClient
                 discharge_date: discharge_date,
                 onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
                 last_menstrual_period_date: last_menstrual_period_date,
-                delay_reason_code: delay_reason_code
+                delay_reason_code: delay_reason_code,
+                patient_authorized_release: patient_authorized_release
               }.compact
             end
             Encounters::V4::Encounter.from_json(json_object: response.body)

@@ -38,9 +38,11 @@ module CandidApiClient
   module Encounters
     module V4
       class Encounter
-        attr_reader :date_of_service, :end_date_of_service, :encounter_id, :claims, :patient, :guarantor,
-                    :billing_provider, :rendering_provider, :referring_provider, :service_facility, :subscriber_primary, :subscriber_secondary, :url, :diagnoses, :clinical_notes, :billing_notes, :place_of_service_code, :place_of_service_code_as_submitted, :patient_histories, :patient_payments, :tags, :coding_attribution, :work_queue_id, :work_queue_membership_activated_at, :owner_of_next_action, :submission_origin, :external_id, :prior_authorization_number, :patient_authorized_release, :benefits_assigned_to_provider, :provider_accepts_assignment, :appointment_type, :existing_medications, :vitals, :interventions, :pay_to_address, :synchronicity, :billable_status, :responsible_party, :additional_information, :service_authorization_exception_code, :admission_date, :discharge_date, :onset_of_current_illness_or_symptom_date, :last_menstrual_period_date, :delay_reason_code, :additional_properties
+        attr_reader :patient_control_number, :date_of_service, :end_date_of_service, :encounter_id, :claims, :patient,
+                    :guarantor, :billing_provider, :rendering_provider, :referring_provider, :service_facility, :subscriber_primary, :subscriber_secondary, :url, :diagnoses, :clinical_notes, :billing_notes, :place_of_service_code, :place_of_service_code_as_submitted, :patient_histories, :patient_payments, :tags, :coding_attribution, :work_queue_id, :work_queue_membership_activated_at, :owner_of_next_action, :submission_origin, :external_id, :prior_authorization_number, :patient_authorized_release, :benefits_assigned_to_provider, :provider_accepts_assignment, :appointment_type, :existing_medications, :vitals, :interventions, :pay_to_address, :synchronicity, :billable_status, :responsible_party, :additional_information, :service_authorization_exception_code, :admission_date, :discharge_date, :onset_of_current_illness_or_symptom_date, :last_menstrual_period_date, :delay_reason_code, :additional_properties
 
+        # @param patient_control_number [String] A patient control number (PCN) is a unique identifier assigned to a patient within a healthcare system or facility.
+        #   It's used to track and manage a patient's medical records, treatments, and other healthcare-related information.
         # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #   This date must be the local date in the timezone where the service occurred.
         #   Box 24a on the CMS-1500 claim form.
@@ -131,7 +133,10 @@ module CandidApiClient
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [Encounters::V4::Encounter]
         def initialize(date_of_service:, encounter_id:, claims:, patient:, billing_provider:, rendering_provider:,
-                       service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, end_date_of_service: nil, guarantor: nil, referring_provider: nil, subscriber_primary: nil, subscriber_secondary: nil, billing_notes: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, coding_attribution: nil, work_queue_id: nil, work_queue_membership_activated_at: nil, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil)
+                       service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, patient_control_number: nil, end_date_of_service: nil, guarantor: nil, referring_provider: nil, subscriber_primary: nil, subscriber_secondary: nil, billing_notes: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, coding_attribution: nil, work_queue_id: nil, work_queue_membership_activated_at: nil, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil)
+          # @type [String] A patient control number (PCN) is a unique identifier assigned to a patient within a healthcare system or facility.
+          #   It's used to track and manage a patient's medical records, treatments, and other healthcare-related information.
+          @patient_control_number = patient_control_number
           # @type [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
           #   This date must be the local date in the timezone where the service occurred.
           #   Box 24a on the CMS-1500 claim form.
@@ -276,6 +281,7 @@ module CandidApiClient
         def self.from_json(json_object:)
           struct = JSON.parse(json_object, object_class: OpenStruct)
           parsed_json = JSON.parse(json_object)
+          patient_control_number = struct.patient_control_number
           date_of_service = struct.date_of_service
           end_date_of_service = struct.end_date_of_service
           encounter_id = struct.encounter_id
@@ -401,8 +407,8 @@ module CandidApiClient
           onset_of_current_illness_or_symptom_date = struct.onset_of_current_illness_or_symptom_date
           last_menstrual_period_date = struct.last_menstrual_period_date
           delay_reason_code = struct.delay_reason_code
-          new(date_of_service: date_of_service, end_date_of_service: end_date_of_service, encounter_id: encounter_id,
-              claims: claims, patient: patient, guarantor: guarantor, billing_provider: billing_provider, rendering_provider: rendering_provider, referring_provider: referring_provider, service_facility: service_facility, subscriber_primary: subscriber_primary, subscriber_secondary: subscriber_secondary, url: url, diagnoses: diagnoses, clinical_notes: clinical_notes, billing_notes: billing_notes, place_of_service_code: place_of_service_code, place_of_service_code_as_submitted: place_of_service_code_as_submitted, patient_histories: patient_histories, patient_payments: patient_payments, tags: tags, coding_attribution: coding_attribution, work_queue_id: work_queue_id, work_queue_membership_activated_at: work_queue_membership_activated_at, owner_of_next_action: owner_of_next_action, submission_origin: submission_origin, external_id: external_id, prior_authorization_number: prior_authorization_number, patient_authorized_release: patient_authorized_release, benefits_assigned_to_provider: benefits_assigned_to_provider, provider_accepts_assignment: provider_accepts_assignment, appointment_type: appointment_type, existing_medications: existing_medications, vitals: vitals, interventions: interventions, pay_to_address: pay_to_address, synchronicity: synchronicity, billable_status: billable_status, responsible_party: responsible_party, additional_information: additional_information, service_authorization_exception_code: service_authorization_exception_code, admission_date: admission_date, discharge_date: discharge_date, onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date, last_menstrual_period_date: last_menstrual_period_date, delay_reason_code: delay_reason_code, additional_properties: struct)
+          new(patient_control_number: patient_control_number, date_of_service: date_of_service,
+              end_date_of_service: end_date_of_service, encounter_id: encounter_id, claims: claims, patient: patient, guarantor: guarantor, billing_provider: billing_provider, rendering_provider: rendering_provider, referring_provider: referring_provider, service_facility: service_facility, subscriber_primary: subscriber_primary, subscriber_secondary: subscriber_secondary, url: url, diagnoses: diagnoses, clinical_notes: clinical_notes, billing_notes: billing_notes, place_of_service_code: place_of_service_code, place_of_service_code_as_submitted: place_of_service_code_as_submitted, patient_histories: patient_histories, patient_payments: patient_payments, tags: tags, coding_attribution: coding_attribution, work_queue_id: work_queue_id, work_queue_membership_activated_at: work_queue_membership_activated_at, owner_of_next_action: owner_of_next_action, submission_origin: submission_origin, external_id: external_id, prior_authorization_number: prior_authorization_number, patient_authorized_release: patient_authorized_release, benefits_assigned_to_provider: benefits_assigned_to_provider, provider_accepts_assignment: provider_accepts_assignment, appointment_type: appointment_type, existing_medications: existing_medications, vitals: vitals, interventions: interventions, pay_to_address: pay_to_address, synchronicity: synchronicity, billable_status: billable_status, responsible_party: responsible_party, additional_information: additional_information, service_authorization_exception_code: service_authorization_exception_code, admission_date: admission_date, discharge_date: discharge_date, onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date, last_menstrual_period_date: last_menstrual_period_date, delay_reason_code: delay_reason_code, additional_properties: struct)
         end
 
         # Serialize an instance of Encounter to a JSON object
@@ -410,6 +416,7 @@ module CandidApiClient
         # @return [JSON]
         def to_json(*_args)
           {
+            "patient_control_number": @patient_control_number,
             "date_of_service": @date_of_service,
             "end_date_of_service": @end_date_of_service,
             "encounter_id": @encounter_id,
@@ -464,6 +471,7 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
+          obj.patient_control_number&.is_a?(String) != false || raise("Passed value for field obj.patient_control_number is not the expected type, validation failed.")
           obj.date_of_service.is_a?(String) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
           obj.end_date_of_service&.is_a?(String) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
           obj.encounter_id.is_a?(UUID) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")

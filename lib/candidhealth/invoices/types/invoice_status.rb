@@ -8,6 +8,7 @@ module CandidApiClient
       PAID = "paid"
       VOID = "void"
       UNCOLLECTIBLE = "uncollectible"
+      HELD = "held"
     end
   end
 end

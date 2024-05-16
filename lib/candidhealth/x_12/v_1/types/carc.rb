@@ -406,6 +406,7 @@ module CandidApiClient
         CARC_Y_1 = "Y1"
         CARC_Y_2 = "Y2"
         CARC_Y_3 = "Y3"
+        UNKNOWN = "UNKNOWN"
       end
     end
   end

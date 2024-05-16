@@ -12,6 +12,7 @@ module CandidApiClient
       PR = "PR"
       RR = "RR"
       NC = "NC"
+      UNKNOWN = "UNKNOWN"
     end
   end
 end

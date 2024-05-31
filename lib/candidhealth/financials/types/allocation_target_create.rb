@@ -3,6 +3,7 @@
 require "json"
 require_relative "../../commons/types/service_line_id"
 require_relative "../../commons/types/claim_id"
+require_relative "../../commons/types/encounter_external_id"
 require_relative "../../commons/types/provider_id"
 
 module CandidApiClient
@@ -35,6 +36,8 @@ module CandidApiClient
                    json_object.value
                  when "claim_by_id"
                    json_object.value
+                 when "claim_by_encounter_external_id"
+                   json_object.value
                  when "billing_provider_by_id"
                    json_object.value
                  when "unattributed"
@@ -53,6 +56,8 @@ module CandidApiClient
         when "service_line_by_id"
           { "type": @discriminant, "value": @member }.to_json
         when "claim_by_id"
+          { "type": @discriminant, "value": @member }.to_json
+        when "claim_by_encounter_external_id"
           { "type": @discriminant, "value": @member }.to_json
         when "billing_provider_by_id"
           { "type": @discriminant, "value": @member }.to_json
@@ -74,6 +79,8 @@ module CandidApiClient
           obj.is_a?(UUID) != false || raise("Passed value for field obj is not the expected type, validation failed.")
         when "claim_by_id"
           obj.is_a?(UUID) != false || raise("Passed value for field obj is not the expected type, validation failed.")
+        when "claim_by_encounter_external_id"
+          obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
         when "billing_provider_by_id"
           obj.is_a?(UUID) != false || raise("Passed value for field obj is not the expected type, validation failed.")
         when "unattributed"
@@ -101,6 +108,12 @@ module CandidApiClient
       # @return [Financials::AllocationTargetCreate]
       def self.claim_by_id(member:)
         new(member: member, discriminant: "claim_by_id")
+      end
+
+      # @param member [Commons::ENCOUNTER_EXTERNAL_ID]
+      # @return [Financials::AllocationTargetCreate]
+      def self.claim_by_encounter_external_id(member:)
+        new(member: member, discriminant: "claim_by_encounter_external_id")
       end
 
       # @param member [Commons::PROVIDER_ID]

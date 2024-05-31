@@ -69,6 +69,34 @@ module CandidApiClient
           end
           response.body
         end
+
+        # If you'd like access to this endpoint, please reach out to support@joincandidhealth.com with the subject line "Action: Activate Availity Eligibility API Endpoint
+        #
+        # This API is a wrapper around Availity's coverages API. Below are some helpful documentation links:
+        #
+        # - [Availity - Coverages 1.0.0 API](https://developer.availity.com/partner/documentation#c_coverages_references)
+        # - [Candid Availity Eligibility Integration Guide](https://support.joincandidhealth.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
+        #
+        # A schema of the response object can be found here: [Availity Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
+        #
+        # - Note Availity requires a free developer account to access this documentation.
+        #
+        # Check connection status of Availity API and partners here:
+        #
+        # - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
+        #
+        # @param request [Object]
+        # @param request_options [RequestOptions]
+        # @return [Object]
+        def submit_eligibility_check_availity_post(request: nil, request_options: nil)
+          response = @request_client.conn.post("/api/eligibility/v2/availity") do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+          end
+          response.body
+        end
       end
 
       class AsyncV2Client
@@ -134,6 +162,36 @@ module CandidApiClient
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
               req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            end
+            response.body
+          end
+        end
+
+        # If you'd like access to this endpoint, please reach out to support@joincandidhealth.com with the subject line "Action: Activate Availity Eligibility API Endpoint
+        #
+        # This API is a wrapper around Availity's coverages API. Below are some helpful documentation links:
+        #
+        # - [Availity - Coverages 1.0.0 API](https://developer.availity.com/partner/documentation#c_coverages_references)
+        # - [Candid Availity Eligibility Integration Guide](https://support.joincandidhealth.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
+        #
+        # A schema of the response object can be found here: [Availity Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
+        #
+        # - Note Availity requires a free developer account to access this documentation.
+        #
+        # Check connection status of Availity API and partners here:
+        #
+        # - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
+        #
+        # @param request [Object]
+        # @param request_options [RequestOptions]
+        # @return [Object]
+        def submit_eligibility_check_availity_post(request: nil, request_options: nil)
+          Async do
+            response = @request_client.conn.post("/api/eligibility/v2/availity") do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
             end
             response.body
           end

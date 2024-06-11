@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "candidhealth/auth/v_2/types/auth_get_token_request"
 require_relative "candidhealth/auth/v_2/types/auth_get_token_response"
 require_relative "candidhealth/auth/v_2/types/too_many_requests_error_type"
 require_relative "candidhealth/billing_notes/v_2/types/billing_note_id"

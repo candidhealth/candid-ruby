@@ -7,6 +7,7 @@ module CandidApiClient
         STRIPE = "STRIPE"
         CEDAR = "CEDAR"
         HEALTHIE = "HEALTHIE"
+        COLLECTLY = "COLLECTLY"
       end
     end
   end

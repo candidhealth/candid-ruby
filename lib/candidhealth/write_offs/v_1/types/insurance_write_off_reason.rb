@@ -19,6 +19,7 @@ module CandidApiClient
         CASE_RATE_OR_CAPITATED = "CASE_RATE_OR_CAPITATED"
         OTHER = "OTHER"
         UNKNOWN = "UNKNOWN"
+        CONTRACTUAL_ADJUSTMENT = "CONTRACTUAL_ADJUSTMENT"
       end
     end
   end

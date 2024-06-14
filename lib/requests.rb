@@ -20,7 +20,7 @@ module CandidApiClient
       @headers = {
         "X-Fern-Language": "Ruby",
         "X-Fern-SDK-Name": "candidhealth",
-        "X-Fern-SDK-Version": "0.19.1-6de2b0d",
+        "X-Fern-SDK-Version": "0.20.0",
         "Authorization": "Bearer #{token}"
       }
       @conn = Faraday.new(@base_url, headers: @headers) do |faraday|
@@ -46,7 +46,7 @@ module CandidApiClient
       @headers = {
         "X-Fern-Language": "Ruby",
         "X-Fern-SDK-Name": "candidhealth",
-        "X-Fern-SDK-Version": "0.19.1-6de2b0d",
+        "X-Fern-SDK-Version": "0.20.0",
         "Authorization": "Bearer #{token}"
       }
       @conn = Faraday.new(@base_url, headers: @headers) do |faraday|

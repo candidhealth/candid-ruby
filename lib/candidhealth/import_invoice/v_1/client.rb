@@ -3,6 +3,14 @@
 require_relative "../../../requests"
 require_relative "types/create_import_invoice_request"
 require_relative "types/import_invoice"
+require_relative "../../commons/types/patient_external_id"
+require_relative "../../commons/types/encounter_external_id"
+require "date"
+require_relative "../../invoices/v_2/types/invoice_status"
+require_relative "../../invoices/v_2/types/invoice_sort_field"
+require_relative "../../commons/types/sort_direction"
+require_relative "../../commons/types/page_token"
+require_relative "types/import_invoices_page"
 require_relative "../../commons/types/invoice_id"
 require_relative "types/import_invoice_update_request"
 require "async"
@@ -41,6 +49,43 @@ module CandidApiClient
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
           end
           ImportInvoice::V1::ImportInvoice.from_json(json_object: response.body)
+        end
+
+        # Returns all Invoices for the authenticated user's organziation with all filters applied.
+        #
+        # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
+        # @param encounter_external_id [Commons::ENCOUNTER_EXTERNAL_ID]
+        # @param note [String] partial match supported
+        # @param due_date_before [Date] all invoices whose due date is before this due date, not inclusive
+        # @param due_date_after [Date] all invoices whose due date is after this due date, not inclusive
+        # @param status [Invoices::V2::InvoiceStatus] all invoices that match any of the provided statuses
+        # @param limit [Integer] Defaults to 100
+        # @param sort [Invoices::V2::InvoiceSortField] Defaults to created_at
+        # @param sort_direction [Commons::SortDirection] Sort direction. Defaults to descending order
+        # @param page_token [Commons::PAGE_TOKEN]
+        # @param request_options [RequestOptions]
+        # @return [ImportInvoice::V1::ImportInvoicesPage]
+        def get_multi(patient_external_id: nil, encounter_external_id: nil, note: nil, due_date_before: nil,
+                      due_date_after: nil, status: nil, limit: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
+          response = @request_client.conn.get("/api/import-invoice/v1") do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.params = {
+              **(request_options&.additional_query_parameters || {}),
+              "patient_external_id": patient_external_id,
+              "encounter_external_id": encounter_external_id,
+              "note": note,
+              "due_date_before": due_date_before,
+              "due_date_after": due_date_after,
+              "status": status,
+              "limit": limit,
+              "sort": sort,
+              "sort_direction": sort_direction,
+              "page_token": page_token
+            }.compact
+          end
+          ImportInvoice::V1::ImportInvoicesPage.from_json(json_object: response.body)
         end
 
         # Retrieve and view an import invoice
@@ -113,6 +158,45 @@ module CandidApiClient
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
             end
             ImportInvoice::V1::ImportInvoice.from_json(json_object: response.body)
+          end
+        end
+
+        # Returns all Invoices for the authenticated user's organziation with all filters applied.
+        #
+        # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
+        # @param encounter_external_id [Commons::ENCOUNTER_EXTERNAL_ID]
+        # @param note [String] partial match supported
+        # @param due_date_before [Date] all invoices whose due date is before this due date, not inclusive
+        # @param due_date_after [Date] all invoices whose due date is after this due date, not inclusive
+        # @param status [Invoices::V2::InvoiceStatus] all invoices that match any of the provided statuses
+        # @param limit [Integer] Defaults to 100
+        # @param sort [Invoices::V2::InvoiceSortField] Defaults to created_at
+        # @param sort_direction [Commons::SortDirection] Sort direction. Defaults to descending order
+        # @param page_token [Commons::PAGE_TOKEN]
+        # @param request_options [RequestOptions]
+        # @return [ImportInvoice::V1::ImportInvoicesPage]
+        def get_multi(patient_external_id: nil, encounter_external_id: nil, note: nil, due_date_before: nil,
+                      due_date_after: nil, status: nil, limit: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
+          Async do
+            response = @request_client.conn.get("/api/import-invoice/v1") do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.params = {
+                **(request_options&.additional_query_parameters || {}),
+                "patient_external_id": patient_external_id,
+                "encounter_external_id": encounter_external_id,
+                "note": note,
+                "due_date_before": due_date_before,
+                "due_date_after": due_date_after,
+                "status": status,
+                "limit": limit,
+                "sort": sort,
+                "sort_direction": sort_direction,
+                "page_token": page_token
+              }.compact
+            end
+            ImportInvoice::V1::ImportInvoicesPage.from_json(json_object: response.body)
           end
         end
 

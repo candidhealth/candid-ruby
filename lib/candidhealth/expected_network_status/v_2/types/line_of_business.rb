@@ -3,10 +3,12 @@
 module CandidApiClient
   module ExpectedNetworkStatus
     module V2
-      class LineOfBusiness
-        MEDICARE = "medicare"
-        MEDICAID = "medicaid"
-        COMMERCIAL = "commercial"
+      module Types
+        class LineOfBusiness
+          MEDICARE = "medicare"
+          MEDICAID = "medicaid"
+          COMMERCIAL = "commercial"
+        end
       end
     end
   end

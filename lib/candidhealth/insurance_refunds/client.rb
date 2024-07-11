@@ -6,22 +6,24 @@ require_relative "v_1/client"
 module CandidApiClient
   module InsuranceRefunds
     class Client
+      # @return [CandidApiClient::InsuranceRefunds::V1::V1Client]
       attr_reader :v_1
 
-      # @param request_client [RequestClient]
-      # @return [InsuranceRefunds::Client]
+      # @param request_client [CandidApiClient::RequestClient]
+      # @return [CandidApiClient::InsuranceRefunds::Client]
       def initialize(request_client:)
-        @v_1 = InsuranceRefunds::V1::V1Client.new(request_client: request_client)
+        @v_1 = CandidApiClient::InsuranceRefunds::V1::V1Client.new(request_client: request_client)
       end
     end
 
     class AsyncClient
+      # @return [CandidApiClient::InsuranceRefunds::V1::AsyncV1Client]
       attr_reader :v_1
 
-      # @param request_client [RequestClient]
-      # @return [InsuranceRefunds::AsyncClient]
+      # @param request_client [CandidApiClient::AsyncRequestClient]
+      # @return [CandidApiClient::InsuranceRefunds::AsyncClient]
       def initialize(request_client:)
-        @v_1 = InsuranceRefunds::V1::AsyncV1Client.new(request_client: request_client)
+        @v_1 = CandidApiClient::InsuranceRefunds::V1::AsyncV1Client.new(request_client: request_client)
       end
     end
   end

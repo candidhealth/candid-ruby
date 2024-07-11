@@ -3,9 +3,11 @@
 module CandidApiClient
   module OrganizationProviders
     module V2
-      class ProviderType
-        INDIVIDUAL = "INDIVIDUAL"
-        ORGANIZATION = "ORGANIZATION"
+      module Types
+        class ProviderType
+          INDIVIDUAL = "INDIVIDUAL"
+          ORGANIZATION = "ORGANIZATION"
+        end
       end
     end
   end

@@ -1,119 +1,150 @@
 # frozen_string_literal: true
 
-require_relative "guarantor_id"
 require_relative "../../../commons/types/phone_number"
-require_relative "../../../commons/types/email"
 require "date"
 require_relative "../../../commons/types/street_address_short_zip"
+require "ostruct"
 require "json"
 
 module CandidApiClient
   module Guarantor
     module V1
-      class Guarantor
-        attr_reader :guarantor_id, :phone_numbers, :phone_consent, :email, :email_consent, :first_name, :last_name,
-                    :external_id, :date_of_birth, :address, :additional_properties
+      module Types
+        class Guarantor
+          # @return [String]
+          attr_reader :guarantor_id
+          # @return [Array<CandidApiClient::Commons::Types::PhoneNumber>]
+          attr_reader :phone_numbers
+          # @return [Boolean]
+          attr_reader :phone_consent
+          # @return [String]
+          attr_reader :email
+          # @return [Boolean]
+          attr_reader :email_consent
+          # @return [String]
+          attr_reader :first_name
+          # @return [String]
+          attr_reader :last_name
+          # @return [String]
+          attr_reader :external_id
+          # @return [Date]
+          attr_reader :date_of_birth
+          # @return [CandidApiClient::Commons::Types::StreetAddressShortZip]
+          attr_reader :address
+          # @return [OpenStruct] Additional properties unmapped to the current class definition
+          attr_reader :additional_properties
+          # @return [Object]
+          attr_reader :_field_set
+          protected :_field_set
 
-        # @param guarantor_id [Guarantor::V1::GUARANTOR_ID]
-        # @param phone_numbers [Array<Commons::PhoneNumber>]
-        # @param phone_consent [Boolean]
-        # @param email [Commons::EMAIL]
-        # @param email_consent [Boolean]
-        # @param first_name [String]
-        # @param last_name [String]
-        # @param external_id [String]
-        # @param date_of_birth [Date]
-        # @param address [Commons::StreetAddressShortZip]
-        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @return [Guarantor::V1::Guarantor]
-        def initialize(guarantor_id:, phone_numbers:, phone_consent:, email_consent:, first_name:, last_name:,
-                       external_id:, email: nil, date_of_birth: nil, address: nil, additional_properties: nil)
-          # @type [Guarantor::V1::GUARANTOR_ID]
-          @guarantor_id = guarantor_id
-          # @type [Array<Commons::PhoneNumber>]
-          @phone_numbers = phone_numbers
-          # @type [Boolean]
-          @phone_consent = phone_consent
-          # @type [Commons::EMAIL]
-          @email = email
-          # @type [Boolean]
-          @email_consent = email_consent
-          # @type [String]
-          @first_name = first_name
-          # @type [String]
-          @last_name = last_name
-          # @type [String]
-          @external_id = external_id
-          # @type [Date]
-          @date_of_birth = date_of_birth
-          # @type [Commons::StreetAddressShortZip]
-          @address = address
-          # @type [OpenStruct] Additional properties unmapped to the current class definition
-          @additional_properties = additional_properties
-        end
+          OMIT = Object.new
 
-        # Deserialize a JSON object to an instance of Guarantor
-        #
-        # @param json_object [JSON]
-        # @return [Guarantor::V1::Guarantor]
-        def self.from_json(json_object:)
-          struct = JSON.parse(json_object, object_class: OpenStruct)
-          parsed_json = JSON.parse(json_object)
-          guarantor_id = struct.guarantor_id
-          phone_numbers = parsed_json["phone_numbers"]&.map do |v|
-            v = v.to_json
-            Commons::PhoneNumber.from_json(json_object: v)
+          # @param guarantor_id [String]
+          # @param phone_numbers [Array<CandidApiClient::Commons::Types::PhoneNumber>]
+          # @param phone_consent [Boolean]
+          # @param email [String]
+          # @param email_consent [Boolean]
+          # @param first_name [String]
+          # @param last_name [String]
+          # @param external_id [String]
+          # @param date_of_birth [Date]
+          # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip]
+          # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+          # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
+          def initialize(guarantor_id:, phone_numbers:, phone_consent:, email_consent:, first_name:, last_name:,
+                         external_id:, email: OMIT, date_of_birth: OMIT, address: OMIT, additional_properties: nil)
+            @guarantor_id = guarantor_id
+            @phone_numbers = phone_numbers
+            @phone_consent = phone_consent
+            @email = email if email != OMIT
+            @email_consent = email_consent
+            @first_name = first_name
+            @last_name = last_name
+            @external_id = external_id
+            @date_of_birth = date_of_birth if date_of_birth != OMIT
+            @address = address if address != OMIT
+            @additional_properties = additional_properties
+            @_field_set = {
+              "guarantor_id": guarantor_id,
+              "phone_numbers": phone_numbers,
+              "phone_consent": phone_consent,
+              "email": email,
+              "email_consent": email_consent,
+              "first_name": first_name,
+              "last_name": last_name,
+              "external_id": external_id,
+              "date_of_birth": date_of_birth,
+              "address": address
+            }.reject do |_k, v|
+              v == OMIT
+            end
           end
-          phone_consent = struct.phone_consent
-          email = struct.email
-          email_consent = struct.email_consent
-          first_name = struct.first_name
-          last_name = struct.last_name
-          external_id = struct.external_id
-          date_of_birth = (Date.parse(parsed_json["date_of_birth"]) unless parsed_json["date_of_birth"].nil?)
-          if parsed_json["address"].nil?
-            address = nil
-          else
-            address = parsed_json["address"].to_json
-            address = Commons::StreetAddressShortZip.from_json(json_object: address)
+
+          # Deserialize a JSON object to an instance of Guarantor
+          #
+          # @param json_object [String]
+          # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
+          def self.from_json(json_object:)
+            struct = JSON.parse(json_object, object_class: OpenStruct)
+            parsed_json = JSON.parse(json_object)
+            guarantor_id = struct["guarantor_id"]
+            phone_numbers = parsed_json["phone_numbers"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::Commons::Types::PhoneNumber.from_json(json_object: item)
+            end
+            phone_consent = struct["phone_consent"]
+            email = struct["email"]
+            email_consent = struct["email_consent"]
+            first_name = struct["first_name"]
+            last_name = struct["last_name"]
+            external_id = struct["external_id"]
+            date_of_birth = (Date.parse(parsed_json["date_of_birth"]) unless parsed_json["date_of_birth"].nil?)
+            if parsed_json["address"].nil?
+              address = nil
+            else
+              address = parsed_json["address"].to_json
+              address = CandidApiClient::Commons::Types::StreetAddressShortZip.from_json(json_object: address)
+            end
+            new(
+              guarantor_id: guarantor_id,
+              phone_numbers: phone_numbers,
+              phone_consent: phone_consent,
+              email: email,
+              email_consent: email_consent,
+              first_name: first_name,
+              last_name: last_name,
+              external_id: external_id,
+              date_of_birth: date_of_birth,
+              address: address,
+              additional_properties: struct
+            )
           end
-          new(guarantor_id: guarantor_id, phone_numbers: phone_numbers, phone_consent: phone_consent, email: email,
-              email_consent: email_consent, first_name: first_name, last_name: last_name, external_id: external_id, date_of_birth: date_of_birth, address: address, additional_properties: struct)
-        end
 
-        # Serialize an instance of Guarantor to a JSON object
-        #
-        # @return [JSON]
-        def to_json(*_args)
-          {
-            "guarantor_id": @guarantor_id,
-            "phone_numbers": @phone_numbers,
-            "phone_consent": @phone_consent,
-            "email": @email,
-            "email_consent": @email_consent,
-            "first_name": @first_name,
-            "last_name": @last_name,
-            "external_id": @external_id,
-            "date_of_birth": @date_of_birth,
-            "address": @address
-          }.to_json
-        end
+          # Serialize an instance of Guarantor to a JSON object
+          #
+          # @return [String]
+          def to_json(*_args)
+            @_field_set&.to_json
+          end
 
-        # Leveraged for Union-type generation, validate_raw attempts to parse the given hash and check each fields type against the current object's property definitions.
-        #
-        # @param obj [Object]
-        # @return [Void]
-        def self.validate_raw(obj:)
-          obj.guarantor_id.is_a?(UUID) != false || raise("Passed value for field obj.guarantor_id is not the expected type, validation failed.")
-          obj.phone_numbers.is_a?(Array) != false || raise("Passed value for field obj.phone_numbers is not the expected type, validation failed.")
-          obj.phone_consent.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
-          obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
-          obj.email_consent.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
-          obj.first_name.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")
-          obj.last_name.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
-          obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
-          obj.date_of_birth&.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")
-          obj.address.nil? || Commons::StreetAddressShortZip.validate_raw(obj: obj.address)
+          # Leveraged for Union-type generation, validate_raw attempts to parse the given
+          #  hash and check each fields type against the current object's property
+          #  definitions.
+          #
+          # @param obj [Object]
+          # @return [Void]
+          def self.validate_raw(obj:)
+            obj.guarantor_id.is_a?(String) != false || raise("Passed value for field obj.guarantor_id is not the expected type, validation failed.")
+            obj.phone_numbers.is_a?(Array) != false || raise("Passed value for field obj.phone_numbers is not the expected type, validation failed.")
+            obj.phone_consent.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
+            obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
+            obj.email_consent.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
+            obj.first_name.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")
+            obj.last_name.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
+            obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
+            obj.date_of_birth&.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")
+            obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressShortZip.validate_raw(obj: obj.address)
+          end
         end
       end
     end

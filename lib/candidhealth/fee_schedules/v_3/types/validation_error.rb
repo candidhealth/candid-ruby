@@ -8,120 +8,126 @@ require_relative "../../../commons/types/entity_not_found_error_message"
 module CandidApiClient
   module FeeSchedules
     module V3
-      class ValidationError
-        attr_reader :member, :discriminant
+      module Types
+        class ValidationError
+          # @return [Object]
+          attr_reader :member
+          # @return [String]
+          attr_reader :discriminant
 
-        private_class_method :new
-        alias kind_of? is_a?
-        # @param member [Object]
-        # @param discriminant [String]
-        # @return [FeeSchedules::V3::ValidationError]
-        def initialize(member:, discriminant:)
-          # @type [Object]
-          @member = member
-          # @type [String]
-          @discriminant = discriminant
-        end
+          private_class_method :new
+          alias kind_of? is_a?
 
-        # Deserialize a JSON object to an instance of ValidationError
-        #
-        # @param json_object [JSON]
-        # @return [FeeSchedules::V3::ValidationError]
-        def self.from_json(json_object:)
-          struct = JSON.parse(json_object, object_class: OpenStruct)
-          member = case struct.type
-                   when "overlapping_rate_entries"
-                     FeeSchedules::V3::OverlappingRateEntriesError.from_json(json_object: json_object)
-                   when "version_conflict"
-                     Commons::EntityConflictErrorMessage.from_json(json_object: json_object)
-                   when "organization_provider_not_found"
-                     Commons::EntityNotFoundErrorMessage.from_json(json_object: json_object)
-                   when "duplicate_rate"
-                     nil
-                   when "empty_entries"
-                     nil
-                   else
-                     FeeSchedules::V3::OverlappingRateEntriesError.from_json(json_object: json_object)
-                   end
-          new(member: member, discriminant: struct.type)
-        end
-
-        # For Union Types, to_json functionality is delegated to the wrapped member.
-        #
-        # @return [JSON]
-        def to_json(*_args)
-          case @discriminant
-          when "overlapping_rate_entries"
-            { **@member.to_json, type: @discriminant }.to_json
-          when "version_conflict"
-            { **@member.to_json, type: @discriminant }.to_json
-          when "organization_provider_not_found"
-            { **@member.to_json, type: @discriminant }.to_json
-          when "duplicate_rate"
-            { type: @discriminant }.to_json
-          when "empty_entries"
-            { type: @discriminant }.to_json
-          else
-            { "type": @discriminant, value: @member }.to_json
+          # @param member [Object]
+          # @param discriminant [String]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def initialize(member:, discriminant:)
+            @member = member
+            @discriminant = discriminant
           end
-          @member.to_json
-        end
 
-        # Leveraged for Union-type generation, validate_raw attempts to parse the given hash and check each fields type against the current object's property definitions.
-        #
-        # @param obj [Object]
-        # @return [Void]
-        def self.validate_raw(obj:)
-          case obj.type
-          when "overlapping_rate_entries"
-            FeeSchedules::V3::OverlappingRateEntriesError.validate_raw(obj: obj)
-          when "version_conflict"
-            Commons::EntityConflictErrorMessage.validate_raw(obj: obj)
-          when "organization_provider_not_found"
-            Commons::EntityNotFoundErrorMessage.validate_raw(obj: obj)
-          when "duplicate_rate"
-            # noop
-          when "empty_entries"
-            # noop
-          else
-            raise("Passed value matched no type within the union, validation failed.")
+          # Deserialize a JSON object to an instance of ValidationError
+          #
+          # @param json_object [String]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.from_json(json_object:)
+            struct = JSON.parse(json_object, object_class: OpenStruct)
+            member = case struct.type
+                     when "overlapping_rate_entries"
+                       CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
+                     when "version_conflict"
+                       CandidApiClient::Commons::Types::EntityConflictErrorMessage.from_json(json_object: json_object)
+                     when "organization_provider_not_found"
+                       CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.from_json(json_object: json_object)
+                     when "duplicate_rate"
+                       nil
+                     when "empty_entries"
+                       nil
+                     else
+                       CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
+                     end
+            new(member: member, discriminant: struct.type)
           end
-        end
 
-        # For Union Types, is_a? functionality is delegated to the wrapped member.
-        #
-        # @param obj [Object]
-        # @return [Boolean]
-        def is_a?(obj)
-          @member.is_a?(obj)
-        end
+          # For Union Types, to_json functionality is delegated to the wrapped member.
+          #
+          # @return [String]
+          def to_json(*_args)
+            case @discriminant
+            when "overlapping_rate_entries"
+              { **@member.to_json, type: @discriminant }.to_json
+            when "version_conflict"
+              { **@member.to_json, type: @discriminant }.to_json
+            when "organization_provider_not_found"
+              { **@member.to_json, type: @discriminant }.to_json
+            when "duplicate_rate"
+              { type: @discriminant }.to_json
+            when "empty_entries"
+              { type: @discriminant }.to_json
+            else
+              { "type": @discriminant, value: @member }.to_json
+            end
+            @member.to_json
+          end
 
-        # @param member [FeeSchedules::V3::OverlappingRateEntriesError]
-        # @return [FeeSchedules::V3::ValidationError]
-        def self.overlapping_rate_entries(member:)
-          new(member: member, discriminant: "overlapping_rate_entries")
-        end
+          # Leveraged for Union-type generation, validate_raw attempts to parse the given
+          #  hash and check each fields type against the current object's property
+          #  definitions.
+          #
+          # @param obj [Object]
+          # @return [Void]
+          def self.validate_raw(obj:)
+            case obj.type
+            when "overlapping_rate_entries"
+              CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.validate_raw(obj: obj)
+            when "version_conflict"
+              CandidApiClient::Commons::Types::EntityConflictErrorMessage.validate_raw(obj: obj)
+            when "organization_provider_not_found"
+              CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.validate_raw(obj: obj)
+            when "duplicate_rate"
+              # noop
+            when "empty_entries"
+              # noop
+            else
+              raise("Passed value matched no type within the union, validation failed.")
+            end
+          end
 
-        # @param member [Commons::EntityConflictErrorMessage]
-        # @return [FeeSchedules::V3::ValidationError]
-        def self.version_conflict(member:)
-          new(member: member, discriminant: "version_conflict")
-        end
+          # For Union Types, is_a? functionality is delegated to the wrapped member.
+          #
+          # @param obj [Object]
+          # @return [Boolean]
+          def is_a?(obj)
+            @member.is_a?(obj)
+          end
 
-        # @param member [Commons::EntityNotFoundErrorMessage]
-        # @return [FeeSchedules::V3::ValidationError]
-        def self.organization_provider_not_found(member:)
-          new(member: member, discriminant: "organization_provider_not_found")
-        end
+          # @param member [CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.overlapping_rate_entries(member:)
+            new(member: member, discriminant: "overlapping_rate_entries")
+          end
 
-        # @return [FeeSchedules::V3::ValidationError]
-        def self.duplicate_rate
-          new(member: nil, discriminant: "duplicate_rate")
-        end
+          # @param member [CandidApiClient::Commons::Types::EntityConflictErrorMessage]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.version_conflict(member:)
+            new(member: member, discriminant: "version_conflict")
+          end
 
-        # @return [FeeSchedules::V3::ValidationError]
-        def self.empty_entries
-          new(member: nil, discriminant: "empty_entries")
+          # @param member [CandidApiClient::Commons::Types::EntityNotFoundErrorMessage]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.organization_provider_not_found(member:)
+            new(member: member, discriminant: "organization_provider_not_found")
+          end
+
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.duplicate_rate
+            new(member: nil, discriminant: "duplicate_rate")
+          end
+
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.empty_entries
+            new(member: nil, discriminant: "empty_entries")
+          end
         end
       end
     end

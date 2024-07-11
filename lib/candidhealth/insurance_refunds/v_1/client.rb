@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "../../../requests"
-require_relative "../../payers/v_3/types/payer_uuid"
-require_relative "../../commons/types/claim_id"
-require_relative "../../commons/types/service_line_id"
-require_relative "../../commons/types/provider_id"
 require_relative "types/insurance_refund_sort_field"
 require_relative "../../commons/types/sort_direction"
-require_relative "../../commons/types/page_token"
 require_relative "types/insurance_refunds_page"
-require_relative "types/insurance_refund_id"
 require_relative "types/insurance_refund"
 require_relative "types/insurance_refund_create"
 require "date"
@@ -21,34 +15,51 @@ module CandidApiClient
   module InsuranceRefunds
     module V1
       class V1Client
+        # @return [CandidApiClient::RequestClient]
         attr_reader :request_client
 
-        # @param request_client [RequestClient]
-        # @return [InsuranceRefunds::V1::V1Client]
+        # @param request_client [CandidApiClient::RequestClient]
+        # @return [CandidApiClient::InsuranceRefunds::V1::V1Client]
         def initialize(request_client:)
-          # @type [RequestClient]
           @request_client = request_client
         end
 
-        # Returns all insurance refunds satisfying the search criteria AND whose organization_id matches
-        # the current organization_id of the authenticated user.
+        # Returns all insurance refunds satisfying the search criteria AND whose
+        #  organization_id matches
+        #  the current organization_id of the authenticated user.
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
-        # @param payer_uuid [Payers::V3::PAYER_UUID]
-        # @param claim_id [Commons::CLAIM_ID]
-        # @param service_line_id [Commons::SERVICE_LINE_ID]
-        # @param billing_provider_id [Commons::PROVIDER_ID]
-        # @param sort [InsuranceRefunds::V1::InsuranceRefundSortField] Defaults to refund_timestamp
-        # @param sort_direction [Commons::SortDirection] Sort direction. Defaults to descending order if not provided.
-        # @param page_token [Commons::PAGE_TOKEN]
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefundsPage]
+        # @param payer_uuid [String]
+        # @param claim_id [String]
+        # @param service_line_id [String]
+        # @param billing_provider_id [String]
+        # @param sort [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundSortField] Defaults to refund_timestamp
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
+        # @param page_token [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundsPage]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.get_multi(
+        #    limit: 1,
+        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    sort: AMOUNT_CENTS,
+        #    sort_direction: ASC,
+        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
+        #  )
         def get_multi(limit: nil, payer_uuid: nil, claim_id: nil, service_line_id: nil, billing_provider_id: nil,
                       sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
-          response = @request_client.conn.get("/api/insurance-refunds/v1") do |req|
+          response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.params = {
               **(request_options&.additional_query_parameters || {}),
               "limit": limit,
@@ -60,119 +71,172 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
           end
-          InsuranceRefunds::V1::InsuranceRefundsPage.from_json(json_object: response.body)
+          CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundsPage.from_json(json_object: response.body)
         end
 
         # Retrieves a previously created insurance refund by its `insurance_refund_id`.
-        # If the refund does not exist, a `403` will be thrown.
+        #  If the refund does not exist, a `403` will be thrown.
         #
-        # @param insurance_refund_id [InsuranceRefunds::V1::INSURANCE_REFUND_ID]
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefund]
+        # @param insurance_refund_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.get(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(insurance_refund_id:, request_options: nil)
-          response = @request_client.conn.get("/api/insurance-refunds/v1/#{insurance_refund_id}") do |req|
+          response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
           end
-          InsuranceRefunds::V1::InsuranceRefund.from_json(json_object: response.body)
+          CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
         end
 
-        # Creates a new insurance refund record and returns the newly created `InsuranceRefund` object.
-        # The allocations can describe whether the refund is being applied toward a specific service line,
-        # claim, or billing provider.
+        # Creates a new insurance refund record and returns the newly created
+        #  `InsuranceRefund` object.
+        #  The allocations can describe whether the refund is being applied toward a
+        #  specific service line,
+        #  claim, or billing provider.
         #
-        # @param request [Hash] Request of type InsuranceRefunds::V1::InsuranceRefundCreate, as a Hash
+        # @param request [Hash] Request of type CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundCreate, as a Hash
         #   * :payer_identifier (Hash)
         #   * :amount_cents (Integer)
         #   * :refund_timestamp (DateTime)
         #   * :refund_note (String)
-        #   * :allocations (Array<Financials::AllocationCreate>)
-        #   * :refund_reason (Financials::RefundReason)
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefund]
+        #   * :allocations (Array<CandidApiClient::Financials::Types::AllocationCreate>)
+        #   * :refund_reason (CandidApiClient::Financials::Types::RefundReason)
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.create(request: { amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", allocations: [{  }], refund_reason: OVERCHARGED })
         def create(request:, request_options: nil)
-          response = @request_client.conn.post("/api/insurance-refunds/v1") do |req|
+          response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
           end
-          InsuranceRefunds::V1::InsuranceRefund.from_json(json_object: response.body)
+          CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
         end
 
-        # Updates the patient refund record matching the provided insurance_refund_id. If updating the refund amount,
-        # then the allocations must be appropriately updated as well.
+        # Updates the patient refund record matching the provided insurance_refund_id. If
+        #  updating the refund amount,
+        #  then the allocations must be appropriately updated as well.
         #
-        # @param insurance_refund_id [InsuranceRefunds::V1::INSURANCE_REFUND_ID]
+        # @param insurance_refund_id [String]
         # @param refund_timestamp [DateTime]
-        # @param refund_note [Financials::NoteUpdate]
-        # @param refund_reason [Financials::RefundReasonUpdate]
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefund]
+        # @param refund_note [CandidApiClient::Financials::Types::NoteUpdate]
+        # @param refund_reason [CandidApiClient::Financials::Types::RefundReasonUpdate]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.update(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(insurance_refund_id:, refund_timestamp: nil, refund_note: nil, refund_reason: nil,
                    request_options: nil)
-          response = @request_client.conn.patch("/api/insurance-refunds/v1/#{insurance_refund_id}") do |req|
+          response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               refund_timestamp: refund_timestamp,
               refund_note: refund_note,
               refund_reason: refund_reason
             }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
           end
-          InsuranceRefunds::V1::InsuranceRefund.from_json(json_object: response.body)
+          CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
         end
 
         # Deletes the insurance refund record matching the provided `insurance_refund_id`.
-        # If the matching record's organization_id does not match the authenticated user's
-        # current organization_id, then a response code of `403` will be returned.
+        #  If the matching record's organization_id does not match the authenticated user's
+        #  current organization_id, then a response code of `403` will be returned.
         #
-        # @param insurance_refund_id [InsuranceRefunds::V1::INSURANCE_REFUND_ID]
-        # @param request_options [RequestOptions]
+        # @param insurance_refund_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.delete(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(insurance_refund_id:, request_options: nil)
-          @request_client.conn.delete("/api/insurance-refunds/v1/#{insurance_refund_id}") do |req|
+          @request_client.conn.delete do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
           end
         end
       end
 
       class AsyncV1Client
+        # @return [CandidApiClient::AsyncRequestClient]
         attr_reader :request_client
 
-        # @param request_client [AsyncRequestClient]
-        # @return [InsuranceRefunds::V1::AsyncV1Client]
+        # @param request_client [CandidApiClient::AsyncRequestClient]
+        # @return [CandidApiClient::InsuranceRefunds::V1::AsyncV1Client]
         def initialize(request_client:)
-          # @type [AsyncRequestClient]
           @request_client = request_client
         end
 
-        # Returns all insurance refunds satisfying the search criteria AND whose organization_id matches
-        # the current organization_id of the authenticated user.
+        # Returns all insurance refunds satisfying the search criteria AND whose
+        #  organization_id matches
+        #  the current organization_id of the authenticated user.
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
-        # @param payer_uuid [Payers::V3::PAYER_UUID]
-        # @param claim_id [Commons::CLAIM_ID]
-        # @param service_line_id [Commons::SERVICE_LINE_ID]
-        # @param billing_provider_id [Commons::PROVIDER_ID]
-        # @param sort [InsuranceRefunds::V1::InsuranceRefundSortField] Defaults to refund_timestamp
-        # @param sort_direction [Commons::SortDirection] Sort direction. Defaults to descending order if not provided.
-        # @param page_token [Commons::PAGE_TOKEN]
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefundsPage]
+        # @param payer_uuid [String]
+        # @param claim_id [String]
+        # @param service_line_id [String]
+        # @param billing_provider_id [String]
+        # @param sort [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundSortField] Defaults to refund_timestamp
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
+        # @param page_token [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundsPage]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.get_multi(
+        #    limit: 1,
+        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    sort: AMOUNT_CENTS,
+        #    sort_direction: ASC,
+        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
+        #  )
         def get_multi(limit: nil, payer_uuid: nil, claim_id: nil, service_line_id: nil, billing_provider_id: nil,
                       sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           Async do
-            response = @request_client.conn.get("/api/insurance-refunds/v1") do |req|
+            response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.params = {
                 **(request_options&.additional_query_parameters || {}),
                 "limit": limit,
@@ -184,93 +248,129 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
             end
-            InsuranceRefunds::V1::InsuranceRefundsPage.from_json(json_object: response.body)
+            CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundsPage.from_json(json_object: response.body)
           end
         end
 
         # Retrieves a previously created insurance refund by its `insurance_refund_id`.
-        # If the refund does not exist, a `403` will be thrown.
+        #  If the refund does not exist, a `403` will be thrown.
         #
-        # @param insurance_refund_id [InsuranceRefunds::V1::INSURANCE_REFUND_ID]
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefund]
+        # @param insurance_refund_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.get(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(insurance_refund_id:, request_options: nil)
           Async do
-            response = @request_client.conn.get("/api/insurance-refunds/v1/#{insurance_refund_id}") do |req|
+            response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
             end
-            InsuranceRefunds::V1::InsuranceRefund.from_json(json_object: response.body)
+            CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
           end
         end
 
-        # Creates a new insurance refund record and returns the newly created `InsuranceRefund` object.
-        # The allocations can describe whether the refund is being applied toward a specific service line,
-        # claim, or billing provider.
+        # Creates a new insurance refund record and returns the newly created
+        #  `InsuranceRefund` object.
+        #  The allocations can describe whether the refund is being applied toward a
+        #  specific service line,
+        #  claim, or billing provider.
         #
-        # @param request [Hash] Request of type InsuranceRefunds::V1::InsuranceRefundCreate, as a Hash
+        # @param request [Hash] Request of type CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundCreate, as a Hash
         #   * :payer_identifier (Hash)
         #   * :amount_cents (Integer)
         #   * :refund_timestamp (DateTime)
         #   * :refund_note (String)
-        #   * :allocations (Array<Financials::AllocationCreate>)
-        #   * :refund_reason (Financials::RefundReason)
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefund]
+        #   * :allocations (Array<CandidApiClient::Financials::Types::AllocationCreate>)
+        #   * :refund_reason (CandidApiClient::Financials::Types::RefundReason)
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.create(request: { amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", allocations: [{  }], refund_reason: OVERCHARGED })
         def create(request:, request_options: nil)
           Async do
-            response = @request_client.conn.post("/api/insurance-refunds/v1") do |req|
+            response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
             end
-            InsuranceRefunds::V1::InsuranceRefund.from_json(json_object: response.body)
+            CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
           end
         end
 
-        # Updates the patient refund record matching the provided insurance_refund_id. If updating the refund amount,
-        # then the allocations must be appropriately updated as well.
+        # Updates the patient refund record matching the provided insurance_refund_id. If
+        #  updating the refund amount,
+        #  then the allocations must be appropriately updated as well.
         #
-        # @param insurance_refund_id [InsuranceRefunds::V1::INSURANCE_REFUND_ID]
+        # @param insurance_refund_id [String]
         # @param refund_timestamp [DateTime]
-        # @param refund_note [Financials::NoteUpdate]
-        # @param refund_reason [Financials::RefundReasonUpdate]
-        # @param request_options [RequestOptions]
-        # @return [InsuranceRefunds::V1::InsuranceRefund]
+        # @param refund_note [CandidApiClient::Financials::Types::NoteUpdate]
+        # @param refund_reason [CandidApiClient::Financials::Types::RefundReasonUpdate]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.update(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(insurance_refund_id:, refund_timestamp: nil, refund_note: nil, refund_reason: nil,
                    request_options: nil)
           Async do
-            response = @request_client.conn.patch("/api/insurance-refunds/v1/#{insurance_refund_id}") do |req|
+            response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 refund_timestamp: refund_timestamp,
                 refund_note: refund_note,
                 refund_reason: refund_reason
               }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
             end
-            InsuranceRefunds::V1::InsuranceRefund.from_json(json_object: response.body)
+            CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
           end
         end
 
         # Deletes the insurance refund record matching the provided `insurance_refund_id`.
-        # If the matching record's organization_id does not match the authenticated user's
-        # current organization_id, then a response code of `403` will be returned.
+        #  If the matching record's organization_id does not match the authenticated user's
+        #  current organization_id, then a response code of `403` will be returned.
         #
-        # @param insurance_refund_id [InsuranceRefunds::V1::INSURANCE_REFUND_ID]
-        # @param request_options [RequestOptions]
+        # @param insurance_refund_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.insurance_refunds.v_1.delete(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(insurance_refund_id:, request_options: nil)
           Async do
-            @request_client.conn.delete("/api/insurance-refunds/v1/#{insurance_refund_id}") do |req|
+            @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
             end
           end
         end

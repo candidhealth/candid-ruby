@@ -3,8 +3,10 @@
 module CandidApiClient
   module OrganizationProviders
     module V2
-      class AddressType
-        DEFAULT = "DEFAULT"
+      module Types
+        class AddressType
+          DEFAULT = "DEFAULT"
+        end
       end
     end
   end

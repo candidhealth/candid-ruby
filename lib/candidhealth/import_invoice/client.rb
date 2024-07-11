@@ -6,22 +6,24 @@ require_relative "v_1/client"
 module CandidApiClient
   module ImportInvoice
     class Client
+      # @return [CandidApiClient::ImportInvoice::V1::V1Client]
       attr_reader :v_1
 
-      # @param request_client [RequestClient]
-      # @return [ImportInvoice::Client]
+      # @param request_client [CandidApiClient::RequestClient]
+      # @return [CandidApiClient::ImportInvoice::Client]
       def initialize(request_client:)
-        @v_1 = ImportInvoice::V1::V1Client.new(request_client: request_client)
+        @v_1 = CandidApiClient::ImportInvoice::V1::V1Client.new(request_client: request_client)
       end
     end
 
     class AsyncClient
+      # @return [CandidApiClient::ImportInvoice::V1::AsyncV1Client]
       attr_reader :v_1
 
-      # @param request_client [RequestClient]
-      # @return [ImportInvoice::AsyncClient]
+      # @param request_client [CandidApiClient::AsyncRequestClient]
+      # @return [CandidApiClient::ImportInvoice::AsyncClient]
       def initialize(request_client:)
-        @v_1 = ImportInvoice::V1::AsyncV1Client.new(request_client: request_client)
+        @v_1 = CandidApiClient::ImportInvoice::V1::AsyncV1Client.new(request_client: request_client)
       end
     end
   end

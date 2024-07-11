@@ -6,85 +6,91 @@ require_relative "../../../commons/types/regions"
 module CandidApiClient
   module Contracts
     module V2
-      class RegionsUpdate
-        attr_reader :member, :discriminant
+      module Types
+        class RegionsUpdate
+          # @return [Object]
+          attr_reader :member
+          # @return [String]
+          attr_reader :discriminant
 
-        private_class_method :new
-        alias kind_of? is_a?
-        # @param member [Object]
-        # @param discriminant [String]
-        # @return [Contracts::V2::RegionsUpdate]
-        def initialize(member:, discriminant:)
-          # @type [Object]
-          @member = member
-          # @type [String]
-          @discriminant = discriminant
-        end
+          private_class_method :new
+          alias kind_of? is_a?
 
-        # Deserialize a JSON object to an instance of RegionsUpdate
-        #
-        # @param json_object [JSON]
-        # @return [Contracts::V2::RegionsUpdate]
-        def self.from_json(json_object:)
-          struct = JSON.parse(json_object, object_class: OpenStruct)
-          member = case struct.type
-                   when "set"
-                     Commons::Regions.from_json(json_object: json_object.value)
-                   when "remove"
-                     nil
-                   else
-                     Commons::Regions.from_json(json_object: json_object)
-                   end
-          new(member: member, discriminant: struct.type)
-        end
-
-        # For Union Types, to_json functionality is delegated to the wrapped member.
-        #
-        # @return [JSON]
-        def to_json(*_args)
-          case @discriminant
-          when "set"
-            { "type": @discriminant, "value": @member }.to_json
-          when "remove"
-            { type: @discriminant }.to_json
-          else
-            { "type": @discriminant, value: @member }.to_json
+          # @param member [Object]
+          # @param discriminant [String]
+          # @return [CandidApiClient::Contracts::V2::Types::RegionsUpdate]
+          def initialize(member:, discriminant:)
+            @member = member
+            @discriminant = discriminant
           end
-          @member.to_json
-        end
 
-        # Leveraged for Union-type generation, validate_raw attempts to parse the given hash and check each fields type against the current object's property definitions.
-        #
-        # @param obj [Object]
-        # @return [Void]
-        def self.validate_raw(obj:)
-          case obj.type
-          when "set"
-            Commons::Regions.validate_raw(obj: obj)
-          when "remove"
-            # noop
-          else
-            raise("Passed value matched no type within the union, validation failed.")
+          # Deserialize a JSON object to an instance of RegionsUpdate
+          #
+          # @param json_object [String]
+          # @return [CandidApiClient::Contracts::V2::Types::RegionsUpdate]
+          def self.from_json(json_object:)
+            struct = JSON.parse(json_object, object_class: OpenStruct)
+            member = case struct.type
+                     when "set"
+                       CandidApiClient::Commons::Types::Regions.from_json(json_object: json_object.value)
+                     when "remove"
+                       nil
+                     else
+                       CandidApiClient::Commons::Types::Regions.from_json(json_object: json_object)
+                     end
+            new(member: member, discriminant: struct.type)
           end
-        end
 
-        # For Union Types, is_a? functionality is delegated to the wrapped member.
-        #
-        # @param obj [Object]
-        # @return [Boolean]
-        def is_a?(obj)
-          @member.is_a?(obj)
-        end
+          # For Union Types, to_json functionality is delegated to the wrapped member.
+          #
+          # @return [String]
+          def to_json(*_args)
+            case @discriminant
+            when "set"
+              { "type": @discriminant, "value": @member }.to_json
+            when "remove"
+              { type: @discriminant }.to_json
+            else
+              { "type": @discriminant, value: @member }.to_json
+            end
+            @member.to_json
+          end
 
-        # @param member [Commons::Regions]
-        # @return [Contracts::V2::RegionsUpdate]
-        def self.set(member:)
-          new(member: member, discriminant: "set")
-        end
+          # Leveraged for Union-type generation, validate_raw attempts to parse the given
+          #  hash and check each fields type against the current object's property
+          #  definitions.
+          #
+          # @param obj [Object]
+          # @return [Void]
+          def self.validate_raw(obj:)
+            case obj.type
+            when "set"
+              CandidApiClient::Commons::Types::Regions.validate_raw(obj: obj)
+            when "remove"
+              # noop
+            else
+              raise("Passed value matched no type within the union, validation failed.")
+            end
+          end
 
-        # @return [Contracts::V2::RegionsUpdate]
-        def self.remove
-          new(member: nil, discriminant: "remove")
+          # For Union Types, is_a? functionality is delegated to the wrapped member.
+          #
+          # @param obj [Object]
+          # @return [Boolean]
+          def is_a?(obj)
+            @member.is_a?(obj)
+          end
+
+          # @param member [CandidApiClient::Commons::Types::Regions]
+          # @return [CandidApiClient::Contracts::V2::Types::RegionsUpdate]
+          def self.set(member:)
+            new(member: member, discriminant: "set")
+          end
+
+          # @return [CandidApiClient::Contracts::V2::Types::RegionsUpdate]
+          def self.remove
+            new(member: nil, discriminant: "remove")
+          end
         end
       end
     end

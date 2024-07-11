@@ -3,10 +3,12 @@
 module CandidApiClient
   module Contracts
     module V2
-      class ContractStatus
-        PENDING = "pending"
-        EFFECTIVE = "effective"
-        CANCELLED = "cancelled"
+      module Types
+        class ContractStatus
+          PENDING = "pending"
+          EFFECTIVE = "effective"
+          CANCELLED = "cancelled"
+        end
       end
     end
   end

@@ -1,52 +1,69 @@
 # frozen_string_literal: true
 
-require_relative "page_token"
+require "ostruct"
 require "json"
 
 module CandidApiClient
-  class Commons
-    class ResourcePage
-      attr_reader :prev_page_token, :next_page_token, :additional_properties
+  module Commons
+    module Types
+      class ResourcePage
+        # @return [String]
+        attr_reader :prev_page_token
+        # @return [String]
+        attr_reader :next_page_token
+        # @return [OpenStruct] Additional properties unmapped to the current class definition
+        attr_reader :additional_properties
+        # @return [Object]
+        attr_reader :_field_set
+        protected :_field_set
 
-      # @param prev_page_token [Commons::PAGE_TOKEN]
-      # @param next_page_token [Commons::PAGE_TOKEN]
-      # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-      # @return [Commons::ResourcePage]
-      def initialize(prev_page_token: nil, next_page_token: nil, additional_properties: nil)
-        # @type [Commons::PAGE_TOKEN]
-        @prev_page_token = prev_page_token
-        # @type [Commons::PAGE_TOKEN]
-        @next_page_token = next_page_token
-        # @type [OpenStruct] Additional properties unmapped to the current class definition
-        @additional_properties = additional_properties
-      end
+        OMIT = Object.new
 
-      # Deserialize a JSON object to an instance of ResourcePage
-      #
-      # @param json_object [JSON]
-      # @return [Commons::ResourcePage]
-      def self.from_json(json_object:)
-        struct = JSON.parse(json_object, object_class: OpenStruct)
-        JSON.parse(json_object)
-        prev_page_token = struct.prev_page_token
-        next_page_token = struct.next_page_token
-        new(prev_page_token: prev_page_token, next_page_token: next_page_token, additional_properties: struct)
-      end
+        # @param prev_page_token [String]
+        # @param next_page_token [String]
+        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+        # @return [CandidApiClient::Commons::Types::ResourcePage]
+        def initialize(prev_page_token: OMIT, next_page_token: OMIT, additional_properties: nil)
+          @prev_page_token = prev_page_token if prev_page_token != OMIT
+          @next_page_token = next_page_token if next_page_token != OMIT
+          @additional_properties = additional_properties
+          @_field_set = { "prev_page_token": prev_page_token, "next_page_token": next_page_token }.reject do |_k, v|
+            v == OMIT
+          end
+        end
 
-      # Serialize an instance of ResourcePage to a JSON object
-      #
-      # @return [JSON]
-      def to_json(*_args)
-        { "prev_page_token": @prev_page_token, "next_page_token": @next_page_token }.to_json
-      end
+        # Deserialize a JSON object to an instance of ResourcePage
+        #
+        # @param json_object [String]
+        # @return [CandidApiClient::Commons::Types::ResourcePage]
+        def self.from_json(json_object:)
+          struct = JSON.parse(json_object, object_class: OpenStruct)
+          prev_page_token = struct["prev_page_token"]
+          next_page_token = struct["next_page_token"]
+          new(
+            prev_page_token: prev_page_token,
+            next_page_token: next_page_token,
+            additional_properties: struct
+          )
+        end
 
-      # Leveraged for Union-type generation, validate_raw attempts to parse the given hash and check each fields type against the current object's property definitions.
-      #
-      # @param obj [Object]
-      # @return [Void]
-      def self.validate_raw(obj:)
-        obj.prev_page_token&.is_a?(String) != false || raise("Passed value for field obj.prev_page_token is not the expected type, validation failed.")
-        obj.next_page_token&.is_a?(String) != false || raise("Passed value for field obj.next_page_token is not the expected type, validation failed.")
+        # Serialize an instance of ResourcePage to a JSON object
+        #
+        # @return [String]
+        def to_json(*_args)
+          @_field_set&.to_json
+        end
+
+        # Leveraged for Union-type generation, validate_raw attempts to parse the given
+        #  hash and check each fields type against the current object's property
+        #  definitions.
+        #
+        # @param obj [Object]
+        # @return [Void]
+        def self.validate_raw(obj:)
+          obj.prev_page_token&.is_a?(String) != false || raise("Passed value for field obj.prev_page_token is not the expected type, validation failed.")
+          obj.next_page_token&.is_a?(String) != false || raise("Passed value for field obj.next_page_token is not the expected type, validation failed.")
+        end
       end
     end
   end

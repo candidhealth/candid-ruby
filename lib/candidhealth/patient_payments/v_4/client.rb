@@ -1,17 +1,10 @@
 # frozen_string_literal: true
 
 require_relative "../../../requests"
-require_relative "../../commons/types/patient_external_id"
-require_relative "../../commons/types/claim_id"
-require_relative "../../commons/types/service_line_id"
-require_relative "../../commons/types/provider_id"
-require_relative "../../commons/types/invoice_id"
 require_relative "../../financials/types/patient_transaction_source"
 require_relative "types/patient_payment_sort_field"
 require_relative "../../commons/types/sort_direction"
-require_relative "../../commons/types/page_token"
 require_relative "types/patient_payments_page"
-require_relative "types/patient_payment_id"
 require_relative "types/patient_payment"
 require "date"
 require_relative "../../financials/types/allocation_create"
@@ -23,37 +16,57 @@ module CandidApiClient
   module PatientPayments
     module V4
       class V4Client
+        # @return [CandidApiClient::RequestClient]
         attr_reader :request_client
 
-        # @param request_client [RequestClient]
-        # @return [PatientPayments::V4::V4Client]
+        # @param request_client [CandidApiClient::RequestClient]
+        # @return [CandidApiClient::PatientPayments::V4::V4Client]
         def initialize(request_client:)
-          # @type [RequestClient]
           @request_client = request_client
         end
 
-        # Returns all patient payments satisfying the search criteria AND whose organization_id matches
-        # the current organization_id of the authenticated user.
+        # Returns all patient payments satisfying the search criteria AND whose
+        #  organization_id matches
+        #  the current organization_id of the authenticated user.
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
-        # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
-        # @param claim_id [Commons::CLAIM_ID]
-        # @param service_line_id [Commons::SERVICE_LINE_ID]
-        # @param billing_provider_id [Commons::PROVIDER_ID]
+        # @param patient_external_id [String]
+        # @param claim_id [String]
+        # @param service_line_id [String]
+        # @param billing_provider_id [String]
         # @param unattributed [Boolean] returns payments with unattributed allocations if set to true
-        # @param invoice_id [Commons::INVOICE_ID]
-        # @param sources [Financials::PatientTransactionSource]
-        # @param sort [PatientPayments::V4::PatientPaymentSortField] Defaults to payment_timestamp
-        # @param sort_direction [Commons::SortDirection] Sort direction. Defaults to descending order if not provided.
-        # @param page_token [Commons::PAGE_TOKEN]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPaymentsPage]
+        # @param invoice_id [String]
+        # @param sources [CandidApiClient::Financials::Types::PatientTransactionSource]
+        # @param sort [CandidApiClient::PatientPayments::V4::Types::PatientPaymentSortField] Defaults to payment_timestamp
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
+        # @param page_token [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.get_multi(
+        #    limit: 1,
+        #    patient_external_id: "string",
+        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    unattributed: true,
+        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    sources: MANUAL_ENTRY,
+        #    sort: PAYMENT_SOURCE,
+        #    sort_direction: ASC,
+        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
+        #  )
         def get_multi(limit: nil, patient_external_id: nil, claim_id: nil, service_line_id: nil,
                       billing_provider_id: nil, unattributed: nil, invoice_id: nil, sources: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
-          response = @request_client.conn.get("/api/patient-payments/v4") do |req|
+          response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.params = {
               **(request_options&.additional_query_parameters || {}),
               "limit": limit,
@@ -68,44 +81,69 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
           end
-          PatientPayments::V4::PatientPaymentsPage.from_json(json_object: response.body)
+          CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage.from_json(json_object: response.body)
         end
 
         # Retrieves a previously created patient payment by its `patient_payment_id`.
         #
-        # @param patient_payment_id [PatientPayments::V4::PATIENT_PAYMENT_ID]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPayment]
+        # @param patient_payment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.get(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(patient_payment_id:, request_options: nil)
-          response = @request_client.conn.get("/api/patient-payments/v4/#{patient_payment_id}") do |req|
+          response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
           end
-          PatientPayments::V4::PatientPayment.from_json(json_object: response.body)
+          CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
         end
 
-        # Creates a new patient payment record and returns the newly created PatientPayment object.
-        # The allocations can describe whether the payment is being applied toward a specific service line,
-        # claim, or billing provider.
+        # Creates a new patient payment record and returns the newly created
+        #  PatientPayment object.
+        #  The allocations can describe whether the payment is being applied toward a
+        #  specific service line,
+        #  claim, or billing provider.
         #
         # @param amount_cents [Integer]
         # @param payment_timestamp [DateTime]
         # @param payment_note [String]
-        # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
-        # @param allocations [Array<Hash>] Request of type Array<Financials::AllocationCreate>, as a Hash
+        # @param patient_external_id [String]
+        # @param allocations [Array<Hash>] Request of type Array<CandidApiClient::Financials::Types::AllocationCreate>, as a Hash
         #   * :amount_cents (Integer)
         #   * :target (Hash)
-        # @param invoice [Commons::INVOICE_ID]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPayment]
+        # @param invoice [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.create(
+        #    amount_cents: 1,
+        #    payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
+        #    payment_note: "string",
+        #    patient_external_id: "string",
+        #    allocations: [{ amount_cents: 1 }],
+        #    invoice: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+        #  )
         def create(amount_cents:, patient_external_id:, allocations:, payment_timestamp: nil, payment_note: nil,
                    invoice: nil, request_options: nil)
-          response = @request_client.conn.post("/api/patient-payments/v4") do |req|
+          response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               amount_cents: amount_cents,
@@ -115,80 +153,117 @@ module CandidApiClient
               allocations: allocations,
               invoice: invoice
             }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
           end
-          PatientPayments::V4::PatientPayment.from_json(json_object: response.body)
+          CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
         end
 
         # Updates the patient payment record matching the provided patient_payment_id.
         #
-        # @param patient_payment_id [PatientPayments::V4::PATIENT_PAYMENT_ID]
+        # @param patient_payment_id [String]
         # @param payment_timestamp [DateTime]
-        # @param payment_note [Financials::NoteUpdate]
-        # @param invoice [Financials::InvoiceUpdate]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPayment]
+        # @param payment_note [CandidApiClient::Financials::Types::NoteUpdate]
+        # @param invoice [CandidApiClient::Financials::Types::InvoiceUpdate]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(patient_payment_id:, payment_timestamp: nil, payment_note: nil, invoice: nil, request_options: nil)
-          response = @request_client.conn.patch("/api/patient-payments/v4/#{patient_payment_id}") do |req|
+          response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               payment_timestamp: payment_timestamp,
               payment_note: payment_note,
               invoice: invoice
             }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
           end
-          PatientPayments::V4::PatientPayment.from_json(json_object: response.body)
+          CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
         end
 
         # Deletes the patient payment record matching the provided patient_payment_id.
         #
-        # @param patient_payment_id [PatientPayments::V4::PATIENT_PAYMENT_ID]
-        # @param request_options [RequestOptions]
+        # @param patient_payment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.delete(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(patient_payment_id:, request_options: nil)
-          @request_client.conn.delete("/api/patient-payments/v4/#{patient_payment_id}") do |req|
+          @request_client.conn.delete do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
           end
         end
       end
 
       class AsyncV4Client
+        # @return [CandidApiClient::AsyncRequestClient]
         attr_reader :request_client
 
-        # @param request_client [AsyncRequestClient]
-        # @return [PatientPayments::V4::AsyncV4Client]
+        # @param request_client [CandidApiClient::AsyncRequestClient]
+        # @return [CandidApiClient::PatientPayments::V4::AsyncV4Client]
         def initialize(request_client:)
-          # @type [AsyncRequestClient]
           @request_client = request_client
         end
 
-        # Returns all patient payments satisfying the search criteria AND whose organization_id matches
-        # the current organization_id of the authenticated user.
+        # Returns all patient payments satisfying the search criteria AND whose
+        #  organization_id matches
+        #  the current organization_id of the authenticated user.
         #
         # @param limit [Integer] Defaults to 100. The value must be greater than 0 and less than 1000.
-        # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
-        # @param claim_id [Commons::CLAIM_ID]
-        # @param service_line_id [Commons::SERVICE_LINE_ID]
-        # @param billing_provider_id [Commons::PROVIDER_ID]
+        # @param patient_external_id [String]
+        # @param claim_id [String]
+        # @param service_line_id [String]
+        # @param billing_provider_id [String]
         # @param unattributed [Boolean] returns payments with unattributed allocations if set to true
-        # @param invoice_id [Commons::INVOICE_ID]
-        # @param sources [Financials::PatientTransactionSource]
-        # @param sort [PatientPayments::V4::PatientPaymentSortField] Defaults to payment_timestamp
-        # @param sort_direction [Commons::SortDirection] Sort direction. Defaults to descending order if not provided.
-        # @param page_token [Commons::PAGE_TOKEN]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPaymentsPage]
+        # @param invoice_id [String]
+        # @param sources [CandidApiClient::Financials::Types::PatientTransactionSource]
+        # @param sort [CandidApiClient::PatientPayments::V4::Types::PatientPaymentSortField] Defaults to payment_timestamp
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
+        # @param page_token [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.get_multi(
+        #    limit: 1,
+        #    patient_external_id: "string",
+        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    unattributed: true,
+        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    sources: MANUAL_ENTRY,
+        #    sort: PAYMENT_SOURCE,
+        #    sort_direction: ASC,
+        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
+        #  )
         def get_multi(limit: nil, patient_external_id: nil, claim_id: nil, service_line_id: nil,
                       billing_provider_id: nil, unattributed: nil, invoice_id: nil, sources: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           Async do
-            response = @request_client.conn.get("/api/patient-payments/v4") do |req|
+            response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.params = {
                 **(request_options&.additional_query_parameters || {}),
                 "limit": limit,
@@ -203,48 +278,73 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
             end
-            PatientPayments::V4::PatientPaymentsPage.from_json(json_object: response.body)
+            CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage.from_json(json_object: response.body)
           end
         end
 
         # Retrieves a previously created patient payment by its `patient_payment_id`.
         #
-        # @param patient_payment_id [PatientPayments::V4::PATIENT_PAYMENT_ID]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPayment]
+        # @param patient_payment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.get(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(patient_payment_id:, request_options: nil)
           Async do
-            response = @request_client.conn.get("/api/patient-payments/v4/#{patient_payment_id}") do |req|
+            response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
             end
-            PatientPayments::V4::PatientPayment.from_json(json_object: response.body)
+            CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
           end
         end
 
-        # Creates a new patient payment record and returns the newly created PatientPayment object.
-        # The allocations can describe whether the payment is being applied toward a specific service line,
-        # claim, or billing provider.
+        # Creates a new patient payment record and returns the newly created
+        #  PatientPayment object.
+        #  The allocations can describe whether the payment is being applied toward a
+        #  specific service line,
+        #  claim, or billing provider.
         #
         # @param amount_cents [Integer]
         # @param payment_timestamp [DateTime]
         # @param payment_note [String]
-        # @param patient_external_id [Commons::PATIENT_EXTERNAL_ID]
-        # @param allocations [Array<Hash>] Request of type Array<Financials::AllocationCreate>, as a Hash
+        # @param patient_external_id [String]
+        # @param allocations [Array<Hash>] Request of type Array<CandidApiClient::Financials::Types::AllocationCreate>, as a Hash
         #   * :amount_cents (Integer)
         #   * :target (Hash)
-        # @param invoice [Commons::INVOICE_ID]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPayment]
+        # @param invoice [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.create(
+        #    amount_cents: 1,
+        #    payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
+        #    payment_note: "string",
+        #    patient_external_id: "string",
+        #    allocations: [{ amount_cents: 1 }],
+        #    invoice: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+        #  )
         def create(amount_cents:, patient_external_id:, allocations:, payment_timestamp: nil, payment_note: nil,
                    invoice: nil, request_options: nil)
           Async do
-            response = @request_client.conn.post("/api/patient-payments/v4") do |req|
+            response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 amount_cents: amount_cents,
@@ -254,47 +354,64 @@ module CandidApiClient
                 allocations: allocations,
                 invoice: invoice
               }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
             end
-            PatientPayments::V4::PatientPayment.from_json(json_object: response.body)
+            CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
           end
         end
 
         # Updates the patient payment record matching the provided patient_payment_id.
         #
-        # @param patient_payment_id [PatientPayments::V4::PATIENT_PAYMENT_ID]
+        # @param patient_payment_id [String]
         # @param payment_timestamp [DateTime]
-        # @param payment_note [Financials::NoteUpdate]
-        # @param invoice [Financials::InvoiceUpdate]
-        # @param request_options [RequestOptions]
-        # @return [PatientPayments::V4::PatientPayment]
+        # @param payment_note [CandidApiClient::Financials::Types::NoteUpdate]
+        # @param invoice [CandidApiClient::Financials::Types::InvoiceUpdate]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(patient_payment_id:, payment_timestamp: nil, payment_note: nil, invoice: nil, request_options: nil)
           Async do
-            response = @request_client.conn.patch("/api/patient-payments/v4/#{patient_payment_id}") do |req|
+            response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 payment_timestamp: payment_timestamp,
                 payment_note: payment_note,
                 invoice: invoice
               }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
             end
-            PatientPayments::V4::PatientPayment.from_json(json_object: response.body)
+            CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
           end
         end
 
         # Deletes the patient payment record matching the provided patient_payment_id.
         #
-        # @param patient_payment_id [PatientPayments::V4::PATIENT_PAYMENT_ID]
-        # @param request_options [RequestOptions]
+        # @param patient_payment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.patient_payments.v_4.delete(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(patient_payment_id:, request_options: nil)
           Async do
-            @request_client.conn.delete("/api/patient-payments/v4/#{patient_payment_id}") do |req|
+            @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
             end
           end
         end

@@ -3,9 +3,11 @@
 module CandidApiClient
   module Encounters
     module V4
-      class LabCodeType
-        QUEST = "quest"
-        LABCORP = "labcorp"
+      module Types
+        class LabCodeType
+          QUEST = "quest"
+          LABCORP = "labcorp"
+        end
       end
     end
   end

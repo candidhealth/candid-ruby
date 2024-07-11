@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module CandidApiClient
-  class Commons
-    class EmrPayerCrosswalk
-      HEALTHIE = "HEALTHIE"
-      CANVAS = "CANVAS"
+  module Commons
+    module Types
+      class EmrPayerCrosswalk
+        HEALTHIE = "HEALTHIE"
+        CANVAS = "CANVAS"
+      end
     end
   end
 end

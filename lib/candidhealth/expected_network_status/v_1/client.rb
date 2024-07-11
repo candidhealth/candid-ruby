@@ -3,7 +3,6 @@
 require_relative "../../../requests"
 require_relative "../../commons/types/insurance_type_code"
 require_relative "../../commons/types/state"
-require_relative "../../commons/types/date"
 require_relative "types/expected_network_status_response"
 require "async"
 
@@ -11,12 +10,12 @@ module CandidApiClient
   module ExpectedNetworkStatus
     module V1
       class V1Client
+        # @return [CandidApiClient::RequestClient]
         attr_reader :request_client
 
-        # @param request_client [RequestClient]
-        # @return [ExpectedNetworkStatus::V1::V1Client]
+        # @param request_client [CandidApiClient::RequestClient]
+        # @return [CandidApiClient::ExpectedNetworkStatus::V1::V1Client]
         def initialize(request_client:)
-          # @type [RequestClient]
           @request_client = request_client
         end
 
@@ -25,21 +24,43 @@ module CandidApiClient
         # @param external_patient_id [String]
         # @param subscriber_payer_id [String]
         # @param subscriber_payer_name [String]
-        # @param subscriber_insurance_type [Commons::InsuranceTypeCode]
-        # @param subscriber_plan_name [String] The descriptive name of the insurance plan selected by the subscriber, often indicating coverage specifics or tier.
-        # @param billing_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider responsible for billing. A unique 10-digit identification number.
+        # @param subscriber_insurance_type [CandidApiClient::Commons::Types::InsuranceTypeCode]
+        # @param subscriber_plan_name [String] The descriptive name of the insurance plan selected by the subscriber, often
+        #  indicating coverage specifics or tier.
+        # @param billing_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider responsible
+        #  for billing. A unique 10-digit identification number.
         # @param billing_provider_tin [String] Follow the 9-digit format of the Taxpayer Identification Number (TIN).
-        # @param rendering_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider who delivered the services. A unique 10-digit identification number.
-        # @param contracted_state [Commons::State] The state in which the healthcare provider has a contractual agreement with the insurance payer.
-        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        # @param request_options [RequestOptions]
-        # @return [ExpectedNetworkStatus::V1::ExpectedNetworkStatusResponse]
+        # @param rendering_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider who delivered
+        #  the services. A unique 10-digit identification number.
+        # @param contracted_state [CandidApiClient::Commons::Types::State] The state in which the healthcare provider has a contractual agreement with the
+        #  insurance payer.
+        # @param date_of_service [String] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.expected_network_status.v_1.compute(
+        #    external_patient_id: "string",
+        #    subscriber_payer_id: "string",
+        #    subscriber_payer_name: "string",
+        #    subscriber_insurance_type: C_01,
+        #    subscriber_plan_name: "string",
+        #    billing_provider_npi: "string",
+        #    billing_provider_tin: "string",
+        #    rendering_provider_npi: "string",
+        #    contracted_state: AA,
+        #    date_of_service: "string"
+        #  )
         def compute(subscriber_payer_id:, subscriber_payer_name:, billing_provider_npi:, billing_provider_tin:, rendering_provider_npi:, contracted_state:, date_of_service:, external_patient_id: nil,
                     subscriber_insurance_type: nil, subscriber_plan_name: nil, request_options: nil)
-          response = @request_client.conn.post("/api/expected-network-status/v1") do |req|
+          response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               external_patient_id: external_patient_id,
@@ -53,18 +74,19 @@ module CandidApiClient
               contracted_state: contracted_state,
               date_of_service: date_of_service
             }.compact
+            req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v1"
           end
-          ExpectedNetworkStatus::V1::ExpectedNetworkStatusResponse.from_json(json_object: response.body)
+          CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse.from_json(json_object: response.body)
         end
       end
 
       class AsyncV1Client
+        # @return [CandidApiClient::AsyncRequestClient]
         attr_reader :request_client
 
-        # @param request_client [AsyncRequestClient]
-        # @return [ExpectedNetworkStatus::V1::AsyncV1Client]
+        # @param request_client [CandidApiClient::AsyncRequestClient]
+        # @return [CandidApiClient::ExpectedNetworkStatus::V1::AsyncV1Client]
         def initialize(request_client:)
-          # @type [AsyncRequestClient]
           @request_client = request_client
         end
 
@@ -73,22 +95,44 @@ module CandidApiClient
         # @param external_patient_id [String]
         # @param subscriber_payer_id [String]
         # @param subscriber_payer_name [String]
-        # @param subscriber_insurance_type [Commons::InsuranceTypeCode]
-        # @param subscriber_plan_name [String] The descriptive name of the insurance plan selected by the subscriber, often indicating coverage specifics or tier.
-        # @param billing_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider responsible for billing. A unique 10-digit identification number.
+        # @param subscriber_insurance_type [CandidApiClient::Commons::Types::InsuranceTypeCode]
+        # @param subscriber_plan_name [String] The descriptive name of the insurance plan selected by the subscriber, often
+        #  indicating coverage specifics or tier.
+        # @param billing_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider responsible
+        #  for billing. A unique 10-digit identification number.
         # @param billing_provider_tin [String] Follow the 9-digit format of the Taxpayer Identification Number (TIN).
-        # @param rendering_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider who delivered the services. A unique 10-digit identification number.
-        # @param contracted_state [Commons::State] The state in which the healthcare provider has a contractual agreement with the insurance payer.
-        # @param date_of_service [Commons::DATE] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        # @param request_options [RequestOptions]
-        # @return [ExpectedNetworkStatus::V1::ExpectedNetworkStatusResponse]
+        # @param rendering_provider_npi [String] The National Provider Identifier (NPI) of the healthcare provider who delivered
+        #  the services. A unique 10-digit identification number.
+        # @param contracted_state [CandidApiClient::Commons::Types::State] The state in which the healthcare provider has a contractual agreement with the
+        #  insurance payer.
+        # @param date_of_service [String] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.expected_network_status.v_1.compute(
+        #    external_patient_id: "string",
+        #    subscriber_payer_id: "string",
+        #    subscriber_payer_name: "string",
+        #    subscriber_insurance_type: C_01,
+        #    subscriber_plan_name: "string",
+        #    billing_provider_npi: "string",
+        #    billing_provider_tin: "string",
+        #    rendering_provider_npi: "string",
+        #    contracted_state: AA,
+        #    date_of_service: "string"
+        #  )
         def compute(subscriber_payer_id:, subscriber_payer_name:, billing_provider_npi:, billing_provider_tin:, rendering_provider_npi:, contracted_state:, date_of_service:, external_patient_id: nil,
                     subscriber_insurance_type: nil, subscriber_plan_name: nil, request_options: nil)
           Async do
-            response = @request_client.conn.post("/api/expected-network-status/v1") do |req|
+            response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = { **req.headers, **(request_options&.additional_headers || {}) }.compact
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 external_patient_id: external_patient_id,
@@ -102,8 +146,9 @@ module CandidApiClient
                 contracted_state: contracted_state,
                 date_of_service: date_of_service
               }.compact
+              req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v1"
             end
-            ExpectedNetworkStatus::V1::ExpectedNetworkStatusResponse.from_json(json_object: response.body)
+            CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse.from_json(json_object: response.body)
           end
         end
       end

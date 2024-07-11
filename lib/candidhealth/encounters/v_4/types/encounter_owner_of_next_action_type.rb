@@ -3,11 +3,13 @@
 module CandidApiClient
   module Encounters
     module V4
-      class EncounterOwnerOfNextActionType
-        CANDID = "CANDID"
-        CUSTOMER = "CUSTOMER"
-        CODER = "CODER"
-        NONE = "NONE"
+      module Types
+        class EncounterOwnerOfNextActionType
+          CANDID = "CANDID"
+          CUSTOMER = "CUSTOMER"
+          CODER = "CODER"
+          NONE = "NONE"
+        end
       end
     end
   end

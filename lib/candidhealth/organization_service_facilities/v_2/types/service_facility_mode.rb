@@ -3,9 +3,11 @@
 module CandidApiClient
   module OrganizationServiceFacilities
     module V2
-      class ServiceFacilityMode
-        INSTANCE = "instance"
-        KIND = "kind"
+      module Types
+        class ServiceFacilityMode
+          INSTANCE = "instance"
+          KIND = "kind"
+        end
       end
     end
   end

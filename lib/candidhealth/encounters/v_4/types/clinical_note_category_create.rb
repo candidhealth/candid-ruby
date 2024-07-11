@@ -2,56 +2,73 @@
 
 require_relative "note_category"
 require_relative "clinical_note"
+require "ostruct"
 require "json"
 
 module CandidApiClient
   module Encounters
     module V4
-      class ClinicalNoteCategoryCreate
-        attr_reader :category, :notes, :additional_properties
+      module Types
+        class ClinicalNoteCategoryCreate
+          # @return [CandidApiClient::Encounters::V4::Types::NoteCategory]
+          attr_reader :category
+          # @return [Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>]
+          attr_reader :notes
+          # @return [OpenStruct] Additional properties unmapped to the current class definition
+          attr_reader :additional_properties
+          # @return [Object]
+          attr_reader :_field_set
+          protected :_field_set
 
-        # @param category [Encounters::V4::NoteCategory]
-        # @param notes [Array<Encounters::V4::ClinicalNote>]
-        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @return [Encounters::V4::ClinicalNoteCategoryCreate]
-        def initialize(category:, notes:, additional_properties: nil)
-          # @type [Encounters::V4::NoteCategory]
-          @category = category
-          # @type [Array<Encounters::V4::ClinicalNote>]
-          @notes = notes
-          # @type [OpenStruct] Additional properties unmapped to the current class definition
-          @additional_properties = additional_properties
-        end
+          OMIT = Object.new
 
-        # Deserialize a JSON object to an instance of ClinicalNoteCategoryCreate
-        #
-        # @param json_object [JSON]
-        # @return [Encounters::V4::ClinicalNoteCategoryCreate]
-        def self.from_json(json_object:)
-          struct = JSON.parse(json_object, object_class: OpenStruct)
-          parsed_json = JSON.parse(json_object)
-          category = struct.category
-          notes = parsed_json["notes"]&.map do |v|
-            v = v.to_json
-            Encounters::V4::ClinicalNote.from_json(json_object: v)
+          # @param category [CandidApiClient::Encounters::V4::Types::NoteCategory]
+          # @param notes [Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>]
+          # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+          # @return [CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate]
+          def initialize(category:, notes:, additional_properties: nil)
+            @category = category
+            @notes = notes
+            @additional_properties = additional_properties
+            @_field_set = { "category": category, "notes": notes }
           end
-          new(category: category, notes: notes, additional_properties: struct)
-        end
 
-        # Serialize an instance of ClinicalNoteCategoryCreate to a JSON object
-        #
-        # @return [JSON]
-        def to_json(*_args)
-          { "category": @category, "notes": @notes }.to_json
-        end
+          # Deserialize a JSON object to an instance of ClinicalNoteCategoryCreate
+          #
+          # @param json_object [String]
+          # @return [CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate]
+          def self.from_json(json_object:)
+            struct = JSON.parse(json_object, object_class: OpenStruct)
+            parsed_json = JSON.parse(json_object)
+            category = struct["category"]
+            notes = parsed_json["notes"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::Encounters::V4::Types::ClinicalNote.from_json(json_object: item)
+            end
+            new(
+              category: category,
+              notes: notes,
+              additional_properties: struct
+            )
+          end
 
-        # Leveraged for Union-type generation, validate_raw attempts to parse the given hash and check each fields type against the current object's property definitions.
-        #
-        # @param obj [Object]
-        # @return [Void]
-        def self.validate_raw(obj:)
-          obj.category.is_a?(Encounters::V4::NoteCategory) != false || raise("Passed value for field obj.category is not the expected type, validation failed.")
-          obj.notes.is_a?(Array) != false || raise("Passed value for field obj.notes is not the expected type, validation failed.")
+          # Serialize an instance of ClinicalNoteCategoryCreate to a JSON object
+          #
+          # @return [String]
+          def to_json(*_args)
+            @_field_set&.to_json
+          end
+
+          # Leveraged for Union-type generation, validate_raw attempts to parse the given
+          #  hash and check each fields type against the current object's property
+          #  definitions.
+          #
+          # @param obj [Object]
+          # @return [Void]
+          def self.validate_raw(obj:)
+            obj.category.is_a?(CandidApiClient::Encounters::V4::Types::NoteCategory) != false || raise("Passed value for field obj.category is not the expected type, validation failed.")
+            obj.notes.is_a?(Array) != false || raise("Passed value for field obj.notes is not the expected type, validation failed.")
+          end
         end
       end
     end

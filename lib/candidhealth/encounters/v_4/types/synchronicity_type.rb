@@ -3,9 +3,11 @@
 module CandidApiClient
   module Encounters
     module V4
-      class SynchronicityType
-        SYNCHRONOUS = "Synchronous"
-        ASYNCHRONOUS = "Asynchronous"
+      module Types
+        class SynchronicityType
+          SYNCHRONOUS = "Synchronous"
+          ASYNCHRONOUS = "Asynchronous"
+        end
       end
     end
   end

@@ -3,9 +3,11 @@
 module CandidApiClient
   module Encounters
     module V4
-      class EncounterSubmissionOriginType
-        CANDID = "CANDID"
-        EXTERNAL = "EXTERNAL"
+      module Types
+        class EncounterSubmissionOriginType
+          CANDID = "CANDID"
+          EXTERNAL = "EXTERNAL"
+        end
       end
     end
   end

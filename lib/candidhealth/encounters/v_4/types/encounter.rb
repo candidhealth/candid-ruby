@@ -78,6 +78,12 @@ module CandidApiClient
           attr_reader :rendering_provider
           # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           attr_reader :referring_provider
+          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          attr_reader :initial_referring_provider
+          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          attr_reader :supervising_provider
+          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          attr_reader :ordering_provider
           # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility] Encounter Service facility is typically the location a medical service was
           #  rendered, such as a provider office or hospital. For telehealth, service
           #  facility can represent the provider's location when the service was delivered
@@ -260,6 +266,9 @@ module CandidApiClient
           #  communication, or other service. The rendering provider address should generally
           #  be the same as the service facility address.
           # @param referring_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          # @param initial_referring_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          # @param supervising_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           # @param service_facility [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility] Encounter Service facility is typically the location a medical service was
           #  rendered, such as a provider office or hospital. For telehealth, service
           #  facility can represent the provider's location when the service was delivered
@@ -366,7 +375,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(date_of_service:, encounter_id:, claims:, patient:, billing_provider:, rendering_provider:,
-                         service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, patient_control_number: OMIT, end_date_of_service: OMIT, guarantor: OMIT, referring_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, prior_authorization_number: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, patient_control_number: OMIT, end_date_of_service: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, ordering_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, prior_authorization_number: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @date_of_service = date_of_service
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
@@ -377,6 +386,9 @@ module CandidApiClient
             @billing_provider = billing_provider
             @rendering_provider = rendering_provider
             @referring_provider = referring_provider if referring_provider != OMIT
+            @initial_referring_provider = initial_referring_provider if initial_referring_provider != OMIT
+            @supervising_provider = supervising_provider if supervising_provider != OMIT
+            @ordering_provider = ordering_provider if ordering_provider != OMIT
             @service_facility = service_facility
             @subscriber_primary = subscriber_primary if subscriber_primary != OMIT
             @subscriber_secondary = subscriber_secondary if subscriber_secondary != OMIT
@@ -434,6 +446,9 @@ module CandidApiClient
               "billing_provider": billing_provider,
               "rendering_provider": rendering_provider,
               "referring_provider": referring_provider,
+              "initial_referring_provider": initial_referring_provider,
+              "supervising_provider": supervising_provider,
+              "ordering_provider": ordering_provider,
               "service_facility": service_facility,
               "subscriber_primary": subscriber_primary,
               "subscriber_secondary": subscriber_secondary,
@@ -522,6 +537,24 @@ module CandidApiClient
             else
               referring_provider = parsed_json["referring_provider"].to_json
               referring_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: referring_provider)
+            end
+            if parsed_json["initial_referring_provider"].nil?
+              initial_referring_provider = nil
+            else
+              initial_referring_provider = parsed_json["initial_referring_provider"].to_json
+              initial_referring_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: initial_referring_provider)
+            end
+            if parsed_json["supervising_provider"].nil?
+              supervising_provider = nil
+            else
+              supervising_provider = parsed_json["supervising_provider"].to_json
+              supervising_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: supervising_provider)
+            end
+            if parsed_json["ordering_provider"].nil?
+              ordering_provider = nil
+            else
+              ordering_provider = parsed_json["ordering_provider"].to_json
+              ordering_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: ordering_provider)
             end
             if parsed_json["service_facility"].nil?
               service_facility = nil
@@ -626,6 +659,9 @@ module CandidApiClient
               billing_provider: billing_provider,
               rendering_provider: rendering_provider,
               referring_provider: referring_provider,
+              initial_referring_provider: initial_referring_provider,
+              supervising_provider: supervising_provider,
+              ordering_provider: ordering_provider,
               service_facility: service_facility,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
@@ -691,6 +727,9 @@ module CandidApiClient
             CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.billing_provider)
             CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.rendering_provider)
             obj.referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.referring_provider)
+            obj.initial_referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.initial_referring_provider)
+            obj.supervising_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.supervising_provider)
+            obj.ordering_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.ordering_provider)
             CandidApiClient::ServiceFacility::Types::EncounterServiceFacility.validate_raw(obj: obj.service_facility)
             obj.subscriber_primary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_primary)
             obj.subscriber_secondary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_secondary)

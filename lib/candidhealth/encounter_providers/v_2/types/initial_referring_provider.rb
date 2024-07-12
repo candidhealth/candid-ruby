@@ -9,17 +9,14 @@ module CandidApiClient
   module EncounterProviders
     module V2
       module Types
-        class EncounterProvider
-          # @return [String]
-          attr_reader :provider_id
-          # @return [CandidApiClient::Commons::Types::StreetAddressLongZip]
-          attr_reader :address
-          # @return [String]
-          attr_reader :tax_id
-          # @return [String]
+        class InitialReferringProvider
+          # @return [String] A National Provider Identifier is a unique 10-digit identification
+          #  number issued to health care providers in the United States
           attr_reader :npi
           # @return [String]
           attr_reader :taxonomy_code
+          # @return [CandidApiClient::Commons::Types::StreetAddressLongZip]
+          attr_reader :address
           # @return [CandidApiClient::Commons::Types::QualifierCode]
           attr_reader :qualifier
           # @return [String] If the provider is an individual, this should be set instead of organization
@@ -39,11 +36,10 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param provider_id [String]
-          # @param address [CandidApiClient::Commons::Types::StreetAddressLongZip]
-          # @param tax_id [String]
-          # @param npi [String]
+          # @param npi [String] A National Provider Identifier is a unique 10-digit identification
+          #  number issued to health care providers in the United States
           # @param taxonomy_code [String]
+          # @param address [CandidApiClient::Commons::Types::StreetAddressLongZip]
           # @param qualifier [CandidApiClient::Commons::Types::QualifierCode]
           # @param first_name [String] If the provider is an individual, this should be set instead of organization
           #  name
@@ -52,25 +48,21 @@ module CandidApiClient
           # @param organization_name [String] If the provider is an organization, this should be set instead of first + last
           #  name
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          def initialize(provider_id:, address:, npi:, tax_id: OMIT, taxonomy_code: OMIT, qualifier: OMIT,
-                         first_name: OMIT, last_name: OMIT, organization_name: OMIT, additional_properties: nil)
-            @provider_id = provider_id
-            @address = address
-            @tax_id = tax_id if tax_id != OMIT
+          # @return [CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider]
+          def initialize(npi:, taxonomy_code: OMIT, address: OMIT, qualifier: OMIT, first_name: OMIT, last_name: OMIT,
+                         organization_name: OMIT, additional_properties: nil)
             @npi = npi
             @taxonomy_code = taxonomy_code if taxonomy_code != OMIT
+            @address = address if address != OMIT
             @qualifier = qualifier if qualifier != OMIT
             @first_name = first_name if first_name != OMIT
             @last_name = last_name if last_name != OMIT
             @organization_name = organization_name if organization_name != OMIT
             @additional_properties = additional_properties
             @_field_set = {
-              "provider_id": provider_id,
-              "address": address,
-              "tax_id": tax_id,
               "npi": npi,
               "taxonomy_code": taxonomy_code,
+              "address": address,
               "qualifier": qualifier,
               "first_name": first_name,
               "last_name": last_name,
@@ -80,33 +72,29 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of EncounterProvider
+          # Deserialize a JSON object to an instance of InitialReferringProvider
           #
           # @param json_object [String]
-          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          # @return [CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
-            provider_id = struct["provider_id"]
+            npi = struct["npi"]
+            taxonomy_code = struct["taxonomy_code"]
             if parsed_json["address"].nil?
               address = nil
             else
               address = parsed_json["address"].to_json
               address = CandidApiClient::Commons::Types::StreetAddressLongZip.from_json(json_object: address)
             end
-            tax_id = struct["tax_id"]
-            npi = struct["npi"]
-            taxonomy_code = struct["taxonomy_code"]
             qualifier = struct["qualifier"]
             first_name = struct["first_name"]
             last_name = struct["last_name"]
             organization_name = struct["organization_name"]
             new(
-              provider_id: provider_id,
-              address: address,
-              tax_id: tax_id,
               npi: npi,
               taxonomy_code: taxonomy_code,
+              address: address,
               qualifier: qualifier,
               first_name: first_name,
               last_name: last_name,
@@ -115,7 +103,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of EncounterProvider to a JSON object
+          # Serialize an instance of InitialReferringProvider to a JSON object
           #
           # @return [String]
           def to_json(*_args)
@@ -129,11 +117,9 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.provider_id.is_a?(String) != false || raise("Passed value for field obj.provider_id is not the expected type, validation failed.")
-            CandidApiClient::Commons::Types::StreetAddressLongZip.validate_raw(obj: obj.address)
-            obj.tax_id&.is_a?(String) != false || raise("Passed value for field obj.tax_id is not the expected type, validation failed.")
             obj.npi.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
             obj.taxonomy_code&.is_a?(String) != false || raise("Passed value for field obj.taxonomy_code is not the expected type, validation failed.")
+            obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressLongZip.validate_raw(obj: obj.address)
             obj.qualifier&.is_a?(CandidApiClient::Commons::Types::QualifierCode) != false || raise("Passed value for field obj.qualifier is not the expected type, validation failed.")
             obj.first_name&.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")
             obj.last_name&.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")

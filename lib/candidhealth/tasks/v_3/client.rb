@@ -40,7 +40,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3/#{task_id}/actions"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/tasks/v3/#{task_id}/actions"
           end
           CandidApiClient::Tasks::V3::Types::TaskActions.from_json(json_object: response.body)
         end
@@ -103,7 +104,7 @@ module CandidApiClient
               "billing_provider_npi": billing_provider_npi,
               "sort": sort
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3"
+            req.url "#{@request_client.get_url(environment: CandidApi, request_options: request_options)}/api/tasks/v3"
           end
           CandidApiClient::Tasks::V3::Types::TaskPage.from_json(json_object: response.body)
         end
@@ -123,7 +124,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3/#{task_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/tasks/v3/#{task_id}"
           end
           CandidApiClient::Tasks::V3::Types::Task.from_json(json_object: response.body)
         end
@@ -151,7 +153,7 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3"
+            req.url "#{@request_client.get_url(environment: CandidApi, request_options: request_options)}/api/tasks/v3"
           end
           CandidApiClient::Tasks::V3::Types::Task.from_json(json_object: response.body)
         end
@@ -176,7 +178,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3/#{task_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/tasks/v3/#{task_id}"
           end
           CandidApiClient::Tasks::V3::Types::Task.from_json(json_object: response.body)
         end
@@ -208,7 +211,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3/#{task_id}/actions"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/tasks/v3/#{task_id}/actions"
             end
             CandidApiClient::Tasks::V3::Types::TaskActions.from_json(json_object: response.body)
           end
@@ -273,7 +277,8 @@ module CandidApiClient
                 "billing_provider_npi": billing_provider_npi,
                 "sort": sort
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/tasks/v3"
             end
             CandidApiClient::Tasks::V3::Types::TaskPage.from_json(json_object: response.body)
           end
@@ -295,7 +300,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3/#{task_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/tasks/v3/#{task_id}"
             end
             CandidApiClient::Tasks::V3::Types::Task.from_json(json_object: response.body)
           end
@@ -325,7 +331,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/tasks/v3"
             end
             CandidApiClient::Tasks::V3::Types::Task.from_json(json_object: response.body)
           end
@@ -352,7 +359,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/tasks/v3/#{task_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/tasks/v3/#{task_id}"
             end
             CandidApiClient::Tasks::V3::Types::Task.from_json(json_object: response.body)
           end

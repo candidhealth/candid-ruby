@@ -65,7 +65,8 @@ module CandidApiClient
               "start_date": start_date,
               "end_date": end_date
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/exports/v3"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/exports/v3"
           end
           CandidApiClient::Exports::V3::Types::GetExportsResponse.from_json(json_object: response.body)
         end
@@ -129,7 +130,8 @@ module CandidApiClient
                 "start_date": start_date,
                 "end_date": end_date
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/exports/v3"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/exports/v3"
             end
             CandidApiClient::Exports::V3::Types::GetExportsResponse.from_json(json_object: response.body)
           end

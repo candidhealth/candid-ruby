@@ -50,14 +50,22 @@ module CandidApiClient
           #  All physicians who order services or refer Medicare beneficiaries must
           #  report this data.
           attr_reader :referring_provider
-          # @return [CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider] The first provider who referred the services that were rendered.
-          #  All physicians who order services or refer Medicare beneficiaries must
-          #  report this data. This field cannot be populated unless referring_provider is
-          #  first populated.
+          # @return [CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider] The second iteration of Loop ID-2310. Use code "P3 - Primary Care Provider" in
+          #  this loop to
+          #  indicate the initial referral from the primary care provider or whatever
+          #  provider wrote the initial referral for this patient's episode of care being
+          #  billed/reported in this transaction.
+          #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+          #  service line by the presence of Loop ID-2420 with the same value in NM101.
           attr_reader :initial_referring_provider
-          # @return [CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider] The provider who is supervising the rendering provider.
+          # @return [CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider] Required when the rendering provider is supervised by a physician. If not
+          #  required by this implementation guide, do not send.
+          #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+          #  service line by the presence of Loop ID-2420 with the same value in NM101.
           attr_reader :supervising_provider
-          # @return [CandidApiClient::EncounterProviders::V2::Types::OrderingProvider] The provider who ordered the services that were rendered.
+          # @return [CandidApiClient::EncounterProviders::V2::Types::OrderingProvider] Required when the service or supply was ordered by a provider who is different
+          #  than the rendering provider for this service line.
+          #  If not required by this implementation guide, do not send.
           attr_reader :ordering_provider
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
@@ -88,12 +96,20 @@ module CandidApiClient
           # @param referring_provider [CandidApiClient::EncounterProviders::V2::Types::ReferringProvider] The final provider who referred the services that were rendered.
           #  All physicians who order services or refer Medicare beneficiaries must
           #  report this data.
-          # @param initial_referring_provider [CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider] The first provider who referred the services that were rendered.
-          #  All physicians who order services or refer Medicare beneficiaries must
-          #  report this data. This field cannot be populated unless referring_provider is
-          #  first populated.
-          # @param supervising_provider [CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider] The provider who is supervising the rendering provider.
-          # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::OrderingProvider] The provider who ordered the services that were rendered.
+          # @param initial_referring_provider [CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider] The second iteration of Loop ID-2310. Use code "P3 - Primary Care Provider" in
+          #  this loop to
+          #  indicate the initial referral from the primary care provider or whatever
+          #  provider wrote the initial referral for this patient's episode of care being
+          #  billed/reported in this transaction.
+          #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+          #  service line by the presence of Loop ID-2420 with the same value in NM101.
+          # @param supervising_provider [CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider] Required when the rendering provider is supervised by a physician. If not
+          #  required by this implementation guide, do not send.
+          #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+          #  service line by the presence of Loop ID-2420 with the same value in NM101.
+          # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::OrderingProvider] Required when the service or supply was ordered by a provider who is different
+          #  than the rendering provider for this service line.
+          #  If not required by this implementation guide, do not send.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate]
           def initialize(procedure_code:, quantity:, units:, diagnosis_pointers:, modifiers: OMIT,

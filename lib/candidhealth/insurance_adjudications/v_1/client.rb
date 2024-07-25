@@ -36,7 +36,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
           end
           CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudication.from_json(json_object: response.body)
         end
@@ -69,7 +70,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-adjudications/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-adjudications/v1"
           end
           CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudication.from_json(json_object: response.body)
         end
@@ -92,7 +94,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
           end
         end
       end
@@ -126,7 +129,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
             end
             CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudication.from_json(json_object: response.body)
           end
@@ -161,7 +165,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-adjudications/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-adjudications/v1"
             end
             CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudication.from_json(json_object: response.body)
           end
@@ -186,7 +191,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-adjudications/v1/#{insurance_adjudication_id}"
             end
           end
         end

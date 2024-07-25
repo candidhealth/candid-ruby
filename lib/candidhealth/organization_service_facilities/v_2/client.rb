@@ -35,7 +35,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
           end
           CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
         end
@@ -67,7 +68,8 @@ module CandidApiClient
               "name": name,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/organization-service-facilities/v2"
           end
           CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage.from_json(json_object: response.body)
         end
@@ -105,7 +107,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/organization-service-facilities/v2"
           end
           CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
         end
@@ -144,7 +147,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
           end
           CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
         end
@@ -164,7 +168,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
           end
         end
       end
@@ -195,7 +200,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
             end
             CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
           end
@@ -229,7 +235,8 @@ module CandidApiClient
                 "name": name,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/organization-service-facilities/v2"
             end
             CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage.from_json(json_object: response.body)
           end
@@ -269,7 +276,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/organization-service-facilities/v2"
             end
             CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
           end
@@ -310,7 +318,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
             end
             CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
           end
@@ -332,7 +341,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/organization-service-facilities/v2/#{organization_service_facility_id}"
             end
           end
         end

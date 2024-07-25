@@ -74,7 +74,8 @@ module CandidApiClient
               "page_token": page_token,
               "account_types": account_types
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/write-offs/v1"
           end
           CandidApiClient::WriteOffs::V1::Types::WriteOffsPage.from_json(json_object: response.body)
         end
@@ -96,7 +97,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1/#{write_off_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/write-offs/v1/#{write_off_id}"
           end
           CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
         end
@@ -120,7 +122,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request_options&.additional_body_parameters || {}), write_offs: write_offs }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/write-offs/v1"
           end
           CandidApiClient::WriteOffs::V1::Types::CreateWriteOffsResponse.from_json(json_object: response.body)
         end
@@ -142,7 +145,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1/#{write_off_id}/revert"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/write-offs/v1/#{write_off_id}/revert"
           end
           CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
         end
@@ -210,7 +214,8 @@ module CandidApiClient
                 "page_token": page_token,
                 "account_types": account_types
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/write-offs/v1"
             end
             CandidApiClient::WriteOffs::V1::Types::WriteOffsPage.from_json(json_object: response.body)
           end
@@ -234,7 +239,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1/#{write_off_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/write-offs/v1/#{write_off_id}"
             end
             CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
           end
@@ -260,7 +266,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request_options&.additional_body_parameters || {}), write_offs: write_offs }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/write-offs/v1"
             end
             CandidApiClient::WriteOffs::V1::Types::CreateWriteOffsResponse.from_json(json_object: response.body)
           end
@@ -284,7 +291,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/write-offs/v1/#{write_off_id}/revert"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/write-offs/v1/#{write_off_id}/revert"
             end
             CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
           end

@@ -68,7 +68,8 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-payments/v1"
           end
           CandidApiClient::InsurancePayments::V1::Types::InsurancePaymentsPage.from_json(json_object: response.body)
         end
@@ -91,7 +92,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
           end
           CandidApiClient::InsurancePayments::V1::Types::InsurancePayment.from_json(json_object: response.body)
         end
@@ -124,7 +126,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-payments/v1"
           end
           CandidApiClient::InsurancePayments::V1::Types::InsurancePayment.from_json(json_object: response.body)
         end
@@ -155,7 +158,8 @@ module CandidApiClient
               payment_timestamp: payment_timestamp,
               payment_note: payment_note
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
           end
           CandidApiClient::InsurancePayments::V1::Types::InsurancePayment.from_json(json_object: response.body)
         end
@@ -180,7 +184,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
           end
         end
       end
@@ -241,7 +246,8 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-payments/v1"
             end
             CandidApiClient::InsurancePayments::V1::Types::InsurancePaymentsPage.from_json(json_object: response.body)
           end
@@ -266,7 +272,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
             end
             CandidApiClient::InsurancePayments::V1::Types::InsurancePayment.from_json(json_object: response.body)
           end
@@ -301,7 +308,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-payments/v1"
             end
             CandidApiClient::InsurancePayments::V1::Types::InsurancePayment.from_json(json_object: response.body)
           end
@@ -334,7 +342,8 @@ module CandidApiClient
                 payment_timestamp: payment_timestamp,
                 payment_note: payment_note
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
             end
             CandidApiClient::InsurancePayments::V1::Types::InsurancePayment.from_json(json_object: response.body)
           end
@@ -361,7 +370,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-payments/v1/#{insurance_payment_id}"
             end
           end
         end

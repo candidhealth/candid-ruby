@@ -54,7 +54,8 @@ module CandidApiClient
           npi: npi,
           address: address
         }.compact
-        req.url "#{@request_client.get_url(request_options: request_options)}/api/service_facility/v2/#{service_facility_id}"
+        req.url "#{@request_client.get_url(environment: CandidApi,
+                                           request_options: request_options)}/api/service_facility/v2/#{service_facility_id}"
       end
       CandidApiClient::ServiceFacility::Types::EncounterServiceFacility.from_json(json_object: response.body)
     end
@@ -109,7 +110,8 @@ module CandidApiClient
             npi: npi,
             address: address
           }.compact
-          req.url "#{@request_client.get_url(request_options: request_options)}/api/service_facility/v2/#{service_facility_id}"
+          req.url "#{@request_client.get_url(environment: CandidApi,
+                                             request_options: request_options)}/api/service_facility/v2/#{service_facility_id}"
         end
         CandidApiClient::ServiceFacility::Types::EncounterServiceFacility.from_json(json_object: response.body)
       end

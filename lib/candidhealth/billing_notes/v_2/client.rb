@@ -43,7 +43,8 @@ module CandidApiClient
               _field_set: _field_set,
               encounter_id: encounter_id
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/billing_notes/v2"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/billing_notes/v2"
           end
           CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: response.body)
         end
@@ -85,7 +86,8 @@ module CandidApiClient
                 _field_set: _field_set,
                 encounter_id: encounter_id
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/billing_notes/v2"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/billing_notes/v2"
             end
             CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: response.body)
           end

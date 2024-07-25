@@ -32,7 +32,7 @@ module CandidApiClient
             @latest_version = latest_version
             @message = message
             @additional_properties = additional_properties
-            @_field_set = { "code": code, "latestVersion": latest_version, "message": message }
+            @_field_set = { "code": code, "latest_version": latest_version, "message": message }
           end
 
           # Deserialize a JSON object to an instance of VersionConflictErrorBody
@@ -42,7 +42,7 @@ module CandidApiClient
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             code = struct["code"]
-            latest_version = struct["latestVersion"]
+            latest_version = struct["latest_version"]
             message = struct["message"]
             new(
               code: code,

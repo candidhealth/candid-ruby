@@ -25,7 +25,6 @@ module CandidApiClient
     def initialize(base_url: nil, environment: CandidApiClient::Environment::PRODUCTION, max_retries: nil,
                    timeout_in_seconds: nil, token: nil)
       @default_environment = environment
-      @base_url = environment || base_url
       @token = token
       @conn = Faraday.new do |faraday|
         faraday.request :json
@@ -36,14 +35,15 @@ module CandidApiClient
     end
 
     # @param request_options [CandidApiClient::RequestOptions]
+    # @param environment [String]
     # @return [String]
-    def get_url(request_options: nil)
-      request_options&.base_url || @default_environment || @base_url
+    def get_url(environment:, request_options: nil)
+      request_options&.base_url || @default_environment[environment] || @base_url
     end
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.23.0" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.0-2a6d412" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end
@@ -68,7 +68,6 @@ module CandidApiClient
     def initialize(base_url: nil, environment: CandidApiClient::Environment::PRODUCTION, max_retries: nil,
                    timeout_in_seconds: nil, token: nil)
       @default_environment = environment
-      @base_url = environment || base_url
       @token = token
       @conn = Faraday.new do |faraday|
         faraday.request :json
@@ -80,14 +79,15 @@ module CandidApiClient
     end
 
     # @param request_options [CandidApiClient::RequestOptions]
+    # @param environment [String]
     # @return [String]
-    def get_url(request_options: nil)
-      request_options&.base_url || @default_environment || @base_url
+    def get_url(environment:, request_options: nil)
+      request_options&.base_url || @default_environment[environment] || @base_url
     end
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.23.0" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.0-2a6d412" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end

@@ -55,7 +55,7 @@ module CandidApiClient
               "line": line,
               "city": city,
               "state": state,
-              "postalCode": postal_code,
+              "postal_code": postal_code,
               "country": country,
               "period": period
             }.reject do |_k, v|
@@ -74,7 +74,7 @@ module CandidApiClient
             line = struct["line"]
             city = struct["city"]
             state = struct["state"]
-            postal_code = struct["postalCode"]
+            postal_code = struct["postal_code"]
             country = struct["country"]
             if parsed_json["period"].nil?
               period = nil

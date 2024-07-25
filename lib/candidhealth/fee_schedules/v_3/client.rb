@@ -50,7 +50,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match"
           end
           CandidApiClient::FeeSchedules::V3::Types::MatchResult.from_json(json_object: response.body)
         end
@@ -73,7 +74,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match/#{rate_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match/#{rate_id}"
           end
           CandidApiClient::FeeSchedules::V3::Types::MatchTestResult.from_json(json_object: response.body)
         end
@@ -136,7 +138,8 @@ module CandidApiClient
               "cpt_code": cpt_code,
               "modifiers": modifiers
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3"
           end
           CandidApiClient::FeeSchedules::V3::Types::RatesPage.from_json(json_object: response.body)
         end
@@ -200,7 +203,8 @@ module CandidApiClient
               "cpt_code": cpt_code,
               "modifiers": modifiers
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/unique-dimension-values"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/unique-dimension-values"
           end
           CandidApiClient::FeeSchedules::V3::Types::DimensionsPage.from_json(json_object: response.body)
         end
@@ -222,7 +226,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/history"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/history"
           end
           parsed_json = JSON.parse(response.body)
           parsed_json&.map do |item|
@@ -255,7 +260,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request_options&.additional_body_parameters || {}), dry_run: dry_run, rates: rates }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3"
           end
           parsed_json = JSON.parse(response.body)
           parsed_json&.map do |item|
@@ -283,7 +289,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/#{version}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/#{version}"
           end
         end
 
@@ -303,7 +310,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/payer-threshold/default"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/payer-threshold/default"
           end
           CandidApiClient::FeeSchedules::V3::Types::PayerThreshold.from_json(json_object: response.body)
         end
@@ -326,7 +334,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.params = { **(request_options&.additional_query_parameters || {}), "payer_uuids": payer_uuids }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/payer-threshold"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/payer-threshold"
           end
           CandidApiClient::FeeSchedules::V3::Types::PayerThresholdsPage.from_json(json_object: response.body)
         end
@@ -353,7 +362,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/payer-threshold/#{payer_uuid}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/payer-threshold/#{payer_uuid}"
           end
           CandidApiClient::FeeSchedules::V3::Types::PayerThreshold.from_json(json_object: response.body)
         end
@@ -388,7 +398,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match"
             end
             CandidApiClient::FeeSchedules::V3::Types::MatchResult.from_json(json_object: response.body)
           end
@@ -413,7 +424,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match/#{rate_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/service-line/#{service_line_id}/match/#{rate_id}"
             end
             CandidApiClient::FeeSchedules::V3::Types::MatchTestResult.from_json(json_object: response.body)
           end
@@ -478,7 +490,8 @@ module CandidApiClient
                 "cpt_code": cpt_code,
                 "modifiers": modifiers
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3"
             end
             CandidApiClient::FeeSchedules::V3::Types::RatesPage.from_json(json_object: response.body)
           end
@@ -544,7 +557,8 @@ module CandidApiClient
                 "cpt_code": cpt_code,
                 "modifiers": modifiers
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/unique-dimension-values"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/unique-dimension-values"
             end
             CandidApiClient::FeeSchedules::V3::Types::DimensionsPage.from_json(json_object: response.body)
           end
@@ -568,7 +582,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/history"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/history"
             end
             parsed_json = JSON.parse(response.body)
             parsed_json&.map do |item|
@@ -607,7 +622,8 @@ module CandidApiClient
                 dry_run: dry_run,
                 rates: rates
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3"
             end
             parsed_json = JSON.parse(response.body)
             parsed_json&.map do |item|
@@ -637,7 +653,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/#{version}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/#{rate_id}/#{version}"
             end
           end
         end
@@ -659,7 +676,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/payer-threshold/default"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/payer-threshold/default"
             end
             CandidApiClient::FeeSchedules::V3::Types::PayerThreshold.from_json(json_object: response.body)
           end
@@ -687,7 +705,8 @@ module CandidApiClient
                 **(request_options&.additional_query_parameters || {}),
                 "payer_uuids": payer_uuids
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/payer-threshold"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/payer-threshold"
             end
             CandidApiClient::FeeSchedules::V3::Types::PayerThresholdsPage.from_json(json_object: response.body)
           end
@@ -716,7 +735,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/fee-schedules/v3/payer-threshold/#{payer_uuid}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/payer-threshold/#{payer_uuid}"
             end
             CandidApiClient::FeeSchedules::V3::Types::PayerThreshold.from_json(json_object: response.body)
           end

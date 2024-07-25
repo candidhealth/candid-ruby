@@ -43,7 +43,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2/#{contract_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/contracts/v2/#{contract_id}"
           end
           CandidApiClient::Contracts::V2::Types::ContractWithProviders.from_json(json_object: response.body)
         end
@@ -88,7 +89,8 @@ module CandidApiClient
               "states": states,
               "contract_status": contract_status
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/contracts/v2"
           end
           CandidApiClient::Contracts::V2::Types::ContractsPage.from_json(json_object: response.body)
         end
@@ -152,7 +154,8 @@ module CandidApiClient
               rendering_provider_ids: rendering_provider_ids,
               payer_uuid: payer_uuid
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/contracts/v2"
           end
           CandidApiClient::Contracts::V2::Types::ContractWithProviders.from_json(json_object: response.body)
         end
@@ -172,7 +175,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2/#{contract_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/contracts/v2/#{contract_id}"
           end
         end
 
@@ -221,7 +225,8 @@ module CandidApiClient
               medicare_insurance_types: medicare_insurance_types,
               medicaid_insurance_types: medicaid_insurance_types
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2/#{contract_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/contracts/v2/#{contract_id}"
           end
           CandidApiClient::Contracts::V2::Types::ContractWithProviders.from_json(json_object: response.body)
         end
@@ -253,7 +258,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2/#{contract_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/contracts/v2/#{contract_id}"
             end
             CandidApiClient::Contracts::V2::Types::ContractWithProviders.from_json(json_object: response.body)
           end
@@ -300,7 +306,8 @@ module CandidApiClient
                 "states": states,
                 "contract_status": contract_status
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/contracts/v2"
             end
             CandidApiClient::Contracts::V2::Types::ContractsPage.from_json(json_object: response.body)
           end
@@ -366,7 +373,8 @@ module CandidApiClient
                 rendering_provider_ids: rendering_provider_ids,
                 payer_uuid: payer_uuid
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/contracts/v2"
             end
             CandidApiClient::Contracts::V2::Types::ContractWithProviders.from_json(json_object: response.body)
           end
@@ -388,7 +396,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2/#{contract_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/contracts/v2/#{contract_id}"
             end
           end
         end
@@ -439,7 +448,8 @@ module CandidApiClient
                 medicare_insurance_types: medicare_insurance_types,
                 medicaid_insurance_types: medicaid_insurance_types
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/contracts/v2/#{contract_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/contracts/v2/#{contract_id}"
             end
             CandidApiClient::Contracts::V2::Types::ContractWithProviders.from_json(json_object: response.body)
           end

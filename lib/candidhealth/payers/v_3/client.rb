@@ -33,7 +33,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/payers/v3/#{payer_uuid}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/payers/v3/#{payer_uuid}"
           end
           CandidApiClient::Payers::V3::Types::Payer.from_json(json_object: response.body)
         end
@@ -65,7 +66,7 @@ module CandidApiClient
               "search_term": search_term,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/payers/v3"
+            req.url "#{@request_client.get_url(environment: CandidApi, request_options: request_options)}/api/payers/v3"
           end
           CandidApiClient::Payers::V3::Types::PayerPage.from_json(json_object: response.body)
         end
@@ -97,7 +98,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/payers/v3/#{payer_uuid}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/payers/v3/#{payer_uuid}"
             end
             CandidApiClient::Payers::V3::Types::Payer.from_json(json_object: response.body)
           end
@@ -131,7 +133,8 @@ module CandidApiClient
                 "search_term": search_term,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/payers/v3"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/payers/v3"
             end
             CandidApiClient::Payers::V3::Types::PayerPage.from_json(json_object: response.body)
           end

@@ -55,7 +55,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/guarantors/v1/#{encounter_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/guarantors/v1/#{encounter_id}"
           end
           CandidApiClient::Guarantor::V1::Types::Guarantor.from_json(json_object: response.body)
         end
@@ -77,7 +78,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
           end
           CandidApiClient::Guarantor::V1::Types::Guarantor.from_json(json_object: response.body)
         end
@@ -140,7 +142,8 @@ module CandidApiClient
               email: email,
               email_consent: email_consent
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
           end
           CandidApiClient::Guarantor::V1::Types::Guarantor.from_json(json_object: response.body)
         end
@@ -191,7 +194,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/guarantors/v1/#{encounter_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/guarantors/v1/#{encounter_id}"
             end
             CandidApiClient::Guarantor::V1::Types::Guarantor.from_json(json_object: response.body)
           end
@@ -215,7 +219,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
             end
             CandidApiClient::Guarantor::V1::Types::Guarantor.from_json(json_object: response.body)
           end
@@ -280,7 +285,8 @@ module CandidApiClient
                 email: email,
                 email_consent: email_consent
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/guarantors/v1/#{guarantor_id}"
             end
             CandidApiClient::Guarantor::V1::Types::Guarantor.from_json(json_object: response.body)
           end

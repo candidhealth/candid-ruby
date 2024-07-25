@@ -71,7 +71,8 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-refunds/v1"
           end
           CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundsPage.from_json(json_object: response.body)
         end
@@ -94,7 +95,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
           end
           CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
         end
@@ -127,7 +129,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-refunds/v1"
           end
           CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
         end
@@ -161,7 +164,8 @@ module CandidApiClient
               refund_note: refund_note,
               refund_reason: refund_reason
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
           end
           CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
         end
@@ -185,7 +189,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
           end
         end
       end
@@ -248,7 +253,8 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-refunds/v1"
             end
             CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefundsPage.from_json(json_object: response.body)
           end
@@ -273,7 +279,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
             end
             CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
           end
@@ -308,7 +315,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-refunds/v1"
             end
             CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
           end
@@ -344,7 +352,8 @@ module CandidApiClient
                 refund_note: refund_note,
                 refund_reason: refund_reason
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
             end
             CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund.from_json(json_object: response.body)
           end
@@ -370,7 +379,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/insurance-refunds/v1/#{insurance_refund_id}"
             end
           end
         end

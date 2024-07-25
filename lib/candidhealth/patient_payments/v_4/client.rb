@@ -81,7 +81,8 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-payments/v4"
           end
           CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage.from_json(json_object: response.body)
         end
@@ -103,7 +104,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
           end
           CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
         end
@@ -153,7 +155,8 @@ module CandidApiClient
               allocations: allocations,
               invoice: invoice
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-payments/v4"
           end
           CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
         end
@@ -184,7 +187,8 @@ module CandidApiClient
               payment_note: payment_note,
               invoice: invoice
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
           end
           CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
         end
@@ -206,7 +210,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
           end
         end
       end
@@ -278,7 +283,8 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-payments/v4"
             end
             CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage.from_json(json_object: response.body)
           end
@@ -302,7 +308,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
             end
             CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
           end
@@ -354,7 +361,8 @@ module CandidApiClient
                 allocations: allocations,
                 invoice: invoice
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-payments/v4"
             end
             CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
           end
@@ -387,7 +395,8 @@ module CandidApiClient
                 payment_note: payment_note,
                 invoice: invoice
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
             end
             CandidApiClient::PatientPayments::V4::Types::PatientPayment.from_json(json_object: response.body)
           end
@@ -411,7 +420,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-payments/v4/#{patient_payment_id}"
             end
           end
         end

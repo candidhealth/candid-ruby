@@ -60,7 +60,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v2/compute/#{rendering_provider_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/expected-network-status/v2/compute/#{rendering_provider_id}"
           end
           CandidApiClient::ExpectedNetworkStatus::V2::Types::ExpectedNetworkStatusResponseV2.from_json(json_object: response.body)
         end
@@ -104,7 +105,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v2/compute"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/expected-network-status/v2/compute"
           end
           CandidApiClient::ExpectedNetworkStatus::V2::Types::ComputeAllInNetworkProvidersResponse.from_json(json_object: response.body)
         end
@@ -161,7 +163,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v2/compute/#{rendering_provider_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/expected-network-status/v2/compute/#{rendering_provider_id}"
             end
             CandidApiClient::ExpectedNetworkStatus::V2::Types::ExpectedNetworkStatusResponseV2.from_json(json_object: response.body)
           end
@@ -207,7 +210,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v2/compute"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/expected-network-status/v2/compute"
             end
             CandidApiClient::ExpectedNetworkStatus::V2::Types::ComputeAllInNetworkProvidersResponse.from_json(json_object: response.body)
           end

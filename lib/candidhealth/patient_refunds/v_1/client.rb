@@ -83,7 +83,8 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-refunds/v1"
           end
           CandidApiClient::PatientRefunds::V1::Types::PatientRefundsPage.from_json(json_object: response.body)
         end
@@ -105,7 +106,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
           end
           CandidApiClient::PatientRefunds::V1::Types::PatientRefund.from_json(json_object: response.body)
         end
@@ -158,7 +160,8 @@ module CandidApiClient
               invoice: invoice,
               refund_reason: refund_reason
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-refunds/v1"
           end
           CandidApiClient::PatientRefunds::V1::Types::PatientRefund.from_json(json_object: response.body)
         end
@@ -192,7 +195,8 @@ module CandidApiClient
               invoice: invoice,
               refund_reason: refund_reason
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
           end
           CandidApiClient::PatientRefunds::V1::Types::PatientRefund.from_json(json_object: response.body)
         end
@@ -214,7 +218,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
           end
         end
       end
@@ -286,7 +291,8 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-refunds/v1"
             end
             CandidApiClient::PatientRefunds::V1::Types::PatientRefundsPage.from_json(json_object: response.body)
           end
@@ -310,7 +316,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
             end
             CandidApiClient::PatientRefunds::V1::Types::PatientRefund.from_json(json_object: response.body)
           end
@@ -365,7 +372,8 @@ module CandidApiClient
                 invoice: invoice,
                 refund_reason: refund_reason
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-refunds/v1"
             end
             CandidApiClient::PatientRefunds::V1::Types::PatientRefund.from_json(json_object: response.body)
           end
@@ -401,7 +409,8 @@ module CandidApiClient
                 invoice: invoice,
                 refund_reason: refund_reason
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
             end
             CandidApiClient::PatientRefunds::V1::Types::PatientRefund.from_json(json_object: response.body)
           end
@@ -425,7 +434,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/patient-refunds/v1/#{patient_refund_id}"
             end
           end
         end

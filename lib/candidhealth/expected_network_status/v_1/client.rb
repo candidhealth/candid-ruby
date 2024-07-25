@@ -74,7 +74,8 @@ module CandidApiClient
               contracted_state: contracted_state,
               date_of_service: date_of_service
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/expected-network-status/v1"
           end
           CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse.from_json(json_object: response.body)
         end
@@ -146,7 +147,8 @@ module CandidApiClient
                 contracted_state: contracted_state,
                 date_of_service: date_of_service
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/expected-network-status/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/expected-network-status/v1"
             end
             CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse.from_json(json_object: response.body)
           end

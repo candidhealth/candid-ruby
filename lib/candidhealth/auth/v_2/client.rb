@@ -65,7 +65,8 @@ module CandidApiClient
               client_id: client_id,
               client_secret: client_secret
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/auth/v2/token"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/auth/v2/token"
           end
           CandidApiClient::Auth::V2::Types::AuthGetTokenResponse.from_json(json_object: response.body)
         end
@@ -130,7 +131,8 @@ module CandidApiClient
                 client_id: client_id,
                 client_secret: client_secret
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/auth/v2/token"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/auth/v2/token"
             end
             CandidApiClient::Auth::V2::Types::AuthGetTokenResponse.from_json(json_object: response.body)
           end

@@ -119,7 +119,8 @@ module CandidApiClient
               "owner_of_next_action": owner_of_next_action,
               "patient_external_id": patient_external_id
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/encounters/v4"
           end
           CandidApiClient::Encounters::V4::Types::EncounterPage.from_json(json_object: response.body)
         end
@@ -139,7 +140,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4/#{encounter_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/encounters/v4/#{encounter_id}"
           end
           CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
         end
@@ -320,10 +322,13 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param initial_referring_provider [Hash] The first provider who referred the services that were rendered.
-        #  All physicians who order services or refer Medicare beneficiaries must
-        #  report this data. This field cannot be populated unless referring_provider is
-        #  first populated.Request of type CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider, as a Hash
+        # @param initial_referring_provider [Hash] The second iteration of Loop ID-2310. Use code "P3 - Primary Care Provider" in
+        #  this loop to
+        #  indicate the initial referral from the primary care provider or whatever
+        #  provider wrote the initial referral for this patient's episode of care being
+        #  billed/reported in this transaction.
+        #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+        #  service line by the presence of Loop ID-2420 with the same value in NM101.Request of type CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider, as a Hash
         #   * :npi (String)
         #   * :taxonomy_code (String)
         #   * :address (Hash)
@@ -337,7 +342,10 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param supervising_provider [Hash] The provider who is supervising the rendering provider.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider, as a Hash
+        # @param supervising_provider [Hash] Required when the rendering provider is supervised by a physician. If not
+        #  required by this implementation guide, do not send.
+        #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+        #  service line by the presence of Loop ID-2420 with the same value in NM101.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider, as a Hash
         #   * :npi (String)
         #   * :taxonomy_code (String)
         #   * :address (Hash)
@@ -350,7 +358,9 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param ordering_provider [Hash] The provider who ordered the services that were rendered.Request of type CandidApiClient::EncounterProviders::V2::Types::OrderingProvider, as a Hash
+        # @param ordering_provider [Hash] Required when the service or supply was ordered by a provider who is different
+        #  than the rendering provider for this service line.
+        #  If not required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::OrderingProvider, as a Hash
         #   * :npi (String)
         #   * :taxonomy_code (String)
         #   * :address (Hash)
@@ -641,7 +651,8 @@ module CandidApiClient
               external_claim_submission: external_claim_submission,
               tag_ids: tag_ids
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/encounters/v4"
           end
           CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
         end
@@ -863,7 +874,8 @@ module CandidApiClient
               delay_reason_code: delay_reason_code,
               patient_authorized_release: patient_authorized_release
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4/#{encounter_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/encounters/v4/#{encounter_id}"
           end
           CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
         end
@@ -950,7 +962,8 @@ module CandidApiClient
                 "owner_of_next_action": owner_of_next_action,
                 "patient_external_id": patient_external_id
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/encounters/v4"
             end
             CandidApiClient::Encounters::V4::Types::EncounterPage.from_json(json_object: response.body)
           end
@@ -972,7 +985,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4/#{encounter_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/encounters/v4/#{encounter_id}"
             end
             CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
           end
@@ -1154,10 +1168,13 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param initial_referring_provider [Hash] The first provider who referred the services that were rendered.
-        #  All physicians who order services or refer Medicare beneficiaries must
-        #  report this data. This field cannot be populated unless referring_provider is
-        #  first populated.Request of type CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider, as a Hash
+        # @param initial_referring_provider [Hash] The second iteration of Loop ID-2310. Use code "P3 - Primary Care Provider" in
+        #  this loop to
+        #  indicate the initial referral from the primary care provider or whatever
+        #  provider wrote the initial referral for this patient's episode of care being
+        #  billed/reported in this transaction.
+        #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+        #  service line by the presence of Loop ID-2420 with the same value in NM101.Request of type CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider, as a Hash
         #   * :npi (String)
         #   * :taxonomy_code (String)
         #   * :address (Hash)
@@ -1171,7 +1188,10 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param supervising_provider [Hash] The provider who is supervising the rendering provider.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider, as a Hash
+        # @param supervising_provider [Hash] Required when the rendering provider is supervised by a physician. If not
+        #  required by this implementation guide, do not send.
+        #  Information in Loop ID-2310 applies to the entire claim unless overridden on a
+        #  service line by the presence of Loop ID-2420 with the same value in NM101.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider, as a Hash
         #   * :npi (String)
         #   * :taxonomy_code (String)
         #   * :address (Hash)
@@ -1184,7 +1204,9 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param ordering_provider [Hash] The provider who ordered the services that were rendered.Request of type CandidApiClient::EncounterProviders::V2::Types::OrderingProvider, as a Hash
+        # @param ordering_provider [Hash] Required when the service or supply was ordered by a provider who is different
+        #  than the rendering provider for this service line.
+        #  If not required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::OrderingProvider, as a Hash
         #   * :npi (String)
         #   * :taxonomy_code (String)
         #   * :address (Hash)
@@ -1476,7 +1498,8 @@ module CandidApiClient
                 external_claim_submission: external_claim_submission,
                 tag_ids: tag_ids
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/encounters/v4"
             end
             CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
           end
@@ -1700,7 +1723,8 @@ module CandidApiClient
                 delay_reason_code: delay_reason_code,
                 patient_authorized_release: patient_authorized_release
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/encounters/v4/#{encounter_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/encounters/v4/#{encounter_id}"
             end
             CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
           end

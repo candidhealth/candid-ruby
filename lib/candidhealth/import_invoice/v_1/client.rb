@@ -52,7 +52,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/import-invoice/v1"
           end
           CandidApiClient::ImportInvoice::V1::Types::ImportInvoice.from_json(json_object: response.body)
         end
@@ -109,7 +110,8 @@ module CandidApiClient
               "sort_direction": sort_direction,
               "page_token": page_token
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/import-invoice/v1"
           end
           CandidApiClient::ImportInvoice::V1::Types::ImportInvoicesPage.from_json(json_object: response.body)
         end
@@ -131,7 +133,8 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
           end
           CandidApiClient::ImportInvoice::V1::Types::ImportInvoice.from_json(json_object: response.body)
         end
@@ -162,7 +165,8 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-            req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
           end
           CandidApiClient::ImportInvoice::V1::Types::ImportInvoice.from_json(json_object: response.body)
         end
@@ -207,7 +211,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/import-invoice/v1"
             end
             CandidApiClient::ImportInvoice::V1::Types::ImportInvoice.from_json(json_object: response.body)
           end
@@ -266,7 +271,8 @@ module CandidApiClient
                 "sort_direction": sort_direction,
                 "page_token": page_token
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/import-invoice/v1"
             end
             CandidApiClient::ImportInvoice::V1::Types::ImportInvoicesPage.from_json(json_object: response.body)
           end
@@ -290,7 +296,8 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
             end
             CandidApiClient::ImportInvoice::V1::Types::ImportInvoice.from_json(json_object: response.body)
           end
@@ -323,7 +330,8 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/import-invoice/v1/#{invoice_id}"
             end
             CandidApiClient::ImportInvoice::V1::Types::ImportInvoice.from_json(json_object: response.body)
           end

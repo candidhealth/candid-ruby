@@ -23,7 +23,6 @@ require_relative "../../encounter_providers/v_2/types/rendering_provider"
 require_relative "../../encounter_providers/v_2/types/referring_provider"
 require_relative "../../encounter_providers/v_2/types/initial_referring_provider"
 require_relative "../../encounter_providers/v_2/types/supervising_provider"
-require_relative "../../encounter_providers/v_2/types/ordering_provider"
 require_relative "../../service_facility/types/encounter_service_facility_base"
 require_relative "../../individual/types/subscriber_create"
 require_relative "../../diagnoses/types/diagnosis_create"
@@ -358,21 +357,6 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param ordering_provider [Hash] Required when the service or supply was ordered by a provider who is different
-        #  than the rendering provider for this service line.
-        #  If not required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::OrderingProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
         # @param service_facility [Hash] Encounter Service facility is typically the location a medical service was
         #  rendered, such as a provider office or hospital. For telehealth, service
         #  facility can represent the provider's location when the service was delivered
@@ -581,7 +565,6 @@ module CandidApiClient
         #    referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
-        #    ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
@@ -596,7 +579,7 @@ module CandidApiClient
         #    tag_ids: ["string"]
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, ordering_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -637,7 +620,6 @@ module CandidApiClient
               referring_provider: referring_provider,
               initial_referring_provider: initial_referring_provider,
               supervising_provider: supervising_provider,
-              ordering_provider: ordering_provider,
               service_facility: service_facility,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
@@ -1204,21 +1186,6 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :organization_name (String)
-        # @param ordering_provider [Hash] Required when the service or supply was ordered by a provider who is different
-        #  than the rendering provider for this service line.
-        #  If not required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::OrderingProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
         # @param service_facility [Hash] Encounter Service facility is typically the location a medical service was
         #  rendered, such as a provider office or hospital. For telehealth, service
         #  facility can represent the provider's location when the service was delivered
@@ -1427,7 +1394,6 @@ module CandidApiClient
         #    referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
-        #    ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
@@ -1442,7 +1408,7 @@ module CandidApiClient
         #    tag_ids: ["string"]
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, ordering_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, responsible_party:, patient:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, prior_authorization_number: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, date_of_service: nil, end_date_of_service: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1484,7 +1450,6 @@ module CandidApiClient
                 referring_provider: referring_provider,
                 initial_referring_provider: initial_referring_provider,
                 supervising_provider: supervising_provider,
-                ordering_provider: ordering_provider,
                 service_facility: service_facility,
                 subscriber_primary: subscriber_primary,
                 subscriber_secondary: subscriber_secondary,

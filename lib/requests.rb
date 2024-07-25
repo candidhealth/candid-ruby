@@ -43,7 +43,7 @@ module CandidApiClient
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.0-2a6d412" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.1" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end
@@ -87,7 +87,7 @@ module CandidApiClient
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.0-2a6d412" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.1" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end

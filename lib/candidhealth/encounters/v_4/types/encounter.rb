@@ -17,6 +17,7 @@ require_relative "../../../tags/types/tag"
 require_relative "coding_attribution_type"
 require_relative "encounter_owner_of_next_action_type"
 require_relative "encounter_submission_origin_type"
+require_relative "../../../custom_schemas/v_1/types/schema_instance"
 require_relative "medication"
 require_relative "vitals"
 require_relative "intervention"
@@ -144,6 +145,10 @@ module CandidApiClient
           #  For Encounters created with an external_claim_submission object, this will be
           #  EncounterSubmissionOriginType.EXTERNAL.
           attr_reader :submission_origin
+          # @return [Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
+          #  Multiple schema
+          #  instances cannot be created for the same schema on an encounter.
+          attr_reader :schema_instances
           # @return [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -311,6 +316,9 @@ module CandidApiClient
           #  EncounterSubmissionOriginType.CANDID.
           #  For Encounters created with an external_claim_submission object, this will be
           #  EncounterSubmissionOriginType.EXTERNAL.
+          # @param schema_instances [Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
+          #  Multiple schema
+          #  instances cannot be created for the same schema on an encounter.
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -372,7 +380,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(date_of_service:, encounter_id:, claims:, patient:, billing_provider:, rendering_provider:,
-                         service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, patient_control_number: OMIT, end_date_of_service: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, prior_authorization_number: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, patient_control_number: OMIT, end_date_of_service: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, prior_authorization_number: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @date_of_service = date_of_service
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
@@ -406,6 +414,7 @@ module CandidApiClient
             end
             @owner_of_next_action = owner_of_next_action
             @submission_origin = submission_origin
+            @schema_instances = schema_instances
             @external_id = external_id
             @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
             @patient_authorized_release = patient_authorized_release
@@ -461,6 +470,7 @@ module CandidApiClient
               "work_queue_membership_activated_at": work_queue_membership_activated_at,
               "owner_of_next_action": owner_of_next_action,
               "submission_origin": submission_origin,
+              "schema_instances": schema_instances,
               "external_id": external_id,
               "prior_authorization_number": prior_authorization_number,
               "patient_authorized_release": patient_authorized_release,
@@ -597,6 +607,10 @@ module CandidApiClient
                                                  end
             owner_of_next_action = struct["owner_of_next_action"]
             submission_origin = struct["submission_origin"]
+            schema_instances = parsed_json["schema_instances"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::CustomSchemas::V1::Types::SchemaInstance.from_json(json_object: item)
+            end
             external_id = struct["external_id"]
             prior_authorization_number = struct["prior_authorization_number"]
             patient_authorized_release = struct["patient_authorized_release"]
@@ -667,6 +681,7 @@ module CandidApiClient
               work_queue_membership_activated_at: work_queue_membership_activated_at,
               owner_of_next_action: owner_of_next_action,
               submission_origin: submission_origin,
+              schema_instances: schema_instances,
               external_id: external_id,
               prior_authorization_number: prior_authorization_number,
               patient_authorized_release: patient_authorized_release,
@@ -734,6 +749,7 @@ module CandidApiClient
             obj.work_queue_membership_activated_at&.is_a?(DateTime) != false || raise("Passed value for field obj.work_queue_membership_activated_at is not the expected type, validation failed.")
             obj.owner_of_next_action.is_a?(CandidApiClient::Encounters::V4::Types::EncounterOwnerOfNextActionType) != false || raise("Passed value for field obj.owner_of_next_action is not the expected type, validation failed.")
             obj.submission_origin.is_a?(CandidApiClient::Encounters::V4::Types::EncounterSubmissionOriginType) != false || raise("Passed value for field obj.submission_origin is not the expected type, validation failed.")
+            obj.schema_instances.is_a?(Array) != false || raise("Passed value for field obj.schema_instances is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.prior_authorization_number&.is_a?(String) != false || raise("Passed value for field obj.prior_authorization_number is not the expected type, validation failed.")
             obj.patient_authorized_release.is_a?(Boolean) != false || raise("Passed value for field obj.patient_authorized_release is not the expected type, validation failed.")

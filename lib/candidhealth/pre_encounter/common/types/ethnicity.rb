@@ -4,12 +4,9 @@ module CandidApiClient
   module PreEncounter
     module Common
       module Types
-        class Gender
-          MAN = "MAN"
-          WOMAN = "WOMAN"
-          NON_BINARY = "NON_BINARY"
-          TWO_SPIRIT = "TWO_SPIRIT"
-          OTHER = "OTHER"
+        class Ethnicity
+          HISPANIC_OR_LATINO = "HISPANIC_OR_LATINO"
+          NOT_HISPANIC_OR_LATINO = "NOT_HISPANIC_OR_LATINO"
           UNKNOWN = "UNKNOWN"
           REFUSED = "REFUSED"
         end

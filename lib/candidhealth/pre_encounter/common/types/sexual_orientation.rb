@@ -4,10 +4,10 @@ module CandidApiClient
   module PreEncounter
     module Common
       module Types
-        class Gender
-          MAN = "MAN"
-          WOMAN = "WOMAN"
-          NON_BINARY = "NON_BINARY"
+        class SexualOrientation
+          HETEROSEXUAL = "HETEROSEXUAL"
+          HOMOSEXUAL = "HOMOSEXUAL"
+          BISEXUAL = "BISEXUAL"
           TWO_SPIRIT = "TWO_SPIRIT"
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"

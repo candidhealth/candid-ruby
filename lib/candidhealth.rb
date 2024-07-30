@@ -26,8 +26,8 @@ require_relative "candidhealth/patient_refunds/client"
 require_relative "candidhealth/payers/client"
 require_relative "candidhealth/tasks/client"
 require_relative "candidhealth/write_offs/client"
-require_relative "candidhealth/service_facility/client"
 require_relative "candidhealth/pre_encounter/client"
+require_relative "candidhealth/service_facility/client"
 
 module CandidApiClient
   class Client
@@ -75,10 +75,10 @@ module CandidApiClient
     attr_reader :tasks
     # @return [CandidApiClient::WriteOffs::Client]
     attr_reader :write_offs
-    # @return [CandidApiClient::ServiceFacilityClient]
-    attr_reader :service_facility
     # @return [CandidApiClient::PreEncounter::Client]
     attr_reader :pre_encounter
+    # @return [CandidApiClient::ServiceFacilityClient]
+    attr_reader :service_facility
 
     # @param base_url [String]
     # @param environment [CandidApiClient::Environment]
@@ -128,8 +128,8 @@ module CandidApiClient
       @payers = CandidApiClient::Payers::Client.new(request_client: @request_client)
       @tasks = CandidApiClient::Tasks::Client.new(request_client: @request_client)
       @write_offs = CandidApiClient::WriteOffs::Client.new(request_client: @request_client)
-      @service_facility = CandidApiClient::ServiceFacilityClient.new(request_client: @request_client)
       @pre_encounter = CandidApiClient::PreEncounter::Client.new(request_client: @request_client)
+      @service_facility = CandidApiClient::ServiceFacilityClient.new(request_client: @request_client)
     end
   end
 
@@ -178,10 +178,10 @@ module CandidApiClient
     attr_reader :tasks
     # @return [CandidApiClient::WriteOffs::AsyncClient]
     attr_reader :write_offs
-    # @return [CandidApiClient::AsyncServiceFacilityClient]
-    attr_reader :service_facility
     # @return [CandidApiClient::PreEncounter::AsyncClient]
     attr_reader :pre_encounter
+    # @return [CandidApiClient::AsyncServiceFacilityClient]
+    attr_reader :service_facility
 
     # @param base_url [String]
     # @param environment [CandidApiClient::Environment]
@@ -231,8 +231,8 @@ module CandidApiClient
       @payers = CandidApiClient::Payers::AsyncClient.new(request_client: @async_request_client)
       @tasks = CandidApiClient::Tasks::AsyncClient.new(request_client: @async_request_client)
       @write_offs = CandidApiClient::WriteOffs::AsyncClient.new(request_client: @async_request_client)
-      @service_facility = CandidApiClient::AsyncServiceFacilityClient.new(request_client: @async_request_client)
       @pre_encounter = CandidApiClient::PreEncounter::AsyncClient.new(request_client: @async_request_client)
+      @service_facility = CandidApiClient::AsyncServiceFacilityClient.new(request_client: @async_request_client)
     end
   end
 end

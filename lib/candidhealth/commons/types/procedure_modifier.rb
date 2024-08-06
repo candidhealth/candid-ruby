@@ -94,6 +94,7 @@ module CandidApiClient
         CT = "CT"
         CO = "CO"
         CQ = "CQ"
+        DA = "DA"
         E_1 = "E1"
         E_2 = "E2"
         E_3 = "E3"

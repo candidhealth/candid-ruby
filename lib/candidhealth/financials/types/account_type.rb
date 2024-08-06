@@ -6,6 +6,7 @@ module CandidApiClient
       class AccountType
         PATIENT = "PATIENT"
         INSURANCE = "INSURANCE"
+        THIRD_PARTY_PAYER = "THIRD_PARTY_PAYER"
       end
     end
   end

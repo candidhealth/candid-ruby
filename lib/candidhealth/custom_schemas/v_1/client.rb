@@ -48,7 +48,7 @@ module CandidApiClient
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.custom_schemas.v_1.get(schema_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        #  api.custom_schemas.v_1.get(schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582")
         def get(schema_id:, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -64,8 +64,8 @@ module CandidApiClient
           CandidApiClient::CustomSchemas::V1::Types::Schema.from_json(json_object: response.body)
         end
 
-        # Create a custom schema. Schema keys can be referenced as inputs in
-        #  user-configurable rules in the Rules
+        # Create custom schema with a set of typed keys. Schema keys can be referenced as
+        #  inputs in user-configurable rules in the Rules
         #  Engine, and key-value pairs can be attached to claims via the Encounters API.
         #
         # @param name [String]
@@ -78,9 +78,9 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.create(
-        #    name: "string",
-        #    description: "string",
-        #    fields: [{ key: "string", type: BOOLEAN }]
+        #    name: "General Medicine",
+        #    description: "Values associated with a generic visit",
+        #    fields: [{ key: "provider_category", type: STRING }, { key: "is_urgent_care", type: BOOLEAN }, { key: "bmi", type: DOUBLE }, { key: "age", type: INTEGER }]
         #  )
         def create(name:, fields:, description: nil, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -117,10 +117,10 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.update(
-        #    schema_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    name: "string",
-        #    description: "string",
-        #    fields_to_add: [{ key: "string", type: BOOLEAN }]
+        #    schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582",
+        #    name: "General Medicine and Health",
+        #    description: "Values collected during all visits",
+        #    fields_to_add: [{ key: "visit_type", type: STRING }]
         #  )
         def update(schema_id:, name: nil, description: nil, fields_to_add: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -185,7 +185,7 @@ module CandidApiClient
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.custom_schemas.v_1.get(schema_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        #  api.custom_schemas.v_1.get(schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582")
         def get(schema_id:, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
@@ -203,8 +203,8 @@ module CandidApiClient
           end
         end
 
-        # Create a custom schema. Schema keys can be referenced as inputs in
-        #  user-configurable rules in the Rules
+        # Create custom schema with a set of typed keys. Schema keys can be referenced as
+        #  inputs in user-configurable rules in the Rules
         #  Engine, and key-value pairs can be attached to claims via the Encounters API.
         #
         # @param name [String]
@@ -217,9 +217,9 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.create(
-        #    name: "string",
-        #    description: "string",
-        #    fields: [{ key: "string", type: BOOLEAN }]
+        #    name: "General Medicine",
+        #    description: "Values associated with a generic visit",
+        #    fields: [{ key: "provider_category", type: STRING }, { key: "is_urgent_care", type: BOOLEAN }, { key: "bmi", type: DOUBLE }, { key: "age", type: INTEGER }]
         #  )
         def create(name:, fields:, description: nil, request_options: nil)
           Async do
@@ -258,10 +258,10 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.update(
-        #    schema_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    name: "string",
-        #    description: "string",
-        #    fields_to_add: [{ key: "string", type: BOOLEAN }]
+        #    schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582",
+        #    name: "General Medicine and Health",
+        #    description: "Values collected during all visits",
+        #    fields_to_add: [{ key: "visit_type", type: STRING }]
         #  )
         def update(schema_id:, name: nil, description: nil, fields_to_add: nil, request_options: nil)
           Async do

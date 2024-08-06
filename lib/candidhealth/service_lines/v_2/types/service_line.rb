@@ -32,6 +32,12 @@ module CandidApiClient
           # @return [Integer]
           attr_reader :paid_amount_cents
           # @return [Integer]
+          attr_reader :primary_paid_amount_cents
+          # @return [Integer]
+          attr_reader :secondary_paid_amount_cents
+          # @return [Integer]
+          attr_reader :tertiary_paid_amount_cents
+          # @return [Integer]
           attr_reader :patient_responsibility_cents
           # @return [String]
           attr_reader :diagnosis_id_zero
@@ -100,6 +106,9 @@ module CandidApiClient
           # @param insurance_balance_cents [Integer]
           # @param patient_balance_cents [Integer]
           # @param paid_amount_cents [Integer]
+          # @param primary_paid_amount_cents [Integer]
+          # @param secondary_paid_amount_cents [Integer]
+          # @param tertiary_paid_amount_cents [Integer]
           # @param patient_responsibility_cents [Integer]
           # @param diagnosis_id_zero [String]
           # @param diagnosis_id_one [String]
@@ -133,13 +142,16 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
           def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
-                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, additional_properties: nil)
+                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @allowed_amount_cents = allowed_amount_cents if allowed_amount_cents != OMIT
             @insurance_balance_cents = insurance_balance_cents if insurance_balance_cents != OMIT
             @patient_balance_cents = patient_balance_cents if patient_balance_cents != OMIT
             @paid_amount_cents = paid_amount_cents if paid_amount_cents != OMIT
+            @primary_paid_amount_cents = primary_paid_amount_cents if primary_paid_amount_cents != OMIT
+            @secondary_paid_amount_cents = secondary_paid_amount_cents if secondary_paid_amount_cents != OMIT
+            @tertiary_paid_amount_cents = tertiary_paid_amount_cents if tertiary_paid_amount_cents != OMIT
             @patient_responsibility_cents = patient_responsibility_cents if patient_responsibility_cents != OMIT
             @diagnosis_id_zero = diagnosis_id_zero if diagnosis_id_zero != OMIT
             @diagnosis_id_one = diagnosis_id_one if diagnosis_id_one != OMIT
@@ -177,6 +189,9 @@ module CandidApiClient
               "insurance_balance_cents": insurance_balance_cents,
               "patient_balance_cents": patient_balance_cents,
               "paid_amount_cents": paid_amount_cents,
+              "primary_paid_amount_cents": primary_paid_amount_cents,
+              "secondary_paid_amount_cents": secondary_paid_amount_cents,
+              "tertiary_paid_amount_cents": tertiary_paid_amount_cents,
               "patient_responsibility_cents": patient_responsibility_cents,
               "diagnosis_id_zero": diagnosis_id_zero,
               "diagnosis_id_one": diagnosis_id_one,
@@ -220,6 +235,9 @@ module CandidApiClient
             insurance_balance_cents = struct["insurance_balance_cents"]
             patient_balance_cents = struct["patient_balance_cents"]
             paid_amount_cents = struct["paid_amount_cents"]
+            primary_paid_amount_cents = struct["primary_paid_amount_cents"]
+            secondary_paid_amount_cents = struct["secondary_paid_amount_cents"]
+            tertiary_paid_amount_cents = struct["tertiary_paid_amount_cents"]
             patient_responsibility_cents = struct["patient_responsibility_cents"]
             diagnosis_id_zero = struct["diagnosis_id_zero"]
             diagnosis_id_one = struct["diagnosis_id_one"]
@@ -298,6 +316,9 @@ module CandidApiClient
               insurance_balance_cents: insurance_balance_cents,
               patient_balance_cents: patient_balance_cents,
               paid_amount_cents: paid_amount_cents,
+              primary_paid_amount_cents: primary_paid_amount_cents,
+              secondary_paid_amount_cents: secondary_paid_amount_cents,
+              tertiary_paid_amount_cents: tertiary_paid_amount_cents,
               patient_responsibility_cents: patient_responsibility_cents,
               diagnosis_id_zero: diagnosis_id_zero,
               diagnosis_id_one: diagnosis_id_one,
@@ -347,6 +368,9 @@ module CandidApiClient
             obj.insurance_balance_cents&.is_a?(Integer) != false || raise("Passed value for field obj.insurance_balance_cents is not the expected type, validation failed.")
             obj.patient_balance_cents&.is_a?(Integer) != false || raise("Passed value for field obj.patient_balance_cents is not the expected type, validation failed.")
             obj.paid_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.paid_amount_cents is not the expected type, validation failed.")
+            obj.primary_paid_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.primary_paid_amount_cents is not the expected type, validation failed.")
+            obj.secondary_paid_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.secondary_paid_amount_cents is not the expected type, validation failed.")
+            obj.tertiary_paid_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.tertiary_paid_amount_cents is not the expected type, validation failed.")
             obj.patient_responsibility_cents&.is_a?(Integer) != false || raise("Passed value for field obj.patient_responsibility_cents is not the expected type, validation failed.")
             obj.diagnosis_id_zero&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_zero is not the expected type, validation failed.")
             obj.diagnosis_id_one&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_one is not the expected type, validation failed.")

@@ -49,7 +49,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Auth::V2::Types::AuthGetTokenResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.auth.v_2.get_token(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
         def get_token(client_id:, client_secret:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -114,7 +114,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Auth::V2::Types::AuthGetTokenResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.auth.v_2.get_token(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
         def get_token(client_id:, client_secret:, request_options: nil)
           Async do

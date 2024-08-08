@@ -49,7 +49,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Exports::V3::Types::GetExportsResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.exports.v_3.get_exports(start_date: DateTime.parse(2023-10-01), end_date: DateTime.parse(2023-10-02))
         def get_exports(start_date:, end_date:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -113,7 +113,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Exports::V3::Types::GetExportsResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.exports.v_3.get_exports(start_date: DateTime.parse(2023-10-01), end_date: DateTime.parse(2023-10-02))
         def get_exports(start_date:, end_date:, request_options: nil)
           Async do

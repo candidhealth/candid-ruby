@@ -29,7 +29,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::TaskActions]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.get_actions(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_actions(task_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -62,7 +62,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::TaskPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.get_multi(
         #    limit: 1,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
@@ -113,7 +113,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.get(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(task_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -141,7 +141,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", task_type: CUSTOMER_DATA_REQUEST, description: "string", blocks_claim_submission: true, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", category: OTHER, work_queue_id: "string" })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -166,7 +166,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { status: FINISHED, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", blocks_claim_submission: true })
         def update(task_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -199,7 +199,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::TaskActions]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.get_actions(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_actions(task_id:, request_options: nil)
           Async do
@@ -234,7 +234,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::TaskPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.get_multi(
         #    limit: 1,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
@@ -288,7 +288,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.get(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(task_id:, request_options: nil)
           Async do
@@ -318,7 +318,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", task_type: CUSTOMER_DATA_REQUEST, description: "string", blocks_claim_submission: true, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", category: OTHER, work_queue_id: "string" })
         def create(request:, request_options: nil)
           Async do
@@ -346,7 +346,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { status: FINISHED, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", blocks_claim_submission: true })
         def update(task_id:, request:, request_options: nil)
           Async do

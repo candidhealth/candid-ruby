@@ -32,7 +32,7 @@ module CandidApiClient
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility]
     # @example
-    #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+    #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
     #  api.service_facility.update(
     #    service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
     #    organization_name: "string",
@@ -87,7 +87,7 @@ module CandidApiClient
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility]
     # @example
-    #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+    #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
     #  api.service_facility.update(
     #    service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
     #    organization_name: "string",

@@ -43,7 +43,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.guarantor.v_1.create(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -67,7 +67,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.guarantor.v_1.get(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(guarantor_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -107,7 +107,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.guarantor.v_1.update(
         #    guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    first_name: "string",
@@ -181,7 +181,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.guarantor.v_1.create(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create(encounter_id:, request:, request_options: nil)
           Async do
@@ -207,7 +207,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.guarantor.v_1.get(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(guarantor_id:, request_options: nil)
           Async do
@@ -249,7 +249,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.guarantor.v_1.update(
         #    guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    first_name: "string",

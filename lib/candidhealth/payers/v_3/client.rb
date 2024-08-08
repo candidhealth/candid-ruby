@@ -22,7 +22,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Payers::V3::Types::Payer]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.payers.v_3.get(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(payer_uuid:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -45,7 +45,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Payers::V3::Types::PayerPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.payers.v_3.get_all(
         #    limit: 100,
         #    search_term: "john",
@@ -86,7 +86,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Payers::V3::Types::Payer]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.payers.v_3.get(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(payer_uuid:, request_options: nil)
           Async do
@@ -111,7 +111,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Payers::V3::Types::PayerPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.payers.v_3.get_all(
         #    limit: 100,
         #    search_term: "john",

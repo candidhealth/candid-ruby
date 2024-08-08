@@ -38,7 +38,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.expected_network_status.v_1.compute(
         #    external_patient_id: "string",
         #    subscriber_payer_id: "string",
@@ -110,7 +110,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ExpectedNetworkStatus::V1::Types::ExpectedNetworkStatusResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.expected_network_status.v_1.compute(
         #    external_patient_id: "string",
         #    subscriber_payer_id: "string",

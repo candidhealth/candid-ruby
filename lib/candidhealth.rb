@@ -87,7 +87,7 @@ module CandidApiClient
     # @param client_id [String]
     # @param client_secret [String]
     # @return [CandidApiClient::Client]
-    def initialize(client_id:, client_secret:, base_url: nil, environment: CandidApiClient::Environment::PRODUCTION, max_retries: nil,
+    def initialize(client_id:, client_secret:, base_url: nil, environment: nil, max_retries: nil,
                    timeout_in_seconds: nil)
       @oauth_provider = CandidApiClient::OauthTokenProvider.new(
         client_id: client_id,
@@ -190,7 +190,7 @@ module CandidApiClient
     # @param client_id [String]
     # @param client_secret [String]
     # @return [CandidApiClient::AsyncClient]
-    def initialize(client_id:, client_secret:, base_url: nil, environment: CandidApiClient::Environment::PRODUCTION, max_retries: nil,
+    def initialize(client_id:, client_secret:, base_url: nil, environment: nil, max_retries: nil,
                    timeout_in_seconds: nil)
       @oauth_provider = CandidApiClient::OauthTokenProvider.new(
         client_id: client_id,

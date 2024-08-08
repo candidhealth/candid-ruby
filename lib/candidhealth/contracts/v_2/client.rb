@@ -32,7 +32,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.get(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(contract_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -59,7 +59,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.get_multi(
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    limit: 1,
@@ -122,7 +122,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.create(
         #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    rendering_provider_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
@@ -164,7 +164,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.delete(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(contract_id:, request_options: nil)
           @request_client.conn.delete do |req|
@@ -196,7 +196,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.update(
         #    contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    rendering_provider_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
@@ -246,7 +246,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.get(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(contract_id:, request_options: nil)
           Async do
@@ -275,7 +275,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.get_multi(
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    limit: 1,
@@ -340,7 +340,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.create(
         #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    rendering_provider_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
@@ -384,7 +384,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.delete(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(contract_id:, request_options: nil)
           Async do
@@ -418,7 +418,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.contracts.v_2.update(
         #    contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    rendering_provider_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],

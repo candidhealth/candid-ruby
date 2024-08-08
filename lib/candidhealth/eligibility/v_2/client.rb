@@ -46,7 +46,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Object]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.eligibility.v_2.submit_eligibility_check(request: {"key":"value"})
         def submit_eligibility_check(request: nil, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -90,7 +90,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Object]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.eligibility.v_2.submit_eligibility_check_availity
         def submit_eligibility_check_availity(request_options: nil)
           response = @request_client.conn.get do |req|
@@ -126,7 +126,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Object]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.eligibility.v_2.submit_eligibility_check_availity_post(request: {"key":"value"})
         def submit_eligibility_check_availity_post(request: nil, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -184,7 +184,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Object]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.eligibility.v_2.submit_eligibility_check(request: {"key":"value"})
         def submit_eligibility_check(request: nil, request_options: nil)
           Async do
@@ -231,7 +231,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Object]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.eligibility.v_2.submit_eligibility_check_availity
         def submit_eligibility_check_availity(request_options: nil)
           Async do
@@ -270,7 +270,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Object]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.eligibility.v_2.submit_eligibility_check_availity_post(request: {"key":"value"})
         def submit_eligibility_check_availity_post(request: nil, request_options: nil)
           Async do

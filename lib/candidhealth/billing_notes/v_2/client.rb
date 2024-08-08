@@ -25,7 +25,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::BillingNotes::V2::Types::BillingNote]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.billing_notes.v_2.create(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def create(text:, encounter_id:, additional_properties: nil, _field_set: nil, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -67,7 +67,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::BillingNotes::V2::Types::BillingNote]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.billing_notes.v_2.create(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def create(text:, encounter_id:, additional_properties: nil, _field_set: nil, request_options: nil)
           Async do

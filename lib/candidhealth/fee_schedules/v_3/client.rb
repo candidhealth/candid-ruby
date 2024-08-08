@@ -39,7 +39,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::MatchResult]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_match(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_match(service_line_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -63,7 +63,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::MatchTestResult]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.test_match(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def test_match(service_line_id:, rate_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -98,7 +98,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::RatesPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_multi(
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    limit: 1,
@@ -163,7 +163,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::DimensionsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_unique_values_for_dimension(
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    limit: 1,
@@ -215,7 +215,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Array<CandidApiClient::FeeSchedules::V3::Types::Rate>]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_rate_history(rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_rate_history(rate_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -248,7 +248,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Array<CandidApiClient::FeeSchedules::V3::Types::Rate>]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.upload_fee_schedule(dry_run: true, rates: )
         def upload_fee_schedule(dry_run:, rates:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -278,7 +278,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.delete_rate(rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", version: 1)
         def delete_rate(rate_id:, version:, request_options: nil)
           @request_client.conn.delete do |req|
@@ -299,7 +299,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThreshold]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_payer_thresholds_default
         def get_payer_thresholds_default(request_options: nil)
           response = @request_client.conn.get do |req|
@@ -322,7 +322,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThresholdsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_payer_thresholds(payer_uuids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_payer_thresholds(payer_uuids:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -350,7 +350,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThreshold]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.set_payer_threshold(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { upper_threshold_cents: 1, lower_threshold_cents: 1, disable_paid_incorrectly: true })
         def set_payer_threshold(payer_uuid:, request:, request_options: nil)
           response = @request_client.conn.put do |req|
@@ -386,7 +386,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::MatchResult]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_match(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_match(service_line_id:, request_options: nil)
           Async do
@@ -412,7 +412,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::MatchTestResult]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.test_match(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def test_match(service_line_id:, rate_id:, request_options: nil)
           Async do
@@ -449,7 +449,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::RatesPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_multi(
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    limit: 1,
@@ -516,7 +516,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::DimensionsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_unique_values_for_dimension(
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    limit: 1,
@@ -570,7 +570,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Array<CandidApiClient::FeeSchedules::V3::Types::Rate>]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_rate_history(rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_rate_history(rate_id:, request_options: nil)
           Async do
@@ -605,7 +605,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Array<CandidApiClient::FeeSchedules::V3::Types::Rate>]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.upload_fee_schedule(dry_run: true, rates: )
         def upload_fee_schedule(dry_run:, rates:, request_options: nil)
           Async do
@@ -641,7 +641,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.delete_rate(rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", version: 1)
         def delete_rate(rate_id:, version:, request_options: nil)
           Async do
@@ -664,7 +664,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThreshold]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_payer_thresholds_default
         def get_payer_thresholds_default(request_options: nil)
           Async do
@@ -689,7 +689,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThresholdsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.get_payer_thresholds(payer_uuids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get_payer_thresholds(payer_uuids:, request_options: nil)
           Async do
@@ -722,7 +722,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThreshold]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.fee_schedules.v_3.set_payer_threshold(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { upper_threshold_cents: 1, lower_threshold_cents: 1, disable_paid_incorrectly: true })
         def set_payer_threshold(payer_uuid:, request:, request_options: nil)
           Async do

@@ -36,7 +36,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePaymentsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.get_multi(
         #    limit: 1,
         #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
@@ -81,7 +81,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.get(insurance_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(insurance_payment_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -114,7 +114,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.create(request: { amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", allocations: [{  }] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -142,7 +142,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.update(insurance_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(insurance_payment_id:, payment_timestamp: nil, payment_note: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -173,7 +173,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.delete(insurance_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(insurance_payment_id:, request_options: nil)
           @request_client.conn.delete do |req|
@@ -213,7 +213,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePaymentsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.get_multi(
         #    limit: 1,
         #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
@@ -260,7 +260,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.get(insurance_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(insurance_payment_id:, request_options: nil)
           Async do
@@ -295,7 +295,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.create(request: { amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", allocations: [{  }] })
         def create(request:, request_options: nil)
           Async do
@@ -325,7 +325,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.update(insurance_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(insurance_payment_id:, payment_timestamp: nil, payment_note: nil, request_options: nil)
           Async do
@@ -358,7 +358,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.insurance_payments.v_1.delete(insurance_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(insurance_payment_id:, request_options: nil)
           Async do

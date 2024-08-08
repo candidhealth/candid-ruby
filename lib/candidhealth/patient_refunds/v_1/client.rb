@@ -45,7 +45,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefundsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.get_multi(
         #    limit: 1,
         #    patient_external_id: "string",
@@ -95,7 +95,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.get(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(patient_refund_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -130,7 +130,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.create(
         #    amount_cents: 1,
         #    refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
@@ -176,7 +176,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(patient_refund_id:, refund_timestamp: nil, refund_note: nil, invoice: nil, refund_reason: nil,
                    request_options: nil)
@@ -207,7 +207,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.delete(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(patient_refund_id:, request_options: nil)
           @request_client.conn.delete do |req|
@@ -252,7 +252,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefundsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.get_multi(
         #    limit: 1,
         #    patient_external_id: "string",
@@ -304,7 +304,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.get(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(patient_refund_id:, request_options: nil)
           Async do
@@ -341,7 +341,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.create(
         #    amount_cents: 1,
         #    refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
@@ -389,7 +389,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(patient_refund_id:, refund_timestamp: nil, refund_note: nil, invoice: nil, refund_reason: nil,
                    request_options: nil)
@@ -422,7 +422,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
         #  api.patient_refunds.v_1.delete(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(patient_refund_id:, request_options: nil)
           Async do

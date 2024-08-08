@@ -144,7 +144,7 @@ module CandidApiClient
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, gender:, birth_date:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, social_security_number: OMIT, biological_sex: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, additional_properties: nil)
+                           other_names:, birth_date:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, biological_sex: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, additional_properties: nil)
               @id = id
               @mrn = mrn
               @organization_id = organization_id
@@ -154,7 +154,7 @@ module CandidApiClient
               @updating_user_id = updating_user_id
               @name = name
               @other_names = other_names
-              @gender = gender
+              @gender = gender if gender != OMIT
               @birth_date = birth_date
               @social_security_number = social_security_number if social_security_number != OMIT
               @biological_sex = biological_sex if biological_sex != OMIT
@@ -357,7 +357,7 @@ module CandidApiClient
               obj.updating_user_id.is_a?(String) != false || raise("Passed value for field obj.updating_user_id is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Common::Types::HumanName.validate_raw(obj: obj.name)
               obj.other_names.is_a?(Array) != false || raise("Passed value for field obj.other_names is not the expected type, validation failed.")
-              obj.gender.is_a?(CandidApiClient::PreEncounter::Common::Types::Gender) != false || raise("Passed value for field obj.gender is not the expected type, validation failed.")
+              obj.gender&.is_a?(CandidApiClient::PreEncounter::Common::Types::Gender) != false || raise("Passed value for field obj.gender is not the expected type, validation failed.")
               obj.birth_date.is_a?(Date) != false || raise("Passed value for field obj.birth_date is not the expected type, validation failed.")
               obj.social_security_number&.is_a?(String) != false || raise("Passed value for field obj.social_security_number is not the expected type, validation failed.")
               obj.biological_sex&.is_a?(CandidApiClient::PreEncounter::Common::Types::Sex) != false || raise("Passed value for field obj.biological_sex is not the expected type, validation failed.")

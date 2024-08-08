@@ -2,13 +2,5 @@
 
 module CandidApiClient
   class Environment
-    PRODUCTION = {
-      CandidApi: "https://api.joincandidhealth.com",
-      PreEncounter: "https://pre-api.joincandidhealth.com"
-    }.freeze
-    STAGING = {
-      CandidApi: "https://api-staging.joincandidhealth.com",
-      PreEncounter: "https://pre-api-staging.joincandidhealth.com"
-    }.freeze
   end
 end

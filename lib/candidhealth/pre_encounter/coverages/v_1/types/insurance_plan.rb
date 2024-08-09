@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "network_type"
+require_relative "insurance_type_code"
 require_relative "../../../common/types/period"
 require "ostruct"
 require "json"
@@ -22,6 +23,8 @@ module CandidApiClient
             # @return [String]
             attr_reader :name
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType]
+            attr_reader :plan_type
+            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode]
             attr_reader :type
             # @return [CandidApiClient::PreEncounter::Common::Types::Period]
             attr_reader :period
@@ -40,18 +43,20 @@ module CandidApiClient
             # @param payer_name [String]
             # @param group_number [String]
             # @param name [String]
-            # @param type [CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType]
+            # @param plan_type [CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType]
+            # @param type [CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode]
             # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
             # @param insurance_card_image_locator [String]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
-            def initialize(member_id:, payer_id:, payer_name:, group_number: OMIT, name: OMIT, type: OMIT,
-                           period: OMIT, insurance_card_image_locator: OMIT, additional_properties: nil)
+            def initialize(member_id:, payer_id:, payer_name:, group_number: OMIT, name: OMIT, plan_type: OMIT,
+                           type: OMIT, period: OMIT, insurance_card_image_locator: OMIT, additional_properties: nil)
               @member_id = member_id
               @payer_id = payer_id
               @payer_name = payer_name
               @group_number = group_number if group_number != OMIT
               @name = name if name != OMIT
+              @plan_type = plan_type if plan_type != OMIT
               @type = type if type != OMIT
               @period = period if period != OMIT
               @insurance_card_image_locator = insurance_card_image_locator if insurance_card_image_locator != OMIT
@@ -62,6 +67,7 @@ module CandidApiClient
                 "payer_name": payer_name,
                 "group_number": group_number,
                 "name": name,
+                "plan_type": plan_type,
                 "type": type,
                 "period": period,
                 "insurance_card_image_locator": insurance_card_image_locator
@@ -82,6 +88,7 @@ module CandidApiClient
               payer_name = struct["payer_name"]
               group_number = struct["group_number"]
               name = struct["name"]
+              plan_type = struct["plan_type"]
               type = struct["type"]
               if parsed_json["period"].nil?
                 period = nil
@@ -96,6 +103,7 @@ module CandidApiClient
                 payer_name: payer_name,
                 group_number: group_number,
                 name: name,
+                plan_type: plan_type,
                 type: type,
                 period: period,
                 insurance_card_image_locator: insurance_card_image_locator,
@@ -122,7 +130,8 @@ module CandidApiClient
               obj.payer_name.is_a?(String) != false || raise("Passed value for field obj.payer_name is not the expected type, validation failed.")
               obj.group_number&.is_a?(String) != false || raise("Passed value for field obj.group_number is not the expected type, validation failed.")
               obj.name&.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
-              obj.type&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType) != false || raise("Passed value for field obj.type is not the expected type, validation failed.")
+              obj.plan_type&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType) != false || raise("Passed value for field obj.plan_type is not the expected type, validation failed.")
+              obj.type&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode) != false || raise("Passed value for field obj.type is not the expected type, validation failed.")
               obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
               obj.insurance_card_image_locator&.is_a?(String) != false || raise("Passed value for field obj.insurance_card_image_locator is not the expected type, validation failed.")
             end

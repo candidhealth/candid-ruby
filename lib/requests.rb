@@ -22,7 +22,8 @@ module CandidApiClient
     # @param timeout_in_seconds [Long]
     # @param token [String, Method]
     # @return [CandidApiClient::RequestClient]
-    def initialize(base_url: nil, environment: nil, max_retries: nil, timeout_in_seconds: nil, token: nil)
+    def initialize(base_url: nil, environment: CandidApiClient::Environment::PRODUCTION, max_retries: nil,
+                   timeout_in_seconds: nil, token: nil)
       @default_environment = environment
       @token = token
       @conn = Faraday.new do |faraday|
@@ -42,7 +43,7 @@ module CandidApiClient
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.6" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.7" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end
@@ -64,7 +65,8 @@ module CandidApiClient
     # @param timeout_in_seconds [Long]
     # @param token [String, Method]
     # @return [CandidApiClient::AsyncRequestClient]
-    def initialize(base_url: nil, environment: nil, max_retries: nil, timeout_in_seconds: nil, token: nil)
+    def initialize(base_url: nil, environment: CandidApiClient::Environment::PRODUCTION, max_retries: nil,
+                   timeout_in_seconds: nil, token: nil)
       @default_environment = environment
       @token = token
       @conn = Faraday.new do |faraday|
@@ -85,7 +87,7 @@ module CandidApiClient
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.6" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.24.7" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end

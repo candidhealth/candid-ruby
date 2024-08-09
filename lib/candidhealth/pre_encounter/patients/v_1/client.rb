@@ -70,14 +70,14 @@ module CandidApiClient
           #     * :external_id (String)
           #     * :system_name (String)
           #   * :contacts (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>)
-          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider>)
+          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
-          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, gender: MAN, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{ name: {  }, npi: "string", telecoms: [{  }], addresses: [{  }], period: {  } }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -100,7 +100,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.get(id: "string")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -124,7 +124,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.get_history(id: "string")
           def get_history(id:, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -196,17 +196,17 @@ module CandidApiClient
           #     * :external_id (String)
           #     * :system_name (String)
           #   * :contacts (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>)
-          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider>)
+          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, gender: MAN, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{ name: {  }, npi: "string", telecoms: [{  }], addresses: [{  }], period: {  } }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
+          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -234,7 +234,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Void]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.deactivate(id: "string", version: "string")
           def deactivate(id:, version:, request_options: nil)
             @request_client.conn.delete do |req|
@@ -256,7 +256,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.search(name_contains: "string")
           def search(name_contains: nil, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -288,7 +288,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.scan(since: DateTime.parse(2024-01-15T09:30:00.000Z))
           def scan(since:, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -370,14 +370,14 @@ module CandidApiClient
           #     * :external_id (String)
           #     * :system_name (String)
           #   * :contacts (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>)
-          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider>)
+          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
-          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, gender: MAN, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{ name: {  }, npi: "string", telecoms: [{  }], addresses: [{  }], period: {  } }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -402,7 +402,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.get(id: "string")
           def get(id:, request_options: nil)
             Async do
@@ -428,7 +428,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.get_history(id: "string")
           def get_history(id:, request_options: nil)
             Async do
@@ -502,17 +502,17 @@ module CandidApiClient
           #     * :external_id (String)
           #     * :system_name (String)
           #   * :contacts (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>)
-          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider>)
+          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, gender: MAN, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{ name: {  }, npi: "string", telecoms: [{  }], addresses: [{  }], period: {  } }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
+          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -542,7 +542,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Void]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.deactivate(id: "string", version: "string")
           def deactivate(id:, version:, request_options: nil)
             Async do
@@ -566,7 +566,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.search(name_contains: "string")
           def search(name_contains: nil, request_options: nil)
             Async do
@@ -600,7 +600,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.scan(since: DateTime.parse(2024-01-15T09:30:00.000Z))
           def scan(since:, request_options: nil)
             Async do

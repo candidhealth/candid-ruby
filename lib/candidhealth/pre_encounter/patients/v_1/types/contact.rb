@@ -2,7 +2,6 @@
 
 require_relative "../../../common/types/relationship"
 require_relative "../../../common/types/human_name"
-require_relative "../../../common/types/gender"
 require_relative "../../../common/types/contact_point"
 require_relative "../../../common/types/address"
 require_relative "../../../common/types/period"
@@ -19,8 +18,6 @@ module CandidApiClient
             attr_reader :relationship
             # @return [CandidApiClient::PreEncounter::Common::Types::HumanName]
             attr_reader :name
-            # @return [CandidApiClient::PreEncounter::Common::Types::Gender]
-            attr_reader :gender
             # @return [Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>]
             attr_reader :telecoms
             # @return [Array<CandidApiClient::PreEncounter::Common::Types::Address>]
@@ -37,17 +34,14 @@ module CandidApiClient
 
             # @param relationship [Array<CandidApiClient::PreEncounter::Common::Types::Relationship>]
             # @param name [CandidApiClient::PreEncounter::Common::Types::HumanName]
-            # @param gender [CandidApiClient::PreEncounter::Common::Types::Gender]
             # @param telecoms [Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>]
             # @param addresses [Array<CandidApiClient::PreEncounter::Common::Types::Address>]
             # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Contact]
-            def initialize(relationship:, name:, telecoms:, addresses:, gender: OMIT, period: OMIT,
-                           additional_properties: nil)
+            def initialize(relationship:, name:, telecoms:, addresses:, period: OMIT, additional_properties: nil)
               @relationship = relationship
               @name = name
-              @gender = gender if gender != OMIT
               @telecoms = telecoms
               @addresses = addresses
               @period = period if period != OMIT
@@ -55,7 +49,6 @@ module CandidApiClient
               @_field_set = {
                 "relationship": relationship,
                 "name": name,
-                "gender": gender,
                 "telecoms": telecoms,
                 "addresses": addresses,
                 "period": period
@@ -78,7 +71,6 @@ module CandidApiClient
                 name = parsed_json["name"].to_json
                 name = CandidApiClient::PreEncounter::Common::Types::HumanName.from_json(json_object: name)
               end
-              gender = struct["gender"]
               telecoms = parsed_json["telecoms"]&.map do |item|
                 item = item.to_json
                 CandidApiClient::PreEncounter::Common::Types::ContactPoint.from_json(json_object: item)
@@ -96,7 +88,6 @@ module CandidApiClient
               new(
                 relationship: relationship,
                 name: name,
-                gender: gender,
                 telecoms: telecoms,
                 addresses: addresses,
                 period: period,
@@ -120,7 +111,6 @@ module CandidApiClient
             def self.validate_raw(obj:)
               obj.relationship.is_a?(Array) != false || raise("Passed value for field obj.relationship is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Common::Types::HumanName.validate_raw(obj: obj.name)
-              obj.gender&.is_a?(CandidApiClient::PreEncounter::Common::Types::Gender) != false || raise("Passed value for field obj.gender is not the expected type, validation failed.")
               obj.telecoms.is_a?(Array) != false || raise("Passed value for field obj.telecoms is not the expected type, validation failed.")
               obj.addresses.is_a?(Array) != false || raise("Passed value for field obj.addresses is not the expected type, validation failed.")
               obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)

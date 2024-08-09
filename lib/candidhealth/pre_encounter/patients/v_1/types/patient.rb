@@ -13,7 +13,7 @@ require_relative "../../../common/types/address"
 require_relative "../../../common/types/contact_point"
 require_relative "external_provenance"
 require_relative "contact"
-require_relative "external_provider"
+require_relative "../../../common/types/external_provider"
 require_relative "filing_order"
 require "ostruct"
 require "json"
@@ -53,7 +53,9 @@ module CandidApiClient
             attr_reader :birth_date
             # @return [String]
             attr_reader :social_security_number
-            # @return [CandidApiClient::PreEncounter::Common::Types::Sex] The biological sex of the patient.
+            # @return [CandidApiClient::PreEncounter::Common::Types::Sex] The biological sex of the patient. This corresponds to the HL7
+            #  AdministrativeGender
+            #  https://www.hl7.org/fhir/valueset-administrative-gender.html
             attr_reader :biological_sex
             # @return [CandidApiClient::PreEncounter::Common::Types::SexualOrientation] The sexual orientation of the patient.
             attr_reader :sexual_orientation
@@ -91,7 +93,7 @@ module CandidApiClient
             attr_reader :external_provenance
             # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
             attr_reader :contacts
-            # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider>]
+            # @return [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]
             attr_reader :general_practitioners
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::FilingOrder]
             attr_reader :filing_order
@@ -119,7 +121,9 @@ module CandidApiClient
             # @param gender [CandidApiClient::PreEncounter::Common::Types::Gender]
             # @param birth_date [Date]
             # @param social_security_number [String]
-            # @param biological_sex [CandidApiClient::PreEncounter::Common::Types::Sex] The biological sex of the patient.
+            # @param biological_sex [CandidApiClient::PreEncounter::Common::Types::Sex] The biological sex of the patient. This corresponds to the HL7
+            #  AdministrativeGender
+            #  https://www.hl7.org/fhir/valueset-administrative-gender.html
             # @param sexual_orientation [CandidApiClient::PreEncounter::Common::Types::SexualOrientation] The sexual orientation of the patient.
             # @param race [CandidApiClient::PreEncounter::Common::Types::Race]
             # @param ethnicity [CandidApiClient::PreEncounter::Common::Types::Ethnicity]
@@ -139,12 +143,12 @@ module CandidApiClient
             # @param external_provenance [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data. Leave unset
             #  if Candid owns patient data.
             # @param contacts [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
-            # @param general_practitioners [Array<CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider>]
+            # @param general_practitioners [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]
             # @param filing_order [CandidApiClient::PreEncounter::Patients::V1::Types::FilingOrder]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, birth_date:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, biological_sex: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, additional_properties: nil)
+                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, additional_properties: nil)
               @id = id
               @mrn = mrn
               @organization_id = organization_id
@@ -157,7 +161,7 @@ module CandidApiClient
               @gender = gender if gender != OMIT
               @birth_date = birth_date
               @social_security_number = social_security_number if social_security_number != OMIT
-              @biological_sex = biological_sex if biological_sex != OMIT
+              @biological_sex = biological_sex
               @sexual_orientation = sexual_orientation if sexual_orientation != OMIT
               @race = race if race != OMIT
               @ethnicity = ethnicity if ethnicity != OMIT
@@ -289,7 +293,7 @@ module CandidApiClient
               end
               general_practitioners = parsed_json["general_practitioners"]&.map do |item|
                 item = item.to_json
-                CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvider.from_json(json_object: item)
+                CandidApiClient::PreEncounter::Common::Types::ExternalProvider.from_json(json_object: item)
               end
               if parsed_json["filing_order"].nil?
                 filing_order = nil
@@ -360,7 +364,7 @@ module CandidApiClient
               obj.gender&.is_a?(CandidApiClient::PreEncounter::Common::Types::Gender) != false || raise("Passed value for field obj.gender is not the expected type, validation failed.")
               obj.birth_date.is_a?(Date) != false || raise("Passed value for field obj.birth_date is not the expected type, validation failed.")
               obj.social_security_number&.is_a?(String) != false || raise("Passed value for field obj.social_security_number is not the expected type, validation failed.")
-              obj.biological_sex&.is_a?(CandidApiClient::PreEncounter::Common::Types::Sex) != false || raise("Passed value for field obj.biological_sex is not the expected type, validation failed.")
+              obj.biological_sex.is_a?(CandidApiClient::PreEncounter::Common::Types::Sex) != false || raise("Passed value for field obj.biological_sex is not the expected type, validation failed.")
               obj.sexual_orientation&.is_a?(CandidApiClient::PreEncounter::Common::Types::SexualOrientation) != false || raise("Passed value for field obj.sexual_orientation is not the expected type, validation failed.")
               obj.race&.is_a?(CandidApiClient::PreEncounter::Common::Types::Race) != false || raise("Passed value for field obj.race is not the expected type, validation failed.")
               obj.ethnicity&.is_a?(CandidApiClient::PreEncounter::Common::Types::Ethnicity) != false || raise("Passed value for field obj.ethnicity is not the expected type, validation failed.")

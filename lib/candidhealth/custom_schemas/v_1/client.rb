@@ -24,7 +24,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::SchemaGetMultiResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.get_multi
         def get_multi(request_options: nil)
           response = @request_client.conn.get do |req|
@@ -47,7 +47,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.get(schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582")
         def get(schema_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -76,7 +76,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.create(
         #    name: "General Medicine",
         #    description: "Values associated with a generic visit",
@@ -115,7 +115,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.update(
         #    schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582",
         #    name: "General Medicine and Health",
@@ -159,7 +159,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::SchemaGetMultiResponse]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.get_multi
         def get_multi(request_options: nil)
           Async do
@@ -184,7 +184,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.get(schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582")
         def get(schema_id:, request_options: nil)
           Async do
@@ -215,7 +215,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.create(
         #    name: "General Medicine",
         #    description: "Values associated with a generic visit",
@@ -256,7 +256,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::CustomSchemas::V1::Types::Schema]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.custom_schemas.v_1.update(
         #    schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582",
         #    name: "General Medicine and Health",

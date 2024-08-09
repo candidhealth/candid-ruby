@@ -77,7 +77,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::EncounterPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.get_all(
         #    limit: 100,
         #    claim_status: BILLER_RECEIVED,
@@ -129,7 +129,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.get(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(encounter_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -561,7 +561,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.create(
         #    date_of_service: DateTime.parse(2023-01-15),
         #    end_date_of_service: DateTime.parse(2023-01-15),
@@ -804,7 +804,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.update(
         #    encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    prior_authorization_number: "string",
@@ -920,7 +920,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::EncounterPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.get_all(
         #    limit: 100,
         #    claim_status: BILLER_RECEIVED,
@@ -974,7 +974,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.get(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(encounter_id:, request_options: nil)
           Async do
@@ -1408,7 +1408,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.create(
         #    date_of_service: DateTime.parse(2023-01-15),
         #    end_date_of_service: DateTime.parse(2023-01-15),
@@ -1653,7 +1653,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.update(
         #    encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    prior_authorization_number: "string",

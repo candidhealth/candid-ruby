@@ -38,7 +38,7 @@ module CandidApiClient
           #         * :start (Date)
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
-          #     * :gender (CandidApiClient::PreEncounter::Common::Types::Gender)
+          #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -47,7 +47,8 @@ module CandidApiClient
           #     * :payer_name (String)
           #     * :group_number (String)
           #     * :name (String)
-          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :plan_type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode)
           #     * :period (Hash)
           #       * :start (Date)
           #       * :end_ (Date)
@@ -56,8 +57,8 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), gender: MAN }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", type: PPO, period: {  }, insurance_card_image_locator: "string" }, verified: true })
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -90,7 +91,7 @@ module CandidApiClient
           #         * :start (Date)
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
-          #     * :gender (CandidApiClient::PreEncounter::Common::Types::Gender)
+          #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -99,7 +100,8 @@ module CandidApiClient
           #     * :payer_name (String)
           #     * :group_number (String)
           #     * :name (String)
-          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :plan_type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode)
           #     * :period (Hash)
           #       * :start (Date)
           #       * :end_ (Date)
@@ -108,11 +110,11 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "string",
-          #    request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), gender: MAN }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", type: PPO, period: {  }, insurance_card_image_locator: "string" }, verified: true }
+          #    request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -136,7 +138,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.get(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -160,7 +162,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.get_history(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
           def get_history(id:, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -187,7 +189,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.get_multi(patient_id: "string")
           def get_multi(patient_id: nil, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -216,7 +218,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.scan(since: DateTime.parse(2024-01-15T09:30:00.000Z))
           def scan(since:, request_options: nil)
             response = @request_client.conn.get do |req|
@@ -266,7 +268,7 @@ module CandidApiClient
           #         * :start (Date)
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
-          #     * :gender (CandidApiClient::PreEncounter::Common::Types::Gender)
+          #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -275,7 +277,8 @@ module CandidApiClient
           #     * :payer_name (String)
           #     * :group_number (String)
           #     * :name (String)
-          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :plan_type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode)
           #     * :period (Hash)
           #       * :start (Date)
           #       * :end_ (Date)
@@ -284,8 +287,8 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), gender: MAN }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", type: PPO, period: {  }, insurance_card_image_locator: "string" }, verified: true })
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -320,7 +323,7 @@ module CandidApiClient
           #         * :start (Date)
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
-          #     * :gender (CandidApiClient::PreEncounter::Common::Types::Gender)
+          #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -329,7 +332,8 @@ module CandidApiClient
           #     * :payer_name (String)
           #     * :group_number (String)
           #     * :name (String)
-          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :plan_type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          #     * :type (CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode)
           #     * :period (Hash)
           #       * :start (Date)
           #       * :end_ (Date)
@@ -338,11 +342,11 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "string",
-          #    request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), gender: MAN }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", type: PPO, period: {  }, insurance_card_image_locator: "string" }, verified: true }
+          #    request: { status: ACTIVE, subscriber: { name: {  }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -368,7 +372,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.get(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
           def get(id:, request_options: nil)
             Async do
@@ -394,7 +398,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.get_history(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
           def get_history(id:, request_options: nil)
             Async do
@@ -423,7 +427,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.get_multi(patient_id: "string")
           def get_multi(patient_id: nil, request_options: nil)
             Async do
@@ -457,7 +461,7 @@ module CandidApiClient
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage>]
           # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.scan(since: DateTime.parse(2024-01-15T09:30:00.000Z))
           def scan(since:, request_options: nil)
             Async do

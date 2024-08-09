@@ -24,7 +24,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.get(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
         def get(organization_service_facility_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -47,7 +47,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.get_multi(
         #    limit: 100,
         #    name: "Test Service Facility",
@@ -95,7 +95,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.create(request: { name: "Test Service Facility", aliases: ["Test Service Facility Alias"], description: "Test Service Facility Description", status: ACTIVE, operational_status: CLOSED, mode: INSTANCE, type: DIAGNOSTICS_OR_THERAPEUTICS_UNIT, physical_type: SITE, telecoms: ["555-555-5555"], address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -135,7 +135,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.update(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", request: { name: "Test Service Facility", aliases: ["Test Service Facility Alias"], description: "Test Service Facility Description", status: ACTIVE, operational_status: CLOSED, mode: INSTANCE, type: DIAGNOSTICS_OR_THERAPEUTICS_UNIT, physical_type: SITE, telecoms: ["555-555-5555"], address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def update(organization_service_facility_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -157,7 +157,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.delete(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
         def delete(organization_service_facility_id:, request_options: nil)
           @request_client.conn.delete do |req|
@@ -188,7 +188,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.get(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
         def get(organization_service_facility_id:, request_options: nil)
           Async do
@@ -213,7 +213,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.get_multi(
         #    limit: 100,
         #    name: "Test Service Facility",
@@ -263,7 +263,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.create(request: { name: "Test Service Facility", aliases: ["Test Service Facility Alias"], description: "Test Service Facility Description", status: ACTIVE, operational_status: CLOSED, mode: INSTANCE, type: DIAGNOSTICS_OR_THERAPEUTICS_UNIT, physical_type: SITE, telecoms: ["555-555-5555"], address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create(request:, request_options: nil)
           Async do
@@ -305,7 +305,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.update(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", request: { name: "Test Service Facility", aliases: ["Test Service Facility Alias"], description: "Test Service Facility Description", status: ACTIVE, operational_status: CLOSED, mode: INSTANCE, type: DIAGNOSTICS_OR_THERAPEUTICS_UNIT, physical_type: SITE, telecoms: ["555-555-5555"], address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def update(organization_service_facility_id:, request:, request_options: nil)
           Async do
@@ -329,7 +329,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.organization_service_facilities.v_2.delete(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
         def delete(organization_service_facility_id:, request_options: nil)
           Async do

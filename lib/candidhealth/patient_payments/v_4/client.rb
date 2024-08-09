@@ -43,7 +43,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.get_multi(
         #    limit: 1,
         #    patient_external_id: "string",
@@ -93,7 +93,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.get(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(patient_payment_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -127,7 +127,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.create(
         #    amount_cents: 1,
         #    payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
@@ -170,7 +170,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(patient_payment_id:, payment_timestamp: nil, payment_note: nil, invoice: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -199,7 +199,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.delete(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(patient_payment_id:, request_options: nil)
           @request_client.conn.delete do |req|
@@ -244,7 +244,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.get_multi(
         #    limit: 1,
         #    patient_external_id: "string",
@@ -296,7 +296,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.get(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(patient_payment_id:, request_options: nil)
           Async do
@@ -332,7 +332,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.create(
         #    amount_cents: 1,
         #    payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
@@ -377,7 +377,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
         def update(patient_payment_id:, payment_timestamp: nil, payment_note: nil, invoice: nil, request_options: nil)
           Async do
@@ -408,7 +408,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [Void]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.delete(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def delete(patient_payment_id:, request_options: nil)
           Async do

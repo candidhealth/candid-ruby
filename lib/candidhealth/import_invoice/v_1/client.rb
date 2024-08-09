@@ -40,7 +40,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoice]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.import_invoice(request: { external_payment_account_config_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", patient_external_id: "string", external_customer_identifier: "string", note: "string", due_date: DateTime.parse(2023-01-15), items: [{  }], status: DRAFT, external_identifier: "string", customer_invoice_url: "string" })
         def import_invoice(request:, request_options: nil)
           response = @request_client.conn.post do |req|
@@ -74,7 +74,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoicesPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.get_multi(
         #    patient_external_id: "string",
         #    encounter_external_id: "string",
@@ -122,7 +122,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoice]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.get(invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(invoice_id:, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -153,7 +153,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoice]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.update(invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { customer_invoice_url: "string", status: DRAFT, note: "string", due_date: DateTime.parse(2023-01-15), items: { update_type: APPEND, items: [{  }] } })
         def update(invoice_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -198,7 +198,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoice]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.import_invoice(request: { external_payment_account_config_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", patient_external_id: "string", external_customer_identifier: "string", note: "string", due_date: DateTime.parse(2023-01-15), items: [{  }], status: DRAFT, external_identifier: "string", customer_invoice_url: "string" })
         def import_invoice(request:, request_options: nil)
           Async do
@@ -234,7 +234,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoicesPage]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.get_multi(
         #    patient_external_id: "string",
         #    encounter_external_id: "string",
@@ -284,7 +284,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoice]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.get(invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(invoice_id:, request_options: nil)
           Async do
@@ -317,7 +317,7 @@ module CandidApiClient
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ImportInvoice::V1::Types::ImportInvoice]
         # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com")
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.import_invoice.v_1.update(invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { customer_invoice_url: "string", status: DRAFT, note: "string", due_date: DateTime.parse(2023-01-15), items: { update_type: APPEND, items: [{  }] } })
         def update(invoice_id:, request:, request_options: nil)
           Async do

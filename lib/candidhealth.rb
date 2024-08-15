@@ -26,6 +26,9 @@ require_relative "candidhealth/patient_refunds/client"
 require_relative "candidhealth/payers/client"
 require_relative "candidhealth/service_lines/client"
 require_relative "candidhealth/tasks/client"
+require_relative "candidhealth/third_party_payer_payments/client"
+require_relative "candidhealth/third_party_payer_refunds/client"
+require_relative "candidhealth/third_party_payers/client"
 require_relative "candidhealth/write_offs/client"
 require_relative "candidhealth/pre_encounter/client"
 require_relative "candidhealth/service_facility/client"
@@ -76,6 +79,12 @@ module CandidApiClient
     attr_reader :service_lines
     # @return [CandidApiClient::Tasks::Client]
     attr_reader :tasks
+    # @return [CandidApiClient::ThirdPartyPayerPayments::Client]
+    attr_reader :third_party_payer_payments
+    # @return [CandidApiClient::ThirdPartyPayerRefunds::Client]
+    attr_reader :third_party_payer_refunds
+    # @return [CandidApiClient::ThirdPartyPayers::Client]
+    attr_reader :third_party_payers
     # @return [CandidApiClient::WriteOffs::Client]
     attr_reader :write_offs
     # @return [CandidApiClient::PreEncounter::Client]
@@ -131,6 +140,9 @@ module CandidApiClient
       @payers = CandidApiClient::Payers::Client.new(request_client: @request_client)
       @service_lines = CandidApiClient::ServiceLines::Client.new(request_client: @request_client)
       @tasks = CandidApiClient::Tasks::Client.new(request_client: @request_client)
+      @third_party_payer_payments = CandidApiClient::ThirdPartyPayerPayments::Client.new(request_client: @request_client)
+      @third_party_payer_refunds = CandidApiClient::ThirdPartyPayerRefunds::Client.new(request_client: @request_client)
+      @third_party_payers = CandidApiClient::ThirdPartyPayers::Client.new(request_client: @request_client)
       @write_offs = CandidApiClient::WriteOffs::Client.new(request_client: @request_client)
       @pre_encounter = CandidApiClient::PreEncounter::Client.new(request_client: @request_client)
       @service_facility = CandidApiClient::ServiceFacilityClient.new(request_client: @request_client)
@@ -182,6 +194,12 @@ module CandidApiClient
     attr_reader :service_lines
     # @return [CandidApiClient::Tasks::AsyncClient]
     attr_reader :tasks
+    # @return [CandidApiClient::ThirdPartyPayerPayments::AsyncClient]
+    attr_reader :third_party_payer_payments
+    # @return [CandidApiClient::ThirdPartyPayerRefunds::AsyncClient]
+    attr_reader :third_party_payer_refunds
+    # @return [CandidApiClient::ThirdPartyPayers::AsyncClient]
+    attr_reader :third_party_payers
     # @return [CandidApiClient::WriteOffs::AsyncClient]
     attr_reader :write_offs
     # @return [CandidApiClient::PreEncounter::AsyncClient]
@@ -237,6 +255,9 @@ module CandidApiClient
       @payers = CandidApiClient::Payers::AsyncClient.new(request_client: @async_request_client)
       @service_lines = CandidApiClient::ServiceLines::AsyncClient.new(request_client: @async_request_client)
       @tasks = CandidApiClient::Tasks::AsyncClient.new(request_client: @async_request_client)
+      @third_party_payer_payments = CandidApiClient::ThirdPartyPayerPayments::AsyncClient.new(request_client: @async_request_client)
+      @third_party_payer_refunds = CandidApiClient::ThirdPartyPayerRefunds::AsyncClient.new(request_client: @async_request_client)
+      @third_party_payers = CandidApiClient::ThirdPartyPayers::AsyncClient.new(request_client: @async_request_client)
       @write_offs = CandidApiClient::WriteOffs::AsyncClient.new(request_client: @async_request_client)
       @pre_encounter = CandidApiClient::PreEncounter::AsyncClient.new(request_client: @async_request_client)
       @service_facility = CandidApiClient::AsyncServiceFacilityClient.new(request_client: @async_request_client)

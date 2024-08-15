@@ -4,6 +4,7 @@ require "json"
 require_relative "service_line_allocation_target"
 require_relative "claim_allocation_target"
 require_relative "billing_provider_allocation_target"
+require_relative "appointment_allocation_target"
 
 module CandidApiClient
   module Financials
@@ -41,6 +42,8 @@ module CandidApiClient
                      CandidApiClient::Financials::Types::ClaimAllocationTarget.from_json(json_object: json_object)
                    when "billing_provider_id"
                      CandidApiClient::Financials::Types::BillingProviderAllocationTarget.from_json(json_object: json_object)
+                   when "appointment"
+                     CandidApiClient::Financials::Types::AppointmentAllocationTarget.from_json(json_object: json_object)
                    when "unattributed"
                      nil
                    else
@@ -59,6 +62,8 @@ module CandidApiClient
           when "claim"
             { **@member.to_json, type: @discriminant }.to_json
           when "billing_provider_id"
+            { **@member.to_json, type: @discriminant }.to_json
+          when "appointment"
             { **@member.to_json, type: @discriminant }.to_json
           when "unattributed"
             { type: @discriminant }.to_json
@@ -82,6 +87,8 @@ module CandidApiClient
             CandidApiClient::Financials::Types::ClaimAllocationTarget.validate_raw(obj: obj)
           when "billing_provider_id"
             CandidApiClient::Financials::Types::BillingProviderAllocationTarget.validate_raw(obj: obj)
+          when "appointment"
+            CandidApiClient::Financials::Types::AppointmentAllocationTarget.validate_raw(obj: obj)
           when "unattributed"
             # noop
           else
@@ -113,6 +120,12 @@ module CandidApiClient
         # @return [CandidApiClient::Financials::Types::AllocationTarget]
         def self.billing_provider_id(member:)
           new(member: member, discriminant: "billing_provider_id")
+        end
+
+        # @param member [CandidApiClient::Financials::Types::AppointmentAllocationTarget]
+        # @return [CandidApiClient::Financials::Types::AllocationTarget]
+        def self.appointment(member:)
+          new(member: member, discriminant: "appointment")
         end
 
         # @return [CandidApiClient::Financials::Types::AllocationTarget]

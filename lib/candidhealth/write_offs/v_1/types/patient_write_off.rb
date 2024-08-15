@@ -19,6 +19,10 @@ module CandidApiClient
           # @return [CandidApiClient::WriteOffs::V1::Types::PatientWriteOffReason]
           attr_reader :write_off_reason
           # @return [String]
+          attr_reader :patient_external_id
+          # @return [String]
+          attr_reader :claim_id
+          # @return [String]
           attr_reader :service_line_id
           # @return [String]
           attr_reader :reverts_write_off_id
@@ -38,18 +42,22 @@ module CandidApiClient
           # @param write_off_timestamp [DateTime]
           # @param write_off_note [String]
           # @param write_off_reason [CandidApiClient::WriteOffs::V1::Types::PatientWriteOffReason]
+          # @param patient_external_id [String]
+          # @param claim_id [String]
           # @param service_line_id [String]
           # @param reverts_write_off_id [String]
           # @param reverted_by_write_off_id [String]
           # @param amount_cents [Integer]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::WriteOffs::V1::Types::PatientWriteOff]
-          def initialize(write_off_id:, write_off_timestamp:, write_off_reason:, service_line_id:, amount_cents:,
-                         write_off_note: OMIT, reverts_write_off_id: OMIT, reverted_by_write_off_id: OMIT, additional_properties: nil)
+          def initialize(write_off_id:, write_off_timestamp:, write_off_reason:, patient_external_id:, claim_id:,
+                         service_line_id:, amount_cents:, write_off_note: OMIT, reverts_write_off_id: OMIT, reverted_by_write_off_id: OMIT, additional_properties: nil)
             @write_off_id = write_off_id
             @write_off_timestamp = write_off_timestamp
             @write_off_note = write_off_note if write_off_note != OMIT
             @write_off_reason = write_off_reason
+            @patient_external_id = patient_external_id
+            @claim_id = claim_id
             @service_line_id = service_line_id
             @reverts_write_off_id = reverts_write_off_id if reverts_write_off_id != OMIT
             @reverted_by_write_off_id = reverted_by_write_off_id if reverted_by_write_off_id != OMIT
@@ -60,6 +68,8 @@ module CandidApiClient
               "write_off_timestamp": write_off_timestamp,
               "write_off_note": write_off_note,
               "write_off_reason": write_off_reason,
+              "patient_external_id": patient_external_id,
+              "claim_id": claim_id,
               "service_line_id": service_line_id,
               "reverts_write_off_id": reverts_write_off_id,
               "reverted_by_write_off_id": reverted_by_write_off_id,
@@ -82,6 +92,8 @@ module CandidApiClient
                                   end
             write_off_note = struct["write_off_note"]
             write_off_reason = struct["write_off_reason"]
+            patient_external_id = struct["patient_external_id"]
+            claim_id = struct["claim_id"]
             service_line_id = struct["service_line_id"]
             reverts_write_off_id = struct["reverts_write_off_id"]
             reverted_by_write_off_id = struct["reverted_by_write_off_id"]
@@ -91,6 +103,8 @@ module CandidApiClient
               write_off_timestamp: write_off_timestamp,
               write_off_note: write_off_note,
               write_off_reason: write_off_reason,
+              patient_external_id: patient_external_id,
+              claim_id: claim_id,
               service_line_id: service_line_id,
               reverts_write_off_id: reverts_write_off_id,
               reverted_by_write_off_id: reverted_by_write_off_id,
@@ -117,6 +131,8 @@ module CandidApiClient
             obj.write_off_timestamp.is_a?(DateTime) != false || raise("Passed value for field obj.write_off_timestamp is not the expected type, validation failed.")
             obj.write_off_note&.is_a?(String) != false || raise("Passed value for field obj.write_off_note is not the expected type, validation failed.")
             obj.write_off_reason.is_a?(CandidApiClient::WriteOffs::V1::Types::PatientWriteOffReason) != false || raise("Passed value for field obj.write_off_reason is not the expected type, validation failed.")
+            obj.patient_external_id.is_a?(String) != false || raise("Passed value for field obj.patient_external_id is not the expected type, validation failed.")
+            obj.claim_id.is_a?(String) != false || raise("Passed value for field obj.claim_id is not the expected type, validation failed.")
             obj.service_line_id.is_a?(String) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
             obj.reverts_write_off_id&.is_a?(String) != false || raise("Passed value for field obj.reverts_write_off_id is not the expected type, validation failed.")
             obj.reverted_by_write_off_id&.is_a?(String) != false || raise("Passed value for field obj.reverted_by_write_off_id is not the expected type, validation failed.")

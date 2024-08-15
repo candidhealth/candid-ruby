@@ -40,6 +40,8 @@ module CandidApiClient
                      json_object.value
                    when "billing_provider_by_id"
                      json_object.value
+                   when "appointment_by_id"
+                     json_object.value
                    when "unattributed"
                      nil
                    else
@@ -60,6 +62,8 @@ module CandidApiClient
           when "claim_by_encounter_external_id"
             { "type": @discriminant, "value": @member }.to_json
           when "billing_provider_by_id"
+            { "type": @discriminant, "value": @member }.to_json
+          when "appointment_by_id"
             { "type": @discriminant, "value": @member }.to_json
           when "unattributed"
             { type: @discriminant }.to_json
@@ -84,6 +88,8 @@ module CandidApiClient
           when "claim_by_encounter_external_id"
             obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
           when "billing_provider_by_id"
+            obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
+          when "appointment_by_id"
             obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
           when "unattributed"
             # noop
@@ -122,6 +128,12 @@ module CandidApiClient
         # @return [CandidApiClient::Financials::Types::AllocationTargetCreate]
         def self.billing_provider_by_id(member:)
           new(member: member, discriminant: "billing_provider_by_id")
+        end
+
+        # @param member [String]
+        # @return [CandidApiClient::Financials::Types::AllocationTargetCreate]
+        def self.appointment_by_id(member:)
+          new(member: member, discriminant: "appointment_by_id")
         end
 
         # @return [CandidApiClient::Financials::Types::AllocationTargetCreate]

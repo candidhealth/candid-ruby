@@ -22,22 +22,13 @@ module CandidApiClient
         # @param request [Hash] Request of type CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateStandalone, as a Hash
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
         #   * :charge_amount_cents (Integer)
-        #   * :allowed_amount_cents (Integer)
-        #   * :insurance_balance_cents (Integer)
-        #   * :patient_balance_cents (Integer)
-        #   * :primary_paid_amount_cents (Integer)
-        #   * :secondary_paid_amount_cents (Integer)
-        #   * :tertiary_paid_amount_cents (Integer)
-        #   * :patient_responsibility_cents (Integer)
         #   * :diagnosis_id_zero (String)
         #   * :diagnosis_id_one (String)
         #   * :diagnosis_id_two (String)
         #   * :diagnosis_id_three (String)
-        #   * :service_line_manual_adjustments (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineAdjustment>)
         #   * :denial_reason (Hash)
         #     * :reason (CandidApiClient::ServiceLines::V2::Types::DenialReasonContent)
         #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
-        #   * :place_of_service_code_as_submitted (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :procedure_code (String)
         #   * :quantity (String)
         #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
@@ -49,7 +40,7 @@ module CandidApiClient
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, allowed_amount_cents: 1, insurance_balance_cents: 1, patient_balance_cents: 1, primary_paid_amount_cents: 1, secondary_paid_amount_cents: 1, tertiary_paid_amount_cents: 1, patient_responsibility_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", service_line_manual_adjustments: [{  }], denial_reason: {  }, place_of_service_code: PHARMACY, place_of_service_code_as_submitted: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
+        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: {  }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -71,22 +62,13 @@ module CandidApiClient
         #   * :edit_reason (String)
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
         #   * :charge_amount_cents (Integer)
-        #   * :allowed_amount_cents (Integer)
-        #   * :insurance_balance_cents (Integer)
-        #   * :patient_balance_cents (Integer)
-        #   * :primary_paid_amount_cents (Integer)
-        #   * :secondary_paid_amount_cents (Integer)
-        #   * :tertiary_paid_amount_cents (Integer)
-        #   * :patient_responsibility_cents (Integer)
         #   * :diagnosis_id_zero (String)
         #   * :diagnosis_id_one (String)
         #   * :diagnosis_id_two (String)
         #   * :diagnosis_id_three (String)
-        #   * :service_line_manual_adjustments (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineAdjustment>)
         #   * :denial_reason (Hash)
         #     * :reason (CandidApiClient::ServiceLines::V2::Types::DenialReasonContent)
         #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
-        #   * :place_of_service_code_as_submitted (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
         #   * :procedure_code (String)
         #   * :quantity (String)
@@ -97,7 +79,7 @@ module CandidApiClient
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.update(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { edit_reason: "string", modifiers: [TWENTY_TWO], charge_amount_cents: 1, allowed_amount_cents: 1, insurance_balance_cents: 1, patient_balance_cents: 1, primary_paid_amount_cents: 1, secondary_paid_amount_cents: 1, tertiary_paid_amount_cents: 1, patient_responsibility_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", service_line_manual_adjustments: [{  }], denial_reason: {  }, place_of_service_code: PHARMACY, place_of_service_code_as_submitted: PHARMACY, units: MJ, procedure_code: "string", quantity: "string", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
+        #  api.service_lines.v_2.update(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { edit_reason: "string", modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: {  }, place_of_service_code: PHARMACY, units: MJ, procedure_code: "string", quantity: "string", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
         def update(service_line_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -128,22 +110,13 @@ module CandidApiClient
         # @param request [Hash] Request of type CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateStandalone, as a Hash
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
         #   * :charge_amount_cents (Integer)
-        #   * :allowed_amount_cents (Integer)
-        #   * :insurance_balance_cents (Integer)
-        #   * :patient_balance_cents (Integer)
-        #   * :primary_paid_amount_cents (Integer)
-        #   * :secondary_paid_amount_cents (Integer)
-        #   * :tertiary_paid_amount_cents (Integer)
-        #   * :patient_responsibility_cents (Integer)
         #   * :diagnosis_id_zero (String)
         #   * :diagnosis_id_one (String)
         #   * :diagnosis_id_two (String)
         #   * :diagnosis_id_three (String)
-        #   * :service_line_manual_adjustments (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineAdjustment>)
         #   * :denial_reason (Hash)
         #     * :reason (CandidApiClient::ServiceLines::V2::Types::DenialReasonContent)
         #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
-        #   * :place_of_service_code_as_submitted (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :procedure_code (String)
         #   * :quantity (String)
         #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
@@ -155,7 +128,7 @@ module CandidApiClient
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, allowed_amount_cents: 1, insurance_balance_cents: 1, patient_balance_cents: 1, primary_paid_amount_cents: 1, secondary_paid_amount_cents: 1, tertiary_paid_amount_cents: 1, patient_responsibility_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", service_line_manual_adjustments: [{  }], denial_reason: {  }, place_of_service_code: PHARMACY, place_of_service_code_as_submitted: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
+        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: {  }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -179,22 +152,13 @@ module CandidApiClient
         #   * :edit_reason (String)
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
         #   * :charge_amount_cents (Integer)
-        #   * :allowed_amount_cents (Integer)
-        #   * :insurance_balance_cents (Integer)
-        #   * :patient_balance_cents (Integer)
-        #   * :primary_paid_amount_cents (Integer)
-        #   * :secondary_paid_amount_cents (Integer)
-        #   * :tertiary_paid_amount_cents (Integer)
-        #   * :patient_responsibility_cents (Integer)
         #   * :diagnosis_id_zero (String)
         #   * :diagnosis_id_one (String)
         #   * :diagnosis_id_two (String)
         #   * :diagnosis_id_three (String)
-        #   * :service_line_manual_adjustments (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineAdjustment>)
         #   * :denial_reason (Hash)
         #     * :reason (CandidApiClient::ServiceLines::V2::Types::DenialReasonContent)
         #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
-        #   * :place_of_service_code_as_submitted (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
         #   * :procedure_code (String)
         #   * :quantity (String)
@@ -205,7 +169,7 @@ module CandidApiClient
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.update(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { edit_reason: "string", modifiers: [TWENTY_TWO], charge_amount_cents: 1, allowed_amount_cents: 1, insurance_balance_cents: 1, patient_balance_cents: 1, primary_paid_amount_cents: 1, secondary_paid_amount_cents: 1, tertiary_paid_amount_cents: 1, patient_responsibility_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", service_line_manual_adjustments: [{  }], denial_reason: {  }, place_of_service_code: PHARMACY, place_of_service_code_as_submitted: PHARMACY, units: MJ, procedure_code: "string", quantity: "string", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
+        #  api.service_lines.v_2.update(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { edit_reason: "string", modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: {  }, place_of_service_code: PHARMACY, units: MJ, procedure_code: "string", quantity: "string", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
         def update(service_line_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

@@ -3,6 +3,8 @@
 require_relative "../../../../requests"
 require_relative "types/mutable_patient"
 require_relative "types/patient"
+require_relative "../../common/types/sort_direction"
+require_relative "types/patient_page"
 require "json"
 require "date"
 require "async"
@@ -77,7 +79,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
+          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  }, hipaa_authorization: true }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -92,6 +94,44 @@ module CandidApiClient
                                                  request_options: request_options)}/patients/v1"
             end
             CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
+          end
+
+          # Searches for patients that match the query parameters.
+          #
+          # @param page_token [String]
+          # @param limit [Integer]
+          # @param sort_field [String]
+          # @param sort_direction [CandidApiClient::PreEncounter::Common::Types::SortDirection] Defaults to ascending.
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.patients.v_1.get_multi(
+          #    page_token: "string",
+          #    limit: 1,
+          #    sort_field: "string",
+          #    sort_direction: ASC
+          #  )
+          def get_multi(page_token: nil, limit: nil, sort_field: nil, sort_direction: nil, request_options: nil)
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.params = {
+                **(request_options&.additional_query_parameters || {}),
+                "page_token": page_token,
+                "limit": limit,
+                "sort_field": sort_field,
+                "sort_direction": sort_direction
+              }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/patients/v1/get_multi"
+            end
+            CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage.from_json(json_object: response.body)
           end
 
           # Gets a patient.
@@ -145,8 +185,8 @@ module CandidApiClient
             end
           end
 
-          # Updates a patient. The path must contain the most recent version to prevent
-          #  races. Updating historic versions is not supported.
+          # Updates a patient. The path must contain the most recent version to prevent race
+          #  conditions. Updating historic versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -206,7 +246,7 @@ module CandidApiClient
           #  api.pre_encounter.patients.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
+          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  }, hipaa_authorization: true }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -225,9 +265,9 @@ module CandidApiClient
           end
 
           # Sets a patient as deactivated. The path must contain the most recent version to
-          #  prevent races. Dactivating historic versions is not supported. Subsequent
-          #  updates via PUT to the patient will "reactivate" the patient and set the
-          #  deactivated flag to false.
+          #  prevent race conditions. Deactivating historic versions is not supported.
+          #  Subsequent updates via PUT to the patient will "reactivate" the patient and set
+          #  the deactivated flag to false.
           #
           # @param id [String]
           # @param version [String]
@@ -250,15 +290,16 @@ module CandidApiClient
             end
           end
 
-          # Searches for patients that match the query parameters.
+          # Returns a list of Patients based on the search criteria.
           #
-          # @param name_contains [String]
+          # @param mrn [String]
+          # @param similar_name_ordering [String] A string that is used to order similar names in search results.
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.search(name_contains: "string")
-          def search(name_contains: nil, request_options: nil)
+          #  api.pre_encounter.patients.v_1.search(mrn: "string", similar_name_ordering: "string")
+          def search(mrn: nil, similar_name_ordering: nil, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -269,7 +310,8 @@ module CandidApiClient
               }.compact
               req.params = {
                 **(request_options&.additional_query_parameters || {}),
-                "name_contains": name_contains
+                "mrn": mrn,
+                "similar_name_ordering": similar_name_ordering
               }.compact
               req.url "#{@request_client.get_url(environment: PreEncounter,
                                                  request_options: request_options)}/patients/v1"
@@ -377,7 +419,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
+          #  api.pre_encounter.patients.v_1.create(request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  }, hipaa_authorization: true }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -393,6 +435,46 @@ module CandidApiClient
                                                    request_options: request_options)}/patients/v1"
               end
               CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
+            end
+          end
+
+          # Searches for patients that match the query parameters.
+          #
+          # @param page_token [String]
+          # @param limit [Integer]
+          # @param sort_field [String]
+          # @param sort_direction [CandidApiClient::PreEncounter::Common::Types::SortDirection] Defaults to ascending.
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.patients.v_1.get_multi(
+          #    page_token: "string",
+          #    limit: 1,
+          #    sort_field: "string",
+          #    sort_direction: ASC
+          #  )
+          def get_multi(page_token: nil, limit: nil, sort_field: nil, sort_direction: nil, request_options: nil)
+            Async do
+              response = @request_client.conn.get do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.params = {
+                  **(request_options&.additional_query_parameters || {}),
+                  "page_token": page_token,
+                  "limit": limit,
+                  "sort_field": sort_field,
+                  "sort_direction": sort_direction
+                }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/patients/v1/get_multi"
+              end
+              CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage.from_json(json_object: response.body)
             end
           end
 
@@ -451,8 +533,8 @@ module CandidApiClient
             end
           end
 
-          # Updates a patient. The path must contain the most recent version to prevent
-          #  races. Updating historic versions is not supported.
+          # Updates a patient. The path must contain the most recent version to prevent race
+          #  conditions. Updating historic versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -512,7 +594,7 @@ module CandidApiClient
           #  api.pre_encounter.patients.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  } }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
+          #    request: { name: {  }, other_names: [{  }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: {  }, other_addresses: [{  }], primary_telecom: {  }, other_telecoms: [{  }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: {  }, telecoms: [{  }], addresses: [{  }], period: {  }, hipaa_authorization: true }], general_practitioners: [{  }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -533,9 +615,9 @@ module CandidApiClient
           end
 
           # Sets a patient as deactivated. The path must contain the most recent version to
-          #  prevent races. Dactivating historic versions is not supported. Subsequent
-          #  updates via PUT to the patient will "reactivate" the patient and set the
-          #  deactivated flag to false.
+          #  prevent race conditions. Deactivating historic versions is not supported.
+          #  Subsequent updates via PUT to the patient will "reactivate" the patient and set
+          #  the deactivated flag to false.
           #
           # @param id [String]
           # @param version [String]
@@ -560,15 +642,16 @@ module CandidApiClient
             end
           end
 
-          # Searches for patients that match the query parameters.
+          # Returns a list of Patients based on the search criteria.
           #
-          # @param name_contains [String]
+          # @param mrn [String]
+          # @param similar_name_ordering [String] A string that is used to order similar names in search results.
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.search(name_contains: "string")
-          def search(name_contains: nil, request_options: nil)
+          #  api.pre_encounter.patients.v_1.search(mrn: "string", similar_name_ordering: "string")
+          def search(mrn: nil, similar_name_ordering: nil, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
                 req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -580,7 +663,8 @@ module CandidApiClient
                 }.compact
                 req.params = {
                   **(request_options&.additional_query_parameters || {}),
-                  "name_contains": name_contains
+                  "mrn": mrn,
+                  "similar_name_ordering": similar_name_ordering
                 }.compact
                 req.url "#{@request_client.get_url(environment: PreEncounter,
                                                    request_options: request_options)}/patients/v1"

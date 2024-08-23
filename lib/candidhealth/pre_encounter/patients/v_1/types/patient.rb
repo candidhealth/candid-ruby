@@ -29,7 +29,8 @@ module CandidApiClient
             #  contexts.
             attr_reader :id
             # @return [String] The medical record number for the patient. Human-friendly Candid generated MRNs
-            #  are of the form JCH + 8 alphanumeric characters. MRNs are not case-sensitive.
+            #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
+            #  and "XXXX" is a zero-padded incrementing integer.
             attr_reader :mrn
             # @return [String] The organization that owns this patient.
             attr_reader :organization_id
@@ -108,7 +109,8 @@ module CandidApiClient
             # @param id [String] The unique UUID identifier for a Patient. Patient ID is used in machine
             #  contexts.
             # @param mrn [String] The medical record number for the patient. Human-friendly Candid generated MRNs
-            #  are of the form JCH + 8 alphanumeric characters. MRNs are not case-sensitive.
+            #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
+            #  and "XXXX" is a zero-padded incrementing integer.
             # @param organization_id [String] The organization that owns this patient.
             # @param deactivated [Boolean] True if the patient is deactivated. Deactivated patients are not returned in
             #  search results but are returned in all other endpoints including scan.

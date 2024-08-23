@@ -66,7 +66,6 @@ module CandidApiClient
             CMV = "MV"
             COA = "OA"
             COT = "OT"
-            CPE = "PE"
             CPL = "PL"
             CPP = "PP"
             CPR = "PR"

@@ -4,10 +4,9 @@ module CandidApiClient
   module PreEncounter
     module Common
       module Types
-        class ExternalProviderType
-          PRIMARY = "PRIMARY"
-          REFERRING = "REFERRING"
-          ATTENDING = "ATTENDING"
+        class SortDirection
+          ASC = "asc"
+          DESC = "desc"
         end
       end
     end

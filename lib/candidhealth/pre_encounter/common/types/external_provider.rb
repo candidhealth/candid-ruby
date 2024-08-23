@@ -25,6 +25,8 @@ module CandidApiClient
           attr_reader :addresses
           # @return [CandidApiClient::PreEncounter::Common::Types::Period]
           attr_reader :period
+          # @return [String]
+          attr_reader :canonical_id
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -39,15 +41,18 @@ module CandidApiClient
           # @param telecoms [Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>]
           # @param addresses [Array<CandidApiClient::PreEncounter::Common::Types::Address>]
           # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
+          # @param canonical_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::PreEncounter::Common::Types::ExternalProvider]
-          def initialize(name:, telecoms:, addresses:, type: OMIT, npi: OMIT, period: OMIT, additional_properties: nil)
+          def initialize(name:, telecoms:, addresses:, type: OMIT, npi: OMIT, period: OMIT, canonical_id: OMIT,
+                         additional_properties: nil)
             @name = name
             @type = type if type != OMIT
             @npi = npi if npi != OMIT
             @telecoms = telecoms
             @addresses = addresses
             @period = period if period != OMIT
+            @canonical_id = canonical_id if canonical_id != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "name": name,
@@ -55,7 +60,8 @@ module CandidApiClient
               "npi": npi,
               "telecoms": telecoms,
               "addresses": addresses,
-              "period": period
+              "period": period,
+              "canonical_id": canonical_id
             }.reject do |_k, v|
               v == OMIT
             end
@@ -90,6 +96,7 @@ module CandidApiClient
               period = parsed_json["period"].to_json
               period = CandidApiClient::PreEncounter::Common::Types::Period.from_json(json_object: period)
             end
+            canonical_id = struct["canonical_id"]
             new(
               name: name,
               type: type,
@@ -97,6 +104,7 @@ module CandidApiClient
               telecoms: telecoms,
               addresses: addresses,
               period: period,
+              canonical_id: canonical_id,
               additional_properties: struct
             )
           end
@@ -121,6 +129,7 @@ module CandidApiClient
             obj.telecoms.is_a?(Array) != false || raise("Passed value for field obj.telecoms is not the expected type, validation failed.")
             obj.addresses.is_a?(Array) != false || raise("Passed value for field obj.addresses is not the expected type, validation failed.")
             obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
+            obj.canonical_id&.is_a?(String) != false || raise("Passed value for field obj.canonical_id is not the expected type, validation failed.")
           end
         end
       end

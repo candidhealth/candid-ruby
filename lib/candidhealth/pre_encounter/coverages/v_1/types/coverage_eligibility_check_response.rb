@@ -13,8 +13,6 @@ module CandidApiClient
           class CoverageEligibilityCheckResponse
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata]
             attr_reader :metadata
-            # @return [String]
-            attr_reader :error
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck]
             attr_reader :check
             # @return [OpenStruct] Additional properties unmapped to the current class definition
@@ -26,16 +24,14 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param metadata [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata]
-            # @param error [String]
             # @param check [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageEligibilityCheckResponse]
-            def initialize(metadata:, error: OMIT, check: OMIT, additional_properties: nil)
+            def initialize(metadata:, check: OMIT, additional_properties: nil)
               @metadata = metadata
-              @error = error if error != OMIT
               @check = check if check != OMIT
               @additional_properties = additional_properties
-              @_field_set = { "metadata": metadata, "error": error, "check": check }.reject do |_k, v|
+              @_field_set = { "metadata": metadata, "check": check }.reject do |_k, v|
                 v == OMIT
               end
             end
@@ -53,7 +49,6 @@ module CandidApiClient
                 metadata = parsed_json["metadata"].to_json
                 metadata = CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.from_json(json_object: metadata)
               end
-              error = struct["error"]
               if parsed_json["check"].nil?
                 check = nil
               else
@@ -62,7 +57,6 @@ module CandidApiClient
               end
               new(
                 metadata: metadata,
-                error: error,
                 check: check,
                 additional_properties: struct
               )
@@ -83,7 +77,6 @@ module CandidApiClient
             # @return [Void]
             def self.validate_raw(obj:)
               CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.validate_raw(obj: obj.metadata)
-              obj.error&.is_a?(String) != false || raise("Passed value for field obj.error is not the expected type, validation failed.")
               obj.check.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck.validate_raw(obj: obj.check)
             end
           end

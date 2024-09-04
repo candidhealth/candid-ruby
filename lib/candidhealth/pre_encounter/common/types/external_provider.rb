@@ -44,13 +44,13 @@ module CandidApiClient
           # @param canonical_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::PreEncounter::Common::Types::ExternalProvider]
-          def initialize(name:, telecoms:, addresses:, type: OMIT, npi: OMIT, period: OMIT, canonical_id: OMIT,
+          def initialize(name:, telecoms:, type: OMIT, npi: OMIT, addresses: OMIT, period: OMIT, canonical_id: OMIT,
                          additional_properties: nil)
             @name = name
             @type = type if type != OMIT
             @npi = npi if npi != OMIT
             @telecoms = telecoms
-            @addresses = addresses
+            @addresses = addresses if addresses != OMIT
             @period = period if period != OMIT
             @canonical_id = canonical_id if canonical_id != OMIT
             @additional_properties = additional_properties
@@ -127,7 +127,7 @@ module CandidApiClient
             obj.type&.is_a?(CandidApiClient::PreEncounter::Common::Types::ExternalProviderType) != false || raise("Passed value for field obj.type is not the expected type, validation failed.")
             obj.npi&.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
             obj.telecoms.is_a?(Array) != false || raise("Passed value for field obj.telecoms is not the expected type, validation failed.")
-            obj.addresses.is_a?(Array) != false || raise("Passed value for field obj.addresses is not the expected type, validation failed.")
+            obj.addresses&.is_a?(Array) != false || raise("Passed value for field obj.addresses is not the expected type, validation failed.")
             obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
             obj.canonical_id&.is_a?(String) != false || raise("Passed value for field obj.canonical_id is not the expected type, validation failed.")
           end

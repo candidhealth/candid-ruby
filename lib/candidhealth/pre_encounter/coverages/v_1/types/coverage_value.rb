@@ -9,9 +9,9 @@ module CandidApiClient
       module V1
         module Types
           class CoverageValue
-            # @return [Integer]
+            # @return [Float]
             attr_reader :family
-            # @return [Integer]
+            # @return [Float]
             attr_reader :individual
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
@@ -21,8 +21,8 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param family [Integer]
-            # @param individual [Integer]
+            # @param family [Float]
+            # @param individual [Float]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageValue]
             def initialize(family: OMIT, individual: OMIT, additional_properties: nil)
@@ -63,8 +63,8 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              obj.family&.is_a?(Integer) != false || raise("Passed value for field obj.family is not the expected type, validation failed.")
-              obj.individual&.is_a?(Integer) != false || raise("Passed value for field obj.individual is not the expected type, validation failed.")
+              obj.family&.is_a?(Float) != false || raise("Passed value for field obj.family is not the expected type, validation failed.")
+              obj.individual&.is_a?(Float) != false || raise("Passed value for field obj.individual is not the expected type, validation failed.")
             end
           end
         end

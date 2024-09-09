@@ -18,6 +18,10 @@ module CandidApiClient
           attr_reader :blood_pressure_diastolic_mmhg
           # @return [Float]
           attr_reader :body_temperature_f
+          # @return [Float]
+          attr_reader :hemoglobin_gdl
+          # @return [Float]
+          attr_reader :hematocrit_pct
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -31,22 +35,28 @@ module CandidApiClient
           # @param blood_pressure_systolic_mmhg [Integer]
           # @param blood_pressure_diastolic_mmhg [Integer]
           # @param body_temperature_f [Float]
+          # @param hemoglobin_gdl [Float]
+          # @param hematocrit_pct [Float]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Vitals]
           def initialize(height_in: OMIT, weight_lbs: OMIT, blood_pressure_systolic_mmhg: OMIT,
-                         blood_pressure_diastolic_mmhg: OMIT, body_temperature_f: OMIT, additional_properties: nil)
+                         blood_pressure_diastolic_mmhg: OMIT, body_temperature_f: OMIT, hemoglobin_gdl: OMIT, hematocrit_pct: OMIT, additional_properties: nil)
             @height_in = height_in if height_in != OMIT
             @weight_lbs = weight_lbs if weight_lbs != OMIT
             @blood_pressure_systolic_mmhg = blood_pressure_systolic_mmhg if blood_pressure_systolic_mmhg != OMIT
             @blood_pressure_diastolic_mmhg = blood_pressure_diastolic_mmhg if blood_pressure_diastolic_mmhg != OMIT
             @body_temperature_f = body_temperature_f if body_temperature_f != OMIT
+            @hemoglobin_gdl = hemoglobin_gdl if hemoglobin_gdl != OMIT
+            @hematocrit_pct = hematocrit_pct if hematocrit_pct != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "height_in": height_in,
               "weight_lbs": weight_lbs,
               "blood_pressure_systolic_mmhg": blood_pressure_systolic_mmhg,
               "blood_pressure_diastolic_mmhg": blood_pressure_diastolic_mmhg,
-              "body_temperature_f": body_temperature_f
+              "body_temperature_f": body_temperature_f,
+              "hemoglobin_gdl": hemoglobin_gdl,
+              "hematocrit_pct": hematocrit_pct
             }.reject do |_k, v|
               v == OMIT
             end
@@ -63,12 +73,16 @@ module CandidApiClient
             blood_pressure_systolic_mmhg = struct["blood_pressure_systolic_mmhg"]
             blood_pressure_diastolic_mmhg = struct["blood_pressure_diastolic_mmhg"]
             body_temperature_f = struct["body_temperature_f"]
+            hemoglobin_gdl = struct["hemoglobin_gdl"]
+            hematocrit_pct = struct["hematocrit_pct"]
             new(
               height_in: height_in,
               weight_lbs: weight_lbs,
               blood_pressure_systolic_mmhg: blood_pressure_systolic_mmhg,
               blood_pressure_diastolic_mmhg: blood_pressure_diastolic_mmhg,
               body_temperature_f: body_temperature_f,
+              hemoglobin_gdl: hemoglobin_gdl,
+              hematocrit_pct: hematocrit_pct,
               additional_properties: struct
             )
           end
@@ -92,6 +106,8 @@ module CandidApiClient
             obj.blood_pressure_systolic_mmhg&.is_a?(Integer) != false || raise("Passed value for field obj.blood_pressure_systolic_mmhg is not the expected type, validation failed.")
             obj.blood_pressure_diastolic_mmhg&.is_a?(Integer) != false || raise("Passed value for field obj.blood_pressure_diastolic_mmhg is not the expected type, validation failed.")
             obj.body_temperature_f&.is_a?(Float) != false || raise("Passed value for field obj.body_temperature_f is not the expected type, validation failed.")
+            obj.hemoglobin_gdl&.is_a?(Float) != false || raise("Passed value for field obj.hemoglobin_gdl is not the expected type, validation failed.")
+            obj.hematocrit_pct&.is_a?(Float) != false || raise("Passed value for field obj.hematocrit_pct is not the expected type, validation failed.")
           end
         end
       end

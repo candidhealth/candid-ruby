@@ -174,6 +174,8 @@ module CandidApiClient
         #   * :blood_pressure_systolic_mmhg (Integer)
         #   * :blood_pressure_diastolic_mmhg (Integer)
         #   * :body_temperature_f (Float)
+        #   * :hemoglobin_gdl (Float)
+        #   * :hematocrit_pct (Float)
         # @param interventions [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::Intervention>, as a Hash
         #   * :name (String)
         #   * :category (CandidApiClient::Encounters::V4::Types::InterventionCategory)
@@ -472,6 +474,7 @@ module CandidApiClient
         #     * :measurement_unit_code (CandidApiClient::ServiceLines::V2::Types::MeasurementUnitCode)
         #     * :link_sequence_number (String)
         #     * :pharmacy_prescription_number (String)
+        #     * :conversion_formula (String)
         #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :description (String)
         #   * :date_of_service (Date)
@@ -1021,6 +1024,8 @@ module CandidApiClient
         #   * :blood_pressure_systolic_mmhg (Integer)
         #   * :blood_pressure_diastolic_mmhg (Integer)
         #   * :body_temperature_f (Float)
+        #   * :hemoglobin_gdl (Float)
+        #   * :hematocrit_pct (Float)
         # @param interventions [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::Intervention>, as a Hash
         #   * :name (String)
         #   * :category (CandidApiClient::Encounters::V4::Types::InterventionCategory)
@@ -1319,6 +1324,7 @@ module CandidApiClient
         #     * :measurement_unit_code (CandidApiClient::ServiceLines::V2::Types::MeasurementUnitCode)
         #     * :link_sequence_number (String)
         #     * :pharmacy_prescription_number (String)
+        #     * :conversion_formula (String)
         #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :description (String)
         #   * :date_of_service (Date)

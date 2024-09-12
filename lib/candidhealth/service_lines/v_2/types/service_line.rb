@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../../commons/types/procedure_modifier"
+require_relative "drug_identification"
 require_relative "service_line_era_data"
 require_relative "service_line_adjustment"
 require_relative "../../../invoices/types/invoice"
@@ -47,6 +48,8 @@ module CandidApiClient
           attr_reader :diagnosis_id_two
           # @return [String]
           attr_reader :diagnosis_id_three
+          # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
+          attr_reader :drug_identification
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineEraData]
           attr_reader :service_line_era_data
           # @return [Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineAdjustment>]
@@ -114,6 +117,7 @@ module CandidApiClient
           # @param diagnosis_id_one [String]
           # @param diagnosis_id_two [String]
           # @param diagnosis_id_three [String]
+          # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
           # @param service_line_era_data [CandidApiClient::ServiceLines::V2::Types::ServiceLineEraData]
           # @param service_line_manual_adjustments [Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineAdjustment>]
           # @param related_invoices [Array<CandidApiClient::Invoices::Types::Invoice>]
@@ -142,7 +146,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
           def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
-                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, additional_properties: nil)
+                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @allowed_amount_cents = allowed_amount_cents if allowed_amount_cents != OMIT
@@ -157,6 +161,7 @@ module CandidApiClient
             @diagnosis_id_one = diagnosis_id_one if diagnosis_id_one != OMIT
             @diagnosis_id_two = diagnosis_id_two if diagnosis_id_two != OMIT
             @diagnosis_id_three = diagnosis_id_three if diagnosis_id_three != OMIT
+            @drug_identification = drug_identification if drug_identification != OMIT
             @service_line_era_data = service_line_era_data if service_line_era_data != OMIT
             if service_line_manual_adjustments != OMIT
               @service_line_manual_adjustments = service_line_manual_adjustments
@@ -197,6 +202,7 @@ module CandidApiClient
               "diagnosis_id_one": diagnosis_id_one,
               "diagnosis_id_two": diagnosis_id_two,
               "diagnosis_id_three": diagnosis_id_three,
+              "drug_identification": drug_identification,
               "service_line_era_data": service_line_era_data,
               "service_line_manual_adjustments": service_line_manual_adjustments,
               "related_invoices": related_invoices,
@@ -243,6 +249,12 @@ module CandidApiClient
             diagnosis_id_one = struct["diagnosis_id_one"]
             diagnosis_id_two = struct["diagnosis_id_two"]
             diagnosis_id_three = struct["diagnosis_id_three"]
+            if parsed_json["drug_identification"].nil?
+              drug_identification = nil
+            else
+              drug_identification = parsed_json["drug_identification"].to_json
+              drug_identification = CandidApiClient::ServiceLines::V2::Types::DrugIdentification.from_json(json_object: drug_identification)
+            end
             if parsed_json["service_line_era_data"].nil?
               service_line_era_data = nil
             else
@@ -324,6 +336,7 @@ module CandidApiClient
               diagnosis_id_one: diagnosis_id_one,
               diagnosis_id_two: diagnosis_id_two,
               diagnosis_id_three: diagnosis_id_three,
+              drug_identification: drug_identification,
               service_line_era_data: service_line_era_data,
               service_line_manual_adjustments: service_line_manual_adjustments,
               related_invoices: related_invoices,
@@ -376,6 +389,7 @@ module CandidApiClient
             obj.diagnosis_id_one&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_one is not the expected type, validation failed.")
             obj.diagnosis_id_two&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_two is not the expected type, validation failed.")
             obj.diagnosis_id_three&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_three is not the expected type, validation failed.")
+            obj.drug_identification.nil? || CandidApiClient::ServiceLines::V2::Types::DrugIdentification.validate_raw(obj: obj.drug_identification)
             obj.service_line_era_data.nil? || CandidApiClient::ServiceLines::V2::Types::ServiceLineEraData.validate_raw(obj: obj.service_line_era_data)
             obj.service_line_manual_adjustments&.is_a?(Array) != false || raise("Passed value for field obj.service_line_manual_adjustments is not the expected type, validation failed.")
             obj.related_invoices&.is_a?(Array) != false || raise("Passed value for field obj.related_invoices is not the expected type, validation failed.")

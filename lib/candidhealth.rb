@@ -19,6 +19,7 @@ require_relative "candidhealth/import_invoice/client"
 require_relative "candidhealth/insurance_adjudications/client"
 require_relative "candidhealth/insurance_payments/client"
 require_relative "candidhealth/insurance_refunds/client"
+require_relative "candidhealth/medication_dispense/client"
 require_relative "candidhealth/non_insurance_payer_payments/client"
 require_relative "candidhealth/non_insurance_payer_refunds/client"
 require_relative "candidhealth/non_insurance_payers/client"
@@ -68,6 +69,8 @@ module CandidApiClient
     attr_reader :insurance_payments
     # @return [CandidApiClient::InsuranceRefunds::Client]
     attr_reader :insurance_refunds
+    # @return [CandidApiClient::MedicationDispense::Client]
+    attr_reader :medication_dispense
     # @return [CandidApiClient::NonInsurancePayerPayments::Client]
     attr_reader :non_insurance_payer_payments
     # @return [CandidApiClient::NonInsurancePayerRefunds::Client]
@@ -142,6 +145,7 @@ module CandidApiClient
       @insurance_adjudications = CandidApiClient::InsuranceAdjudications::Client.new(request_client: @request_client)
       @insurance_payments = CandidApiClient::InsurancePayments::Client.new(request_client: @request_client)
       @insurance_refunds = CandidApiClient::InsuranceRefunds::Client.new(request_client: @request_client)
+      @medication_dispense = CandidApiClient::MedicationDispense::Client.new(request_client: @request_client)
       @non_insurance_payer_payments = CandidApiClient::NonInsurancePayerPayments::Client.new(request_client: @request_client)
       @non_insurance_payer_refunds = CandidApiClient::NonInsurancePayerRefunds::Client.new(request_client: @request_client)
       @non_insurance_payers = CandidApiClient::NonInsurancePayers::Client.new(request_client: @request_client)
@@ -192,6 +196,8 @@ module CandidApiClient
     attr_reader :insurance_payments
     # @return [CandidApiClient::InsuranceRefunds::AsyncClient]
     attr_reader :insurance_refunds
+    # @return [CandidApiClient::MedicationDispense::AsyncClient]
+    attr_reader :medication_dispense
     # @return [CandidApiClient::NonInsurancePayerPayments::AsyncClient]
     attr_reader :non_insurance_payer_payments
     # @return [CandidApiClient::NonInsurancePayerRefunds::AsyncClient]
@@ -266,6 +272,7 @@ module CandidApiClient
       @insurance_adjudications = CandidApiClient::InsuranceAdjudications::AsyncClient.new(request_client: @async_request_client)
       @insurance_payments = CandidApiClient::InsurancePayments::AsyncClient.new(request_client: @async_request_client)
       @insurance_refunds = CandidApiClient::InsuranceRefunds::AsyncClient.new(request_client: @async_request_client)
+      @medication_dispense = CandidApiClient::MedicationDispense::AsyncClient.new(request_client: @async_request_client)
       @non_insurance_payer_payments = CandidApiClient::NonInsurancePayerPayments::AsyncClient.new(request_client: @async_request_client)
       @non_insurance_payer_refunds = CandidApiClient::NonInsurancePayerRefunds::AsyncClient.new(request_client: @async_request_client)
       @non_insurance_payers = CandidApiClient::NonInsurancePayers::AsyncClient.new(request_client: @async_request_client)

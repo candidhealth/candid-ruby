@@ -34,6 +34,7 @@ require_relative "../../service_lines/v_2/types/service_line_create"
 require_relative "../../guarantor/v_1/types/guarantor_create"
 require_relative "../../claim_submission/v_1/types/external_claim_submission_create"
 require_relative "../../custom_schemas/v_1/types/schema_instance"
+require_relative "types/vitals_update"
 require "async"
 
 module CandidApiClient
@@ -804,6 +805,16 @@ module CandidApiClient
         #  is provided as an input, then the encounter's schema instances will be cleared.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
         #   * :schema_id (String)
         #   * :content (Hash{String => Object})
+        # @param vitals [Hash] If a vitals entity already exists for the encounter, then all values will be
+        #  updated to the provided values.
+        #  Otherwise, a new vitals object will be created for the encounter.Request of type CandidApiClient::Encounters::V4::Types::VitalsUpdate, as a Hash
+        #   * :height_in (Integer)
+        #   * :weight_lbs (Integer)
+        #   * :blood_pressure_systolic_mmhg (Integer)
+        #   * :blood_pressure_diastolic_mmhg (Integer)
+        #   * :body_temperature_f (Float)
+        #   * :hemoglobin_gdl (Float)
+        #   * :hematocrit_pct (Float)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -836,10 +847,11 @@ module CandidApiClient
         #    last_menstrual_period_date: DateTime.parse(2023-01-15),
         #    delay_reason_code: C_1,
         #    patient_authorized_release: true,
-        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
+        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
+        #    vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }
         #  )
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -876,7 +888,8 @@ module CandidApiClient
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
               patient_authorized_release: patient_authorized_release,
-              schema_instances: schema_instances
+              schema_instances: schema_instances,
+              vitals: vitals
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/encounters/v4/#{encounter_id}"
@@ -1656,6 +1669,16 @@ module CandidApiClient
         #  is provided as an input, then the encounter's schema instances will be cleared.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
         #   * :schema_id (String)
         #   * :content (Hash{String => Object})
+        # @param vitals [Hash] If a vitals entity already exists for the encounter, then all values will be
+        #  updated to the provided values.
+        #  Otherwise, a new vitals object will be created for the encounter.Request of type CandidApiClient::Encounters::V4::Types::VitalsUpdate, as a Hash
+        #   * :height_in (Integer)
+        #   * :weight_lbs (Integer)
+        #   * :blood_pressure_systolic_mmhg (Integer)
+        #   * :blood_pressure_diastolic_mmhg (Integer)
+        #   * :body_temperature_f (Float)
+        #   * :hemoglobin_gdl (Float)
+        #   * :hematocrit_pct (Float)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -1688,10 +1711,11 @@ module CandidApiClient
         #    last_menstrual_period_date: DateTime.parse(2023-01-15),
         #    delay_reason_code: C_1,
         #    patient_authorized_release: true,
-        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
+        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
+        #    vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }
         #  )
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1729,7 +1753,8 @@ module CandidApiClient
                 last_menstrual_period_date: last_menstrual_period_date,
                 delay_reason_code: delay_reason_code,
                 patient_authorized_release: patient_authorized_release,
-                schema_instances: schema_instances
+                schema_instances: schema_instances,
+                vitals: vitals
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/encounters/v4/#{encounter_id}"

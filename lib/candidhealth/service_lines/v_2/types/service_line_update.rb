@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../../commons/types/procedure_modifier"
+require_relative "drug_identification"
 require_relative "service_line_denial_reason"
 require_relative "../../../commons/types/facility_type_code"
 require_relative "../../../commons/types/service_line_units"
@@ -27,6 +28,8 @@ module CandidApiClient
           attr_reader :diagnosis_id_two
           # @return [String]
           attr_reader :diagnosis_id_three
+          # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
+          attr_reader :drug_identification
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
           attr_reader :denial_reason
           # @return [CandidApiClient::Commons::Types::FacilityTypeCode]
@@ -62,6 +65,7 @@ module CandidApiClient
           # @param diagnosis_id_one [String]
           # @param diagnosis_id_two [String]
           # @param diagnosis_id_three [String]
+          # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
           # @param denial_reason [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
           # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode]
           # @param units [CandidApiClient::Commons::Types::ServiceLineUnits]
@@ -77,7 +81,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineUpdate]
           def initialize(edit_reason: OMIT, modifiers: OMIT, charge_amount_cents: OMIT, diagnosis_id_zero: OMIT,
-                         diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, units: OMIT, procedure_code: OMIT, quantity: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, additional_properties: nil)
+                         diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, units: OMIT, procedure_code: OMIT, quantity: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, additional_properties: nil)
             @edit_reason = edit_reason if edit_reason != OMIT
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
@@ -85,6 +89,7 @@ module CandidApiClient
             @diagnosis_id_one = diagnosis_id_one if diagnosis_id_one != OMIT
             @diagnosis_id_two = diagnosis_id_two if diagnosis_id_two != OMIT
             @diagnosis_id_three = diagnosis_id_three if diagnosis_id_three != OMIT
+            @drug_identification = drug_identification if drug_identification != OMIT
             @denial_reason = denial_reason if denial_reason != OMIT
             @place_of_service_code = place_of_service_code if place_of_service_code != OMIT
             @units = units if units != OMIT
@@ -102,6 +107,7 @@ module CandidApiClient
               "diagnosis_id_one": diagnosis_id_one,
               "diagnosis_id_two": diagnosis_id_two,
               "diagnosis_id_three": diagnosis_id_three,
+              "drug_identification": drug_identification,
               "denial_reason": denial_reason,
               "place_of_service_code": place_of_service_code,
               "units": units,
@@ -129,6 +135,12 @@ module CandidApiClient
             diagnosis_id_one = struct["diagnosis_id_one"]
             diagnosis_id_two = struct["diagnosis_id_two"]
             diagnosis_id_three = struct["diagnosis_id_three"]
+            if parsed_json["drug_identification"].nil?
+              drug_identification = nil
+            else
+              drug_identification = parsed_json["drug_identification"].to_json
+              drug_identification = CandidApiClient::ServiceLines::V2::Types::DrugIdentification.from_json(json_object: drug_identification)
+            end
             if parsed_json["denial_reason"].nil?
               denial_reason = nil
             else
@@ -152,6 +164,7 @@ module CandidApiClient
               diagnosis_id_one: diagnosis_id_one,
               diagnosis_id_two: diagnosis_id_two,
               diagnosis_id_three: diagnosis_id_three,
+              drug_identification: drug_identification,
               denial_reason: denial_reason,
               place_of_service_code: place_of_service_code,
               units: units,
@@ -185,6 +198,7 @@ module CandidApiClient
             obj.diagnosis_id_one&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_one is not the expected type, validation failed.")
             obj.diagnosis_id_two&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_two is not the expected type, validation failed.")
             obj.diagnosis_id_three&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_three is not the expected type, validation failed.")
+            obj.drug_identification.nil? || CandidApiClient::ServiceLines::V2::Types::DrugIdentification.validate_raw(obj: obj.drug_identification)
             obj.denial_reason.nil? || CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason.validate_raw(obj: obj.denial_reason)
             obj.place_of_service_code&.is_a?(CandidApiClient::Commons::Types::FacilityTypeCode) != false || raise("Passed value for field obj.place_of_service_code is not the expected type, validation failed.")
             obj.units&.is_a?(CandidApiClient::Commons::Types::ServiceLineUnits) != false || raise("Passed value for field obj.units is not the expected type, validation failed.")

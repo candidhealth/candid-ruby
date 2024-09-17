@@ -9,6 +9,7 @@ require_relative "candidhealth/billing_notes/client"
 require_relative "candidhealth/contracts/client"
 require_relative "candidhealth/custom_schemas/client"
 require_relative "candidhealth/eligibility/client"
+require_relative "candidhealth/encounter_providers/client"
 require_relative "candidhealth/encounters/client"
 require_relative "candidhealth/expected_network_status/client"
 require_relative "candidhealth/exports/client"
@@ -49,6 +50,8 @@ module CandidApiClient
     attr_reader :custom_schemas
     # @return [CandidApiClient::Eligibility::Client]
     attr_reader :eligibility
+    # @return [CandidApiClient::EncounterProviders::Client]
+    attr_reader :encounter_providers
     # @return [CandidApiClient::Encounters::Client]
     attr_reader :encounters
     # @return [CandidApiClient::ExpectedNetworkStatus::Client]
@@ -135,6 +138,7 @@ module CandidApiClient
       @contracts = CandidApiClient::Contracts::Client.new(request_client: @request_client)
       @custom_schemas = CandidApiClient::CustomSchemas::Client.new(request_client: @request_client)
       @eligibility = CandidApiClient::Eligibility::Client.new(request_client: @request_client)
+      @encounter_providers = CandidApiClient::EncounterProviders::Client.new(request_client: @request_client)
       @encounters = CandidApiClient::Encounters::Client.new(request_client: @request_client)
       @expected_network_status = CandidApiClient::ExpectedNetworkStatus::Client.new(request_client: @request_client)
       @exports = CandidApiClient::Exports::Client.new(request_client: @request_client)
@@ -176,6 +180,8 @@ module CandidApiClient
     attr_reader :custom_schemas
     # @return [CandidApiClient::Eligibility::AsyncClient]
     attr_reader :eligibility
+    # @return [CandidApiClient::EncounterProviders::AsyncClient]
+    attr_reader :encounter_providers
     # @return [CandidApiClient::Encounters::AsyncClient]
     attr_reader :encounters
     # @return [CandidApiClient::ExpectedNetworkStatus::AsyncClient]
@@ -262,6 +268,7 @@ module CandidApiClient
       @contracts = CandidApiClient::Contracts::AsyncClient.new(request_client: @async_request_client)
       @custom_schemas = CandidApiClient::CustomSchemas::AsyncClient.new(request_client: @async_request_client)
       @eligibility = CandidApiClient::Eligibility::AsyncClient.new(request_client: @async_request_client)
+      @encounter_providers = CandidApiClient::EncounterProviders::AsyncClient.new(request_client: @async_request_client)
       @encounters = CandidApiClient::Encounters::AsyncClient.new(request_client: @async_request_client)
       @expected_network_status = CandidApiClient::ExpectedNetworkStatus::AsyncClient.new(request_client: @async_request_client)
       @exports = CandidApiClient::Exports::AsyncClient.new(request_client: @async_request_client)

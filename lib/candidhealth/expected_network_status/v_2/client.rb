@@ -49,7 +49,7 @@ module CandidApiClient
         # @return [CandidApiClient::ExpectedNetworkStatus::V2::Types::ExpectedNetworkStatusResponseV2]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.expected_network_status.v_2.compute_for_rendering_provider(rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: {  }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
+        #  api.expected_network_status.v_2.compute_for_rendering_provider(rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: { payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", member_id: "string", insurance_type: { line_of_business: MEDICARE } }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
         def compute_for_rendering_provider(rendering_provider_id:, request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -94,7 +94,7 @@ module CandidApiClient
         # @return [CandidApiClient::ExpectedNetworkStatus::V2::Types::ComputeAllInNetworkProvidersResponse]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.expected_network_status.v_2.compute_all_in_network_providers(request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: {  }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
+        #  api.expected_network_status.v_2.compute_all_in_network_providers(request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: { payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", member_id: "string", insurance_type: { line_of_business: MEDICARE } }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
         def compute_all_in_network_providers(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -151,7 +151,7 @@ module CandidApiClient
         # @return [CandidApiClient::ExpectedNetworkStatus::V2::Types::ExpectedNetworkStatusResponseV2]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.expected_network_status.v_2.compute_for_rendering_provider(rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: {  }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
+        #  api.expected_network_status.v_2.compute_for_rendering_provider(rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: { payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", member_id: "string", insurance_type: { line_of_business: MEDICARE } }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
         def compute_for_rendering_provider(rendering_provider_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -198,7 +198,7 @@ module CandidApiClient
         # @return [CandidApiClient::ExpectedNetworkStatus::V2::Types::ComputeAllInNetworkProvidersResponse]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.expected_network_status.v_2.compute_all_in_network_providers(request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: {  }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
+        #  api.expected_network_status.v_2.compute_all_in_network_providers(request: { service_type: NEW_PATIENT_VIDEO_APPT, place_of_service_code: PHARMACY, subscriber_information: { payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", member_id: "string", insurance_type: { line_of_business: MEDICARE } }, patient_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569", date_of_service: DateTime.parse(2023-01-15) })
         def compute_all_in_network_providers(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

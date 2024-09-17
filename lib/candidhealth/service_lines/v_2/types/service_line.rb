@@ -69,12 +69,6 @@ module CandidApiClient
           # @return [String]
           attr_reader :procedure_code
           # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          attr_reader :referring_provider
-          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          attr_reader :initial_referring_provider
-          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          attr_reader :supervising_provider
-          # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           attr_reader :ordering_provider
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
@@ -127,9 +121,6 @@ module CandidApiClient
           # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode]
           # @param service_line_id [String]
           # @param procedure_code [String]
-          # @param referring_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          # @param initial_referring_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          # @param supervising_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
@@ -146,7 +137,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
           def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
-                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, additional_properties: nil)
+                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @allowed_amount_cents = allowed_amount_cents if allowed_amount_cents != OMIT
@@ -175,9 +166,6 @@ module CandidApiClient
             end
             @service_line_id = service_line_id
             @procedure_code = procedure_code
-            @referring_provider = referring_provider if referring_provider != OMIT
-            @initial_referring_provider = initial_referring_provider if initial_referring_provider != OMIT
-            @supervising_provider = supervising_provider if supervising_provider != OMIT
             @ordering_provider = ordering_provider if ordering_provider != OMIT
             @quantity = quantity
             @units = units
@@ -212,9 +200,6 @@ module CandidApiClient
               "place_of_service_code_as_submitted": place_of_service_code_as_submitted,
               "service_line_id": service_line_id,
               "procedure_code": procedure_code,
-              "referring_provider": referring_provider,
-              "initial_referring_provider": initial_referring_provider,
-              "supervising_provider": supervising_provider,
               "ordering_provider": ordering_provider,
               "quantity": quantity,
               "units": units,
@@ -283,24 +268,6 @@ module CandidApiClient
             place_of_service_code_as_submitted = struct["place_of_service_code_as_submitted"]
             service_line_id = struct["service_line_id"]
             procedure_code = struct["procedure_code"]
-            if parsed_json["referring_provider"].nil?
-              referring_provider = nil
-            else
-              referring_provider = parsed_json["referring_provider"].to_json
-              referring_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: referring_provider)
-            end
-            if parsed_json["initial_referring_provider"].nil?
-              initial_referring_provider = nil
-            else
-              initial_referring_provider = parsed_json["initial_referring_provider"].to_json
-              initial_referring_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: initial_referring_provider)
-            end
-            if parsed_json["supervising_provider"].nil?
-              supervising_provider = nil
-            else
-              supervising_provider = parsed_json["supervising_provider"].to_json
-              supervising_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: supervising_provider)
-            end
             if parsed_json["ordering_provider"].nil?
               ordering_provider = nil
             else
@@ -346,9 +313,6 @@ module CandidApiClient
               place_of_service_code_as_submitted: place_of_service_code_as_submitted,
               service_line_id: service_line_id,
               procedure_code: procedure_code,
-              referring_provider: referring_provider,
-              initial_referring_provider: initial_referring_provider,
-              supervising_provider: supervising_provider,
               ordering_provider: ordering_provider,
               quantity: quantity,
               units: units,
@@ -399,9 +363,6 @@ module CandidApiClient
             obj.place_of_service_code_as_submitted&.is_a?(CandidApiClient::Commons::Types::FacilityTypeCode) != false || raise("Passed value for field obj.place_of_service_code_as_submitted is not the expected type, validation failed.")
             obj.service_line_id.is_a?(String) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
             obj.procedure_code.is_a?(String) != false || raise("Passed value for field obj.procedure_code is not the expected type, validation failed.")
-            obj.referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.referring_provider)
-            obj.initial_referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.initial_referring_provider)
-            obj.supervising_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.supervising_provider)
             obj.ordering_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.ordering_provider)
             obj.quantity.is_a?(String) != false || raise("Passed value for field obj.quantity is not the expected type, validation failed.")
             obj.units.is_a?(CandidApiClient::Commons::Types::ServiceLineUnits) != false || raise("Passed value for field obj.units is not the expected type, validation failed.")

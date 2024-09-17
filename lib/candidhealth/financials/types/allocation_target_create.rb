@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "json"
+require_relative "appointment_by_id_and_patient_external_id"
 
 module CandidApiClient
   module Financials
@@ -40,8 +41,8 @@ module CandidApiClient
                      json_object.value
                    when "billing_provider_by_id"
                      json_object.value
-                   when "appointment_by_id"
-                     json_object.value
+                   when "appointment_by_id_and_patient_external_id"
+                     CandidApiClient::Financials::Types::AppointmentByIdAndPatientExternalId.from_json(json_object: json_object)
                    when "unattributed"
                      nil
                    else
@@ -63,8 +64,8 @@ module CandidApiClient
             { "type": @discriminant, "value": @member }.to_json
           when "billing_provider_by_id"
             { "type": @discriminant, "value": @member }.to_json
-          when "appointment_by_id"
-            { "type": @discriminant, "value": @member }.to_json
+          when "appointment_by_id_and_patient_external_id"
+            { **@member.to_json, type: @discriminant }.to_json
           when "unattributed"
             { type: @discriminant }.to_json
           else
@@ -89,8 +90,8 @@ module CandidApiClient
             obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
           when "billing_provider_by_id"
             obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
-          when "appointment_by_id"
-            obj.is_a?(String) != false || raise("Passed value for field obj is not the expected type, validation failed.")
+          when "appointment_by_id_and_patient_external_id"
+            CandidApiClient::Financials::Types::AppointmentByIdAndPatientExternalId.validate_raw(obj: obj)
           when "unattributed"
             # noop
           else
@@ -130,10 +131,10 @@ module CandidApiClient
           new(member: member, discriminant: "billing_provider_by_id")
         end
 
-        # @param member [String]
+        # @param member [CandidApiClient::Financials::Types::AppointmentByIdAndPatientExternalId]
         # @return [CandidApiClient::Financials::Types::AllocationTargetCreate]
-        def self.appointment_by_id(member:)
-          new(member: member, discriminant: "appointment_by_id")
+        def self.appointment_by_id_and_patient_external_id(member:)
+          new(member: member, discriminant: "appointment_by_id_and_patient_external_id")
         end
 
         # @return [CandidApiClient::Financials::Types::AllocationTargetCreate]

@@ -118,7 +118,7 @@ module CandidApiClient
         # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.insurance_refunds.v_1.create(request: { amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", allocations: [{  }], refund_reason: OVERCHARGED })
+        #  api.insurance_refunds.v_1.create(request: { amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", allocations: [{ amount_cents: 1 }], refund_reason: OVERCHARGED })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -303,7 +303,7 @@ module CandidApiClient
         # @return [CandidApiClient::InsuranceRefunds::V1::Types::InsuranceRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.insurance_refunds.v_1.create(request: { amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", allocations: [{  }], refund_reason: OVERCHARGED })
+        #  api.insurance_refunds.v_1.create(request: { amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", allocations: [{ amount_cents: 1 }], refund_reason: OVERCHARGED })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

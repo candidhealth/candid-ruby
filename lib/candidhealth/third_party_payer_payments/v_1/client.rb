@@ -108,7 +108,7 @@ module CandidApiClient
         # @return [CandidApiClient::ThirdPartyPayerPayments::V1::Types::ThirdPartyPayerPayment]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.third_party_payer_payments.v_1.create(request: { third_party_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", check_number: "string", allocations: [{  }], invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
+        #  api.third_party_payer_payments.v_1.create(request: { third_party_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", check_number: "string", allocations: [{ amount_cents: 1 }], invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -278,7 +278,7 @@ module CandidApiClient
         # @return [CandidApiClient::ThirdPartyPayerPayments::V1::Types::ThirdPartyPayerPayment]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.third_party_payer_payments.v_1.create(request: { third_party_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", check_number: "string", allocations: [{  }], invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
+        #  api.third_party_payer_payments.v_1.create(request: { third_party_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", check_number: "string", allocations: [{ amount_cents: 1 }], invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

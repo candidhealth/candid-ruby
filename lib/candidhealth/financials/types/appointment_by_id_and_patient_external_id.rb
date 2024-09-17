@@ -6,7 +6,7 @@ require "json"
 module CandidApiClient
   module Financials
     module Types
-      class AppointmentAllocationTarget
+      class AppointmentByIdAndPatientExternalId
         # @return [String]
         attr_reader :appointment_id
         # @return [String]
@@ -22,7 +22,7 @@ module CandidApiClient
         # @param appointment_id [String]
         # @param patient_external_id [String]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @return [CandidApiClient::Financials::Types::AppointmentAllocationTarget]
+        # @return [CandidApiClient::Financials::Types::AppointmentByIdAndPatientExternalId]
         def initialize(appointment_id:, patient_external_id:, additional_properties: nil)
           @appointment_id = appointment_id
           @patient_external_id = patient_external_id
@@ -30,10 +30,10 @@ module CandidApiClient
           @_field_set = { "appointment_id": appointment_id, "patient_external_id": patient_external_id }
         end
 
-        # Deserialize a JSON object to an instance of AppointmentAllocationTarget
+        # Deserialize a JSON object to an instance of AppointmentByIdAndPatientExternalId
         #
         # @param json_object [String]
-        # @return [CandidApiClient::Financials::Types::AppointmentAllocationTarget]
+        # @return [CandidApiClient::Financials::Types::AppointmentByIdAndPatientExternalId]
         def self.from_json(json_object:)
           struct = JSON.parse(json_object, object_class: OpenStruct)
           appointment_id = struct["appointment_id"]
@@ -45,7 +45,7 @@ module CandidApiClient
           )
         end
 
-        # Serialize an instance of AppointmentAllocationTarget to a JSON object
+        # Serialize an instance of AppointmentByIdAndPatientExternalId to a JSON object
         #
         # @return [String]
         def to_json(*_args)

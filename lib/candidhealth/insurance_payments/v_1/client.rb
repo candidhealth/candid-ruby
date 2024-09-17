@@ -115,7 +115,7 @@ module CandidApiClient
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.insurance_payments.v_1.create(request: { amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", allocations: [{  }] })
+        #  api.insurance_payments.v_1.create(request: { amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", allocations: [{ amount_cents: 1 }] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -296,7 +296,7 @@ module CandidApiClient
         # @return [CandidApiClient::InsurancePayments::V1::Types::InsurancePayment]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.insurance_payments.v_1.create(request: { amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", allocations: [{  }] })
+        #  api.insurance_payments.v_1.create(request: { amount_cents: 1, payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), payment_note: "string", allocations: [{ amount_cents: 1 }] })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

@@ -15,6 +15,7 @@ require_relative "external_provenance"
 require_relative "contact"
 require_relative "../../../common/types/external_provider"
 require_relative "filing_order"
+require_relative "guarantor"
 require "ostruct"
 require "json"
 
@@ -98,6 +99,12 @@ module CandidApiClient
             attr_reader :general_practitioners
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::FilingOrder]
             attr_reader :filing_order
+            # @return [Array<String>]
+            attr_reader :non_insurance_payers
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor]
+            attr_reader :guarantor
+            # @return [Boolean]
+            attr_reader :self_pay
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -147,10 +154,13 @@ module CandidApiClient
             # @param contacts [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
             # @param general_practitioners [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]
             # @param filing_order [CandidApiClient::PreEncounter::Patients::V1::Types::FilingOrder]
+            # @param non_insurance_payers [Array<String>]
+            # @param guarantor [CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor]
+            # @param self_pay [Boolean]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, additional_properties: nil)
+                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, guarantor: OMIT, self_pay: OMIT, additional_properties: nil)
               @id = id
               @mrn = mrn
               @organization_id = organization_id
@@ -185,6 +195,9 @@ module CandidApiClient
               @contacts = contacts
               @general_practitioners = general_practitioners
               @filing_order = filing_order
+              @non_insurance_payers = non_insurance_payers if non_insurance_payers != OMIT
+              @guarantor = guarantor if guarantor != OMIT
+              @self_pay = self_pay if self_pay != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "id": id,
@@ -218,7 +231,10 @@ module CandidApiClient
                 "external_provenance": external_provenance,
                 "contacts": contacts,
                 "general_practitioners": general_practitioners,
-                "filing_order": filing_order
+                "filing_order": filing_order,
+                "non_insurance_payers": non_insurance_payers,
+                "guarantor": guarantor,
+                "self_pay": self_pay
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -303,6 +319,14 @@ module CandidApiClient
                 filing_order = parsed_json["filing_order"].to_json
                 filing_order = CandidApiClient::PreEncounter::Patients::V1::Types::FilingOrder.from_json(json_object: filing_order)
               end
+              non_insurance_payers = struct["non_insurance_payers"]
+              if parsed_json["guarantor"].nil?
+                guarantor = nil
+              else
+                guarantor = parsed_json["guarantor"].to_json
+                guarantor = CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor.from_json(json_object: guarantor)
+              end
+              self_pay = struct["self_pay"]
               new(
                 id: id,
                 mrn: mrn,
@@ -336,6 +360,9 @@ module CandidApiClient
                 contacts: contacts,
                 general_practitioners: general_practitioners,
                 filing_order: filing_order,
+                non_insurance_payers: non_insurance_payers,
+                guarantor: guarantor,
+                self_pay: self_pay,
                 additional_properties: struct
               )
             end
@@ -386,6 +413,9 @@ module CandidApiClient
               obj.contacts.is_a?(Array) != false || raise("Passed value for field obj.contacts is not the expected type, validation failed.")
               obj.general_practitioners.is_a?(Array) != false || raise("Passed value for field obj.general_practitioners is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Patients::V1::Types::FilingOrder.validate_raw(obj: obj.filing_order)
+              obj.non_insurance_payers&.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers is not the expected type, validation failed.")
+              obj.guarantor.nil? || CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor.validate_raw(obj: obj.guarantor)
+              obj.self_pay&.is_a?(Boolean) != false || raise("Passed value for field obj.self_pay is not the expected type, validation failed.")
             end
           end
         end

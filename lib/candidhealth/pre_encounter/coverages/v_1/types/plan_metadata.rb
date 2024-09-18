@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "date"
-require_relative "eligibility_status"
+require_relative "plan_date"
 require "ostruct"
 require "json"
 
@@ -25,8 +25,8 @@ module CandidApiClient
             attr_reader :start_date
             # @return [Date]
             attr_reader :end_date
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus]
-            attr_reader :eligibility_status
+            # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::PlanDate>]
+            attr_reader :plan_dates
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -42,11 +42,11 @@ module CandidApiClient
             # @param group_number [String]
             # @param start_date [Date]
             # @param end_date [Date]
-            # @param eligibility_status [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus]
+            # @param plan_dates [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::PlanDate>]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanMetadata]
             def initialize(insurance_type: OMIT, insurance_type_code: OMIT, plan_name: OMIT, member_id: OMIT,
-                           group_number: OMIT, start_date: OMIT, end_date: OMIT, eligibility_status: OMIT, additional_properties: nil)
+                           group_number: OMIT, start_date: OMIT, end_date: OMIT, plan_dates: OMIT, additional_properties: nil)
               @insurance_type = insurance_type if insurance_type != OMIT
               @insurance_type_code = insurance_type_code if insurance_type_code != OMIT
               @plan_name = plan_name if plan_name != OMIT
@@ -54,7 +54,7 @@ module CandidApiClient
               @group_number = group_number if group_number != OMIT
               @start_date = start_date if start_date != OMIT
               @end_date = end_date if end_date != OMIT
-              @eligibility_status = eligibility_status if eligibility_status != OMIT
+              @plan_dates = plan_dates if plan_dates != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "insurance_type": insurance_type,
@@ -64,7 +64,7 @@ module CandidApiClient
                 "group_number": group_number,
                 "start_date": start_date,
                 "end_date": end_date,
-                "eligibility_status": eligibility_status
+                "plan_dates": plan_dates
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -84,7 +84,10 @@ module CandidApiClient
               group_number = struct["group_number"]
               start_date = (Date.parse(parsed_json["start_date"]) unless parsed_json["start_date"].nil?)
               end_date = (Date.parse(parsed_json["end_date"]) unless parsed_json["end_date"].nil?)
-              eligibility_status = struct["eligibility_status"]
+              plan_dates = parsed_json["plan_dates"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Coverages::V1::Types::PlanDate.from_json(json_object: item)
+              end
               new(
                 insurance_type: insurance_type,
                 insurance_type_code: insurance_type_code,
@@ -93,7 +96,7 @@ module CandidApiClient
                 group_number: group_number,
                 start_date: start_date,
                 end_date: end_date,
-                eligibility_status: eligibility_status,
+                plan_dates: plan_dates,
                 additional_properties: struct
               )
             end
@@ -119,7 +122,7 @@ module CandidApiClient
               obj.group_number&.is_a?(String) != false || raise("Passed value for field obj.group_number is not the expected type, validation failed.")
               obj.start_date&.is_a?(Date) != false || raise("Passed value for field obj.start_date is not the expected type, validation failed.")
               obj.end_date&.is_a?(Date) != false || raise("Passed value for field obj.end_date is not the expected type, validation failed.")
-              obj.eligibility_status&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus) != false || raise("Passed value for field obj.eligibility_status is not the expected type, validation failed.")
+              obj.plan_dates&.is_a?(Array) != false || raise("Passed value for field obj.plan_dates is not the expected type, validation failed.")
             end
           end
         end

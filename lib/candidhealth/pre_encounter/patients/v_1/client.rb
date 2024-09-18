@@ -26,6 +26,7 @@ module CandidApiClient
           # Adds a patient. VersionConflictError is returned when the patient's external ID
           #  is already in use.
           #
+          # @param skip_duplicate_check [Boolean]
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient, as a Hash
           #   * :name (Hash)
           #     * :family (String)
@@ -75,12 +76,40 @@ module CandidApiClient
           #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
+          #   * :non_insurance_payers (Array<String>)
+          #   * :guarantor (Hash)
+          #     * :name (Hash)
+          #       * :family (String)
+          #       * :given (Array<String>)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::NameUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :telecom (Hash)
+          #       * :value (String)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::ContactPointUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :email (String)
+          #     * :birth_date (Date)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #   * :self_pay (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create(request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], primary_telecom: { value: "string", use: HOME, period: {"key":"value"} }, other_telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], period: { start: {"key":"value"}, end_: {"key":"value"} }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{"key":"value"}], period: { start: {"key":"value"}, end_: {"key":"value"} }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
-          def create(request:, request_options: nil)
+          #  api.pre_encounter.patients.v_1.create(skip_duplicate_check: true, request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], primary_telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{"key":"value"}], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } } }, self_pay: true })
+          def create(request:, skip_duplicate_check: nil, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -89,77 +118,9 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-              req.url "#{@request_client.get_url(environment: PreEncounter,
-                                                 request_options: request_options)}/patients/v1"
-            end
-            CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
-          end
-
-          # Adds a patient without checking for duplicates.
-          #
-          # @param request [Hash] Request of type CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient, as a Hash
-          #   * :name (Hash)
-          #     * :family (String)
-          #     * :given (Array<String>)
-          #     * :use (CandidApiClient::PreEncounter::Common::Types::NameUse)
-          #     * :period (Hash)
-          #       * :start (Date)
-          #       * :end_ (Date)
-          #   * :other_names (Array<CandidApiClient::PreEncounter::Common::Types::HumanName>)
-          #   * :gender (CandidApiClient::PreEncounter::Common::Types::Gender)
-          #   * :birth_date (Date)
-          #   * :social_security_number (String)
-          #   * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
-          #   * :sexual_orientation (CandidApiClient::PreEncounter::Common::Types::SexualOrientation)
-          #   * :race (CandidApiClient::PreEncounter::Common::Types::Race)
-          #   * :ethnicity (CandidApiClient::PreEncounter::Common::Types::Ethnicity)
-          #   * :disability_status (CandidApiClient::PreEncounter::Common::Types::DisabilityStatus)
-          #   * :marital_status (CandidApiClient::PreEncounter::Patients::V1::Types::MaritalStatus)
-          #   * :deceased (DateTime)
-          #   * :multiple_birth (Integer)
-          #   * :primary_address (Hash)
-          #     * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
-          #     * :line (Array<String>)
-          #     * :city (String)
-          #     * :state (String)
-          #     * :postal_code (String)
-          #     * :country (String)
-          #     * :period (Hash)
-          #       * :start (Date)
-          #       * :end_ (Date)
-          #   * :other_addresses (Array<CandidApiClient::PreEncounter::Common::Types::Address>)
-          #   * :primary_telecom (Hash)
-          #     * :value (String)
-          #     * :use (CandidApiClient::PreEncounter::Common::Types::ContactPointUse)
-          #     * :period (Hash)
-          #       * :start (Date)
-          #       * :end_ (Date)
-          #   * :other_telecoms (Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>)
-          #   * :email (String)
-          #   * :electronic_communication_opt_in (Boolean)
-          #   * :photo (String)
-          #   * :language (String)
-          #   * :external_provenance (Hash)
-          #     * :external_id (String)
-          #     * :system_name (String)
-          #   * :contacts (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>)
-          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
-          #   * :filing_order (Hash)
-          #     * :coverages (Array<String>)
-          # @param request_options [CandidApiClient::RequestOptions]
-          # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
-          # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create_no_duplicate_check(request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], primary_telecom: { value: "string", use: HOME, period: {"key":"value"} }, other_telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], period: { start: {"key":"value"}, end_: {"key":"value"} }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{"key":"value"}], period: { start: {"key":"value"}, end_: {"key":"value"} }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
-          def create_no_duplicate_check(request:, request_options: nil)
-            response = @request_client.conn.post do |req|
-              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
-              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = {
-            **(req.headers || {}),
-            **@request_client.get_headers,
-            **(request_options&.additional_headers || {})
+              req.params = {
+                **(request_options&.additional_query_parameters || {}),
+                "skip_duplicate_check": skip_duplicate_check
               }.compact
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
               req.url "#{@request_client.get_url(environment: PreEncounter,
@@ -315,6 +276,34 @@ module CandidApiClient
           #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
+          #   * :non_insurance_payers (Array<String>)
+          #   * :guarantor (Hash)
+          #     * :name (Hash)
+          #       * :family (String)
+          #       * :given (Array<String>)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::NameUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :telecom (Hash)
+          #       * :value (String)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::ContactPointUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :email (String)
+          #     * :birth_date (Date)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #   * :self_pay (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
@@ -322,7 +311,7 @@ module CandidApiClient
           #  api.pre_encounter.patients.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], primary_telecom: { value: "string", use: HOME, period: {"key":"value"} }, other_telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], period: { start: {"key":"value"}, end_: {"key":"value"} }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{"key":"value"}], period: { start: {"key":"value"}, end_: {"key":"value"} }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
+          #    request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], primary_telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{"key":"value"}], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } } }, self_pay: true }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -442,6 +431,7 @@ module CandidApiClient
           # Adds a patient. VersionConflictError is returned when the patient's external ID
           #  is already in use.
           #
+          # @param skip_duplicate_check [Boolean]
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient, as a Hash
           #   * :name (Hash)
           #     * :family (String)
@@ -491,12 +481,40 @@ module CandidApiClient
           #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
+          #   * :non_insurance_payers (Array<String>)
+          #   * :guarantor (Hash)
+          #     * :name (Hash)
+          #       * :family (String)
+          #       * :given (Array<String>)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::NameUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :telecom (Hash)
+          #       * :value (String)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::ContactPointUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :email (String)
+          #     * :birth_date (Date)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #   * :self_pay (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create(request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], primary_telecom: { value: "string", use: HOME, period: {"key":"value"} }, other_telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], period: { start: {"key":"value"}, end_: {"key":"value"} }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{"key":"value"}], period: { start: {"key":"value"}, end_: {"key":"value"} }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
-          def create(request:, request_options: nil)
+          #  api.pre_encounter.patients.v_1.create(skip_duplicate_check: true, request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], primary_telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{"key":"value"}], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } } }, self_pay: true })
+          def create(request:, skip_duplicate_check: nil, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
                 req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -506,79 +524,9 @@ module CandidApiClient
               **@request_client.get_headers,
               **(request_options&.additional_headers || {})
                 }.compact
-                req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
-                req.url "#{@request_client.get_url(environment: PreEncounter,
-                                                   request_options: request_options)}/patients/v1"
-              end
-              CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
-            end
-          end
-
-          # Adds a patient without checking for duplicates.
-          #
-          # @param request [Hash] Request of type CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient, as a Hash
-          #   * :name (Hash)
-          #     * :family (String)
-          #     * :given (Array<String>)
-          #     * :use (CandidApiClient::PreEncounter::Common::Types::NameUse)
-          #     * :period (Hash)
-          #       * :start (Date)
-          #       * :end_ (Date)
-          #   * :other_names (Array<CandidApiClient::PreEncounter::Common::Types::HumanName>)
-          #   * :gender (CandidApiClient::PreEncounter::Common::Types::Gender)
-          #   * :birth_date (Date)
-          #   * :social_security_number (String)
-          #   * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
-          #   * :sexual_orientation (CandidApiClient::PreEncounter::Common::Types::SexualOrientation)
-          #   * :race (CandidApiClient::PreEncounter::Common::Types::Race)
-          #   * :ethnicity (CandidApiClient::PreEncounter::Common::Types::Ethnicity)
-          #   * :disability_status (CandidApiClient::PreEncounter::Common::Types::DisabilityStatus)
-          #   * :marital_status (CandidApiClient::PreEncounter::Patients::V1::Types::MaritalStatus)
-          #   * :deceased (DateTime)
-          #   * :multiple_birth (Integer)
-          #   * :primary_address (Hash)
-          #     * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
-          #     * :line (Array<String>)
-          #     * :city (String)
-          #     * :state (String)
-          #     * :postal_code (String)
-          #     * :country (String)
-          #     * :period (Hash)
-          #       * :start (Date)
-          #       * :end_ (Date)
-          #   * :other_addresses (Array<CandidApiClient::PreEncounter::Common::Types::Address>)
-          #   * :primary_telecom (Hash)
-          #     * :value (String)
-          #     * :use (CandidApiClient::PreEncounter::Common::Types::ContactPointUse)
-          #     * :period (Hash)
-          #       * :start (Date)
-          #       * :end_ (Date)
-          #   * :other_telecoms (Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>)
-          #   * :email (String)
-          #   * :electronic_communication_opt_in (Boolean)
-          #   * :photo (String)
-          #   * :language (String)
-          #   * :external_provenance (Hash)
-          #     * :external_id (String)
-          #     * :system_name (String)
-          #   * :contacts (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>)
-          #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
-          #   * :filing_order (Hash)
-          #     * :coverages (Array<String>)
-          # @param request_options [CandidApiClient::RequestOptions]
-          # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
-          # @example
-          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create_no_duplicate_check(request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], primary_telecom: { value: "string", use: HOME, period: {"key":"value"} }, other_telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], period: { start: {"key":"value"}, end_: {"key":"value"} }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{"key":"value"}], period: { start: {"key":"value"}, end_: {"key":"value"} }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
-          def create_no_duplicate_check(request:, request_options: nil)
-            Async do
-              response = @request_client.conn.post do |req|
-                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
-                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-                req.headers = {
-              **(req.headers || {}),
-              **@request_client.get_headers,
-              **(request_options&.additional_headers || {})
+                req.params = {
+                  **(request_options&.additional_query_parameters || {}),
+                  "skip_duplicate_check": skip_duplicate_check
                 }.compact
                 req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
                 req.url "#{@request_client.get_url(environment: PreEncounter,
@@ -741,6 +689,34 @@ module CandidApiClient
           #   * :general_practitioners (Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>)
           #   * :filing_order (Hash)
           #     * :coverages (Array<String>)
+          #   * :non_insurance_payers (Array<String>)
+          #   * :guarantor (Hash)
+          #     * :name (Hash)
+          #       * :family (String)
+          #       * :given (Array<String>)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::NameUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :telecom (Hash)
+          #       * :value (String)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::ContactPointUse)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #     * :email (String)
+          #     * :birth_date (Date)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
+          #   * :self_pay (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
@@ -748,7 +724,7 @@ module CandidApiClient
           #  api.pre_encounter.patients.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], primary_telecom: { value: "string", use: HOME, period: {"key":"value"} }, other_telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } }], period: { start: {"key":"value"}, end_: {"key":"value"} }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: {"key":"value"} }], addresses: [{"key":"value"}], period: { start: {"key":"value"}, end_: {"key":"value"} }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
+          #    request: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], primary_telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, other_telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }], addresses: [{"key":"value"}], period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) }, canonical_id: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, telecom: { value: "string", use: HOME, period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: DateTime.parse(2023-01-15), end_: DateTime.parse(2023-01-15) } } }, self_pay: true }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do

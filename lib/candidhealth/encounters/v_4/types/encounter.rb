@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "date"
 require_relative "../../../claims/types/claim"
 require_relative "../../../individual/types/patient"
 require_relative "../../../guarantor/v_1/types/guarantor"
 require_relative "../../../encounter_providers/v_2/types/encounter_provider"
 require_relative "../../../service_facility/types/encounter_service_facility"
 require_relative "../../../individual/types/subscriber"
+require_relative "responsible_party_type"
 require_relative "../../../diagnoses/types/diagnosis"
 require_relative "clinical_note_category"
 require_relative "../../../billing_notes/v_2/types/billing_note"
@@ -15,6 +15,7 @@ require_relative "patient_history_category"
 require_relative "../../../patient_payments/v_3/types/patient_payment"
 require_relative "../../../tags/types/tag"
 require_relative "coding_attribution_type"
+require "date"
 require_relative "encounter_owner_of_next_action_type"
 require_relative "encounter_submission_origin_type"
 require_relative "../../../custom_schemas/v_1/types/schema_instance"
@@ -24,7 +25,6 @@ require_relative "intervention"
 require_relative "../../../commons/types/street_address_long_zip"
 require_relative "synchronicity_type"
 require_relative "billable_status_type"
-require_relative "responsible_party_type"
 require_relative "service_authorization_exception_code"
 require_relative "../../../commons/types/delay_reason_code"
 require "ostruct"
@@ -40,18 +40,6 @@ module CandidApiClient
           #  It's used to track and manage a patient's medical records, treatments, and other
           #  healthcare-related information.
           attr_reader :patient_control_number
-          # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-          #  This date must be the local date in the timezone where the service occurred.
-          #  Box 24a on the CMS-1500 claim form.
-          #  If service occurred over a range of dates, this should be the start date.
-          #  date_of_service must be defined on either the encounter or the service lines but
-          #  not both.
-          attr_reader :date_of_service
-          # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-          #  This date must be the local date in the timezone where the service occurred.
-          #  If omitted, the Encounter is assumed to be for a single day.
-          #  Must not be temporally before the date_of_service field.
-          attr_reader :end_date_of_service
           # @return [String]
           attr_reader :encounter_id
           # @return [Array<CandidApiClient::Claims::Types::Claim>]
@@ -104,6 +92,13 @@ module CandidApiClient
           attr_reader :subscriber_primary
           # @return [CandidApiClient::Individual::Types::Subscriber] Contains details of the secondary insurance subscriber.
           attr_reader :subscriber_secondary
+          # @return [String] Box 23 on the CMS-1500 claim form.
+          attr_reader :prior_authorization_number
+          # @return [String] Human-readable description of the appointment type (ex: "Acupuncture -
+          #  Headaches").
+          attr_reader :appointment_type
+          # @return [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
+          attr_reader :responsible_party
           # @return [String] URL that links directly to the claim created in Candid.
           attr_reader :url
           # @return [Array<CandidApiClient::Diagnoses::Types::Diagnosis>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -153,8 +148,24 @@ module CandidApiClient
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
           attr_reader :external_id
-          # @return [String] Box 23 on the CMS-1500 claim form.
-          attr_reader :prior_authorization_number
+          # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+          #  This date must be the local date in the timezone where the service occurred.
+          #  Box 24a on the CMS-1500 claim form.
+          #  If service occurred over a range of dates, this should be the start date.
+          #  date_of_service must be defined on either the encounter or the service lines but
+          #  not both.
+          #  If there are greater than zero service lines, it is recommended to specify
+          #  date_of_service on the service_line instead of on the encounter to prepare for
+          #  future API versions.
+          attr_reader :date_of_service
+          # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
+          #  This date must be the local date in the timezone where the service occurred.
+          #  If omitted, the Encounter is assumed to be for a single day.
+          #  Must not be temporally before the date_of_service field.
+          #  If there are greater than zero service lines, it is recommended to specify
+          #  end_date_of_service on the service_line instead of on the encounter to prepare
+          #  for future API versions.
+          attr_reader :end_date_of_service
           # @return [Boolean] Whether this patient has authorized the release of medical information
           #  for billing purpose.
           #  Box 12 on the CMS-1500 claim form.
@@ -167,9 +178,6 @@ module CandidApiClient
           #  to be made to you, not them.
           #  Box 27 on the CMS-1500 claim form.
           attr_reader :provider_accepts_assignment
-          # @return [String] Human-readable description of the appointment type (ex: "Acupuncture -
-          #  Headaches").
-          attr_reader :appointment_type
           # @return [Array<CandidApiClient::Encounters::V4::Types::Medication>]
           attr_reader :existing_medications
           # @return [CandidApiClient::Encounters::V4::Types::Vitals]
@@ -191,8 +199,6 @@ module CandidApiClient
           #  if the Encounter has not occurred yet or if there is no intention of ever
           #  billing the responsible_party.
           attr_reader :billable_status
-          # @return [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
-          attr_reader :responsible_party
           # @return [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
           attr_reader :additional_information
@@ -239,16 +245,6 @@ module CandidApiClient
           #  within a healthcare system or facility.
           #  It's used to track and manage a patient's medical records, treatments, and other
           #  healthcare-related information.
-          # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-          #  This date must be the local date in the timezone where the service occurred.
-          #  Box 24a on the CMS-1500 claim form.
-          #  If service occurred over a range of dates, this should be the start date.
-          #  date_of_service must be defined on either the encounter or the service lines but
-          #  not both.
-          # @param end_date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-          #  This date must be the local date in the timezone where the service occurred.
-          #  If omitted, the Encounter is assumed to be for a single day.
-          #  Must not be temporally before the date_of_service field.
           # @param encounter_id [String]
           # @param claims [Array<CandidApiClient::Claims::Types::Claim>]
           # @param patient [CandidApiClient::Individual::Types::Patient] Contains the identification information of the individual receiving medical
@@ -289,6 +285,10 @@ module CandidApiClient
           #  Note: Cash Pay is no longer a valid payer_id in v4, please use responsible party
           #  to define self-pay claims.
           # @param subscriber_secondary [CandidApiClient::Individual::Types::Subscriber] Contains details of the secondary insurance subscriber.
+          # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form.
+          # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
+          #  Headaches").
+          # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
           # @param url [String] URL that links directly to the claim created in Candid.
           # @param diagnoses [Array<CandidApiClient::Diagnoses::Types::Diagnosis>] Ideally, this field should contain no more than 12 diagnoses. However, more
           #  diagnoses may be submitted at this time, and coders will later prioritize the 12
@@ -322,7 +322,22 @@ module CandidApiClient
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
-          # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form.
+          # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+          #  This date must be the local date in the timezone where the service occurred.
+          #  Box 24a on the CMS-1500 claim form.
+          #  If service occurred over a range of dates, this should be the start date.
+          #  date_of_service must be defined on either the encounter or the service lines but
+          #  not both.
+          #  If there are greater than zero service lines, it is recommended to specify
+          #  date_of_service on the service_line instead of on the encounter to prepare for
+          #  future API versions.
+          # @param end_date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
+          #  This date must be the local date in the timezone where the service occurred.
+          #  If omitted, the Encounter is assumed to be for a single day.
+          #  Must not be temporally before the date_of_service field.
+          #  If there are greater than zero service lines, it is recommended to specify
+          #  end_date_of_service on the service_line instead of on the encounter to prepare
+          #  for future API versions.
           # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
           #  for billing purpose.
           #  Box 12 on the CMS-1500 claim form.
@@ -332,8 +347,6 @@ module CandidApiClient
           # @param provider_accepts_assignment [Boolean] Whether you have accepted the patient's authorization for insurance payments
           #  to be made to you, not them.
           #  Box 27 on the CMS-1500 claim form.
-          # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
-          #  Headaches").
           # @param existing_medications [Array<CandidApiClient::Encounters::V4::Types::Medication>]
           # @param vitals [CandidApiClient::Encounters::V4::Types::Vitals]
           # @param interventions [Array<CandidApiClient::Encounters::V4::Types::Intervention>]
@@ -349,7 +362,6 @@ module CandidApiClient
           #  Examples for when this should be set to NOT_BILLABLE include
           #  if the Encounter has not occurred yet or if there is no intention of ever
           #  billing the responsible_party.
-          # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
           # @param additional_information [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
           # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
@@ -379,11 +391,9 @@ module CandidApiClient
           #  Code indicating the reason why a request was delayed
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
-          def initialize(date_of_service:, encounter_id:, claims:, patient:, billing_provider:, rendering_provider:,
-                         service_facility:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, responsible_party:, patient_control_number: OMIT, end_date_of_service: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, prior_authorization_number: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+          def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, appointment_type: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
-            @date_of_service = date_of_service
-            @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @encounter_id = encounter_id
             @claims = claims
             @patient = patient
@@ -396,6 +406,9 @@ module CandidApiClient
             @service_facility = service_facility
             @subscriber_primary = subscriber_primary if subscriber_primary != OMIT
             @subscriber_secondary = subscriber_secondary if subscriber_secondary != OMIT
+            @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
+            @appointment_type = appointment_type if appointment_type != OMIT
+            @responsible_party = responsible_party
             @url = url
             @diagnoses = diagnoses
             @clinical_notes = clinical_notes
@@ -416,18 +429,17 @@ module CandidApiClient
             @submission_origin = submission_origin
             @schema_instances = schema_instances
             @external_id = external_id
-            @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
+            @date_of_service = date_of_service if date_of_service != OMIT
+            @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @patient_authorized_release = patient_authorized_release
             @benefits_assigned_to_provider = benefits_assigned_to_provider
             @provider_accepts_assignment = provider_accepts_assignment
-            @appointment_type = appointment_type if appointment_type != OMIT
             @existing_medications = existing_medications if existing_medications != OMIT
             @vitals = vitals if vitals != OMIT
             @interventions = interventions if interventions != OMIT
             @pay_to_address = pay_to_address if pay_to_address != OMIT
             @synchronicity = synchronicity if synchronicity != OMIT
             @billable_status = billable_status
-            @responsible_party = responsible_party
             @additional_information = additional_information if additional_information != OMIT
             if service_authorization_exception_code != OMIT
               @service_authorization_exception_code = service_authorization_exception_code
@@ -442,8 +454,6 @@ module CandidApiClient
             @additional_properties = additional_properties
             @_field_set = {
               "patient_control_number": patient_control_number,
-              "date_of_service": date_of_service,
-              "end_date_of_service": end_date_of_service,
               "encounter_id": encounter_id,
               "claims": claims,
               "patient": patient,
@@ -456,6 +466,9 @@ module CandidApiClient
               "service_facility": service_facility,
               "subscriber_primary": subscriber_primary,
               "subscriber_secondary": subscriber_secondary,
+              "prior_authorization_number": prior_authorization_number,
+              "appointment_type": appointment_type,
+              "responsible_party": responsible_party,
               "url": url,
               "diagnoses": diagnoses,
               "clinical_notes": clinical_notes,
@@ -472,18 +485,17 @@ module CandidApiClient
               "submission_origin": submission_origin,
               "schema_instances": schema_instances,
               "external_id": external_id,
-              "prior_authorization_number": prior_authorization_number,
+              "date_of_service": date_of_service,
+              "end_date_of_service": end_date_of_service,
               "patient_authorized_release": patient_authorized_release,
               "benefits_assigned_to_provider": benefits_assigned_to_provider,
               "provider_accepts_assignment": provider_accepts_assignment,
-              "appointment_type": appointment_type,
               "existing_medications": existing_medications,
               "vitals": vitals,
               "interventions": interventions,
               "pay_to_address": pay_to_address,
               "synchronicity": synchronicity,
               "billable_status": billable_status,
-              "responsible_party": responsible_party,
               "additional_information": additional_information,
               "service_authorization_exception_code": service_authorization_exception_code,
               "admission_date": admission_date,
@@ -504,10 +516,6 @@ module CandidApiClient
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
             patient_control_number = struct["patient_control_number"]
-            date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
-            end_date_of_service = unless parsed_json["end_date_of_service"].nil?
-                                    Date.parse(parsed_json["end_date_of_service"])
-                                  end
             encounter_id = struct["encounter_id"]
             claims = parsed_json["claims"]&.map do |item|
               item = item.to_json
@@ -573,6 +581,9 @@ module CandidApiClient
               subscriber_secondary = parsed_json["subscriber_secondary"].to_json
               subscriber_secondary = CandidApiClient::Individual::Types::Subscriber.from_json(json_object: subscriber_secondary)
             end
+            prior_authorization_number = struct["prior_authorization_number"]
+            appointment_type = struct["appointment_type"]
+            responsible_party = struct["responsible_party"]
             url = struct["url"]
             diagnoses = parsed_json["diagnoses"]&.map do |item|
               item = item.to_json
@@ -612,11 +623,13 @@ module CandidApiClient
               CandidApiClient::CustomSchemas::V1::Types::SchemaInstance.from_json(json_object: item)
             end
             external_id = struct["external_id"]
-            prior_authorization_number = struct["prior_authorization_number"]
+            date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
+            end_date_of_service = unless parsed_json["end_date_of_service"].nil?
+                                    Date.parse(parsed_json["end_date_of_service"])
+                                  end
             patient_authorized_release = struct["patient_authorized_release"]
             benefits_assigned_to_provider = struct["benefits_assigned_to_provider"]
             provider_accepts_assignment = struct["provider_accepts_assignment"]
-            appointment_type = struct["appointment_type"]
             existing_medications = parsed_json["existing_medications"]&.map do |item|
               item = item.to_json
               CandidApiClient::Encounters::V4::Types::Medication.from_json(json_object: item)
@@ -639,7 +652,6 @@ module CandidApiClient
             end
             synchronicity = struct["synchronicity"]
             billable_status = struct["billable_status"]
-            responsible_party = struct["responsible_party"]
             additional_information = struct["additional_information"]
             service_authorization_exception_code = struct["service_authorization_exception_code"]
             admission_date = (Date.parse(parsed_json["admission_date"]) unless parsed_json["admission_date"].nil?)
@@ -653,8 +665,6 @@ module CandidApiClient
             delay_reason_code = struct["delay_reason_code"]
             new(
               patient_control_number: patient_control_number,
-              date_of_service: date_of_service,
-              end_date_of_service: end_date_of_service,
               encounter_id: encounter_id,
               claims: claims,
               patient: patient,
@@ -667,6 +677,9 @@ module CandidApiClient
               service_facility: service_facility,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
+              prior_authorization_number: prior_authorization_number,
+              appointment_type: appointment_type,
+              responsible_party: responsible_party,
               url: url,
               diagnoses: diagnoses,
               clinical_notes: clinical_notes,
@@ -683,18 +696,17 @@ module CandidApiClient
               submission_origin: submission_origin,
               schema_instances: schema_instances,
               external_id: external_id,
-              prior_authorization_number: prior_authorization_number,
+              date_of_service: date_of_service,
+              end_date_of_service: end_date_of_service,
               patient_authorized_release: patient_authorized_release,
               benefits_assigned_to_provider: benefits_assigned_to_provider,
               provider_accepts_assignment: provider_accepts_assignment,
-              appointment_type: appointment_type,
               existing_medications: existing_medications,
               vitals: vitals,
               interventions: interventions,
               pay_to_address: pay_to_address,
               synchronicity: synchronicity,
               billable_status: billable_status,
-              responsible_party: responsible_party,
               additional_information: additional_information,
               service_authorization_exception_code: service_authorization_exception_code,
               admission_date: admission_date,
@@ -721,8 +733,6 @@ module CandidApiClient
           # @return [Void]
           def self.validate_raw(obj:)
             obj.patient_control_number&.is_a?(String) != false || raise("Passed value for field obj.patient_control_number is not the expected type, validation failed.")
-            obj.date_of_service.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
-            obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
             obj.encounter_id.is_a?(String) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
             obj.claims.is_a?(Array) != false || raise("Passed value for field obj.claims is not the expected type, validation failed.")
             CandidApiClient::Individual::Types::Patient.validate_raw(obj: obj.patient)
@@ -735,6 +745,9 @@ module CandidApiClient
             CandidApiClient::ServiceFacility::Types::EncounterServiceFacility.validate_raw(obj: obj.service_facility)
             obj.subscriber_primary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_primary)
             obj.subscriber_secondary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_secondary)
+            obj.prior_authorization_number&.is_a?(String) != false || raise("Passed value for field obj.prior_authorization_number is not the expected type, validation failed.")
+            obj.appointment_type&.is_a?(String) != false || raise("Passed value for field obj.appointment_type is not the expected type, validation failed.")
+            obj.responsible_party.is_a?(CandidApiClient::Encounters::V4::Types::ResponsiblePartyType) != false || raise("Passed value for field obj.responsible_party is not the expected type, validation failed.")
             obj.url.is_a?(String) != false || raise("Passed value for field obj.url is not the expected type, validation failed.")
             obj.diagnoses.is_a?(Array) != false || raise("Passed value for field obj.diagnoses is not the expected type, validation failed.")
             obj.clinical_notes.is_a?(Array) != false || raise("Passed value for field obj.clinical_notes is not the expected type, validation failed.")
@@ -751,18 +764,17 @@ module CandidApiClient
             obj.submission_origin.is_a?(CandidApiClient::Encounters::V4::Types::EncounterSubmissionOriginType) != false || raise("Passed value for field obj.submission_origin is not the expected type, validation failed.")
             obj.schema_instances.is_a?(Array) != false || raise("Passed value for field obj.schema_instances is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
-            obj.prior_authorization_number&.is_a?(String) != false || raise("Passed value for field obj.prior_authorization_number is not the expected type, validation failed.")
+            obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
+            obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
             obj.patient_authorized_release.is_a?(Boolean) != false || raise("Passed value for field obj.patient_authorized_release is not the expected type, validation failed.")
             obj.benefits_assigned_to_provider.is_a?(Boolean) != false || raise("Passed value for field obj.benefits_assigned_to_provider is not the expected type, validation failed.")
             obj.provider_accepts_assignment.is_a?(Boolean) != false || raise("Passed value for field obj.provider_accepts_assignment is not the expected type, validation failed.")
-            obj.appointment_type&.is_a?(String) != false || raise("Passed value for field obj.appointment_type is not the expected type, validation failed.")
             obj.existing_medications&.is_a?(Array) != false || raise("Passed value for field obj.existing_medications is not the expected type, validation failed.")
             obj.vitals.nil? || CandidApiClient::Encounters::V4::Types::Vitals.validate_raw(obj: obj.vitals)
             obj.interventions&.is_a?(Array) != false || raise("Passed value for field obj.interventions is not the expected type, validation failed.")
             obj.pay_to_address.nil? || CandidApiClient::Commons::Types::StreetAddressLongZip.validate_raw(obj: obj.pay_to_address)
             obj.synchronicity&.is_a?(CandidApiClient::Encounters::V4::Types::SynchronicityType) != false || raise("Passed value for field obj.synchronicity is not the expected type, validation failed.")
             obj.billable_status.is_a?(CandidApiClient::Encounters::V4::Types::BillableStatusType) != false || raise("Passed value for field obj.billable_status is not the expected type, validation failed.")
-            obj.responsible_party.is_a?(CandidApiClient::Encounters::V4::Types::ResponsiblePartyType) != false || raise("Passed value for field obj.responsible_party is not the expected type, validation failed.")
             obj.additional_information&.is_a?(String) != false || raise("Passed value for field obj.additional_information is not the expected type, validation failed.")
             obj.service_authorization_exception_code&.is_a?(CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode) != false || raise("Passed value for field obj.service_authorization_exception_code is not the expected type, validation failed.")
             obj.admission_date&.is_a?(Date) != false || raise("Passed value for field obj.admission_date is not the expected type, validation failed.")

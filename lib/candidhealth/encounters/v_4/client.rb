@@ -34,6 +34,7 @@ require_relative "../../service_lines/v_2/types/service_line_create"
 require_relative "../../guarantor/v_1/types/guarantor_create"
 require_relative "../../claim_submission/v_1/types/external_claim_submission_create"
 require_relative "../../custom_schemas/v_1/types/schema_instance"
+require_relative "../../individual/types/patient_update"
 require_relative "types/vitals_update"
 require "async"
 
@@ -988,7 +989,7 @@ module CandidApiClient
         #  be
         #  submitted to the payor.
         # @param tag_ids [Array<String>] Names of tags that should be on the encounter.  Note all tags on encounter will
-        #  be overriden with this list.
+        #  be overridden with this list.
         # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
         #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
@@ -1111,6 +1112,25 @@ module CandidApiClient
         #  related to the patient's pregnancy.
         # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #  Code indicating the reason why a request was delayed
+        # @param patient [Hash] Contains the identification information of the individual receiving medical
+        #  services.Request of type CandidApiClient::Individual::Types::PatientUpdate, as a Hash
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :external_id (String)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
+        #   * :phone_consent (Boolean)
+        #   * :email (String)
+        #   * :email_consent (Boolean)
+        #   * :non_insurance_payers (Array<String>)
         # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
         #  for billing purpose.
         #  Box 12 on the CMS-1500 claim form.
@@ -1164,12 +1184,13 @@ module CandidApiClient
         #    onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15),
         #    last_menstrual_period_date: DateTime.parse(2023-01-15),
         #    delay_reason_code: C_1,
+        #    patient: { first_name: "string", last_name: "string", gender: MALE, external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, non_insurance_payers: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] },
         #    patient_authorized_release: true,
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
         #    vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }
         #  )
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1205,6 +1226,7 @@ module CandidApiClient
               onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
+              patient: patient,
               patient_authorized_release: patient_authorized_release,
               schema_instances: schema_instances,
               vitals: vitals
@@ -2172,7 +2194,7 @@ module CandidApiClient
         #  be
         #  submitted to the payor.
         # @param tag_ids [Array<String>] Names of tags that should be on the encounter.  Note all tags on encounter will
-        #  be overriden with this list.
+        #  be overridden with this list.
         # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
         #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
@@ -2295,6 +2317,25 @@ module CandidApiClient
         #  related to the patient's pregnancy.
         # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #  Code indicating the reason why a request was delayed
+        # @param patient [Hash] Contains the identification information of the individual receiving medical
+        #  services.Request of type CandidApiClient::Individual::Types::PatientUpdate, as a Hash
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :external_id (String)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
+        #   * :phone_consent (Boolean)
+        #   * :email (String)
+        #   * :email_consent (Boolean)
+        #   * :non_insurance_payers (Array<String>)
         # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
         #  for billing purpose.
         #  Box 12 on the CMS-1500 claim form.
@@ -2348,12 +2389,13 @@ module CandidApiClient
         #    onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15),
         #    last_menstrual_period_date: DateTime.parse(2023-01-15),
         #    delay_reason_code: C_1,
+        #    patient: { first_name: "string", last_name: "string", gender: MALE, external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, non_insurance_payers: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] },
         #    patient_authorized_release: true,
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
         #    vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }
         #  )
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2390,6 +2432,7 @@ module CandidApiClient
                 onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
                 last_menstrual_period_date: last_menstrual_period_date,
                 delay_reason_code: delay_reason_code,
+                patient: patient,
                 patient_authorized_release: patient_authorized_release,
                 schema_instances: schema_instances,
                 vitals: vitals

@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
 require_relative "../../../common/types/additional_payer_information"
-require_relative "network_type"
-require_relative "insurance_type_code"
+require_relative "authorization_unit"
 require_relative "../../../common/types/period"
 require "ostruct"
 require "json"
 
 module CandidApiClient
   module PreEncounter
-    module Coverages
+    module Patients
       module V1
         module Types
-          class InsurancePlan
-            # @return [String]
-            attr_reader :member_id
+          class Authorization
             # @return [String]
             attr_reader :payer_id
             # @return [String]
@@ -22,17 +19,17 @@ module CandidApiClient
             # @return [CandidApiClient::PreEncounter::Common::Types::AdditionalPayerInformation]
             attr_reader :additional_payer_information
             # @return [String]
-            attr_reader :group_number
+            attr_reader :authorization_number
             # @return [String]
-            attr_reader :name
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType]
-            attr_reader :plan_type
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode]
-            attr_reader :type
+            attr_reader :cpt_code
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::AuthorizationUnit]
+            attr_reader :units
+            # @return [Integer]
+            attr_reader :quantity
             # @return [CandidApiClient::PreEncounter::Common::Types::Period]
             attr_reader :period
             # @return [String]
-            attr_reader :insurance_card_image_locator
+            attr_reader :notes
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -41,55 +38,51 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param member_id [String]
             # @param payer_id [String]
             # @param payer_name [String]
             # @param additional_payer_information [CandidApiClient::PreEncounter::Common::Types::AdditionalPayerInformation]
-            # @param group_number [String]
-            # @param name [String]
-            # @param plan_type [CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType]
-            # @param type [CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode]
+            # @param authorization_number [String]
+            # @param cpt_code [String]
+            # @param units [CandidApiClient::PreEncounter::Patients::V1::Types::AuthorizationUnit]
+            # @param quantity [Integer]
             # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
-            # @param insurance_card_image_locator [String]
+            # @param notes [String]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
-            def initialize(member_id:, payer_id:, payer_name:, additional_payer_information: OMIT, group_number: OMIT,
-                           name: OMIT, plan_type: OMIT, type: OMIT, period: OMIT, insurance_card_image_locator: OMIT, additional_properties: nil)
-              @member_id = member_id
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Authorization]
+            def initialize(payer_id:, payer_name:, authorization_number:, cpt_code:, units:,
+                           additional_payer_information: OMIT, quantity: OMIT, period: OMIT, notes: OMIT, additional_properties: nil)
               @payer_id = payer_id
               @payer_name = payer_name
               @additional_payer_information = additional_payer_information if additional_payer_information != OMIT
-              @group_number = group_number if group_number != OMIT
-              @name = name if name != OMIT
-              @plan_type = plan_type if plan_type != OMIT
-              @type = type if type != OMIT
+              @authorization_number = authorization_number
+              @cpt_code = cpt_code
+              @units = units
+              @quantity = quantity if quantity != OMIT
               @period = period if period != OMIT
-              @insurance_card_image_locator = insurance_card_image_locator if insurance_card_image_locator != OMIT
+              @notes = notes if notes != OMIT
               @additional_properties = additional_properties
               @_field_set = {
-                "member_id": member_id,
                 "payer_id": payer_id,
                 "payer_name": payer_name,
                 "additional_payer_information": additional_payer_information,
-                "group_number": group_number,
-                "name": name,
-                "plan_type": plan_type,
-                "type": type,
+                "authorization_number": authorization_number,
+                "cpt_code": cpt_code,
+                "units": units,
+                "quantity": quantity,
                 "period": period,
-                "insurance_card_image_locator": insurance_card_image_locator
+                "notes": notes
               }.reject do |_k, v|
                 v == OMIT
               end
             end
 
-            # Deserialize a JSON object to an instance of InsurancePlan
+            # Deserialize a JSON object to an instance of Authorization
             #
             # @param json_object [String]
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Authorization]
             def self.from_json(json_object:)
               struct = JSON.parse(json_object, object_class: OpenStruct)
               parsed_json = JSON.parse(json_object)
-              member_id = struct["member_id"]
               payer_id = struct["payer_id"]
               payer_name = struct["payer_name"]
               if parsed_json["additional_payer_information"].nil?
@@ -98,33 +91,32 @@ module CandidApiClient
                 additional_payer_information = parsed_json["additional_payer_information"].to_json
                 additional_payer_information = CandidApiClient::PreEncounter::Common::Types::AdditionalPayerInformation.from_json(json_object: additional_payer_information)
               end
-              group_number = struct["group_number"]
-              name = struct["name"]
-              plan_type = struct["plan_type"]
-              type = struct["type"]
+              authorization_number = struct["authorization_number"]
+              cpt_code = struct["cpt_code"]
+              units = struct["units"]
+              quantity = struct["quantity"]
               if parsed_json["period"].nil?
                 period = nil
               else
                 period = parsed_json["period"].to_json
                 period = CandidApiClient::PreEncounter::Common::Types::Period.from_json(json_object: period)
               end
-              insurance_card_image_locator = struct["insurance_card_image_locator"]
+              notes = struct["notes"]
               new(
-                member_id: member_id,
                 payer_id: payer_id,
                 payer_name: payer_name,
                 additional_payer_information: additional_payer_information,
-                group_number: group_number,
-                name: name,
-                plan_type: plan_type,
-                type: type,
+                authorization_number: authorization_number,
+                cpt_code: cpt_code,
+                units: units,
+                quantity: quantity,
                 period: period,
-                insurance_card_image_locator: insurance_card_image_locator,
+                notes: notes,
                 additional_properties: struct
               )
             end
 
-            # Serialize an instance of InsurancePlan to a JSON object
+            # Serialize an instance of Authorization to a JSON object
             #
             # @return [String]
             def to_json(*_args)
@@ -138,16 +130,15 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              obj.member_id.is_a?(String) != false || raise("Passed value for field obj.member_id is not the expected type, validation failed.")
               obj.payer_id.is_a?(String) != false || raise("Passed value for field obj.payer_id is not the expected type, validation failed.")
               obj.payer_name.is_a?(String) != false || raise("Passed value for field obj.payer_name is not the expected type, validation failed.")
               obj.additional_payer_information.nil? || CandidApiClient::PreEncounter::Common::Types::AdditionalPayerInformation.validate_raw(obj: obj.additional_payer_information)
-              obj.group_number&.is_a?(String) != false || raise("Passed value for field obj.group_number is not the expected type, validation failed.")
-              obj.name&.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
-              obj.plan_type&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType) != false || raise("Passed value for field obj.plan_type is not the expected type, validation failed.")
-              obj.type&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode) != false || raise("Passed value for field obj.type is not the expected type, validation failed.")
+              obj.authorization_number.is_a?(String) != false || raise("Passed value for field obj.authorization_number is not the expected type, validation failed.")
+              obj.cpt_code.is_a?(String) != false || raise("Passed value for field obj.cpt_code is not the expected type, validation failed.")
+              obj.units.is_a?(CandidApiClient::PreEncounter::Patients::V1::Types::AuthorizationUnit) != false || raise("Passed value for field obj.units is not the expected type, validation failed.")
+              obj.quantity&.is_a?(Integer) != false || raise("Passed value for field obj.quantity is not the expected type, validation failed.")
               obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
-              obj.insurance_card_image_locator&.is_a?(String) != false || raise("Passed value for field obj.insurance_card_image_locator is not the expected type, validation failed.")
+              obj.notes&.is_a?(String) != false || raise("Passed value for field obj.notes is not the expected type, validation failed.")
             end
           end
         end

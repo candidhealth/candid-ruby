@@ -51,6 +51,9 @@ module CandidApiClient
           #  to be made to you, not them.
           #  Box 27 on the CMS-1500 claim form.
           attr_reader :provider_accepts_assignment
+          # @return [String] Human-readable description of the appointment type (ex: "Acupuncture -
+          #  Headaches").
+          attr_reader :appointment_type
           # @return [Array<CandidApiClient::Encounters::V4::Types::Medication>]
           attr_reader :existing_medications
           # @return [CandidApiClient::Encounters::V4::Types::Vitals]
@@ -142,6 +145,8 @@ module CandidApiClient
           # @param provider_accepts_assignment [Boolean] Whether you have accepted the patient's authorization for insurance payments
           #  to be made to you, not them.
           #  Box 27 on the CMS-1500 claim form.
+          # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
+          #  Headaches").
           # @param existing_medications [Array<CandidApiClient::Encounters::V4::Types::Medication>]
           # @param vitals [CandidApiClient::Encounters::V4::Types::Vitals]
           # @param interventions [Array<CandidApiClient::Encounters::V4::Types::Intervention>]
@@ -187,13 +192,14 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::EncounterBase]
           def initialize(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                         provider_accepts_assignment:, billable_status:, date_of_service: OMIT, end_date_of_service: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         provider_accepts_assignment:, billable_status:, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @external_id = external_id
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @patient_authorized_release = patient_authorized_release
             @benefits_assigned_to_provider = benefits_assigned_to_provider
             @provider_accepts_assignment = provider_accepts_assignment
+            @appointment_type = appointment_type if appointment_type != OMIT
             @existing_medications = existing_medications if existing_medications != OMIT
             @vitals = vitals if vitals != OMIT
             @interventions = interventions if interventions != OMIT
@@ -219,6 +225,7 @@ module CandidApiClient
               "patient_authorized_release": patient_authorized_release,
               "benefits_assigned_to_provider": benefits_assigned_to_provider,
               "provider_accepts_assignment": provider_accepts_assignment,
+              "appointment_type": appointment_type,
               "existing_medications": existing_medications,
               "vitals": vitals,
               "interventions": interventions,
@@ -252,6 +259,7 @@ module CandidApiClient
             patient_authorized_release = struct["patient_authorized_release"]
             benefits_assigned_to_provider = struct["benefits_assigned_to_provider"]
             provider_accepts_assignment = struct["provider_accepts_assignment"]
+            appointment_type = struct["appointment_type"]
             existing_medications = parsed_json["existing_medications"]&.map do |item|
               item = item.to_json
               CandidApiClient::Encounters::V4::Types::Medication.from_json(json_object: item)
@@ -292,6 +300,7 @@ module CandidApiClient
               patient_authorized_release: patient_authorized_release,
               benefits_assigned_to_provider: benefits_assigned_to_provider,
               provider_accepts_assignment: provider_accepts_assignment,
+              appointment_type: appointment_type,
               existing_medications: existing_medications,
               vitals: vitals,
               interventions: interventions,
@@ -329,6 +338,7 @@ module CandidApiClient
             obj.patient_authorized_release.is_a?(Boolean) != false || raise("Passed value for field obj.patient_authorized_release is not the expected type, validation failed.")
             obj.benefits_assigned_to_provider.is_a?(Boolean) != false || raise("Passed value for field obj.benefits_assigned_to_provider is not the expected type, validation failed.")
             obj.provider_accepts_assignment.is_a?(Boolean) != false || raise("Passed value for field obj.provider_accepts_assignment is not the expected type, validation failed.")
+            obj.appointment_type&.is_a?(String) != false || raise("Passed value for field obj.appointment_type is not the expected type, validation failed.")
             obj.existing_medications&.is_a?(Array) != false || raise("Passed value for field obj.existing_medications is not the expected type, validation failed.")
             obj.vitals.nil? || CandidApiClient::Encounters::V4::Types::Vitals.validate_raw(obj: obj.vitals)
             obj.interventions&.is_a?(Array) != false || raise("Passed value for field obj.interventions is not the expected type, validation failed.")

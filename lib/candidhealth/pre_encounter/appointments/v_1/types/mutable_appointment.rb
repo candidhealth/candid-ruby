@@ -3,6 +3,7 @@
 require "date"
 require_relative "appointment_status"
 require_relative "service"
+require_relative "../../../common/types/external_provider"
 require_relative "appointment_work_queue"
 require "ostruct"
 require "json"
@@ -30,6 +31,9 @@ module CandidApiClient
             attr_reader :services
             # @return [String] ID for the appointment/order for the event.
             attr_reader :placer_appointment_id
+            # @return [CandidApiClient::PreEncounter::Common::Types::ExternalProvider] Attending physician information. The attending physician will be stored as the
+            #  Current MD for the patient.
+            attr_reader :attending_doctor
             # @return [Integer]
             attr_reader :estimated_copay_cents
             # @return [Integer]
@@ -72,6 +76,8 @@ module CandidApiClient
             #  minutes.
             # @param services [Array<CandidApiClient::PreEncounter::Appointments::V1::Types::Service>]
             # @param placer_appointment_id [String] ID for the appointment/order for the event.
+            # @param attending_doctor [CandidApiClient::PreEncounter::Common::Types::ExternalProvider] Attending physician information. The attending physician will be stored as the
+            #  Current MD for the patient.
             # @param estimated_copay_cents [Integer]
             # @param estimated_patient_responsibility_cents [Integer]
             # @param patient_deposit_cents [Integer]
@@ -91,13 +97,14 @@ module CandidApiClient
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment]
             def initialize(patient_id:, start_timestamp:, service_duration:, services:, status: OMIT,
-                           placer_appointment_id: OMIT, estimated_copay_cents: OMIT, estimated_patient_responsibility_cents: OMIT, patient_deposit_cents: OMIT, checked_in_timestamp: OMIT, notes: OMIT, location_resource_id: OMIT, automated_eligibility_check_complete: OMIT, work_queue: OMIT, additional_properties: nil)
+                           placer_appointment_id: OMIT, attending_doctor: OMIT, estimated_copay_cents: OMIT, estimated_patient_responsibility_cents: OMIT, patient_deposit_cents: OMIT, checked_in_timestamp: OMIT, notes: OMIT, location_resource_id: OMIT, automated_eligibility_check_complete: OMIT, work_queue: OMIT, additional_properties: nil)
               @patient_id = patient_id
               @start_timestamp = start_timestamp
               @status = status if status != OMIT
               @service_duration = service_duration
               @services = services
               @placer_appointment_id = placer_appointment_id if placer_appointment_id != OMIT
+              @attending_doctor = attending_doctor if attending_doctor != OMIT
               @estimated_copay_cents = estimated_copay_cents if estimated_copay_cents != OMIT
               if estimated_patient_responsibility_cents != OMIT
                 @estimated_patient_responsibility_cents = estimated_patient_responsibility_cents
@@ -118,6 +125,7 @@ module CandidApiClient
                 "service_duration": service_duration,
                 "services": services,
                 "placer_appointment_id": placer_appointment_id,
+                "attending_doctor": attending_doctor,
                 "estimated_copay_cents": estimated_copay_cents,
                 "estimated_patient_responsibility_cents": estimated_patient_responsibility_cents,
                 "patient_deposit_cents": patient_deposit_cents,
@@ -149,6 +157,12 @@ module CandidApiClient
                 CandidApiClient::PreEncounter::Appointments::V1::Types::Service.from_json(json_object: item)
               end
               placer_appointment_id = struct["placer_appointment_id"]
+              if parsed_json["attending_doctor"].nil?
+                attending_doctor = nil
+              else
+                attending_doctor = parsed_json["attending_doctor"].to_json
+                attending_doctor = CandidApiClient::PreEncounter::Common::Types::ExternalProvider.from_json(json_object: attending_doctor)
+              end
               estimated_copay_cents = struct["estimated_copay_cents"]
               estimated_patient_responsibility_cents = struct["estimated_patient_responsibility_cents"]
               patient_deposit_cents = struct["patient_deposit_cents"]
@@ -166,6 +180,7 @@ module CandidApiClient
                 service_duration: service_duration,
                 services: services,
                 placer_appointment_id: placer_appointment_id,
+                attending_doctor: attending_doctor,
                 estimated_copay_cents: estimated_copay_cents,
                 estimated_patient_responsibility_cents: estimated_patient_responsibility_cents,
                 patient_deposit_cents: patient_deposit_cents,
@@ -198,6 +213,7 @@ module CandidApiClient
               obj.service_duration.is_a?(Integer) != false || raise("Passed value for field obj.service_duration is not the expected type, validation failed.")
               obj.services.is_a?(Array) != false || raise("Passed value for field obj.services is not the expected type, validation failed.")
               obj.placer_appointment_id&.is_a?(String) != false || raise("Passed value for field obj.placer_appointment_id is not the expected type, validation failed.")
+              obj.attending_doctor.nil? || CandidApiClient::PreEncounter::Common::Types::ExternalProvider.validate_raw(obj: obj.attending_doctor)
               obj.estimated_copay_cents&.is_a?(Integer) != false || raise("Passed value for field obj.estimated_copay_cents is not the expected type, validation failed.")
               obj.estimated_patient_responsibility_cents&.is_a?(Integer) != false || raise("Passed value for field obj.estimated_patient_responsibility_cents is not the expected type, validation failed.")
               obj.patient_deposit_cents&.is_a?(Integer) != false || raise("Passed value for field obj.patient_deposit_cents is not the expected type, validation failed.")

@@ -8,7 +8,7 @@ module CandidApiClient
   module EncounterProviders
     module V2
       module Types
-        class RenderingProvider
+        class RenderingProviderUpdate
           # @return [String] A National Provider Identifier is a unique 10-digit identification
           #  number issued to health care providers in the United States
           attr_reader :npi
@@ -44,10 +44,10 @@ module CandidApiClient
           # @param organization_name [String] If the provider is an organization, this should be set instead of first + last
           #  name
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider]
-          def initialize(npi:, taxonomy_code: OMIT, address: OMIT, first_name: OMIT, last_name: OMIT,
+          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProviderUpdate]
+          def initialize(npi: OMIT, taxonomy_code: OMIT, address: OMIT, first_name: OMIT, last_name: OMIT,
                          organization_name: OMIT, additional_properties: nil)
-            @npi = npi
+            @npi = npi if npi != OMIT
             @taxonomy_code = taxonomy_code if taxonomy_code != OMIT
             @address = address if address != OMIT
             @first_name = first_name if first_name != OMIT
@@ -66,10 +66,10 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of RenderingProvider
+          # Deserialize a JSON object to an instance of RenderingProviderUpdate
           #
           # @param json_object [String]
-          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider]
+          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProviderUpdate]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
@@ -95,7 +95,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of RenderingProvider to a JSON object
+          # Serialize an instance of RenderingProviderUpdate to a JSON object
           #
           # @return [String]
           def to_json(*_args)
@@ -109,7 +109,7 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.npi.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
+            obj.npi&.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
             obj.taxonomy_code&.is_a?(String) != false || raise("Passed value for field obj.taxonomy_code is not the expected type, validation failed.")
             obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressLongZip.validate_raw(obj: obj.address)
             obj.first_name&.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")

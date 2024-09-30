@@ -4,12 +4,12 @@ require "ostruct"
 require "json"
 
 module CandidApiClient
-  module ThirdPartyPayers
-    module V1
+  module Encounters
+    module V4
       module Types
-        class ToggleThirdPartyPayerEnablementRequest
-          # @return [Boolean]
-          attr_reader :enabled
+        class InsurancePayMissingPrimaryCoverageErrorType
+          # @return [String]
+          attr_reader :patient_id
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -18,27 +18,28 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param enabled [Boolean]
+          # @param patient_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::ThirdPartyPayers::V1::Types::ToggleThirdPartyPayerEnablementRequest]
-          def initialize(enabled:, additional_properties: nil)
-            @enabled = enabled
+          # @return [CandidApiClient::Encounters::V4::Types::InsurancePayMissingPrimaryCoverageErrorType]
+          def initialize(patient_id:, additional_properties: nil)
+            @patient_id = patient_id
             @additional_properties = additional_properties
-            @_field_set = { "enabled": enabled }
+            @_field_set = { "patient_id": patient_id }
           end
 
           # Deserialize a JSON object to an instance of
-          #  ToggleThirdPartyPayerEnablementRequest
+          #  InsurancePayMissingPrimaryCoverageErrorType
           #
           # @param json_object [String]
-          # @return [CandidApiClient::ThirdPartyPayers::V1::Types::ToggleThirdPartyPayerEnablementRequest]
+          # @return [CandidApiClient::Encounters::V4::Types::InsurancePayMissingPrimaryCoverageErrorType]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
-            enabled = struct["enabled"]
-            new(enabled: enabled, additional_properties: struct)
+            patient_id = struct["patient_id"]
+            new(patient_id: patient_id, additional_properties: struct)
           end
 
-          # Serialize an instance of ToggleThirdPartyPayerEnablementRequest to a JSON object
+          # Serialize an instance of InsurancePayMissingPrimaryCoverageErrorType to a JSON
+          #  object
           #
           # @return [String]
           def to_json(*_args)
@@ -52,7 +53,7 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.enabled.is_a?(Boolean) != false || raise("Passed value for field obj.enabled is not the expected type, validation failed.")
+            obj.patient_id.is_a?(String) != false || raise("Passed value for field obj.patient_id is not the expected type, validation failed.")
           end
         end
       end

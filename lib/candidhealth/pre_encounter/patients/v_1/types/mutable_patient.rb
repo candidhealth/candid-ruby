@@ -16,6 +16,8 @@ require_relative "contact"
 require_relative "../../../common/types/external_provider"
 require_relative "filing_order"
 require_relative "guarantor"
+require_relative "authorization"
+require_relative "referral"
 require "ostruct"
 require "json"
 
@@ -86,6 +88,10 @@ module CandidApiClient
             attr_reader :guarantor
             # @return [Boolean]
             attr_reader :self_pay
+            # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>]
+            attr_reader :authorizations
+            # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>]
+            attr_reader :referrals
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -126,10 +132,12 @@ module CandidApiClient
             # @param non_insurance_payers [Array<String>]
             # @param guarantor [CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor]
             # @param self_pay [Boolean]
+            # @param authorizations [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>]
+            # @param referrals [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient]
             def initialize(name:, other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:,
-                           primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, guarantor: OMIT, self_pay: OMIT, additional_properties: nil)
+                           primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, additional_properties: nil)
               @name = name
               @other_names = other_names
               @gender = gender if gender != OMIT
@@ -160,6 +168,8 @@ module CandidApiClient
               @non_insurance_payers = non_insurance_payers if non_insurance_payers != OMIT
               @guarantor = guarantor if guarantor != OMIT
               @self_pay = self_pay if self_pay != OMIT
+              @authorizations = authorizations if authorizations != OMIT
+              @referrals = referrals if referrals != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "name": name,
@@ -189,7 +199,9 @@ module CandidApiClient
                 "filing_order": filing_order,
                 "non_insurance_payers": non_insurance_payers,
                 "guarantor": guarantor,
-                "self_pay": self_pay
+                "self_pay": self_pay,
+                "authorizations": authorizations,
+                "referrals": referrals
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -275,6 +287,14 @@ module CandidApiClient
                 guarantor = CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor.from_json(json_object: guarantor)
               end
               self_pay = struct["self_pay"]
+              authorizations = parsed_json["authorizations"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Patients::V1::Types::Authorization.from_json(json_object: item)
+              end
+              referrals = parsed_json["referrals"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Patients::V1::Types::Referral.from_json(json_object: item)
+              end
               new(
                 name: name,
                 other_names: other_names,
@@ -304,6 +324,8 @@ module CandidApiClient
                 non_insurance_payers: non_insurance_payers,
                 guarantor: guarantor,
                 self_pay: self_pay,
+                authorizations: authorizations,
+                referrals: referrals,
                 additional_properties: struct
               )
             end
@@ -350,6 +372,8 @@ module CandidApiClient
               obj.non_insurance_payers&.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers is not the expected type, validation failed.")
               obj.guarantor.nil? || CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor.validate_raw(obj: obj.guarantor)
               obj.self_pay&.is_a?(Boolean) != false || raise("Passed value for field obj.self_pay is not the expected type, validation failed.")
+              obj.authorizations&.is_a?(Array) != false || raise("Passed value for field obj.authorizations is not the expected type, validation failed.")
+              obj.referrals&.is_a?(Array) != false || raise("Passed value for field obj.referrals is not the expected type, validation failed.")
             end
           end
         end

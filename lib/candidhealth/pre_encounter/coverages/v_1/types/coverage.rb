@@ -6,6 +6,7 @@ require_relative "subscriber"
 require_relative "../../../common/types/relationship"
 require_relative "insurance_plan"
 require_relative "eligibility_check_metadata"
+require_relative "latest_eligibility_check"
 require_relative "coverage_benefits"
 require "ostruct"
 require "json"
@@ -48,6 +49,8 @@ module CandidApiClient
             attr_reader :verified
             # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.
             attr_reader :eligibility_checks
+            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck] The latest eligibility check metadata that has been initiated on this coverage.
+            attr_reader :latest_eligibility_check
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits] The eligibility of the patient for the coverage, manually verified by users.
             attr_reader :benefits
             # @return [OpenStruct] Additional properties unmapped to the current class definition
@@ -76,11 +79,12 @@ module CandidApiClient
             # @param insurance_plan [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
             # @param verified [Boolean] A boolean indicating if the coverage has been verified by a user.
             # @param eligibility_checks [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.
+            # @param latest_eligibility_check [CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck] The latest eligibility check metadata that has been initiated on this coverage.
             # @param benefits [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits] The eligibility of the patient for the coverage, manually verified by users.
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
             def initialize(id:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, status:,
-                           subscriber:, relationship:, patient:, insurance_plan:, verified:, eligibility_checks: OMIT, benefits: OMIT, additional_properties: nil)
+                           subscriber:, relationship:, patient:, insurance_plan:, verified:, eligibility_checks: OMIT, latest_eligibility_check: OMIT, benefits: OMIT, additional_properties: nil)
               @id = id
               @organization_id = organization_id
               @deactivated = deactivated
@@ -94,6 +98,7 @@ module CandidApiClient
               @insurance_plan = insurance_plan
               @verified = verified
               @eligibility_checks = eligibility_checks if eligibility_checks != OMIT
+              @latest_eligibility_check = latest_eligibility_check if latest_eligibility_check != OMIT
               @benefits = benefits if benefits != OMIT
               @additional_properties = additional_properties
               @_field_set = {
@@ -110,6 +115,7 @@ module CandidApiClient
                 "insurance_plan": insurance_plan,
                 "verified": verified,
                 "eligibility_checks": eligibility_checks,
+                "latest_eligibility_check": latest_eligibility_check,
                 "benefits": benefits
               }.reject do |_k, v|
                 v == OMIT
@@ -149,6 +155,12 @@ module CandidApiClient
                 item = item.to_json
                 CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.from_json(json_object: item)
               end
+              if parsed_json["latest_eligibility_check"].nil?
+                latest_eligibility_check = nil
+              else
+                latest_eligibility_check = parsed_json["latest_eligibility_check"].to_json
+                latest_eligibility_check = CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck.from_json(json_object: latest_eligibility_check)
+              end
               if parsed_json["benefits"].nil?
                 benefits = nil
               else
@@ -169,6 +181,7 @@ module CandidApiClient
                 insurance_plan: insurance_plan,
                 verified: verified,
                 eligibility_checks: eligibility_checks,
+                latest_eligibility_check: latest_eligibility_check,
                 benefits: benefits,
                 additional_properties: struct
               )
@@ -201,6 +214,7 @@ module CandidApiClient
               CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan.validate_raw(obj: obj.insurance_plan)
               obj.verified.is_a?(Boolean) != false || raise("Passed value for field obj.verified is not the expected type, validation failed.")
               obj.eligibility_checks&.is_a?(Array) != false || raise("Passed value for field obj.eligibility_checks is not the expected type, validation failed.")
+              obj.latest_eligibility_check.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck.validate_raw(obj: obj.latest_eligibility_check)
               obj.benefits.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits.validate_raw(obj: obj.benefits)
             end
           end

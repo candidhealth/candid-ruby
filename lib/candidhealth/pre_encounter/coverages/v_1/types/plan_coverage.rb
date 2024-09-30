@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "plan_coverage_details"
+require_relative "coverage_details"
 require "ostruct"
 require "json"
 
@@ -12,8 +13,12 @@ module CandidApiClient
           class PlanCoverage
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails]
             attr_reader :in_network
+            # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>]
+            attr_reader :in_network_flat
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails]
             attr_reader :out_of_network
+            # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>]
+            attr_reader :out_of_network_flat
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -23,14 +28,24 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param in_network [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails]
+            # @param in_network_flat [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>]
             # @param out_of_network [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails]
+            # @param out_of_network_flat [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverage]
-            def initialize(in_network: OMIT, out_of_network: OMIT, additional_properties: nil)
+            def initialize(in_network: OMIT, in_network_flat: OMIT, out_of_network: OMIT, out_of_network_flat: OMIT,
+                           additional_properties: nil)
               @in_network = in_network if in_network != OMIT
+              @in_network_flat = in_network_flat if in_network_flat != OMIT
               @out_of_network = out_of_network if out_of_network != OMIT
+              @out_of_network_flat = out_of_network_flat if out_of_network_flat != OMIT
               @additional_properties = additional_properties
-              @_field_set = { "in_network": in_network, "out_of_network": out_of_network }.reject do |_k, v|
+              @_field_set = {
+                "in_network": in_network,
+                "in_network_flat": in_network_flat,
+                "out_of_network": out_of_network,
+                "out_of_network_flat": out_of_network_flat
+              }.reject do |_k, v|
                 v == OMIT
               end
             end
@@ -48,15 +63,25 @@ module CandidApiClient
                 in_network = parsed_json["in_network"].to_json
                 in_network = CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails.from_json(json_object: in_network)
               end
+              in_network_flat = parsed_json["in_network_flat"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails.from_json(json_object: item)
+              end
               if parsed_json["out_of_network"].nil?
                 out_of_network = nil
               else
                 out_of_network = parsed_json["out_of_network"].to_json
                 out_of_network = CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails.from_json(json_object: out_of_network)
               end
+              out_of_network_flat = parsed_json["out_of_network_flat"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails.from_json(json_object: item)
+              end
               new(
                 in_network: in_network,
+                in_network_flat: in_network_flat,
                 out_of_network: out_of_network,
+                out_of_network_flat: out_of_network_flat,
                 additional_properties: struct
               )
             end
@@ -76,7 +101,9 @@ module CandidApiClient
             # @return [Void]
             def self.validate_raw(obj:)
               obj.in_network.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails.validate_raw(obj: obj.in_network)
+              obj.in_network_flat&.is_a?(Array) != false || raise("Passed value for field obj.in_network_flat is not the expected type, validation failed.")
               obj.out_of_network.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverageDetails.validate_raw(obj: obj.out_of_network)
+              obj.out_of_network_flat&.is_a?(Array) != false || raise("Passed value for field obj.out_of_network_flat is not the expected type, validation failed.")
             end
           end
         end

@@ -740,7 +740,7 @@ module CandidApiClient
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param pre_encounter_patient_id [String]
-        # @param pre_encounter_appointment_id [String]
+        # @param pre_encounter_appointment_ids [Array<String>]
         # @param billing_provider [Hash] The billing provider is the provider or business entity submitting the claim.
         #  Billing provider may be, but is not necessarily, the same person/NPI as the
         #  rendering provider. From a payer's perspective, this represents the person or
@@ -904,7 +904,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.create_from_pre_encounter_patient(
         #    pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    pre_encounter_appointment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
         #    billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", first_name: "string", last_name: "string", organization_name: "string" },
         #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
@@ -921,7 +921,7 @@ module CandidApiClient
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
         #  )
         def create_from_pre_encounter_patient(external_id:, patient_authorized_release:,
-                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_id:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -955,7 +955,7 @@ module CandidApiClient
               additional_properties: additional_properties,
               _field_set: _field_set,
               pre_encounter_patient_id: pre_encounter_patient_id,
-              pre_encounter_appointment_id: pre_encounter_appointment_id,
+              pre_encounter_appointment_ids: pre_encounter_appointment_ids,
               billing_provider: billing_provider,
               rendering_provider: rendering_provider,
               initial_referring_provider: initial_referring_provider,
@@ -2065,7 +2065,7 @@ module CandidApiClient
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param pre_encounter_patient_id [String]
-        # @param pre_encounter_appointment_id [String]
+        # @param pre_encounter_appointment_ids [Array<String>]
         # @param billing_provider [Hash] The billing provider is the provider or business entity submitting the claim.
         #  Billing provider may be, but is not necessarily, the same person/NPI as the
         #  rendering provider. From a payer's perspective, this represents the person or
@@ -2229,7 +2229,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.create_from_pre_encounter_patient(
         #    pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    pre_encounter_appointment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
         #    billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", first_name: "string", last_name: "string", organization_name: "string" },
         #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
@@ -2246,7 +2246,7 @@ module CandidApiClient
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
         #  )
         def create_from_pre_encounter_patient(external_id:, patient_authorized_release:,
-                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_id:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2281,7 +2281,7 @@ module CandidApiClient
                 additional_properties: additional_properties,
                 _field_set: _field_set,
                 pre_encounter_patient_id: pre_encounter_patient_id,
-                pre_encounter_appointment_id: pre_encounter_appointment_id,
+                pre_encounter_appointment_ids: pre_encounter_appointment_ids,
                 billing_provider: billing_provider,
                 rendering_provider: rendering_provider,
                 initial_referring_provider: initial_referring_provider,

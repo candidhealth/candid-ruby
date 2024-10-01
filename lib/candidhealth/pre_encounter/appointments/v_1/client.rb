@@ -4,6 +4,7 @@ require_relative "../../../../requests"
 require_relative "types/mutable_appointment"
 require_relative "types/appointment"
 require "json"
+require "date"
 require "async"
 
 module CandidApiClient
@@ -185,6 +186,35 @@ module CandidApiClient
                                                  request_options: request_options)}/appointments/v1/#{id}/#{version}"
             end
             CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.from_json(json_object: response.body)
+          end
+
+          # Scans up to 100 appointment updates. The since query parameter is inclusive, and
+          #  the result list is ordered by updatedAt ascending.
+          #
+          # @param since [DateTime]
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [Array<CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment>]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.appointments.v_1.scan(since: DateTime.parse(2024-01-15T09:30:00.000Z))
+          def scan(since:, request_options: nil)
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.params = { **(request_options&.additional_query_parameters || {}), "since": since }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/appointments/v1/updates/scan"
+            end
+            parsed_json = JSON.parse(response.body)
+            parsed_json&.map do |item|
+              item = item.to_json
+              CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.from_json(json_object: item)
+            end
           end
 
           # Sets an appointment as deactivated. The path must contain the most recent
@@ -396,6 +426,37 @@ module CandidApiClient
                                                    request_options: request_options)}/appointments/v1/#{id}/#{version}"
               end
               CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.from_json(json_object: response.body)
+            end
+          end
+
+          # Scans up to 100 appointment updates. The since query parameter is inclusive, and
+          #  the result list is ordered by updatedAt ascending.
+          #
+          # @param since [DateTime]
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [Array<CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment>]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.appointments.v_1.scan(since: DateTime.parse(2024-01-15T09:30:00.000Z))
+          def scan(since:, request_options: nil)
+            Async do
+              response = @request_client.conn.get do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.params = { **(request_options&.additional_query_parameters || {}), "since": since }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/appointments/v1/updates/scan"
+              end
+              parsed_json = JSON.parse(response.body)
+              parsed_json&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.from_json(json_object: item)
+              end
             end
           end
 

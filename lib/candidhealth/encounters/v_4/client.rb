@@ -497,6 +497,7 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :organization_name (String)
+        #   * :test_result (Hash)
         # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorCreate, as a Hash
         #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
         #   * :phone_consent (Boolean)
@@ -885,6 +886,7 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :organization_name (String)
+        #   * :test_result (Hash)
         # @param external_claim_submission [Hash] ***This field is in beta.***
         #  To be included for claims that have been submitted outside of Candid.
         #  Candid supports posting remits and payments to these claims and working them
@@ -1820,6 +1822,7 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :organization_name (String)
+        #   * :test_result (Hash)
         # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorCreate, as a Hash
         #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
         #   * :phone_consent (Boolean)
@@ -2210,6 +2213,7 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :organization_name (String)
+        #   * :test_result (Hash)
         # @param external_claim_submission [Hash] ***This field is in beta.***
         #  To be included for claims that have been submitted outside of Candid.
         #  Candid supports posting remits and payments to these claims and working them

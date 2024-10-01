@@ -83,6 +83,7 @@ module CandidApiClient
         #   * :description (String)
         #   * :date_of_service (Date)
         #   * :end_date_of_service (Date)
+        #   * :test_result (Hash)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
@@ -201,6 +202,7 @@ module CandidApiClient
         #   * :description (String)
         #   * :date_of_service (Date)
         #   * :end_date_of_service (Date)
+        #   * :test_result (Hash)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example

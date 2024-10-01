@@ -6,6 +6,7 @@ require_relative "drug_identification"
 require_relative "../../../commons/types/facility_type_code"
 require "date"
 require_relative "../../../encounter_providers/v_2/types/ordering_provider"
+require_relative "test_result"
 require "ostruct"
 require "json"
 
@@ -47,6 +48,8 @@ module CandidApiClient
           #  than the rendering provider for this service line.
           #  If not required by this implementation guide, do not send.
           attr_reader :ordering_provider
+          # @return [CandidApiClient::ServiceLines::V2::Types::TestResult] Contains a single test result value. Maps to MEA-02 on the 837-P.
+          attr_reader :test_result
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -76,10 +79,11 @@ module CandidApiClient
           # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::OrderingProvider] Required when the service or supply was ordered by a provider who is different
           #  than the rendering provider for this service line.
           #  If not required by this implementation guide, do not send.
+          # @param test_result [CandidApiClient::ServiceLines::V2::Types::TestResult] Contains a single test result value. Maps to MEA-02 on the 837-P.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate]
           def initialize(procedure_code:, quantity:, units:, diagnosis_pointers:, modifiers: OMIT,
-                         charge_amount_cents: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, additional_properties: nil)
+                         charge_amount_cents: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_result: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @procedure_code = procedure_code
             @quantity = quantity
@@ -92,6 +96,7 @@ module CandidApiClient
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @ordering_provider = ordering_provider if ordering_provider != OMIT
+            @test_result = test_result if test_result != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
@@ -105,7 +110,8 @@ module CandidApiClient
               "description": description,
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
-              "ordering_provider": ordering_provider
+              "ordering_provider": ordering_provider,
+              "test_result": test_result
             }.reject do |_k, v|
               v == OMIT
             end
@@ -142,6 +148,12 @@ module CandidApiClient
               ordering_provider = parsed_json["ordering_provider"].to_json
               ordering_provider = CandidApiClient::EncounterProviders::V2::Types::OrderingProvider.from_json(json_object: ordering_provider)
             end
+            if parsed_json["test_result"].nil?
+              test_result = nil
+            else
+              test_result = parsed_json["test_result"].to_json
+              test_result = CandidApiClient::ServiceLines::V2::Types::TestResult.from_json(json_object: test_result)
+            end
             new(
               modifiers: modifiers,
               procedure_code: procedure_code,
@@ -155,6 +167,7 @@ module CandidApiClient
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
               ordering_provider: ordering_provider,
+              test_result: test_result,
               additional_properties: struct
             )
           end
@@ -185,6 +198,7 @@ module CandidApiClient
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
             obj.ordering_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::OrderingProvider.validate_raw(obj: obj.ordering_provider)
+            obj.test_result.nil? || CandidApiClient::ServiceLines::V2::Types::TestResult.validate_raw(obj: obj.test_result)
           end
         end
       end

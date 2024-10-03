@@ -39,6 +39,7 @@ require_relative "types/vitals_update"
 require_relative "../../encounter_providers/v_2/types/rendering_provider_update"
 require_relative "../../service_facility/types/encounter_service_facility_update"
 require_relative "../../guarantor/v_1/types/guarantor_update"
+require_relative "../../encounter_providers/v_2/types/billing_provider_update"
 require_relative "../../encounter_providers/v_2/types/supervising_provider_update"
 require_relative "../../encounter_providers/v_2/types/referring_provider_update"
 require_relative "../../encounter_providers/v_2/types/initial_referring_provider_update"
@@ -1222,6 +1223,28 @@ module CandidApiClient
         #   * :phone_consent (Boolean)
         #   * :email (String)
         #   * :email_consent (Boolean)
+        # @param billing_provider [Hash] The billing provider is the provider or business entity submitting the claim.
+        #  Billing provider may be, but is not necessarily, the same person/NPI as the
+        #  rendering provider. From a payer's perspective, this represents the person or
+        #  entity being reimbursed. When a contract exists with the target payer, the
+        #  billing provider should be the entity contracted with the payer. In some
+        #  circumstances, this will be an individual provider. In that case, submit that
+        #  provider's NPI and the tax ID (TIN) that the provider gave to the payer during
+        #  contracting. In other cases, the billing entity will be a medical group. If so,
+        #  submit the group NPI and the group's tax ID. Box 33 on the CMS-1500 claim form.Request of type CandidApiClient::EncounterProviders::V2::Types::BillingProviderUpdate, as a Hash
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :tax_id (String)
+        #   * :npi (String)
+        #   * :taxonomy_code (String)
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :organization_name (String)
         # @param supervising_provider [Hash] Required when the rendering provider is supervised by a physician. If not
         #  required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProviderUpdate, as a Hash
         #   * :npi (String)
@@ -1308,12 +1331,13 @@ module CandidApiClient
         #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    guarantor: { first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true },
+        #    billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", first_name: "string", last_name: "string", organization_name: "string" },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" }
         #  )
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1357,6 +1381,7 @@ module CandidApiClient
               rendering_provider: rendering_provider,
               service_facility: service_facility,
               guarantor: guarantor,
+              billing_provider: billing_provider,
               supervising_provider: supervising_provider,
               referring_provider: referring_provider,
               initial_referring_provider: initial_referring_provider
@@ -2551,6 +2576,28 @@ module CandidApiClient
         #   * :phone_consent (Boolean)
         #   * :email (String)
         #   * :email_consent (Boolean)
+        # @param billing_provider [Hash] The billing provider is the provider or business entity submitting the claim.
+        #  Billing provider may be, but is not necessarily, the same person/NPI as the
+        #  rendering provider. From a payer's perspective, this represents the person or
+        #  entity being reimbursed. When a contract exists with the target payer, the
+        #  billing provider should be the entity contracted with the payer. In some
+        #  circumstances, this will be an individual provider. In that case, submit that
+        #  provider's NPI and the tax ID (TIN) that the provider gave to the payer during
+        #  contracting. In other cases, the billing entity will be a medical group. If so,
+        #  submit the group NPI and the group's tax ID. Box 33 on the CMS-1500 claim form.Request of type CandidApiClient::EncounterProviders::V2::Types::BillingProviderUpdate, as a Hash
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :tax_id (String)
+        #   * :npi (String)
+        #   * :taxonomy_code (String)
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :organization_name (String)
         # @param supervising_provider [Hash] Required when the rendering provider is supervised by a physician. If not
         #  required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProviderUpdate, as a Hash
         #   * :npi (String)
@@ -2637,12 +2684,13 @@ module CandidApiClient
         #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    guarantor: { first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true },
+        #    billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", first_name: "string", last_name: "string", organization_name: "string" },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" }
         #  )
         def update(encounter_id:, prior_authorization_number: nil, external_id: nil, date_of_service: nil,
-                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, request_options: nil)
+                   diagnosis_ids: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, benefits_assigned_to_provider: nil, synchronicity: nil, place_of_service_code: nil, place_of_service_code_as_submitted: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2687,6 +2735,7 @@ module CandidApiClient
                 rendering_provider: rendering_provider,
                 service_facility: service_facility,
                 guarantor: guarantor,
+                billing_provider: billing_provider,
                 supervising_provider: supervising_provider,
                 referring_provider: referring_provider,
                 initial_referring_provider: initial_referring_provider

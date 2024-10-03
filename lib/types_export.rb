@@ -38,6 +38,7 @@ require_relative "candidhealth/encounter_providers/v_2/types/supervising_provide
 require_relative "candidhealth/encounter_providers/v_2/types/ordering_provider"
 require_relative "candidhealth/encounter_providers/v_2/types/ordering_provider_update"
 require_relative "candidhealth/encounter_providers/v_2/types/billing_provider"
+require_relative "candidhealth/encounter_providers/v_2/types/billing_provider_update"
 require_relative "candidhealth/encounter_providers/v_2/types/encounter_provider"
 require_relative "candidhealth/encounters/v_4/types/encounter_base"
 require_relative "candidhealth/encounters/v_4/types/encounter"

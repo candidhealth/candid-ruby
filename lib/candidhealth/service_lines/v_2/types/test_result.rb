@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "test_result_type"
+require "ostruct"
 require "json"
 
 module CandidApiClient
@@ -7,20 +9,27 @@ module CandidApiClient
     module V2
       module Types
         class TestResult
+          # @return [Float]
+          attr_reader :value
+          # @return [CandidApiClient::ServiceLines::V2::Types::TestResultType]
+          attr_reader :result_type
+          # @return [OpenStruct] Additional properties unmapped to the current class definition
+          attr_reader :additional_properties
           # @return [Object]
-          attr_reader :member
-          # @return [String]
-          attr_reader :discriminant
+          attr_reader :_field_set
+          protected :_field_set
 
-          private_class_method :new
-          alias kind_of? is_a?
+          OMIT = Object.new
 
-          # @param member [Object]
-          # @param discriminant [String]
+          # @param value [Float]
+          # @param result_type [CandidApiClient::ServiceLines::V2::Types::TestResultType]
+          # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::TestResult]
-          def initialize(member:, discriminant:)
-            @member = member
-            @discriminant = discriminant
+          def initialize(value:, result_type:, additional_properties: nil)
+            @value = value
+            @result_type = result_type
+            @additional_properties = additional_properties
+            @_field_set = { "value": value, "result_type": result_type }
           end
 
           # Deserialize a JSON object to an instance of TestResult
@@ -29,27 +38,20 @@ module CandidApiClient
           # @return [CandidApiClient::ServiceLines::V2::Types::TestResult]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
-            member = case struct.type
-                     when "hematocrit"
-                       json_object.value
-                     when "hemoglobin"
-                       json_object.value
-                     else
-                       json_object
-                     end
-            new(member: member, discriminant: struct.type)
+            value = struct["value"]
+            result_type = struct["result_type"]
+            new(
+              value: value,
+              result_type: result_type,
+              additional_properties: struct
+            )
           end
 
-          # For Union Types, to_json functionality is delegated to the wrapped member.
+          # Serialize an instance of TestResult to a JSON object
           #
           # @return [String]
           def to_json(*_args)
-            case @discriminant
-            when "hematocrit"
-            when "hemoglobin"
-            end
-            { "type": @discriminant, "value": @member }.to_json
-            @member.to_json
+            @_field_set&.to_json
           end
 
           # Leveraged for Union-type generation, validate_raw attempts to parse the given
@@ -59,34 +61,8 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            case obj.type
-            when "hematocrit"
-              obj.is_a?(Float) != false || raise("Passed value for field obj is not the expected type, validation failed.")
-            when "hemoglobin"
-              obj.is_a?(Float) != false || raise("Passed value for field obj is not the expected type, validation failed.")
-            else
-              raise("Passed value matched no type within the union, validation failed.")
-            end
-          end
-
-          # For Union Types, is_a? functionality is delegated to the wrapped member.
-          #
-          # @param obj [Object]
-          # @return [Boolean]
-          def is_a?(obj)
-            @member.is_a?(obj)
-          end
-
-          # @param member [Float]
-          # @return [CandidApiClient::ServiceLines::V2::Types::TestResult]
-          def self.hematocrit(member:)
-            new(member: member, discriminant: "hematocrit")
-          end
-
-          # @param member [Float]
-          # @return [CandidApiClient::ServiceLines::V2::Types::TestResult]
-          def self.hemoglobin(member:)
-            new(member: member, discriminant: "hemoglobin")
+            obj.value.is_a?(Float) != false || raise("Passed value for field obj.value is not the expected type, validation failed.")
+            obj.result_type.is_a?(CandidApiClient::ServiceLines::V2::Types::TestResultType) != false || raise("Passed value for field obj.result_type is not the expected type, validation failed.")
           end
         end
       end

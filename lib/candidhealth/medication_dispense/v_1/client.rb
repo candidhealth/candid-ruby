@@ -33,13 +33,14 @@ module CandidApiClient
         #     * :link_sequence_number (String)
         #     * :pharmacy_prescription_number (String)
         #     * :conversion_formula (String)
+        #     * :drug_description (String)
         #   * :description (String)
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.medication_dispense.v_1.create(request: { medication_dispense_external_id: "string", patient_external_id: "string", procedure_code: "string", quantity: "string", units: MJ, date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string" }, description: "string", modifiers: [TWENTY_TWO] })
+        #  api.medication_dispense.v_1.create(request: { medication_dispense_external_id: "string", patient_external_id: "string", procedure_code: "string", quantity: "string", units: MJ, date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, description: "string", modifiers: [TWENTY_TWO] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -82,13 +83,14 @@ module CandidApiClient
         #     * :link_sequence_number (String)
         #     * :pharmacy_prescription_number (String)
         #     * :conversion_formula (String)
+        #     * :drug_description (String)
         #   * :description (String)
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.medication_dispense.v_1.create(request: { medication_dispense_external_id: "string", patient_external_id: "string", procedure_code: "string", quantity: "string", units: MJ, date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string" }, description: "string", modifiers: [TWENTY_TWO] })
+        #  api.medication_dispense.v_1.create(request: { medication_dispense_external_id: "string", patient_external_id: "string", procedure_code: "string", quantity: "string", units: MJ, date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, description: "string", modifiers: [TWENTY_TWO] })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

@@ -90,8 +90,9 @@ module CandidApiClient
           attr_reader :date_of_service
           # @return [Date]
           attr_reader :end_date_of_service
-          # @return [CandidApiClient::ServiceLines::V2::Types::TestResult] Contains a single test result value. Maps to MEA-02 on the 837-P.
-          attr_reader :test_result
+          # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Maps to MEA-02 on the 837-P. No more than 5 test results may be submitted per
+          #  service line.
+          attr_reader :test_results
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -137,11 +138,12 @@ module CandidApiClient
           #  Maps to SV1-01, C003-07 on the 837-P.
           # @param date_of_service [Date]
           # @param end_date_of_service [Date]
-          # @param test_result [CandidApiClient::ServiceLines::V2::Types::TestResult] Contains a single test result value. Maps to MEA-02 on the 837-P.
+          # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Maps to MEA-02 on the 837-P. No more than 5 test results may be submitted per
+          #  service line.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
           def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
-                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, test_result: OMIT, additional_properties: nil)
+                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, test_results: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @allowed_amount_cents = allowed_amount_cents if allowed_amount_cents != OMIT
@@ -178,7 +180,7 @@ module CandidApiClient
             @description = description if description != OMIT
             @date_of_service = date_of_service
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
-            @test_result = test_result if test_result != OMIT
+            @test_results = test_results if test_results != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
@@ -213,7 +215,7 @@ module CandidApiClient
               "description": description,
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
-              "test_result": test_result
+              "test_results": test_results
             }.reject do |_k, v|
               v == OMIT
             end
@@ -294,11 +296,9 @@ module CandidApiClient
             end_date_of_service = unless parsed_json["end_date_of_service"].nil?
                                     Date.parse(parsed_json["end_date_of_service"])
                                   end
-            if parsed_json["test_result"].nil?
-              test_result = nil
-            else
-              test_result = parsed_json["test_result"].to_json
-              test_result = CandidApiClient::ServiceLines::V2::Types::TestResult.from_json(json_object: test_result)
+            test_results = parsed_json["test_results"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::ServiceLines::V2::Types::TestResult.from_json(json_object: item)
             end
             new(
               modifiers: modifiers,
@@ -333,7 +333,7 @@ module CandidApiClient
               description: description,
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
-              test_result: test_result,
+              test_results: test_results,
               additional_properties: struct
             )
           end
@@ -384,7 +384,7 @@ module CandidApiClient
             obj.description&.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
             obj.date_of_service.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
-            obj.test_result.nil? || CandidApiClient::ServiceLines::V2::Types::TestResult.validate_raw(obj: obj.test_result)
+            obj.test_results&.is_a?(Array) != false || raise("Passed value for field obj.test_results is not the expected type, validation failed.")
           end
         end
       end

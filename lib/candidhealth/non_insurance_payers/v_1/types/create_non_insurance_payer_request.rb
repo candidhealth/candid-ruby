@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "../../../commons/types/street_address_short_zip"
 require "ostruct"
 require "json"
 
@@ -14,6 +15,8 @@ module CandidApiClient
           attr_reader :description
           # @return [String] Max 255 characters allowed
           attr_reader :category
+          # @return [CandidApiClient::Commons::Types::StreetAddressShortZip]
+          attr_reader :address
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -25,14 +28,21 @@ module CandidApiClient
           # @param name [String] Max 50 characters allowed
           # @param description [String] Max 255 characters allowed
           # @param category [String] Max 255 characters allowed
+          # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::NonInsurancePayers::V1::Types::CreateNonInsurancePayerRequest]
-          def initialize(name:, description: OMIT, category: OMIT, additional_properties: nil)
+          def initialize(name:, description: OMIT, category: OMIT, address: OMIT, additional_properties: nil)
             @name = name
             @description = description if description != OMIT
             @category = category if category != OMIT
+            @address = address if address != OMIT
             @additional_properties = additional_properties
-            @_field_set = { "name": name, "description": description, "category": category }.reject do |_k, v|
+            @_field_set = {
+              "name": name,
+              "description": description,
+              "category": category,
+              "address": address
+            }.reject do |_k, v|
               v == OMIT
             end
           end
@@ -43,13 +53,21 @@ module CandidApiClient
           # @return [CandidApiClient::NonInsurancePayers::V1::Types::CreateNonInsurancePayerRequest]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
+            parsed_json = JSON.parse(json_object)
             name = struct["name"]
             description = struct["description"]
             category = struct["category"]
+            if parsed_json["address"].nil?
+              address = nil
+            else
+              address = parsed_json["address"].to_json
+              address = CandidApiClient::Commons::Types::StreetAddressShortZip.from_json(json_object: address)
+            end
             new(
               name: name,
               description: description,
               category: category,
+              address: address,
               additional_properties: struct
             )
           end
@@ -71,6 +89,7 @@ module CandidApiClient
             obj.name.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
             obj.description&.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
             obj.category&.is_a?(String) != false || raise("Passed value for field obj.category is not the expected type, validation failed.")
+            obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressShortZip.validate_raw(obj: obj.address)
           end
         end
       end

@@ -233,6 +233,8 @@ module CandidApiClient
           # @return [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
           #  Code indicating the reason why a request was delayed
           attr_reader :delay_reason_code
+          # @return [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
+          attr_reader :referral_number
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -389,10 +391,11 @@ module CandidApiClient
           #  related to the patient's pregnancy.
           # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
           #  Code indicating the reason why a request was delayed
+          # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
-                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, referral_number: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
             @claims = claims
@@ -451,6 +454,7 @@ module CandidApiClient
             end
             @last_menstrual_period_date = last_menstrual_period_date if last_menstrual_period_date != OMIT
             @delay_reason_code = delay_reason_code if delay_reason_code != OMIT
+            @referral_number = referral_number if referral_number != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "patient_control_number": patient_control_number,
@@ -502,7 +506,8 @@ module CandidApiClient
               "discharge_date": discharge_date,
               "onset_of_current_illness_or_symptom_date": onset_of_current_illness_or_symptom_date,
               "last_menstrual_period_date": last_menstrual_period_date,
-              "delay_reason_code": delay_reason_code
+              "delay_reason_code": delay_reason_code,
+              "referral_number": referral_number
             }.reject do |_k, v|
               v == OMIT
             end
@@ -663,6 +668,7 @@ module CandidApiClient
                                            Date.parse(parsed_json["last_menstrual_period_date"])
                                          end
             delay_reason_code = struct["delay_reason_code"]
+            referral_number = struct["referral_number"]
             new(
               patient_control_number: patient_control_number,
               encounter_id: encounter_id,
@@ -714,6 +720,7 @@ module CandidApiClient
               onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
+              referral_number: referral_number,
               additional_properties: struct
             )
           end
@@ -782,6 +789,7 @@ module CandidApiClient
             obj.onset_of_current_illness_or_symptom_date&.is_a?(Date) != false || raise("Passed value for field obj.onset_of_current_illness_or_symptom_date is not the expected type, validation failed.")
             obj.last_menstrual_period_date&.is_a?(Date) != false || raise("Passed value for field obj.last_menstrual_period_date is not the expected type, validation failed.")
             obj.delay_reason_code&.is_a?(CandidApiClient::Commons::Types::DelayReasonCode) != false || raise("Passed value for field obj.delay_reason_code is not the expected type, validation failed.")
+            obj.referral_number&.is_a?(String) != false || raise("Passed value for field obj.referral_number is not the expected type, validation failed.")
           end
         end
       end

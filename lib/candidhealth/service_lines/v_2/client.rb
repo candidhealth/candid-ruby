@@ -36,11 +36,21 @@ module CandidApiClient
         #   * :description (String)
         #   * :date_of_service (Date)
         #   * :end_date_of_service (Date)
+        #   * :drug_identification (Hash)
+        #     * :service_id_qualifier (CandidApiClient::ServiceLines::V2::Types::ServiceIdQualifier)
+        #     * :national_drug_code (String)
+        #     * :national_drug_unit_count (String)
+        #     * :measurement_unit_code (CandidApiClient::ServiceLines::V2::Types::MeasurementUnitCode)
+        #     * :link_sequence_number (String)
+        #     * :pharmacy_prescription_number (String)
+        #     * :conversion_formula (String)
+        #     * :drug_description (String)
+        #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
+        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -154,11 +164,21 @@ module CandidApiClient
         #   * :description (String)
         #   * :date_of_service (Date)
         #   * :end_date_of_service (Date)
+        #   * :drug_identification (Hash)
+        #     * :service_id_qualifier (CandidApiClient::ServiceLines::V2::Types::ServiceIdQualifier)
+        #     * :national_drug_code (String)
+        #     * :national_drug_unit_count (String)
+        #     * :measurement_unit_code (CandidApiClient::ServiceLines::V2::Types::MeasurementUnitCode)
+        #     * :link_sequence_number (String)
+        #     * :pharmacy_prescription_number (String)
+        #     * :conversion_formula (String)
+        #     * :drug_description (String)
+        #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15) })
+        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

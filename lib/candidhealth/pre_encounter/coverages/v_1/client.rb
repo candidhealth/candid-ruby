@@ -42,6 +42,16 @@ module CandidApiClient
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
           #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -104,7 +114,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } })
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -138,6 +148,16 @@ module CandidApiClient
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
           #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -203,7 +223,7 @@ module CandidApiClient
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "string",
-          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } }
+          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -420,6 +440,16 @@ module CandidApiClient
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
           #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -482,7 +512,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } })
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -518,6 +548,16 @@ module CandidApiClient
           #         * :end_ (Date)
           #     * :date_of_birth (Date)
           #     * :biological_sex (CandidApiClient::PreEncounter::Common::Types::Sex)
+          #     * :address (Hash)
+          #       * :use (CandidApiClient::PreEncounter::Common::Types::AddressUse)
+          #       * :line (Array<String>)
+          #       * :city (String)
+          #       * :state (String)
+          #       * :postal_code (String)
+          #       * :country (String)
+          #       * :period (Hash)
+          #         * :start (Date)
+          #         * :end_ (Date)
           #   * :relationship (CandidApiClient::PreEncounter::Common::Types::Relationship)
           #   * :patient (String)
           #   * :insurance_plan (Hash)
@@ -583,7 +623,7 @@ module CandidApiClient
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "string",
-          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } }
+          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: { start: {"key":"value"}, end_: {"key":"value"} } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: { start: {"key":"value"}, end_: {"key":"value"} } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: { availity_eligibility_id: "string", availity_payer_id: "string", availity_payer_name: "string", availity_remittance_payer_id: "string" }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: { start: {"key":"value"}, end_: {"key":"value"} }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: CREATED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: { plan_coverage: {"key":"value"}, service_specific_coverage: {"key":"value"} } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do

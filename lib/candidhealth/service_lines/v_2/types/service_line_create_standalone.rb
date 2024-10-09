@@ -5,6 +5,8 @@ require_relative "service_line_denial_reason"
 require_relative "../../../commons/types/facility_type_code"
 require_relative "../../../commons/types/service_line_units"
 require "date"
+require_relative "drug_identification"
+require_relative "test_result"
 require "ostruct"
 require "json"
 
@@ -46,6 +48,11 @@ module CandidApiClient
           attr_reader :date_of_service
           # @return [Date]
           attr_reader :end_date_of_service
+          # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
+          attr_reader :drug_identification
+          # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Maps to MEA-02 on the 837-P. No more than 5 test results may be submitted per
+          #  service line.
+          attr_reader :test_results
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -72,10 +79,13 @@ module CandidApiClient
           #  Maps to SV1-01, C003-07 on the 837-P.
           # @param date_of_service [Date]
           # @param end_date_of_service [Date]
+          # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
+          # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Maps to MEA-02 on the 837-P. No more than 5 test results may be submitted per
+          #  service line.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateStandalone]
           def initialize(procedure_code:, quantity:, units:, claim_id:, modifiers: OMIT, charge_amount_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT,
-                         diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, additional_properties: nil)
+                         diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, drug_identification: OMIT, test_results: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @diagnosis_id_zero = diagnosis_id_zero if diagnosis_id_zero != OMIT
@@ -91,6 +101,8 @@ module CandidApiClient
             @description = description if description != OMIT
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
+            @drug_identification = drug_identification if drug_identification != OMIT
+            @test_results = test_results if test_results != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
@@ -107,7 +119,9 @@ module CandidApiClient
               "claim_id": claim_id,
               "description": description,
               "date_of_service": date_of_service,
-              "end_date_of_service": end_date_of_service
+              "end_date_of_service": end_date_of_service,
+              "drug_identification": drug_identification,
+              "test_results": test_results
             }.reject do |_k, v|
               v == OMIT
             end
@@ -142,6 +156,16 @@ module CandidApiClient
             end_date_of_service = unless parsed_json["end_date_of_service"].nil?
                                     Date.parse(parsed_json["end_date_of_service"])
                                   end
+            if parsed_json["drug_identification"].nil?
+              drug_identification = nil
+            else
+              drug_identification = parsed_json["drug_identification"].to_json
+              drug_identification = CandidApiClient::ServiceLines::V2::Types::DrugIdentification.from_json(json_object: drug_identification)
+            end
+            test_results = parsed_json["test_results"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::ServiceLines::V2::Types::TestResult.from_json(json_object: item)
+            end
             new(
               modifiers: modifiers,
               charge_amount_cents: charge_amount_cents,
@@ -158,6 +182,8 @@ module CandidApiClient
               description: description,
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
+              drug_identification: drug_identification,
+              test_results: test_results,
               additional_properties: struct
             )
           end
@@ -191,6 +217,8 @@ module CandidApiClient
             obj.description&.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
+            obj.drug_identification.nil? || CandidApiClient::ServiceLines::V2::Types::DrugIdentification.validate_raw(obj: obj.drug_identification)
+            obj.test_results&.is_a?(Array) != false || raise("Passed value for field obj.test_results is not the expected type, validation failed.")
           end
         end
       end

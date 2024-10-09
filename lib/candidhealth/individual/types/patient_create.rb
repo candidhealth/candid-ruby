@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../commons/types/phone_number"
+require_relative "patient_non_insurance_payer_info_create"
 require "date"
 require_relative "../../commons/types/street_address_short_zip"
 require_relative "gender"
@@ -19,6 +20,8 @@ module CandidApiClient
         attr_reader :email
         # @return [Array<String>]
         attr_reader :non_insurance_payers
+        # @return [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate>]
+        attr_reader :non_insurance_payers_info
         # @return [Boolean] Defaults to false
         attr_reader :email_consent
         # @return [String] The ID used to identify this individual in your system. For example, your
@@ -47,6 +50,7 @@ module CandidApiClient
         # @param phone_consent [Boolean] Defaults to false
         # @param email [String]
         # @param non_insurance_payers [Array<String>]
+        # @param non_insurance_payers_info [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate>]
         # @param email_consent [Boolean] Defaults to false
         # @param external_id [String] The ID used to identify this individual in your system. For example, your
         #  internal patient ID or an EHR patient ID.
@@ -59,11 +63,12 @@ module CandidApiClient
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::Individual::Types::PatientCreate]
         def initialize(external_id:, date_of_birth:, address:, first_name:, last_name:, gender:, phone_numbers: OMIT, phone_consent: OMIT, email: OMIT, non_insurance_payers: OMIT,
-                       email_consent: OMIT, additional_properties: nil)
+                       non_insurance_payers_info: OMIT, email_consent: OMIT, additional_properties: nil)
           @phone_numbers = phone_numbers if phone_numbers != OMIT
           @phone_consent = phone_consent if phone_consent != OMIT
           @email = email if email != OMIT
           @non_insurance_payers = non_insurance_payers if non_insurance_payers != OMIT
+          @non_insurance_payers_info = non_insurance_payers_info if non_insurance_payers_info != OMIT
           @email_consent = email_consent if email_consent != OMIT
           @external_id = external_id
           @date_of_birth = date_of_birth
@@ -77,6 +82,7 @@ module CandidApiClient
             "phone_consent": phone_consent,
             "email": email,
             "non_insurance_payers": non_insurance_payers,
+            "non_insurance_payers_info": non_insurance_payers_info,
             "email_consent": email_consent,
             "external_id": external_id,
             "date_of_birth": date_of_birth,
@@ -103,6 +109,10 @@ module CandidApiClient
           phone_consent = struct["phone_consent"]
           email = struct["email"]
           non_insurance_payers = struct["non_insurance_payers"]
+          non_insurance_payers_info = parsed_json["non_insurance_payers_info"]&.map do |item|
+            item = item.to_json
+            CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate.from_json(json_object: item)
+          end
           email_consent = struct["email_consent"]
           external_id = struct["external_id"]
           date_of_birth = (Date.parse(parsed_json["date_of_birth"]) unless parsed_json["date_of_birth"].nil?)
@@ -120,6 +130,7 @@ module CandidApiClient
             phone_consent: phone_consent,
             email: email,
             non_insurance_payers: non_insurance_payers,
+            non_insurance_payers_info: non_insurance_payers_info,
             email_consent: email_consent,
             external_id: external_id,
             date_of_birth: date_of_birth,
@@ -149,6 +160,7 @@ module CandidApiClient
           obj.phone_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
           obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
           obj.non_insurance_payers&.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers is not the expected type, validation failed.")
+          obj.non_insurance_payers_info&.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers_info is not the expected type, validation failed.")
           obj.email_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
           obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
           obj.date_of_birth.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")

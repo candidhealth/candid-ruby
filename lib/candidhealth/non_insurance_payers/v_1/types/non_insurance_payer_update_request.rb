@@ -2,6 +2,7 @@
 
 require_relative "non_insurance_payer_description_update"
 require_relative "non_insurance_payer_category_update"
+require_relative "non_insurance_payer_address_update"
 require "ostruct"
 require "json"
 
@@ -16,6 +17,8 @@ module CandidApiClient
           attr_reader :description
           # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerCategoryUpdate]
           attr_reader :category
+          # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerAddressUpdate]
+          attr_reader :address
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -27,14 +30,21 @@ module CandidApiClient
           # @param name [String] Max 50 characters allowed
           # @param description [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerDescriptionUpdate]
           # @param category [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerCategoryUpdate]
+          # @param address [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerAddressUpdate]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerUpdateRequest]
-          def initialize(name: OMIT, description: OMIT, category: OMIT, additional_properties: nil)
+          def initialize(name: OMIT, description: OMIT, category: OMIT, address: OMIT, additional_properties: nil)
             @name = name if name != OMIT
             @description = description if description != OMIT
             @category = category if category != OMIT
+            @address = address if address != OMIT
             @additional_properties = additional_properties
-            @_field_set = { "name": name, "description": description, "category": category }.reject do |_k, v|
+            @_field_set = {
+              "name": name,
+              "description": description,
+              "category": category,
+              "address": address
+            }.reject do |_k, v|
               v == OMIT
             end
           end
@@ -59,10 +69,17 @@ module CandidApiClient
               category = parsed_json["category"].to_json
               category = CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerCategoryUpdate.from_json(json_object: category)
             end
+            if parsed_json["address"].nil?
+              address = nil
+            else
+              address = parsed_json["address"].to_json
+              address = CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerAddressUpdate.from_json(json_object: address)
+            end
             new(
               name: name,
               description: description,
               category: category,
+              address: address,
               additional_properties: struct
             )
           end
@@ -84,6 +101,7 @@ module CandidApiClient
             obj.name&.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
             obj.description.nil? || CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerDescriptionUpdate.validate_raw(obj: obj.description)
             obj.category.nil? || CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerCategoryUpdate.validate_raw(obj: obj.category)
+            obj.address.nil? || CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerAddressUpdate.validate_raw(obj: obj.address)
           end
         end
       end

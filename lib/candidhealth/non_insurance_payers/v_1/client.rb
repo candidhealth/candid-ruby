@@ -27,11 +27,18 @@ module CandidApiClient
         #   * :name (String)
         #   * :description (String)
         #   * :category (String)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.create(request: { name: "string", description: "string", category: "string" })
+        #  api.non_insurance_payers.v_1.create(request: { name: "string", description: "string", category: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -144,6 +151,7 @@ module CandidApiClient
         #   * :name (String)
         #   * :description (Hash)
         #   * :category (Hash)
+        #   * :address (Hash)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
@@ -200,11 +208,18 @@ module CandidApiClient
         #   * :name (String)
         #   * :description (String)
         #   * :category (String)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.create(request: { name: "string", description: "string", category: "string" })
+        #  api.non_insurance_payers.v_1.create(request: { name: "string", description: "string", category: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -325,6 +340,7 @@ module CandidApiClient
         #   * :name (String)
         #   * :description (Hash)
         #   * :category (Hash)
+        #   * :address (Hash)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example

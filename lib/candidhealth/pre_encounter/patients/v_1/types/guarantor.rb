@@ -38,9 +38,9 @@ module CandidApiClient
             # @param address [CandidApiClient::PreEncounter::Common::Types::Address]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Guarantor]
-            def initialize(name:, telecom:, birth_date:, address:, email: OMIT, additional_properties: nil)
+            def initialize(name:, birth_date:, address:, telecom: OMIT, email: OMIT, additional_properties: nil)
               @name = name
-              @telecom = telecom
+              @telecom = telecom if telecom != OMIT
               @email = email if email != OMIT
               @birth_date = birth_date
               @address = address
@@ -108,7 +108,7 @@ module CandidApiClient
             # @return [Void]
             def self.validate_raw(obj:)
               CandidApiClient::PreEncounter::Common::Types::HumanName.validate_raw(obj: obj.name)
-              CandidApiClient::PreEncounter::Common::Types::ContactPoint.validate_raw(obj: obj.telecom)
+              obj.telecom.nil? || CandidApiClient::PreEncounter::Common::Types::ContactPoint.validate_raw(obj: obj.telecom)
               obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
               obj.birth_date.is_a?(Date) != false || raise("Passed value for field obj.birth_date is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Common::Types::Address.validate_raw(obj: obj.address)

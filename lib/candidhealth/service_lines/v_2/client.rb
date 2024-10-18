@@ -45,12 +45,25 @@ module CandidApiClient
         #     * :pharmacy_prescription_number (String)
         #     * :conversion_formula (String)
         #     * :drug_description (String)
+        #   * :ordering_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
         #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] })
+        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -173,12 +186,25 @@ module CandidApiClient
         #     * :pharmacy_prescription_number (String)
         #     * :conversion_formula (String)
         #     * :drug_description (String)
+        #   * :ordering_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
         #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] })
+        #  api.service_lines.v_2.create(request: { modifiers: [TWENTY_TWO], charge_amount_cents: 1, diagnosis_id_zero: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_one: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_two: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", diagnosis_id_three: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", denial_reason: { reason: AUTHORIZATION_REQUIRED }, place_of_service_code: PHARMACY, procedure_code: "string", quantity: "string", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

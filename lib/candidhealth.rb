@@ -7,6 +7,7 @@ require_relative "requests"
 require_relative "candidhealth/auth/client"
 require_relative "candidhealth/billing_notes/client"
 require_relative "candidhealth/contracts/client"
+require_relative "candidhealth/credentialing/client"
 require_relative "candidhealth/custom_schemas/client"
 require_relative "candidhealth/eligibility/client"
 require_relative "candidhealth/encounter_providers/client"
@@ -44,6 +45,8 @@ module CandidApiClient
     attr_reader :billing_notes
     # @return [CandidApiClient::Contracts::Client]
     attr_reader :contracts
+    # @return [CandidApiClient::Credentialing::Client]
+    attr_reader :credentialing
     # @return [CandidApiClient::CustomSchemas::Client]
     attr_reader :custom_schemas
     # @return [CandidApiClient::Eligibility::Client]
@@ -130,6 +133,7 @@ module CandidApiClient
       @auth = CandidApiClient::Auth::Client.new(request_client: @request_client)
       @billing_notes = CandidApiClient::BillingNotes::Client.new(request_client: @request_client)
       @contracts = CandidApiClient::Contracts::Client.new(request_client: @request_client)
+      @credentialing = CandidApiClient::Credentialing::Client.new(request_client: @request_client)
       @custom_schemas = CandidApiClient::CustomSchemas::Client.new(request_client: @request_client)
       @eligibility = CandidApiClient::Eligibility::Client.new(request_client: @request_client)
       @encounter_providers = CandidApiClient::EncounterProviders::Client.new(request_client: @request_client)
@@ -168,6 +172,8 @@ module CandidApiClient
     attr_reader :billing_notes
     # @return [CandidApiClient::Contracts::AsyncClient]
     attr_reader :contracts
+    # @return [CandidApiClient::Credentialing::AsyncClient]
+    attr_reader :credentialing
     # @return [CandidApiClient::CustomSchemas::AsyncClient]
     attr_reader :custom_schemas
     # @return [CandidApiClient::Eligibility::AsyncClient]
@@ -254,6 +260,7 @@ module CandidApiClient
       @auth = CandidApiClient::Auth::AsyncClient.new(request_client: @async_request_client)
       @billing_notes = CandidApiClient::BillingNotes::AsyncClient.new(request_client: @async_request_client)
       @contracts = CandidApiClient::Contracts::AsyncClient.new(request_client: @async_request_client)
+      @credentialing = CandidApiClient::Credentialing::AsyncClient.new(request_client: @async_request_client)
       @custom_schemas = CandidApiClient::CustomSchemas::AsyncClient.new(request_client: @async_request_client)
       @eligibility = CandidApiClient::Eligibility::AsyncClient.new(request_client: @async_request_client)
       @encounter_providers = CandidApiClient::EncounterProviders::AsyncClient.new(request_client: @async_request_client)

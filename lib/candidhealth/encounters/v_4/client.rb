@@ -257,7 +257,6 @@ module CandidApiClient
         #  related to the patient's pregnancy.
         # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #  Code indicating the reason why a request was delayed
-        # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param patient [Hash] Contains the identification information of the individual receiving medical
@@ -531,6 +530,7 @@ module CandidApiClient
         #  instances cannot be created for the same schema on an encounter.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
         #   * :schema_id (String)
         #   * :content (Hash{String => Object})
+        # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -556,10 +556,11 @@ module CandidApiClient
         #    guarantor: { phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] },
         #    tag_ids: ["string"],
-        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
+        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
+        #    referral_number: "string"
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, referral_number: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -590,7 +591,6 @@ module CandidApiClient
               onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
-              referral_number: referral_number,
               additional_properties: additional_properties,
               _field_set: _field_set,
               patient: patient,
@@ -613,7 +613,8 @@ module CandidApiClient
               guarantor: guarantor,
               external_claim_submission: external_claim_submission,
               tag_ids: tag_ids,
-              schema_instances: schema_instances
+              schema_instances: schema_instances,
+              referral_number: referral_number
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/encounters/v4"
@@ -634,7 +635,7 @@ module CandidApiClient
         #  - Referring Provider
         #  - Subscriber Primary
         #  - Subscriber Secondary
-        #  - Prior Authorization Number
+        #  - Referral Number
         #  - Responsible Party
         #  - Guarantor
         #  Utilizing this endpoint opts you into automatic updating of the encounter when
@@ -743,7 +744,6 @@ module CandidApiClient
         #  related to the patient's pregnancy.
         # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #  Code indicating the reason why a request was delayed
-        # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param pre_encounter_patient_id [String]
@@ -930,7 +930,7 @@ module CandidApiClient
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
         #  )
         def create_from_pre_encounter_patient(external_id:, patient_authorized_release:,
-                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, referral_number: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -961,7 +961,6 @@ module CandidApiClient
               onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
-              referral_number: referral_number,
               additional_properties: additional_properties,
               _field_set: _field_set,
               pre_encounter_patient_id: pre_encounter_patient_id,
@@ -1617,7 +1616,6 @@ module CandidApiClient
         #  related to the patient's pregnancy.
         # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #  Code indicating the reason why a request was delayed
-        # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param patient [Hash] Contains the identification information of the individual receiving medical
@@ -1891,6 +1889,7 @@ module CandidApiClient
         #  instances cannot be created for the same schema on an encounter.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
         #   * :schema_id (String)
         #   * :content (Hash{String => Object})
+        # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -1916,10 +1915,11 @@ module CandidApiClient
         #    guarantor: { phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] },
         #    tag_ids: ["string"],
-        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
+        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
+        #    referral_number: "string"
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, referral_number: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1951,7 +1951,6 @@ module CandidApiClient
                 onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
                 last_menstrual_period_date: last_menstrual_period_date,
                 delay_reason_code: delay_reason_code,
-                referral_number: referral_number,
                 additional_properties: additional_properties,
                 _field_set: _field_set,
                 patient: patient,
@@ -1974,7 +1973,8 @@ module CandidApiClient
                 guarantor: guarantor,
                 external_claim_submission: external_claim_submission,
                 tag_ids: tag_ids,
-                schema_instances: schema_instances
+                schema_instances: schema_instances,
+                referral_number: referral_number
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/encounters/v4"
@@ -1996,7 +1996,7 @@ module CandidApiClient
         #  - Referring Provider
         #  - Subscriber Primary
         #  - Subscriber Secondary
-        #  - Prior Authorization Number
+        #  - Referral Number
         #  - Responsible Party
         #  - Guarantor
         #  Utilizing this endpoint opts you into automatic updating of the encounter when
@@ -2105,7 +2105,6 @@ module CandidApiClient
         #  related to the patient's pregnancy.
         # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
         #  Code indicating the reason why a request was delayed
-        # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param pre_encounter_patient_id [String]
@@ -2292,7 +2291,7 @@ module CandidApiClient
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
         #  )
         def create_from_pre_encounter_patient(external_id:, patient_authorized_release:,
-                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, referral_number: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2324,7 +2323,6 @@ module CandidApiClient
                 onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
                 last_menstrual_period_date: last_menstrual_period_date,
                 delay_reason_code: delay_reason_code,
-                referral_number: referral_number,
                 additional_properties: additional_properties,
                 _field_set: _field_set,
                 pre_encounter_patient_id: pre_encounter_patient_id,

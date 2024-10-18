@@ -107,7 +107,7 @@ module CandidApiClient
         # @return [CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.organization_providers.v_3.create(request: { npi: "string", is_rendering: true, is_billing: true, first_name: "string", last_name: "string", organization_name: "string", provider_type: INDIVIDUAL, tax_id: "string", taxonomy_code: "string", license_type: MD, addresses: [{ address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, address_type: DEFAULT }], employment_start_date: DateTime.parse(2023-01-15), employment_termination_date: DateTime.parse(2023-01-15), qualifications: [{ period: { start_date: "string", end_date: {"key":"value"} }, identifier_code: MCR }] })
+        #  api.organization_providers.v_3.create(request: { npi: "string", is_rendering: true, is_billing: true, first_name: "string", last_name: "string", organization_name: "string", provider_type: INDIVIDUAL, tax_id: "string", taxonomy_code: "string", license_type: MD, addresses: [{ address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, address_type: DEFAULT }], employment_start_date: DateTime.parse(2023-01-15), employment_termination_date: DateTime.parse(2023-01-15), qualifications: [{ period: { start_date: "string" }, identifier_code: MCR }] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -262,7 +262,7 @@ module CandidApiClient
         # @return [CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.organization_providers.v_3.create(request: { npi: "string", is_rendering: true, is_billing: true, first_name: "string", last_name: "string", organization_name: "string", provider_type: INDIVIDUAL, tax_id: "string", taxonomy_code: "string", license_type: MD, addresses: [{ address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, address_type: DEFAULT }], employment_start_date: DateTime.parse(2023-01-15), employment_termination_date: DateTime.parse(2023-01-15), qualifications: [{ period: { start_date: "string", end_date: {"key":"value"} }, identifier_code: MCR }] })
+        #  api.organization_providers.v_3.create(request: { npi: "string", is_rendering: true, is_billing: true, first_name: "string", last_name: "string", organization_name: "string", provider_type: INDIVIDUAL, tax_id: "string", taxonomy_code: "string", license_type: MD, addresses: [{ address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, address_type: DEFAULT }], employment_start_date: DateTime.parse(2023-01-15), employment_termination_date: DateTime.parse(2023-01-15), qualifications: [{ period: { start_date: "string" }, identifier_code: MCR }] })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

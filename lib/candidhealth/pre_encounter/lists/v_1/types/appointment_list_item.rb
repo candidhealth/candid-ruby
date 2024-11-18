@@ -3,6 +3,7 @@
 require_relative "../../../appointments/v_1/types/appointment"
 require_relative "../../../patients/v_1/types/mutable_patient"
 require_relative "../../../coverages/v_1/types/mutable_coverage"
+require_relative "../../../appointments/v_1/types/universal_service_identifier"
 require "ostruct"
 require "json"
 
@@ -18,6 +19,8 @@ module CandidApiClient
             attr_reader :patient
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
             attr_reader :primary_coverage
+            # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier]
+            attr_reader :primary_service_type
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -29,17 +32,21 @@ module CandidApiClient
             # @param appointment [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
             # @param patient [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient]
             # @param primary_coverage [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
+            # @param primary_service_type [CandidApiClient::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Lists::V1::Types::AppointmentListItem]
-            def initialize(appointment:, patient:, primary_coverage: OMIT, additional_properties: nil)
+            def initialize(appointment:, patient:, primary_coverage: OMIT, primary_service_type: OMIT,
+                           additional_properties: nil)
               @appointment = appointment
               @patient = patient
               @primary_coverage = primary_coverage if primary_coverage != OMIT
+              @primary_service_type = primary_service_type if primary_service_type != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "appointment": appointment,
                 "patient": patient,
-                "primary_coverage": primary_coverage
+                "primary_coverage": primary_coverage,
+                "primary_service_type": primary_service_type
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -70,10 +77,12 @@ module CandidApiClient
                 primary_coverage = parsed_json["primary_coverage"].to_json
                 primary_coverage = CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.from_json(json_object: primary_coverage)
               end
+              primary_service_type = struct["primary_service_type"]
               new(
                 appointment: appointment,
                 patient: patient,
                 primary_coverage: primary_coverage,
+                primary_service_type: primary_service_type,
                 additional_properties: struct
               )
             end
@@ -95,6 +104,7 @@ module CandidApiClient
               CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.validate_raw(obj: obj.appointment)
               CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient.validate_raw(obj: obj.patient)
               obj.primary_coverage.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.validate_raw(obj: obj.primary_coverage)
+              obj.primary_service_type&.is_a?(CandidApiClient::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier) != false || raise("Passed value for field obj.primary_service_type is not the expected type, validation failed.")
             end
           end
         end

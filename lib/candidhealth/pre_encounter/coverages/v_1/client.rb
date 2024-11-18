@@ -110,6 +110,7 @@ module CandidApiClient
           #         * :additional_notes (String)
           #       * :out_of_network_flat (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>)
           #     * :service_specific_coverage (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage>)
+          #     * :notes (String)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
@@ -216,6 +217,7 @@ module CandidApiClient
           #         * :additional_notes (String)
           #       * :out_of_network_flat (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>)
           #     * :service_specific_coverage (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage>)
+          #     * :notes (String)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
@@ -508,6 +510,7 @@ module CandidApiClient
           #         * :additional_notes (String)
           #       * :out_of_network_flat (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>)
           #     * :service_specific_coverage (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage>)
+          #     * :notes (String)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
@@ -616,6 +619,7 @@ module CandidApiClient
           #         * :additional_notes (String)
           #       * :out_of_network_flat (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageDetails>)
           #     * :service_specific_coverage (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage>)
+          #     * :notes (String)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example

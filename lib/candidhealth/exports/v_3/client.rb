@@ -36,8 +36,9 @@ module CandidApiClient
         #  available by Wednesday at the latest. If file generation is still in progress
         #  upon request before 3 business days have passed, the
         #  caller will receive a 422 response. If the file has already been generated, it
-        #  will be served. Please email
-        #  our [Support team](mailto:support@joincandidhealth.com) with any data requests
+        #  will be served. Historic files should be available
+        #  up to 90 days in the past by default. Please email our [Support
+        #  team](mailto:support@joincandidhealth.com) with any data requests
         #  outside of these stated guarantees.
         #
         # @param start_date [Date] Beginning date of claim versions returned in the export, ISO 8601 date e.g.
@@ -100,8 +101,9 @@ module CandidApiClient
         #  available by Wednesday at the latest. If file generation is still in progress
         #  upon request before 3 business days have passed, the
         #  caller will receive a 422 response. If the file has already been generated, it
-        #  will be served. Please email
-        #  our [Support team](mailto:support@joincandidhealth.com) with any data requests
+        #  will be served. Historic files should be available
+        #  up to 90 days in the past by default. Please email our [Support
+        #  team](mailto:support@joincandidhealth.com) with any data requests
         #  outside of these stated guarantees.
         #
         # @param start_date [Date] Beginning date of claim versions returned in the export, ISO 8601 date e.g.

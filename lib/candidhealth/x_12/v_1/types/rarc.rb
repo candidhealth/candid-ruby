@@ -104,6 +104,7 @@ module CandidApiClient
           M_115 = "M115"
           M_116 = "M116"
           M_117 = "M117"
+          M_119 = "M119"
           M_121 = "M121"
           M_122 = "M122"
           M_123 = "M123"
@@ -210,6 +211,7 @@ module CandidApiClient
           MA_97 = "MA97"
           MA_99 = "MA99"
           MA_100 = "MA100"
+          MA_102 = "MA102"
           MA_103 = "MA103"
           MA_106 = "MA106"
           MA_107 = "MA107"
@@ -249,6 +251,7 @@ module CandidApiClient
           N_11 = "N11"
           N_12 = "N12"
           N_13 = "N13"
+          N_14 = "N14"
           N_15 = "N15"
           N_16 = "N16"
           N_19 = "N19"
@@ -579,6 +582,7 @@ module CandidApiClient
           N_362 = "N362"
           N_363 = "N363"
           N_364 = "N364"
+          N_365 = "N365"
           N_366 = "N366"
           N_367 = "N367"
           N_368 = "N368"
@@ -1066,6 +1070,8 @@ module CandidApiClient
           N_858 = "N858"
           N_859 = "N859"
           N_860 = "N860"
+          N_880 = "N880"
+          N_887 = "N887"
         end
       end
     end

@@ -35,13 +35,13 @@ module CandidApiClient
           # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Guarantor::V1::Types::GuarantorBase]
-          def initialize(first_name:, last_name:, external_id:, date_of_birth: OMIT, address: OMIT,
+          def initialize(first_name:, last_name:, external_id:, address:, date_of_birth: OMIT,
                          additional_properties: nil)
             @first_name = first_name
             @last_name = last_name
             @external_id = external_id
             @date_of_birth = date_of_birth if date_of_birth != OMIT
-            @address = address if address != OMIT
+            @address = address
             @additional_properties = additional_properties
             @_field_set = {
               "first_name": first_name,
@@ -99,7 +99,7 @@ module CandidApiClient
             obj.last_name.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.date_of_birth&.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")
-            obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressShortZip.validate_raw(obj: obj.address)
+            CandidApiClient::Commons::Types::StreetAddressShortZip.validate_raw(obj: obj.address)
           end
         end
       end

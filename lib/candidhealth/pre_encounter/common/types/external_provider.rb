@@ -15,7 +15,7 @@ module CandidApiClient
         class ExternalProvider
           # @return [CandidApiClient::PreEncounter::Common::Types::HumanName]
           attr_reader :name
-          # @return [CandidApiClient::PreEncounter::Common::Types::ExternalProviderType]
+          # @return [CandidApiClient::PreEncounter::Common::Types::ExternalProviderType] Defaults to ATTENDING.
           attr_reader :type
           # @return [String]
           attr_reader :npi
@@ -36,7 +36,7 @@ module CandidApiClient
           OMIT = Object.new
 
           # @param name [CandidApiClient::PreEncounter::Common::Types::HumanName]
-          # @param type [CandidApiClient::PreEncounter::Common::Types::ExternalProviderType]
+          # @param type [CandidApiClient::PreEncounter::Common::Types::ExternalProviderType] Defaults to ATTENDING.
           # @param npi [String]
           # @param telecoms [Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>]
           # @param addresses [Array<CandidApiClient::PreEncounter::Common::Types::Address>]

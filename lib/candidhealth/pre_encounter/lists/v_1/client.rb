@@ -25,7 +25,7 @@ module CandidApiClient
           #
           # @param page_token [String]
           # @param limit [Integer]
-          # @param sort_field [String]
+          # @param sort_field [String] Defaults to patient.updatedAt.
           # @param sort_direction [CandidApiClient::PreEncounter::Common::Types::SortDirection] Defaults to ascending.
           # @param filters [String]
           # @param request_options [CandidApiClient::RequestOptions]
@@ -65,8 +65,7 @@ module CandidApiClient
 
           # Searches for appointments that match the query parameters.
           #
-          # @param sort_field [String] The string path to the field to order by. Defaults to
-          #  appointment.startTimestamp. Path values are camelCase.
+          # @param sort_field [String] Defaults to appointment.startTimestamp.
           # @param sort_direction [CandidApiClient::PreEncounter::Common::Types::SortDirection] Defaults to asc.
           # @param limit [Integer] Defaults to 100.
           # @param page_token [String]
@@ -122,7 +121,7 @@ module CandidApiClient
           #
           # @param page_token [String]
           # @param limit [Integer]
-          # @param sort_field [String]
+          # @param sort_field [String] Defaults to patient.updatedAt.
           # @param sort_direction [CandidApiClient::PreEncounter::Common::Types::SortDirection] Defaults to ascending.
           # @param filters [String]
           # @param request_options [CandidApiClient::RequestOptions]
@@ -164,8 +163,7 @@ module CandidApiClient
 
           # Searches for appointments that match the query parameters.
           #
-          # @param sort_field [String] The string path to the field to order by. Defaults to
-          #  appointment.startTimestamp. Path values are camelCase.
+          # @param sort_field [String] Defaults to appointment.startTimestamp.
           # @param sort_direction [CandidApiClient::PreEncounter::Common::Types::SortDirection] Defaults to asc.
           # @param limit [Integer] Defaults to 100.
           # @param page_token [String]

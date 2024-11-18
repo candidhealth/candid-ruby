@@ -25,6 +25,8 @@ module CandidApiClient
           attr_reader :note
           # @return [Hash{String => Array}]
           attr_reader :claims
+          # @return [String]
+          attr_reader :remit_draft_id
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -40,10 +42,11 @@ module CandidApiClient
           # @param check_date [Date]
           # @param note [String]
           # @param claims [Hash{String => Array}]
+          # @param remit_draft_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudicationCreate]
           def initialize(payer_identifier:, payee:, check_date:, claims:, post_date: OMIT, check_number: OMIT,
-                         note: OMIT, additional_properties: nil)
+                         note: OMIT, remit_draft_id: OMIT, additional_properties: nil)
             @payer_identifier = payer_identifier
             @payee = payee
             @post_date = post_date if post_date != OMIT
@@ -51,6 +54,7 @@ module CandidApiClient
             @check_date = check_date
             @note = note if note != OMIT
             @claims = claims
+            @remit_draft_id = remit_draft_id if remit_draft_id != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "payer_identifier": payer_identifier,
@@ -59,7 +63,8 @@ module CandidApiClient
               "check_number": check_number,
               "check_date": check_date,
               "note": note,
-              "claims": claims
+              "claims": claims,
+              "remit_draft_id": remit_draft_id
             }.reject do |_k, v|
               v == OMIT
             end
@@ -94,6 +99,7 @@ module CandidApiClient
                 CandidApiClient::InsuranceAdjudications::V1::Types::ClaimAdjudicationCreate.from_json(json_object: item)
               end
             end
+            remit_draft_id = struct["remit_draft_id"]
             new(
               payer_identifier: payer_identifier,
               payee: payee,
@@ -102,6 +108,7 @@ module CandidApiClient
               check_date: check_date,
               note: note,
               claims: claims,
+              remit_draft_id: remit_draft_id,
               additional_properties: struct
             )
           end
@@ -127,6 +134,7 @@ module CandidApiClient
             obj.check_date.is_a?(Date) != false || raise("Passed value for field obj.check_date is not the expected type, validation failed.")
             obj.note&.is_a?(String) != false || raise("Passed value for field obj.note is not the expected type, validation failed.")
             obj.claims.is_a?(Hash) != false || raise("Passed value for field obj.claims is not the expected type, validation failed.")
+            obj.remit_draft_id&.is_a?(String) != false || raise("Passed value for field obj.remit_draft_id is not the expected type, validation failed.")
           end
         end
       end

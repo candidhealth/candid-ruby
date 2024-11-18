@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "date"
 require_relative "../../../common/types/human_name"
 require_relative "../../../common/types/gender"
+require "date"
 require_relative "../../../common/types/sex"
 require_relative "../../../common/types/sexual_orientation"
 require_relative "../../../common/types/race"
@@ -28,27 +28,9 @@ module CandidApiClient
     module Patients
       module V1
         module Types
-          # A patient object with immutable server-owned properties.
-          class Patient
-            # @return [String] The unique UUID identifier for a Patient. Patient ID is used in machine
-            #  contexts.
-            attr_reader :id
-            # @return [String] The medical record number for the patient. Human-friendly Candid generated MRNs
-            #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
-            #  and "XXXX" is a zero-padded incrementing integer.
+          class MutablePatientWithMrn
+            # @return [String] The medical record number for the patient.
             attr_reader :mrn
-            # @return [String] The organization that owns this patient.
-            attr_reader :organization_id
-            # @return [Boolean] True if the patient is deactivated. Deactivated patients are not returned in
-            #  search results but are returned in all other endpoints including scan.
-            attr_reader :deactivated
-            # @return [Integer] The version of the patient. Any update to any property of a patient object will
-            #  create a new version.
-            attr_reader :version
-            # @return [DateTime]
-            attr_reader :updated_at
-            # @return [String] The user ID of the user who last updated the patient.
-            attr_reader :updating_user_id
             # @return [CandidApiClient::PreEncounter::Common::Types::HumanName]
             attr_reader :name
             # @return [Array<CandidApiClient::PreEncounter::Common::Types::HumanName>] Other names for the patient.
@@ -127,18 +109,7 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param id [String] The unique UUID identifier for a Patient. Patient ID is used in machine
-            #  contexts.
-            # @param mrn [String] The medical record number for the patient. Human-friendly Candid generated MRNs
-            #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
-            #  and "XXXX" is a zero-padded incrementing integer.
-            # @param organization_id [String] The organization that owns this patient.
-            # @param deactivated [Boolean] True if the patient is deactivated. Deactivated patients are not returned in
-            #  search results but are returned in all other endpoints including scan.
-            # @param version [Integer] The version of the patient. Any update to any property of a patient object will
-            #  create a new version.
-            # @param updated_at [DateTime]
-            # @param updating_user_id [String] The user ID of the user who last updated the patient.
+            # @param mrn [String] The medical record number for the patient.
             # @param name [CandidApiClient::PreEncounter::Common::Types::HumanName]
             # @param other_names [Array<CandidApiClient::PreEncounter::Common::Types::HumanName>] Other names for the patient.
             # @param gender [CandidApiClient::PreEncounter::Common::Types::Gender]
@@ -177,16 +148,10 @@ module CandidApiClient
             # @param primary_service_facility_id [String]
             # @param do_not_invoice_reason [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
-            def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, additional_properties: nil)
-              @id = id
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn]
+            def initialize(mrn:, name:, other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:,
+                           primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, additional_properties: nil)
               @mrn = mrn
-              @organization_id = organization_id
-              @deactivated = deactivated
-              @version = version
-              @updated_at = updated_at
-              @updating_user_id = updating_user_id
               @name = name
               @other_names = other_names
               @gender = gender if gender != OMIT
@@ -226,13 +191,7 @@ module CandidApiClient
               @do_not_invoice_reason = do_not_invoice_reason if do_not_invoice_reason != OMIT
               @additional_properties = additional_properties
               @_field_set = {
-                "id": id,
                 "mrn": mrn,
-                "organization_id": organization_id,
-                "deactivated": deactivated,
-                "version": version,
-                "updated_at": updated_at,
-                "updating_user_id": updating_user_id,
                 "name": name,
                 "other_names": other_names,
                 "gender": gender,
@@ -271,20 +230,14 @@ module CandidApiClient
               end
             end
 
-            # Deserialize a JSON object to an instance of Patient
+            # Deserialize a JSON object to an instance of MutablePatientWithMrn
             #
             # @param json_object [String]
-            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn]
             def self.from_json(json_object:)
               struct = JSON.parse(json_object, object_class: OpenStruct)
               parsed_json = JSON.parse(json_object)
-              id = struct["id"]
               mrn = struct["mrn"]
-              organization_id = struct["organization_id"]
-              deactivated = struct["deactivated"]
-              version = struct["version"]
-              updated_at = (DateTime.parse(parsed_json["updated_at"]) unless parsed_json["updated_at"].nil?)
-              updating_user_id = struct["updating_user_id"]
               if parsed_json["name"].nil?
                 name = nil
               else
@@ -373,13 +326,7 @@ module CandidApiClient
               primary_service_facility_id = struct["primary_service_facility_id"]
               do_not_invoice_reason = struct["do_not_invoice_reason"]
               new(
-                id: id,
                 mrn: mrn,
-                organization_id: organization_id,
-                deactivated: deactivated,
-                version: version,
-                updated_at: updated_at,
-                updating_user_id: updating_user_id,
                 name: name,
                 other_names: other_names,
                 gender: gender,
@@ -417,7 +364,7 @@ module CandidApiClient
               )
             end
 
-            # Serialize an instance of Patient to a JSON object
+            # Serialize an instance of MutablePatientWithMrn to a JSON object
             #
             # @return [String]
             def to_json(*_args)
@@ -431,13 +378,7 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              obj.id.is_a?(String) != false || raise("Passed value for field obj.id is not the expected type, validation failed.")
               obj.mrn.is_a?(String) != false || raise("Passed value for field obj.mrn is not the expected type, validation failed.")
-              obj.organization_id.is_a?(String) != false || raise("Passed value for field obj.organization_id is not the expected type, validation failed.")
-              obj.deactivated.is_a?(Boolean) != false || raise("Passed value for field obj.deactivated is not the expected type, validation failed.")
-              obj.version.is_a?(Integer) != false || raise("Passed value for field obj.version is not the expected type, validation failed.")
-              obj.updated_at.is_a?(DateTime) != false || raise("Passed value for field obj.updated_at is not the expected type, validation failed.")
-              obj.updating_user_id.is_a?(String) != false || raise("Passed value for field obj.updating_user_id is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Common::Types::HumanName.validate_raw(obj: obj.name)
               obj.other_names.is_a?(Array) != false || raise("Passed value for field obj.other_names is not the expected type, validation failed.")
               obj.gender&.is_a?(CandidApiClient::PreEncounter::Common::Types::Gender) != false || raise("Passed value for field obj.gender is not the expected type, validation failed.")

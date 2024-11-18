@@ -48,8 +48,8 @@ module CandidApiClient
           # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Guarantor::V1::Types::GuarantorCreate]
-          def initialize(first_name:, last_name:, external_id:, phone_numbers: OMIT, phone_consent: OMIT, email: OMIT,
-                         email_consent: OMIT, date_of_birth: OMIT, address: OMIT, additional_properties: nil)
+          def initialize(first_name:, last_name:, external_id:, address:, phone_numbers: OMIT, phone_consent: OMIT,
+                         email: OMIT, email_consent: OMIT, date_of_birth: OMIT, additional_properties: nil)
             @phone_numbers = phone_numbers if phone_numbers != OMIT
             @phone_consent = phone_consent if phone_consent != OMIT
             @email = email if email != OMIT
@@ -58,7 +58,7 @@ module CandidApiClient
             @last_name = last_name
             @external_id = external_id
             @date_of_birth = date_of_birth if date_of_birth != OMIT
-            @address = address if address != OMIT
+            @address = address
             @additional_properties = additional_properties
             @_field_set = {
               "phone_numbers": phone_numbers,
@@ -135,7 +135,7 @@ module CandidApiClient
             obj.last_name.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.date_of_birth&.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")
-            obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressShortZip.validate_raw(obj: obj.address)
+            CandidApiClient::Commons::Types::StreetAddressShortZip.validate_raw(obj: obj.address)
           end
         end
       end

@@ -55,11 +55,12 @@ module CandidApiClient
         #   * :check_date (Date)
         #   * :note (String)
         #   * :claims (Hash{String => Array})
+        #   * :remit_draft_id (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudication]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.insurance_adjudications.v_1.create(request: { payee: { payee_name: "string" }, post_date: DateTime.parse(2023-01-15), check_number: "string", check_date: DateTime.parse(2023-01-15), note: "string", claims: { "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32": [{ claim_status_code: PROCESSED_AS_PRIMARY, service_lines: {  }, carcs:  }] } })
+        #  api.insurance_adjudications.v_1.create(request: { payee: { payee_name: "string" }, post_date: DateTime.parse(2023-01-15), check_number: "string", check_date: DateTime.parse(2023-01-15), note: "string", claims: { "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32": [{ claim_status_code: PROCESSED_AS_PRIMARY, service_lines: {  }, carcs:  }] }, remit_draft_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -149,11 +150,12 @@ module CandidApiClient
         #   * :check_date (Date)
         #   * :note (String)
         #   * :claims (Hash{String => Array})
+        #   * :remit_draft_id (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudication]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.insurance_adjudications.v_1.create(request: { payee: { payee_name: "string" }, post_date: DateTime.parse(2023-01-15), check_number: "string", check_date: DateTime.parse(2023-01-15), note: "string", claims: { "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32": [{ claim_status_code: PROCESSED_AS_PRIMARY, service_lines: {  }, carcs:  }] } })
+        #  api.insurance_adjudications.v_1.create(request: { payee: { payee_name: "string" }, post_date: DateTime.parse(2023-01-15), check_number: "string", check_date: DateTime.parse(2023-01-15), note: "string", claims: { "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32": [{ claim_status_code: PROCESSED_AS_PRIMARY, service_lines: {  }, carcs:  }] }, remit_draft_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

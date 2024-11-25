@@ -94,8 +94,12 @@ module CandidApiClient
         # @param limit [Integer] Maximum number of entities per page, defaults to 100.
         # @param page_token [String]
         # @param payer_uuid [String] Filter by payer.
-        # @param as_rendering_provider [Boolean] Filter to credentialing spans where the provider is a rendering provider.
-        # @param as_contracting_provider [Boolean] Filter to credentialing spans where the provider is a contracting provider.
+        # @param provider_id [String] Filter to a particular provider. Use in conjunction as_rendering_provider and
+        #  as_contracting_provider.
+        # @param as_rendering_provider [Boolean] Filter to credentialing spans where the provider is a rendering provider. To use
+        #  this filter provider_id is required.
+        # @param as_contracting_provider [Boolean] Filter to credentialing spans where the provider is a contracting provider. To
+        #  use this filter provider_id is required.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpanPage]
         # @example
@@ -104,10 +108,11 @@ module CandidApiClient
         #    limit: 1,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    as_rendering_provider: true,
         #    as_contracting_provider: true
         #  )
-        def get_all(limit: nil, page_token: nil, payer_uuid: nil, as_rendering_provider: nil,
+        def get_all(limit: nil, page_token: nil, payer_uuid: nil, provider_id: nil, as_rendering_provider: nil,
                     as_contracting_provider: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -122,6 +127,7 @@ module CandidApiClient
               "limit": limit,
               "page_token": page_token,
               "payer_uuid": payer_uuid,
+              "provider_id": provider_id,
               "as_rendering_provider": as_rendering_provider,
               "as_contracting_provider": as_contracting_provider
             }.compact
@@ -291,8 +297,12 @@ module CandidApiClient
         # @param limit [Integer] Maximum number of entities per page, defaults to 100.
         # @param page_token [String]
         # @param payer_uuid [String] Filter by payer.
-        # @param as_rendering_provider [Boolean] Filter to credentialing spans where the provider is a rendering provider.
-        # @param as_contracting_provider [Boolean] Filter to credentialing spans where the provider is a contracting provider.
+        # @param provider_id [String] Filter to a particular provider. Use in conjunction as_rendering_provider and
+        #  as_contracting_provider.
+        # @param as_rendering_provider [Boolean] Filter to credentialing spans where the provider is a rendering provider. To use
+        #  this filter provider_id is required.
+        # @param as_contracting_provider [Boolean] Filter to credentialing spans where the provider is a contracting provider. To
+        #  use this filter provider_id is required.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpanPage]
         # @example
@@ -301,10 +311,11 @@ module CandidApiClient
         #    limit: 1,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    as_rendering_provider: true,
         #    as_contracting_provider: true
         #  )
-        def get_all(limit: nil, page_token: nil, payer_uuid: nil, as_rendering_provider: nil,
+        def get_all(limit: nil, page_token: nil, payer_uuid: nil, provider_id: nil, as_rendering_provider: nil,
                     as_contracting_provider: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
@@ -320,6 +331,7 @@ module CandidApiClient
                 "limit": limit,
                 "page_token": page_token,
                 "payer_uuid": payer_uuid,
+                "provider_id": provider_id,
                 "as_rendering_provider": as_rendering_provider,
                 "as_contracting_provider": as_contracting_provider
               }.compact

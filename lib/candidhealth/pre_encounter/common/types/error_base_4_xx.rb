@@ -7,9 +7,11 @@ module CandidApiClient
   module PreEncounter
     module Common
       module Types
-        class ErrorBase
+        class ErrorBase4Xx
           # @return [String]
           attr_reader :message
+          # @return [Object]
+          attr_reader :data
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -19,25 +21,34 @@ module CandidApiClient
           OMIT = Object.new
 
           # @param message [String]
+          # @param data [Object]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::PreEncounter::Common::Types::ErrorBase]
-          def initialize(message:, additional_properties: nil)
+          # @return [CandidApiClient::PreEncounter::Common::Types::ErrorBase4Xx]
+          def initialize(message:, data: OMIT, additional_properties: nil)
             @message = message
+            @data = data if data != OMIT
             @additional_properties = additional_properties
-            @_field_set = { "message": message }
+            @_field_set = { "message": message, "data": data }.reject do |_k, v|
+              v == OMIT
+            end
           end
 
-          # Deserialize a JSON object to an instance of ErrorBase
+          # Deserialize a JSON object to an instance of ErrorBase4Xx
           #
           # @param json_object [String]
-          # @return [CandidApiClient::PreEncounter::Common::Types::ErrorBase]
+          # @return [CandidApiClient::PreEncounter::Common::Types::ErrorBase4Xx]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             message = struct["message"]
-            new(message: message, additional_properties: struct)
+            data = struct["data"]
+            new(
+              message: message,
+              data: data,
+              additional_properties: struct
+            )
           end
 
-          # Serialize an instance of ErrorBase to a JSON object
+          # Serialize an instance of ErrorBase4Xx to a JSON object
           #
           # @return [String]
           def to_json(*_args)
@@ -52,6 +63,7 @@ module CandidApiClient
           # @return [Void]
           def self.validate_raw(obj:)
             obj.message.is_a?(String) != false || raise("Passed value for field obj.message is not the expected type, validation failed.")
+            obj.data&.is_a?(Object) != false || raise("Passed value for field obj.data is not the expected type, validation failed.")
           end
         end
       end

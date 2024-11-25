@@ -8,12 +8,12 @@ module CandidApiClient
     module Common
       module Types
         class VersionConflictErrorBody
-          # @return [String]
-          attr_reader :code
           # @return [Integer]
           attr_reader :latest_version
           # @return [String]
           attr_reader :message
+          # @return [Object]
+          attr_reader :data
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -22,17 +22,19 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param code [String]
           # @param latest_version [Integer]
           # @param message [String]
+          # @param data [Object]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::PreEncounter::Common::Types::VersionConflictErrorBody]
-          def initialize(code:, latest_version:, message:, additional_properties: nil)
-            @code = code
-            @latest_version = latest_version
+          def initialize(message:, latest_version: OMIT, data: OMIT, additional_properties: nil)
+            @latest_version = latest_version if latest_version != OMIT
             @message = message
+            @data = data if data != OMIT
             @additional_properties = additional_properties
-            @_field_set = { "code": code, "latest_version": latest_version, "message": message }
+            @_field_set = { "latest_version": latest_version, "message": message, "data": data }.reject do |_k, v|
+              v == OMIT
+            end
           end
 
           # Deserialize a JSON object to an instance of VersionConflictErrorBody
@@ -41,13 +43,13 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Common::Types::VersionConflictErrorBody]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
-            code = struct["code"]
             latest_version = struct["latest_version"]
             message = struct["message"]
+            data = struct["data"]
             new(
-              code: code,
               latest_version: latest_version,
               message: message,
+              data: data,
               additional_properties: struct
             )
           end
@@ -66,9 +68,9 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.code.is_a?(String) != false || raise("Passed value for field obj.code is not the expected type, validation failed.")
-            obj.latest_version.is_a?(Integer) != false || raise("Passed value for field obj.latest_version is not the expected type, validation failed.")
+            obj.latest_version&.is_a?(Integer) != false || raise("Passed value for field obj.latest_version is not the expected type, validation failed.")
             obj.message.is_a?(String) != false || raise("Passed value for field obj.message is not the expected type, validation failed.")
+            obj.data&.is_a?(Object) != false || raise("Passed value for field obj.data is not the expected type, validation failed.")
           end
         end
       end

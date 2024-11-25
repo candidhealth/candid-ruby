@@ -1072,6 +1072,7 @@ module CandidApiClient
           N_860 = "N860"
           N_880 = "N880"
           N_887 = "N887"
+          N_891 = "N891"
         end
       end
     end

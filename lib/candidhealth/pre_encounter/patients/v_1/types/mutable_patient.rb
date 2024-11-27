@@ -100,6 +100,10 @@ module CandidApiClient
             attr_reader :primary_service_facility_id
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             attr_reader :do_not_invoice_reason
+            # @return [Array<String>]
+            attr_reader :note_ids
+            # @return [Array<String>]
+            attr_reader :tag_ids
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -145,10 +149,12 @@ module CandidApiClient
             # @param referrals [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>]
             # @param primary_service_facility_id [String]
             # @param do_not_invoice_reason [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
+            # @param note_ids [Array<String>]
+            # @param tag_ids [Array<String>]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient]
             def initialize(name:, other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:,
-                           primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, additional_properties: nil)
+                           primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, additional_properties: nil)
               @name = name
               @other_names = other_names
               @gender = gender if gender != OMIT
@@ -186,6 +192,8 @@ module CandidApiClient
               @referrals = referrals if referrals != OMIT
               @primary_service_facility_id = primary_service_facility_id if primary_service_facility_id != OMIT
               @do_not_invoice_reason = do_not_invoice_reason if do_not_invoice_reason != OMIT
+              @note_ids = note_ids if note_ids != OMIT
+              @tag_ids = tag_ids if tag_ids != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "name": name,
@@ -220,7 +228,9 @@ module CandidApiClient
                 "authorizations": authorizations,
                 "referrals": referrals,
                 "primary_service_facility_id": primary_service_facility_id,
-                "do_not_invoice_reason": do_not_invoice_reason
+                "do_not_invoice_reason": do_not_invoice_reason,
+                "note_ids": note_ids,
+                "tag_ids": tag_ids
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -320,6 +330,8 @@ module CandidApiClient
               end
               primary_service_facility_id = struct["primary_service_facility_id"]
               do_not_invoice_reason = struct["do_not_invoice_reason"]
+              note_ids = struct["note_ids"]
+              tag_ids = struct["tag_ids"]
               new(
                 name: name,
                 other_names: other_names,
@@ -354,6 +366,8 @@ module CandidApiClient
                 referrals: referrals,
                 primary_service_facility_id: primary_service_facility_id,
                 do_not_invoice_reason: do_not_invoice_reason,
+                note_ids: note_ids,
+                tag_ids: tag_ids,
                 additional_properties: struct
               )
             end
@@ -405,6 +419,8 @@ module CandidApiClient
               obj.referrals&.is_a?(Array) != false || raise("Passed value for field obj.referrals is not the expected type, validation failed.")
               obj.primary_service_facility_id&.is_a?(String) != false || raise("Passed value for field obj.primary_service_facility_id is not the expected type, validation failed.")
               obj.do_not_invoice_reason&.is_a?(CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason) != false || raise("Passed value for field obj.do_not_invoice_reason is not the expected type, validation failed.")
+              obj.note_ids&.is_a?(Array) != false || raise("Passed value for field obj.note_ids is not the expected type, validation failed.")
+              obj.tag_ids&.is_a?(Array) != false || raise("Passed value for field obj.tag_ids is not the expected type, validation failed.")
             end
           end
         end

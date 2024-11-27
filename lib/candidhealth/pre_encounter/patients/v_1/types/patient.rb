@@ -37,17 +37,17 @@ module CandidApiClient
             #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
             #  and "XXXX" is a zero-padded incrementing integer.
             attr_reader :mrn
-            # @return [String] The organization that owns this patient.
+            # @return [String] The organization that owns this object.
             attr_reader :organization_id
-            # @return [Boolean] True if the patient is deactivated. Deactivated patients are not returned in
+            # @return [Boolean] True if the object is deactivated. Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
             attr_reader :deactivated
-            # @return [Integer] The version of the patient. Any update to any property of a patient object will
+            # @return [Integer] The version of the object. Any update to any property of an object object will
             #  create a new version.
             attr_reader :version
             # @return [DateTime]
             attr_reader :updated_at
-            # @return [String] The user ID of the user who last updated the patient.
+            # @return [String] The user ID of the user who last updated the object.
             attr_reader :updating_user_id
             # @return [CandidApiClient::PreEncounter::Common::Types::HumanName]
             attr_reader :name
@@ -119,6 +119,10 @@ module CandidApiClient
             attr_reader :primary_service_facility_id
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             attr_reader :do_not_invoice_reason
+            # @return [Array<String>]
+            attr_reader :note_ids
+            # @return [Array<String>]
+            attr_reader :tag_ids
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -132,13 +136,13 @@ module CandidApiClient
             # @param mrn [String] The medical record number for the patient. Human-friendly Candid generated MRNs
             #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
             #  and "XXXX" is a zero-padded incrementing integer.
-            # @param organization_id [String] The organization that owns this patient.
-            # @param deactivated [Boolean] True if the patient is deactivated. Deactivated patients are not returned in
+            # @param organization_id [String] The organization that owns this object.
+            # @param deactivated [Boolean] True if the object is deactivated. Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
-            # @param version [Integer] The version of the patient. Any update to any property of a patient object will
+            # @param version [Integer] The version of the object. Any update to any property of an object object will
             #  create a new version.
             # @param updated_at [DateTime]
-            # @param updating_user_id [String] The user ID of the user who last updated the patient.
+            # @param updating_user_id [String] The user ID of the user who last updated the object.
             # @param name [CandidApiClient::PreEncounter::Common::Types::HumanName]
             # @param other_names [Array<CandidApiClient::PreEncounter::Common::Types::HumanName>] Other names for the patient.
             # @param gender [CandidApiClient::PreEncounter::Common::Types::Gender]
@@ -176,10 +180,12 @@ module CandidApiClient
             # @param referrals [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>]
             # @param primary_service_facility_id [String]
             # @param do_not_invoice_reason [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
+            # @param note_ids [Array<String>]
+            # @param tag_ids [Array<String>]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, additional_properties: nil)
+                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, additional_properties: nil)
               @id = id
               @mrn = mrn
               @organization_id = organization_id
@@ -224,6 +230,8 @@ module CandidApiClient
               @referrals = referrals if referrals != OMIT
               @primary_service_facility_id = primary_service_facility_id if primary_service_facility_id != OMIT
               @do_not_invoice_reason = do_not_invoice_reason if do_not_invoice_reason != OMIT
+              @note_ids = note_ids if note_ids != OMIT
+              @tag_ids = tag_ids if tag_ids != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "id": id,
@@ -265,7 +273,9 @@ module CandidApiClient
                 "authorizations": authorizations,
                 "referrals": referrals,
                 "primary_service_facility_id": primary_service_facility_id,
-                "do_not_invoice_reason": do_not_invoice_reason
+                "do_not_invoice_reason": do_not_invoice_reason,
+                "note_ids": note_ids,
+                "tag_ids": tag_ids
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -372,6 +382,8 @@ module CandidApiClient
               end
               primary_service_facility_id = struct["primary_service_facility_id"]
               do_not_invoice_reason = struct["do_not_invoice_reason"]
+              note_ids = struct["note_ids"]
+              tag_ids = struct["tag_ids"]
               new(
                 id: id,
                 mrn: mrn,
@@ -413,6 +425,8 @@ module CandidApiClient
                 referrals: referrals,
                 primary_service_facility_id: primary_service_facility_id,
                 do_not_invoice_reason: do_not_invoice_reason,
+                note_ids: note_ids,
+                tag_ids: tag_ids,
                 additional_properties: struct
               )
             end
@@ -471,6 +485,8 @@ module CandidApiClient
               obj.referrals&.is_a?(Array) != false || raise("Passed value for field obj.referrals is not the expected type, validation failed.")
               obj.primary_service_facility_id&.is_a?(String) != false || raise("Passed value for field obj.primary_service_facility_id is not the expected type, validation failed.")
               obj.do_not_invoice_reason&.is_a?(CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason) != false || raise("Passed value for field obj.do_not_invoice_reason is not the expected type, validation failed.")
+              obj.note_ids&.is_a?(Array) != false || raise("Passed value for field obj.note_ids is not the expected type, validation failed.")
+              obj.tag_ids&.is_a?(Array) != false || raise("Passed value for field obj.tag_ids is not the expected type, validation failed.")
             end
           end
         end

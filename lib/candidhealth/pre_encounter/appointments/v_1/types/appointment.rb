@@ -17,18 +17,17 @@ module CandidApiClient
           class Appointment
             # @return [String]
             attr_reader :id
-            # @return [String] The organization that owns this appointment.
+            # @return [String] The organization that owns this object.
             attr_reader :organization_id
-            # @return [Boolean] True if the appointment is deactivated. Deactivated appointments are not
-            #  returned in search results but are returned in all other endpoints including
-            #  scan.
+            # @return [Boolean] True if the object is deactivated. Deactivated objects are not returned in
+            #  search results but are returned in all other endpoints including scan.
             attr_reader :deactivated
-            # @return [Integer] The version of the appointment. Any update to any property of an appointment
-            #  object will create a new version.
+            # @return [Integer] The version of the object. Any update to any property of an object object will
+            #  create a new version.
             attr_reader :version
             # @return [DateTime]
             attr_reader :updated_at
-            # @return [String] The user ID of the user who last updated the appointment.
+            # @return [String] The user ID of the user who last updated the object.
             attr_reader :updating_user_id
             # @return [String] The Candid-defined patient identifier.
             attr_reader :patient_id
@@ -82,14 +81,13 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param id [String]
-            # @param organization_id [String] The organization that owns this appointment.
-            # @param deactivated [Boolean] True if the appointment is deactivated. Deactivated appointments are not
-            #  returned in search results but are returned in all other endpoints including
-            #  scan.
-            # @param version [Integer] The version of the appointment. Any update to any property of an appointment
-            #  object will create a new version.
+            # @param organization_id [String] The organization that owns this object.
+            # @param deactivated [Boolean] True if the object is deactivated. Deactivated objects are not returned in
+            #  search results but are returned in all other endpoints including scan.
+            # @param version [Integer] The version of the object. Any update to any property of an object object will
+            #  create a new version.
             # @param updated_at [DateTime]
-            # @param updating_user_id [String] The user ID of the user who last updated the appointment.
+            # @param updating_user_id [String] The user ID of the user who last updated the object.
             # @param patient_id [String] The Candid-defined patient identifier.
             # @param start_timestamp [DateTime]
             # @param status [CandidApiClient::PreEncounter::Appointments::V1::Types::AppointmentStatus] Defaults to PENDING. If status is NOT_READY, work_queue must be set. If status

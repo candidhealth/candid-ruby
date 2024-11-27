@@ -20,17 +20,17 @@ module CandidApiClient
           class Coverage
             # @return [String]
             attr_reader :id
-            # @return [String] The organization that owns this coverage.
+            # @return [String] The organization that owns this object.
             attr_reader :organization_id
-            # @return [Boolean] True if the coverage is deactivated. Deactivated coverages are not returned in
+            # @return [Boolean] True if the object is deactivated. Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
             attr_reader :deactivated
-            # @return [Integer] The version of the coverage. Any update to any property of a coverage object
-            #  will create a new version.
+            # @return [Integer] The version of the object. Any update to any property of an object object will
+            #  create a new version.
             attr_reader :version
             # @return [DateTime]
             attr_reader :updated_at
-            # @return [String] The user ID of the user who last updated the coverage.
+            # @return [String] The user ID of the user who last updated the object.
             attr_reader :updating_user_id
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageStatus] The status indiciating if the coverage is active or not.
             attr_reader :status
@@ -62,13 +62,13 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param id [String]
-            # @param organization_id [String] The organization that owns this coverage.
-            # @param deactivated [Boolean] True if the coverage is deactivated. Deactivated coverages are not returned in
+            # @param organization_id [String] The organization that owns this object.
+            # @param deactivated [Boolean] True if the object is deactivated. Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
-            # @param version [Integer] The version of the coverage. Any update to any property of a coverage object
-            #  will create a new version.
+            # @param version [Integer] The version of the object. Any update to any property of an object object will
+            #  create a new version.
             # @param updated_at [DateTime]
-            # @param updating_user_id [String] The user ID of the user who last updated the coverage.
+            # @param updating_user_id [String] The user ID of the user who last updated the object.
             # @param status [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageStatus] The status indiciating if the coverage is active or not.
             # @param subscriber [CandidApiClient::PreEncounter::Coverages::V1::Types::Subscriber] The party who has signed-up for or 'owns' the contractual relationship to the
             #  policy or to whom the benefit of the policy for services rendered to them or

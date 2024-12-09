@@ -35,7 +35,10 @@ module CandidApiClient
           attr_reader :diagnosis_pointers
           # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
           attr_reader :drug_identification
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
+          #  a different place of service at the service line level, this field should not be
+          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
           # @return [String] A free-form description to clarify the related data elements and their content.
           #  Maps to SV1-01, C003-07 on the 837-P.
@@ -72,7 +75,10 @@ module CandidApiClient
           #  equal to 0.
           # @param diagnosis_pointers [Array<Integer>] Indices (zero-indexed) of all the diagnoses this service line references
           # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
+          #  a different place of service at the service line level, this field should not be
+          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param description [String] A free-form description to clarify the related data elements and their content.
           #  Maps to SV1-01, C003-07 on the 837-P.
           # @param date_of_service [Date]

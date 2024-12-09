@@ -459,8 +459,8 @@ module CandidApiClient
         # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
         #  in the billing process.Request of type Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>, as a Hash
         #   * :text (String)
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list
         #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
         # @param patient_histories [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryEnum)
@@ -852,9 +852,9 @@ module CandidApiClient
         # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
         #  in the billing process.Request of type Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>, as a Hash
         #   * :text (String)
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
-        #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list [here](https://www.cms
+        #  .gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
         # @param patient_histories [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryEnum)
         #   * :questions (Array<CandidApiClient::Encounters::V4::Types::IntakeQuestion>)
@@ -1033,11 +1033,11 @@ module CandidApiClient
         #  instant messaging, or other pre-recorded digital mediums. Synchronous encounters
         #  occur in live, real-time settings where the patient interacts directly with the
         #  provider, such as over video or a phone call.
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list
         #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
-        # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
+        # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list
         #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
         # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
         #  Headaches").
@@ -1818,8 +1818,8 @@ module CandidApiClient
         # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
         #  in the billing process.Request of type Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>, as a Hash
         #   * :text (String)
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list
         #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
         # @param patient_histories [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryEnum)
@@ -2213,9 +2213,9 @@ module CandidApiClient
         # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
         #  in the billing process.Request of type Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>, as a Hash
         #   * :text (String)
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
-        #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list [here](https://www.cms
+        #  .gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
         # @param patient_histories [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryEnum)
         #   * :questions (Array<CandidApiClient::Encounters::V4::Types::IntakeQuestion>)
@@ -2396,11 +2396,11 @@ module CandidApiClient
         #  instant messaging, or other pre-recorded digital mediums. Synchronous encounters
         #  occur in live, real-time settings where the patient interacts directly with the
         #  provider, such as over video or a phone call.
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list
         #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
-        # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. Line-level place of service is not currently
-        #  supported. 02 for telemedicine, 11 for in-person. Full list
+        # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
+        #  telemedicine, 11 for in-person. Full list
         #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
         # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
         #  Headaches").

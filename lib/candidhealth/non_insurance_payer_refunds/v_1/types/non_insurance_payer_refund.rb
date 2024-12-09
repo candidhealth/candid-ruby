@@ -22,6 +22,8 @@ module CandidApiClient
           attr_reader :refund_timestamp
           # @return [String]
           attr_reader :refund_note
+          # @return [String]
+          attr_reader :check_number
           # @return [Array<CandidApiClient::Financials::Types::Allocation>]
           attr_reader :allocations
           # @return [CandidApiClient::Financials::Types::RefundReason]
@@ -41,18 +43,20 @@ module CandidApiClient
           # @param amount_cents [Integer]
           # @param refund_timestamp [DateTime]
           # @param refund_note [String]
+          # @param check_number [String]
           # @param allocations [Array<CandidApiClient::Financials::Types::Allocation>]
           # @param refund_reason [CandidApiClient::Financials::Types::RefundReason]
           # @param invoice_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund]
           def initialize(non_insurance_payer_refund_id:, non_insurance_payer:, amount_cents:, allocations:, refund_timestamp: OMIT,
-                         refund_note: OMIT, refund_reason: OMIT, invoice_id: OMIT, additional_properties: nil)
+                         refund_note: OMIT, check_number: OMIT, refund_reason: OMIT, invoice_id: OMIT, additional_properties: nil)
             @non_insurance_payer_refund_id = non_insurance_payer_refund_id
             @non_insurance_payer = non_insurance_payer
             @amount_cents = amount_cents
             @refund_timestamp = refund_timestamp if refund_timestamp != OMIT
             @refund_note = refund_note if refund_note != OMIT
+            @check_number = check_number if check_number != OMIT
             @allocations = allocations
             @refund_reason = refund_reason if refund_reason != OMIT
             @invoice_id = invoice_id if invoice_id != OMIT
@@ -63,6 +67,7 @@ module CandidApiClient
               "amount_cents": amount_cents,
               "refund_timestamp": refund_timestamp,
               "refund_note": refund_note,
+              "check_number": check_number,
               "allocations": allocations,
               "refund_reason": refund_reason,
               "invoice_id": invoice_id
@@ -90,6 +95,7 @@ module CandidApiClient
                                  DateTime.parse(parsed_json["refund_timestamp"])
                                end
             refund_note = struct["refund_note"]
+            check_number = struct["check_number"]
             allocations = parsed_json["allocations"]&.map do |item|
               item = item.to_json
               CandidApiClient::Financials::Types::Allocation.from_json(json_object: item)
@@ -102,6 +108,7 @@ module CandidApiClient
               amount_cents: amount_cents,
               refund_timestamp: refund_timestamp,
               refund_note: refund_note,
+              check_number: check_number,
               allocations: allocations,
               refund_reason: refund_reason,
               invoice_id: invoice_id,
@@ -128,6 +135,7 @@ module CandidApiClient
             obj.amount_cents.is_a?(Integer) != false || raise("Passed value for field obj.amount_cents is not the expected type, validation failed.")
             obj.refund_timestamp&.is_a?(DateTime) != false || raise("Passed value for field obj.refund_timestamp is not the expected type, validation failed.")
             obj.refund_note&.is_a?(String) != false || raise("Passed value for field obj.refund_note is not the expected type, validation failed.")
+            obj.check_number&.is_a?(String) != false || raise("Passed value for field obj.check_number is not the expected type, validation failed.")
             obj.allocations.is_a?(Array) != false || raise("Passed value for field obj.allocations is not the expected type, validation failed.")
             obj.refund_reason&.is_a?(CandidApiClient::Financials::Types::RefundReason) != false || raise("Passed value for field obj.refund_reason is not the expected type, validation failed.")
             obj.invoice_id&.is_a?(String) != false || raise("Passed value for field obj.invoice_id is not the expected type, validation failed.")

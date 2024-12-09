@@ -48,6 +48,49 @@ module CandidApiClient
           end
           CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: response.body)
         end
+
+        # @param billing_note_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.billing_notes.v_2.delete(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def delete(billing_note_id:, request_options: nil)
+          @request_client.conn.delete do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/billing_notes/v2/#{billing_note_id}"
+          end
+        end
+
+        # @param billing_note_id [String]
+        # @param text [String] Empty string not allowed.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::BillingNotes::V2::Types::BillingNote]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.billing_notes.v_2.update(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", text: "string")
+        def update(billing_note_id:, text:, request_options: nil)
+          response = @request_client.conn.patch do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = { **(request_options&.additional_body_parameters || {}), text: text }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/billing_notes/v2/#{billing_note_id}"
+          end
+          CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: response.body)
+        end
       end
 
       class AsyncV2Client
@@ -88,6 +131,53 @@ module CandidApiClient
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/billing_notes/v2"
+            end
+            CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: response.body)
+          end
+        end
+
+        # @param billing_note_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.billing_notes.v_2.delete(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def delete(billing_note_id:, request_options: nil)
+          Async do
+            @request_client.conn.delete do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/billing_notes/v2/#{billing_note_id}"
+            end
+          end
+        end
+
+        # @param billing_note_id [String]
+        # @param text [String] Empty string not allowed.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::BillingNotes::V2::Types::BillingNote]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.billing_notes.v_2.update(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", text: "string")
+        def update(billing_note_id:, text:, request_options: nil)
+          Async do
+            response = @request_client.conn.patch do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request_options&.additional_body_parameters || {}), text: text }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/billing_notes/v2/#{billing_note_id}"
             end
             CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: response.body)
           end

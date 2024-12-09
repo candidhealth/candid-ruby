@@ -61,9 +61,11 @@ module CandidApiClient
           attr_reader :related_invoice_info
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
           attr_reader :denial_reason
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code_as_submitted
           # @return [String]
           attr_reader :service_line_id
@@ -121,8 +123,10 @@ module CandidApiClient
           # @param related_invoices [Array<CandidApiClient::Invoices::Types::Invoice>]
           # @param related_invoice_info [Array<CandidApiClient::Invoices::V2::Types::InvoiceInfo>]
           # @param denial_reason [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode]
-          # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
+          # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param service_line_id [String]
           # @param procedure_code [String]
           # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]

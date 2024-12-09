@@ -30,7 +30,10 @@ module CandidApiClient
           attr_reader :diagnosis_id_three
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
           attr_reader :denial_reason
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
+          #  a different place of service at the service line level, this field should not be
+          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
           # @return [String]
           attr_reader :procedure_code
@@ -73,7 +76,10 @@ module CandidApiClient
           # @param diagnosis_id_two [String]
           # @param diagnosis_id_three [String]
           # @param denial_reason [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode]
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
+          #  a different place of service at the service line level, this field should not be
+          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param procedure_code [String]
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.

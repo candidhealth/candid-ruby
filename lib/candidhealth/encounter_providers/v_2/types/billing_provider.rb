@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../../commons/types/street_address_long_zip"
+require_relative "../../../commons/types/billing_provider_commercial_license_type"
 require "ostruct"
 require "json"
 
@@ -31,6 +32,9 @@ module CandidApiClient
           attr_reader :npi
           # @return [String]
           attr_reader :taxonomy_code
+          # @return [CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType] 837i Loop2010BB G2
+          #  Provider Commercial Number
+          attr_reader :provider_commercial_license_type
           # @return [String] If the provider is an individual, this should be set instead of organization
           #  name
           attr_reader :first_name
@@ -53,6 +57,8 @@ module CandidApiClient
           #  given to the payer on an IRS W-9 form completed during contracting.
           # @param npi [String]
           # @param taxonomy_code [String]
+          # @param provider_commercial_license_type [CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType] 837i Loop2010BB G2
+          #  Provider Commercial Number
           # @param first_name [String] If the provider is an individual, this should be set instead of organization
           #  name
           # @param last_name [String] If the provider is an individual, this should be set instead of organization
@@ -61,12 +67,15 @@ module CandidApiClient
           #  name
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::EncounterProviders::V2::Types::BillingProvider]
-          def initialize(address:, tax_id:, npi:, taxonomy_code: OMIT, first_name: OMIT, last_name: OMIT,
-                         organization_name: OMIT, additional_properties: nil)
+          def initialize(address:, tax_id:, npi:, taxonomy_code: OMIT, provider_commercial_license_type: OMIT,
+                         first_name: OMIT, last_name: OMIT, organization_name: OMIT, additional_properties: nil)
             @address = address
             @tax_id = tax_id
             @npi = npi
             @taxonomy_code = taxonomy_code if taxonomy_code != OMIT
+            if provider_commercial_license_type != OMIT
+              @provider_commercial_license_type = provider_commercial_license_type
+            end
             @first_name = first_name if first_name != OMIT
             @last_name = last_name if last_name != OMIT
             @organization_name = organization_name if organization_name != OMIT
@@ -76,6 +85,7 @@ module CandidApiClient
               "tax_id": tax_id,
               "npi": npi,
               "taxonomy_code": taxonomy_code,
+              "provider_commercial_license_type": provider_commercial_license_type,
               "first_name": first_name,
               "last_name": last_name,
               "organization_name": organization_name
@@ -100,6 +110,7 @@ module CandidApiClient
             tax_id = struct["tax_id"]
             npi = struct["npi"]
             taxonomy_code = struct["taxonomy_code"]
+            provider_commercial_license_type = struct["provider_commercial_license_type"]
             first_name = struct["first_name"]
             last_name = struct["last_name"]
             organization_name = struct["organization_name"]
@@ -108,6 +119,7 @@ module CandidApiClient
               tax_id: tax_id,
               npi: npi,
               taxonomy_code: taxonomy_code,
+              provider_commercial_license_type: provider_commercial_license_type,
               first_name: first_name,
               last_name: last_name,
               organization_name: organization_name,
@@ -133,6 +145,7 @@ module CandidApiClient
             obj.tax_id.is_a?(String) != false || raise("Passed value for field obj.tax_id is not the expected type, validation failed.")
             obj.npi.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
             obj.taxonomy_code&.is_a?(String) != false || raise("Passed value for field obj.taxonomy_code is not the expected type, validation failed.")
+            obj.provider_commercial_license_type&.is_a?(CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType) != false || raise("Passed value for field obj.provider_commercial_license_type is not the expected type, validation failed.")
             obj.first_name&.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")
             obj.last_name&.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
             obj.organization_name&.is_a?(String) != false || raise("Passed value for field obj.organization_name is not the expected type, validation failed.")

@@ -105,7 +105,7 @@ module CandidApiClient
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.guarantor.v_1.update(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true })
+        #  api.guarantor.v_1.update(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: , phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true })
         def update(guarantor_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -223,7 +223,7 @@ module CandidApiClient
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.guarantor.v_1.update(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true })
+        #  api.guarantor.v_1.update(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, phone_numbers: , phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true })
         def update(guarantor_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

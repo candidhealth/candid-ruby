@@ -43,7 +43,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update_referring_provider(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -79,7 +79,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update_initial_referring_provider(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -114,7 +114,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update_supervising_provider(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -149,7 +149,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def update_ordering_provider(service_line_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -184,7 +184,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create_referring_provider(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -220,7 +220,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ })
         def create_initial_referring_provider(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -255,7 +255,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create_supervising_provider(encounter_id:, request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -290,7 +290,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create_ordering_provider(service_line_id:, request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -416,7 +416,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update_referring_provider(encounter_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
@@ -454,7 +454,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update_initial_referring_provider(encounter_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
@@ -491,7 +491,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update_supervising_provider(encounter_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
@@ -528,7 +528,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.update_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.update_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def update_ordering_provider(service_line_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
@@ -565,7 +565,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create_referring_provider(encounter_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -603,7 +603,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ })
         def create_initial_referring_provider(encounter_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -640,7 +640,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create_supervising_provider(encounter_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -677,7 +677,7 @@ module CandidApiClient
         # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_providers.v_2.create_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" })
+        #  api.encounter_providers.v_2.create_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
         def create_ordering_provider(service_line_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

@@ -6,6 +6,7 @@ require_relative "core/oauth"
 require_relative "requests"
 require_relative "candidhealth/auth/client"
 require_relative "candidhealth/billing_notes/client"
+require_relative "candidhealth/charge_capture/client"
 require_relative "candidhealth/contracts/client"
 require_relative "candidhealth/credentialing/client"
 require_relative "candidhealth/custom_schemas/client"
@@ -43,6 +44,8 @@ module CandidApiClient
     attr_reader :auth
     # @return [CandidApiClient::BillingNotes::Client]
     attr_reader :billing_notes
+    # @return [CandidApiClient::ChargeCapture::Client]
+    attr_reader :charge_capture
     # @return [CandidApiClient::Contracts::Client]
     attr_reader :contracts
     # @return [CandidApiClient::Credentialing::Client]
@@ -132,6 +135,7 @@ module CandidApiClient
       )
       @auth = CandidApiClient::Auth::Client.new(request_client: @request_client)
       @billing_notes = CandidApiClient::BillingNotes::Client.new(request_client: @request_client)
+      @charge_capture = CandidApiClient::ChargeCapture::Client.new(request_client: @request_client)
       @contracts = CandidApiClient::Contracts::Client.new(request_client: @request_client)
       @credentialing = CandidApiClient::Credentialing::Client.new(request_client: @request_client)
       @custom_schemas = CandidApiClient::CustomSchemas::Client.new(request_client: @request_client)
@@ -170,6 +174,8 @@ module CandidApiClient
     attr_reader :auth
     # @return [CandidApiClient::BillingNotes::AsyncClient]
     attr_reader :billing_notes
+    # @return [CandidApiClient::ChargeCapture::AsyncClient]
+    attr_reader :charge_capture
     # @return [CandidApiClient::Contracts::AsyncClient]
     attr_reader :contracts
     # @return [CandidApiClient::Credentialing::AsyncClient]
@@ -259,6 +265,7 @@ module CandidApiClient
       )
       @auth = CandidApiClient::Auth::AsyncClient.new(request_client: @async_request_client)
       @billing_notes = CandidApiClient::BillingNotes::AsyncClient.new(request_client: @async_request_client)
+      @charge_capture = CandidApiClient::ChargeCapture::AsyncClient.new(request_client: @async_request_client)
       @contracts = CandidApiClient::Contracts::AsyncClient.new(request_client: @async_request_client)
       @credentialing = CandidApiClient::Credentialing::AsyncClient.new(request_client: @async_request_client)
       @custom_schemas = CandidApiClient::CustomSchemas::AsyncClient.new(request_client: @async_request_client)

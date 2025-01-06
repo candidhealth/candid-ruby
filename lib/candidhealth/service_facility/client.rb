@@ -27,6 +27,7 @@ module CandidApiClient
     #     * :city (String)
     #     * :state (CandidApiClient::Commons::Types::State)
     #     * :zip_code (String)
+    #   * :secondary_identification (String)
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility]
     # @example
@@ -70,6 +71,7 @@ module CandidApiClient
     #     * :city (String)
     #     * :state (CandidApiClient::Commons::Types::State)
     #     * :zip_code (String)
+    #   * :secondary_identification (String)
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility]
     # @example

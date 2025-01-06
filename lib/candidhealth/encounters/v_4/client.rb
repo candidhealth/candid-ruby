@@ -384,6 +384,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
+        #   * :secondary_identification (String)
         # @param subscriber_primary [Hash] Subscriber_primary is required when responsible_party is INSURANCE_PAY (i.e.
         #  when the claim should be billed to insurance).
         #  These are not required fields when responsible_party is SELF_PAY (i.e. when the
@@ -543,7 +544,7 @@ module CandidApiClient
         #    referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
-        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
+        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
         #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE },
         #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE },
         #    prior_authorization_number: "string",
@@ -839,6 +840,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
+        #   * :secondary_identification (String)
         # @param diagnoses [Array<Hash>] Ideally, this field should contain no more than 12 diagnoses. However, more
         #  diagnoses
         #  may be submitted at this time, and coders will later prioritize the 12 that will
@@ -920,7 +922,7 @@ module CandidApiClient
         #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
-        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
+        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
         #    clinical_notes: [{ category: CLINICAL, notes: [{ text: "string", author_name: "string", author_npi: "string", timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }] }],
         #    billing_notes: [{ text: "string" }],
@@ -1208,6 +1210,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
+        #   * :secondary_identification (String)
         # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorUpdate, as a Hash
         #   * :first_name (String)
         #   * :last_name (String)
@@ -1714,6 +1717,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
+        #   * :secondary_identification (String)
         # @param subscriber_primary [Hash] Subscriber_primary is required when responsible_party is INSURANCE_PAY (i.e.
         #  when the claim should be billed to insurance).
         #  These are not required fields when responsible_party is SELF_PAY (i.e. when the
@@ -1873,7 +1877,7 @@ module CandidApiClient
         #    referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
-        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
+        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
         #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE },
         #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE },
         #    prior_authorization_number: "string",
@@ -2171,6 +2175,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
+        #   * :secondary_identification (String)
         # @param diagnoses [Array<Hash>] Ideally, this field should contain no more than 12 diagnoses. However, more
         #  diagnoses
         #  may be submitted at this time, and coders will later prioritize the 12 that will
@@ -2252,7 +2257,7 @@ module CandidApiClient
         #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
-        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
+        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
         #    clinical_notes: [{ category: CLINICAL, notes: [{ text: "string", author_name: "string", author_npi: "string", timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }] }],
         #    billing_notes: [{ text: "string" }],
@@ -2542,6 +2547,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
+        #   * :secondary_identification (String)
         # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorUpdate, as a Hash
         #   * :first_name (String)
         #   * :last_name (String)

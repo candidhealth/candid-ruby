@@ -360,7 +360,6 @@ require_relative "candidhealth/commons/types/http_service_unavailable_error_mess
 require_relative "candidhealth/commons/types/request_validation_error"
 require_relative "candidhealth/commons/types/updates_disabled_due_to_external_system_integration_error_message"
 require_relative "candidhealth/commons/types/organization_not_authorized_error_message"
-require_relative "candidhealth/commons/types/not_implemented_error_message"
 require_relative "candidhealth/commons/types/phone_number"
 require_relative "candidhealth/commons/types/phone_number_type"
 require_relative "candidhealth/commons/types/delay_reason_code"

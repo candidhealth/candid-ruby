@@ -17,6 +17,12 @@ module CandidApiClient
         # @return [CandidApiClient::Commons::Types::StreetAddressLongZip] zip_plus_four_code is required for service facility address. When the
         #  zip_plus_four_code is not available use "9998" as per CMS documentation.
         attr_reader :address
+        # @return [String] An additional identifier for the service facility other than the facility's NPI.
+        #  Some payers may require this field.
+        #  Potential examples: state license number, provider commercial number, or
+        #  location number.
+        #  Box 32 section (b) of the CMS-1500 claim form.
+        attr_reader :secondary_identification
         # @return [OpenStruct] Additional properties unmapped to the current class definition
         attr_reader :additional_properties
         # @return [Object]
@@ -31,14 +37,26 @@ module CandidApiClient
         #  Box 32 section (a) of the CMS-1500 claim form.
         # @param address [CandidApiClient::Commons::Types::StreetAddressLongZip] zip_plus_four_code is required for service facility address. When the
         #  zip_plus_four_code is not available use "9998" as per CMS documentation.
+        # @param secondary_identification [String] An additional identifier for the service facility other than the facility's NPI.
+        #  Some payers may require this field.
+        #  Potential examples: state license number, provider commercial number, or
+        #  location number.
+        #  Box 32 section (b) of the CMS-1500 claim form.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacilityUpdate]
-        def initialize(organization_name: OMIT, npi: OMIT, address: OMIT, additional_properties: nil)
+        def initialize(organization_name: OMIT, npi: OMIT, address: OMIT, secondary_identification: OMIT,
+                       additional_properties: nil)
           @organization_name = organization_name if organization_name != OMIT
           @npi = npi if npi != OMIT
           @address = address if address != OMIT
+          @secondary_identification = secondary_identification if secondary_identification != OMIT
           @additional_properties = additional_properties
-          @_field_set = { "organization_name": organization_name, "npi": npi, "address": address }.reject do |_k, v|
+          @_field_set = {
+            "organization_name": organization_name,
+            "npi": npi,
+            "address": address,
+            "secondary_identification": secondary_identification
+          }.reject do |_k, v|
             v == OMIT
           end
         end
@@ -58,10 +76,12 @@ module CandidApiClient
             address = parsed_json["address"].to_json
             address = CandidApiClient::Commons::Types::StreetAddressLongZip.from_json(json_object: address)
           end
+          secondary_identification = struct["secondary_identification"]
           new(
             organization_name: organization_name,
             npi: npi,
             address: address,
+            secondary_identification: secondary_identification,
             additional_properties: struct
           )
         end
@@ -83,6 +103,7 @@ module CandidApiClient
           obj.organization_name&.is_a?(String) != false || raise("Passed value for field obj.organization_name is not the expected type, validation failed.")
           obj.npi&.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
           obj.address.nil? || CandidApiClient::Commons::Types::StreetAddressLongZip.validate_raw(obj: obj.address)
+          obj.secondary_identification&.is_a?(String) != false || raise("Passed value for field obj.secondary_identification is not the expected type, validation failed.")
         end
       end
     end

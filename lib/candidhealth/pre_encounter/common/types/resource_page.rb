@@ -12,6 +12,8 @@ module CandidApiClient
           attr_reader :next_page_token
           # @return [String]
           attr_reader :prev_page_token
+          # @return [Integer]
+          attr_reader :total
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -22,13 +24,19 @@ module CandidApiClient
 
           # @param next_page_token [String]
           # @param prev_page_token [String]
+          # @param total [Integer]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::PreEncounter::Common::Types::ResourcePage]
-          def initialize(next_page_token: OMIT, prev_page_token: OMIT, additional_properties: nil)
+          def initialize(total:, next_page_token: OMIT, prev_page_token: OMIT, additional_properties: nil)
             @next_page_token = next_page_token if next_page_token != OMIT
             @prev_page_token = prev_page_token if prev_page_token != OMIT
+            @total = total
             @additional_properties = additional_properties
-            @_field_set = { "next_page_token": next_page_token, "prev_page_token": prev_page_token }.reject do |_k, v|
+            @_field_set = {
+              "next_page_token": next_page_token,
+              "prev_page_token": prev_page_token,
+              "total": total
+            }.reject do |_k, v|
               v == OMIT
             end
           end
@@ -41,9 +49,11 @@ module CandidApiClient
             struct = JSON.parse(json_object, object_class: OpenStruct)
             next_page_token = struct["next_page_token"]
             prev_page_token = struct["prev_page_token"]
+            total = struct["total"]
             new(
               next_page_token: next_page_token,
               prev_page_token: prev_page_token,
+              total: total,
               additional_properties: struct
             )
           end
@@ -64,6 +74,7 @@ module CandidApiClient
           def self.validate_raw(obj:)
             obj.next_page_token&.is_a?(String) != false || raise("Passed value for field obj.next_page_token is not the expected type, validation failed.")
             obj.prev_page_token&.is_a?(String) != false || raise("Passed value for field obj.prev_page_token is not the expected type, validation failed.")
+            obj.total.is_a?(Integer) != false || raise("Passed value for field obj.total is not the expected type, validation failed.")
           end
         end
       end

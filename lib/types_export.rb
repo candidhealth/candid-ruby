@@ -79,6 +79,7 @@ require_relative "candidhealth/encounters/v_4/types/encounter_external_id_unique
 require_relative "candidhealth/encounters/v_4/types/encounter_patient_control_number_uniqueness_error_type"
 require_relative "candidhealth/encounters/v_4/types/encounter_guarantor_missing_contact_info_error_type"
 require_relative "candidhealth/encounters/v_4/types/cash_pay_payer_error_message"
+require_relative "candidhealth/encounters/v_4/types/invalid_tag_names_error_type"
 require_relative "candidhealth/encounters/v_4/types/service_authorization_exception_code"
 require_relative "candidhealth/encounters/v_4/types/schema_instance_validation_failure"
 require_relative "candidhealth/encounters/v_4/types/key_does_not_exist_error"

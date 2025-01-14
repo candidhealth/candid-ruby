@@ -2,6 +2,7 @@
 
 require_relative "../../../requests"
 require_relative "types/charge_capture_data"
+require "date"
 require_relative "types/charge_capture_status"
 require_relative "types/charge_capture"
 require_relative "types/charge_capture_page"
@@ -237,12 +238,14 @@ module CandidApiClient
         #     * :last_name (String)
         #     * :organization_name (String)
         #   * :referral_number (String)
-        # @param encounter_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
         #  internal encounter ID or a Dr. Chrono encounter ID. This field should not
         #  contain PHI.
         # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
         #  system (e.g. the EHR visit page). Send full URL format for the external link
         #  (e.g. https://emr_charge_capture_url.com/123).
+        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
         # @param request_options [CandidApiClient::RequestOptions]
@@ -251,13 +254,14 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
         #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string" },
-        #    encounter_external_id: "string",
+        #    charge_external_id: "string",
         #    ehr_source_url: "string",
+        #    date_of_service: DateTime.parse(2023-01-15),
         #    patient_external_id: "string",
         #    status: PLANNED
         #  )
-        def create(data:, encounter_external_id:, patient_external_id:, status:, ehr_source_url: nil,
-                   request_options: nil)
+        def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil,
+                   date_of_service: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -269,8 +273,9 @@ module CandidApiClient
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               data: data,
-              encounter_external_id: encounter_external_id,
+              charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
+              date_of_service: date_of_service,
               patient_external_id: patient_external_id,
               status: status
             }.compact
@@ -516,7 +521,7 @@ module CandidApiClient
         #     * :last_name (String)
         #     * :organization_name (String)
         #   * :referral_number (String)
-        # @param encounter_external_id [String] A client-specified unique ID to associate with this encounter;
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
         # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
@@ -525,6 +530,8 @@ module CandidApiClient
         #  https://emr_charge_capture_url.com/123).
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
+        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
         # @example
@@ -532,13 +539,14 @@ module CandidApiClient
         #  api.charge_capture.v_1.update(
         #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string" },
-        #    encounter_external_id: "string",
+        #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
-        #    status: PLANNED
+        #    status: PLANNED,
+        #    date_of_service: DateTime.parse(2023-01-15)
         #  )
-        def update(charge_capture_id:, data: nil, encounter_external_id: nil, ehr_source_url: nil,
-                   patient_external_id: nil, status: nil, request_options: nil)
+        def update(charge_capture_id:, data: nil, charge_external_id: nil, ehr_source_url: nil,
+                   patient_external_id: nil, status: nil, date_of_service: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -550,10 +558,11 @@ module CandidApiClient
             req.body = {
               **(request_options&.additional_body_parameters || {}),
               data: data,
-              encounter_external_id: encounter_external_id,
+              charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
               patient_external_id: patient_external_id,
-              status: status
+              status: status,
+              date_of_service: date_of_service
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/charge_captures/v1/#{charge_capture_id}"
@@ -586,9 +595,11 @@ module CandidApiClient
         # @param page_token [String]
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge captures
-        # @param external_id [String] A client-specified unique ID to associate with this encounter;
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
+        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
@@ -598,10 +609,11 @@ module CandidApiClient
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    patient_external_id: "string",
         #    status: PLANNED,
-        #    external_id: "string"
+        #    charge_external_id: "string",
+        #    date_of_service: DateTime.parse(2023-01-15)
         #  )
-        def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, external_id: nil,
-                    request_options: nil)
+        def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, charge_external_id: nil,
+                    date_of_service: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -616,7 +628,8 @@ module CandidApiClient
               "page_token": page_token,
               "patient_external_id": patient_external_id,
               "status": status,
-              "external_id": external_id
+              "charge_external_id": charge_external_id,
+              "date_of_service": date_of_service
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/charge_captures/v1"
@@ -852,12 +865,14 @@ module CandidApiClient
         #     * :last_name (String)
         #     * :organization_name (String)
         #   * :referral_number (String)
-        # @param encounter_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
         #  internal encounter ID or a Dr. Chrono encounter ID. This field should not
         #  contain PHI.
         # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
         #  system (e.g. the EHR visit page). Send full URL format for the external link
         #  (e.g. https://emr_charge_capture_url.com/123).
+        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
         # @param request_options [CandidApiClient::RequestOptions]
@@ -866,13 +881,14 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
         #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string" },
-        #    encounter_external_id: "string",
+        #    charge_external_id: "string",
         #    ehr_source_url: "string",
+        #    date_of_service: DateTime.parse(2023-01-15),
         #    patient_external_id: "string",
         #    status: PLANNED
         #  )
-        def create(data:, encounter_external_id:, patient_external_id:, status:, ehr_source_url: nil,
-                   request_options: nil)
+        def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil,
+                   date_of_service: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -885,8 +901,9 @@ module CandidApiClient
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 data: data,
-                encounter_external_id: encounter_external_id,
+                charge_external_id: charge_external_id,
                 ehr_source_url: ehr_source_url,
+                date_of_service: date_of_service,
                 patient_external_id: patient_external_id,
                 status: status
               }.compact
@@ -1135,7 +1152,7 @@ module CandidApiClient
         #     * :last_name (String)
         #     * :organization_name (String)
         #   * :referral_number (String)
-        # @param encounter_external_id [String] A client-specified unique ID to associate with this encounter;
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
         # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
@@ -1144,6 +1161,8 @@ module CandidApiClient
         #  https://emr_charge_capture_url.com/123).
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
+        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
         # @example
@@ -1151,13 +1170,14 @@ module CandidApiClient
         #  api.charge_capture.v_1.update(
         #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string" },
-        #    encounter_external_id: "string",
+        #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
-        #    status: PLANNED
+        #    status: PLANNED,
+        #    date_of_service: DateTime.parse(2023-01-15)
         #  )
-        def update(charge_capture_id:, data: nil, encounter_external_id: nil, ehr_source_url: nil,
-                   patient_external_id: nil, status: nil, request_options: nil)
+        def update(charge_capture_id:, data: nil, charge_external_id: nil, ehr_source_url: nil,
+                   patient_external_id: nil, status: nil, date_of_service: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1170,10 +1190,11 @@ module CandidApiClient
               req.body = {
                 **(request_options&.additional_body_parameters || {}),
                 data: data,
-                encounter_external_id: encounter_external_id,
+                charge_external_id: charge_external_id,
                 ehr_source_url: ehr_source_url,
                 patient_external_id: patient_external_id,
-                status: status
+                status: status,
+                date_of_service: date_of_service
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1/#{charge_capture_id}"
@@ -1209,9 +1230,11 @@ module CandidApiClient
         # @param page_token [String]
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge captures
-        # @param external_id [String] A client-specified unique ID to associate with this encounter;
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
+        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
@@ -1221,10 +1244,11 @@ module CandidApiClient
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    patient_external_id: "string",
         #    status: PLANNED,
-        #    external_id: "string"
+        #    charge_external_id: "string",
+        #    date_of_service: DateTime.parse(2023-01-15)
         #  )
-        def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, external_id: nil,
-                    request_options: nil)
+        def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, charge_external_id: nil,
+                    date_of_service: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1240,7 +1264,8 @@ module CandidApiClient
                 "page_token": page_token,
                 "patient_external_id": patient_external_id,
                 "status": status,
-                "external_id": external_id
+                "charge_external_id": charge_external_id,
+                "date_of_service": date_of_service
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1"

@@ -9,6 +9,7 @@ module CandidApiClient
             INDIVIDUAL = "INDIVIDUAL"
             FAMILY = "FAMILY"
             EMPLOYEE_ONLY = "EMPLOYEE_ONLY"
+            EMPLOYEE_AND_SPOUSE = "EMPLOYEE_AND_SPOUSE"
           end
         end
       end

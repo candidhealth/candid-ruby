@@ -37,6 +37,7 @@ module CandidApiClient
           M_30 = "M30"
           M_31 = "M31"
           M_32 = "M32"
+          M_34 = "M34"
           M_36 = "M36"
           M_37 = "M37"
           M_38 = "M38"
@@ -264,6 +265,7 @@ module CandidApiClient
           N_26 = "N26"
           N_27 = "N27"
           N_28 = "N28"
+          N_29 = "N29"
           N_30 = "N30"
           N_31 = "N31"
           N_32 = "N32"
@@ -1072,6 +1074,7 @@ module CandidApiClient
           N_860 = "N860"
           N_880 = "N880"
           N_887 = "N887"
+          N_888 = "N888"
           N_891 = "N891"
         end
       end

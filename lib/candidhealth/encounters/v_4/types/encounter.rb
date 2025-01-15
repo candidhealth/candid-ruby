@@ -143,6 +143,8 @@ module CandidApiClient
           attr_reader :schema_instances
           # @return [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
           attr_reader :referral_number
+          # @return [DateTime] The date and time the encounter was last submitted to a payer.
+          attr_reader :last_submitted_at
           # @return [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -320,6 +322,7 @@ module CandidApiClient
           #  Multiple schema
           #  instances cannot be created for the same schema on an encounter.
           # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
+          # @param last_submitted_at [DateTime] The date and time the encounter was last submitted to a payer.
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -395,7 +398,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
-                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
             @claims = claims
@@ -431,6 +434,7 @@ module CandidApiClient
             @submission_origin = submission_origin
             @schema_instances = schema_instances
             @referral_number = referral_number if referral_number != OMIT
+            @last_submitted_at = last_submitted_at if last_submitted_at != OMIT
             @external_id = external_id
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
@@ -488,6 +492,7 @@ module CandidApiClient
               "submission_origin": submission_origin,
               "schema_instances": schema_instances,
               "referral_number": referral_number,
+              "last_submitted_at": last_submitted_at,
               "external_id": external_id,
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
@@ -627,6 +632,9 @@ module CandidApiClient
               CandidApiClient::CustomSchemas::V1::Types::SchemaInstance.from_json(json_object: item)
             end
             referral_number = struct["referral_number"]
+            last_submitted_at = unless parsed_json["last_submitted_at"].nil?
+                                  DateTime.parse(parsed_json["last_submitted_at"])
+                                end
             external_id = struct["external_id"]
             date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
             end_date_of_service = unless parsed_json["end_date_of_service"].nil?
@@ -701,6 +709,7 @@ module CandidApiClient
               submission_origin: submission_origin,
               schema_instances: schema_instances,
               referral_number: referral_number,
+              last_submitted_at: last_submitted_at,
               external_id: external_id,
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
@@ -770,6 +779,7 @@ module CandidApiClient
             obj.submission_origin.is_a?(CandidApiClient::Encounters::V4::Types::EncounterSubmissionOriginType) != false || raise("Passed value for field obj.submission_origin is not the expected type, validation failed.")
             obj.schema_instances.is_a?(Array) != false || raise("Passed value for field obj.schema_instances is not the expected type, validation failed.")
             obj.referral_number&.is_a?(String) != false || raise("Passed value for field obj.referral_number is not the expected type, validation failed.")
+            obj.last_submitted_at&.is_a?(DateTime) != false || raise("Passed value for field obj.last_submitted_at is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")

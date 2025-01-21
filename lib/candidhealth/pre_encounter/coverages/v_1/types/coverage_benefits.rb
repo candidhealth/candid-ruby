@@ -2,6 +2,7 @@
 
 require_relative "plan_coverage"
 require_relative "service_coverage"
+require_relative "benefits_related_entity"
 require "ostruct"
 require "json"
 
@@ -15,6 +16,8 @@ module CandidApiClient
             attr_reader :plan_coverage
             # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage>]
             attr_reader :service_specific_coverage
+            # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::BenefitsRelatedEntity>]
+            attr_reader :benefits_related_entities
             # @return [String]
             attr_reader :notes
             # @return [OpenStruct] Additional properties unmapped to the current class definition
@@ -27,18 +30,21 @@ module CandidApiClient
 
             # @param plan_coverage [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverage]
             # @param service_specific_coverage [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage>]
+            # @param benefits_related_entities [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::BenefitsRelatedEntity>]
             # @param notes [String]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits]
-            def initialize(plan_coverage: OMIT, service_specific_coverage: OMIT, notes: OMIT,
-                           additional_properties: nil)
+            def initialize(plan_coverage: OMIT, service_specific_coverage: OMIT, benefits_related_entities: OMIT,
+                           notes: OMIT, additional_properties: nil)
               @plan_coverage = plan_coverage if plan_coverage != OMIT
               @service_specific_coverage = service_specific_coverage if service_specific_coverage != OMIT
+              @benefits_related_entities = benefits_related_entities if benefits_related_entities != OMIT
               @notes = notes if notes != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "plan_coverage": plan_coverage,
                 "service_specific_coverage": service_specific_coverage,
+                "benefits_related_entities": benefits_related_entities,
                 "notes": notes
               }.reject do |_k, v|
                 v == OMIT
@@ -62,10 +68,15 @@ module CandidApiClient
                 item = item.to_json
                 CandidApiClient::PreEncounter::Coverages::V1::Types::ServiceCoverage.from_json(json_object: item)
               end
+              benefits_related_entities = parsed_json["benefits_related_entities"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Coverages::V1::Types::BenefitsRelatedEntity.from_json(json_object: item)
+              end
               notes = struct["notes"]
               new(
                 plan_coverage: plan_coverage,
                 service_specific_coverage: service_specific_coverage,
+                benefits_related_entities: benefits_related_entities,
                 notes: notes,
                 additional_properties: struct
               )
@@ -87,6 +98,7 @@ module CandidApiClient
             def self.validate_raw(obj:)
               obj.plan_coverage.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::PlanCoverage.validate_raw(obj: obj.plan_coverage)
               obj.service_specific_coverage&.is_a?(Array) != false || raise("Passed value for field obj.service_specific_coverage is not the expected type, validation failed.")
+              obj.benefits_related_entities&.is_a?(Array) != false || raise("Passed value for field obj.benefits_related_entities is not the expected type, validation failed.")
               obj.notes&.is_a?(String) != false || raise("Passed value for field obj.notes is not the expected type, validation failed.")
             end
           end

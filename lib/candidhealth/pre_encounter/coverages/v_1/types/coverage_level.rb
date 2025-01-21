@@ -6,10 +6,11 @@ module CandidApiClient
       module V1
         module Types
           class CoverageLevel
-            INDIVIDUAL = "INDIVIDUAL"
-            FAMILY = "FAMILY"
+            EMPLOYEE_AND_CHILDREN = "EMPLOYEE_AND_CHILDREN"
             EMPLOYEE_ONLY = "EMPLOYEE_ONLY"
             EMPLOYEE_AND_SPOUSE = "EMPLOYEE_AND_SPOUSE"
+            FAMILY = "FAMILY"
+            INDIVIDUAL = "INDIVIDUAL"
           end
         end
       end

@@ -23,6 +23,8 @@ module CandidApiClient
         VETERANS_AFFAIRS_PLAN = "VA"
         WORKERS_COMP_HEALTH_CLAIM = "WC"
         MUTUALLY_DEFINED = "ZZ"
+        COMMERCIAL_INSURANCE_CO = "CI"
+        BLUE_CROSS_BLUE_SHIELD = "BL"
       end
     end
   end

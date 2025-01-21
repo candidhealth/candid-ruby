@@ -15,6 +15,8 @@ module CandidApiClient
             attr_reader :individual
             # @return [Float]
             attr_reader :employee_and_spouse
+            # @return [Float]
+            attr_reader :employee_and_children
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -26,17 +28,21 @@ module CandidApiClient
             # @param family [Float]
             # @param individual [Float]
             # @param employee_and_spouse [Float]
+            # @param employee_and_children [Float]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageValue]
-            def initialize(family: OMIT, individual: OMIT, employee_and_spouse: OMIT, additional_properties: nil)
+            def initialize(family: OMIT, individual: OMIT, employee_and_spouse: OMIT, employee_and_children: OMIT,
+                           additional_properties: nil)
               @family = family if family != OMIT
               @individual = individual if individual != OMIT
               @employee_and_spouse = employee_and_spouse if employee_and_spouse != OMIT
+              @employee_and_children = employee_and_children if employee_and_children != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "family": family,
                 "individual": individual,
-                "employeeAndSpouse": employee_and_spouse
+                "employeeAndSpouse": employee_and_spouse,
+                "employeeAndChildren": employee_and_children
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -51,10 +57,12 @@ module CandidApiClient
               family = struct["family"]
               individual = struct["individual"]
               employee_and_spouse = struct["employeeAndSpouse"]
+              employee_and_children = struct["employeeAndChildren"]
               new(
                 family: family,
                 individual: individual,
                 employee_and_spouse: employee_and_spouse,
+                employee_and_children: employee_and_children,
                 additional_properties: struct
               )
             end
@@ -76,6 +84,7 @@ module CandidApiClient
               obj.family&.is_a?(Float) != false || raise("Passed value for field obj.family is not the expected type, validation failed.")
               obj.individual&.is_a?(Float) != false || raise("Passed value for field obj.individual is not the expected type, validation failed.")
               obj.employee_and_spouse&.is_a?(Float) != false || raise("Passed value for field obj.employee_and_spouse is not the expected type, validation failed.")
+              obj.employee_and_children&.is_a?(Float) != false || raise("Passed value for field obj.employee_and_children is not the expected type, validation failed.")
             end
           end
         end

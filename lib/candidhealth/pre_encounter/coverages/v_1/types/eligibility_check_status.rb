@@ -7,7 +7,6 @@ module CandidApiClient
         module Types
           # enum to represent the statuses of eligibility checks
           class EligibilityCheckStatus
-            CREATED = "CREATED"
             COMPLETED = "COMPLETED"
             FAILED = "FAILED"
             PENDING = "PENDING"

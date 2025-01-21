@@ -73,6 +73,7 @@ module CandidApiClient
           M_75 = "M75"
           M_76 = "M76"
           M_77 = "M77"
+          M_78 = "M78"
           M_79 = "M79"
           M_80 = "M80"
           M_81 = "M81"
@@ -1076,6 +1077,7 @@ module CandidApiClient
           N_887 = "N887"
           N_888 = "N888"
           N_891 = "N891"
+          N_900 = "N900"
         end
       end
     end

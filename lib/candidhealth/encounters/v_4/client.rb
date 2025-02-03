@@ -34,6 +34,8 @@ require_relative "../../service_lines/v_2/types/service_line_create"
 require_relative "../../guarantor/v_1/types/guarantor_create"
 require_relative "../../claim_submission/v_1/types/external_claim_submission_create"
 require_relative "../../custom_schemas/v_1/types/schema_instance"
+require_relative "types/epsdt_referral"
+require_relative "types/encounter_create_from_pre_encounter"
 require_relative "../../individual/types/patient_update"
 require_relative "types/vitals_update"
 require_relative "../../encounter_providers/v_2/types/rendering_provider_update"
@@ -471,6 +473,8 @@ module CandidApiClient
         #  `service_line.diagnosis_pointers`must contain at least one entry which should be
         #  in bounds of the diagnoses list field.Request of type Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>, as a Hash
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
+        #   * :has_epsdt_indicator (Boolean)
+        #   * :has_family_planning_indicator (Boolean)
         #   * :procedure_code (String)
         #   * :quantity (String)
         #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
@@ -519,8 +523,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
-        # @param external_claim_submission [Hash] ***This field is in beta.***
-        #  To be included for claims that have been submitted outside of Candid.
+        # @param external_claim_submission [Hash] To be included for claims that have been submitted outside of Candid.
         #  Candid supports posting remits and payments to these claims and working them
         #  in-platform (e.g. editing, resubmitting).Request of type CandidApiClient::ClaimSubmission::V1::Types::ExternalClaimSubmissionCreate, as a Hash
         #   * :claim_created_at (DateTime)
@@ -533,6 +536,11 @@ module CandidApiClient
         #   * :schema_id (String)
         #   * :content (Hash{String => Object})
         # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
+        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
+        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
+        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -550,19 +558,20 @@ module CandidApiClient
         #    prior_authorization_number: "string",
         #    responsible_party: INSURANCE_PAY,
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
-        #    clinical_notes: [{ category: CLINICAL, notes: [{ text: "string", author_name: "string", author_npi: "string", timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }] }],
+        #    clinical_notes: [{ category: CLINICAL, notes:  }],
         #    billing_notes: [{ text: "string" }],
         #    place_of_service_code: PHARMACY,
         #    patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }],
-        #    service_lines: [{ modifiers: [TWENTY_TWO], procedure_code: "string", quantity: "string", units: MJ, charge_amount_cents: 1, diagnosis_pointers: [1], drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, place_of_service_code: PHARMACY, description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] }],
+        #    service_lines: [{ procedure_code: "string", quantity: "string", units: MJ, diagnosis_pointers:  }],
         #    guarantor: { phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] },
         #    tag_ids: ["string"],
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
-        #    referral_number: "string"
+        #    referral_number: "string",
+        #    epsdt_referral: { condition_indicator_1: AV, condition_indicator_2: AV, condition_indicator_3: AV }
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -616,7 +625,8 @@ module CandidApiClient
               external_claim_submission: external_claim_submission,
               tag_ids: tag_ids,
               schema_instances: schema_instances,
-              referral_number: referral_number
+              referral_number: referral_number,
+              epsdt_referral: epsdt_referral
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/encounters/v4"
@@ -644,247 +654,25 @@ module CandidApiClient
         #  the patient or appointment is updated, assuming the
         #  encounter has not already been submitted or adjudicated.
         #
-        # @param external_id [String] A client-specified unique ID to associate with this encounter;
-        #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
-        #  This field should not contain PHI.
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #  This date must be the local date in the timezone where the service occurred.
-        #  Box 24a on the CMS-1500 claim form.
-        #  If service occurred over a range of dates, this should be the start date.
-        #  date_of_service must be defined on either the encounter or the service lines but
-        #  not both.
-        #  If there are greater than zero service lines, it is recommended to specify
-        #  date_of_service on the service_line instead of on the encounter to prepare for
-        #  future API versions.
-        # @param end_date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        #  This date must be the local date in the timezone where the service occurred.
-        #  If omitted, the Encounter is assumed to be for a single day.
-        #  Must not be temporally before the date_of_service field.
-        #  If there are greater than zero service lines, it is recommended to specify
-        #  end_date_of_service on the service_line instead of on the encounter to prepare
-        #  for future API versions.
-        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
-        #  for billing purpose.
-        #  Box 12 on the CMS-1500 claim form.
-        # @param benefits_assigned_to_provider [Boolean] Whether this patient has authorized insurance payments to be made to you,
-        #  not them. If false, patient may receive reimbursement.
-        #  Box 13 on the CMS-1500 claim form.
-        # @param provider_accepts_assignment [Boolean] Whether you have accepted the patient's authorization for insurance payments
-        #  to be made to you, not them.
-        #  Box 27 on the CMS-1500 claim form.
-        # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
-        #  Headaches").
-        # @param existing_medications [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::Medication>, as a Hash
-        #   * :name (String)
-        #   * :rx_cui (String)
-        #   * :dosage (String)
-        #   * :dosage_form (String)
-        #   * :frequency (String)
-        #   * :as_needed (Boolean)
-        # @param vitals [Hash] Request of type CandidApiClient::Encounters::V4::Types::Vitals, as a Hash
-        #   * :height_in (Integer)
-        #   * :weight_lbs (Integer)
-        #   * :blood_pressure_systolic_mmhg (Integer)
-        #   * :blood_pressure_diastolic_mmhg (Integer)
-        #   * :body_temperature_f (Float)
-        #   * :hemoglobin_gdl (Float)
-        #   * :hematocrit_pct (Float)
-        # @param interventions [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::Intervention>, as a Hash
-        #   * :name (String)
-        #   * :category (CandidApiClient::Encounters::V4::Types::InterventionCategory)
-        #   * :description (String)
-        #   * :medication (Hash)
-        #     * :name (String)
-        #     * :rx_cui (String)
-        #     * :dosage (String)
-        #     * :dosage_form (String)
-        #     * :frequency (String)
-        #     * :as_needed (Boolean)
-        #   * :labs (Array<CandidApiClient::Encounters::V4::Types::Lab>)
-        # @param pay_to_address [Hash] Specifies the address to which payments for the claim should be sent.Request of type CandidApiClient::Commons::Types::StreetAddressLongZip, as a Hash
-        #   * :zip_plus_four_code (String)
-        #   * :address_1 (String)
-        #   * :address_2 (String)
-        #   * :city (String)
-        #   * :state (CandidApiClient::Commons::Types::State)
-        #   * :zip_code (String)
-        # @param synchronicity [CandidApiClient::Encounters::V4::Types::SynchronicityType] Whether or not this was a synchronous or asynchronous encounter.
-        #  Asynchronous encounters occur when providers and patients communicate online
-        #  using
-        #  forms, instant messaging, or other pre-recorded digital mediums.
-        #  Synchronous encounters occur in live, real-time settings where the patient
-        #  interacts
-        #  directly with the provider, such as over video or a phone call.
-        # @param billable_status [CandidApiClient::Encounters::V4::Types::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party.
-        #  Examples for when this should be set to NOT_BILLABLE include
-        #  if the Encounter has not occurred yet or if there is no intention of ever
-        #  billing the responsible_party.
-        # @param additional_information [String] Defines additional information on the claim needed by the payer.
-        #  Box 19 on the CMS-1500 claim form.
-        # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
-        #  Required when mandated by government law or regulation to obtain authorization
-        #  for specific service(s) but, for the
-        #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
-        #  the service was performed without
-        #  obtaining the authorization.
-        # @param admission_date [Date] 837p Loop2300 DTP\*435, CMS-1500 Box 18
-        #  Required on all ambulance claims when the patient was known to be admitted to
-        #  the hospital.
-        #  OR
-        #  Required on all claims involving inpatient medical visits.
-        # @param discharge_date [Date] 837p Loop2300 DTP\*096, CMS-1500 Box 18
-        #  Required for inpatient claims when the patient was discharged from the facility
-        #  and the discharge date is known.
-        # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP\*431, CMS-1500 Box 14
-        #  Required for the initial medical service or visit performed in response to a
-        #  medical emergency when the date is available and is different than the date of
-        #  service.
-        #  OR
-        #  This date is the onset of acute symptoms for the current illness or condition.
-        # @param last_menstrual_period_date [Date] 837p Loop2300 DTP\*484, CMS-1500 Box 14
-        #  Required when, in the judgment of the provider, the services on this claim are
-        #  related to the patient's pregnancy.
-        # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
-        #  Code indicating the reason why a request was delayed
-        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @param _field_set [Object]
-        # @param pre_encounter_patient_id [String]
-        # @param pre_encounter_appointment_ids [Array<String>]
-        # @param billing_provider [Hash] The billing provider is the provider or business entity submitting the claim.
-        #  Billing provider may be, but is not necessarily, the same person/NPI as the
-        #  rendering provider. From a payer's perspective, this represents the person or
-        #  entity being reimbursed. When a contract exists with the target payer, the
-        #  billing provider should be the entity contracted with the payer. In some
-        #  circumstances, this will be an individual provider. In that case, submit that
-        #  provider's NPI and the tax ID (TIN) that the provider gave to the payer during
-        #  contracting. In other cases, the billing entity will be a medical group. If so,
-        #  submit the group NPI and the group's tax ID. Box 33 on the CMS-1500 claim form.Request of type CandidApiClient::EncounterProviders::V2::Types::BillingProvider, as a Hash
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :tax_id (String)
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param rendering_provider [Hash] The rendering provider is the practitioner -- physician, nurse practitioner,
-        #  etc. -- performing the service.
-        #  For telehealth services, the rendering provider performs the visit, asynchronous
-        #  communication, or other service. The rendering provider address should generally
-        #  be the same as the service facility address.Request of type CandidApiClient::EncounterProviders::V2::Types::RenderingProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param initial_referring_provider [Hash] The second iteration of Loop ID-2310. Use code "P3 - Primary Care Provider" in
-        #  this loop to
-        #  indicate the initial referral from the primary care provider or whatever
-        #  provider wrote the initial referral for this patient's episode of care being
-        #  billed/reported in this transaction.Request of type CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param supervising_provider [Hash] Required when the rendering provider is supervised by a physician. If not
-        #  required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param service_facility [Hash] Encounter Service facility is typically the location a medical service was
-        #  rendered, such as a provider office or hospital. For telehealth, service
-        #  facility can represent the provider's location when the service was delivered
-        #  (e.g., home), or the location where an in-person visit would have taken place,
-        #  whichever is easier to identify. If the provider is in-network, service facility
-        #  may be defined in payer contracts. Box 32 on the CMS-1500 claim form. Note that
-        #  for an in-network claim to be successfully adjudicated, the service facility
-        #  address listed on claims must match what was provided to the payer during the
-        #  credentialing process.Request of type CandidApiClient::ServiceFacility::Types::EncounterServiceFacilityBase, as a Hash
-        #   * :organization_name (String)
-        #   * :npi (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :secondary_identification (String)
-        # @param diagnoses [Array<Hash>] Ideally, this field should contain no more than 12 diagnoses. However, more
-        #  diagnoses
-        #  may be submitted at this time, and coders will later prioritize the 12 that will
-        #  be
-        #  submitted to the payor.Request of type Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>, as a Hash
-        #   * :name (String)
-        #   * :code_type (CandidApiClient::Diagnoses::Types::DiagnosisTypeCode)
-        #   * :code (String)
-        # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
-        #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
-        #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
-        #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
-        # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
-        #  in the billing process.Request of type Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>, as a Hash
-        #   * :text (String)
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
-        #  telemedicine, 11 for in-person. Full list [here](https://www.cms
-        #  .gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
-        # @param patient_histories [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>, as a Hash
-        #   * :category (CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryEnum)
-        #   * :questions (Array<CandidApiClient::Encounters::V4::Types::IntakeQuestion>)
-        # @param service_lines [Array<Hash>] Each service line must be linked to a diagnosis. Concretely,
-        #  `service_line.diagnosis_pointers`must contain at least one entry which should be
-        #  in bounds of the diagnoses list field.Request of type Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>, as a Hash
-        #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
-        #   * :procedure_code (String)
-        #   * :quantity (String)
-        #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
-        #   * :charge_amount_cents (Integer)
-        #   * :diagnosis_pointers (Array<Integer>)
-        #   * :drug_identification (Hash)
-        #     * :service_id_qualifier (CandidApiClient::ServiceLines::V2::Types::ServiceIdQualifier)
-        #     * :national_drug_code (String)
-        #     * :national_drug_unit_count (String)
-        #     * :measurement_unit_code (CandidApiClient::ServiceLines::V2::Types::MeasurementUnitCode)
-        #     * :link_sequence_number (String)
-        #     * :pharmacy_prescription_number (String)
-        #     * :conversion_formula (String)
-        #     * :drug_description (String)
-        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
-        #   * :description (String)
-        #   * :date_of_service (Date)
-        #   * :end_date_of_service (Date)
-        #   * :ordering_provider (Hash)
+        # @param request [Hash] Request of type CandidApiClient::Encounters::V4::Types::EncounterCreateFromPreEncounter, as a Hash
+        #   * :pre_encounter_patient_id (String)
+        #   * :pre_encounter_appointment_ids (Array<String>)
+        #   * :billing_provider (Hash)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :tax_id (String)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :rendering_provider (Hash)
         #     * :npi (String)
         #     * :taxonomy_code (String)
         #     * :address (Hash)
@@ -897,44 +685,95 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :organization_name (String)
-        #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
-        # @param external_claim_submission [Hash] ***This field is in beta.***
-        #  To be included for claims that have been submitted outside of Candid.
-        #  Candid supports posting remits and payments to these claims and working them
-        #  in-platform (e.g. editing, resubmitting).Request of type CandidApiClient::ClaimSubmission::V1::Types::ExternalClaimSubmissionCreate, as a Hash
-        #   * :claim_created_at (DateTime)
-        #   * :patient_control_number (String)
-        #   * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreate>)
-        # @param tag_ids [Array<String>] Names of tags that should be on the encounter.
-        # @param schema_instances [Array<Hash>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
-        #  Multiple schema
-        #  instances cannot be created for the same schema on an encounter.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
-        #   * :schema_id (String)
-        #   * :content (Hash{String => Object})
+        #   * :initial_referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :supervising_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :service_facility (Hash)
+        #     * :organization_name (String)
+        #     * :npi (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :secondary_identification (String)
+        #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>)
+        #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>)
+        #   * :billing_notes (Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
+        #   * :patient_histories (Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>)
+        #   * :service_lines (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>)
+        #   * :external_claim_submission (Hash)
+        #     * :claim_created_at (DateTime)
+        #     * :patient_control_number (String)
+        #     * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreate>)
+        #   * :tag_ids (Array<String>)
+        #   * :schema_instances (Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>)
+        #   * :external_id (String)
+        #   * :date_of_service (Date)
+        #   * :end_date_of_service (Date)
+        #   * :patient_authorized_release (Boolean)
+        #   * :benefits_assigned_to_provider (Boolean)
+        #   * :provider_accepts_assignment (Boolean)
+        #   * :appointment_type (String)
+        #   * :existing_medications (Array<CandidApiClient::Encounters::V4::Types::Medication>)
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
+        #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::Intervention>)
+        #   * :pay_to_address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :synchronicity (CandidApiClient::Encounters::V4::Types::SynchronicityType)
+        #   * :billable_status (CandidApiClient::Encounters::V4::Types::BillableStatusType)
+        #   * :additional_information (String)
+        #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
+        #   * :admission_date (Date)
+        #   * :discharge_date (Date)
+        #   * :onset_of_current_illness_or_symptom_date (Date)
+        #   * :last_menstrual_period_date (Date)
+        #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounters.v_4.create_from_pre_encounter_patient(
-        #    pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
-        #    billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", provider_commercial_license_type: LICENSED_CLINICAL_SOCIAL_WORKER, first_name: "string", last_name: "string", organization_name: "string" },
-        #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
-        #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
-        #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
-        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
-        #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
-        #    clinical_notes: [{ category: CLINICAL, notes: [{ text: "string", author_name: "string", author_npi: "string", timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }] }],
-        #    billing_notes: [{ text: "string" }],
-        #    place_of_service_code: PHARMACY,
-        #    patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }],
-        #    service_lines: [{ modifiers: [TWENTY_TWO], procedure_code: "string", quantity: "string", units: MJ, charge_amount_cents: 1, diagnosis_pointers: [1], drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, place_of_service_code: PHARMACY, description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] }],
-        #    external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] },
-        #    tag_ids: ["string"],
-        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
-        #  )
-        def create_from_pre_encounter_patient(external_id:, patient_authorized_release:,
-                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+        #  api.encounters.v_4.create_from_pre_encounter_patient(request: { pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", provider_commercial_license_type: LICENSED_CLINICAL_SOCIAL_WORKER, first_name: "string", last_name: "string", organization_name: "string" }, rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" }, supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" }, diagnoses: [{ name: "string", code_type: ABF, code: "string" }], clinical_notes: [{ category: CLINICAL, notes:  }], billing_notes: [{ text: "string" }], place_of_service_code: PHARMACY, patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }], service_lines: [{ procedure_code: "string", quantity: "string", units: MJ, diagnosis_pointers:  }], external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, tag_ids: ["string"], schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }], external_id: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), patient_authorized_release: true, benefits_assigned_to_provider: true, provider_accepts_assignment: true, appointment_type: "string", existing_medications: [{ name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }], vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, interventions: [{ name: "Physical Therapy Session", category: LIFESTYLE, description: "A session focused on improving muscular strength, flexibility, and range of motion post-injury.", medication: { name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }, labs: [{ name: "Genetic Health Labs", code: "GH12345", code_type: QUEST }] }], pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, synchronicity: SYNCHRONOUS, billable_status: BILLABLE, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1 })
+        def create_from_pre_encounter_patient(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -943,49 +782,164 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.body = {
-              **(request_options&.additional_body_parameters || {}),
-              external_id: external_id,
-              date_of_service: date_of_service,
-              end_date_of_service: end_date_of_service,
-              patient_authorized_release: patient_authorized_release,
-              benefits_assigned_to_provider: benefits_assigned_to_provider,
-              provider_accepts_assignment: provider_accepts_assignment,
-              appointment_type: appointment_type,
-              existing_medications: existing_medications,
-              vitals: vitals,
-              interventions: interventions,
-              pay_to_address: pay_to_address,
-              synchronicity: synchronicity,
-              billable_status: billable_status,
-              additional_information: additional_information,
-              service_authorization_exception_code: service_authorization_exception_code,
-              admission_date: admission_date,
-              discharge_date: discharge_date,
-              onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
-              last_menstrual_period_date: last_menstrual_period_date,
-              delay_reason_code: delay_reason_code,
-              additional_properties: additional_properties,
-              _field_set: _field_set,
-              pre_encounter_patient_id: pre_encounter_patient_id,
-              pre_encounter_appointment_ids: pre_encounter_appointment_ids,
-              billing_provider: billing_provider,
-              rendering_provider: rendering_provider,
-              initial_referring_provider: initial_referring_provider,
-              supervising_provider: supervising_provider,
-              service_facility: service_facility,
-              diagnoses: diagnoses,
-              clinical_notes: clinical_notes,
-              billing_notes: billing_notes,
-              place_of_service_code: place_of_service_code,
-              patient_histories: patient_histories,
-              service_lines: service_lines,
-              external_claim_submission: external_claim_submission,
-              tag_ids: tag_ids,
-              schema_instances: schema_instances
-            }.compact
+            req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/encounters/v4/create-from-pre-encounter"
+          end
+          CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
+        end
+
+        # Create an encounter from a pre-encounter patient and appointment. This endpoint
+        #  is intended to be used by consumers who are managing
+        #  patients and appointments in the pre-encounter service and is currently under
+        #  development. Consumers who are not taking advantage
+        #  of the pre-encounter service should use the standard create endpoint.
+        #  The endpoint will create an encounter from the provided fields, pulling
+        #  information from the provided patient and appointment objects
+        #  where applicable. In particular, the following fields are populated from the
+        #  patient and appointment objects:
+        #  - Patient
+        #  - Referring Provider
+        #  - Subscriber Primary
+        #  - Subscriber Secondary
+        #  - Referral Number
+        #  - Responsible Party
+        #  - Guarantor
+        #  Utilizing this endpoint opts you into automatic updating of the encounter when
+        #  the patient or appointment is updated, assuming the
+        #  encounter has not already been submitted or adjudicated.
+        #
+        # @param request [Hash] Request of type CandidApiClient::Encounters::V4::Types::EncounterCreateFromPreEncounter, as a Hash
+        #   * :pre_encounter_patient_id (String)
+        #   * :pre_encounter_appointment_ids (Array<String>)
+        #   * :billing_provider (Hash)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :tax_id (String)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :rendering_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :initial_referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :supervising_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :service_facility (Hash)
+        #     * :organization_name (String)
+        #     * :npi (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :secondary_identification (String)
+        #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>)
+        #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>)
+        #   * :billing_notes (Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
+        #   * :patient_histories (Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>)
+        #   * :service_lines (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>)
+        #   * :external_claim_submission (Hash)
+        #     * :claim_created_at (DateTime)
+        #     * :patient_control_number (String)
+        #     * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreate>)
+        #   * :tag_ids (Array<String>)
+        #   * :schema_instances (Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>)
+        #   * :external_id (String)
+        #   * :date_of_service (Date)
+        #   * :end_date_of_service (Date)
+        #   * :patient_authorized_release (Boolean)
+        #   * :benefits_assigned_to_provider (Boolean)
+        #   * :provider_accepts_assignment (Boolean)
+        #   * :appointment_type (String)
+        #   * :existing_medications (Array<CandidApiClient::Encounters::V4::Types::Medication>)
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
+        #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::Intervention>)
+        #   * :pay_to_address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :synchronicity (CandidApiClient::Encounters::V4::Types::SynchronicityType)
+        #   * :billable_status (CandidApiClient::Encounters::V4::Types::BillableStatusType)
+        #   * :additional_information (String)
+        #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
+        #   * :admission_date (Date)
+        #   * :discharge_date (Date)
+        #   * :onset_of_current_illness_or_symptom_date (Date)
+        #   * :last_menstrual_period_date (Date)
+        #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Encounters::V4::Types::Encounter]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.encounters.v_4.create_from_pre_encounter_patient_internal(request: { pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", provider_commercial_license_type: LICENSED_CLINICAL_SOCIAL_WORKER, first_name: "string", last_name: "string", organization_name: "string" }, rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" }, supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" }, diagnoses: [{ name: "string", code_type: ABF, code: "string" }], clinical_notes: [{ category: CLINICAL, notes:  }], billing_notes: [{ text: "string" }], place_of_service_code: PHARMACY, patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }], service_lines: [{ procedure_code: "string", quantity: "string", units: MJ, diagnosis_pointers:  }], external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, tag_ids: ["string"], schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }], external_id: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), patient_authorized_release: true, benefits_assigned_to_provider: true, provider_accepts_assignment: true, appointment_type: "string", existing_medications: [{ name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }], vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, interventions: [{ name: "Physical Therapy Session", category: LIFESTYLE, description: "A session focused on improving muscular strength, flexibility, and range of motion post-injury.", medication: { name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }, labs: [{ name: "Genetic Health Labs", code: "GH12345", code_type: QUEST }] }], pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, synchronicity: SYNCHRONOUS, billable_status: BILLABLE, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1 })
+        def create_from_pre_encounter_patient_internal(request:, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/encounters/v4/create-from-pre-encounter-internal"
           end
           CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
         end
@@ -1298,6 +1252,11 @@ module CandidApiClient
         #   * :last_name (String)
         #   * :organization_name (String)
         # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
+        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
+        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
+        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param diagnosis_ids [Array<String>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -1318,7 +1277,7 @@ module CandidApiClient
         #    place_of_service_code_as_submitted: PHARMACY
         #  )
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1365,6 +1324,7 @@ module CandidApiClient
               referring_provider: referring_provider,
               initial_referring_provider: initial_referring_provider,
               referral_number: referral_number,
+              epsdt_referral: epsdt_referral,
               additional_properties: additional_properties,
               _field_set: _field_set,
               diagnosis_ids: diagnosis_ids,
@@ -1804,6 +1764,8 @@ module CandidApiClient
         #  `service_line.diagnosis_pointers`must contain at least one entry which should be
         #  in bounds of the diagnoses list field.Request of type Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>, as a Hash
         #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
+        #   * :has_epsdt_indicator (Boolean)
+        #   * :has_family_planning_indicator (Boolean)
         #   * :procedure_code (String)
         #   * :quantity (String)
         #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
@@ -1852,8 +1814,7 @@ module CandidApiClient
         #     * :city (String)
         #     * :state (CandidApiClient::Commons::Types::State)
         #     * :zip_code (String)
-        # @param external_claim_submission [Hash] ***This field is in beta.***
-        #  To be included for claims that have been submitted outside of Candid.
+        # @param external_claim_submission [Hash] To be included for claims that have been submitted outside of Candid.
         #  Candid supports posting remits and payments to these claims and working them
         #  in-platform (e.g. editing, resubmitting).Request of type CandidApiClient::ClaimSubmission::V1::Types::ExternalClaimSubmissionCreate, as a Hash
         #   * :claim_created_at (DateTime)
@@ -1866,6 +1827,11 @@ module CandidApiClient
         #   * :schema_id (String)
         #   * :content (Hash{String => Object})
         # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
+        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
+        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
+        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -1883,19 +1849,20 @@ module CandidApiClient
         #    prior_authorization_number: "string",
         #    responsible_party: INSURANCE_PAY,
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
-        #    clinical_notes: [{ category: CLINICAL, notes: [{ text: "string", author_name: "string", author_npi: "string", timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }] }],
+        #    clinical_notes: [{ category: CLINICAL, notes:  }],
         #    billing_notes: [{ text: "string" }],
         #    place_of_service_code: PHARMACY,
         #    patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }],
-        #    service_lines: [{ modifiers: [TWENTY_TWO], procedure_code: "string", quantity: "string", units: MJ, charge_amount_cents: 1, diagnosis_pointers: [1], drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, place_of_service_code: PHARMACY, description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] }],
+        #    service_lines: [{ procedure_code: "string", quantity: "string", units: MJ, diagnosis_pointers:  }],
         #    guarantor: { phone_numbers: [{ number: "1234567890", type: HOME }], phone_consent: true, email: "johndoe@joincandidhealth.com", email_consent: true, first_name: "string", last_name: "string", external_id: "string", date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } },
         #    external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] },
         #    tag_ids: ["string"],
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
-        #    referral_number: "string"
+        #    referral_number: "string",
+        #    epsdt_referral: { condition_indicator_1: AV, condition_indicator_2: AV, condition_indicator_3: AV }
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1950,7 +1917,8 @@ module CandidApiClient
                 external_claim_submission: external_claim_submission,
                 tag_ids: tag_ids,
                 schema_instances: schema_instances,
-                referral_number: referral_number
+                referral_number: referral_number,
+                epsdt_referral: epsdt_referral
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/encounters/v4"
@@ -1979,247 +1947,25 @@ module CandidApiClient
         #  the patient or appointment is updated, assuming the
         #  encounter has not already been submitted or adjudicated.
         #
-        # @param external_id [String] A client-specified unique ID to associate with this encounter;
-        #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
-        #  This field should not contain PHI.
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #  This date must be the local date in the timezone where the service occurred.
-        #  Box 24a on the CMS-1500 claim form.
-        #  If service occurred over a range of dates, this should be the start date.
-        #  date_of_service must be defined on either the encounter or the service lines but
-        #  not both.
-        #  If there are greater than zero service lines, it is recommended to specify
-        #  date_of_service on the service_line instead of on the encounter to prepare for
-        #  future API versions.
-        # @param end_date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-25.
-        #  This date must be the local date in the timezone where the service occurred.
-        #  If omitted, the Encounter is assumed to be for a single day.
-        #  Must not be temporally before the date_of_service field.
-        #  If there are greater than zero service lines, it is recommended to specify
-        #  end_date_of_service on the service_line instead of on the encounter to prepare
-        #  for future API versions.
-        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
-        #  for billing purpose.
-        #  Box 12 on the CMS-1500 claim form.
-        # @param benefits_assigned_to_provider [Boolean] Whether this patient has authorized insurance payments to be made to you,
-        #  not them. If false, patient may receive reimbursement.
-        #  Box 13 on the CMS-1500 claim form.
-        # @param provider_accepts_assignment [Boolean] Whether you have accepted the patient's authorization for insurance payments
-        #  to be made to you, not them.
-        #  Box 27 on the CMS-1500 claim form.
-        # @param appointment_type [String] Human-readable description of the appointment type (ex: "Acupuncture -
-        #  Headaches").
-        # @param existing_medications [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::Medication>, as a Hash
-        #   * :name (String)
-        #   * :rx_cui (String)
-        #   * :dosage (String)
-        #   * :dosage_form (String)
-        #   * :frequency (String)
-        #   * :as_needed (Boolean)
-        # @param vitals [Hash] Request of type CandidApiClient::Encounters::V4::Types::Vitals, as a Hash
-        #   * :height_in (Integer)
-        #   * :weight_lbs (Integer)
-        #   * :blood_pressure_systolic_mmhg (Integer)
-        #   * :blood_pressure_diastolic_mmhg (Integer)
-        #   * :body_temperature_f (Float)
-        #   * :hemoglobin_gdl (Float)
-        #   * :hematocrit_pct (Float)
-        # @param interventions [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::Intervention>, as a Hash
-        #   * :name (String)
-        #   * :category (CandidApiClient::Encounters::V4::Types::InterventionCategory)
-        #   * :description (String)
-        #   * :medication (Hash)
-        #     * :name (String)
-        #     * :rx_cui (String)
-        #     * :dosage (String)
-        #     * :dosage_form (String)
-        #     * :frequency (String)
-        #     * :as_needed (Boolean)
-        #   * :labs (Array<CandidApiClient::Encounters::V4::Types::Lab>)
-        # @param pay_to_address [Hash] Specifies the address to which payments for the claim should be sent.Request of type CandidApiClient::Commons::Types::StreetAddressLongZip, as a Hash
-        #   * :zip_plus_four_code (String)
-        #   * :address_1 (String)
-        #   * :address_2 (String)
-        #   * :city (String)
-        #   * :state (CandidApiClient::Commons::Types::State)
-        #   * :zip_code (String)
-        # @param synchronicity [CandidApiClient::Encounters::V4::Types::SynchronicityType] Whether or not this was a synchronous or asynchronous encounter.
-        #  Asynchronous encounters occur when providers and patients communicate online
-        #  using
-        #  forms, instant messaging, or other pre-recorded digital mediums.
-        #  Synchronous encounters occur in live, real-time settings where the patient
-        #  interacts
-        #  directly with the provider, such as over video or a phone call.
-        # @param billable_status [CandidApiClient::Encounters::V4::Types::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party.
-        #  Examples for when this should be set to NOT_BILLABLE include
-        #  if the Encounter has not occurred yet or if there is no intention of ever
-        #  billing the responsible_party.
-        # @param additional_information [String] Defines additional information on the claim needed by the payer.
-        #  Box 19 on the CMS-1500 claim form.
-        # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
-        #  Required when mandated by government law or regulation to obtain authorization
-        #  for specific service(s) but, for the
-        #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
-        #  the service was performed without
-        #  obtaining the authorization.
-        # @param admission_date [Date] 837p Loop2300 DTP\*435, CMS-1500 Box 18
-        #  Required on all ambulance claims when the patient was known to be admitted to
-        #  the hospital.
-        #  OR
-        #  Required on all claims involving inpatient medical visits.
-        # @param discharge_date [Date] 837p Loop2300 DTP\*096, CMS-1500 Box 18
-        #  Required for inpatient claims when the patient was discharged from the facility
-        #  and the discharge date is known.
-        # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP\*431, CMS-1500 Box 14
-        #  Required for the initial medical service or visit performed in response to a
-        #  medical emergency when the date is available and is different than the date of
-        #  service.
-        #  OR
-        #  This date is the onset of acute symptoms for the current illness or condition.
-        # @param last_menstrual_period_date [Date] 837p Loop2300 DTP\*484, CMS-1500 Box 14
-        #  Required when, in the judgment of the provider, the services on this claim are
-        #  related to the patient's pregnancy.
-        # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
-        #  Code indicating the reason why a request was delayed
-        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @param _field_set [Object]
-        # @param pre_encounter_patient_id [String]
-        # @param pre_encounter_appointment_ids [Array<String>]
-        # @param billing_provider [Hash] The billing provider is the provider or business entity submitting the claim.
-        #  Billing provider may be, but is not necessarily, the same person/NPI as the
-        #  rendering provider. From a payer's perspective, this represents the person or
-        #  entity being reimbursed. When a contract exists with the target payer, the
-        #  billing provider should be the entity contracted with the payer. In some
-        #  circumstances, this will be an individual provider. In that case, submit that
-        #  provider's NPI and the tax ID (TIN) that the provider gave to the payer during
-        #  contracting. In other cases, the billing entity will be a medical group. If so,
-        #  submit the group NPI and the group's tax ID. Box 33 on the CMS-1500 claim form.Request of type CandidApiClient::EncounterProviders::V2::Types::BillingProvider, as a Hash
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :tax_id (String)
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param rendering_provider [Hash] The rendering provider is the practitioner -- physician, nurse practitioner,
-        #  etc. -- performing the service.
-        #  For telehealth services, the rendering provider performs the visit, asynchronous
-        #  communication, or other service. The rendering provider address should generally
-        #  be the same as the service facility address.Request of type CandidApiClient::EncounterProviders::V2::Types::RenderingProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param initial_referring_provider [Hash] The second iteration of Loop ID-2310. Use code "P3 - Primary Care Provider" in
-        #  this loop to
-        #  indicate the initial referral from the primary care provider or whatever
-        #  provider wrote the initial referral for this patient's episode of care being
-        #  billed/reported in this transaction.Request of type CandidApiClient::EncounterProviders::V2::Types::InitialReferringProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param supervising_provider [Hash] Required when the rendering provider is supervised by a physician. If not
-        #  required by this implementation guide, do not send.Request of type CandidApiClient::EncounterProviders::V2::Types::SupervisingProvider, as a Hash
-        #   * :npi (String)
-        #   * :taxonomy_code (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :organization_name (String)
-        # @param service_facility [Hash] Encounter Service facility is typically the location a medical service was
-        #  rendered, such as a provider office or hospital. For telehealth, service
-        #  facility can represent the provider's location when the service was delivered
-        #  (e.g., home), or the location where an in-person visit would have taken place,
-        #  whichever is easier to identify. If the provider is in-network, service facility
-        #  may be defined in payer contracts. Box 32 on the CMS-1500 claim form. Note that
-        #  for an in-network claim to be successfully adjudicated, the service facility
-        #  address listed on claims must match what was provided to the payer during the
-        #  credentialing process.Request of type CandidApiClient::ServiceFacility::Types::EncounterServiceFacilityBase, as a Hash
-        #   * :organization_name (String)
-        #   * :npi (String)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :secondary_identification (String)
-        # @param diagnoses [Array<Hash>] Ideally, this field should contain no more than 12 diagnoses. However, more
-        #  diagnoses
-        #  may be submitted at this time, and coders will later prioritize the 12 that will
-        #  be
-        #  submitted to the payor.Request of type Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>, as a Hash
-        #   * :name (String)
-        #   * :code_type (CandidApiClient::Diagnoses::Types::DiagnosisTypeCode)
-        #   * :code (String)
-        # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
-        #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
-        #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
-        #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
-        # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
-        #  in the billing process.Request of type Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>, as a Hash
-        #   * :text (String)
-        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
-        #  telemedicine, 11 for in-person. Full list [here](https://www.cms
-        #  .gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
-        # @param patient_histories [Array<Hash>] Request of type Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>, as a Hash
-        #   * :category (CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryEnum)
-        #   * :questions (Array<CandidApiClient::Encounters::V4::Types::IntakeQuestion>)
-        # @param service_lines [Array<Hash>] Each service line must be linked to a diagnosis. Concretely,
-        #  `service_line.diagnosis_pointers`must contain at least one entry which should be
-        #  in bounds of the diagnoses list field.Request of type Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>, as a Hash
-        #   * :modifiers (Array<CandidApiClient::Commons::Types::ProcedureModifier>)
-        #   * :procedure_code (String)
-        #   * :quantity (String)
-        #   * :units (CandidApiClient::Commons::Types::ServiceLineUnits)
-        #   * :charge_amount_cents (Integer)
-        #   * :diagnosis_pointers (Array<Integer>)
-        #   * :drug_identification (Hash)
-        #     * :service_id_qualifier (CandidApiClient::ServiceLines::V2::Types::ServiceIdQualifier)
-        #     * :national_drug_code (String)
-        #     * :national_drug_unit_count (String)
-        #     * :measurement_unit_code (CandidApiClient::ServiceLines::V2::Types::MeasurementUnitCode)
-        #     * :link_sequence_number (String)
-        #     * :pharmacy_prescription_number (String)
-        #     * :conversion_formula (String)
-        #     * :drug_description (String)
-        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
-        #   * :description (String)
-        #   * :date_of_service (Date)
-        #   * :end_date_of_service (Date)
-        #   * :ordering_provider (Hash)
+        # @param request [Hash] Request of type CandidApiClient::Encounters::V4::Types::EncounterCreateFromPreEncounter, as a Hash
+        #   * :pre_encounter_patient_id (String)
+        #   * :pre_encounter_appointment_ids (Array<String>)
+        #   * :billing_provider (Hash)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :tax_id (String)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :rendering_provider (Hash)
         #     * :npi (String)
         #     * :taxonomy_code (String)
         #     * :address (Hash)
@@ -2232,44 +1978,95 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :organization_name (String)
-        #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
-        # @param external_claim_submission [Hash] ***This field is in beta.***
-        #  To be included for claims that have been submitted outside of Candid.
-        #  Candid supports posting remits and payments to these claims and working them
-        #  in-platform (e.g. editing, resubmitting).Request of type CandidApiClient::ClaimSubmission::V1::Types::ExternalClaimSubmissionCreate, as a Hash
-        #   * :claim_created_at (DateTime)
-        #   * :patient_control_number (String)
-        #   * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreate>)
-        # @param tag_ids [Array<String>] Names of tags that should be on the encounter.
-        # @param schema_instances [Array<Hash>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
-        #  Multiple schema
-        #  instances cannot be created for the same schema on an encounter.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
-        #   * :schema_id (String)
-        #   * :content (Hash{String => Object})
+        #   * :initial_referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :supervising_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :service_facility (Hash)
+        #     * :organization_name (String)
+        #     * :npi (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :secondary_identification (String)
+        #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>)
+        #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>)
+        #   * :billing_notes (Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
+        #   * :patient_histories (Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>)
+        #   * :service_lines (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>)
+        #   * :external_claim_submission (Hash)
+        #     * :claim_created_at (DateTime)
+        #     * :patient_control_number (String)
+        #     * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreate>)
+        #   * :tag_ids (Array<String>)
+        #   * :schema_instances (Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>)
+        #   * :external_id (String)
+        #   * :date_of_service (Date)
+        #   * :end_date_of_service (Date)
+        #   * :patient_authorized_release (Boolean)
+        #   * :benefits_assigned_to_provider (Boolean)
+        #   * :provider_accepts_assignment (Boolean)
+        #   * :appointment_type (String)
+        #   * :existing_medications (Array<CandidApiClient::Encounters::V4::Types::Medication>)
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
+        #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::Intervention>)
+        #   * :pay_to_address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :synchronicity (CandidApiClient::Encounters::V4::Types::SynchronicityType)
+        #   * :billable_status (CandidApiClient::Encounters::V4::Types::BillableStatusType)
+        #   * :additional_information (String)
+        #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
+        #   * :admission_date (Date)
+        #   * :discharge_date (Date)
+        #   * :onset_of_current_illness_or_symptom_date (Date)
+        #   * :last_menstrual_period_date (Date)
+        #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounters.v_4.create_from_pre_encounter_patient(
-        #    pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
-        #    billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", provider_commercial_license_type: LICENSED_CLINICAL_SOCIAL_WORKER, first_name: "string", last_name: "string", organization_name: "string" },
-        #    rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
-        #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
-        #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
-        #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
-        #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
-        #    clinical_notes: [{ category: CLINICAL, notes: [{ text: "string", author_name: "string", author_npi: "string", timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }] }],
-        #    billing_notes: [{ text: "string" }],
-        #    place_of_service_code: PHARMACY,
-        #    patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }],
-        #    service_lines: [{ modifiers: [TWENTY_TWO], procedure_code: "string", quantity: "string", units: MJ, charge_amount_cents: 1, diagnosis_pointers: [1], drug_identification: { service_id_qualifier: EAN_UCC_13, national_drug_code: "string", national_drug_unit_count: "string", measurement_unit_code: MILLILITERS, link_sequence_number: "string", pharmacy_prescription_number: "string", conversion_formula: "string", drug_description: "string" }, place_of_service_code: PHARMACY, description: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), ordering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, test_results: [{ value: 1.1, result_type: HEMATOCRIT }] }],
-        #    external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] },
-        #    tag_ids: ["string"],
-        #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }]
-        #  )
-        def create_from_pre_encounter_patient(external_id:, patient_authorized_release:,
-                                              benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, pre_encounter_patient_id:, pre_encounter_appointment_ids:, billing_provider:, rendering_provider:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, request_options: nil)
+        #  api.encounters.v_4.create_from_pre_encounter_patient(request: { pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", provider_commercial_license_type: LICENSED_CLINICAL_SOCIAL_WORKER, first_name: "string", last_name: "string", organization_name: "string" }, rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" }, supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" }, diagnoses: [{ name: "string", code_type: ABF, code: "string" }], clinical_notes: [{ category: CLINICAL, notes:  }], billing_notes: [{ text: "string" }], place_of_service_code: PHARMACY, patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }], service_lines: [{ procedure_code: "string", quantity: "string", units: MJ, diagnosis_pointers:  }], external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, tag_ids: ["string"], schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }], external_id: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), patient_authorized_release: true, benefits_assigned_to_provider: true, provider_accepts_assignment: true, appointment_type: "string", existing_medications: [{ name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }], vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, interventions: [{ name: "Physical Therapy Session", category: LIFESTYLE, description: "A session focused on improving muscular strength, flexibility, and range of motion post-injury.", medication: { name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }, labs: [{ name: "Genetic Health Labs", code: "GH12345", code_type: QUEST }] }], pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, synchronicity: SYNCHRONOUS, billable_status: BILLABLE, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1 })
+        def create_from_pre_encounter_patient(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2279,49 +2076,166 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.body = {
-                **(request_options&.additional_body_parameters || {}),
-                external_id: external_id,
-                date_of_service: date_of_service,
-                end_date_of_service: end_date_of_service,
-                patient_authorized_release: patient_authorized_release,
-                benefits_assigned_to_provider: benefits_assigned_to_provider,
-                provider_accepts_assignment: provider_accepts_assignment,
-                appointment_type: appointment_type,
-                existing_medications: existing_medications,
-                vitals: vitals,
-                interventions: interventions,
-                pay_to_address: pay_to_address,
-                synchronicity: synchronicity,
-                billable_status: billable_status,
-                additional_information: additional_information,
-                service_authorization_exception_code: service_authorization_exception_code,
-                admission_date: admission_date,
-                discharge_date: discharge_date,
-                onset_of_current_illness_or_symptom_date: onset_of_current_illness_or_symptom_date,
-                last_menstrual_period_date: last_menstrual_period_date,
-                delay_reason_code: delay_reason_code,
-                additional_properties: additional_properties,
-                _field_set: _field_set,
-                pre_encounter_patient_id: pre_encounter_patient_id,
-                pre_encounter_appointment_ids: pre_encounter_appointment_ids,
-                billing_provider: billing_provider,
-                rendering_provider: rendering_provider,
-                initial_referring_provider: initial_referring_provider,
-                supervising_provider: supervising_provider,
-                service_facility: service_facility,
-                diagnoses: diagnoses,
-                clinical_notes: clinical_notes,
-                billing_notes: billing_notes,
-                place_of_service_code: place_of_service_code,
-                patient_histories: patient_histories,
-                service_lines: service_lines,
-                external_claim_submission: external_claim_submission,
-                tag_ids: tag_ids,
-                schema_instances: schema_instances
-              }.compact
+              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/encounters/v4/create-from-pre-encounter"
+            end
+            CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
+          end
+        end
+
+        # Create an encounter from a pre-encounter patient and appointment. This endpoint
+        #  is intended to be used by consumers who are managing
+        #  patients and appointments in the pre-encounter service and is currently under
+        #  development. Consumers who are not taking advantage
+        #  of the pre-encounter service should use the standard create endpoint.
+        #  The endpoint will create an encounter from the provided fields, pulling
+        #  information from the provided patient and appointment objects
+        #  where applicable. In particular, the following fields are populated from the
+        #  patient and appointment objects:
+        #  - Patient
+        #  - Referring Provider
+        #  - Subscriber Primary
+        #  - Subscriber Secondary
+        #  - Referral Number
+        #  - Responsible Party
+        #  - Guarantor
+        #  Utilizing this endpoint opts you into automatic updating of the encounter when
+        #  the patient or appointment is updated, assuming the
+        #  encounter has not already been submitted or adjudicated.
+        #
+        # @param request [Hash] Request of type CandidApiClient::Encounters::V4::Types::EncounterCreateFromPreEncounter, as a Hash
+        #   * :pre_encounter_patient_id (String)
+        #   * :pre_encounter_appointment_ids (Array<String>)
+        #   * :billing_provider (Hash)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :tax_id (String)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :rendering_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :initial_referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :supervising_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :service_facility (Hash)
+        #     * :organization_name (String)
+        #     * :npi (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :secondary_identification (String)
+        #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>)
+        #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>)
+        #   * :billing_notes (Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
+        #   * :patient_histories (Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>)
+        #   * :service_lines (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate>)
+        #   * :external_claim_submission (Hash)
+        #     * :claim_created_at (DateTime)
+        #     * :patient_control_number (String)
+        #     * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreate>)
+        #   * :tag_ids (Array<String>)
+        #   * :schema_instances (Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>)
+        #   * :external_id (String)
+        #   * :date_of_service (Date)
+        #   * :end_date_of_service (Date)
+        #   * :patient_authorized_release (Boolean)
+        #   * :benefits_assigned_to_provider (Boolean)
+        #   * :provider_accepts_assignment (Boolean)
+        #   * :appointment_type (String)
+        #   * :existing_medications (Array<CandidApiClient::Encounters::V4::Types::Medication>)
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
+        #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::Intervention>)
+        #   * :pay_to_address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :synchronicity (CandidApiClient::Encounters::V4::Types::SynchronicityType)
+        #   * :billable_status (CandidApiClient::Encounters::V4::Types::BillableStatusType)
+        #   * :additional_information (String)
+        #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
+        #   * :admission_date (Date)
+        #   * :discharge_date (Date)
+        #   * :onset_of_current_illness_or_symptom_date (Date)
+        #   * :last_menstrual_period_date (Date)
+        #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Encounters::V4::Types::Encounter]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.encounters.v_4.create_from_pre_encounter_patient_internal(request: { pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], billing_provider: { address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, tax_id: "string", npi: "string", taxonomy_code: "string", provider_commercial_license_type: LICENSED_CLINICAL_SOCIAL_WORKER, first_name: "string", last_name: "string", organization_name: "string" }, rendering_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" }, supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" }, service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" }, diagnoses: [{ name: "string", code_type: ABF, code: "string" }], clinical_notes: [{ category: CLINICAL, notes:  }], billing_notes: [{ text: "string" }], place_of_service_code: PHARMACY, patient_histories: [{ category: PRESENT_ILLNESS, questions: [{ id: "6E7FBCE4-A8EA-46D0-A8D8-FF83CA3BB176", text: "Do you have any allergies?", responses: [{ response: "No allergies", follow_ups: [{ id: "4F3D57F9-AC94-49D6-87E4-E804B709917A", text: "Do you have any allergies?", response: "No allergies" }] }] }] }], service_lines: [{ procedure_code: "string", quantity: "string", units: MJ, diagnosis_pointers:  }], external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, tag_ids: ["string"], schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }], external_id: "string", date_of_service: DateTime.parse(2023-01-15), end_date_of_service: DateTime.parse(2023-01-15), patient_authorized_release: true, benefits_assigned_to_provider: true, provider_accepts_assignment: true, appointment_type: "string", existing_medications: [{ name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }], vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, interventions: [{ name: "Physical Therapy Session", category: LIFESTYLE, description: "A session focused on improving muscular strength, flexibility, and range of motion post-injury.", medication: { name: "Lisinopril", rx_cui: "860975", dosage: "10mg", dosage_form: "Tablet", frequency: "Once Daily", as_needed: true }, labs: [{ name: "Genetic Health Labs", code: "GH12345", code_type: QUEST }] }], pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, synchronicity: SYNCHRONOUS, billable_status: BILLABLE, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1 })
+        def create_from_pre_encounter_patient_internal(request:, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/encounters/v4/create-from-pre-encounter-internal"
             end
             CandidApiClient::Encounters::V4::Types::Encounter.from_json(json_object: response.body)
           end
@@ -2635,6 +2549,11 @@ module CandidApiClient
         #   * :last_name (String)
         #   * :organization_name (String)
         # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
+        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
+        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
+        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param diagnosis_ids [Array<String>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -2655,7 +2574,7 @@ module CandidApiClient
         #    place_of_service_code_as_submitted: PHARMACY
         #  )
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2703,6 +2622,7 @@ module CandidApiClient
                 referring_provider: referring_provider,
                 initial_referring_provider: initial_referring_provider,
                 referral_number: referral_number,
+                epsdt_referral: epsdt_referral,
                 additional_properties: additional_properties,
                 _field_set: _field_set,
                 diagnosis_ids: diagnosis_ids,

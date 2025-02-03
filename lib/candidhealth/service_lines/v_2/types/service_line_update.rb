@@ -59,6 +59,14 @@ module CandidApiClient
           #  provided. No more than 5 test
           #  results may be submitted per service line.
           attr_reader :test_results
+          # @return [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
+          attr_reader :has_epsdt_indicator
+          # @return [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
+          attr_reader :has_family_planning_indicator
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -94,10 +102,16 @@ module CandidApiClient
           #  so the test results on the service line will be set to whatever inputs are
           #  provided. No more than 5 test
           #  results may be submitted per service line.
+          # @param has_epsdt_indicator [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
+          # @param has_family_planning_indicator [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineUpdate]
           def initialize(edit_reason: OMIT, modifiers: OMIT, charge_amount_cents: OMIT, diagnosis_id_zero: OMIT,
-                         diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, units: OMIT, procedure_code: OMIT, quantity: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, test_results: OMIT, additional_properties: nil)
+                         diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, units: OMIT, procedure_code: OMIT, quantity: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, additional_properties: nil)
             @edit_reason = edit_reason if edit_reason != OMIT
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
@@ -115,6 +129,8 @@ module CandidApiClient
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @test_results = test_results if test_results != OMIT
+            @has_epsdt_indicator = has_epsdt_indicator if has_epsdt_indicator != OMIT
+            @has_family_planning_indicator = has_family_planning_indicator if has_family_planning_indicator != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "edit_reason": edit_reason,
@@ -133,7 +149,9 @@ module CandidApiClient
               "description": description,
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
-              "test_results": test_results
+              "test_results": test_results,
+              "has_epsdt_indicator": has_epsdt_indicator,
+              "has_family_planning_indicator": has_family_planning_indicator
             }.reject do |_k, v|
               v == OMIT
             end
@@ -178,6 +196,8 @@ module CandidApiClient
               item = item.to_json
               CandidApiClient::ServiceLines::V2::Types::TestResult.from_json(json_object: item)
             end
+            has_epsdt_indicator = struct["has_epsdt_indicator"]
+            has_family_planning_indicator = struct["has_family_planning_indicator"]
             new(
               edit_reason: edit_reason,
               modifiers: modifiers,
@@ -196,6 +216,8 @@ module CandidApiClient
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
               test_results: test_results,
+              has_epsdt_indicator: has_epsdt_indicator,
+              has_family_planning_indicator: has_family_planning_indicator,
               additional_properties: struct
             )
           end
@@ -231,6 +253,8 @@ module CandidApiClient
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
             obj.test_results&.is_a?(Array) != false || raise("Passed value for field obj.test_results is not the expected type, validation failed.")
+            obj.has_epsdt_indicator&.is_a?(Boolean) != false || raise("Passed value for field obj.has_epsdt_indicator is not the expected type, validation failed.")
+            obj.has_family_planning_indicator&.is_a?(Boolean) != false || raise("Passed value for field obj.has_family_planning_indicator is not the expected type, validation failed.")
           end
         end
       end

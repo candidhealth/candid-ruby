@@ -17,6 +17,14 @@ module CandidApiClient
         class ServiceLineCreate
           # @return [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
           attr_reader :modifiers
+          # @return [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
+          attr_reader :has_epsdt_indicator
+          # @return [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
+          attr_reader :has_family_planning_indicator
           # @return [String]
           attr_reader :procedure_code
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
@@ -63,6 +71,12 @@ module CandidApiClient
           OMIT = Object.new
 
           # @param modifiers [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
+          # @param has_epsdt_indicator [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
+          # @param has_family_planning_indicator [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
+          #  If the value is true, the box will be populated with "Y". Otherwise, the box
+          #  will not be populated.
           # @param procedure_code [String]
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
@@ -91,8 +105,10 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreate]
           def initialize(procedure_code:, quantity:, units:, diagnosis_pointers:, modifiers: OMIT,
-                         charge_amount_cents: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_results: OMIT, additional_properties: nil)
+                         has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, charge_amount_cents: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_results: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
+            @has_epsdt_indicator = has_epsdt_indicator if has_epsdt_indicator != OMIT
+            @has_family_planning_indicator = has_family_planning_indicator if has_family_planning_indicator != OMIT
             @procedure_code = procedure_code
             @quantity = quantity
             @units = units
@@ -108,6 +124,8 @@ module CandidApiClient
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
+              "has_epsdt_indicator": has_epsdt_indicator,
+              "has_family_planning_indicator": has_family_planning_indicator,
               "procedure_code": procedure_code,
               "quantity": quantity,
               "units": units,
@@ -133,6 +151,8 @@ module CandidApiClient
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
             modifiers = struct["modifiers"]
+            has_epsdt_indicator = struct["has_epsdt_indicator"]
+            has_family_planning_indicator = struct["has_family_planning_indicator"]
             procedure_code = struct["procedure_code"]
             quantity = struct["quantity"]
             units = struct["units"]
@@ -162,6 +182,8 @@ module CandidApiClient
             end
             new(
               modifiers: modifiers,
+              has_epsdt_indicator: has_epsdt_indicator,
+              has_family_planning_indicator: has_family_planning_indicator,
               procedure_code: procedure_code,
               quantity: quantity,
               units: units,
@@ -193,6 +215,8 @@ module CandidApiClient
           # @return [Void]
           def self.validate_raw(obj:)
             obj.modifiers&.is_a?(Array) != false || raise("Passed value for field obj.modifiers is not the expected type, validation failed.")
+            obj.has_epsdt_indicator&.is_a?(Boolean) != false || raise("Passed value for field obj.has_epsdt_indicator is not the expected type, validation failed.")
+            obj.has_family_planning_indicator&.is_a?(Boolean) != false || raise("Passed value for field obj.has_family_planning_indicator is not the expected type, validation failed.")
             obj.procedure_code.is_a?(String) != false || raise("Passed value for field obj.procedure_code is not the expected type, validation failed.")
             obj.quantity.is_a?(String) != false || raise("Passed value for field obj.quantity is not the expected type, validation failed.")
             obj.units.is_a?(CandidApiClient::Commons::Types::ServiceLineUnits) != false || raise("Passed value for field obj.units is not the expected type, validation failed.")

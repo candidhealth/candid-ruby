@@ -94,6 +94,7 @@ require_relative "candidhealth/encounters/v_4/types/schema_unauthorized_access_e
 require_relative "candidhealth/encounters/v_4/types/value_does_not_match_key_type_error"
 require_relative "candidhealth/encounters/v_4/types/multiple_instances_for_schema_error"
 require_relative "candidhealth/encounters/v_4/types/schema_instance_validation_error"
+require_relative "candidhealth/encounters/v_4/types/payer_plan_group_payer_does_not_match_insurance_card_error"
 require_relative "candidhealth/expected_network_status/v_1/types/expected_network_status"
 require_relative "candidhealth/expected_network_status/v_1/types/expected_network_status_response"
 require_relative "candidhealth/expected_network_status/v_2/types/line_of_business"

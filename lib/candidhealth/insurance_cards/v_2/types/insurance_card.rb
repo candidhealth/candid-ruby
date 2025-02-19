@@ -34,6 +34,8 @@ module CandidApiClient
           attr_reader :plan_type
           # @return [CandidApiClient::Commons::Types::InsuranceTypeCode]
           attr_reader :insurance_type
+          # @return [String]
+          attr_reader :payer_plan_group_id
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -54,10 +56,11 @@ module CandidApiClient
           # @param plan_name [String] Box 11c on the CMS-1500 claim form.
           # @param plan_type [CandidApiClient::Commons::Types::SourceOfPaymentCode]
           # @param insurance_type [CandidApiClient::Commons::Types::InsuranceTypeCode]
+          # @param payer_plan_group_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::InsuranceCards::V2::Types::InsuranceCard]
           def initialize(insurance_card_id:, member_id:, payer_name:, payer_id:, rx_bin: OMIT, rx_pcn: OMIT,
-                         image_url_front: OMIT, image_url_back: OMIT, group_number: OMIT, plan_name: OMIT, plan_type: OMIT, insurance_type: OMIT, additional_properties: nil)
+                         image_url_front: OMIT, image_url_back: OMIT, group_number: OMIT, plan_name: OMIT, plan_type: OMIT, insurance_type: OMIT, payer_plan_group_id: OMIT, additional_properties: nil)
             @insurance_card_id = insurance_card_id
             @member_id = member_id
             @payer_name = payer_name
@@ -70,6 +73,7 @@ module CandidApiClient
             @plan_name = plan_name if plan_name != OMIT
             @plan_type = plan_type if plan_type != OMIT
             @insurance_type = insurance_type if insurance_type != OMIT
+            @payer_plan_group_id = payer_plan_group_id if payer_plan_group_id != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "insurance_card_id": insurance_card_id,
@@ -83,7 +87,8 @@ module CandidApiClient
               "group_number": group_number,
               "plan_name": plan_name,
               "plan_type": plan_type,
-              "insurance_type": insurance_type
+              "insurance_type": insurance_type,
+              "payer_plan_group_id": payer_plan_group_id
             }.reject do |_k, v|
               v == OMIT
             end
@@ -107,6 +112,7 @@ module CandidApiClient
             plan_name = struct["plan_name"]
             plan_type = struct["plan_type"]
             insurance_type = struct["insurance_type"]
+            payer_plan_group_id = struct["payer_plan_group_id"]
             new(
               insurance_card_id: insurance_card_id,
               member_id: member_id,
@@ -120,6 +126,7 @@ module CandidApiClient
               plan_name: plan_name,
               plan_type: plan_type,
               insurance_type: insurance_type,
+              payer_plan_group_id: payer_plan_group_id,
               additional_properties: struct
             )
           end
@@ -150,6 +157,7 @@ module CandidApiClient
             obj.plan_name&.is_a?(String) != false || raise("Passed value for field obj.plan_name is not the expected type, validation failed.")
             obj.plan_type&.is_a?(CandidApiClient::Commons::Types::SourceOfPaymentCode) != false || raise("Passed value for field obj.plan_type is not the expected type, validation failed.")
             obj.insurance_type&.is_a?(CandidApiClient::Commons::Types::InsuranceTypeCode) != false || raise("Passed value for field obj.insurance_type is not the expected type, validation failed.")
+            obj.payer_plan_group_id&.is_a?(String) != false || raise("Passed value for field obj.payer_plan_group_id is not the expected type, validation failed.")
           end
         end
       end

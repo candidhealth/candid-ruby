@@ -408,6 +408,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -434,6 +435,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -553,8 +555,8 @@ module CandidApiClient
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
-        #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
-        #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
+        #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
+        #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    prior_authorization_number: "string",
         #    responsible_party: INSURANCE_PAY,
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
@@ -858,6 +860,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -884,6 +887,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -1544,6 +1548,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -1570,6 +1575,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -1689,8 +1695,8 @@ module CandidApiClient
         #    initial_referring_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, qualifier: DQ, first_name: "string", last_name: "string", organization_name: "string" },
         #    supervising_provider: { npi: "string", taxonomy_code: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", organization_name: "string" },
         #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
-        #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
-        #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01 }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
+        #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
+        #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    prior_authorization_number: "string",
         #    responsible_party: INSURANCE_PAY,
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
@@ -1998,6 +2004,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)
@@ -2024,6 +2031,7 @@ module CandidApiClient
         #     * :plan_name (String)
         #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
         #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
         #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
         #   * :date_of_birth (Date)
         #   * :address (Hash)

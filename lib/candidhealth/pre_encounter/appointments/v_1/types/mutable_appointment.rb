@@ -56,7 +56,7 @@ module CandidApiClient
             attr_reader :automated_eligibility_check_complete
             # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::AppointmentWorkQueue] The work queue that the appointment belongs to. It is not recommended to change
             #  this value manually via API. If status is NOT_READY, work_queue must be set. If
-            #  status is READY or CHECKED_IN, work_queue must be null.
+            #  status is READY, work_queue must be null.
             attr_reader :work_queue
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
@@ -93,7 +93,7 @@ module CandidApiClient
             #  appointment.
             # @param work_queue [CandidApiClient::PreEncounter::Appointments::V1::Types::AppointmentWorkQueue] The work queue that the appointment belongs to. It is not recommended to change
             #  this value manually via API. If status is NOT_READY, work_queue must be set. If
-            #  status is READY or CHECKED_IN, work_queue must be null.
+            #  status is READY, work_queue must be null.
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment]
             def initialize(patient_id:, start_timestamp:, service_duration:, services:, status: OMIT,

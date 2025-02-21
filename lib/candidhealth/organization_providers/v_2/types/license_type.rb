@@ -96,6 +96,10 @@ module CandidApiClient
           PLMHP = "PLMHP"
           PCMSW = "PCMSW"
           LMHP = "LMHP"
+          OTRL = "OTR/L"
+          RPA = "RPA"
+          COTA = "COTA"
+          CRNP = "CRNP"
         end
       end
     end

@@ -33,6 +33,8 @@ module CandidApiClient
             attr_reader :period
             # @return [String]
             attr_reader :insurance_card_image_locator
+            # @return [String] The ID of the Candid configured payer plan group associated with this coverage
+            attr_reader :payer_plan_group_id
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -51,10 +53,11 @@ module CandidApiClient
             # @param type [CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode]
             # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
             # @param insurance_card_image_locator [String]
+            # @param payer_plan_group_id [String] The ID of the Candid configured payer plan group associated with this coverage
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
             def initialize(member_id:, payer_id:, payer_name:, additional_payer_information: OMIT, group_number: OMIT,
-                           name: OMIT, plan_type: OMIT, type: OMIT, period: OMIT, insurance_card_image_locator: OMIT, additional_properties: nil)
+                           name: OMIT, plan_type: OMIT, type: OMIT, period: OMIT, insurance_card_image_locator: OMIT, payer_plan_group_id: OMIT, additional_properties: nil)
               @member_id = member_id
               @payer_id = payer_id
               @payer_name = payer_name
@@ -65,6 +68,7 @@ module CandidApiClient
               @type = type if type != OMIT
               @period = period if period != OMIT
               @insurance_card_image_locator = insurance_card_image_locator if insurance_card_image_locator != OMIT
+              @payer_plan_group_id = payer_plan_group_id if payer_plan_group_id != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "member_id": member_id,
@@ -76,7 +80,8 @@ module CandidApiClient
                 "plan_type": plan_type,
                 "type": type,
                 "period": period,
-                "insurance_card_image_locator": insurance_card_image_locator
+                "insurance_card_image_locator": insurance_card_image_locator,
+                "payer_plan_group_id": payer_plan_group_id
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -109,6 +114,7 @@ module CandidApiClient
                 period = CandidApiClient::PreEncounter::Common::Types::Period.from_json(json_object: period)
               end
               insurance_card_image_locator = struct["insurance_card_image_locator"]
+              payer_plan_group_id = struct["payer_plan_group_id"]
               new(
                 member_id: member_id,
                 payer_id: payer_id,
@@ -120,6 +126,7 @@ module CandidApiClient
                 type: type,
                 period: period,
                 insurance_card_image_locator: insurance_card_image_locator,
+                payer_plan_group_id: payer_plan_group_id,
                 additional_properties: struct
               )
             end
@@ -148,6 +155,7 @@ module CandidApiClient
               obj.type&.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::InsuranceTypeCode) != false || raise("Passed value for field obj.type is not the expected type, validation failed.")
               obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
               obj.insurance_card_image_locator&.is_a?(String) != false || raise("Passed value for field obj.insurance_card_image_locator is not the expected type, validation failed.")
+              obj.payer_plan_group_id&.is_a?(String) != false || raise("Passed value for field obj.payer_plan_group_id is not the expected type, validation failed.")
             end
           end
         end

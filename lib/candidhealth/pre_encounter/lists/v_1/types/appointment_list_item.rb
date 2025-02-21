@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../../appointments/v_1/types/appointment"
-require_relative "../../../patients/v_1/types/mutable_patient"
+require_relative "../../../patients/v_1/types/mutable_patient_with_mrn"
 require_relative "../../../coverages/v_1/types/mutable_coverage"
 require_relative "../../../appointments/v_1/types/universal_service_identifier"
 require "ostruct"
@@ -15,7 +15,7 @@ module CandidApiClient
           class AppointmentListItem
             # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
             attr_reader :appointment
-            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient]
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn]
             attr_reader :patient
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
             attr_reader :primary_coverage
@@ -30,7 +30,7 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param appointment [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
-            # @param patient [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient]
+            # @param patient [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn]
             # @param primary_coverage [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
             # @param primary_service_type [CandidApiClient::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
@@ -69,7 +69,7 @@ module CandidApiClient
                 patient = nil
               else
                 patient = parsed_json["patient"].to_json
-                patient = CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient.from_json(json_object: patient)
+                patient = CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn.from_json(json_object: patient)
               end
               if parsed_json["primary_coverage"].nil?
                 primary_coverage = nil
@@ -102,7 +102,7 @@ module CandidApiClient
             # @return [Void]
             def self.validate_raw(obj:)
               CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.validate_raw(obj: obj.appointment)
-              CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatient.validate_raw(obj: obj.patient)
+              CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn.validate_raw(obj: obj.patient)
               obj.primary_coverage.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.validate_raw(obj: obj.primary_coverage)
               obj.primary_service_type&.is_a?(CandidApiClient::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier) != false || raise("Passed value for field obj.primary_service_type is not the expected type, validation failed.")
             end

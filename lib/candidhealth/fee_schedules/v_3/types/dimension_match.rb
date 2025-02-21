@@ -9,6 +9,7 @@ require_relative "match_modifiers"
 require_relative "match_license_type"
 require_relative "match_facility_type_code"
 require_relative "match_network_types"
+require_relative "match_payer_plan_groups"
 require "ostruct"
 require "json"
 
@@ -36,6 +37,8 @@ module CandidApiClient
           attr_reader :facility_type_code
           # @return [CandidApiClient::FeeSchedules::V3::Types::MatchNetworkTypes]
           attr_reader :network_types
+          # @return [CandidApiClient::FeeSchedules::V3::Types::MatchPayerPlanGroups]
+          attr_reader :payer_plan_groups
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -53,10 +56,11 @@ module CandidApiClient
           # @param license_type [CandidApiClient::FeeSchedules::V3::Types::MatchLicenseType]
           # @param facility_type_code [CandidApiClient::FeeSchedules::V3::Types::MatchFacilityTypeCode]
           # @param network_types [CandidApiClient::FeeSchedules::V3::Types::MatchNetworkTypes]
+          # @param payer_plan_groups [CandidApiClient::FeeSchedules::V3::Types::MatchPayerPlanGroups]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::FeeSchedules::V3::Types::DimensionMatch]
           def initialize(payer:, geography:, organization_billing_provider:, date_of_service:, cpt_code:, modifiers:,
-                         license_type:, facility_type_code:, network_types:, additional_properties: nil)
+                         license_type:, facility_type_code:, network_types:, payer_plan_groups:, additional_properties: nil)
             @payer = payer
             @geography = geography
             @organization_billing_provider = organization_billing_provider
@@ -66,6 +70,7 @@ module CandidApiClient
             @license_type = license_type
             @facility_type_code = facility_type_code
             @network_types = network_types
+            @payer_plan_groups = payer_plan_groups
             @additional_properties = additional_properties
             @_field_set = {
               "payer": payer,
@@ -76,7 +81,8 @@ module CandidApiClient
               "modifiers": modifiers,
               "license_type": license_type,
               "facility_type_code": facility_type_code,
-              "network_types": network_types
+              "network_types": network_types,
+              "payer_plan_groups": payer_plan_groups
             }
           end
 
@@ -141,6 +147,12 @@ module CandidApiClient
               network_types = parsed_json["network_types"].to_json
               network_types = CandidApiClient::FeeSchedules::V3::Types::MatchNetworkTypes.from_json(json_object: network_types)
             end
+            if parsed_json["payer_plan_groups"].nil?
+              payer_plan_groups = nil
+            else
+              payer_plan_groups = parsed_json["payer_plan_groups"].to_json
+              payer_plan_groups = CandidApiClient::FeeSchedules::V3::Types::MatchPayerPlanGroups.from_json(json_object: payer_plan_groups)
+            end
             new(
               payer: payer,
               geography: geography,
@@ -151,6 +163,7 @@ module CandidApiClient
               license_type: license_type,
               facility_type_code: facility_type_code,
               network_types: network_types,
+              payer_plan_groups: payer_plan_groups,
               additional_properties: struct
             )
           end
@@ -178,6 +191,7 @@ module CandidApiClient
             CandidApiClient::FeeSchedules::V3::Types::MatchLicenseType.validate_raw(obj: obj.license_type)
             CandidApiClient::FeeSchedules::V3::Types::MatchFacilityTypeCode.validate_raw(obj: obj.facility_type_code)
             CandidApiClient::FeeSchedules::V3::Types::MatchNetworkTypes.validate_raw(obj: obj.network_types)
+            CandidApiClient::FeeSchedules::V3::Types::MatchPayerPlanGroups.validate_raw(obj: obj.payer_plan_groups)
           end
         end
       end

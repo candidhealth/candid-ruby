@@ -4,6 +4,7 @@ require "json"
 require_relative "overlapping_rate_entries_error"
 require_relative "../../../commons/types/entity_conflict_error_message"
 require_relative "../../../commons/types/entity_not_found_error_message"
+require_relative "payer_plan_group_does_not_match_rate_payer_error"
 
 module CandidApiClient
   module FeeSchedules
@@ -32,20 +33,24 @@ module CandidApiClient
           # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
-            member = case struct.type
-                     when "overlapping_rate_entries"
-                       CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
-                     when "version_conflict"
-                       CandidApiClient::Commons::Types::EntityConflictErrorMessage.from_json(json_object: json_object)
-                     when "organization_provider_not_found"
-                       CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.from_json(json_object: json_object)
-                     when "duplicate_rate"
-                       nil
-                     when "empty_entries"
-                       nil
-                     else
-                       CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
-                     end
+            case struct.type
+            when "overlapping_rate_entries"
+              member = CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
+            when "version_conflict"
+              member = CandidApiClient::Commons::Types::EntityConflictErrorMessage.from_json(json_object: json_object)
+            when "organization_provider_not_found"
+              member = CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.from_json(json_object: json_object)
+            when "duplicate_rate"
+              member = nil
+            when "empty_entries"
+              member = nil
+            when "payer_plan_group_not_found"
+              member = CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.from_json(json_object: json_object)
+            when "payer_plan_group_does_not_match_rate_payer"
+              member = CandidApiClient::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError.from_json(json_object: json_object)
+            else
+              member = CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
+            end
             new(member: member, discriminant: struct.type)
           end
 
@@ -64,6 +69,10 @@ module CandidApiClient
               { type: @discriminant }.to_json
             when "empty_entries"
               { type: @discriminant }.to_json
+            when "payer_plan_group_not_found"
+              { **@member.to_json, type: @discriminant }.to_json
+            when "payer_plan_group_does_not_match_rate_payer"
+              { **@member.to_json, type: @discriminant }.to_json
             else
               { "type": @discriminant, value: @member }.to_json
             end
@@ -88,6 +97,10 @@ module CandidApiClient
               # noop
             when "empty_entries"
               # noop
+            when "payer_plan_group_not_found"
+              CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.validate_raw(obj: obj)
+            when "payer_plan_group_does_not_match_rate_payer"
+              CandidApiClient::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError.validate_raw(obj: obj)
             else
               raise("Passed value matched no type within the union, validation failed.")
             end
@@ -127,6 +140,18 @@ module CandidApiClient
           # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
           def self.empty_entries
             new(member: nil, discriminant: "empty_entries")
+          end
+
+          # @param member [CandidApiClient::Commons::Types::EntityNotFoundErrorMessage]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.payer_plan_group_not_found(member:)
+            new(member: member, discriminant: "payer_plan_group_not_found")
+          end
+
+          # @param member [CandidApiClient::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.payer_plan_group_does_not_match_rate_payer(member:)
+            new(member: member, discriminant: "payer_plan_group_does_not_match_rate_payer")
           end
         end
       end

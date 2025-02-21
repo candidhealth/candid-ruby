@@ -93,6 +93,7 @@ module CandidApiClient
         # @param license_types [CandidApiClient::OrganizationProviders::V2::Types::LicenseType]
         # @param facility_type_codes [CandidApiClient::Commons::Types::FacilityTypeCode]
         # @param network_types [CandidApiClient::Commons::Types::NetworkType]
+        # @param payer_plan_group_ids [String]
         # @param cpt_code [String]
         # @param modifiers [CandidApiClient::Commons::Types::ProcedureModifier]
         # @param request_options [CandidApiClient::RequestOptions]
@@ -110,11 +111,12 @@ module CandidApiClient
         #    license_types: MD,
         #    facility_type_codes: PHARMACY,
         #    network_types: PPO,
+        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
         #    modifiers: TWENTY_TWO
         #  )
         def get_multi(page_token: nil, limit: nil, active_date: nil, payer_uuid: nil,
-                      organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, cpt_code: nil, modifiers: nil, request_options: nil)
+                      organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -135,6 +137,7 @@ module CandidApiClient
               "license_types": license_types,
               "facility_type_codes": facility_type_codes,
               "network_types": network_types,
+              "payer_plan_group_ids": payer_plan_group_ids,
               "cpt_code": cpt_code,
               "modifiers": modifiers
             }.compact
@@ -158,6 +161,7 @@ module CandidApiClient
         # @param license_types [CandidApiClient::OrganizationProviders::V2::Types::LicenseType]
         # @param facility_type_codes [CandidApiClient::Commons::Types::FacilityTypeCode]
         # @param network_types [CandidApiClient::Commons::Types::NetworkType]
+        # @param payer_plan_group_ids [String]
         # @param cpt_code [String]
         # @param modifiers [CandidApiClient::Commons::Types::ProcedureModifier]
         # @param request_options [CandidApiClient::RequestOptions]
@@ -175,11 +179,12 @@ module CandidApiClient
         #    license_types: MD,
         #    facility_type_codes: PHARMACY,
         #    network_types: PPO,
+        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
         #    modifiers: TWENTY_TWO
         #  )
         def get_unique_values_for_dimension(pivot_dimension:, page_token: nil, limit: nil, payer_uuid: nil,
-                                            organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, cpt_code: nil, modifiers: nil, request_options: nil)
+                                            organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -200,6 +205,7 @@ module CandidApiClient
               "license_types": license_types,
               "facility_type_codes": facility_type_codes,
               "network_types": network_types,
+              "payer_plan_group_ids": payer_plan_group_ids,
               "cpt_code": cpt_code,
               "modifiers": modifiers
             }.compact
@@ -444,6 +450,7 @@ module CandidApiClient
         # @param license_types [CandidApiClient::OrganizationProviders::V2::Types::LicenseType]
         # @param facility_type_codes [CandidApiClient::Commons::Types::FacilityTypeCode]
         # @param network_types [CandidApiClient::Commons::Types::NetworkType]
+        # @param payer_plan_group_ids [String]
         # @param cpt_code [String]
         # @param modifiers [CandidApiClient::Commons::Types::ProcedureModifier]
         # @param request_options [CandidApiClient::RequestOptions]
@@ -461,11 +468,12 @@ module CandidApiClient
         #    license_types: MD,
         #    facility_type_codes: PHARMACY,
         #    network_types: PPO,
+        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
         #    modifiers: TWENTY_TWO
         #  )
         def get_multi(page_token: nil, limit: nil, active_date: nil, payer_uuid: nil,
-                      organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, cpt_code: nil, modifiers: nil, request_options: nil)
+                      organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -487,6 +495,7 @@ module CandidApiClient
                 "license_types": license_types,
                 "facility_type_codes": facility_type_codes,
                 "network_types": network_types,
+                "payer_plan_group_ids": payer_plan_group_ids,
                 "cpt_code": cpt_code,
                 "modifiers": modifiers
               }.compact
@@ -511,6 +520,7 @@ module CandidApiClient
         # @param license_types [CandidApiClient::OrganizationProviders::V2::Types::LicenseType]
         # @param facility_type_codes [CandidApiClient::Commons::Types::FacilityTypeCode]
         # @param network_types [CandidApiClient::Commons::Types::NetworkType]
+        # @param payer_plan_group_ids [String]
         # @param cpt_code [String]
         # @param modifiers [CandidApiClient::Commons::Types::ProcedureModifier]
         # @param request_options [CandidApiClient::RequestOptions]
@@ -528,11 +538,12 @@ module CandidApiClient
         #    license_types: MD,
         #    facility_type_codes: PHARMACY,
         #    network_types: PPO,
+        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
         #    modifiers: TWENTY_TWO
         #  )
         def get_unique_values_for_dimension(pivot_dimension:, page_token: nil, limit: nil, payer_uuid: nil,
-                                            organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, cpt_code: nil, modifiers: nil, request_options: nil)
+                                            organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -554,6 +565,7 @@ module CandidApiClient
                 "license_types": license_types,
                 "facility_type_codes": facility_type_codes,
                 "network_types": network_types,
+                "payer_plan_group_ids": payer_plan_group_ids,
                 "cpt_code": cpt_code,
                 "modifiers": modifiers
               }.compact

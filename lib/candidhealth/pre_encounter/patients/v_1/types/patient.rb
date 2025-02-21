@@ -2,6 +2,7 @@
 
 require "date"
 require_relative "../../../common/types/human_name"
+require_relative "../../../common/types/external_identifier"
 require_relative "../../../common/types/gender"
 require_relative "../../../common/types/sex"
 require_relative "../../../common/types/sexual_orientation"
@@ -53,6 +54,8 @@ module CandidApiClient
             attr_reader :name
             # @return [Array<CandidApiClient::PreEncounter::Common::Types::HumanName>] Other names for the patient.
             attr_reader :other_names
+            # @return [Array<CandidApiClient::PreEncounter::Common::Types::ExternalIdentifier>] Other identifiers for the patient.
+            attr_reader :other_identifiers
             # @return [CandidApiClient::PreEncounter::Common::Types::Gender]
             attr_reader :gender
             # @return [Date]
@@ -145,6 +148,7 @@ module CandidApiClient
             # @param updating_user_id [String] The user ID of the user who last updated the object.
             # @param name [CandidApiClient::PreEncounter::Common::Types::HumanName]
             # @param other_names [Array<CandidApiClient::PreEncounter::Common::Types::HumanName>] Other names for the patient.
+            # @param other_identifiers [Array<CandidApiClient::PreEncounter::Common::Types::ExternalIdentifier>] Other identifiers for the patient.
             # @param gender [CandidApiClient::PreEncounter::Common::Types::Gender]
             # @param birth_date [Date]
             # @param social_security_number [String]
@@ -185,7 +189,7 @@ module CandidApiClient
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, additional_properties: nil)
+                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, other_identifiers: OMIT, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, additional_properties: nil)
               @id = id
               @mrn = mrn
               @organization_id = organization_id
@@ -195,6 +199,7 @@ module CandidApiClient
               @updating_user_id = updating_user_id
               @name = name
               @other_names = other_names
+              @other_identifiers = other_identifiers if other_identifiers != OMIT
               @gender = gender if gender != OMIT
               @birth_date = birth_date
               @social_security_number = social_security_number if social_security_number != OMIT
@@ -243,6 +248,7 @@ module CandidApiClient
                 "updating_user_id": updating_user_id,
                 "name": name,
                 "other_names": other_names,
+                "other_identifiers": other_identifiers,
                 "gender": gender,
                 "birth_date": birth_date,
                 "social_security_number": social_security_number,
@@ -304,6 +310,10 @@ module CandidApiClient
               other_names = parsed_json["other_names"]&.map do |item|
                 item = item.to_json
                 CandidApiClient::PreEncounter::Common::Types::HumanName.from_json(json_object: item)
+              end
+              other_identifiers = parsed_json["other_identifiers"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::Common::Types::ExternalIdentifier.from_json(json_object: item)
               end
               gender = struct["gender"]
               birth_date = (Date.parse(parsed_json["birth_date"]) unless parsed_json["birth_date"].nil?)
@@ -394,6 +404,7 @@ module CandidApiClient
                 updating_user_id: updating_user_id,
                 name: name,
                 other_names: other_names,
+                other_identifiers: other_identifiers,
                 gender: gender,
                 birth_date: birth_date,
                 social_security_number: social_security_number,
@@ -454,6 +465,7 @@ module CandidApiClient
               obj.updating_user_id.is_a?(String) != false || raise("Passed value for field obj.updating_user_id is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Common::Types::HumanName.validate_raw(obj: obj.name)
               obj.other_names.is_a?(Array) != false || raise("Passed value for field obj.other_names is not the expected type, validation failed.")
+              obj.other_identifiers&.is_a?(Array) != false || raise("Passed value for field obj.other_identifiers is not the expected type, validation failed.")
               obj.gender&.is_a?(CandidApiClient::PreEncounter::Common::Types::Gender) != false || raise("Passed value for field obj.gender is not the expected type, validation failed.")
               obj.birth_date.is_a?(Date) != false || raise("Passed value for field obj.birth_date is not the expected type, validation failed.")
               obj.social_security_number&.is_a?(String) != false || raise("Passed value for field obj.social_security_number is not the expected type, validation failed.")

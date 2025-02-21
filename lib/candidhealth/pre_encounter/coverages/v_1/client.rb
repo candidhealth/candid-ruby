@@ -3,6 +3,7 @@
 require_relative "../../../../requests"
 require_relative "types/mutable_coverage"
 require_relative "types/coverage"
+require_relative "types/coverages_page"
 require "json"
 require "date"
 require_relative "types/service_type_code"
@@ -71,6 +72,7 @@ module CandidApiClient
           #       * :start (Date)
           #       * :end_ (Date)
           #     * :insurance_card_image_locator (String)
+          #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
           #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
@@ -172,7 +174,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: COMPLETED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } })
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string", payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, verified: true, eligibility_checks: , latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -235,6 +237,7 @@ module CandidApiClient
           #       * :start (Date)
           #       * :end_ (Date)
           #     * :insurance_card_image_locator (String)
+          #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
           #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
@@ -339,7 +342,7 @@ module CandidApiClient
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "string",
-          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: COMPLETED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } }
+          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string", payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, verified: true, eligibility_checks: , latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -355,6 +358,45 @@ module CandidApiClient
                                                  request_options: request_options)}/coverages/v1/#{id}/#{version}"
             end
             CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage.from_json(json_object: response.body)
+          end
+
+          # Returns a page of Coverages based on the search criteria.
+          #
+          # @param patient_id [String]
+          # @param payer_plan_group_id [String]
+          # @param page_token [String]
+          # @param limit [Integer] Must be between 0 and 1000. Defaults to 100
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoveragesPage]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.coverages.v_1.get_multi_paginated(
+          #    patient_id: "string",
+          #    payer_plan_group_id: "string",
+          #    page_token: "string",
+          #    limit: 1
+          #  )
+          def get_multi_paginated(patient_id: nil, payer_plan_group_id: nil, page_token: nil, limit: nil,
+                                  request_options: nil)
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.params = {
+                **(request_options&.additional_query_parameters || {}),
+                "patient_id": patient_id,
+                "payer_plan_group_id": payer_plan_group_id,
+                "page_token": page_token,
+                "limit": limit
+              }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/coverages/v1/get-multi-paginated"
+            end
+            CandidApiClient::PreEncounter::Coverages::V1::Types::CoveragesPage.from_json(json_object: response.body)
           end
 
           # gets a specific Coverage
@@ -585,6 +627,7 @@ module CandidApiClient
           #       * :start (Date)
           #       * :end_ (Date)
           #     * :insurance_card_image_locator (String)
+          #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
           #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
@@ -686,7 +729,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: COMPLETED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } })
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string", payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, verified: true, eligibility_checks: , latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -751,6 +794,7 @@ module CandidApiClient
           #       * :start (Date)
           #       * :end_ (Date)
           #     * :insurance_card_image_locator (String)
+          #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
           #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
@@ -855,7 +899,7 @@ module CandidApiClient
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "string",
-          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string" }, verified: true, eligibility_checks: [{ check_id: "string", service_code: MEDICAL_CARE, status: COMPLETED, initiated_by: "string", initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }], latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } }
+          #    request: { status: ACTIVE, subscriber: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE, address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, relationship: SELF, patient: "string", insurance_plan: { member_id: "string", payer_id: "string", payer_name: "string", additional_payer_information: {  }, group_number: "string", name: "string", plan_type: SELF_PAY, type: C_01, period: {  }, insurance_card_image_locator: "string", payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, verified: true, eligibility_checks: , latest_eligibility_check: { check_id: "string", status: ACTIVE, initiated_at: DateTime.parse(2024-01-15T09:30:00.000Z) }, benefits: {  } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -872,6 +916,47 @@ module CandidApiClient
                                                    request_options: request_options)}/coverages/v1/#{id}/#{version}"
               end
               CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage.from_json(json_object: response.body)
+            end
+          end
+
+          # Returns a page of Coverages based on the search criteria.
+          #
+          # @param patient_id [String]
+          # @param payer_plan_group_id [String]
+          # @param page_token [String]
+          # @param limit [Integer] Must be between 0 and 1000. Defaults to 100
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoveragesPage]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.coverages.v_1.get_multi_paginated(
+          #    patient_id: "string",
+          #    payer_plan_group_id: "string",
+          #    page_token: "string",
+          #    limit: 1
+          #  )
+          def get_multi_paginated(patient_id: nil, payer_plan_group_id: nil, page_token: nil, limit: nil,
+                                  request_options: nil)
+            Async do
+              response = @request_client.conn.get do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.params = {
+                  **(request_options&.additional_query_parameters || {}),
+                  "patient_id": patient_id,
+                  "payer_plan_group_id": payer_plan_group_id,
+                  "page_token": page_token,
+                  "limit": limit
+                }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/coverages/v1/get-multi-paginated"
+              end
+              CandidApiClient::PreEncounter::Coverages::V1::Types::CoveragesPage.from_json(json_object: response.body)
             end
           end
 

@@ -24,6 +24,8 @@ module CandidApiClient
           attr_reader :facility_type_codes
           # @return [Set<CandidApiClient::Commons::Types::NetworkType>]
           attr_reader :network_types
+          # @return [Set<String>]
+          attr_reader :payer_plan_group_ids
           # @return [String]
           attr_reader :cpt_code
           # @return [Set<CandidApiClient::Commons::Types::ProcedureModifier>]
@@ -43,12 +45,13 @@ module CandidApiClient
           # @param license_types [Set<CandidApiClient::OrganizationProviders::V2::Types::LicenseType>]
           # @param facility_type_codes [Set<CandidApiClient::Commons::Types::FacilityTypeCode>]
           # @param network_types [Set<CandidApiClient::Commons::Types::NetworkType>]
+          # @param payer_plan_group_ids [Set<String>]
           # @param cpt_code [String]
           # @param modifiers [Set<CandidApiClient::Commons::Types::ProcedureModifier>]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::FeeSchedules::V3::Types::OptionalDimensions]
-          def initialize(states:, zip_codes:, license_types:, facility_type_codes:, network_types:, modifiers:,
-                         payer_uuid: OMIT, organization_billing_provider_id: OMIT, cpt_code: OMIT, additional_properties: nil)
+          def initialize(states:, zip_codes:, license_types:, facility_type_codes:, network_types:,
+                         payer_plan_group_ids:, modifiers:, payer_uuid: OMIT, organization_billing_provider_id: OMIT, cpt_code: OMIT, additional_properties: nil)
             @payer_uuid = payer_uuid if payer_uuid != OMIT
             if organization_billing_provider_id != OMIT
               @organization_billing_provider_id = organization_billing_provider_id
@@ -58,6 +61,7 @@ module CandidApiClient
             @license_types = license_types
             @facility_type_codes = facility_type_codes
             @network_types = network_types
+            @payer_plan_group_ids = payer_plan_group_ids
             @cpt_code = cpt_code if cpt_code != OMIT
             @modifiers = modifiers
             @additional_properties = additional_properties
@@ -69,6 +73,7 @@ module CandidApiClient
               "license_types": license_types,
               "facility_type_codes": facility_type_codes,
               "network_types": network_types,
+              "payer_plan_group_ids": payer_plan_group_ids,
               "cpt_code": cpt_code,
               "modifiers": modifiers
             }.reject do |_k, v|
@@ -115,6 +120,12 @@ module CandidApiClient
               network_types = parsed_json["network_types"].to_json
               network_types = Set.new(network_types)
             end
+            if parsed_json["payer_plan_group_ids"].nil?
+              payer_plan_group_ids = nil
+            else
+              payer_plan_group_ids = parsed_json["payer_plan_group_ids"].to_json
+              payer_plan_group_ids = Set.new(payer_plan_group_ids)
+            end
             cpt_code = struct["cpt_code"]
             if parsed_json["modifiers"].nil?
               modifiers = nil
@@ -130,6 +141,7 @@ module CandidApiClient
               license_types: license_types,
               facility_type_codes: facility_type_codes,
               network_types: network_types,
+              payer_plan_group_ids: payer_plan_group_ids,
               cpt_code: cpt_code,
               modifiers: modifiers,
               additional_properties: struct
@@ -157,6 +169,7 @@ module CandidApiClient
             obj.license_types.is_a?(Set) != false || raise("Passed value for field obj.license_types is not the expected type, validation failed.")
             obj.facility_type_codes.is_a?(Set) != false || raise("Passed value for field obj.facility_type_codes is not the expected type, validation failed.")
             obj.network_types.is_a?(Set) != false || raise("Passed value for field obj.network_types is not the expected type, validation failed.")
+            obj.payer_plan_group_ids.is_a?(Set) != false || raise("Passed value for field obj.payer_plan_group_ids is not the expected type, validation failed.")
             obj.cpt_code&.is_a?(String) != false || raise("Passed value for field obj.cpt_code is not the expected type, validation failed.")
             obj.modifiers.is_a?(Set) != false || raise("Passed value for field obj.modifiers is not the expected type, validation failed.")
           end

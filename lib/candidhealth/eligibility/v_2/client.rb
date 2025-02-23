@@ -17,7 +17,14 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # This API is a wrapper around Change Healthcare's eligibility API. Below are some
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
+        #  to use [Candid's Stedi passthrough
+        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  For assistance with the transition, please reference the [Transitioning to
+        #  Candid's New Eligibility
+        #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
+        #  document in the Candid Support Center.</Tip>
+        #  This API is a wrapper around Change Healthcare's eligibility API. Below are some
         #  helpful documentation links:
         #  - [Change Healthcare - Guides: Contents of the Eligibility Request
         #  althcare.com/eligibilityandclaims/docs/contents-of-the-eligibility-request-body)
@@ -64,7 +71,14 @@ module CandidApiClient
           JSON.parse(response.body)
         end
 
-        # **Availity has transitioned their GET endpoint to a POST endpoint. Candid has
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
+        #  to use [Candid's Stedi passthrough
+        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  For assistance with the transition, please reference the [Transitioning to
+        #  Candid's New Eligibility
+        #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
+        #  document in the Candid Support Center.</Tip>
+        #  **Availity has transitioned their GET endpoint to a POST endpoint. Candid has
         #  updated their pass-through integration to enable backwards compatibility for the
         #  GET endpoint so that customers do not have to immediately update their
         #  integrations.**
@@ -107,7 +121,14 @@ module CandidApiClient
           JSON.parse(response.body)
         end
 
-        # If you'd like access to this endpoint, please reach out to
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
+        #  to use [Candid's Stedi passthrough
+        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  For assistance with the transition, please reference the [Transitioning to
+        #  Candid's New Eligibility
+        #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
+        #  document in the Candid Support Center.</Tip>
+        #  If you'd like access to this endpoint, please reach out to
         #  support@joincandidhealth.com with the subject line "Action: Activate Availity
         #  Eligibility API Endpoint
         #  This API is a wrapper around Availity's coverages API. Below are some helpful
@@ -155,7 +176,14 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # This API is a wrapper around Change Healthcare's eligibility API. Below are some
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
+        #  to use [Candid's Stedi passthrough
+        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  For assistance with the transition, please reference the [Transitioning to
+        #  Candid's New Eligibility
+        #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
+        #  document in the Candid Support Center.</Tip>
+        #  This API is a wrapper around Change Healthcare's eligibility API. Below are some
         #  helpful documentation links:
         #  - [Change Healthcare - Guides: Contents of the Eligibility Request
         #  althcare.com/eligibilityandclaims/docs/contents-of-the-eligibility-request-body)
@@ -205,7 +233,14 @@ module CandidApiClient
           end
         end
 
-        # **Availity has transitioned their GET endpoint to a POST endpoint. Candid has
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
+        #  to use [Candid's Stedi passthrough
+        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  For assistance with the transition, please reference the [Transitioning to
+        #  Candid's New Eligibility
+        #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
+        #  document in the Candid Support Center.</Tip>
+        #  **Availity has transitioned their GET endpoint to a POST endpoint. Candid has
         #  updated their pass-through integration to enable backwards compatibility for the
         #  GET endpoint so that customers do not have to immediately update their
         #  integrations.**
@@ -251,7 +286,14 @@ module CandidApiClient
           end
         end
 
-        # If you'd like access to this endpoint, please reach out to
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
+        #  to use [Candid's Stedi passthrough
+        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  For assistance with the transition, please reference the [Transitioning to
+        #  Candid's New Eligibility
+        #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
+        #  document in the Candid Support Center.</Tip>
+        #  If you'd like access to this endpoint, please reach out to
         #  support@joincandidhealth.com with the subject line "Action: Activate Availity
         #  Eligibility API Endpoint
         #  This API is a wrapper around Availity's coverages API. Below are some helpful

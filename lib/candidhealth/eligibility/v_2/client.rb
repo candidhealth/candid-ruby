@@ -19,7 +19,7 @@ module CandidApiClient
 
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
         #  to use [Candid's Stedi passthrough
-        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  s.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
         #  For assistance with the transition, please reference the [Transitioning to
         #  Candid's New Eligibility
         #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
@@ -73,7 +73,7 @@ module CandidApiClient
 
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
         #  to use [Candid's Stedi passthrough
-        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  s.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
         #  For assistance with the transition, please reference the [Transitioning to
         #  Candid's New Eligibility
         #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
@@ -123,7 +123,7 @@ module CandidApiClient
 
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
         #  to use [Candid's Stedi passthrough
-        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  s.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
         #  For assistance with the transition, please reference the [Transitioning to
         #  Candid's New Eligibility
         #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
@@ -178,7 +178,7 @@ module CandidApiClient
 
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
         #  to use [Candid's Stedi passthrough
-        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  s.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
         #  For assistance with the transition, please reference the [Transitioning to
         #  Candid's New Eligibility
         #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
@@ -235,7 +235,7 @@ module CandidApiClient
 
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
         #  to use [Candid's Stedi passthrough
-        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  s.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
         #  For assistance with the transition, please reference the [Transitioning to
         #  Candid's New Eligibility
         #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)
@@ -288,7 +288,7 @@ module CandidApiClient
 
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended
         #  to use [Candid's Stedi passthrough
-        #  t](https://docs.joincandidhealth.com/api-reference/eligibility-checks/v-1/post).
+        #  s.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
         #  For assistance with the transition, please reference the [Transitioning to
         #  Candid's New Eligibility
         #  Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980)

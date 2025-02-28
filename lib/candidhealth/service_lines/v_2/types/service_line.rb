@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "date"
 require_relative "../../../commons/types/procedure_modifier"
 require_relative "drug_identification"
 require_relative "service_line_era_data"
@@ -11,7 +12,6 @@ require_relative "../../../commons/types/facility_type_code"
 require_relative "../../../encounter_providers/v_2/types/encounter_provider"
 require_relative "../../../commons/types/service_line_units"
 require_relative "../../../commons/types/date_range_optional_end"
-require "date"
 require_relative "test_result"
 require "ostruct"
 require "json"
@@ -21,6 +21,8 @@ module CandidApiClient
     module V2
       module Types
         class ServiceLine
+          # @return [DateTime]
+          attr_reader :created_at
           # @return [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
           attr_reader :modifiers
           # @return [Integer]
@@ -41,6 +43,12 @@ module CandidApiClient
           attr_reader :tertiary_paid_amount_cents
           # @return [Integer]
           attr_reader :patient_responsibility_cents
+          # @return [Integer]
+          attr_reader :copay_cents
+          # @return [Integer]
+          attr_reader :coinsurance_cents
+          # @return [Integer]
+          attr_reader :deductible_cents
           # @return [String]
           attr_reader :diagnosis_id_zero
           # @return [String]
@@ -111,6 +119,7 @@ module CandidApiClient
 
           OMIT = Object.new
 
+          # @param created_at [DateTime]
           # @param modifiers [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
           # @param charge_amount_cents [Integer]
           # @param allowed_amount_cents [Integer]
@@ -121,6 +130,9 @@ module CandidApiClient
           # @param secondary_paid_amount_cents [Integer]
           # @param tertiary_paid_amount_cents [Integer]
           # @param patient_responsibility_cents [Integer]
+          # @param copay_cents [Integer]
+          # @param coinsurance_cents [Integer]
+          # @param deductible_cents [Integer]
           # @param diagnosis_id_zero [String]
           # @param diagnosis_id_one [String]
           # @param diagnosis_id_two [String]
@@ -160,8 +172,9 @@ module CandidApiClient
           #  will not be populated.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
-          def initialize(service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
-                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, additional_properties: nil)
+          def initialize(created_at:, service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
+                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, copay_cents: OMIT, coinsurance_cents: OMIT, deductible_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, additional_properties: nil)
+            @created_at = created_at
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @allowed_amount_cents = allowed_amount_cents if allowed_amount_cents != OMIT
@@ -172,6 +185,9 @@ module CandidApiClient
             @secondary_paid_amount_cents = secondary_paid_amount_cents if secondary_paid_amount_cents != OMIT
             @tertiary_paid_amount_cents = tertiary_paid_amount_cents if tertiary_paid_amount_cents != OMIT
             @patient_responsibility_cents = patient_responsibility_cents if patient_responsibility_cents != OMIT
+            @copay_cents = copay_cents if copay_cents != OMIT
+            @coinsurance_cents = coinsurance_cents if coinsurance_cents != OMIT
+            @deductible_cents = deductible_cents if deductible_cents != OMIT
             @diagnosis_id_zero = diagnosis_id_zero if diagnosis_id_zero != OMIT
             @diagnosis_id_one = diagnosis_id_one if diagnosis_id_one != OMIT
             @diagnosis_id_two = diagnosis_id_two if diagnosis_id_two != OMIT
@@ -203,6 +219,7 @@ module CandidApiClient
             @has_family_planning_indicator = has_family_planning_indicator if has_family_planning_indicator != OMIT
             @additional_properties = additional_properties
             @_field_set = {
+              "created_at": created_at,
               "modifiers": modifiers,
               "charge_amount_cents": charge_amount_cents,
               "allowed_amount_cents": allowed_amount_cents,
@@ -213,6 +230,9 @@ module CandidApiClient
               "secondary_paid_amount_cents": secondary_paid_amount_cents,
               "tertiary_paid_amount_cents": tertiary_paid_amount_cents,
               "patient_responsibility_cents": patient_responsibility_cents,
+              "copay_cents": copay_cents,
+              "coinsurance_cents": coinsurance_cents,
+              "deductible_cents": deductible_cents,
               "diagnosis_id_zero": diagnosis_id_zero,
               "diagnosis_id_one": diagnosis_id_one,
               "diagnosis_id_two": diagnosis_id_two,
@@ -250,6 +270,7 @@ module CandidApiClient
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
+            created_at = (DateTime.parse(parsed_json["created_at"]) unless parsed_json["created_at"].nil?)
             modifiers = struct["modifiers"]
             charge_amount_cents = struct["charge_amount_cents"]
             allowed_amount_cents = struct["allowed_amount_cents"]
@@ -260,6 +281,9 @@ module CandidApiClient
             secondary_paid_amount_cents = struct["secondary_paid_amount_cents"]
             tertiary_paid_amount_cents = struct["tertiary_paid_amount_cents"]
             patient_responsibility_cents = struct["patient_responsibility_cents"]
+            copay_cents = struct["copay_cents"]
+            coinsurance_cents = struct["coinsurance_cents"]
+            deductible_cents = struct["deductible_cents"]
             diagnosis_id_zero = struct["diagnosis_id_zero"]
             diagnosis_id_one = struct["diagnosis_id_one"]
             diagnosis_id_two = struct["diagnosis_id_two"]
@@ -325,6 +349,7 @@ module CandidApiClient
             has_epsdt_indicator = struct["has_epsdt_indicator"]
             has_family_planning_indicator = struct["has_family_planning_indicator"]
             new(
+              created_at: created_at,
               modifiers: modifiers,
               charge_amount_cents: charge_amount_cents,
               allowed_amount_cents: allowed_amount_cents,
@@ -335,6 +360,9 @@ module CandidApiClient
               secondary_paid_amount_cents: secondary_paid_amount_cents,
               tertiary_paid_amount_cents: tertiary_paid_amount_cents,
               patient_responsibility_cents: patient_responsibility_cents,
+              copay_cents: copay_cents,
+              coinsurance_cents: coinsurance_cents,
+              deductible_cents: deductible_cents,
               diagnosis_id_zero: diagnosis_id_zero,
               diagnosis_id_one: diagnosis_id_one,
               diagnosis_id_two: diagnosis_id_two,
@@ -378,6 +406,7 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
+            obj.created_at.is_a?(DateTime) != false || raise("Passed value for field obj.created_at is not the expected type, validation failed.")
             obj.modifiers&.is_a?(Array) != false || raise("Passed value for field obj.modifiers is not the expected type, validation failed.")
             obj.charge_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.charge_amount_cents is not the expected type, validation failed.")
             obj.allowed_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.allowed_amount_cents is not the expected type, validation failed.")
@@ -388,6 +417,9 @@ module CandidApiClient
             obj.secondary_paid_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.secondary_paid_amount_cents is not the expected type, validation failed.")
             obj.tertiary_paid_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.tertiary_paid_amount_cents is not the expected type, validation failed.")
             obj.patient_responsibility_cents&.is_a?(Integer) != false || raise("Passed value for field obj.patient_responsibility_cents is not the expected type, validation failed.")
+            obj.copay_cents&.is_a?(Integer) != false || raise("Passed value for field obj.copay_cents is not the expected type, validation failed.")
+            obj.coinsurance_cents&.is_a?(Integer) != false || raise("Passed value for field obj.coinsurance_cents is not the expected type, validation failed.")
+            obj.deductible_cents&.is_a?(Integer) != false || raise("Passed value for field obj.deductible_cents is not the expected type, validation failed.")
             obj.diagnosis_id_zero&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_zero is not the expected type, validation failed.")
             obj.diagnosis_id_one&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_one is not the expected type, validation failed.")
             obj.diagnosis_id_two&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_two is not the expected type, validation failed.")

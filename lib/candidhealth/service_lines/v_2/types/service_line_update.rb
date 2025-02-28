@@ -19,7 +19,12 @@ module CandidApiClient
           attr_reader :edit_reason
           # @return [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
           attr_reader :modifiers
-          # @return [Integer]
+          # @return [Integer] The total amount charged for this service line, factoring in quantity. If
+          #  `procedure_code` is updated and this is not, the system will attempt
+          #  to set it based on chargemasters entries and the service line's quantity. For
+          #  example, if a single unit has an entry of 100 cents and 2
+          #  units were rendered, the `charge_amount_cents` will be set to 200, if this field
+          #  is unfilled.
           attr_reader :charge_amount_cents
           # @return [String]
           attr_reader :diagnosis_id_zero
@@ -40,7 +45,8 @@ module CandidApiClient
           attr_reader :place_of_service_code
           # @return [CandidApiClient::Commons::Types::ServiceLineUnits]
           attr_reader :units
-          # @return [String]
+          # @return [String] If `procedure_code` is updated, and `charge_amount_cents` is not, then
+          #  `charge_amount_cents` will be set by the system.
           attr_reader :procedure_code
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
@@ -77,7 +83,12 @@ module CandidApiClient
 
           # @param edit_reason [String]
           # @param modifiers [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
-          # @param charge_amount_cents [Integer]
+          # @param charge_amount_cents [Integer] The total amount charged for this service line, factoring in quantity. If
+          #  `procedure_code` is updated and this is not, the system will attempt
+          #  to set it based on chargemasters entries and the service line's quantity. For
+          #  example, if a single unit has an entry of 100 cents and 2
+          #  units were rendered, the `charge_amount_cents` will be set to 200, if this field
+          #  is unfilled.
           # @param diagnosis_id_zero [String]
           # @param diagnosis_id_one [String]
           # @param diagnosis_id_two [String]
@@ -89,7 +100,8 @@ module CandidApiClient
           #  populated. 02 for telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param units [CandidApiClient::Commons::Types::ServiceLineUnits]
-          # @param procedure_code [String]
+          # @param procedure_code [String] If `procedure_code` is updated, and `charge_amount_cents` is not, then
+          #  `charge_amount_cents` will be set by the system.
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
           #  Example: 1.1 is valid, 1.11 is not.

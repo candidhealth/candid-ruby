@@ -18,7 +18,11 @@ module CandidApiClient
         class ServiceLineCreateStandalone
           # @return [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
           attr_reader :modifiers
-          # @return [Integer]
+          # @return [Integer] The total amount charged for this service line, factoring in quantity. If left
+          #  unfilled, the system will attempt to set it based on
+          #  chargemasters entries and the service line's quantity. For example, if a single
+          #  unit has an entry of 100 cents and 2 units were rendered,
+          #  the `charge_amount_cents` will be set to 200, if this field is unfilled.
           attr_reader :charge_amount_cents
           # @return [String]
           attr_reader :diagnosis_id_zero
@@ -78,7 +82,11 @@ module CandidApiClient
           OMIT = Object.new
 
           # @param modifiers [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
-          # @param charge_amount_cents [Integer]
+          # @param charge_amount_cents [Integer] The total amount charged for this service line, factoring in quantity. If left
+          #  unfilled, the system will attempt to set it based on
+          #  chargemasters entries and the service line's quantity. For example, if a single
+          #  unit has an entry of 100 cents and 2 units were rendered,
+          #  the `charge_amount_cents` will be set to 200, if this field is unfilled.
           # @param diagnosis_id_zero [String]
           # @param diagnosis_id_one [String]
           # @param diagnosis_id_two [String]

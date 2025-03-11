@@ -149,6 +149,8 @@ module CandidApiClient
           attr_reader :epsdt_referral
           # @return [DateTime] The date and time the encounter was last submitted to a payer.
           attr_reader :last_submitted_at
+          # @return [DateTime] The date and time the encounter was created.
+          attr_reader :created_at
           # @return [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -329,6 +331,7 @@ module CandidApiClient
           # @param epsdt_referral [CandidApiClient::Encounters::V4::Types::EpsdtReferral] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
           #  837P form
           # @param last_submitted_at [DateTime] The date and time the encounter was last submitted to a payer.
+          # @param created_at [DateTime] The date and time the encounter was created.
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -404,7 +407,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
-                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
             @claims = claims
@@ -442,6 +445,7 @@ module CandidApiClient
             @referral_number = referral_number if referral_number != OMIT
             @epsdt_referral = epsdt_referral if epsdt_referral != OMIT
             @last_submitted_at = last_submitted_at if last_submitted_at != OMIT
+            @created_at = created_at
             @external_id = external_id
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
@@ -501,6 +505,7 @@ module CandidApiClient
               "referral_number": referral_number,
               "epsdt_referral": epsdt_referral,
               "last_submitted_at": last_submitted_at,
+              "created_at": created_at,
               "external_id": external_id,
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
@@ -649,6 +654,7 @@ module CandidApiClient
             last_submitted_at = unless parsed_json["last_submitted_at"].nil?
                                   DateTime.parse(parsed_json["last_submitted_at"])
                                 end
+            created_at = (DateTime.parse(parsed_json["created_at"]) unless parsed_json["created_at"].nil?)
             external_id = struct["external_id"]
             date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
             end_date_of_service = unless parsed_json["end_date_of_service"].nil?
@@ -725,6 +731,7 @@ module CandidApiClient
               referral_number: referral_number,
               epsdt_referral: epsdt_referral,
               last_submitted_at: last_submitted_at,
+              created_at: created_at,
               external_id: external_id,
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
@@ -796,6 +803,7 @@ module CandidApiClient
             obj.referral_number&.is_a?(String) != false || raise("Passed value for field obj.referral_number is not the expected type, validation failed.")
             obj.epsdt_referral.nil? || CandidApiClient::Encounters::V4::Types::EpsdtReferral.validate_raw(obj: obj.epsdt_referral)
             obj.last_submitted_at&.is_a?(DateTime) != false || raise("Passed value for field obj.last_submitted_at is not the expected type, validation failed.")
+            obj.created_at.is_a?(DateTime) != false || raise("Passed value for field obj.created_at is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")

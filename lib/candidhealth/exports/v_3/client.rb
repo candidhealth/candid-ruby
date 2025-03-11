@@ -40,6 +40,10 @@ module CandidApiClient
         #  up to 90 days in the past by default. Please email our [Support
         #  team](mailto:support@joincandidhealth.com) with any data requests
         #  outside of these stated guarantees.
+        #  **New Customers:** This endpoint is not enabled by default for new Candid
+        #  customers. To have this endpoint enabled for your organization,
+        #  please email our [Support team](mailto:support@joincandidhealth.com) with the
+        #  request.
         #
         # @param start_date [Date] Beginning date of claim versions returned in the export, ISO 8601 date e.g.
         #  2019-08-24.
@@ -105,6 +109,10 @@ module CandidApiClient
         #  up to 90 days in the past by default. Please email our [Support
         #  team](mailto:support@joincandidhealth.com) with any data requests
         #  outside of these stated guarantees.
+        #  **New Customers:** This endpoint is not enabled by default for new Candid
+        #  customers. To have this endpoint enabled for your organization,
+        #  please email our [Support team](mailto:support@joincandidhealth.com) with the
+        #  request.
         #
         # @param start_date [Date] Beginning date of claim versions returned in the export, ISO 8601 date e.g.
         #  2019-08-24.

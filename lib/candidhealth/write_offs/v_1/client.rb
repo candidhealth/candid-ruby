@@ -8,6 +8,7 @@ require_relative "types/write_offs_page"
 require_relative "types/write_off"
 require_relative "types/write_off_create"
 require_relative "types/create_write_offs_response"
+require "json"
 require "async"
 
 module CandidApiClient
@@ -149,6 +150,52 @@ module CandidApiClient
                                                request_options: request_options)}/api/write-offs/v1/#{write_off_id}/revert"
           end
           CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
+        end
+
+        # Reverts an Insurance Balance Adjustment given an `adjustment_id`
+        #
+        # @param adjustment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::WriteOffs::V1::Types::WriteOff]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.write_offs.v_1.revert_insurance_balance_adjustment(adjustment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def revert_insurance_balance_adjustment(adjustment_id:, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/write-offs/v1/#{adjustment_id}/revert"
+          end
+          CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
+        end
+
+        # Reverts an ERA-originated Insurance Balance Adjustment given an `adjustment_id`
+        #
+        # @param adjustment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [String]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.write_offs.v_1.revert_era_originated_insurance_balance_adjustment(adjustment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def revert_era_originated_insurance_balance_adjustment(adjustment_id:, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/write-offs/v1/#{adjustment_id}/revert-era-originated"
+          end
+          JSON.parse(response.body)
         end
       end
 
@@ -295,6 +342,57 @@ module CandidApiClient
                                                  request_options: request_options)}/api/write-offs/v1/#{write_off_id}/revert"
             end
             CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
+          end
+        end
+
+        # Reverts an Insurance Balance Adjustment given an `adjustment_id`
+        #
+        # @param adjustment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::WriteOffs::V1::Types::WriteOff]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.write_offs.v_1.revert_insurance_balance_adjustment(adjustment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def revert_insurance_balance_adjustment(adjustment_id:, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/write-offs/v1/#{adjustment_id}/revert"
+            end
+            CandidApiClient::WriteOffs::V1::Types::WriteOff.from_json(json_object: response.body)
+          end
+        end
+
+        # Reverts an ERA-originated Insurance Balance Adjustment given an `adjustment_id`
+        #
+        # @param adjustment_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [String]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.write_offs.v_1.revert_era_originated_insurance_balance_adjustment(adjustment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def revert_era_originated_insurance_balance_adjustment(adjustment_id:, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/write-offs/v1/#{adjustment_id}/revert-era-originated"
+            end
+            parsed_json = JSON.parse(response.body)
+            parsed_json
           end
         end
       end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../non_insurance_payers/v_1/types/non_insurance_payer"
+require_relative "patient_clinical_trial_info"
 require "ostruct"
 require "json"
 
@@ -12,6 +13,8 @@ module CandidApiClient
         attr_reader :non_insurance_payer
         # @return [String]
         attr_reader :member_id
+        # @return [Array<CandidApiClient::Individual::Types::PatientClinicalTrialInfo>] A patient cannot be associated with a given trial more than once
+        attr_reader :clinical_trial_info
         # @return [OpenStruct] Additional properties unmapped to the current class definition
         attr_reader :additional_properties
         # @return [Object]
@@ -22,13 +25,19 @@ module CandidApiClient
 
         # @param non_insurance_payer [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @param member_id [String]
+        # @param clinical_trial_info [Array<CandidApiClient::Individual::Types::PatientClinicalTrialInfo>] A patient cannot be associated with a given trial more than once
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::Individual::Types::PatientNonInsurancePayerInfo]
-        def initialize(non_insurance_payer:, member_id: OMIT, additional_properties: nil)
+        def initialize(non_insurance_payer:, clinical_trial_info:, member_id: OMIT, additional_properties: nil)
           @non_insurance_payer = non_insurance_payer
           @member_id = member_id if member_id != OMIT
+          @clinical_trial_info = clinical_trial_info
           @additional_properties = additional_properties
-          @_field_set = { "non_insurance_payer": non_insurance_payer, "member_id": member_id }.reject do |_k, v|
+          @_field_set = {
+            "non_insurance_payer": non_insurance_payer,
+            "member_id": member_id,
+            "clinical_trial_info": clinical_trial_info
+          }.reject do |_k, v|
             v == OMIT
           end
         end
@@ -47,9 +56,14 @@ module CandidApiClient
             non_insurance_payer = CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer.from_json(json_object: non_insurance_payer)
           end
           member_id = struct["member_id"]
+          clinical_trial_info = parsed_json["clinical_trial_info"]&.map do |item|
+            item = item.to_json
+            CandidApiClient::Individual::Types::PatientClinicalTrialInfo.from_json(json_object: item)
+          end
           new(
             non_insurance_payer: non_insurance_payer,
             member_id: member_id,
+            clinical_trial_info: clinical_trial_info,
             additional_properties: struct
           )
         end
@@ -70,6 +84,7 @@ module CandidApiClient
         def self.validate_raw(obj:)
           CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer.validate_raw(obj: obj.non_insurance_payer)
           obj.member_id&.is_a?(String) != false || raise("Passed value for field obj.member_id is not the expected type, validation failed.")
+          obj.clinical_trial_info.is_a?(Array) != false || raise("Passed value for field obj.clinical_trial_info is not the expected type, validation failed.")
         end
       end
     end

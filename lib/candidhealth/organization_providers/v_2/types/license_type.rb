@@ -100,6 +100,9 @@ module CandidApiClient
           RPA = "RPA"
           COTA = "COTA"
           CRNP = "CRNP"
+          SLP_CF = "SLP-CF"
+          NP_C = "NP-C"
+          PA_C = "PA-C"
         end
       end
     end

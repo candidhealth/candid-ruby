@@ -60,10 +60,11 @@ module CandidApiClient
           attr_reader :date_of_service
           # @return [Date]
           attr_reader :end_date_of_service
-          # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Maps to MEA-02 on the 837-P. Updating test results utilizes PUT semantics,
-          #  so the test results on the service line will be set to whatever inputs are
-          #  provided. No more than 5 test
-          #  results may be submitted per service line.
+          # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Contains a list of test results. Test result types may map to MEA-02 on the
+          #  837-P (ex: Hemoglobin, Hematocrit).
+          #  No more than 5 MEA-02 test results may be submitted per service line.
+          #  Updating test results utilizes PUT semantics, so the test results on the service
+          #  line will be set to whatever inputs are provided.
           attr_reader :test_results
           # @return [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
           #  If the value is true, the box will be populated with "Y". Otherwise, the box
@@ -110,10 +111,11 @@ module CandidApiClient
           # @param date_of_service [Date] date_of_service must be defined on either the encounter or the service lines but
           #  not both.
           # @param end_date_of_service [Date]
-          # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Maps to MEA-02 on the 837-P. Updating test results utilizes PUT semantics,
-          #  so the test results on the service line will be set to whatever inputs are
-          #  provided. No more than 5 test
-          #  results may be submitted per service line.
+          # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Contains a list of test results. Test result types may map to MEA-02 on the
+          #  837-P (ex: Hemoglobin, Hematocrit).
+          #  No more than 5 MEA-02 test results may be submitted per service line.
+          #  Updating test results utilizes PUT semantics, so the test results on the service
+          #  line will be set to whatever inputs are provided.
           # @param has_epsdt_indicator [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
           #  If the value is true, the box will be populated with "Y". Otherwise, the box
           #  will not be populated.

@@ -22,6 +22,9 @@ module CandidApiClient
             attr_reader :authorization_number
             # @return [String]
             attr_reader :cpt_code
+            # @return [Boolean] If true, then the authorization will apply for all claims for the payer that
+            #  fall in range the `period`.
+            attr_reader :apply_for_all_cpt_codes
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::AuthorizationUnit]
             attr_reader :units
             # @return [Integer]
@@ -43,6 +46,8 @@ module CandidApiClient
             # @param additional_payer_information [CandidApiClient::PreEncounter::Common::Types::AdditionalPayerInformation]
             # @param authorization_number [String]
             # @param cpt_code [String]
+            # @param apply_for_all_cpt_codes [Boolean] If true, then the authorization will apply for all claims for the payer that
+            #  fall in range the `period`.
             # @param units [CandidApiClient::PreEncounter::Patients::V1::Types::AuthorizationUnit]
             # @param quantity [Integer]
             # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
@@ -50,12 +55,13 @@ module CandidApiClient
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Authorization]
             def initialize(payer_id:, payer_name:, authorization_number:, cpt_code:, units:,
-                           additional_payer_information: OMIT, quantity: OMIT, period: OMIT, notes: OMIT, additional_properties: nil)
+                           additional_payer_information: OMIT, apply_for_all_cpt_codes: OMIT, quantity: OMIT, period: OMIT, notes: OMIT, additional_properties: nil)
               @payer_id = payer_id
               @payer_name = payer_name
               @additional_payer_information = additional_payer_information if additional_payer_information != OMIT
               @authorization_number = authorization_number
               @cpt_code = cpt_code
+              @apply_for_all_cpt_codes = apply_for_all_cpt_codes if apply_for_all_cpt_codes != OMIT
               @units = units
               @quantity = quantity if quantity != OMIT
               @period = period if period != OMIT
@@ -67,6 +73,7 @@ module CandidApiClient
                 "additional_payer_information": additional_payer_information,
                 "authorization_number": authorization_number,
                 "cpt_code": cpt_code,
+                "apply_for_all_cpt_codes": apply_for_all_cpt_codes,
                 "units": units,
                 "quantity": quantity,
                 "period": period,
@@ -93,6 +100,7 @@ module CandidApiClient
               end
               authorization_number = struct["authorization_number"]
               cpt_code = struct["cpt_code"]
+              apply_for_all_cpt_codes = struct["apply_for_all_cpt_codes"]
               units = struct["units"]
               quantity = struct["quantity"]
               if parsed_json["period"].nil?
@@ -108,6 +116,7 @@ module CandidApiClient
                 additional_payer_information: additional_payer_information,
                 authorization_number: authorization_number,
                 cpt_code: cpt_code,
+                apply_for_all_cpt_codes: apply_for_all_cpt_codes,
                 units: units,
                 quantity: quantity,
                 period: period,
@@ -135,6 +144,7 @@ module CandidApiClient
               obj.additional_payer_information.nil? || CandidApiClient::PreEncounter::Common::Types::AdditionalPayerInformation.validate_raw(obj: obj.additional_payer_information)
               obj.authorization_number.is_a?(String) != false || raise("Passed value for field obj.authorization_number is not the expected type, validation failed.")
               obj.cpt_code.is_a?(String) != false || raise("Passed value for field obj.cpt_code is not the expected type, validation failed.")
+              obj.apply_for_all_cpt_codes&.is_a?(Boolean) != false || raise("Passed value for field obj.apply_for_all_cpt_codes is not the expected type, validation failed.")
               obj.units.is_a?(CandidApiClient::PreEncounter::Patients::V1::Types::AuthorizationUnit) != false || raise("Passed value for field obj.units is not the expected type, validation failed.")
               obj.quantity&.is_a?(Integer) != false || raise("Passed value for field obj.quantity is not the expected type, validation failed.")
               obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)

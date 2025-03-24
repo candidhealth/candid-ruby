@@ -35,6 +35,7 @@ require_relative "../../guarantor/v_1/types/guarantor_create"
 require_relative "../../claim_submission/v_1/types/external_claim_submission_create"
 require_relative "../../custom_schemas/v_1/types/schema_instance"
 require_relative "types/epsdt_referral"
+require_relative "types/claim_supplemental_information"
 require_relative "types/encounter_create_from_pre_encounter"
 require_relative "../../individual/types/patient_update"
 require_relative "types/vitals_update"
@@ -543,6 +544,11 @@ module CandidApiClient
         #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
+        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
+        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
+        #   * :attachment_control_number (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -570,10 +576,11 @@ module CandidApiClient
         #    tag_ids: ["string"],
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
         #    referral_number: "string",
-        #    epsdt_referral: { condition_indicator_1: AV, condition_indicator_2: AV, condition_indicator_3: AV }
+        #    epsdt_referral: { condition_indicator_1: AV, condition_indicator_2: AV, condition_indicator_3: AV },
+        #    claim_supplemental_information: [{ attachment_report_type_code: C_03, attachment_transmission_code: CBM }]
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -628,7 +635,8 @@ module CandidApiClient
               tag_ids: tag_ids,
               schema_instances: schema_instances,
               referral_number: referral_number,
-              epsdt_referral: epsdt_referral
+              epsdt_referral: epsdt_referral,
+              claim_supplemental_information: claim_supplemental_information
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/encounters/v4"
@@ -1106,6 +1114,11 @@ module CandidApiClient
         #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
+        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
+        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
+        #   * :attachment_control_number (String)
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param diagnosis_ids [Array<String>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -1126,7 +1139,7 @@ module CandidApiClient
         #    place_of_service_code_as_submitted: PHARMACY
         #  )
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1174,6 +1187,7 @@ module CandidApiClient
               initial_referring_provider: initial_referring_provider,
               referral_number: referral_number,
               epsdt_referral: epsdt_referral,
+              claim_supplemental_information: claim_supplemental_information,
               additional_properties: additional_properties,
               _field_set: _field_set,
               diagnosis_ids: diagnosis_ids,
@@ -1683,6 +1697,11 @@ module CandidApiClient
         #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
+        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
+        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
+        #   * :attachment_control_number (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Encounters::V4::Types::Encounter]
         # @example
@@ -1710,10 +1729,11 @@ module CandidApiClient
         #    tag_ids: ["string"],
         #    schema_instances: [{ schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582", content: { "provider_category": "internist", "is_urgent_care": true, "bmi": 24.2, "age": 38 } }],
         #    referral_number: "string",
-        #    epsdt_referral: { condition_indicator_1: AV, condition_indicator_2: AV, condition_indicator_3: AV }
+        #    epsdt_referral: { condition_indicator_1: AV, condition_indicator_2: AV, condition_indicator_3: AV },
+        #    claim_supplemental_information: [{ attachment_report_type_code: C_03, attachment_transmission_code: CBM }]
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1769,7 +1789,8 @@ module CandidApiClient
                 tag_ids: tag_ids,
                 schema_instances: schema_instances,
                 referral_number: referral_number,
-                epsdt_referral: epsdt_referral
+                epsdt_referral: epsdt_referral,
+                claim_supplemental_information: claim_supplemental_information
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/encounters/v4"
@@ -2250,6 +2271,11 @@ module CandidApiClient
         #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
+        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
+        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
+        #   * :attachment_control_number (String)
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @param _field_set [Object]
         # @param diagnosis_ids [Array<String>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -2270,7 +2296,7 @@ module CandidApiClient
         #    place_of_service_code_as_submitted: PHARMACY
         #  )
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2319,6 +2345,7 @@ module CandidApiClient
                 initial_referring_provider: initial_referring_provider,
                 referral_number: referral_number,
                 epsdt_referral: epsdt_referral,
+                claim_supplemental_information: claim_supplemental_information,
                 additional_properties: additional_properties,
                 _field_set: _field_set,
                 diagnosis_ids: diagnosis_ids,

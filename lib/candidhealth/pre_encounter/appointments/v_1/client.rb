@@ -41,6 +41,7 @@ module CandidApiClient
           #       * :period (Hash)
           #         * :start (Date)
           #         * :end_ (Date)
+          #       * :suffix (String)
           #     * :type (CandidApiClient::PreEncounter::Common::Types::ExternalProviderType)
           #     * :npi (String)
           #     * :telecoms (Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>)
@@ -62,7 +63,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE })
+          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -193,6 +194,7 @@ module CandidApiClient
           #       * :period (Hash)
           #         * :start (Date)
           #         * :end_ (Date)
+          #       * :suffix (String)
           #     * :type (CandidApiClient::PreEncounter::Common::Types::ExternalProviderType)
           #     * :npi (String)
           #     * :telecoms (Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>)
@@ -217,7 +219,7 @@ module CandidApiClient
           #  api.pre_encounter.appointments.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE }
+          #    request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -319,6 +321,7 @@ module CandidApiClient
           #       * :period (Hash)
           #         * :start (Date)
           #         * :end_ (Date)
+          #       * :suffix (String)
           #     * :type (CandidApiClient::PreEncounter::Common::Types::ExternalProviderType)
           #     * :npi (String)
           #     * :telecoms (Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>)
@@ -340,7 +343,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE })
+          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -479,6 +482,7 @@ module CandidApiClient
           #       * :period (Hash)
           #         * :start (Date)
           #         * :end_ (Date)
+          #       * :suffix (String)
           #     * :type (CandidApiClient::PreEncounter::Common::Types::ExternalProviderType)
           #     * :npi (String)
           #     * :telecoms (Array<CandidApiClient::PreEncounter::Common::Types::ContactPoint>)
@@ -503,7 +507,7 @@ module CandidApiClient
           #  api.pre_encounter.appointments.v_1.update(
           #    id: "string",
           #    version: "string",
-          #    request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  } }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE }
+          #    request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do

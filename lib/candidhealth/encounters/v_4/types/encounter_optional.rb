@@ -22,6 +22,7 @@ require_relative "../../../encounter_providers/v_2/types/supervising_provider_up
 require_relative "../../../encounter_providers/v_2/types/referring_provider_update"
 require_relative "../../../encounter_providers/v_2/types/initial_referring_provider_update"
 require_relative "epsdt_referral"
+require_relative "claim_supplemental_information"
 require "ostruct"
 require "json"
 
@@ -197,6 +198,9 @@ module CandidApiClient
           # @return [CandidApiClient::Encounters::V4::Types::EpsdtReferral] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
           #  837P form
           attr_reader :epsdt_referral
+          # @return [Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+          #  permitted.
+          attr_reader :claim_supplemental_information
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -335,10 +339,12 @@ module CandidApiClient
           # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
           # @param epsdt_referral [CandidApiClient::Encounters::V4::Types::EpsdtReferral] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
           #  837P form
+          # @param claim_supplemental_information [Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+          #  permitted.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::EncounterOptional]
           def initialize(benefits_assigned_to_provider: OMIT, prior_authorization_number: OMIT, external_id: OMIT,
-                         date_of_service: OMIT, tag_ids: OMIT, clinical_notes: OMIT, pay_to_address: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient: OMIT, patient_authorized_release: OMIT, schema_instances: OMIT, vitals: OMIT, existing_medications: OMIT, rendering_provider: OMIT, service_facility: OMIT, guarantor: OMIT, billing_provider: OMIT, supervising_provider: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, referral_number: OMIT, epsdt_referral: OMIT, additional_properties: nil)
+                         date_of_service: OMIT, tag_ids: OMIT, clinical_notes: OMIT, pay_to_address: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient: OMIT, patient_authorized_release: OMIT, schema_instances: OMIT, vitals: OMIT, existing_medications: OMIT, rendering_provider: OMIT, service_facility: OMIT, guarantor: OMIT, billing_provider: OMIT, supervising_provider: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, additional_properties: nil)
             @benefits_assigned_to_provider = benefits_assigned_to_provider if benefits_assigned_to_provider != OMIT
             @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
             @external_id = external_id if external_id != OMIT
@@ -380,6 +386,7 @@ module CandidApiClient
             @initial_referring_provider = initial_referring_provider if initial_referring_provider != OMIT
             @referral_number = referral_number if referral_number != OMIT
             @epsdt_referral = epsdt_referral if epsdt_referral != OMIT
+            @claim_supplemental_information = claim_supplemental_information if claim_supplemental_information != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "benefits_assigned_to_provider": benefits_assigned_to_provider,
@@ -418,7 +425,8 @@ module CandidApiClient
               "referring_provider": referring_provider,
               "initial_referring_provider": initial_referring_provider,
               "referral_number": referral_number,
-              "epsdt_referral": epsdt_referral
+              "epsdt_referral": epsdt_referral,
+              "claim_supplemental_information": claim_supplemental_information
             }.reject do |_k, v|
               v == OMIT
             end
@@ -548,6 +556,10 @@ module CandidApiClient
               epsdt_referral = parsed_json["epsdt_referral"].to_json
               epsdt_referral = CandidApiClient::Encounters::V4::Types::EpsdtReferral.from_json(json_object: epsdt_referral)
             end
+            claim_supplemental_information = parsed_json["claim_supplemental_information"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation.from_json(json_object: item)
+            end
             new(
               benefits_assigned_to_provider: benefits_assigned_to_provider,
               prior_authorization_number: prior_authorization_number,
@@ -586,6 +598,7 @@ module CandidApiClient
               initial_referring_provider: initial_referring_provider,
               referral_number: referral_number,
               epsdt_referral: epsdt_referral,
+              claim_supplemental_information: claim_supplemental_information,
               additional_properties: struct
             )
           end
@@ -641,6 +654,7 @@ module CandidApiClient
             obj.initial_referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::InitialReferringProviderUpdate.validate_raw(obj: obj.initial_referring_provider)
             obj.referral_number&.is_a?(String) != false || raise("Passed value for field obj.referral_number is not the expected type, validation failed.")
             obj.epsdt_referral.nil? || CandidApiClient::Encounters::V4::Types::EpsdtReferral.validate_raw(obj: obj.epsdt_referral)
+            obj.claim_supplemental_information&.is_a?(Array) != false || raise("Passed value for field obj.claim_supplemental_information is not the expected type, validation failed.")
           end
         end
       end

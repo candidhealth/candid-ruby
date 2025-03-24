@@ -3,6 +3,7 @@
 require "json"
 require_relative "patient_write_off"
 require_relative "insurance_write_off"
+require_relative "non_insurance_payer_write_off"
 
 module CandidApiClient
   module WriteOffs
@@ -36,6 +37,8 @@ module CandidApiClient
                        CandidApiClient::WriteOffs::V1::Types::PatientWriteOff.from_json(json_object: json_object)
                      when "insurance"
                        CandidApiClient::WriteOffs::V1::Types::InsuranceWriteOff.from_json(json_object: json_object)
+                     when "non_insurance_payer"
+                       CandidApiClient::WriteOffs::V1::Types::NonInsurancePayerWriteOff.from_json(json_object: json_object)
                      else
                        CandidApiClient::WriteOffs::V1::Types::PatientWriteOff.from_json(json_object: json_object)
                      end
@@ -50,6 +53,8 @@ module CandidApiClient
             when "patient"
               { **@member.to_json, type: @discriminant }.to_json
             when "insurance"
+              { **@member.to_json, type: @discriminant }.to_json
+            when "non_insurance_payer"
               { **@member.to_json, type: @discriminant }.to_json
             else
               { "type": @discriminant, value: @member }.to_json
@@ -69,6 +74,8 @@ module CandidApiClient
               CandidApiClient::WriteOffs::V1::Types::PatientWriteOff.validate_raw(obj: obj)
             when "insurance"
               CandidApiClient::WriteOffs::V1::Types::InsuranceWriteOff.validate_raw(obj: obj)
+            when "non_insurance_payer"
+              CandidApiClient::WriteOffs::V1::Types::NonInsurancePayerWriteOff.validate_raw(obj: obj)
             else
               raise("Passed value matched no type within the union, validation failed.")
             end
@@ -92,6 +99,12 @@ module CandidApiClient
           # @return [CandidApiClient::WriteOffs::V1::Types::WriteOff]
           def self.insurance(member:)
             new(member: member, discriminant: "insurance")
+          end
+
+          # @param member [CandidApiClient::WriteOffs::V1::Types::NonInsurancePayerWriteOff]
+          # @return [CandidApiClient::WriteOffs::V1::Types::WriteOff]
+          def self.non_insurance_payer(member:)
+            new(member: member, discriminant: "non_insurance_payer")
           end
         end
       end

@@ -18,6 +18,8 @@ module CandidApiClient
           attr_reader :use
           # @return [CandidApiClient::PreEncounter::Common::Types::Period]
           attr_reader :period
+          # @return [String]
+          attr_reader :suffix
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -30,15 +32,23 @@ module CandidApiClient
           # @param given [Array<String>]
           # @param use [CandidApiClient::PreEncounter::Common::Types::NameUse]
           # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
+          # @param suffix [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::PreEncounter::Common::Types::HumanName]
-          def initialize(family:, given:, use:, period: OMIT, additional_properties: nil)
+          def initialize(family:, given:, use:, period: OMIT, suffix: OMIT, additional_properties: nil)
             @family = family
             @given = given
             @use = use
             @period = period if period != OMIT
+            @suffix = suffix if suffix != OMIT
             @additional_properties = additional_properties
-            @_field_set = { "family": family, "given": given, "use": use, "period": period }.reject do |_k, v|
+            @_field_set = {
+              "family": family,
+              "given": given,
+              "use": use,
+              "period": period,
+              "suffix": suffix
+            }.reject do |_k, v|
               v == OMIT
             end
           end
@@ -59,11 +69,13 @@ module CandidApiClient
               period = parsed_json["period"].to_json
               period = CandidApiClient::PreEncounter::Common::Types::Period.from_json(json_object: period)
             end
+            suffix = struct["suffix"]
             new(
               family: family,
               given: given,
               use: use,
               period: period,
+              suffix: suffix,
               additional_properties: struct
             )
           end
@@ -86,6 +98,7 @@ module CandidApiClient
             obj.given.is_a?(Array) != false || raise("Passed value for field obj.given is not the expected type, validation failed.")
             obj.use.is_a?(CandidApiClient::PreEncounter::Common::Types::NameUse) != false || raise("Passed value for field obj.use is not the expected type, validation failed.")
             obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
+            obj.suffix&.is_a?(String) != false || raise("Passed value for field obj.suffix is not the expected type, validation failed.")
           end
         end
       end

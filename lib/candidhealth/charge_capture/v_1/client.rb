@@ -244,6 +244,7 @@ module CandidApiClient
         #     * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
         #  internal encounter ID or a Dr. Chrono encounter ID. This field should not
         #  contain PHI.
@@ -533,6 +534,7 @@ module CandidApiClient
         #     * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
@@ -883,6 +885,7 @@ module CandidApiClient
         #     * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
         #  internal encounter ID or a Dr. Chrono encounter ID. This field should not
         #  contain PHI.
@@ -1176,6 +1179,7 @@ module CandidApiClient
         #     * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
         #     * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.

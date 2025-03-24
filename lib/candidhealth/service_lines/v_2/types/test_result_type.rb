@@ -7,6 +7,7 @@ module CandidApiClient
         class TestResultType
           HEMATOCRIT = "HEMATOCRIT"
           HEMOGLOBIN = "HEMOGLOBIN"
+          LDL = "LDL"
         end
       end
     end

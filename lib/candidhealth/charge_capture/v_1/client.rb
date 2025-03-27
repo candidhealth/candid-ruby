@@ -107,6 +107,33 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_tertiary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
         #   * :additional_information (String)
         #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
         #   * :admission_date (Date)
@@ -397,6 +424,33 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_tertiary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
         #   * :additional_information (String)
         #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
         #   * :admission_date (Date)
@@ -614,6 +668,8 @@ module CandidApiClient
         #  This field should not contain PHI.
         # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
+        # @param exclude_bundled [Boolean] Whether to exclude charge captures which are associated with a charge capture
+        #  bundle.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
@@ -624,10 +680,11 @@ module CandidApiClient
         #    patient_external_id: "string",
         #    status: PLANNED,
         #    charge_external_id: "string",
-        #    date_of_service: DateTime.parse(2023-01-15)
+        #    date_of_service: DateTime.parse(2023-01-15),
+        #    exclude_bundled: true
         #  )
         def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, charge_external_id: nil,
-                    date_of_service: nil, request_options: nil)
+                    date_of_service: nil, exclude_bundled: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -643,7 +700,8 @@ module CandidApiClient
               "patient_external_id": patient_external_id,
               "status": status,
               "charge_external_id": charge_external_id,
-              "date_of_service": date_of_service
+              "date_of_service": date_of_service,
+              "exclude_bundled": exclude_bundled
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/charge_captures/v1"
@@ -722,6 +780,33 @@ module CandidApiClient
         #     * :last_name (String)
         #     * :gender (CandidApiClient::Individual::Types::Gender)
         #   * :subscriber_secondary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_tertiary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
         #       * :payer_name (String)
@@ -1042,6 +1127,33 @@ module CandidApiClient
         #     * :first_name (String)
         #     * :last_name (String)
         #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_tertiary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
         #   * :additional_information (String)
         #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
         #   * :admission_date (Date)
@@ -1263,6 +1375,8 @@ module CandidApiClient
         #  This field should not contain PHI.
         # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
+        # @param exclude_bundled [Boolean] Whether to exclude charge captures which are associated with a charge capture
+        #  bundle.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
@@ -1273,10 +1387,11 @@ module CandidApiClient
         #    patient_external_id: "string",
         #    status: PLANNED,
         #    charge_external_id: "string",
-        #    date_of_service: DateTime.parse(2023-01-15)
+        #    date_of_service: DateTime.parse(2023-01-15),
+        #    exclude_bundled: true
         #  )
         def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, charge_external_id: nil,
-                    date_of_service: nil, request_options: nil)
+                    date_of_service: nil, exclude_bundled: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1293,7 +1408,8 @@ module CandidApiClient
                 "patient_external_id": patient_external_id,
                 "status": status,
                 "charge_external_id": charge_external_id,
-                "date_of_service": date_of_service
+                "date_of_service": date_of_service,
+                "exclude_bundled": exclude_bundled
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1"

@@ -94,6 +94,8 @@ module CandidApiClient
           attr_reader :subscriber_primary
           # @return [CandidApiClient::Individual::Types::Subscriber] Contains details of the secondary insurance subscriber.
           attr_reader :subscriber_secondary
+          # @return [CandidApiClient::Individual::Types::Subscriber] Contains details of the tertiary insurance subscriber.
+          attr_reader :subscriber_tertiary
           # @return [String] Box 23 on the CMS-1500 claim form.
           attr_reader :prior_authorization_number
           # @return [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
@@ -299,6 +301,7 @@ module CandidApiClient
           #  Note: Cash Pay is no longer a valid payer_id in v4, please use responsible party
           #  to define self-pay claims.
           # @param subscriber_secondary [CandidApiClient::Individual::Types::Subscriber] Contains details of the secondary insurance subscriber.
+          # @param subscriber_tertiary [CandidApiClient::Individual::Types::Subscriber] Contains details of the tertiary insurance subscriber.
           # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form.
           # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
           # @param url [String] URL that links directly to the claim created in Candid.
@@ -413,7 +416,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
-                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
             @claims = claims
@@ -427,6 +430,7 @@ module CandidApiClient
             @service_facility = service_facility
             @subscriber_primary = subscriber_primary if subscriber_primary != OMIT
             @subscriber_secondary = subscriber_secondary if subscriber_secondary != OMIT
+            @subscriber_tertiary = subscriber_tertiary if subscriber_tertiary != OMIT
             @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
             @responsible_party = responsible_party
             @url = url
@@ -492,6 +496,7 @@ module CandidApiClient
               "service_facility": service_facility,
               "subscriber_primary": subscriber_primary,
               "subscriber_secondary": subscriber_secondary,
+              "subscriber_tertiary": subscriber_tertiary,
               "prior_authorization_number": prior_authorization_number,
               "responsible_party": responsible_party,
               "url": url,
@@ -612,6 +617,12 @@ module CandidApiClient
               subscriber_secondary = parsed_json["subscriber_secondary"].to_json
               subscriber_secondary = CandidApiClient::Individual::Types::Subscriber.from_json(json_object: subscriber_secondary)
             end
+            if parsed_json["subscriber_tertiary"].nil?
+              subscriber_tertiary = nil
+            else
+              subscriber_tertiary = parsed_json["subscriber_tertiary"].to_json
+              subscriber_tertiary = CandidApiClient::Individual::Types::Subscriber.from_json(json_object: subscriber_tertiary)
+            end
             prior_authorization_number = struct["prior_authorization_number"]
             responsible_party = struct["responsible_party"]
             url = struct["url"]
@@ -723,6 +734,7 @@ module CandidApiClient
               service_facility: service_facility,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
+              subscriber_tertiary: subscriber_tertiary,
               prior_authorization_number: prior_authorization_number,
               responsible_party: responsible_party,
               url: url,
@@ -796,6 +808,7 @@ module CandidApiClient
             CandidApiClient::ServiceFacility::Types::EncounterServiceFacility.validate_raw(obj: obj.service_facility)
             obj.subscriber_primary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_primary)
             obj.subscriber_secondary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_secondary)
+            obj.subscriber_tertiary.nil? || CandidApiClient::Individual::Types::Subscriber.validate_raw(obj: obj.subscriber_tertiary)
             obj.prior_authorization_number&.is_a?(String) != false || raise("Passed value for field obj.prior_authorization_number is not the expected type, validation failed.")
             obj.responsible_party.is_a?(CandidApiClient::Encounters::V4::Types::ResponsiblePartyType) != false || raise("Passed value for field obj.responsible_party is not the expected type, validation failed.")
             obj.url.is_a?(String) != false || raise("Passed value for field obj.url is not the expected type, validation failed.")

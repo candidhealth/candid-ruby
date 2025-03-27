@@ -95,6 +95,8 @@ module CandidApiClient
           attr_reader :subscriber_primary
           # @return [CandidApiClient::Individual::Types::SubscriberCreate] Contains details of the secondary insurance subscriber.
           attr_reader :subscriber_secondary
+          # @return [CandidApiClient::Individual::Types::SubscriberCreate] Contains details of the tertiary insurance subscriber.
+          attr_reader :subscriber_tertiary
           # @return [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
           attr_reader :additional_information
@@ -257,6 +259,7 @@ module CandidApiClient
           #  end_date_of_service will update all service line date_of_service values.
           # @param subscriber_primary [CandidApiClient::Individual::Types::SubscriberCreate] Contains details of the primary insurance subscriber.
           # @param subscriber_secondary [CandidApiClient::Individual::Types::SubscriberCreate] Contains details of the secondary insurance subscriber.
+          # @param subscriber_tertiary [CandidApiClient::Individual::Types::SubscriberCreate] Contains details of the tertiary insurance subscriber.
           # @param additional_information [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
           # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
@@ -344,7 +347,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::EncounterOptional]
           def initialize(benefits_assigned_to_provider: OMIT, prior_authorization_number: OMIT, external_id: OMIT,
-                         date_of_service: OMIT, tag_ids: OMIT, clinical_notes: OMIT, pay_to_address: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient: OMIT, patient_authorized_release: OMIT, schema_instances: OMIT, vitals: OMIT, existing_medications: OMIT, rendering_provider: OMIT, service_facility: OMIT, guarantor: OMIT, billing_provider: OMIT, supervising_provider: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, additional_properties: nil)
+                         date_of_service: OMIT, tag_ids: OMIT, clinical_notes: OMIT, pay_to_address: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient: OMIT, patient_authorized_release: OMIT, schema_instances: OMIT, vitals: OMIT, existing_medications: OMIT, rendering_provider: OMIT, service_facility: OMIT, guarantor: OMIT, billing_provider: OMIT, supervising_provider: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, additional_properties: nil)
             @benefits_assigned_to_provider = benefits_assigned_to_provider if benefits_assigned_to_provider != OMIT
             @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
             @external_id = external_id if external_id != OMIT
@@ -361,6 +364,7 @@ module CandidApiClient
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @subscriber_primary = subscriber_primary if subscriber_primary != OMIT
             @subscriber_secondary = subscriber_secondary if subscriber_secondary != OMIT
+            @subscriber_tertiary = subscriber_tertiary if subscriber_tertiary != OMIT
             @additional_information = additional_information if additional_information != OMIT
             if service_authorization_exception_code != OMIT
               @service_authorization_exception_code = service_authorization_exception_code
@@ -405,6 +409,7 @@ module CandidApiClient
               "end_date_of_service": end_date_of_service,
               "subscriber_primary": subscriber_primary,
               "subscriber_secondary": subscriber_secondary,
+              "subscriber_tertiary": subscriber_tertiary,
               "additional_information": additional_information,
               "service_authorization_exception_code": service_authorization_exception_code,
               "admission_date": admission_date,
@@ -474,6 +479,12 @@ module CandidApiClient
             else
               subscriber_secondary = parsed_json["subscriber_secondary"].to_json
               subscriber_secondary = CandidApiClient::Individual::Types::SubscriberCreate.from_json(json_object: subscriber_secondary)
+            end
+            if parsed_json["subscriber_tertiary"].nil?
+              subscriber_tertiary = nil
+            else
+              subscriber_tertiary = parsed_json["subscriber_tertiary"].to_json
+              subscriber_tertiary = CandidApiClient::Individual::Types::SubscriberCreate.from_json(json_object: subscriber_tertiary)
             end
             additional_information = struct["additional_information"]
             service_authorization_exception_code = struct["service_authorization_exception_code"]
@@ -577,6 +588,7 @@ module CandidApiClient
               end_date_of_service: end_date_of_service,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
+              subscriber_tertiary: subscriber_tertiary,
               additional_information: additional_information,
               service_authorization_exception_code: service_authorization_exception_code,
               admission_date: admission_date,
@@ -633,6 +645,7 @@ module CandidApiClient
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
             obj.subscriber_primary.nil? || CandidApiClient::Individual::Types::SubscriberCreate.validate_raw(obj: obj.subscriber_primary)
             obj.subscriber_secondary.nil? || CandidApiClient::Individual::Types::SubscriberCreate.validate_raw(obj: obj.subscriber_secondary)
+            obj.subscriber_tertiary.nil? || CandidApiClient::Individual::Types::SubscriberCreate.validate_raw(obj: obj.subscriber_tertiary)
             obj.additional_information&.is_a?(String) != false || raise("Passed value for field obj.additional_information is not the expected type, validation failed.")
             obj.service_authorization_exception_code&.is_a?(CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode) != false || raise("Passed value for field obj.service_authorization_exception_code is not the expected type, validation failed.")
             obj.admission_date&.is_a?(Date) != false || raise("Passed value for field obj.admission_date is not the expected type, validation failed.")

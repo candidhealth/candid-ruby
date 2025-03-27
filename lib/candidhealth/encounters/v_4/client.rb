@@ -449,6 +449,33 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :gender (CandidApiClient::Individual::Types::Gender)
+        # @param subscriber_tertiary [Hash] Please always include this when you have it, even for self-pay claims.Request of type CandidApiClient::Individual::Types::SubscriberCreate, as a Hash
+        #   * :insurance_card (Hash)
+        #     * :member_id (String)
+        #     * :payer_name (String)
+        #     * :payer_id (String)
+        #     * :rx_bin (String)
+        #     * :rx_pcn (String)
+        #     * :image_url_front (String)
+        #     * :image_url_back (String)
+        #     * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #     * :group_number (String)
+        #     * :plan_name (String)
+        #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
+        #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :gender (CandidApiClient::Individual::Types::Gender)
         # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form.
         # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
         # @param diagnoses [Array<Hash>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -563,6 +590,7 @@ module CandidApiClient
         #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
         #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
+        #    subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    prior_authorization_number: "string",
         #    responsible_party: INSURANCE_PAY,
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
@@ -580,7 +608,7 @@ module CandidApiClient
         #    claim_supplemental_information: [{ attachment_report_type_code: C_03, attachment_transmission_code: CBM }]
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -622,6 +650,7 @@ module CandidApiClient
               service_facility: service_facility,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
+              subscriber_tertiary: subscriber_tertiary,
               prior_authorization_number: prior_authorization_number,
               responsible_party: responsible_party,
               diagnoses: diagnoses,
@@ -908,6 +937,33 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :gender (CandidApiClient::Individual::Types::Gender)
+        # @param subscriber_tertiary [Hash] Contains details of the tertiary insurance subscriber.Request of type CandidApiClient::Individual::Types::SubscriberCreate, as a Hash
+        #   * :insurance_card (Hash)
+        #     * :member_id (String)
+        #     * :payer_name (String)
+        #     * :payer_id (String)
+        #     * :rx_bin (String)
+        #     * :rx_pcn (String)
+        #     * :image_url_front (String)
+        #     * :image_url_back (String)
+        #     * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #     * :group_number (String)
+        #     * :plan_name (String)
+        #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
+        #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :gender (CandidApiClient::Individual::Types::Gender)
         # @param additional_information [String] Defines additional information on the claim needed by the payer.
         #  Box 19 on the CMS-1500 claim form.
         # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
@@ -1139,7 +1195,7 @@ module CandidApiClient
         #    place_of_service_code_as_submitted: PHARMACY
         #  )
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1166,6 +1222,7 @@ module CandidApiClient
               end_date_of_service: end_date_of_service,
               subscriber_primary: subscriber_primary,
               subscriber_secondary: subscriber_secondary,
+              subscriber_tertiary: subscriber_tertiary,
               additional_information: additional_information,
               service_authorization_exception_code: service_authorization_exception_code,
               admission_date: admission_date,
@@ -1602,6 +1659,33 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :gender (CandidApiClient::Individual::Types::Gender)
+        # @param subscriber_tertiary [Hash] Please always include this when you have it, even for self-pay claims.Request of type CandidApiClient::Individual::Types::SubscriberCreate, as a Hash
+        #   * :insurance_card (Hash)
+        #     * :member_id (String)
+        #     * :payer_name (String)
+        #     * :payer_id (String)
+        #     * :rx_bin (String)
+        #     * :rx_pcn (String)
+        #     * :image_url_front (String)
+        #     * :image_url_back (String)
+        #     * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #     * :group_number (String)
+        #     * :plan_name (String)
+        #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
+        #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :gender (CandidApiClient::Individual::Types::Gender)
         # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form.
         # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim.
         # @param diagnoses [Array<Hash>] Ideally, this field should contain no more than 12 diagnoses. However, more
@@ -1716,6 +1800,7 @@ module CandidApiClient
         #    service_facility: { organization_name: "string", npi: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, secondary_identification: "string" },
         #    subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
+        #    subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string", rx_bin: "string", rx_pcn: "string", image_url_front: "string", image_url_back: "string", emr_payer_crosswalk: HEALTHIE, group_number: "string", plan_name: "string", plan_type: SELF_PAY, insurance_type: C_01, payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" }, patient_relationship_to_subscriber_code: SPOUSE, date_of_birth: DateTime.parse(2023-01-15), address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, first_name: "string", last_name: "string", gender: MALE },
         #    prior_authorization_number: "string",
         #    responsible_party: INSURANCE_PAY,
         #    diagnoses: [{ name: "string", code_type: ABF, code: "string" }],
@@ -1733,7 +1818,7 @@ module CandidApiClient
         #    claim_supplemental_information: [{ attachment_report_type_code: C_03, attachment_transmission_code: CBM }]
         #  )
         def create(external_id:, patient_authorized_release:, benefits_assigned_to_provider:,
-                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, request_options: nil)
+                   provider_accepts_assignment:, billable_status:, patient:, billing_provider:, rendering_provider:, responsible_party:, diagnoses:, place_of_service_code:, date_of_service: nil, end_date_of_service: nil, appointment_type: nil, existing_medications: nil, vitals: nil, interventions: nil, pay_to_address: nil, synchronicity: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, additional_properties: nil, _field_set: nil, referring_provider: nil, initial_referring_provider: nil, supervising_provider: nil, service_facility: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, prior_authorization_number: nil, clinical_notes: nil, billing_notes: nil, patient_histories: nil, service_lines: nil, guarantor: nil, external_claim_submission: nil, tag_ids: nil, schema_instances: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1776,6 +1861,7 @@ module CandidApiClient
                 service_facility: service_facility,
                 subscriber_primary: subscriber_primary,
                 subscriber_secondary: subscriber_secondary,
+                subscriber_tertiary: subscriber_tertiary,
                 prior_authorization_number: prior_authorization_number,
                 responsible_party: responsible_party,
                 diagnoses: diagnoses,
@@ -2065,6 +2151,33 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :gender (CandidApiClient::Individual::Types::Gender)
+        # @param subscriber_tertiary [Hash] Contains details of the tertiary insurance subscriber.Request of type CandidApiClient::Individual::Types::SubscriberCreate, as a Hash
+        #   * :insurance_card (Hash)
+        #     * :member_id (String)
+        #     * :payer_name (String)
+        #     * :payer_id (String)
+        #     * :rx_bin (String)
+        #     * :rx_pcn (String)
+        #     * :image_url_front (String)
+        #     * :image_url_back (String)
+        #     * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #     * :group_number (String)
+        #     * :plan_name (String)
+        #     * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #     * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #     * :payer_plan_group_id (String)
+        #   * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :gender (CandidApiClient::Individual::Types::Gender)
         # @param additional_information [String] Defines additional information on the claim needed by the payer.
         #  Box 19 on the CMS-1500 claim form.
         # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
@@ -2296,7 +2409,7 @@ module CandidApiClient
         #    place_of_service_code_as_submitted: PHARMACY
         #  )
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, pay_to_address: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, rendering_provider: nil, service_facility: nil, guarantor: nil, billing_provider: nil, supervising_provider: nil, referring_provider: nil, initial_referring_provider: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, additional_properties: nil, _field_set: nil, diagnosis_ids: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2324,6 +2437,7 @@ module CandidApiClient
                 end_date_of_service: end_date_of_service,
                 subscriber_primary: subscriber_primary,
                 subscriber_secondary: subscriber_secondary,
+                subscriber_tertiary: subscriber_tertiary,
                 additional_information: additional_information,
                 service_authorization_exception_code: service_authorization_exception_code,
                 admission_date: admission_date,

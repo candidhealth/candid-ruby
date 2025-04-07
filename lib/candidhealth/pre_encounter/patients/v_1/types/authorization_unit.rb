@@ -7,6 +7,7 @@ module CandidApiClient
         module Types
           class AuthorizationUnit
             VISIT = "VISIT"
+            UNIT = "UNIT"
           end
         end
       end

@@ -3,6 +3,7 @@
 require_relative "charge_capture_status"
 require_relative "charge_capture_data"
 require "date"
+require_relative "charge_capture_post_billed_change"
 require "ostruct"
 require "json"
 
@@ -26,6 +27,8 @@ module CandidApiClient
           # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
           #  This date must be the local date in the timezone where the service occurred.
           attr_reader :date_of_service
+          # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
+          attr_reader :updates
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -42,9 +45,10 @@ module CandidApiClient
           # @param ehr_source_url [String]
           # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
           #  This date must be the local date in the timezone where the service occurred.
+          # @param updates [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
-          def initialize(id:, status:, charge_capture_data:, patient_external_id:, charge_external_id:,
+          def initialize(id:, status:, charge_capture_data:, patient_external_id:, charge_external_id:, updates:,
                          ehr_source_url: OMIT, date_of_service: OMIT, additional_properties: nil)
             @id = id
             @status = status
@@ -53,6 +57,7 @@ module CandidApiClient
             @charge_external_id = charge_external_id
             @ehr_source_url = ehr_source_url if ehr_source_url != OMIT
             @date_of_service = date_of_service if date_of_service != OMIT
+            @updates = updates
             @additional_properties = additional_properties
             @_field_set = {
               "id": id,
@@ -61,7 +66,8 @@ module CandidApiClient
               "patient_external_id": patient_external_id,
               "charge_external_id": charge_external_id,
               "ehr_source_url": ehr_source_url,
-              "date_of_service": date_of_service
+              "date_of_service": date_of_service,
+              "updates": updates
             }.reject do |_k, v|
               v == OMIT
             end
@@ -86,6 +92,10 @@ module CandidApiClient
             charge_external_id = struct["charge_external_id"]
             ehr_source_url = struct["ehr_source_url"]
             date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
+            updates = parsed_json["updates"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: item)
+            end
             new(
               id: id,
               status: status,
@@ -94,6 +104,7 @@ module CandidApiClient
               charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
               date_of_service: date_of_service,
+              updates: updates,
               additional_properties: struct
             )
           end
@@ -119,6 +130,7 @@ module CandidApiClient
             obj.charge_external_id.is_a?(String) != false || raise("Passed value for field obj.charge_external_id is not the expected type, validation failed.")
             obj.ehr_source_url&.is_a?(String) != false || raise("Passed value for field obj.ehr_source_url is not the expected type, validation failed.")
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
+            obj.updates.is_a?(Array) != false || raise("Passed value for field obj.updates is not the expected type, validation failed.")
           end
         end
       end

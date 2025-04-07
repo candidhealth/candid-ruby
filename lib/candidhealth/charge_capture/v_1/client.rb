@@ -5,6 +5,8 @@ require_relative "types/charge_capture_data"
 require "date"
 require_relative "types/charge_capture_status"
 require_relative "types/charge_capture"
+require_relative "types/charge_capture_sort_field"
+require_relative "../../commons/types/sort_direction"
 require_relative "types/charge_capture_page"
 require "async"
 
@@ -660,6 +662,8 @@ module CandidApiClient
         end
 
         # @param limit [Integer] Maximum number of entities per page, defaults to 100.
+        # @param sort [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureSortField] Defaults to created_at
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
         # @param page_token [String]
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge captures
@@ -676,6 +680,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.get_all(
         #    limit: 1,
+        #    sort: CREATED_AT,
+        #    sort_direction: ASC,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    patient_external_id: "string",
         #    status: PLANNED,
@@ -683,8 +689,8 @@ module CandidApiClient
         #    date_of_service: DateTime.parse(2023-01-15),
         #    exclude_bundled: true
         #  )
-        def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, charge_external_id: nil,
-                    date_of_service: nil, exclude_bundled: nil, request_options: nil)
+        def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
+                    charge_external_id: nil, date_of_service: nil, exclude_bundled: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -696,6 +702,8 @@ module CandidApiClient
             req.params = {
               **(request_options&.additional_query_parameters || {}),
               "limit": limit,
+              "sort": sort,
+              "sort_direction": sort_direction,
               "page_token": page_token,
               "patient_external_id": patient_external_id,
               "status": status,
@@ -1367,6 +1375,8 @@ module CandidApiClient
         end
 
         # @param limit [Integer] Maximum number of entities per page, defaults to 100.
+        # @param sort [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureSortField] Defaults to created_at
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
         # @param page_token [String]
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge captures
@@ -1383,6 +1393,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.get_all(
         #    limit: 1,
+        #    sort: CREATED_AT,
+        #    sort_direction: ASC,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    patient_external_id: "string",
         #    status: PLANNED,
@@ -1390,8 +1402,8 @@ module CandidApiClient
         #    date_of_service: DateTime.parse(2023-01-15),
         #    exclude_bundled: true
         #  )
-        def get_all(limit: nil, page_token: nil, patient_external_id: nil, status: nil, charge_external_id: nil,
-                    date_of_service: nil, exclude_bundled: nil, request_options: nil)
+        def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
+                    charge_external_id: nil, date_of_service: nil, exclude_bundled: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1404,6 +1416,8 @@ module CandidApiClient
               req.params = {
                 **(request_options&.additional_query_parameters || {}),
                 "limit": limit,
+                "sort": sort,
+                "sort_direction": sort_direction,
                 "page_token": page_token,
                 "patient_external_id": patient_external_id,
                 "status": status,

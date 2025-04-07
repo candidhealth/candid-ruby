@@ -14,6 +14,7 @@ module CandidApiClient
           COLLECTION_AGENCY = "COLLECTION_AGENCY"
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"
+          UNCOLLECTIBLE_OR_NON_BILLABLE = "UNCOLLECTIBLE_OR_NON_BILLABLE"
         end
       end
     end

@@ -672,6 +672,7 @@ module CandidApiClient
         #  This field should not contain PHI.
         # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
+        # @param bundle_id [String] The ID of the charge capture bundle to which this charge capture belongs.
         # @param exclude_bundled [Boolean] Whether to exclude charge captures which are associated with a charge capture
         #  bundle.
         # @param request_options [CandidApiClient::RequestOptions]
@@ -687,10 +688,11 @@ module CandidApiClient
         #    status: PLANNED,
         #    charge_external_id: "string",
         #    date_of_service: DateTime.parse(2023-01-15),
+        #    bundle_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    exclude_bundled: true
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service: nil, exclude_bundled: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service: nil, bundle_id: nil, exclude_bundled: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -709,6 +711,7 @@ module CandidApiClient
               "status": status,
               "charge_external_id": charge_external_id,
               "date_of_service": date_of_service,
+              "bundle_id": bundle_id,
               "exclude_bundled": exclude_bundled
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
@@ -1385,6 +1388,7 @@ module CandidApiClient
         #  This field should not contain PHI.
         # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
+        # @param bundle_id [String] The ID of the charge capture bundle to which this charge capture belongs.
         # @param exclude_bundled [Boolean] Whether to exclude charge captures which are associated with a charge capture
         #  bundle.
         # @param request_options [CandidApiClient::RequestOptions]
@@ -1400,10 +1404,11 @@ module CandidApiClient
         #    status: PLANNED,
         #    charge_external_id: "string",
         #    date_of_service: DateTime.parse(2023-01-15),
+        #    bundle_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    exclude_bundled: true
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service: nil, exclude_bundled: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service: nil, bundle_id: nil, exclude_bundled: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1423,6 +1428,7 @@ module CandidApiClient
                 "status": status,
                 "charge_external_id": charge_external_id,
                 "date_of_service": date_of_service,
+                "bundle_id": bundle_id,
                 "exclude_bundled": exclude_bundled
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,

@@ -2,6 +2,7 @@
 
 require_relative "../../../requests"
 require_relative "types/charge_capture_bundle"
+require_relative "types/charge_capture_bundle_summary"
 require_relative "types/charge_capture_bundle_sort_field"
 require_relative "../../commons/types/sort_direction"
 require_relative "types/charge_capture_bundle_status"
@@ -42,6 +43,26 @@ module CandidApiClient
                                                request_options: request_options)}/api/charge_capture_bundle/v1/#{charge_capture_bundle_id}"
           end
           CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundle.from_json(json_object: response.body)
+        end
+
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleSummary]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture_bundles.v_1.get_summary
+        def get_summary(request_options: nil)
+          response = @request_client.conn.get do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/charge_capture_bundle/v1/summary"
+          end
+          CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleSummary.from_json(json_object: response.body)
         end
 
         # @param charge_capture_bundle_id [String]
@@ -91,7 +112,7 @@ module CandidApiClient
         #    sort_direction: ASC,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    patient_external_id: "string",
-        #    bundle_status: IN_PROGRESS,
+        #    bundle_status: NOT_STARTED,
         #    charge_status: PLANNED,
         #    charge_external_id: "string",
         #    date_of_service: DateTime.parse(2023-01-15),
@@ -160,6 +181,28 @@ module CandidApiClient
           end
         end
 
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleSummary]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture_bundles.v_1.get_summary
+        def get_summary(request_options: nil)
+          Async do
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/charge_capture_bundle/v1/summary"
+            end
+            CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleSummary.from_json(json_object: response.body)
+          end
+        end
+
         # @param charge_capture_bundle_id [String]
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundle]
@@ -209,7 +252,7 @@ module CandidApiClient
         #    sort_direction: ASC,
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    patient_external_id: "string",
-        #    bundle_status: IN_PROGRESS,
+        #    bundle_status: NOT_STARTED,
         #    charge_status: PLANNED,
         #    charge_external_id: "string",
         #    date_of_service: DateTime.parse(2023-01-15),

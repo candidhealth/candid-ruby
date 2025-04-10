@@ -113,7 +113,7 @@ module CandidApiClient
         #    network_types: PPO,
         #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
-        #    modifiers: TWENTY_TWO
+        #    modifiers: AV
         #  )
         def get_multi(page_token: nil, limit: nil, active_date: nil, payer_uuid: nil,
                       organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
@@ -181,7 +181,7 @@ module CandidApiClient
         #    network_types: PPO,
         #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
-        #    modifiers: TWENTY_TWO
+        #    modifiers: AV
         #  )
         def get_unique_values_for_dimension(pivot_dimension:, page_token: nil, limit: nil, payer_uuid: nil,
                                             organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
@@ -470,7 +470,7 @@ module CandidApiClient
         #    network_types: PPO,
         #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
-        #    modifiers: TWENTY_TWO
+        #    modifiers: AV
         #  )
         def get_multi(page_token: nil, limit: nil, active_date: nil, payer_uuid: nil,
                       organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
@@ -540,7 +540,7 @@ module CandidApiClient
         #    network_types: PPO,
         #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    cpt_code: "string",
-        #    modifiers: TWENTY_TWO
+        #    modifiers: AV
         #  )
         def get_unique_values_for_dimension(pivot_dimension:, page_token: nil, limit: nil, payer_uuid: nil,
                                             organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)

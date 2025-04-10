@@ -4,6 +4,9 @@ module CandidApiClient
   module Commons
     module Types
       class ProcedureModifier
+        AV = "AV"
+        AU = "AU"
+        AW = "AW"
         TWENTY_TWO = "22"
         TWENTY_THREE = "23"
         TWENTY_FOUR = "24"

@@ -46,6 +46,7 @@ module CandidApiClient
           HELD_BY_CUSTOMER = "held_by_customer"
           PENDING_MANUAL_REMIT_POSTING = "pending_manual_remit_posting"
           INCORRECT_REFERRING_PROVIDER_INFO = "incorrect_referring_provider_info"
+          PAYER_CONFIGURATION_ERROR = "payer_configuration_error"
         end
       end
     end

@@ -2,7 +2,7 @@
 
 require_relative "charge_capture_bundle_status"
 require_relative "../../../charge_capture/v_1/types/charge_capture"
-require_relative "charge_bundle_error"
+require_relative "../../../charge_capture/v_1/types/charge_capture_error"
 require "ostruct"
 require "json"
 
@@ -20,7 +20,7 @@ module CandidApiClient
           attr_reader :status
           # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapture>] All the underlying ChargeCaptures that are present in a ChargeCaptureBundle.
           attr_reader :charge_captures
-          # @return [Array<CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeBundleError>] All errors that were found when the bundle was attempted to be created.
+          # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError>] All errors that were found when the bundle was attempted to be created.
           #  Errors can correspond to the Bundle as a whole or specific underlying Charge
           #  Captures.
           attr_reader :errors
@@ -37,7 +37,7 @@ module CandidApiClient
           # @param status [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleStatus] Status of the Bundle, Successful means that the Bundle created a corresponding
           #  Claim
           # @param charge_captures [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapture>] All the underlying ChargeCaptures that are present in a ChargeCaptureBundle.
-          # @param errors [Array<CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeBundleError>] All errors that were found when the bundle was attempted to be created.
+          # @param errors [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError>] All errors that were found when the bundle was attempted to be created.
           #  Errors can correspond to the Bundle as a whole or specific underlying Charge
           #  Captures.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
@@ -77,7 +77,7 @@ module CandidApiClient
             end
             errors = parsed_json["errors"]&.map do |item|
               item = item.to_json
-              CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeBundleError.from_json(json_object: item)
+              CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError.from_json(json_object: item)
             end
             new(
               id: id,

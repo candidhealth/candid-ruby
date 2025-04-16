@@ -60,7 +60,7 @@ module CandidApiClient
           **(request_options&.additional_headers || {})
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
-                                               request_options: request_options)}/api/charge_capture_bundle/v1/summary"
+                                               request_options: request_options)}/api/charge_capture_bundle/v1/all/summary"
           end
           CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleSummary.from_json(json_object: response.body)
         end
@@ -197,7 +197,7 @@ module CandidApiClient
             **(request_options&.additional_headers || {})
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
-                                                 request_options: request_options)}/api/charge_capture_bundle/v1/summary"
+                                                 request_options: request_options)}/api/charge_capture_bundle/v1/all/summary"
             end
             CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleSummary.from_json(json_object: response.body)
           end

@@ -8,6 +8,7 @@ require_relative "types/charge_capture"
 require_relative "types/charge_capture_sort_field"
 require_relative "../../commons/types/sort_direction"
 require_relative "types/charge_capture_page"
+require_relative "types/charge_capture_post_billed_change"
 require "async"
 
 module CandidApiClient
@@ -718,6 +719,31 @@ module CandidApiClient
                                                request_options: request_options)}/api/charge_captures/v1"
           end
           CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage.from_json(json_object: response.body)
+        end
+
+        # @param charge_capture_change_id [String]
+        # @param resolved [Boolean] Whether the change has been resolved. If true, the change will be marked as
+        #  resolved.
+        #  If false, the change will be marked as unresolved.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture.v_1.update_post_billed_change(charge_capture_change_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", resolved: true)
+        def update_post_billed_change(charge_capture_change_id:, resolved:, request_options: nil)
+          response = @request_client.conn.patch do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = { **(request_options&.additional_body_parameters || {}), resolved: resolved }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/charge_captures/v1/changes/#{charge_capture_change_id}"
+          end
+          CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: response.body)
         end
       end
 
@@ -1435,6 +1461,33 @@ module CandidApiClient
                                                  request_options: request_options)}/api/charge_captures/v1"
             end
             CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage.from_json(json_object: response.body)
+          end
+        end
+
+        # @param charge_capture_change_id [String]
+        # @param resolved [Boolean] Whether the change has been resolved. If true, the change will be marked as
+        #  resolved.
+        #  If false, the change will be marked as unresolved.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture.v_1.update_post_billed_change(charge_capture_change_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", resolved: true)
+        def update_post_billed_change(charge_capture_change_id:, resolved:, request_options: nil)
+          Async do
+            response = @request_client.conn.patch do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request_options&.additional_body_parameters || {}), resolved: resolved }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/charge_captures/v1/changes/#{charge_capture_change_id}"
+            end
+            CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: response.body)
           end
         end
       end

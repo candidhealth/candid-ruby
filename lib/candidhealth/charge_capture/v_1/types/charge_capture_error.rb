@@ -4,10 +4,10 @@ require "ostruct"
 require "json"
 
 module CandidApiClient
-  module ChargeCaptureBundles
+  module ChargeCapture
     module V1
       module Types
-        class ChargeBundleError
+        class ChargeCaptureError
           # @return [String]
           attr_reader :id
           # @return [String] The underlying Charge Capture that this error object references.
@@ -44,7 +44,7 @@ module CandidApiClient
           #  is not present but marked as required, or otherwise in error.
           # @param bundle_id [String] The ID of the ChargeCaptureBundle associated with this Error.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeBundleError]
+          # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           def initialize(id:, message:, bundle_id:, charge_capture_id: OMIT, field_in_error: OMIT,
                          additional_properties: nil)
             @id = id
@@ -64,10 +64,10 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of ChargeBundleError
+          # Deserialize a JSON object to an instance of ChargeCaptureError
           #
           # @param json_object [String]
-          # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeBundleError]
+          # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             id = struct["id"]
@@ -85,7 +85,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of ChargeBundleError to a JSON object
+          # Serialize an instance of ChargeCaptureError to a JSON object
           #
           # @return [String]
           def to_json(*_args)

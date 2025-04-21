@@ -307,6 +307,7 @@ require_relative "candidhealth/pre_encounter/appointments/v_1/types/mutable_appo
 require_relative "candidhealth/pre_encounter/appointments/v_1/types/appointment"
 require_relative "candidhealth/pre_encounter/appointments/v_1/types/visit"
 require_relative "candidhealth/pre_encounter/appointments/v_1/types/visits_page"
+require_relative "candidhealth/pre_encounter/coverages/v_1/types/payer_plan_group_fields"
 require_relative "candidhealth/pre_encounter/coverages/v_1/types/coverages_page"
 require_relative "candidhealth/pre_encounter/coverages/v_1/types/latest_eligibility_check"
 require_relative "candidhealth/pre_encounter/coverages/v_1/types/eligibility_check_metadata"

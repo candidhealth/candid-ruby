@@ -6,6 +6,7 @@ require_relative "types/coverage"
 require_relative "types/coverages_page"
 require "json"
 require "date"
+require_relative "types/payer_plan_group_fields"
 require_relative "types/service_type_code"
 require_relative "types/eligibility_check_metadata"
 require_relative "types/coverage_eligibility_check_response"
@@ -506,6 +507,35 @@ module CandidApiClient
             parsed_json&.map do |item|
               item = item.to_json
               CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage.from_json(json_object: item)
+            end
+          end
+
+          # Finds all coverages associated with the given ppg_id and updates the ppg_fields
+          #  for each coverage.
+          #
+          # @param ppg_id [String]
+          # @param request [Hash] Request of type CandidApiClient::PreEncounter::Coverages::V1::Types::PayerPlanGroupFields, as a Hash
+          #   * :payer_plan_group_id (String)
+          #   * :payer_id (String)
+          #   * :payer_name (String)
+          #   * :plan_type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [Void]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.coverages.v_1.batch_update_ppg(ppg_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payer_id: "string", payer_name: "string", plan_type: SELF_PAY })
+          def batch_update_ppg(ppg_id:, request:, request_options: nil)
+            @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/coverages/v1/batch-update-ppg/#{ppg_id}"
             end
           end
 
@@ -1079,6 +1109,37 @@ module CandidApiClient
               parsed_json&.map do |item|
                 item = item.to_json
                 CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage.from_json(json_object: item)
+              end
+            end
+          end
+
+          # Finds all coverages associated with the given ppg_id and updates the ppg_fields
+          #  for each coverage.
+          #
+          # @param ppg_id [String]
+          # @param request [Hash] Request of type CandidApiClient::PreEncounter::Coverages::V1::Types::PayerPlanGroupFields, as a Hash
+          #   * :payer_plan_group_id (String)
+          #   * :payer_id (String)
+          #   * :payer_name (String)
+          #   * :plan_type (CandidApiClient::PreEncounter::Coverages::V1::Types::NetworkType)
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [Void]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.coverages.v_1.batch_update_ppg(ppg_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payer_id: "string", payer_name: "string", plan_type: SELF_PAY })
+          def batch_update_ppg(ppg_id:, request:, request_options: nil)
+            Async do
+              @request_client.conn.post do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/coverages/v1/batch-update-ppg/#{ppg_id}"
               end
             end
           end

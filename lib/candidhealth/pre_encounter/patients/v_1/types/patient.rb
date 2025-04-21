@@ -68,6 +68,8 @@ module CandidApiClient
             attr_reader :biological_sex
             # @return [CandidApiClient::PreEncounter::Common::Types::SexualOrientation] The sexual orientation of the patient.
             attr_reader :sexual_orientation
+            # @return [Array<String>] The pronouns of the patient.
+            attr_reader :pronouns
             # @return [CandidApiClient::PreEncounter::Common::Types::Race]
             attr_reader :race
             # @return [CandidApiClient::PreEncounter::Common::Types::Ethnicity]
@@ -156,6 +158,7 @@ module CandidApiClient
             #  AdministrativeGender
             #  https://www.hl7.org/fhir/valueset-administrative-gender.html
             # @param sexual_orientation [CandidApiClient::PreEncounter::Common::Types::SexualOrientation] The sexual orientation of the patient.
+            # @param pronouns [Array<String>] The pronouns of the patient.
             # @param race [CandidApiClient::PreEncounter::Common::Types::Race]
             # @param ethnicity [CandidApiClient::PreEncounter::Common::Types::Ethnicity]
             # @param disability_status [CandidApiClient::PreEncounter::Common::Types::DisabilityStatus]
@@ -189,7 +192,7 @@ module CandidApiClient
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             def initialize(id:, mrn:, organization_id:, deactivated:, version:, updated_at:, updating_user_id:, name:,
-                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, other_identifiers: OMIT, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, additional_properties: nil)
+                           other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, other_identifiers: OMIT, gender: OMIT, social_security_number: OMIT, sexual_orientation: OMIT, pronouns: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, additional_properties: nil)
               @id = id
               @mrn = mrn
               @organization_id = organization_id
@@ -205,6 +208,7 @@ module CandidApiClient
               @social_security_number = social_security_number if social_security_number != OMIT
               @biological_sex = biological_sex
               @sexual_orientation = sexual_orientation if sexual_orientation != OMIT
+              @pronouns = pronouns if pronouns != OMIT
               @race = race if race != OMIT
               @ethnicity = ethnicity if ethnicity != OMIT
               @disability_status = disability_status if disability_status != OMIT
@@ -254,6 +258,7 @@ module CandidApiClient
                 "social_security_number": social_security_number,
                 "biological_sex": biological_sex,
                 "sexual_orientation": sexual_orientation,
+                "pronouns": pronouns,
                 "race": race,
                 "ethnicity": ethnicity,
                 "disability_status": disability_status,
@@ -320,6 +325,7 @@ module CandidApiClient
               social_security_number = struct["social_security_number"]
               biological_sex = struct["biological_sex"]
               sexual_orientation = struct["sexual_orientation"]
+              pronouns = struct["pronouns"]
               race = struct["race"]
               ethnicity = struct["ethnicity"]
               disability_status = struct["disability_status"]
@@ -410,6 +416,7 @@ module CandidApiClient
                 social_security_number: social_security_number,
                 biological_sex: biological_sex,
                 sexual_orientation: sexual_orientation,
+                pronouns: pronouns,
                 race: race,
                 ethnicity: ethnicity,
                 disability_status: disability_status,
@@ -471,6 +478,7 @@ module CandidApiClient
               obj.social_security_number&.is_a?(String) != false || raise("Passed value for field obj.social_security_number is not the expected type, validation failed.")
               obj.biological_sex.is_a?(CandidApiClient::PreEncounter::Common::Types::Sex) != false || raise("Passed value for field obj.biological_sex is not the expected type, validation failed.")
               obj.sexual_orientation&.is_a?(CandidApiClient::PreEncounter::Common::Types::SexualOrientation) != false || raise("Passed value for field obj.sexual_orientation is not the expected type, validation failed.")
+              obj.pronouns&.is_a?(Array) != false || raise("Passed value for field obj.pronouns is not the expected type, validation failed.")
               obj.race&.is_a?(CandidApiClient::PreEncounter::Common::Types::Race) != false || raise("Passed value for field obj.race is not the expected type, validation failed.")
               obj.ethnicity&.is_a?(CandidApiClient::PreEncounter::Common::Types::Ethnicity) != false || raise("Passed value for field obj.ethnicity is not the expected type, validation failed.")
               obj.disability_status&.is_a?(CandidApiClient::PreEncounter::Common::Types::DisabilityStatus) != false || raise("Passed value for field obj.disability_status is not the expected type, validation failed.")

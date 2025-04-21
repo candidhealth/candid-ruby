@@ -9,6 +9,8 @@ module CandidApiClient
           WOMAN = "WOMAN"
           NON_BINARY = "NON_BINARY"
           TWO_SPIRIT = "TWO_SPIRIT"
+          FEMALE_TO_MALE = "FEMALE_TO_MALE"
+          MALE_TO_FEMALE = "MALE_TO_FEMALE"
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"
           REFUSED = "REFUSED"

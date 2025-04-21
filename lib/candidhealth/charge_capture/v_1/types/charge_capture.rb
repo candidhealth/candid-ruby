@@ -32,6 +32,8 @@ module CandidApiClient
           attr_reader :error
           # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
           attr_reader :updates
+          # @return [String]
+          attr_reader :bundle_id
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -50,10 +52,11 @@ module CandidApiClient
           #  This date must be the local date in the timezone where the service occurred.
           # @param error [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           # @param updates [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
+          # @param bundle_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
           def initialize(id:, status:, charge_capture_data:, patient_external_id:, charge_external_id:, updates:,
-                         ehr_source_url: OMIT, date_of_service: OMIT, error: OMIT, additional_properties: nil)
+                         ehr_source_url: OMIT, date_of_service: OMIT, error: OMIT, bundle_id: OMIT, additional_properties: nil)
             @id = id
             @status = status
             @charge_capture_data = charge_capture_data
@@ -63,6 +66,7 @@ module CandidApiClient
             @date_of_service = date_of_service if date_of_service != OMIT
             @error = error if error != OMIT
             @updates = updates
+            @bundle_id = bundle_id if bundle_id != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "id": id,
@@ -73,7 +77,8 @@ module CandidApiClient
               "ehr_source_url": ehr_source_url,
               "date_of_service": date_of_service,
               "error": error,
-              "updates": updates
+              "updates": updates,
+              "bundle_id": bundle_id
             }.reject do |_k, v|
               v == OMIT
             end
@@ -108,6 +113,7 @@ module CandidApiClient
               item = item.to_json
               CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: item)
             end
+            bundle_id = struct["bundle_id"]
             new(
               id: id,
               status: status,
@@ -118,6 +124,7 @@ module CandidApiClient
               date_of_service: date_of_service,
               error: error,
               updates: updates,
+              bundle_id: bundle_id,
               additional_properties: struct
             )
           end
@@ -145,6 +152,7 @@ module CandidApiClient
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.error.nil? || CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError.validate_raw(obj: obj.error)
             obj.updates.is_a?(Array) != false || raise("Passed value for field obj.updates is not the expected type, validation failed.")
+            obj.bundle_id&.is_a?(String) != false || raise("Passed value for field obj.bundle_id is not the expected type, validation failed.")
           end
         end
       end

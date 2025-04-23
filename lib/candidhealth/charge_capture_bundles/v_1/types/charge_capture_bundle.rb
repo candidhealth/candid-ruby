@@ -18,6 +18,10 @@ module CandidApiClient
           # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleStatus] Status of the Bundle, Successful means that the Bundle created a corresponding
           #  Claim
           attr_reader :status
+          # @return [Hash{String => String}] A dictionary of characteristics that are used to group charge captures together
+          #  based on the bundling configuration.
+          #  Example: {"service_facility.npi": "99999999", "date_of_service": "2023-01-01"}
+          attr_reader :characteristics
           # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapture>] All the underlying ChargeCaptures that are present in a ChargeCaptureBundle.
           attr_reader :charge_captures
           # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError>] All errors that were found when the bundle was attempted to be created.
@@ -36,17 +40,21 @@ module CandidApiClient
           # @param created_encounter_id [String]
           # @param status [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleStatus] Status of the Bundle, Successful means that the Bundle created a corresponding
           #  Claim
+          # @param characteristics [Hash{String => String}] A dictionary of characteristics that are used to group charge captures together
+          #  based on the bundling configuration.
+          #  Example: {"service_facility.npi": "99999999", "date_of_service": "2023-01-01"}
           # @param charge_captures [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapture>] All the underlying ChargeCaptures that are present in a ChargeCaptureBundle.
           # @param errors [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError>] All errors that were found when the bundle was attempted to be created.
           #  Errors can correspond to the Bundle as a whole or specific underlying Charge
           #  Captures.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundle]
-          def initialize(id:, status:, charge_captures:, errors:, created_encounter_id: OMIT,
+          def initialize(id:, status:, characteristics:, charge_captures:, errors:, created_encounter_id: OMIT,
                          additional_properties: nil)
             @id = id
             @created_encounter_id = created_encounter_id if created_encounter_id != OMIT
             @status = status
+            @characteristics = characteristics
             @charge_captures = charge_captures
             @errors = errors
             @additional_properties = additional_properties
@@ -54,6 +62,7 @@ module CandidApiClient
               "id": id,
               "created_encounter_id": created_encounter_id,
               "status": status,
+              "characteristics": characteristics,
               "charge_captures": charge_captures,
               "errors": errors
             }.reject do |_k, v|
@@ -71,6 +80,7 @@ module CandidApiClient
             id = struct["id"]
             created_encounter_id = struct["created_encounter_id"]
             status = struct["status"]
+            characteristics = struct["characteristics"]
             charge_captures = parsed_json["charge_captures"]&.map do |item|
               item = item.to_json
               CandidApiClient::ChargeCapture::V1::Types::ChargeCapture.from_json(json_object: item)
@@ -83,6 +93,7 @@ module CandidApiClient
               id: id,
               created_encounter_id: created_encounter_id,
               status: status,
+              characteristics: characteristics,
               charge_captures: charge_captures,
               errors: errors,
               additional_properties: struct
@@ -106,6 +117,7 @@ module CandidApiClient
             obj.id.is_a?(String) != false || raise("Passed value for field obj.id is not the expected type, validation failed.")
             obj.created_encounter_id&.is_a?(String) != false || raise("Passed value for field obj.created_encounter_id is not the expected type, validation failed.")
             obj.status.is_a?(CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundleStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
+            obj.characteristics.is_a?(Hash) != false || raise("Passed value for field obj.characteristics is not the expected type, validation failed.")
             obj.charge_captures.is_a?(Array) != false || raise("Passed value for field obj.charge_captures is not the expected type, validation failed.")
             obj.errors.is_a?(Array) != false || raise("Passed value for field obj.errors is not the expected type, validation failed.")
           end

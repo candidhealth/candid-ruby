@@ -11,6 +11,7 @@ module CandidApiClient
           SUCCESSFUL = "successful"
           SUCCESSFUL_DRY_RUN = "successful-dry-run"
           ABORTED = "aborted"
+          HELD = "held"
         end
       end
     end

@@ -34,6 +34,7 @@ require_relative "candidhealth/patient_refunds/client"
 require_relative "candidhealth/payer_plan_groups/client"
 require_relative "candidhealth/payers/client"
 require_relative "candidhealth/service_lines/client"
+require_relative "candidhealth/superbills/client"
 require_relative "candidhealth/tasks/client"
 require_relative "candidhealth/write_offs/client"
 require_relative "candidhealth/pre_encounter/client"
@@ -102,6 +103,8 @@ module CandidApiClient
     attr_reader :payers
     # @return [CandidApiClient::ServiceLines::Client]
     attr_reader :service_lines
+    # @return [CandidApiClient::Superbills::Client]
+    attr_reader :superbills
     # @return [CandidApiClient::Tasks::Client]
     attr_reader :tasks
     # @return [CandidApiClient::WriteOffs::Client]
@@ -169,6 +172,7 @@ module CandidApiClient
       @payer_plan_groups = CandidApiClient::PayerPlanGroups::Client.new(request_client: @request_client)
       @payers = CandidApiClient::Payers::Client.new(request_client: @request_client)
       @service_lines = CandidApiClient::ServiceLines::Client.new(request_client: @request_client)
+      @superbills = CandidApiClient::Superbills::Client.new(request_client: @request_client)
       @tasks = CandidApiClient::Tasks::Client.new(request_client: @request_client)
       @write_offs = CandidApiClient::WriteOffs::Client.new(request_client: @request_client)
       @pre_encounter = CandidApiClient::PreEncounter::Client.new(request_client: @request_client)
@@ -238,6 +242,8 @@ module CandidApiClient
     attr_reader :payers
     # @return [CandidApiClient::ServiceLines::AsyncClient]
     attr_reader :service_lines
+    # @return [CandidApiClient::Superbills::AsyncClient]
+    attr_reader :superbills
     # @return [CandidApiClient::Tasks::AsyncClient]
     attr_reader :tasks
     # @return [CandidApiClient::WriteOffs::AsyncClient]
@@ -305,6 +311,7 @@ module CandidApiClient
       @payer_plan_groups = CandidApiClient::PayerPlanGroups::AsyncClient.new(request_client: @async_request_client)
       @payers = CandidApiClient::Payers::AsyncClient.new(request_client: @async_request_client)
       @service_lines = CandidApiClient::ServiceLines::AsyncClient.new(request_client: @async_request_client)
+      @superbills = CandidApiClient::Superbills::AsyncClient.new(request_client: @async_request_client)
       @tasks = CandidApiClient::Tasks::AsyncClient.new(request_client: @async_request_client)
       @write_offs = CandidApiClient::WriteOffs::AsyncClient.new(request_client: @async_request_client)
       @pre_encounter = CandidApiClient::PreEncounter::AsyncClient.new(request_client: @async_request_client)

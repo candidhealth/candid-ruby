@@ -9,9 +9,7 @@ module CandidApiClient
           NOT_BILLABLE = "not-billable"
           BILLABLE = "billable"
           ABORTED = "aborted"
-          BILLED = "billed"
           ENTERED_IN_ERROR = "entered-in-error"
-          UNKNOWN = "unknown"
         end
       end
     end

@@ -2,11 +2,11 @@
 
 require_relative "../../../requests"
 require_relative "types/charge_capture_data"
-require "date"
 require_relative "types/charge_capture_status"
 require_relative "types/charge_capture"
 require_relative "types/charge_capture_sort_field"
 require_relative "../../commons/types/sort_direction"
+require "date"
 require_relative "types/charge_capture_page"
 require_relative "types/charge_capture_post_billed_change"
 require "async"
@@ -281,8 +281,6 @@ module CandidApiClient
         # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
         #  system (e.g. the EHR visit page). Send full URL format for the external link
         #  (e.g. https://emr_charge_capture_url.com/123).
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #  This date must be the local date in the timezone where the service occurred.
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
         # @param request_options [CandidApiClient::RequestOptions]
@@ -293,12 +291,10 @@ module CandidApiClient
         #    data: {  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
-        #    date_of_service: DateTime.parse(2023-01-15),
         #    patient_external_id: "string",
         #    status: PLANNED
         #  )
-        def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil,
-                   date_of_service: nil, request_options: nil)
+        def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -312,7 +308,6 @@ module CandidApiClient
               data: data,
               charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
-              date_of_service: date_of_service,
               patient_external_id: patient_external_id,
               status: status
             }.compact
@@ -601,8 +596,6 @@ module CandidApiClient
         #  https://emr_charge_capture_url.com/123).
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #  This date must be the local date in the timezone where the service occurred.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
         # @example
@@ -613,11 +606,10 @@ module CandidApiClient
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
-        #    status: PLANNED,
-        #    date_of_service: DateTime.parse(2023-01-15)
+        #    status: PLANNED
         #  )
         def update(charge_capture_id:, data: nil, charge_external_id: nil, ehr_source_url: nil,
-                   patient_external_id: nil, status: nil, date_of_service: nil, request_options: nil)
+                   patient_external_id: nil, status: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -632,8 +624,7 @@ module CandidApiClient
               charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
               patient_external_id: patient_external_id,
-              status: status,
-              date_of_service: date_of_service
+              status: status
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/charge_captures/v1/#{charge_capture_id}"
@@ -1014,8 +1005,6 @@ module CandidApiClient
         # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
         #  system (e.g. the EHR visit page). Send full URL format for the external link
         #  (e.g. https://emr_charge_capture_url.com/123).
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #  This date must be the local date in the timezone where the service occurred.
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
         # @param request_options [CandidApiClient::RequestOptions]
@@ -1026,12 +1015,10 @@ module CandidApiClient
         #    data: {  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
-        #    date_of_service: DateTime.parse(2023-01-15),
         #    patient_external_id: "string",
         #    status: PLANNED
         #  )
-        def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil,
-                   date_of_service: nil, request_options: nil)
+        def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1046,7 +1033,6 @@ module CandidApiClient
                 data: data,
                 charge_external_id: charge_external_id,
                 ehr_source_url: ehr_source_url,
-                date_of_service: date_of_service,
                 patient_external_id: patient_external_id,
                 status: status
               }.compact
@@ -1338,8 +1324,6 @@ module CandidApiClient
         #  https://emr_charge_capture_url.com/123).
         # @param patient_external_id [String] The patient ID from the external EMR platform for the patient
         # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-        #  This date must be the local date in the timezone where the service occurred.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
         # @example
@@ -1350,11 +1334,10 @@ module CandidApiClient
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
-        #    status: PLANNED,
-        #    date_of_service: DateTime.parse(2023-01-15)
+        #    status: PLANNED
         #  )
         def update(charge_capture_id:, data: nil, charge_external_id: nil, ehr_source_url: nil,
-                   patient_external_id: nil, status: nil, date_of_service: nil, request_options: nil)
+                   patient_external_id: nil, status: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1370,8 +1353,7 @@ module CandidApiClient
                 charge_external_id: charge_external_id,
                 ehr_source_url: ehr_source_url,
                 patient_external_id: patient_external_id,
-                status: status,
-                date_of_service: date_of_service
+                status: status
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1/#{charge_capture_id}"

@@ -2,7 +2,6 @@
 
 require_relative "charge_capture_status"
 require_relative "charge_capture_data"
-require "date"
 require_relative "charge_capture_error"
 require_relative "charge_capture_post_billed_change"
 require "ostruct"
@@ -25,9 +24,6 @@ module CandidApiClient
           attr_reader :charge_external_id
           # @return [String]
           attr_reader :ehr_source_url
-          # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-          #  This date must be the local date in the timezone where the service occurred.
-          attr_reader :date_of_service
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           attr_reader :error
           # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
@@ -48,22 +44,19 @@ module CandidApiClient
           # @param patient_external_id [String]
           # @param charge_external_id [String]
           # @param ehr_source_url [String]
-          # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
-          #  This date must be the local date in the timezone where the service occurred.
           # @param error [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           # @param updates [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
           # @param bundle_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
           def initialize(id:, status:, charge_capture_data:, patient_external_id:, charge_external_id:, updates:,
-                         ehr_source_url: OMIT, date_of_service: OMIT, error: OMIT, bundle_id: OMIT, additional_properties: nil)
+                         ehr_source_url: OMIT, error: OMIT, bundle_id: OMIT, additional_properties: nil)
             @id = id
             @status = status
             @charge_capture_data = charge_capture_data
             @patient_external_id = patient_external_id
             @charge_external_id = charge_external_id
             @ehr_source_url = ehr_source_url if ehr_source_url != OMIT
-            @date_of_service = date_of_service if date_of_service != OMIT
             @error = error if error != OMIT
             @updates = updates
             @bundle_id = bundle_id if bundle_id != OMIT
@@ -75,7 +68,6 @@ module CandidApiClient
               "patient_external_id": patient_external_id,
               "charge_external_id": charge_external_id,
               "ehr_source_url": ehr_source_url,
-              "date_of_service": date_of_service,
               "error": error,
               "updates": updates,
               "bundle_id": bundle_id
@@ -102,7 +94,6 @@ module CandidApiClient
             patient_external_id = struct["patient_external_id"]
             charge_external_id = struct["charge_external_id"]
             ehr_source_url = struct["ehr_source_url"]
-            date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
             if parsed_json["error"].nil?
               error = nil
             else
@@ -121,7 +112,6 @@ module CandidApiClient
               patient_external_id: patient_external_id,
               charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
-              date_of_service: date_of_service,
               error: error,
               updates: updates,
               bundle_id: bundle_id,
@@ -149,7 +139,6 @@ module CandidApiClient
             obj.patient_external_id.is_a?(String) != false || raise("Passed value for field obj.patient_external_id is not the expected type, validation failed.")
             obj.charge_external_id.is_a?(String) != false || raise("Passed value for field obj.charge_external_id is not the expected type, validation failed.")
             obj.ehr_source_url&.is_a?(String) != false || raise("Passed value for field obj.ehr_source_url is not the expected type, validation failed.")
-            obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.error.nil? || CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError.validate_raw(obj: obj.error)
             obj.updates.is_a?(Array) != false || raise("Passed value for field obj.updates is not the expected type, validation failed.")
             obj.bundle_id&.is_a?(String) != false || raise("Passed value for field obj.bundle_id is not the expected type, validation failed.")

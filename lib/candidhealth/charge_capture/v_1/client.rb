@@ -664,9 +664,26 @@ module CandidApiClient
         #  This field should not contain PHI.
         # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
-        # @param bundle_id [String] The ID of the charge capture bundle to which this charge capture belongs.
-        # @param exclude_bundled [Boolean] Whether to exclude charge captures which are associated with a charge capture
-        #  bundle.
+        # @param claim_ids [String] A list of claim IDs to filter by. This will return all charge captures that have
+        #  a resulting claim with one of the IDs in this list.
+        # @param bundle_id [String] A list of bundle IDs to filter by. Use `bundle_ids` instead.
+        # @param bundle_ids [String] A list of bundle IDs to filter by.
+        # @param billing_provider_npis [String] A list of billing provider NPIs to filter by. This will return all charge
+        #  captures with one of the NPIs in this list.
+        # @param service_facility_name [String] A string to filter by. This will return all charge captures with this service
+        #  facility name.
+        # @param primary_payer_ids [String] A list of primary payer IDs to filter by. This will return all charge captures
+        #  with one of the primary payer IDs in this list.
+        # @param rendering_provider_npis [String] A list of rendering provider NPIs to filter by. This will return all charge
+        #  captures with one of the NPIs in this list.
+        # @param rendering_provider_names [String] A list of rendering provider names to filter by. This will return all charge
+        #  captures with one of the names in this list.
+        # @param supervising_provider_npis [String] A list of supervising provider NPIs to filter by. This will return all charge
+        #  captures with one of the NPIs in this list.
+        # @param supervising_provider_names [String] A list of supervising provider names to filter by. This will return all charge
+        #  captures with one of the names in this list.
+        # @param exclude_charges_linked_to_claims [Boolean] Whether to exclude charge captures which are part of a bundle that has a created
+        #  claim.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
@@ -680,11 +697,20 @@ module CandidApiClient
         #    status: PLANNED,
         #    charge_external_id: "string",
         #    date_of_service: DateTime.parse(2023-01-15),
+        #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    bundle_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    exclude_bundled: true
+        #    bundle_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    billing_provider_npis: "string",
+        #    service_facility_name: "string",
+        #    primary_payer_ids: "string",
+        #    rendering_provider_npis: "string",
+        #    rendering_provider_names: "string",
+        #    supervising_provider_npis: "string",
+        #    supervising_provider_names: "string",
+        #    exclude_charges_linked_to_claims: true
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service: nil, bundle_id: nil, exclude_bundled: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service: nil, claim_ids: nil, bundle_id: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -703,8 +729,17 @@ module CandidApiClient
               "status": status,
               "charge_external_id": charge_external_id,
               "date_of_service": date_of_service,
+              "claim_ids": claim_ids,
               "bundle_id": bundle_id,
-              "exclude_bundled": exclude_bundled
+              "bundle_ids": bundle_ids,
+              "billing_provider_npis": billing_provider_npis,
+              "service_facility_name": service_facility_name,
+              "primary_payer_ids": primary_payer_ids,
+              "rendering_provider_npis": rendering_provider_npis,
+              "rendering_provider_names": rendering_provider_names,
+              "supervising_provider_npis": supervising_provider_npis,
+              "supervising_provider_names": supervising_provider_names,
+              "exclude_charges_linked_to_claims": exclude_charges_linked_to_claims
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/charge_captures/v1"
@@ -1396,9 +1431,26 @@ module CandidApiClient
         #  This field should not contain PHI.
         # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
-        # @param bundle_id [String] The ID of the charge capture bundle to which this charge capture belongs.
-        # @param exclude_bundled [Boolean] Whether to exclude charge captures which are associated with a charge capture
-        #  bundle.
+        # @param claim_ids [String] A list of claim IDs to filter by. This will return all charge captures that have
+        #  a resulting claim with one of the IDs in this list.
+        # @param bundle_id [String] A list of bundle IDs to filter by. Use `bundle_ids` instead.
+        # @param bundle_ids [String] A list of bundle IDs to filter by.
+        # @param billing_provider_npis [String] A list of billing provider NPIs to filter by. This will return all charge
+        #  captures with one of the NPIs in this list.
+        # @param service_facility_name [String] A string to filter by. This will return all charge captures with this service
+        #  facility name.
+        # @param primary_payer_ids [String] A list of primary payer IDs to filter by. This will return all charge captures
+        #  with one of the primary payer IDs in this list.
+        # @param rendering_provider_npis [String] A list of rendering provider NPIs to filter by. This will return all charge
+        #  captures with one of the NPIs in this list.
+        # @param rendering_provider_names [String] A list of rendering provider names to filter by. This will return all charge
+        #  captures with one of the names in this list.
+        # @param supervising_provider_npis [String] A list of supervising provider NPIs to filter by. This will return all charge
+        #  captures with one of the NPIs in this list.
+        # @param supervising_provider_names [String] A list of supervising provider names to filter by. This will return all charge
+        #  captures with one of the names in this list.
+        # @param exclude_charges_linked_to_claims [Boolean] Whether to exclude charge captures which are part of a bundle that has a created
+        #  claim.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
@@ -1412,11 +1464,20 @@ module CandidApiClient
         #    status: PLANNED,
         #    charge_external_id: "string",
         #    date_of_service: DateTime.parse(2023-01-15),
+        #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    bundle_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    exclude_bundled: true
+        #    bundle_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    billing_provider_npis: "string",
+        #    service_facility_name: "string",
+        #    primary_payer_ids: "string",
+        #    rendering_provider_npis: "string",
+        #    rendering_provider_names: "string",
+        #    supervising_provider_npis: "string",
+        #    supervising_provider_names: "string",
+        #    exclude_charges_linked_to_claims: true
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service: nil, bundle_id: nil, exclude_bundled: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service: nil, claim_ids: nil, bundle_id: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1436,8 +1497,17 @@ module CandidApiClient
                 "status": status,
                 "charge_external_id": charge_external_id,
                 "date_of_service": date_of_service,
+                "claim_ids": claim_ids,
                 "bundle_id": bundle_id,
-                "exclude_bundled": exclude_bundled
+                "bundle_ids": bundle_ids,
+                "billing_provider_npis": billing_provider_npis,
+                "service_facility_name": service_facility_name,
+                "primary_payer_ids": primary_payer_ids,
+                "rendering_provider_npis": rendering_provider_npis,
+                "rendering_provider_names": rendering_provider_names,
+                "supervising_provider_npis": supervising_provider_npis,
+                "supervising_provider_names": supervising_provider_names,
+                "exclude_charges_linked_to_claims": exclude_charges_linked_to_claims
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1"

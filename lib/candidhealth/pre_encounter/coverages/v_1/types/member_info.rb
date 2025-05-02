@@ -10,13 +10,21 @@ module CandidApiClient
       module V1
         module Types
           class MemberInfo
-            # @return [String]
+            # @return [String] Stedi requires that you supply at least one of these fields in the request:
+            #  memberId, dateOfBirth, or lastName.
+            #  However, each payer has different requirements, so you should supply as many of
+            #  the fields necessary for each payer
+            #  to identify the subscriber/dependent in their system.
             attr_reader :member_id
             # @return [String]
             attr_reader :first_name
             # @return [String]
             attr_reader :last_name
-            # @return [Date]
+            # @return [Date] Stedi requires that you supply at least one of these fields in the request:
+            #  memberId, dateOfBirth, or lastName.
+            #  However, each payer has different requirements, so you should supply as many of
+            #  the fields necessary for each payer
+            #  to identify the subscriber/dependent in their system.
             attr_reader :date_of_birth
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
@@ -26,24 +34,34 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param member_id [String]
+            # @param member_id [String] Stedi requires that you supply at least one of these fields in the request:
+            #  memberId, dateOfBirth, or lastName.
+            #  However, each payer has different requirements, so you should supply as many of
+            #  the fields necessary for each payer
+            #  to identify the subscriber/dependent in their system.
             # @param first_name [String]
             # @param last_name [String]
-            # @param date_of_birth [Date]
+            # @param date_of_birth [Date] Stedi requires that you supply at least one of these fields in the request:
+            #  memberId, dateOfBirth, or lastName.
+            #  However, each payer has different requirements, so you should supply as many of
+            #  the fields necessary for each payer
+            #  to identify the subscriber/dependent in their system.
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::MemberInfo]
-            def initialize(member_id:, first_name:, last_name:, date_of_birth:, additional_properties: nil)
-              @member_id = member_id
+            def initialize(first_name:, last_name:, member_id: OMIT, date_of_birth: OMIT, additional_properties: nil)
+              @member_id = member_id if member_id != OMIT
               @first_name = first_name
               @last_name = last_name
-              @date_of_birth = date_of_birth
+              @date_of_birth = date_of_birth if date_of_birth != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "member_id": member_id,
                 "first_name": first_name,
                 "last_name": last_name,
                 "date_of_birth": date_of_birth
-              }
+              }.reject do |_k, v|
+                v == OMIT
+              end
             end
 
             # Deserialize a JSON object to an instance of MemberInfo
@@ -80,10 +98,10 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              obj.member_id.is_a?(String) != false || raise("Passed value for field obj.member_id is not the expected type, validation failed.")
+              obj.member_id&.is_a?(String) != false || raise("Passed value for field obj.member_id is not the expected type, validation failed.")
               obj.first_name.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")
               obj.last_name.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
-              obj.date_of_birth.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")
+              obj.date_of_birth&.is_a?(Date) != false || raise("Passed value for field obj.date_of_birth is not the expected type, validation failed.")
             end
           end
         end

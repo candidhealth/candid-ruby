@@ -8,8 +8,7 @@ module CandidApiClient
     module V1
       module Types
         class ChargeCaptureBundleSummary
-          # @return [Integer] The count of charge captures which are not part of a bundle with a created
-          #  claim.
+          # @return [Integer] The count of charge captures which are not part of a claim creation.
           attr_reader :charge_capture_charges_not_linked_to_claims_count
           # @return [Integer] The count of charge capture bundles that have a bundle status of NOT_STARTED.
           attr_reader :charge_capture_bundles_not_started_count
@@ -27,8 +26,7 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param charge_capture_charges_not_linked_to_claims_count [Integer] The count of charge captures which are not part of a bundle with a created
-          #  claim.
+          # @param charge_capture_charges_not_linked_to_claims_count [Integer] The count of charge captures which are not part of a claim creation.
           # @param charge_capture_bundles_not_started_count [Integer] The count of charge capture bundles that have a bundle status of NOT_STARTED.
           # @param charge_capture_held_bundles_count [Integer] The count of charge capture bundles that have a bundle status of HELD.
           # @param charge_capture_bundles_in_error_count [Integer] The count of charge capture bundles that have a bundle status of IN_ERROR.

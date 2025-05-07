@@ -2,6 +2,7 @@
 
 require_relative "charge_capture_status"
 require_relative "charge_capture_data"
+require "date"
 require_relative "charge_capture_error"
 require_relative "charge_capture_post_billed_change"
 require "ostruct"
@@ -18,6 +19,8 @@ module CandidApiClient
           attr_reader :status
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData]
           attr_reader :charge_capture_data
+          # @return [Date]
+          attr_reader :date_of_service
           # @return [String]
           attr_reader :patient_external_id
           # @return [String]
@@ -41,6 +44,7 @@ module CandidApiClient
           # @param id [String]
           # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus]
           # @param charge_capture_data [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData]
+          # @param date_of_service [Date]
           # @param patient_external_id [String]
           # @param charge_external_id [String]
           # @param ehr_source_url [String]
@@ -50,10 +54,11 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
           def initialize(id:, status:, charge_capture_data:, patient_external_id:, charge_external_id:, updates:,
-                         ehr_source_url: OMIT, error: OMIT, bundle_id: OMIT, additional_properties: nil)
+                         date_of_service: OMIT, ehr_source_url: OMIT, error: OMIT, bundle_id: OMIT, additional_properties: nil)
             @id = id
             @status = status
             @charge_capture_data = charge_capture_data
+            @date_of_service = date_of_service if date_of_service != OMIT
             @patient_external_id = patient_external_id
             @charge_external_id = charge_external_id
             @ehr_source_url = ehr_source_url if ehr_source_url != OMIT
@@ -65,6 +70,7 @@ module CandidApiClient
               "id": id,
               "status": status,
               "charge_capture_data": charge_capture_data,
+              "date_of_service": date_of_service,
               "patient_external_id": patient_external_id,
               "charge_external_id": charge_external_id,
               "ehr_source_url": ehr_source_url,
@@ -91,6 +97,7 @@ module CandidApiClient
               charge_capture_data = parsed_json["charge_capture_data"].to_json
               charge_capture_data = CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData.from_json(json_object: charge_capture_data)
             end
+            date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
             patient_external_id = struct["patient_external_id"]
             charge_external_id = struct["charge_external_id"]
             ehr_source_url = struct["ehr_source_url"]
@@ -109,6 +116,7 @@ module CandidApiClient
               id: id,
               status: status,
               charge_capture_data: charge_capture_data,
+              date_of_service: date_of_service,
               patient_external_id: patient_external_id,
               charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
@@ -136,6 +144,7 @@ module CandidApiClient
             obj.id.is_a?(String) != false || raise("Passed value for field obj.id is not the expected type, validation failed.")
             obj.status.is_a?(CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
             CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData.validate_raw(obj: obj.charge_capture_data)
+            obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.patient_external_id.is_a?(String) != false || raise("Passed value for field obj.patient_external_id is not the expected type, validation failed.")
             obj.charge_external_id.is_a?(String) != false || raise("Passed value for field obj.charge_external_id is not the expected type, validation failed.")
             obj.ehr_source_url&.is_a?(String) != false || raise("Passed value for field obj.ehr_source_url is not the expected type, validation failed.")

@@ -97,7 +97,9 @@ module CandidApiClient
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        # @param date_of_service_min [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
+        # @param date_of_service_max [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
         # @param claim_ids [String] A list of claim IDs to filter by. This will return all charge capture bundles
         #  that have a resulting claim with one of the IDs in this list.
@@ -138,7 +140,8 @@ module CandidApiClient
         #    bundle_status: NOT_STARTED,
         #    charge_status: PLANNED,
         #    charge_external_id: "string",
-        #    date_of_service: DateTime.parse(2023-01-15),
+        #    date_of_service_min: DateTime.parse(2023-01-15),
+        #    date_of_service_max: DateTime.parse(2023-01-15),
         #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    bundle_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    billing_provider_npis: "string",
@@ -151,7 +154,7 @@ module CandidApiClient
         #    has_charge_capture_updates: true
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil,
-                    bundle_status: nil, charge_status: nil, charge_external_id: nil, date_of_service: nil, claim_ids: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
+                    bundle_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -170,7 +173,8 @@ module CandidApiClient
               "bundle_status": bundle_status,
               "charge_status": charge_status,
               "charge_external_id": charge_external_id,
-              "date_of_service": date_of_service,
+              "date_of_service_min": date_of_service_min,
+              "date_of_service_max": date_of_service_max,
               "claim_ids": claim_ids,
               "bundle_ids": bundle_ids,
               "billing_provider_npis": billing_provider_npis,
@@ -278,7 +282,9 @@ module CandidApiClient
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
         #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
         #  This field should not contain PHI.
-        # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        # @param date_of_service_min [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
+        #  This date must be the local date in the timezone where the service occurred.
+        # @param date_of_service_max [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
         # @param claim_ids [String] A list of claim IDs to filter by. This will return all charge capture bundles
         #  that have a resulting claim with one of the IDs in this list.
@@ -319,7 +325,8 @@ module CandidApiClient
         #    bundle_status: NOT_STARTED,
         #    charge_status: PLANNED,
         #    charge_external_id: "string",
-        #    date_of_service: DateTime.parse(2023-01-15),
+        #    date_of_service_min: DateTime.parse(2023-01-15),
+        #    date_of_service_max: DateTime.parse(2023-01-15),
         #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    bundle_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    billing_provider_npis: "string",
@@ -332,7 +339,7 @@ module CandidApiClient
         #    has_charge_capture_updates: true
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil,
-                    bundle_status: nil, charge_status: nil, charge_external_id: nil, date_of_service: nil, claim_ids: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
+                    bundle_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -352,7 +359,8 @@ module CandidApiClient
                 "bundle_status": bundle_status,
                 "charge_status": charge_status,
                 "charge_external_id": charge_external_id,
-                "date_of_service": date_of_service,
+                "date_of_service_min": date_of_service_min,
+                "date_of_service_max": date_of_service_max,
                 "claim_ids": claim_ids,
                 "bundle_ids": bundle_ids,
                 "billing_provider_npis": billing_provider_npis,

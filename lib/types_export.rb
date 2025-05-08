@@ -3,6 +3,7 @@
 require_relative "candidhealth/auth/v_2/types/auth_get_token_response"
 require_relative "candidhealth/auth/v_2/types/too_many_requests_error_type"
 require_relative "candidhealth/billing_notes/v_2/types/billing_note_base"
+require_relative "candidhealth/billing_notes/v_2/types/billing_note_optional"
 require_relative "candidhealth/billing_notes/v_2/types/billing_note"
 require_relative "candidhealth/charge_capture_bundles/v_1/types/charge_capture_bundle_page"
 require_relative "candidhealth/charge_capture_bundles/v_1/types/charge_capture_bundle"

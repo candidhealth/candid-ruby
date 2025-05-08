@@ -5,7 +5,7 @@ require_relative "../../../encounters/v_4/types/intervention"
 require_relative "../../../claim_submission/v_1/types/external_claim_submission_create"
 require_relative "../../../service_lines/v_2/types/service_line_create"
 require_relative "../../../encounters/v_4/types/patient_history_category"
-require_relative "../../../billing_notes/v_2/types/billing_note"
+require_relative "../../../billing_notes/v_2/types/billing_note_optional"
 require "date"
 require_relative "../../../encounters/v_4/types/clinical_note_category_create"
 require_relative "../../../commons/types/street_address_long_zip"
@@ -56,7 +56,7 @@ module CandidApiClient
           attr_reader :service_lines
           # @return [Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>]
           attr_reader :patient_histories
-          # @return [Array<CandidApiClient::BillingNotes::V2::Types::BillingNote>] Spot to store misc, human-readable, notes about this encounter to be
+          # @return [Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteOptional>] Spot to store misc, human-readable, notes about this encounter to be
           #  used in the billing process.
           attr_reader :billing_notes
           # @return [Boolean] Whether this patient has authorized insurance payments to be made to you, not
@@ -253,7 +253,7 @@ module CandidApiClient
           #  `service_line.diagnosis_pointers`must contain at least one entry which should be
           #  in bounds of the diagnoses list field.
           # @param patient_histories [Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategory>]
-          # @param billing_notes [Array<CandidApiClient::BillingNotes::V2::Types::BillingNote>] Spot to store misc, human-readable, notes about this encounter to be
+          # @param billing_notes [Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteOptional>] Spot to store misc, human-readable, notes about this encounter to be
           #  used in the billing process.
           # @param benefits_assigned_to_provider [Boolean] Whether this patient has authorized insurance payments to be made to you, not
           #  them. If false, patient may receive reimbursement. Box 13 on the CMS-1500 claim
@@ -524,7 +524,7 @@ module CandidApiClient
             end
             billing_notes = parsed_json["billing_notes"]&.map do |item|
               item = item.to_json
-              CandidApiClient::BillingNotes::V2::Types::BillingNote.from_json(json_object: item)
+              CandidApiClient::BillingNotes::V2::Types::BillingNoteOptional.from_json(json_object: item)
             end
             benefits_assigned_to_provider = struct["benefits_assigned_to_provider"]
             prior_authorization_number = struct["prior_authorization_number"]

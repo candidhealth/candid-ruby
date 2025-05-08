@@ -4,7 +4,7 @@ module CandidApiClient
   module ChargeCaptureBundles
     module V1
       module Types
-        class ChargeCaptureBundleSortField
+        class ChargeCaptureClaimCreationSortField
           CREATED_AT = "created_at"
         end
       end

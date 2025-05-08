@@ -288,7 +288,7 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
-        #    data: {  },
+        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -602,7 +602,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.update(
         #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    data: {  },
+        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -668,8 +668,7 @@ module CandidApiClient
         #  This date must be the local date in the timezone where the service occurred.
         # @param claim_ids [String] A list of claim IDs to filter by. This will return all charge captures that have
         #  a resulting claim with one of the IDs in this list.
-        # @param bundle_id [String] A list of bundle IDs to filter by. Use `bundle_ids` instead.
-        # @param bundle_ids [String] A list of bundle IDs to filter by.
+        # @param claim_creation_ids [String] A list of Claim Creation IDs to filter by.
         # @param billing_provider_npis [String] A list of billing provider NPIs to filter by. This will return all charge
         #  captures with one of the NPIs in this list.
         # @param service_facility_name [String] A string to filter by. This will return all charge captures with this service
@@ -696,7 +695,7 @@ module CandidApiClient
         #  This date must be the local date in the timezone where the service occurred.
         # @param claim_ids_ranked_sort [String] A list of claim IDs to show first. This will return all charge captures that
         #  have a resulting claim with one of the IDs in this list.
-        # @param bundle_ids_ranked_sort [String] A list of bundle IDs to show first.
+        # @param claim_creation_ids_ranked_sort [String] A list of Claim Creation IDs to show first.
         # @param billing_provider_npis_ranked_sort [String] A list of billing provider NPIs to show first. This will return all charge
         #  captures with one of the NPIs in this list.
         # @param service_facility_name_ranked_sort [String] A string to show first. This will return all charge captures with this service
@@ -726,8 +725,7 @@ module CandidApiClient
         #    date_of_service_min: DateTime.parse(2023-01-15),
         #    date_of_service_max: DateTime.parse(2023-01-15),
         #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    bundle_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    bundle_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    claim_creation_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    billing_provider_npis: "string",
         #    service_facility_name: "string",
         #    primary_payer_ids: "string",
@@ -742,7 +740,7 @@ module CandidApiClient
         #    date_of_service_min_ranked_sort: DateTime.parse(2023-01-15),
         #    date_of_service_max_ranked_sort: DateTime.parse(2023-01-15),
         #    claim_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    bundle_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    claim_creation_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    billing_provider_npis_ranked_sort: "string",
         #    service_facility_name_ranked_sort: "string",
         #    primary_payer_ids_ranked_sort: "string",
@@ -752,7 +750,7 @@ module CandidApiClient
         #    supervising_provider_names_ranked_sort: "string"
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, bundle_id: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, bundle_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -773,8 +771,7 @@ module CandidApiClient
               "date_of_service_min": date_of_service_min,
               "date_of_service_max": date_of_service_max,
               "claim_ids": claim_ids,
-              "bundle_id": bundle_id,
-              "bundle_ids": bundle_ids,
+              "claim_creation_ids": claim_creation_ids,
               "billing_provider_npis": billing_provider_npis,
               "service_facility_name": service_facility_name,
               "primary_payer_ids": primary_payer_ids,
@@ -789,7 +786,7 @@ module CandidApiClient
               "date_of_service_min_ranked_sort": date_of_service_min_ranked_sort,
               "date_of_service_max_ranked_sort": date_of_service_max_ranked_sort,
               "claim_ids_ranked_sort": claim_ids_ranked_sort,
-              "bundle_ids_ranked_sort": bundle_ids_ranked_sort,
+              "claim_creation_ids_ranked_sort": claim_creation_ids_ranked_sort,
               "billing_provider_npis_ranked_sort": billing_provider_npis_ranked_sort,
               "service_facility_name_ranked_sort": service_facility_name_ranked_sort,
               "primary_payer_ids_ranked_sort": primary_payer_ids_ranked_sort,
@@ -1104,7 +1101,7 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
-        #    data: {  },
+        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -1422,7 +1419,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.update(
         #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    data: {  },
+        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -1492,8 +1489,7 @@ module CandidApiClient
         #  This date must be the local date in the timezone where the service occurred.
         # @param claim_ids [String] A list of claim IDs to filter by. This will return all charge captures that have
         #  a resulting claim with one of the IDs in this list.
-        # @param bundle_id [String] A list of bundle IDs to filter by. Use `bundle_ids` instead.
-        # @param bundle_ids [String] A list of bundle IDs to filter by.
+        # @param claim_creation_ids [String] A list of Claim Creation IDs to filter by.
         # @param billing_provider_npis [String] A list of billing provider NPIs to filter by. This will return all charge
         #  captures with one of the NPIs in this list.
         # @param service_facility_name [String] A string to filter by. This will return all charge captures with this service
@@ -1520,7 +1516,7 @@ module CandidApiClient
         #  This date must be the local date in the timezone where the service occurred.
         # @param claim_ids_ranked_sort [String] A list of claim IDs to show first. This will return all charge captures that
         #  have a resulting claim with one of the IDs in this list.
-        # @param bundle_ids_ranked_sort [String] A list of bundle IDs to show first.
+        # @param claim_creation_ids_ranked_sort [String] A list of Claim Creation IDs to show first.
         # @param billing_provider_npis_ranked_sort [String] A list of billing provider NPIs to show first. This will return all charge
         #  captures with one of the NPIs in this list.
         # @param service_facility_name_ranked_sort [String] A string to show first. This will return all charge captures with this service
@@ -1550,8 +1546,7 @@ module CandidApiClient
         #    date_of_service_min: DateTime.parse(2023-01-15),
         #    date_of_service_max: DateTime.parse(2023-01-15),
         #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    bundle_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    bundle_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    claim_creation_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    billing_provider_npis: "string",
         #    service_facility_name: "string",
         #    primary_payer_ids: "string",
@@ -1566,7 +1561,7 @@ module CandidApiClient
         #    date_of_service_min_ranked_sort: DateTime.parse(2023-01-15),
         #    date_of_service_max_ranked_sort: DateTime.parse(2023-01-15),
         #    claim_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    bundle_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    claim_creation_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    billing_provider_npis_ranked_sort: "string",
         #    service_facility_name_ranked_sort: "string",
         #    primary_payer_ids_ranked_sort: "string",
@@ -1576,7 +1571,7 @@ module CandidApiClient
         #    supervising_provider_names_ranked_sort: "string"
         #  )
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, bundle_id: nil, bundle_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, bundle_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1598,8 +1593,7 @@ module CandidApiClient
                 "date_of_service_min": date_of_service_min,
                 "date_of_service_max": date_of_service_max,
                 "claim_ids": claim_ids,
-                "bundle_id": bundle_id,
-                "bundle_ids": bundle_ids,
+                "claim_creation_ids": claim_creation_ids,
                 "billing_provider_npis": billing_provider_npis,
                 "service_facility_name": service_facility_name,
                 "primary_payer_ids": primary_payer_ids,
@@ -1614,7 +1608,7 @@ module CandidApiClient
                 "date_of_service_min_ranked_sort": date_of_service_min_ranked_sort,
                 "date_of_service_max_ranked_sort": date_of_service_max_ranked_sort,
                 "claim_ids_ranked_sort": claim_ids_ranked_sort,
-                "bundle_ids_ranked_sort": bundle_ids_ranked_sort,
+                "claim_creation_ids_ranked_sort": claim_creation_ids_ranked_sort,
                 "billing_provider_npis_ranked_sort": billing_provider_npis_ranked_sort,
                 "service_facility_name_ranked_sort": service_facility_name_ranked_sort,
                 "primary_payer_ids_ranked_sort": primary_payer_ids_ranked_sort,

@@ -4,7 +4,7 @@ require_relative "lib/gemconfig"
 
 Gem::Specification.new do |spec|
   spec.name = "candidhealth"
-  spec.version = "0.42.5"
+  spec.version = "0.43.0"
   spec.authors = CandidApiClient::Gemconfig::AUTHORS
   spec.email = CandidApiClient::Gemconfig::EMAIL
   spec.summary = CandidApiClient::Gemconfig::SUMMARY
@@ -20,6 +20,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.add_dependency "async-http-faraday", ">= 0.0", "< 1.0"
   spec.add_dependency "faraday", ">= 1.10", "< 3.0"
+  spec.add_dependency "faraday-multipart", ">= 0.0", "< 2.0"
   spec.add_dependency "faraday-net_http", ">= 1.0", "< 4.0"
   spec.add_dependency "faraday-retry", ">= 1.0", "< 3.0"
+  spec.add_dependency "mini_mime"
 end

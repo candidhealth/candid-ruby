@@ -2,6 +2,7 @@
 
 require_relative "environment"
 require "faraday"
+require "faraday/multipart"
 require "faraday/retry"
 require "async/http/faraday"
 
@@ -27,6 +28,7 @@ module CandidApiClient
       @default_environment = environment
       @token = token
       @conn = Faraday.new do |faraday|
+        faraday.request :multipart
         faraday.request :json
         faraday.response :raise_error, include_request: true
         faraday.request :retry, { max: max_retries } unless max_retries.nil?
@@ -43,7 +45,7 @@ module CandidApiClient
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.42.5" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.43.0" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end
@@ -70,6 +72,7 @@ module CandidApiClient
       @default_environment = environment
       @token = token
       @conn = Faraday.new do |faraday|
+        faraday.request :multipart
         faraday.request :json
         faraday.response :raise_error, include_request: true
         faraday.adapter :async_http
@@ -87,7 +90,7 @@ module CandidApiClient
 
     # @return [Hash{String => String}]
     def get_headers
-      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.42.5" }
+      headers = { "X-Fern-Language": "Ruby", "X-Fern-SDK-Name": "candidhealth", "X-Fern-SDK-Version": "0.43.0" }
       headers["Authorization"] = ((@token.is_a? Method) ? @token.call : @token) unless token.nil?
       headers
     end

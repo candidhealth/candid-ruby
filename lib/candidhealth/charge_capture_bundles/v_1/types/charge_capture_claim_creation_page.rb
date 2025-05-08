@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "charge_capture_bundle"
+require_relative "charge_capture_claim_creation"
 require "ostruct"
 require "json"
 
@@ -8,8 +8,8 @@ module CandidApiClient
   module ChargeCaptureBundles
     module V1
       module Types
-        class ChargeCaptureBundlePage
-          # @return [Array<CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundle>]
+        class ChargeCaptureClaimCreationPage
+          # @return [Array<CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation>]
           attr_reader :items
           # @return [String]
           attr_reader :prev_page_token
@@ -23,11 +23,11 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param items [Array<CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundle>]
+          # @param items [Array<CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation>]
           # @param prev_page_token [String]
           # @param next_page_token [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundlePage]
+          # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationPage]
           def initialize(items:, prev_page_token: OMIT, next_page_token: OMIT, additional_properties: nil)
             @items = items
             @prev_page_token = prev_page_token if prev_page_token != OMIT
@@ -42,16 +42,16 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of ChargeCaptureBundlePage
+          # Deserialize a JSON object to an instance of ChargeCaptureClaimCreationPage
           #
           # @param json_object [String]
-          # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundlePage]
+          # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationPage]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
             items = parsed_json["items"]&.map do |item|
               item = item.to_json
-              CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureBundle.from_json(json_object: item)
+              CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation.from_json(json_object: item)
             end
             prev_page_token = struct["prev_page_token"]
             next_page_token = struct["next_page_token"]
@@ -63,7 +63,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of ChargeCaptureBundlePage to a JSON object
+          # Serialize an instance of ChargeCaptureClaimCreationPage to a JSON object
           #
           # @return [String]
           def to_json(*_args)

@@ -4,7 +4,7 @@ module CandidApiClient
   module ChargeCaptureBundles
     module V1
       module Types
-        class ChargeCaptureBundleStatus
+        class ChargeCaptureClaimCreationStatus
           NOT_STARTED = "not-started"
           IN_ERROR = "in-error"
           SUCCESSFUL = "successful"

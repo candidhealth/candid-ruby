@@ -9,6 +9,7 @@ require_relative "../../commons/types/sort_direction"
 require "date"
 require_relative "types/charge_capture_page"
 require_relative "types/charge_capture_post_billed_change"
+require "json"
 require "async"
 
 module CandidApiClient
@@ -288,7 +289,7 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
-        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
+        #    data: {  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -602,7 +603,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.update(
         #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
+        #    data: {  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -801,16 +802,17 @@ module CandidApiClient
           CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage.from_json(json_object: response.body)
         end
 
-        # @param charge_capture_change_id [String]
+        # @param charge_capture_change_ids [Array<String>] A list of UUIDs corresponding to ChargeCapturePostBilledChanges.
+        #  All of the charges sent will be marked as resolved
         # @param resolved [Boolean] Whether the change has been resolved. If true, the change will be marked as
         #  resolved.
         #  If false, the change will be marked as unresolved.
         # @param request_options [CandidApiClient::RequestOptions]
-        # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange]
+        # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.update_post_billed_change(charge_capture_change_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", resolved: true)
-        def update_post_billed_change(charge_capture_change_id:, resolved:, request_options: nil)
+        #  api.charge_capture.v_1.update_post_billed_changes(charge_capture_change_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], resolved: true)
+        def update_post_billed_changes(charge_capture_change_ids:, resolved:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -819,11 +821,19 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.body = { **(request_options&.additional_body_parameters || {}), resolved: resolved }.compact
+            req.body = {
+              **(request_options&.additional_body_parameters || {}),
+              charge_capture_change_ids: charge_capture_change_ids,
+              resolved: resolved
+            }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
-                                               request_options: request_options)}/api/charge_captures/v1/changes/#{charge_capture_change_id}"
+                                               request_options: request_options)}/api/charge_captures/v1/changes"
           end
-          CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: response.body)
+          parsed_json = JSON.parse(response.body)
+          parsed_json&.map do |item|
+            item = item.to_json
+            CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: item)
+          end
         end
       end
 
@@ -1101,7 +1111,7 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
-        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
+        #    data: {  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -1419,7 +1429,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.update(
         #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    data: { diagnoses: , interventions: , external_claim_submission: { claim_created_at: DateTime.parse(2023-01-01T12:00:00.000Z), patient_control_number: "PATIENT_CONTROL_NUMBER", submission_records: [{ submitted_at: DateTime.parse(2023-01-01T13:00:00.000Z), claim_frequency_code: ORIGINAL, payer_responsibility: PRIMARY, intended_submission_medium: ELECTRONIC }, { submitted_at: DateTime.parse(2023-01-04T12:00:00.000Z), claim_frequency_code: REPLACEMENT, payer_responsibility: PRIMARY, intended_submission_medium: PAPER }] }, service_lines: , patient_histories: , billing_notes: , benefits_assigned_to_provider: true, prior_authorization_number: "string", external_id: "string", date_of_service: DateTime.parse(2023-01-15), tag_ids: , clinical_notes: , pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, billable_status: BILLABLE, responsible_party: INSURANCE_PAY, provider_accepts_assignment: true, synchronicity: SYNCHRONOUS, place_of_service_code: PHARMACY, appointment_type: "string", end_date_of_service: DateTime.parse(2023-01-15), subscriber_primary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_secondary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, subscriber_tertiary: { insurance_card: { member_id: "string", payer_name: "string", payer_id: "string" }, patient_relationship_to_subscriber_code: SPOUSE, first_name: "string", last_name: "string", gender: MALE }, additional_information: "string", service_authorization_exception_code: C_1, admission_date: DateTime.parse(2023-01-15), discharge_date: DateTime.parse(2023-01-15), onset_of_current_illness_or_symptom_date: DateTime.parse(2023-01-15), last_menstrual_period_date: DateTime.parse(2023-01-15), delay_reason_code: C_1, patient: {  }, patient_authorized_release: true, schema_instances: , vitals: { height_in: 70, weight_lbs: 165, blood_pressure_systolic_mmhg: 115, blood_pressure_diastolic_mmhg: 85, body_temperature_f: 98, hemoglobin_gdl: 15.1, hematocrit_pct: 51.2 }, existing_medications: , rendering_provider: {  }, service_facility: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } }, guarantor: {  }, billing_provider: {  }, supervising_provider: {  }, referring_provider: {  }, initial_referring_provider: {  }, referral_number: "string", epsdt_referral: { condition_indicator_1: AV }, claim_supplemental_information:  },
+        #    data: {  },
         #    charge_external_id: "string",
         #    ehr_source_url: "string",
         #    patient_external_id: "string",
@@ -1624,16 +1634,17 @@ module CandidApiClient
           end
         end
 
-        # @param charge_capture_change_id [String]
+        # @param charge_capture_change_ids [Array<String>] A list of UUIDs corresponding to ChargeCapturePostBilledChanges.
+        #  All of the charges sent will be marked as resolved
         # @param resolved [Boolean] Whether the change has been resolved. If true, the change will be marked as
         #  resolved.
         #  If false, the change will be marked as unresolved.
         # @param request_options [CandidApiClient::RequestOptions]
-        # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange]
+        # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.update_post_billed_change(charge_capture_change_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", resolved: true)
-        def update_post_billed_change(charge_capture_change_id:, resolved:, request_options: nil)
+        #  api.charge_capture.v_1.update_post_billed_changes(charge_capture_change_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], resolved: true)
+        def update_post_billed_changes(charge_capture_change_ids:, resolved:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1643,11 +1654,19 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.body = { **(request_options&.additional_body_parameters || {}), resolved: resolved }.compact
+              req.body = {
+                **(request_options&.additional_body_parameters || {}),
+                charge_capture_change_ids: charge_capture_change_ids,
+                resolved: resolved
+              }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
-                                                 request_options: request_options)}/api/charge_captures/v1/changes/#{charge_capture_change_id}"
+                                                 request_options: request_options)}/api/charge_captures/v1/changes"
             end
-            CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: response.body)
+            parsed_json = JSON.parse(response.body)
+            parsed_json&.map do |item|
+              item = item.to_json
+              CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange.from_json(json_object: item)
+            end
           end
         end
       end

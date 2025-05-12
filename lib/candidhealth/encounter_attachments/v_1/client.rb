@@ -46,7 +46,7 @@ module CandidApiClient
         end
 
         # Uploads a file to the encounter. The file will be stored in the
-        #  encounter's attachments. The maximum file size is 25MB.
+        #  encounter's attachments.
         #
         # @param encounter_id [String]
         # @param attachment_file [String, IO]
@@ -137,7 +137,7 @@ module CandidApiClient
         end
 
         # Uploads a file to the encounter. The file will be stored in the
-        #  encounter's attachments. The maximum file size is 25MB.
+        #  encounter's attachments.
         #
         # @param encounter_id [String]
         # @param attachment_file [String, IO]

@@ -2,6 +2,7 @@
 
 require_relative "charge_capture_claim_creation_status"
 require_relative "../../../charge_capture/v_1/types/charge_capture_error"
+require_relative "../../../charge_capture/v_1/types/charge_capture_data"
 require "ostruct"
 require "json"
 
@@ -17,7 +18,7 @@ module CandidApiClient
           # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationStatus] Status of the Claim Creation, Successful means that the Claim Creation created a
           #  corresponding Claim
           attr_reader :status
-          # @return [Hash{String => String}] A dictionary of characteristics that are used to group charge captures together
+          # @return [Hash{String => Object}] A dictionary of characteristics that are used to group charge captures together
           #  based on the bundling configuration.
           #  Example: {"service_facility.npi": "99999999", "date_of_service": "2023-01-01"}
           attr_reader :characteristics
@@ -25,6 +26,9 @@ module CandidApiClient
           #  Errors can correspond to the Claim Creation as a whole or specific underlying
           #  Charge Captures.
           attr_reader :errors
+          # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData] If a ChargeCaptureBundle attempts creation, this is the input that was created
+          #  from the underlying charges and used to attempt encounter creation.
+          attr_reader :encounter_creation_input
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -37,28 +41,32 @@ module CandidApiClient
           # @param created_encounter_id [String]
           # @param status [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationStatus] Status of the Claim Creation, Successful means that the Claim Creation created a
           #  corresponding Claim
-          # @param characteristics [Hash{String => String}] A dictionary of characteristics that are used to group charge captures together
+          # @param characteristics [Hash{String => Object}] A dictionary of characteristics that are used to group charge captures together
           #  based on the bundling configuration.
           #  Example: {"service_facility.npi": "99999999", "date_of_service": "2023-01-01"}
           # @param errors [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError>] All errors that were found when the Claim was attempted to be created.
           #  Errors can correspond to the Claim Creation as a whole or specific underlying
           #  Charge Captures.
+          # @param encounter_creation_input [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData] If a ChargeCaptureBundle attempts creation, this is the input that was created
+          #  from the underlying charges and used to attempt encounter creation.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation]
           def initialize(id:, status:, characteristics:, errors:, created_encounter_id: OMIT,
-                         additional_properties: nil)
+                         encounter_creation_input: OMIT, additional_properties: nil)
             @id = id
             @created_encounter_id = created_encounter_id if created_encounter_id != OMIT
             @status = status
             @characteristics = characteristics
             @errors = errors
+            @encounter_creation_input = encounter_creation_input if encounter_creation_input != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "id": id,
               "created_encounter_id": created_encounter_id,
               "status": status,
               "characteristics": characteristics,
-              "errors": errors
+              "errors": errors,
+              "encounter_creation_input": encounter_creation_input
             }.reject do |_k, v|
               v == OMIT
             end
@@ -79,12 +87,19 @@ module CandidApiClient
               item = item.to_json
               CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError.from_json(json_object: item)
             end
+            if parsed_json["encounter_creation_input"].nil?
+              encounter_creation_input = nil
+            else
+              encounter_creation_input = parsed_json["encounter_creation_input"].to_json
+              encounter_creation_input = CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData.from_json(json_object: encounter_creation_input)
+            end
             new(
               id: id,
               created_encounter_id: created_encounter_id,
               status: status,
               characteristics: characteristics,
               errors: errors,
+              encounter_creation_input: encounter_creation_input,
               additional_properties: struct
             )
           end
@@ -108,6 +123,7 @@ module CandidApiClient
             obj.status.is_a?(CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
             obj.characteristics.is_a?(Hash) != false || raise("Passed value for field obj.characteristics is not the expected type, validation failed.")
             obj.errors.is_a?(Array) != false || raise("Passed value for field obj.errors is not the expected type, validation failed.")
+            obj.encounter_creation_input.nil? || CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData.validate_raw(obj: obj.encounter_creation_input)
           end
         end
       end

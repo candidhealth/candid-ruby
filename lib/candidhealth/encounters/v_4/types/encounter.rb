@@ -153,6 +153,9 @@ module CandidApiClient
           # @return [Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
           #  permitted.
           attr_reader :claim_supplemental_information
+          # @return [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
+          #  identify the primary payer. This is required for certain states.
+          attr_reader :secondary_payer_carrier_code
           # @return [DateTime] The date and time the encounter was last submitted to a payer.
           attr_reader :last_submitted_at
           # @return [DateTime] The date and time the encounter was created.
@@ -339,6 +342,8 @@ module CandidApiClient
           #  837P form
           # @param claim_supplemental_information [Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
           #  permitted.
+          # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
+          #  identify the primary payer. This is required for certain states.
           # @param last_submitted_at [DateTime] The date and time the encounter was last submitted to a payer.
           # @param created_at [DateTime] The date and time the encounter was created.
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
@@ -416,7 +421,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
-                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
             @claims = claims
@@ -455,6 +460,7 @@ module CandidApiClient
             @referral_number = referral_number if referral_number != OMIT
             @epsdt_referral = epsdt_referral if epsdt_referral != OMIT
             @claim_supplemental_information = claim_supplemental_information if claim_supplemental_information != OMIT
+            @secondary_payer_carrier_code = secondary_payer_carrier_code if secondary_payer_carrier_code != OMIT
             @last_submitted_at = last_submitted_at if last_submitted_at != OMIT
             @created_at = created_at
             @external_id = external_id
@@ -517,6 +523,7 @@ module CandidApiClient
               "referral_number": referral_number,
               "epsdt_referral": epsdt_referral,
               "claim_supplemental_information": claim_supplemental_information,
+              "secondary_payer_carrier_code": secondary_payer_carrier_code,
               "last_submitted_at": last_submitted_at,
               "created_at": created_at,
               "external_id": external_id,
@@ -674,6 +681,7 @@ module CandidApiClient
               item = item.to_json
               CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation.from_json(json_object: item)
             end
+            secondary_payer_carrier_code = struct["secondary_payer_carrier_code"]
             last_submitted_at = unless parsed_json["last_submitted_at"].nil?
                                   DateTime.parse(parsed_json["last_submitted_at"])
                                 end
@@ -755,6 +763,7 @@ module CandidApiClient
               referral_number: referral_number,
               epsdt_referral: epsdt_referral,
               claim_supplemental_information: claim_supplemental_information,
+              secondary_payer_carrier_code: secondary_payer_carrier_code,
               last_submitted_at: last_submitted_at,
               created_at: created_at,
               external_id: external_id,
@@ -829,6 +838,7 @@ module CandidApiClient
             obj.referral_number&.is_a?(String) != false || raise("Passed value for field obj.referral_number is not the expected type, validation failed.")
             obj.epsdt_referral.nil? || CandidApiClient::Encounters::V4::Types::EpsdtReferral.validate_raw(obj: obj.epsdt_referral)
             obj.claim_supplemental_information&.is_a?(Array) != false || raise("Passed value for field obj.claim_supplemental_information is not the expected type, validation failed.")
+            obj.secondary_payer_carrier_code&.is_a?(String) != false || raise("Passed value for field obj.secondary_payer_carrier_code is not the expected type, validation failed.")
             obj.last_submitted_at&.is_a?(DateTime) != false || raise("Passed value for field obj.last_submitted_at is not the expected type, validation failed.")
             obj.created_at.is_a?(DateTime) != false || raise("Passed value for field obj.created_at is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")

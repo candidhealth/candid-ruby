@@ -26,7 +26,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Notes::V1::Types::Note]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.notes.v_1.get(id: "string")
+          #  api.pre_encounter.notes.v_1.get(id: "id")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -52,7 +52,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Notes::V1::Types::Note]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.notes.v_1.create(request: { value: "string", author_email: "string", author_name: "string" })
+          #  api.pre_encounter.notes.v_1.create(request: { value: "value" })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -81,9 +81,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.notes.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { value: "string", author_email: "string", author_name: "string" }
+          #    id: "id",
+          #    version: "version",
+          #    request: { value: "value" }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -101,7 +101,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Notes::V1::Types::Note.from_json(json_object: response.body)
           end
 
-          # Sets a note as deactivated. The path must contain the most recent version to
+          # Sets a note as deactivated.  The path must contain the most recent version to
           #  prevent races.
           #
           # @param id [String]
@@ -110,7 +110,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.notes.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.notes.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -143,7 +143,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Notes::V1::Types::Note]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.notes.v_1.get(id: "string")
+          #  api.pre_encounter.notes.v_1.get(id: "id")
           def get(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -171,7 +171,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Notes::V1::Types::Note]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.notes.v_1.create(request: { value: "string", author_email: "string", author_name: "string" })
+          #  api.pre_encounter.notes.v_1.create(request: { value: "value" })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -203,9 +203,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.notes.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { value: "string", author_email: "string", author_name: "string" }
+          #    id: "id",
+          #    version: "version",
+          #    request: { value: "value" }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -225,7 +225,7 @@ module CandidApiClient
             end
           end
 
-          # Sets a note as deactivated. The path must contain the most recent version to
+          # Sets a note as deactivated.  The path must contain the most recent version to
           #  prevent races.
           #
           # @param id [String]
@@ -234,7 +234,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.notes.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.notes.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             Async do
               @request_client.conn.delete do |req|

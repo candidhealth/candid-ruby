@@ -44,19 +44,7 @@ module CandidApiClient
         # @return [CandidApiClient::PayerPlanGroups::V1::Types::PayerPlanGroupPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.payer_plan_groups.v_1.get_multi(
-        #    plan_group_name: "string",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_id: "string",
-        #    plan_type: SELF_PAY,
-        #    is_active: true,
-        #    payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    limit: 1,
-        #    sort_by_similarity: "string",
-        #    sort: PLAN_GROUP_NAME,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.payer_plan_groups.v_1.get_multi
         def get_multi(plan_group_name: nil, payer_uuid: nil, payer_id: nil, plan_type: nil, is_active: nil,
                       payer_plan_group_id: nil, limit: nil, sort_by_similarity: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -120,7 +108,7 @@ module CandidApiClient
         # @return [CandidApiClient::PayerPlanGroups::V1::Types::PayerPlanGroup]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.payer_plan_groups.v_1.create(request: { plan_group_name: "string", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
+        #  api.payer_plan_groups.v_1.create(request: { plan_group_name: "plan_group_name", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -148,7 +136,7 @@ module CandidApiClient
         # @return [CandidApiClient::PayerPlanGroups::V1::Types::PayerPlanGroup]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.payer_plan_groups.v_1.update(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { plan_group_name: "string", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
+        #  api.payer_plan_groups.v_1.update(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { plan_group_name: "plan_group_name", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
         def update(payer_plan_group_id:, request:, request_options: nil)
           response = @request_client.conn.put do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -221,19 +209,7 @@ module CandidApiClient
         # @return [CandidApiClient::PayerPlanGroups::V1::Types::PayerPlanGroupPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.payer_plan_groups.v_1.get_multi(
-        #    plan_group_name: "string",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_id: "string",
-        #    plan_type: SELF_PAY,
-        #    is_active: true,
-        #    payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    limit: 1,
-        #    sort_by_similarity: "string",
-        #    sort: PLAN_GROUP_NAME,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.payer_plan_groups.v_1.get_multi
         def get_multi(plan_group_name: nil, payer_uuid: nil, payer_id: nil, plan_type: nil, is_active: nil,
                       payer_plan_group_id: nil, limit: nil, sort_by_similarity: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           Async do
@@ -301,7 +277,7 @@ module CandidApiClient
         # @return [CandidApiClient::PayerPlanGroups::V1::Types::PayerPlanGroup]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.payer_plan_groups.v_1.create(request: { plan_group_name: "string", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
+        #  api.payer_plan_groups.v_1.create(request: { plan_group_name: "plan_group_name", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -331,7 +307,7 @@ module CandidApiClient
         # @return [CandidApiClient::PayerPlanGroups::V1::Types::PayerPlanGroup]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.payer_plan_groups.v_1.update(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { plan_group_name: "string", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
+        #  api.payer_plan_groups.v_1.update(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { plan_group_name: "plan_group_name", payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", plan_type: SELF_PAY })
         def update(payer_plan_group_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.put do |req|

@@ -75,7 +75,7 @@ module CandidApiClient
         # @return [CandidApiClient::BillingNotes::V2::Types::BillingNote]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.billing_notes.v_2.update(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", text: "string")
+        #  api.billing_notes.v_2.update(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", text: "text")
         def update(billing_note_id:, text:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -164,7 +164,7 @@ module CandidApiClient
         # @return [CandidApiClient::BillingNotes::V2::Types::BillingNote]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.billing_notes.v_2.update(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", text: "string")
+        #  api.billing_notes.v_2.update(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", text: "text")
         def update(billing_note_id:, text:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

@@ -35,10 +35,9 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.superbills.v_1.create_superbill(
-        #    patient_external_id: "string",
+        #    patient_external_id: "patient_external_id",
         #    date_range_min: DateTime.parse(2023-01-15),
-        #    date_range_max: DateTime.parse(2023-01-15),
-        #    pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }
+        #    date_range_max: DateTime.parse(2023-01-15)
         #  )
         def create_superbill(patient_external_id:, date_range_min:, date_range_max:, pay_to_address: nil,
                              request_options: nil)
@@ -90,10 +89,9 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.superbills.v_1.create_superbill(
-        #    patient_external_id: "string",
+        #    patient_external_id: "patient_external_id",
         #    date_range_min: DateTime.parse(2023-01-15),
-        #    date_range_max: DateTime.parse(2023-01-15),
-        #    pay_to_address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }
+        #    date_range_max: DateTime.parse(2023-01-15)
         #  )
         def create_superbill(patient_external_id:, date_range_min:, date_range_max:, pay_to_address: nil,
                              request_options: nil)

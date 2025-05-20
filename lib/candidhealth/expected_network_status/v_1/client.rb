@@ -40,16 +40,13 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.expected_network_status.v_1.compute(
-        #    external_patient_id: "string",
-        #    subscriber_payer_id: "string",
-        #    subscriber_payer_name: "string",
-        #    subscriber_insurance_type: C_01,
-        #    subscriber_plan_name: "string",
-        #    billing_provider_npi: "string",
-        #    billing_provider_tin: "string",
-        #    rendering_provider_npi: "string",
+        #    subscriber_payer_id: "subscriber_payer_id",
+        #    subscriber_payer_name: "subscriber_payer_name",
+        #    billing_provider_npi: "billing_provider_npi",
+        #    billing_provider_tin: "billing_provider_tin",
+        #    rendering_provider_npi: "rendering_provider_npi",
         #    contracted_state: AA,
-        #    date_of_service: "string"
+        #    date_of_service: "date_of_service"
         #  )
         def compute(subscriber_payer_id:, subscriber_payer_name:, billing_provider_npi:, billing_provider_tin:, rendering_provider_npi:, contracted_state:, date_of_service:, external_patient_id: nil,
                     subscriber_insurance_type: nil, subscriber_plan_name: nil, request_options: nil)
@@ -112,16 +109,13 @@ module CandidApiClient
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.expected_network_status.v_1.compute(
-        #    external_patient_id: "string",
-        #    subscriber_payer_id: "string",
-        #    subscriber_payer_name: "string",
-        #    subscriber_insurance_type: C_01,
-        #    subscriber_plan_name: "string",
-        #    billing_provider_npi: "string",
-        #    billing_provider_tin: "string",
-        #    rendering_provider_npi: "string",
+        #    subscriber_payer_id: "subscriber_payer_id",
+        #    subscriber_payer_name: "subscriber_payer_name",
+        #    billing_provider_npi: "billing_provider_npi",
+        #    billing_provider_tin: "billing_provider_tin",
+        #    rendering_provider_npi: "rendering_provider_npi",
         #    contracted_state: AA,
-        #    date_of_service: "string"
+        #    date_of_service: "date_of_service"
         #  )
         def compute(subscriber_payer_id:, subscriber_payer_name:, billing_provider_npi:, billing_provider_tin:, rendering_provider_npi:, contracted_state:, date_of_service:, external_patient_id: nil,
                     subscriber_insurance_type: nil, subscriber_plan_name: nil, request_options: nil)

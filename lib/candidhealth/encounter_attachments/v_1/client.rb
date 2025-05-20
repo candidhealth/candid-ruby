@@ -53,9 +53,6 @@ module CandidApiClient
         # @param attachment_type [CandidApiClient::EncounterAttachments::V1::Types::EncounterAttachmentType]
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [String]
-        # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_attachments.v_1.create(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", attachment_file: my_file.txt)
         def create(encounter_id:, attachment_file:, attachment_type:, request_options: nil)
           response = @request_client.conn.put do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -144,9 +141,6 @@ module CandidApiClient
         # @param attachment_type [CandidApiClient::EncounterAttachments::V1::Types::EncounterAttachmentType]
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [String]
-        # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.encounter_attachments.v_1.create(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", attachment_file: my_file.txt)
         def create(encounter_id:, attachment_file:, attachment_type:, request_options: nil)
           Async do
             response = @request_client.conn.put do |req|

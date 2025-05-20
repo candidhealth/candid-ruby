@@ -20,7 +20,7 @@ module CandidApiClient
             @request_client = request_client
           end
 
-          # Adds an image. VersionConflictError is returned if a front or back of this
+          # Adds an image.  VersionConflictError is returned if a front or back of this
           #  coverage already exists.
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Images::V1::Types::MutableImage, as a Hash
@@ -38,7 +38,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Images::V1::Types::Image]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.create(request: { file_name: "string", display_name: "string", file_type: "string", status: PENDING, coverage: { id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", side: FRONT }, patient: { id: "string", notes: "string" } })
+          #  api.pre_encounter.images.v_1.create(request: { file_name: "file_name", display_name: "display_name", file_type: "file_type", status: PENDING })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -62,7 +62,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Images::V1::Types::Image]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.get(id: "string")
+          #  api.pre_encounter.images.v_1.get(id: "id")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -78,7 +78,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Images::V1::Types::Image.from_json(json_object: response.body)
           end
 
-          # Updates an Image. The path must contain the most recent version to prevent
+          # Updates an Image.  The path must contain the most recent version to prevent
           #  races.
           #
           # @param id [String]
@@ -99,9 +99,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.images.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { file_name: "string", display_name: "string", file_type: "string", status: PENDING, coverage: { id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", side: FRONT }, patient: { id: "string", notes: "string" } }
+          #    id: "id",
+          #    version: "version",
+          #    request: { file_name: "file_name", display_name: "display_name", file_type: "file_type", status: PENDING }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -119,7 +119,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Images::V1::Types::Image.from_json(json_object: response.body)
           end
 
-          # Sets an Image as deactivated. The path must contain the most recent version to
+          # Sets an Image as deactivated.  The path must contain the most recent version to
           #  prevent races.
           #
           # @param id [String]
@@ -128,7 +128,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.images.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -151,7 +151,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Images::V1::Types::Image>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.get_multi(patient_id: "string", coverage_id: "string")
+          #  api.pre_encounter.images.v_1.get_multi
           def get_multi(patient_id: nil, coverage_id: nil, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -187,7 +187,7 @@ module CandidApiClient
             @request_client = request_client
           end
 
-          # Adds an image. VersionConflictError is returned if a front or back of this
+          # Adds an image.  VersionConflictError is returned if a front or back of this
           #  coverage already exists.
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Images::V1::Types::MutableImage, as a Hash
@@ -205,7 +205,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Images::V1::Types::Image]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.create(request: { file_name: "string", display_name: "string", file_type: "string", status: PENDING, coverage: { id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", side: FRONT }, patient: { id: "string", notes: "string" } })
+          #  api.pre_encounter.images.v_1.create(request: { file_name: "file_name", display_name: "display_name", file_type: "file_type", status: PENDING })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -231,7 +231,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Images::V1::Types::Image]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.get(id: "string")
+          #  api.pre_encounter.images.v_1.get(id: "id")
           def get(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -249,7 +249,7 @@ module CandidApiClient
             end
           end
 
-          # Updates an Image. The path must contain the most recent version to prevent
+          # Updates an Image.  The path must contain the most recent version to prevent
           #  races.
           #
           # @param id [String]
@@ -270,9 +270,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.images.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { file_name: "string", display_name: "string", file_type: "string", status: PENDING, coverage: { id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", side: FRONT }, patient: { id: "string", notes: "string" } }
+          #    id: "id",
+          #    version: "version",
+          #    request: { file_name: "file_name", display_name: "display_name", file_type: "file_type", status: PENDING }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -292,7 +292,7 @@ module CandidApiClient
             end
           end
 
-          # Sets an Image as deactivated. The path must contain the most recent version to
+          # Sets an Image as deactivated.  The path must contain the most recent version to
           #  prevent races.
           #
           # @param id [String]
@@ -301,7 +301,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.images.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             Async do
               @request_client.conn.delete do |req|
@@ -326,7 +326,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Images::V1::Types::Image>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.images.v_1.get_multi(patient_id: "string", coverage_id: "string")
+          #  api.pre_encounter.images.v_1.get_multi
           def get_multi(patient_id: nil, coverage_id: nil, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|

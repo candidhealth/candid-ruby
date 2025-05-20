@@ -23,7 +23,7 @@ module CandidApiClient
         # @return [CandidApiClient::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.external_payment_account_config.v_1.get_multi(limit: 1, page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9")
+        #  api.external_payment_account_config.v_1.get_multi
         def get_multi(limit: nil, page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -61,7 +61,7 @@ module CandidApiClient
         # @return [CandidApiClient::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.external_payment_account_config.v_1.get_multi(limit: 1, page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9")
+        #  api.external_payment_account_config.v_1.get_multi
         def get_multi(limit: nil, page_token: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|

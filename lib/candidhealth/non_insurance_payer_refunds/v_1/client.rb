@@ -38,15 +38,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefundsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payer_refunds.v_1.get_multi(
-        #    limit: 1,
-        #    non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    check_number: "string",
-        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    sort: AMOUNT_CENTS,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.non_insurance_payer_refunds.v_1.get_multi
         def get_multi(limit: nil, non_insurance_payer_id: nil, check_number: nil, invoice_id: nil, sort: nil,
                       sort_direction: nil, page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -116,7 +108,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payer_refunds.v_1.create(request: { non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", check_number: "string", allocations: [{ amount_cents: 1 }], refund_reason: OVERCHARGED })
+        #  api.non_insurance_payer_refunds.v_1.create(request: { non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, allocations: [{ amount_cents: 1 }, { amount_cents: 1 }] })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -146,7 +138,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payer_refunds.v_1.update(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
+        #  api.non_insurance_payer_refunds.v_1.update(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(non_insurance_payer_refund_id:, refund_timestamp: nil, refund_note: nil, refund_reason: nil,
                    invoice_id: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -217,15 +209,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefundsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payer_refunds.v_1.get_multi(
-        #    limit: 1,
-        #    non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    check_number: "string",
-        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    sort: AMOUNT_CENTS,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.non_insurance_payer_refunds.v_1.get_multi
         def get_multi(limit: nil, non_insurance_payer_id: nil, check_number: nil, invoice_id: nil, sort: nil,
                       sort_direction: nil, page_token: nil, request_options: nil)
           Async do
@@ -299,7 +283,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payer_refunds.v_1.create(request: { non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), refund_note: "string", check_number: "string", allocations: [{ amount_cents: 1 }], refund_reason: OVERCHARGED })
+        #  api.non_insurance_payer_refunds.v_1.create(request: { non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", amount_cents: 1, allocations: [{ amount_cents: 1 }, { amount_cents: 1 }] })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -331,7 +315,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payer_refunds.v_1.update(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
+        #  api.non_insurance_payer_refunds.v_1.update(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(non_insurance_payer_refund_id:, refund_timestamp: nil, refund_note: nil, refund_reason: nil,
                    invoice_id: nil, request_options: nil)
           Async do

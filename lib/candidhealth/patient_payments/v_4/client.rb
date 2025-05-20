@@ -44,19 +44,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_payments.v_4.get_multi(
-        #    limit: 1,
-        #    patient_external_id: "string",
-        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    unattributed: true,
-        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    sources: MANUAL_ENTRY,
-        #    sort: PAYMENT_SOURCE,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.patient_payments.v_4.get_multi
         def get_multi(limit: nil, patient_external_id: nil, claim_id: nil, service_line_id: nil,
                       billing_provider_id: nil, unattributed: nil, invoice_id: nil, sources: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -130,11 +118,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.create(
         #    amount_cents: 1,
-        #    payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
-        #    payment_note: "string",
-        #    patient_external_id: "string",
-        #    allocations: [{ amount_cents: 1 }],
-        #    invoice: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+        #    patient_external_id: "patient_external_id",
+        #    allocations: [{ amount_cents: 1 }, { amount_cents: 1 }]
         #  )
         def create(amount_cents:, patient_external_id:, allocations:, payment_timestamp: nil, payment_note: nil,
                    invoice: nil, request_options: nil)
@@ -171,7 +156,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
+        #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(patient_payment_id:, payment_timestamp: nil, payment_note: nil, invoice: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -245,19 +230,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPaymentsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_payments.v_4.get_multi(
-        #    limit: 1,
-        #    patient_external_id: "string",
-        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    unattributed: true,
-        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    sources: MANUAL_ENTRY,
-        #    sort: PAYMENT_SOURCE,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.patient_payments.v_4.get_multi
         def get_multi(limit: nil, patient_external_id: nil, claim_id: nil, service_line_id: nil,
                       billing_provider_id: nil, unattributed: nil, invoice_id: nil, sources: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           Async do
@@ -335,11 +308,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_payments.v_4.create(
         #    amount_cents: 1,
-        #    payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
-        #    payment_note: "string",
-        #    patient_external_id: "string",
-        #    allocations: [{ amount_cents: 1 }],
-        #    invoice: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+        #    patient_external_id: "patient_external_id",
+        #    allocations: [{ amount_cents: 1 }, { amount_cents: 1 }]
         #  )
         def create(amount_cents:, patient_external_id:, allocations:, payment_timestamp: nil, payment_note: nil,
                    invoice: nil, request_options: nil)
@@ -378,7 +348,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientPayments::V4::Types::PatientPayment]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", payment_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
+        #  api.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(patient_payment_id:, payment_timestamp: nil, payment_note: nil, invoice: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

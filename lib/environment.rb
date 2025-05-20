@@ -10,5 +10,9 @@ module CandidApiClient
       CandidApi: "https://api-staging.joincandidhealth.com",
       PreEncounter: "https://pre-api-staging.joincandidhealth.com"
     }.freeze
+    CANDID_STAGING = {
+      CandidApi: "https://staging-api.joincandidhealth.com",
+      PreEncounter: "https://staging-pre-api.joincandidhealth.com"
+    }.freeze
   end
 end

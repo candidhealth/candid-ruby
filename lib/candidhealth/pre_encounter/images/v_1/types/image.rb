@@ -16,15 +16,15 @@ module CandidApiClient
           class Image
             # @return [String]
             attr_reader :id
-            # @return [String] A signed URL to the image. This url can be used to upload an image to GCP
+            # @return [String] A signed URL to the image.  This url can be used to upload an image to GCP
             #  storage or to read the image contents.
             attr_reader :signed_url
             # @return [String] The organization that owns this object.
             attr_reader :organization_id
-            # @return [Boolean] True if the object is deactivated. Deactivated objects are not returned in
+            # @return [Boolean] True if the object is deactivated.  Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
             attr_reader :deactivated
-            # @return [Integer] The version of the object. Any update to any property of an object object will
+            # @return [Integer] The version of the object.  Any update to any property of an object object will
             #  create a new version.
             attr_reader :version
             # @return [DateTime]
@@ -52,12 +52,12 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param id [String]
-            # @param signed_url [String] A signed URL to the image. This url can be used to upload an image to GCP
+            # @param signed_url [String] A signed URL to the image.  This url can be used to upload an image to GCP
             #  storage or to read the image contents.
             # @param organization_id [String] The organization that owns this object.
-            # @param deactivated [Boolean] True if the object is deactivated. Deactivated objects are not returned in
+            # @param deactivated [Boolean] True if the object is deactivated.  Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
-            # @param version [Integer] The version of the object. Any update to any property of an object object will
+            # @param version [Integer] The version of the object.  Any update to any property of an object object will
             #  create a new version.
             # @param updated_at [DateTime]
             # @param updating_user_id [String] The user ID of the user who last updated the object.

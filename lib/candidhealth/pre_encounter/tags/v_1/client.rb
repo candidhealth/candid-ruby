@@ -27,7 +27,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.get(id: "string")
+          #  api.pre_encounter.tags.v_1.get(id: "id")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -51,7 +51,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::TagPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.get_all(limit: 1, page_token: "string")
+          #  api.pre_encounter.tags.v_1.get_all
           def get_all(limit: nil, page_token: nil, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -80,7 +80,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.create(request: { value: "string" })
+          #  api.pre_encounter.tags.v_1.create(request: { value: "value" })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -107,9 +107,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.tags.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { value: "string" }
+          #    id: "id",
+          #    version: "version",
+          #    request: { value: "value" }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -127,7 +127,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Tags::V1::Types::Tag.from_json(json_object: response.body)
           end
 
-          # Sets a tag as deactivated. The path must contain the most recent version to
+          # Sets a tag as deactivated.  The path must contain the most recent version to
           #  prevent races.
           #
           # @param id [String]
@@ -136,7 +136,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.tags.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -169,7 +169,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.get(id: "string")
+          #  api.pre_encounter.tags.v_1.get(id: "id")
           def get(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -195,7 +195,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::TagPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.get_all(limit: 1, page_token: "string")
+          #  api.pre_encounter.tags.v_1.get_all
           def get_all(limit: nil, page_token: nil, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -227,7 +227,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.create(request: { value: "string" })
+          #  api.pre_encounter.tags.v_1.create(request: { value: "value" })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -257,9 +257,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.tags.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { value: "string" }
+          #    id: "id",
+          #    version: "version",
+          #    request: { value: "value" }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -279,7 +279,7 @@ module CandidApiClient
             end
           end
 
-          # Sets a tag as deactivated. The path must contain the most recent version to
+          # Sets a tag as deactivated.  The path must contain the most recent version to
           #  prevent races.
           #
           # @param id [String]
@@ -288,7 +288,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.tags.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.tags.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             Async do
               @request_client.conn.delete do |req|

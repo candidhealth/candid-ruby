@@ -46,19 +46,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefundsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_refunds.v_1.get_multi(
-        #    limit: 1,
-        #    patient_external_id: "string",
-        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    unattributed: true,
-        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    sources: MANUAL_ENTRY,
-        #    sort: REFUND_SOURCE,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.patient_refunds.v_1.get_multi
         def get_multi(limit: nil, patient_external_id: nil, claim_id: nil, service_line_id: nil,
                       billing_provider_id: nil, unattributed: nil, invoice_id: nil, sources: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -133,12 +121,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_refunds.v_1.create(
         #    amount_cents: 1,
-        #    refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
-        #    refund_note: "string",
-        #    patient_external_id: "string",
-        #    allocations: [{ amount_cents: 1 }],
-        #    invoice: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    refund_reason: OVERCHARGED
+        #    patient_external_id: "patient_external_id",
+        #    allocations: [{ amount_cents: 1 }, { amount_cents: 1 }]
         #  )
         def create(amount_cents:, patient_external_id:, allocations:, refund_timestamp: nil, refund_note: nil,
                    invoice: nil, refund_reason: nil, request_options: nil)
@@ -177,7 +161,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
+        #  api.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(patient_refund_id:, refund_timestamp: nil, refund_note: nil, invoice: nil, refund_reason: nil,
                    request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -253,19 +237,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefundsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_refunds.v_1.get_multi(
-        #    limit: 1,
-        #    patient_external_id: "string",
-        #    claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    unattributed: true,
-        #    invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    sources: MANUAL_ENTRY,
-        #    sort: REFUND_SOURCE,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.patient_refunds.v_1.get_multi
         def get_multi(limit: nil, patient_external_id: nil, claim_id: nil, service_line_id: nil,
                       billing_provider_id: nil, unattributed: nil, invoice_id: nil, sources: nil, sort: nil, sort_direction: nil, page_token: nil, request_options: nil)
           Async do
@@ -344,12 +316,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.patient_refunds.v_1.create(
         #    amount_cents: 1,
-        #    refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z),
-        #    refund_note: "string",
-        #    patient_external_id: "string",
-        #    allocations: [{ amount_cents: 1 }],
-        #    invoice: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    refund_reason: OVERCHARGED
+        #    patient_external_id: "patient_external_id",
+        #    allocations: [{ amount_cents: 1 }, { amount_cents: 1 }]
         #  )
         def create(amount_cents:, patient_external_id:, allocations:, refund_timestamp: nil, refund_note: nil,
                    invoice: nil, refund_reason: nil, request_options: nil)
@@ -390,7 +358,7 @@ module CandidApiClient
         # @return [CandidApiClient::PatientRefunds::V1::Types::PatientRefund]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", refund_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z))
+        #  api.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(patient_refund_id:, refund_timestamp: nil, refund_note: nil, invoice: nil, refund_reason: nil,
                    request_options: nil)
           Async do

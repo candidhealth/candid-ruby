@@ -37,11 +37,7 @@ module CandidApiClient
         #  api.credentialing.v_2.create(
         #    rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    start_date: DateTime.parse(2023-01-15),
-        #    end_date: DateTime.parse(2023-01-15),
-        #    submitted_date: DateTime.parse(2023-01-15),
-        #    payer_loaded_date: DateTime.parse(2023-01-15)
+        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
         #  )
         def create(rendering_provider_id:, contracting_provider_id:, payer_uuid:, regions:, start_date: nil,
                    end_date: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
@@ -104,14 +100,7 @@ module CandidApiClient
         # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpanPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.credentialing.v_2.get_all(
-        #    limit: 1,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    as_rendering_provider: true,
-        #    as_contracting_provider: true
-        #  )
+        #  api.credentialing.v_2.get_all
         def get_all(limit: nil, page_token: nil, payer_uuid: nil, provider_id: nil, as_rendering_provider: nil,
                     as_contracting_provider: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -173,15 +162,7 @@ module CandidApiClient
         # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpan]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.credentialing.v_2.update(
-        #    provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    start_date: DateTime.parse(2023-01-15),
-        #    end_date: DateTime.parse(2023-01-15),
-        #    submitted_date: DateTime.parse(2023-01-15),
-        #    payer_loaded_date: DateTime.parse(2023-01-15)
-        #  )
+        #  api.credentialing.v_2.update(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(provider_credentialing_id:, contracting_provider_id: nil, payer_uuid: nil, start_date: nil,
                    end_date: nil, regions: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -236,11 +217,7 @@ module CandidApiClient
         #  api.credentialing.v_2.create(
         #    rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
         #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    start_date: DateTime.parse(2023-01-15),
-        #    end_date: DateTime.parse(2023-01-15),
-        #    submitted_date: DateTime.parse(2023-01-15),
-        #    payer_loaded_date: DateTime.parse(2023-01-15)
+        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
         #  )
         def create(rendering_provider_id:, contracting_provider_id:, payer_uuid:, regions:, start_date: nil,
                    end_date: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
@@ -307,14 +284,7 @@ module CandidApiClient
         # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpanPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.credentialing.v_2.get_all(
-        #    limit: 1,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    as_rendering_provider: true,
-        #    as_contracting_provider: true
-        #  )
+        #  api.credentialing.v_2.get_all
         def get_all(limit: nil, page_token: nil, payer_uuid: nil, provider_id: nil, as_rendering_provider: nil,
                     as_contracting_provider: nil, request_options: nil)
           Async do
@@ -380,15 +350,7 @@ module CandidApiClient
         # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpan]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.credentialing.v_2.update(
-        #    provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    start_date: DateTime.parse(2023-01-15),
-        #    end_date: DateTime.parse(2023-01-15),
-        #    submitted_date: DateTime.parse(2023-01-15),
-        #    payer_loaded_date: DateTime.parse(2023-01-15)
-        #  )
+        #  api.credentialing.v_2.update(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(provider_credentialing_id:, contracting_provider_id: nil, payer_uuid: nil, start_date: nil,
                    end_date: nil, regions: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
           Async do

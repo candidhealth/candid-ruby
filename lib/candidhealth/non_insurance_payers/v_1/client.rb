@@ -39,7 +39,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.create(request: { name: "string", description: "string", category: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, clinical_trials: [{ name: "string", clinical_trial_number: "string", clinical_trial_phase: PHASE_ONE }] })
+        #  api.non_insurance_payers.v_1.create(request: { name: "name" })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -91,15 +91,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.get_multi(
-        #    name: "string",
-        #    category: "string",
-        #    enabled: true,
-        #    sort: NAME,
-        #    sort_direction: ASC,
-        #    limit: 1,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.non_insurance_payers.v_1.get_multi
         def get_multi(name: nil, category: nil, enabled: nil, sort: nil, sort_direction: nil, limit: nil,
                       page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -157,7 +149,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.update(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { name: "string" })
+        #  api.non_insurance_payers.v_1.update(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update(non_insurance_payer_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -221,7 +213,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.create(request: { name: "string", description: "string", category: "string", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" }, clinical_trials: [{ name: "string", clinical_trial_number: "string", clinical_trial_phase: PHASE_ONE }] })
+        #  api.non_insurance_payers.v_1.create(request: { name: "name" })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -277,15 +269,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayerPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.get_multi(
-        #    name: "string",
-        #    category: "string",
-        #    enabled: true,
-        #    sort: NAME,
-        #    sort_direction: ASC,
-        #    limit: 1,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
-        #  )
+        #  api.non_insurance_payers.v_1.get_multi
         def get_multi(name: nil, category: nil, enabled: nil, sort: nil, sort_direction: nil, limit: nil,
                       page_token: nil, request_options: nil)
           Async do
@@ -347,7 +331,7 @@ module CandidApiClient
         # @return [CandidApiClient::NonInsurancePayers::V1::Types::NonInsurancePayer]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.non_insurance_payers.v_1.update(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { name: "string" })
+        #  api.non_insurance_payers.v_1.update(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update(non_insurance_payer_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

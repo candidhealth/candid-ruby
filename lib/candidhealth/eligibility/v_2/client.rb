@@ -97,7 +97,7 @@ module CandidApiClient
         #  th.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
         #  A schema of the response object can be found here: [Availity
         #  tner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
-        #  - Note Availity requires a free developer account to access this documentation.
+        #  * Note Availity requires a free developer account to access this documentation.
         #  Check connection status of Availity API and partners here:
         #  - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #
@@ -139,7 +139,7 @@ module CandidApiClient
         #  th.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
         #  A schema of the response object can be found here: [Availity
         #  tner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
-        #  - Note Availity requires a free developer account to access this documentation.
+        #  * Note Availity requires a free developer account to access this documentation.
         #  Check connection status of Availity API and partners here:
         #  - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #
@@ -259,7 +259,7 @@ module CandidApiClient
         #  th.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
         #  A schema of the response object can be found here: [Availity
         #  tner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
-        #  - Note Availity requires a free developer account to access this documentation.
+        #  * Note Availity requires a free developer account to access this documentation.
         #  Check connection status of Availity API and partners here:
         #  - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #
@@ -304,7 +304,7 @@ module CandidApiClient
         #  th.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
         #  A schema of the response object can be found here: [Availity
         #  tner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
-        #  - Note Availity requires a free developer account to access this documentation.
+        #  * Note Availity requires a free developer account to access this documentation.
         #  Check connection status of Availity API and partners here:
         #  - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #

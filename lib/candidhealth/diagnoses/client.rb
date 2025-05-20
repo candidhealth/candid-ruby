@@ -28,7 +28,7 @@ module CandidApiClient
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-    #  api.diagnoses.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", name: "string", code_type: ABF, code: "string" })
+    #  api.diagnoses.create(request: { code_type: ABF, code: "code", encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
     def create(request:, request_options: nil)
       response = @request_client.conn.post do |req|
         req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -66,12 +66,7 @@ module CandidApiClient
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-    #  api.diagnoses.update(
-    #    diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-    #    name: "string",
-    #    code_type: ABF,
-    #    code: "string"
-    #  )
+    #  api.diagnoses.update(diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
     def update(diagnosis_id:, name: nil, code_type: nil, code: nil, request_options: nil)
       response = @request_client.conn.patch do |req|
         req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -137,7 +132,7 @@ module CandidApiClient
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-    #  api.diagnoses.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", name: "string", code_type: ABF, code: "string" })
+    #  api.diagnoses.create(request: { code_type: ABF, code: "code", encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
     def create(request:, request_options: nil)
       Async do
         response = @request_client.conn.post do |req|
@@ -178,12 +173,7 @@ module CandidApiClient
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-    #  api.diagnoses.update(
-    #    diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-    #    name: "string",
-    #    code_type: ABF,
-    #    code: "string"
-    #  )
+    #  api.diagnoses.update(diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
     def update(diagnosis_id:, name: nil, code_type: nil, code: nil, request_options: nil)
       Async do
         response = @request_client.conn.patch do |req|

@@ -25,7 +25,7 @@ module CandidApiClient
             @request_client = request_client
           end
 
-          # Adds a patient. VersionConflictError is returned when the patient's external ID
+          # Adds a patient.  VersionConflictError is returned when the patient's external ID
           #  is already in use.
           #
           # @param skip_duplicate_check [Boolean]
@@ -121,7 +121,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create(skip_duplicate_check: true, request: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }], other_identifiers: [{ value: "string", system: "string" }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, pronouns: ["string"], race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], primary_telecom: { value: "string", use: HOME }, other_telecoms: [{ value: "string", use: HOME }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecoms: [{ value: "string", use: HOME }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], period: {  }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], non_insurance_payer_associations: [{ id: "string" }], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecom: { value: "string", use: HOME }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, self_pay: true, authorizations: [{ payer_id: "string", payer_name: "string", additional_payer_information: {  }, authorization_number: "string", cpt_code: "string", apply_for_all_cpt_codes: true, units: VISIT, quantity: 1, period: {  }, notes: "string" }], referrals: [{ provider: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, referral_number: "string" }], primary_service_facility_id: "string", do_not_invoice_reason: BANKRUPTCY, note_ids: ["string"], tag_ids: ["string"] })
+          #  api.pre_encounter.patients.v_1.create(request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], primary_telecom: { value: "value", use: HOME }, other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create(request:, skip_duplicate_check: nil, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -142,10 +142,10 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
           end
 
-          # Adds a patient and hydrates their MRN with a pre-existing MRN. Once this patient
-          #  is created their MRN will not be editable. BadRequestError is returned when the
-          #  MRN is greater than 20 characters. VersionConflictError is returned when the
-          #  patient's external ID is already in use.
+          # Adds a patient and hydrates their MRN with a pre-existing MRN.  Once this
+          #  patient is created their MRN will not be editable. BadRequestError is returned
+          #  when the MRN is greater than 20 characters. VersionConflictError is returned
+          #  when the patient's external ID is already in use.
           #
           # @param skip_duplicate_check [Boolean]
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn, as a Hash
@@ -241,7 +241,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create_with_mrn(skip_duplicate_check: true, request: { mrn: "string", name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }], other_identifiers: [{ value: "string", system: "string" }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, pronouns: ["string"], race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], primary_telecom: { value: "string", use: HOME }, other_telecoms: [{ value: "string", use: HOME }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecoms: [{ value: "string", use: HOME }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], period: {  }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], non_insurance_payer_associations: [{ id: "string" }], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecom: { value: "string", use: HOME }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, self_pay: true, authorizations: [{ payer_id: "string", payer_name: "string", additional_payer_information: {  }, authorization_number: "string", cpt_code: "string", apply_for_all_cpt_codes: true, units: VISIT, quantity: 1, period: {  }, notes: "string" }], referrals: [{ provider: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, referral_number: "string" }], primary_service_facility_id: "string", do_not_invoice_reason: BANKRUPTCY, note_ids: ["string"], tag_ids: ["string"] })
+          #  api.pre_encounter.patients.v_1.create_with_mrn(request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], primary_telecom: { value: "value", use: HOME }, other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, mrn: "mrn" })
           def create_with_mrn(request:, skip_duplicate_check: nil, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -273,13 +273,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.get_multi(
-          #    limit: 1,
-          #    mrn: "string",
-          #    page_token: "string",
-          #    sort_field: "string",
-          #    sort_direction: ASC
-          #  )
+          #  api.pre_encounter.patients.v_1.get_multi
           def get_multi(limit: nil, mrn: nil, page_token: nil, sort_field: nil, sort_direction: nil,
                         request_options: nil)
             response = @request_client.conn.get do |req|
@@ -304,7 +298,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage.from_json(json_object: response.body)
           end
 
-          # Searches for referring providers that match the query parameters. The search is
+          # Searches for referring providers that match the query parameters.  The search is
           #  case-insensitive, supports fuzzy matching, and matches against provider name and
           #  NPI. The search criteria must be an alphanumeric string, and the search is
           #  limited to the first 20 results.
@@ -314,7 +308,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.search_providers(search_criteria: "string")
+          #  api.pre_encounter.patients.v_1.search_providers(search_criteria: "search_criteria")
           def search_providers(search_criteria:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -345,7 +339,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.get(id: "string")
+          #  api.pre_encounter.patients.v_1.get(id: "id")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -361,7 +355,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
           end
 
-          # Gets a patient along with it's full history. The return list is ordered by
+          # Gets a patient along with it's full history.  The return list is ordered by
           #  version ascending.
           #
           # @param id [String]
@@ -369,7 +363,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.get_history(id: "string")
+          #  api.pre_encounter.patients.v_1.get_history(id: "id")
           def get_history(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -389,8 +383,8 @@ module CandidApiClient
             end
           end
 
-          # Updates a patient. The path must contain the most recent version to prevent race
-          #  conditions. Updating historic versions is not supported.
+          # Updates a patient.  The path must contain the most recent version to prevent
+          #  race conditions.  Updating historic versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -487,9 +481,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }], other_identifiers: [{ value: "string", system: "string" }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, pronouns: ["string"], race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], primary_telecom: { value: "string", use: HOME }, other_telecoms: [{ value: "string", use: HOME }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecoms: [{ value: "string", use: HOME }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], period: {  }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], non_insurance_payer_associations: [{ id: "string" }], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecom: { value: "string", use: HOME }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, self_pay: true, authorizations: [{ payer_id: "string", payer_name: "string", additional_payer_information: {  }, authorization_number: "string", cpt_code: "string", apply_for_all_cpt_codes: true, units: VISIT, quantity: 1, period: {  }, notes: "string" }], referrals: [{ provider: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, referral_number: "string" }], primary_service_facility_id: "string", do_not_invoice_reason: BANKRUPTCY, note_ids: ["string"], tag_ids: ["string"] }
+          #    id: "id",
+          #    version: "version",
+          #    request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], primary_telecom: { value: "value", use: HOME }, other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -507,8 +501,8 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Patients::V1::Types::Patient.from_json(json_object: response.body)
           end
 
-          # Sets a patient as deactivated. The path must contain the most recent version
-          #  plus 1 to prevent race conditions. Deactivating historic versions is not
+          # Sets a patient as deactivated.  The path must contain the most recent version
+          #  plus 1 to prevent race conditions.  Deactivating historic versions is not
           #  supported.
           #
           # @param id [String]
@@ -517,7 +511,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.patients.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -532,9 +526,9 @@ module CandidApiClient
             end
           end
 
-          # Removes the deactivated flag for a patient. The path must contain the most
-          #  recent version plus 1 to prevent race conditions. Reactivating historic versions
-          #  is not supported.
+          # Removes the deactivated flag for a patient.  The path must contain the most
+          #  recent version plus 1 to prevent race conditions.  Reactivating historic
+          #  versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -542,7 +536,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.reactivate(id: "string", version: "string")
+          #  api.pre_encounter.patients.v_1.reactivate(id: "id", version: "version")
           def reactivate(id:, version:, request_options: nil)
             @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -565,7 +559,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.search(mrn: "string", similar_name_ordering: "string")
+          #  api.pre_encounter.patients.v_1.search
           def search(mrn: nil, similar_name_ordering: nil, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -590,8 +584,8 @@ module CandidApiClient
             end
           end
 
-          # Scans up to 100 patient updates. The since query parameter is inclusive, and the
-          #  result list is ordered by updatedAt ascending.
+          # Scans up to 100 patient updates.  The since query parameter is inclusive, and
+          #  the result list is ordered by updatedAt ascending.
           #
           # @param since [DateTime]
           # @param request_options [CandidApiClient::RequestOptions]
@@ -630,7 +624,7 @@ module CandidApiClient
             @request_client = request_client
           end
 
-          # Adds a patient. VersionConflictError is returned when the patient's external ID
+          # Adds a patient.  VersionConflictError is returned when the patient's external ID
           #  is already in use.
           #
           # @param skip_duplicate_check [Boolean]
@@ -726,7 +720,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create(skip_duplicate_check: true, request: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }], other_identifiers: [{ value: "string", system: "string" }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, pronouns: ["string"], race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], primary_telecom: { value: "string", use: HOME }, other_telecoms: [{ value: "string", use: HOME }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecoms: [{ value: "string", use: HOME }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], period: {  }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], non_insurance_payer_associations: [{ id: "string" }], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecom: { value: "string", use: HOME }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, self_pay: true, authorizations: [{ payer_id: "string", payer_name: "string", additional_payer_information: {  }, authorization_number: "string", cpt_code: "string", apply_for_all_cpt_codes: true, units: VISIT, quantity: 1, period: {  }, notes: "string" }], referrals: [{ provider: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, referral_number: "string" }], primary_service_facility_id: "string", do_not_invoice_reason: BANKRUPTCY, note_ids: ["string"], tag_ids: ["string"] })
+          #  api.pre_encounter.patients.v_1.create(request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], primary_telecom: { value: "value", use: HOME }, other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create(request:, skip_duplicate_check: nil, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -749,10 +743,10 @@ module CandidApiClient
             end
           end
 
-          # Adds a patient and hydrates their MRN with a pre-existing MRN. Once this patient
-          #  is created their MRN will not be editable. BadRequestError is returned when the
-          #  MRN is greater than 20 characters. VersionConflictError is returned when the
-          #  patient's external ID is already in use.
+          # Adds a patient and hydrates their MRN with a pre-existing MRN.  Once this
+          #  patient is created their MRN will not be editable. BadRequestError is returned
+          #  when the MRN is greater than 20 characters. VersionConflictError is returned
+          #  when the patient's external ID is already in use.
           #
           # @param skip_duplicate_check [Boolean]
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn, as a Hash
@@ -848,7 +842,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create_with_mrn(skip_duplicate_check: true, request: { mrn: "string", name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }], other_identifiers: [{ value: "string", system: "string" }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, pronouns: ["string"], race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], primary_telecom: { value: "string", use: HOME }, other_telecoms: [{ value: "string", use: HOME }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecoms: [{ value: "string", use: HOME }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], period: {  }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], non_insurance_payer_associations: [{ id: "string" }], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecom: { value: "string", use: HOME }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, self_pay: true, authorizations: [{ payer_id: "string", payer_name: "string", additional_payer_information: {  }, authorization_number: "string", cpt_code: "string", apply_for_all_cpt_codes: true, units: VISIT, quantity: 1, period: {  }, notes: "string" }], referrals: [{ provider: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, referral_number: "string" }], primary_service_facility_id: "string", do_not_invoice_reason: BANKRUPTCY, note_ids: ["string"], tag_ids: ["string"] })
+          #  api.pre_encounter.patients.v_1.create_with_mrn(request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], primary_telecom: { value: "value", use: HOME }, other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, mrn: "mrn" })
           def create_with_mrn(request:, skip_duplicate_check: nil, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -882,13 +876,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::PatientPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.get_multi(
-          #    limit: 1,
-          #    mrn: "string",
-          #    page_token: "string",
-          #    sort_field: "string",
-          #    sort_direction: ASC
-          #  )
+          #  api.pre_encounter.patients.v_1.get_multi
           def get_multi(limit: nil, mrn: nil, page_token: nil, sort_field: nil, sort_direction: nil,
                         request_options: nil)
             Async do
@@ -915,7 +903,7 @@ module CandidApiClient
             end
           end
 
-          # Searches for referring providers that match the query parameters. The search is
+          # Searches for referring providers that match the query parameters.  The search is
           #  case-insensitive, supports fuzzy matching, and matches against provider name and
           #  NPI. The search criteria must be an alphanumeric string, and the search is
           #  limited to the first 20 results.
@@ -925,7 +913,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.search_providers(search_criteria: "string")
+          #  api.pre_encounter.patients.v_1.search_providers(search_criteria: "search_criteria")
           def search_providers(search_criteria:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -958,7 +946,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.get(id: "string")
+          #  api.pre_encounter.patients.v_1.get(id: "id")
           def get(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -976,7 +964,7 @@ module CandidApiClient
             end
           end
 
-          # Gets a patient along with it's full history. The return list is ordered by
+          # Gets a patient along with it's full history.  The return list is ordered by
           #  version ascending.
           #
           # @param id [String]
@@ -984,7 +972,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.get_history(id: "string")
+          #  api.pre_encounter.patients.v_1.get_history(id: "id")
           def get_history(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -1006,8 +994,8 @@ module CandidApiClient
             end
           end
 
-          # Updates a patient. The path must contain the most recent version to prevent race
-          #  conditions. Updating historic versions is not supported.
+          # Updates a patient.  The path must contain the most recent version to prevent
+          #  race conditions.  Updating historic versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -1104,9 +1092,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.patients.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, other_names: [{ family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }], other_identifiers: [{ value: "string", system: "string" }], gender: MAN, birth_date: DateTime.parse(2023-01-15), social_security_number: "string", biological_sex: FEMALE, sexual_orientation: HETEROSEXUAL, pronouns: ["string"], race: AMERICAN_INDIAN_OR_ALASKA_NATIVE, ethnicity: HISPANIC_OR_LATINO, disability_status: DISABLED, marital_status: ANNULLED, deceased: DateTime.parse(2024-01-15T09:30:00.000Z), multiple_birth: 1, primary_address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }, other_addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], primary_telecom: { value: "string", use: HOME }, other_telecoms: [{ value: "string", use: HOME }], email: "string", electronic_communication_opt_in: true, photo: "string", language: "string", external_provenance: { external_id: "string", system_name: "string" }, contacts: [{ relationship: [SELF], name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecoms: [{ value: "string", use: HOME }], addresses: [{ use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } }], period: {  }, hipaa_authorization: true }], general_practitioners: [{ name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, non_insurance_payers: ["string"], non_insurance_payer_associations: [{ id: "string" }], guarantor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, telecom: { value: "string", use: HOME }, email: "string", birth_date: DateTime.parse(2023-01-15), address: { use: HOME, line: ["string"], city: "string", state: "string", postal_code: "string", country: "string", period: {  } } }, self_pay: true, authorizations: [{ payer_id: "string", payer_name: "string", additional_payer_information: {  }, authorization_number: "string", cpt_code: "string", apply_for_all_cpt_codes: true, units: VISIT, quantity: 1, period: {  }, notes: "string" }], referrals: [{ provider: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, referral_number: "string" }], primary_service_facility_id: "string", do_not_invoice_reason: BANKRUPTCY, note_ids: ["string"], tag_ids: ["string"] }
+          #    id: "id",
+          #    version: "version",
+          #    request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], primary_telecom: { value: "value", use: HOME }, other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -1126,8 +1114,8 @@ module CandidApiClient
             end
           end
 
-          # Sets a patient as deactivated. The path must contain the most recent version
-          #  plus 1 to prevent race conditions. Deactivating historic versions is not
+          # Sets a patient as deactivated.  The path must contain the most recent version
+          #  plus 1 to prevent race conditions.  Deactivating historic versions is not
           #  supported.
           #
           # @param id [String]
@@ -1136,7 +1124,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.patients.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             Async do
               @request_client.conn.delete do |req|
@@ -1153,9 +1141,9 @@ module CandidApiClient
             end
           end
 
-          # Removes the deactivated flag for a patient. The path must contain the most
-          #  recent version plus 1 to prevent race conditions. Reactivating historic versions
-          #  is not supported.
+          # Removes the deactivated flag for a patient.  The path must contain the most
+          #  recent version plus 1 to prevent race conditions.  Reactivating historic
+          #  versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -1163,7 +1151,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.reactivate(id: "string", version: "string")
+          #  api.pre_encounter.patients.v_1.reactivate(id: "id", version: "version")
           def reactivate(id:, version:, request_options: nil)
             Async do
               @request_client.conn.patch do |req|
@@ -1188,7 +1176,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Patient>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.search(mrn: "string", similar_name_ordering: "string")
+          #  api.pre_encounter.patients.v_1.search
           def search(mrn: nil, similar_name_ordering: nil, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -1215,8 +1203,8 @@ module CandidApiClient
             end
           end
 
-          # Scans up to 100 patient updates. The since query parameter is inclusive, and the
-          #  result list is ordered by updatedAt ascending.
+          # Scans up to 100 patient updates.  The since query parameter is inclusive, and
+          #  the result list is ordered by updatedAt ascending.
           #
           # @param since [DateTime]
           # @param request_options [CandidApiClient::RequestOptions]

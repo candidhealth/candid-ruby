@@ -31,19 +31,19 @@ module CandidApiClient
         module Types
           # A patient object with immutable server-owned properties.
           class Patient
-            # @return [String] The unique UUID identifier for a Patient. Patient ID is used in machine
+            # @return [String] The unique UUID identifier for a Patient.  Patient ID is used in machine
             #  contexts.
             attr_reader :id
-            # @return [String] The medical record number for the patient. Human-friendly Candid generated MRNs
+            # @return [String] The medical record number for the patient.  Human-friendly Candid generated MRNs
             #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
             #  and "XXXX" is a zero-padded incrementing integer.
             attr_reader :mrn
             # @return [String] The organization that owns this object.
             attr_reader :organization_id
-            # @return [Boolean] True if the object is deactivated. Deactivated objects are not returned in
+            # @return [Boolean] True if the object is deactivated.  Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
             attr_reader :deactivated
-            # @return [Integer] The version of the object. Any update to any property of an object object will
+            # @return [Integer] The version of the object.  Any update to any property of an object object will
             #  create a new version.
             attr_reader :version
             # @return [DateTime]
@@ -78,10 +78,10 @@ module CandidApiClient
             attr_reader :disability_status
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MaritalStatus]
             attr_reader :marital_status
-            # @return [DateTime] Time of death for the patient. Leave unset if the patient is not deceased.
+            # @return [DateTime] Time of death for the patient.  Leave unset if the patient is not deceased.
             attr_reader :deceased
-            # @return [Integer] The number of siblings the patient was born with. Leave unset if the patient was
-            #  not part of a multiple birth.
+            # @return [Integer] The number of siblings the patient was born with.  Leave unset if the patient
+            #  was not part of a multiple birth.
             attr_reader :multiple_birth
             # @return [CandidApiClient::PreEncounter::Common::Types::Address] The primary address for the patient.
             attr_reader :primary_address
@@ -99,7 +99,7 @@ module CandidApiClient
             attr_reader :photo
             # @return [String]
             attr_reader :language
-            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data. Leave unset
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data.  Leave unset
             #  if Candid owns patient data.
             attr_reader :external_provenance
             # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
@@ -136,15 +136,15 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param id [String] The unique UUID identifier for a Patient. Patient ID is used in machine
+            # @param id [String] The unique UUID identifier for a Patient.  Patient ID is used in machine
             #  contexts.
-            # @param mrn [String] The medical record number for the patient. Human-friendly Candid generated MRNs
+            # @param mrn [String] The medical record number for the patient.  Human-friendly Candid generated MRNs
             #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
             #  and "XXXX" is a zero-padded incrementing integer.
             # @param organization_id [String] The organization that owns this object.
-            # @param deactivated [Boolean] True if the object is deactivated. Deactivated objects are not returned in
+            # @param deactivated [Boolean] True if the object is deactivated.  Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
-            # @param version [Integer] The version of the object. Any update to any property of an object object will
+            # @param version [Integer] The version of the object.  Any update to any property of an object object will
             #  create a new version.
             # @param updated_at [DateTime]
             # @param updating_user_id [String] The user ID of the user who last updated the object.
@@ -163,9 +163,9 @@ module CandidApiClient
             # @param ethnicity [CandidApiClient::PreEncounter::Common::Types::Ethnicity]
             # @param disability_status [CandidApiClient::PreEncounter::Common::Types::DisabilityStatus]
             # @param marital_status [CandidApiClient::PreEncounter::Patients::V1::Types::MaritalStatus]
-            # @param deceased [DateTime] Time of death for the patient. Leave unset if the patient is not deceased.
-            # @param multiple_birth [Integer] The number of siblings the patient was born with. Leave unset if the patient was
-            #  not part of a multiple birth.
+            # @param deceased [DateTime] Time of death for the patient.  Leave unset if the patient is not deceased.
+            # @param multiple_birth [Integer] The number of siblings the patient was born with.  Leave unset if the patient
+            #  was not part of a multiple birth.
             # @param primary_address [CandidApiClient::PreEncounter::Common::Types::Address] The primary address for the patient.
             # @param other_addresses [Array<CandidApiClient::PreEncounter::Common::Types::Address>] Other addresses for the patient.
             # @param primary_telecom [CandidApiClient::PreEncounter::Common::Types::ContactPoint] The primary phone number for the patient.
@@ -174,7 +174,7 @@ module CandidApiClient
             # @param electronic_communication_opt_in [Boolean]
             # @param photo [String]
             # @param language [String]
-            # @param external_provenance [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data. Leave unset
+            # @param external_provenance [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data.  Leave unset
             #  if Candid owns patient data.
             # @param contacts [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
             # @param general_practitioners [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]

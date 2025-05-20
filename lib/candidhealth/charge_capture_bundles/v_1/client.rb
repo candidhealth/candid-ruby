@@ -110,28 +110,7 @@ module CandidApiClient
         # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture_bundles.v_1.get_all(
-        #    limit: 1,
-        #    sort: CREATED_AT,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    patient_external_id: "string",
-        #    claim_creation_status: NOT_STARTED,
-        #    charge_status: PLANNED,
-        #    charge_external_id: "string",
-        #    date_of_service_min: DateTime.parse(2023-01-15),
-        #    date_of_service_max: DateTime.parse(2023-01-15),
-        #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    claim_creation_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_npis: "string",
-        #    service_facility_name: "string",
-        #    primary_payer_ids: "string",
-        #    rendering_provider_npis: "string",
-        #    rendering_provider_names: "string",
-        #    supervising_provider_npis: "string",
-        #    supervising_provider_names: "string",
-        #    has_charge_capture_updates: true
-        #  )
+        #  api.charge_capture_bundles.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil,
                     claim_creation_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -272,28 +251,7 @@ module CandidApiClient
         # @return [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture_bundles.v_1.get_all(
-        #    limit: 1,
-        #    sort: CREATED_AT,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    patient_external_id: "string",
-        #    claim_creation_status: NOT_STARTED,
-        #    charge_status: PLANNED,
-        #    charge_external_id: "string",
-        #    date_of_service_min: DateTime.parse(2023-01-15),
-        #    date_of_service_max: DateTime.parse(2023-01-15),
-        #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    claim_creation_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_npis: "string",
-        #    service_facility_name: "string",
-        #    primary_payer_ids: "string",
-        #    rendering_provider_npis: "string",
-        #    rendering_provider_names: "string",
-        #    supervising_provider_npis: "string",
-        #    supervising_provider_names: "string",
-        #    has_charge_capture_updates: true
-        #  )
+        #  api.charge_capture_bundles.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil,
                     claim_creation_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
           Async do

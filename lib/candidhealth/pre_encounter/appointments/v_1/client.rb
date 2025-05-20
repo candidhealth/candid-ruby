@@ -23,7 +23,7 @@ module CandidApiClient
             @request_client = request_client
           end
 
-          # Adds an appointment. VersionConflictError is returned when the
+          # Adds an appointment.  VersionConflictError is returned when the
           #  placer_appointment_id is already in use.
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment, as a Hash
@@ -63,7 +63,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE })
+          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "patient_id", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), service_duration: 1, services: [{  }, {  }] })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -92,13 +92,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::VisitsPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.get_visits(
-          #    page_token: "string",
-          #    limit: 1,
-          #    sort_field: "string",
-          #    sort_direction: ASC,
-          #    filters: "string"
-          #  )
+          #  api.pre_encounter.appointments.v_1.get_visits
           def get_visits(page_token: nil, limit: nil, sort_field: nil, sort_direction: nil, filters: nil,
                          request_options: nil)
             response = @request_client.conn.get do |req|
@@ -130,7 +124,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.get(id: "string")
+          #  api.pre_encounter.appointments.v_1.get(id: "id")
           def get(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -146,7 +140,7 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.from_json(json_object: response.body)
           end
 
-          # Gets an appointment along with it's full history. The return list is ordered by
+          # Gets an appointment along with it's full history.  The return list is ordered by
           #  version ascending.
           #
           # @param id [String]
@@ -154,7 +148,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.get_history(id: "string")
+          #  api.pre_encounter.appointments.v_1.get_history(id: "id")
           def get_history(id:, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -174,8 +168,8 @@ module CandidApiClient
             end
           end
 
-          # Updates an appointment. The path must contain the most recent version to prevent
-          #  race conditions. Updating historic versions is not supported.
+          # Updates an appointment.  The path must contain the most recent version to
+          #  prevent race conditions.  Updating historic versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -217,9 +211,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.appointments.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE }
+          #    id: "id",
+          #    version: "version",
+          #    request: { patient_id: "patient_id", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), service_duration: 1, services: [{  }, {  }] }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -237,8 +231,8 @@ module CandidApiClient
             CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment.from_json(json_object: response.body)
           end
 
-          # Scans up to 100 appointment updates. The since query parameter is inclusive, and
-          #  the result list is ordered by updatedAt ascending.
+          # Scans up to 100 appointment updates.  The since query parameter is inclusive,
+          #  and the result list is ordered by updatedAt ascending.
           #
           # @param since [DateTime]
           # @param request_options [CandidApiClient::RequestOptions]
@@ -266,8 +260,8 @@ module CandidApiClient
             end
           end
 
-          # Sets an appointment as deactivated. The path must contain the most recent
-          #  version to prevent race conditions. Deactivating historic versions is not
+          # Sets an appointment as deactivated.  The path must contain the most recent
+          #  version to prevent race conditions.  Deactivating historic versions is not
           #  supported. Subsequent updates via PUT to the appointment will "reactivate" the
           #  appointment and set the deactivated flag to false.
           #
@@ -277,7 +271,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.appointments.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             @request_client.conn.delete do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -303,7 +297,7 @@ module CandidApiClient
             @request_client = request_client
           end
 
-          # Adds an appointment. VersionConflictError is returned when the
+          # Adds an appointment.  VersionConflictError is returned when the
           #  placer_appointment_id is already in use.
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment, as a Hash
@@ -343,7 +337,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE })
+          #  api.pre_encounter.appointments.v_1.create(request: { patient_id: "patient_id", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), service_duration: 1, services: [{  }, {  }] })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -374,13 +368,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::VisitsPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.get_visits(
-          #    page_token: "string",
-          #    limit: 1,
-          #    sort_field: "string",
-          #    sort_direction: ASC,
-          #    filters: "string"
-          #  )
+          #  api.pre_encounter.appointments.v_1.get_visits
           def get_visits(page_token: nil, limit: nil, sort_field: nil, sort_direction: nil, filters: nil,
                          request_options: nil)
             Async do
@@ -414,7 +402,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.get(id: "string")
+          #  api.pre_encounter.appointments.v_1.get(id: "id")
           def get(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -432,7 +420,7 @@ module CandidApiClient
             end
           end
 
-          # Gets an appointment along with it's full history. The return list is ordered by
+          # Gets an appointment along with it's full history.  The return list is ordered by
           #  version ascending.
           #
           # @param id [String]
@@ -440,7 +428,7 @@ module CandidApiClient
           # @return [Array<CandidApiClient::PreEncounter::Appointments::V1::Types::Appointment>]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.get_history(id: "string")
+          #  api.pre_encounter.appointments.v_1.get_history(id: "id")
           def get_history(id:, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
@@ -462,8 +450,8 @@ module CandidApiClient
             end
           end
 
-          # Updates an appointment. The path must contain the most recent version to prevent
-          #  race conditions. Updating historic versions is not supported.
+          # Updates an appointment.  The path must contain the most recent version to
+          #  prevent race conditions.  Updating historic versions is not supported.
           #
           # @param id [String]
           # @param version [String]
@@ -505,9 +493,9 @@ module CandidApiClient
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.appointments.v_1.update(
-          #    id: "string",
-          #    version: "string",
-          #    request: { patient_id: "string", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), status: PENDING, service_duration: 1, services: [{ universal_service_identifier: MD_VISIT, start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z) }], placer_appointment_id: "string", attending_doctor: { name: { family: "string", given: ["string"], use: USUAL, period: {  }, suffix: "string" }, type: PRIMARY, npi: "string", telecoms: [{ value: "string", use: HOME }], addresses: , period: {  }, canonical_id: "string", fax: "string" }, estimated_copay_cents: 1, estimated_patient_responsibility_cents: 1, patient_deposit_cents: 1, checked_in_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), notes: "string", location_resource_id: "string", automated_eligibility_check_complete: true, work_queue: EMERGENT_ISSUE }
+          #    id: "id",
+          #    version: "version",
+          #    request: { patient_id: "patient_id", start_timestamp: DateTime.parse(2024-01-15T09:30:00.000Z), service_duration: 1, services: [{  }, {  }] }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do
@@ -527,8 +515,8 @@ module CandidApiClient
             end
           end
 
-          # Scans up to 100 appointment updates. The since query parameter is inclusive, and
-          #  the result list is ordered by updatedAt ascending.
+          # Scans up to 100 appointment updates.  The since query parameter is inclusive,
+          #  and the result list is ordered by updatedAt ascending.
           #
           # @param since [DateTime]
           # @param request_options [CandidApiClient::RequestOptions]
@@ -558,8 +546,8 @@ module CandidApiClient
             end
           end
 
-          # Sets an appointment as deactivated. The path must contain the most recent
-          #  version to prevent race conditions. Deactivating historic versions is not
+          # Sets an appointment as deactivated.  The path must contain the most recent
+          #  version to prevent race conditions.  Deactivating historic versions is not
           #  supported. Subsequent updates via PUT to the appointment will "reactivate" the
           #  appointment and set the deactivated flag to false.
           #
@@ -569,7 +557,7 @@ module CandidApiClient
           # @return [Void]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.appointments.v_1.deactivate(id: "string", version: "string")
+          #  api.pre_encounter.appointments.v_1.deactivate(id: "id", version: "version")
           def deactivate(id:, version:, request_options: nil)
             Async do
               @request_client.conn.delete do |req|

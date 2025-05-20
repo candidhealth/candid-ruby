@@ -291,9 +291,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
         #    data: {  },
-        #    charge_external_id: "string",
-        #    ehr_source_url: "string",
-        #    patient_external_id: "string",
+        #    charge_external_id: "charge_external_id",
+        #    patient_external_id: "patient_external_id",
         #    status: PLANNED
         #  )
         def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil, request_options: nil)
@@ -603,14 +602,7 @@ module CandidApiClient
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.update(
-        #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    data: {  },
-        #    charge_external_id: "string",
-        #    ehr_source_url: "string",
-        #    patient_external_id: "string",
-        #    status: PLANNED
-        #  )
+        #  api.charge_capture.v_1.update(charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(charge_capture_id:, data: nil, charge_external_id: nil, ehr_source_url: nil,
                    patient_external_id: nil, status: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -717,41 +709,7 @@ module CandidApiClient
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.get_all(
-        #    limit: 1,
-        #    sort: CREATED_AT,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    patient_external_id: "string",
-        #    status: PLANNED,
-        #    charge_external_id: "string",
-        #    date_of_service_min: DateTime.parse(2023-01-15),
-        #    date_of_service_max: DateTime.parse(2023-01-15),
-        #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    claim_creation_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_npis: "string",
-        #    service_facility_name: "string",
-        #    primary_payer_ids: "string",
-        #    rendering_provider_npis: "string",
-        #    rendering_provider_names: "string",
-        #    supervising_provider_npis: "string",
-        #    supervising_provider_names: "string",
-        #    exclude_charges_linked_to_claims: true,
-        #    patient_external_id_ranked_sort: "string",
-        #    status_ranked_sort: PLANNED,
-        #    charge_external_id_ranked_sort: "string",
-        #    date_of_service_min_ranked_sort: DateTime.parse(2023-01-15),
-        #    date_of_service_max_ranked_sort: DateTime.parse(2023-01-15),
-        #    claim_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    claim_creation_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_npis_ranked_sort: "string",
-        #    service_facility_name_ranked_sort: "string",
-        #    primary_payer_ids_ranked_sort: "string",
-        #    rendering_provider_npis_ranked_sort: "string",
-        #    rendering_provider_names_ranked_sort: "string",
-        #    supervising_provider_npis_ranked_sort: "string",
-        #    supervising_provider_names_ranked_sort: "string"
-        #  )
+        #  api.charge_capture.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
                     charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -813,7 +771,7 @@ module CandidApiClient
         # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.update_post_billed_changes(charge_capture_change_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], resolved: true)
+        #  api.charge_capture.v_1.update_post_billed_changes(charge_capture_change_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], resolved: true)
         def update_post_billed_changes(charge_capture_change_ids:, resolved:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1115,9 +1073,8 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.create(
         #    data: {  },
-        #    charge_external_id: "string",
-        #    ehr_source_url: "string",
-        #    patient_external_id: "string",
+        #    charge_external_id: "charge_external_id",
+        #    patient_external_id: "patient_external_id",
         #    status: PLANNED
         #  )
         def create(data:, charge_external_id:, patient_external_id:, status:, ehr_source_url: nil, request_options: nil)
@@ -1431,14 +1388,7 @@ module CandidApiClient
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.update(
-        #    charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    data: {  },
-        #    charge_external_id: "string",
-        #    ehr_source_url: "string",
-        #    patient_external_id: "string",
-        #    status: PLANNED
-        #  )
+        #  api.charge_capture.v_1.update(charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(charge_capture_id:, data: nil, charge_external_id: nil, ehr_source_url: nil,
                    patient_external_id: nil, status: nil, request_options: nil)
           Async do
@@ -1549,41 +1499,7 @@ module CandidApiClient
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.get_all(
-        #    limit: 1,
-        #    sort: CREATED_AT,
-        #    sort_direction: ASC,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    patient_external_id: "string",
-        #    status: PLANNED,
-        #    charge_external_id: "string",
-        #    date_of_service_min: DateTime.parse(2023-01-15),
-        #    date_of_service_max: DateTime.parse(2023-01-15),
-        #    claim_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    claim_creation_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_npis: "string",
-        #    service_facility_name: "string",
-        #    primary_payer_ids: "string",
-        #    rendering_provider_npis: "string",
-        #    rendering_provider_names: "string",
-        #    supervising_provider_npis: "string",
-        #    supervising_provider_names: "string",
-        #    exclude_charges_linked_to_claims: true,
-        #    patient_external_id_ranked_sort: "string",
-        #    status_ranked_sort: PLANNED,
-        #    charge_external_id_ranked_sort: "string",
-        #    date_of_service_min_ranked_sort: DateTime.parse(2023-01-15),
-        #    date_of_service_max_ranked_sort: DateTime.parse(2023-01-15),
-        #    claim_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    claim_creation_ids_ranked_sort: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    billing_provider_npis_ranked_sort: "string",
-        #    service_facility_name_ranked_sort: "string",
-        #    primary_payer_ids_ranked_sort: "string",
-        #    rendering_provider_npis_ranked_sort: "string",
-        #    rendering_provider_names_ranked_sort: "string",
-        #    supervising_provider_npis_ranked_sort: "string",
-        #    supervising_provider_names_ranked_sort: "string"
-        #  )
+        #  api.charge_capture.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
                     charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
           Async do
@@ -1647,7 +1563,7 @@ module CandidApiClient
         # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.update_post_billed_changes(charge_capture_change_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], resolved: true)
+        #  api.charge_capture.v_1.update_post_billed_changes(charge_capture_change_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], resolved: true)
         def update_post_billed_changes(charge_capture_change_ids:, resolved:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

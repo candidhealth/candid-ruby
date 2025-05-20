@@ -4,6 +4,8 @@ require_relative "../../../requests"
 require_relative "types/contract_with_providers"
 require_relative "../../commons/types/state"
 require_relative "types/contract_status"
+require_relative "types/contract_sort_field"
+require_relative "../../commons/types/sort_direction"
 require_relative "types/contracts_page"
 require_relative "../../commons/types/regions"
 require_relative "types/authorized_signatory"
@@ -56,21 +58,15 @@ module CandidApiClient
         # @param payer_names [String] Filter to contracts that include any of the included payer names.
         # @param states [CandidApiClient::Commons::Types::State]
         # @param contract_status [CandidApiClient::Contracts::V2::Types::ContractStatus] The status of the contract. Defaults to `pending`
+        # @param sort [CandidApiClient::Contracts::V2::Types::ContractSortField] Potentially sort by a contract related attribute.  Defaults to created_at
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Direction of sort, defaulting to desc
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.contracts.v_2.get_multi(
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    limit: 1,
-        #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    rendering_provider_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_names: "string",
-        #    states: AA,
-        #    contract_status: PENDING
-        #  )
+        #  api.contracts.v_2.get_multi
         def get_multi(page_token: nil, limit: nil, contracting_provider_id: nil, rendering_provider_ids: nil,
-                      payer_names: nil, states: nil, contract_status: nil, request_options: nil)
+                      payer_names: nil, states: nil, contract_status: nil, sort: nil, sort_direction: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -87,7 +83,9 @@ module CandidApiClient
               "rendering_provider_ids": rendering_provider_ids,
               "payer_names": payer_names,
               "states": states,
-              "contract_status": contract_status
+              "contract_status": contract_status,
+              "sort": sort,
+              "sort_direction": sort_direction
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/contracts/v2"
@@ -197,12 +195,7 @@ module CandidApiClient
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.contracts.v_2.update(
-        #    contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    rendering_provider_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
-        #    effective_date: "string",
-        #    contract_status: PENDING
-        #  )
+        #  api.contracts.v_2.update(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(contract_id:, rendering_provider_ids: nil, effective_date: nil, expiration_date: nil, regions: nil,
                    contract_status: nil, authorized_signatory: nil, commercial_insurance_types: nil, medicare_insurance_types: nil, medicaid_insurance_types: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
@@ -272,21 +265,15 @@ module CandidApiClient
         # @param payer_names [String] Filter to contracts that include any of the included payer names.
         # @param states [CandidApiClient::Commons::Types::State]
         # @param contract_status [CandidApiClient::Contracts::V2::Types::ContractStatus] The status of the contract. Defaults to `pending`
+        # @param sort [CandidApiClient::Contracts::V2::Types::ContractSortField] Potentially sort by a contract related attribute.  Defaults to created_at
+        # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Direction of sort, defaulting to desc
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.contracts.v_2.get_multi(
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    limit: 1,
-        #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    rendering_provider_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    payer_names: "string",
-        #    states: AA,
-        #    contract_status: PENDING
-        #  )
+        #  api.contracts.v_2.get_multi
         def get_multi(page_token: nil, limit: nil, contracting_provider_id: nil, rendering_provider_ids: nil,
-                      payer_names: nil, states: nil, contract_status: nil, request_options: nil)
+                      payer_names: nil, states: nil, contract_status: nil, sort: nil, sort_direction: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -304,7 +291,9 @@ module CandidApiClient
                 "rendering_provider_ids": rendering_provider_ids,
                 "payer_names": payer_names,
                 "states": states,
-                "contract_status": contract_status
+                "contract_status": contract_status,
+                "sort": sort,
+                "sort_direction": sort_direction
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/contracts/v2"
@@ -419,12 +408,7 @@ module CandidApiClient
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.contracts.v_2.update(
-        #    contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    rendering_provider_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
-        #    effective_date: "string",
-        #    contract_status: PENDING
-        #  )
+        #  api.contracts.v_2.update(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(contract_id:, rendering_provider_ids: nil, effective_date: nil, expiration_date: nil, regions: nil,
                    contract_status: nil, authorized_signatory: nil, commercial_insurance_types: nil, medicare_insurance_types: nil, medicaid_insurance_types: nil, request_options: nil)
           Async do

@@ -25,7 +25,7 @@ module CandidApiClient
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.organization_service_facilities.v_2.get(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
+        #  api.organization_service_facilities.v_2.get(organization_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(organization_service_facility_id:, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -189,7 +189,7 @@ module CandidApiClient
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.organization_service_facilities.v_2.get(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
+        #  api.organization_service_facilities.v_2.get(organization_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def get(organization_service_facility_id:, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|

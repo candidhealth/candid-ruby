@@ -32,13 +32,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Lists::V1::Types::PatientListPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.lists.v_1.get_patient_list(
-          #    page_token: "string",
-          #    limit: 1,
-          #    sort_field: "string",
-          #    sort_direction: ASC,
-          #    filters: "string"
-          #  )
+          #  api.pre_encounter.lists.v_1.get_patient_list
           def get_patient_list(page_token: nil, limit: nil, sort_field: nil, sort_direction: nil, filters: nil,
                                request_options: nil)
             response = @request_client.conn.get do |req|
@@ -74,13 +68,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Lists::V1::Types::AppointmentListPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.lists.v_1.get_appointment_list(
-          #    sort_field: "string",
-          #    sort_direction: ASC,
-          #    limit: 1,
-          #    page_token: "string",
-          #    filters: "string"
-          #  )
+          #  api.pre_encounter.lists.v_1.get_appointment_list
           def get_appointment_list(sort_field: nil, sort_direction: nil, limit: nil, page_token: nil, filters: nil,
                                    request_options: nil)
             response = @request_client.conn.get do |req|
@@ -128,13 +116,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Lists::V1::Types::PatientListPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.lists.v_1.get_patient_list(
-          #    page_token: "string",
-          #    limit: 1,
-          #    sort_field: "string",
-          #    sort_direction: ASC,
-          #    filters: "string"
-          #  )
+          #  api.pre_encounter.lists.v_1.get_patient_list
           def get_patient_list(page_token: nil, limit: nil, sort_field: nil, sort_direction: nil, filters: nil,
                                request_options: nil)
             Async do
@@ -172,13 +154,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Lists::V1::Types::AppointmentListPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.lists.v_1.get_appointment_list(
-          #    sort_field: "string",
-          #    sort_direction: ASC,
-          #    limit: 1,
-          #    page_token: "string",
-          #    filters: "string"
-          #  )
+          #  api.pre_encounter.lists.v_1.get_appointment_list
           def get_appointment_list(sort_field: nil, sort_direction: nil, limit: nil, page_token: nil, filters: nil,
                                    request_options: nil)
             Async do

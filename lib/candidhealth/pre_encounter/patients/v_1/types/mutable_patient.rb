@@ -59,10 +59,10 @@ module CandidApiClient
             attr_reader :disability_status
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MaritalStatus]
             attr_reader :marital_status
-            # @return [DateTime] Time of death for the patient. Leave unset if the patient is not deceased.
+            # @return [DateTime] Time of death for the patient.  Leave unset if the patient is not deceased.
             attr_reader :deceased
-            # @return [Integer] The number of siblings the patient was born with. Leave unset if the patient was
-            #  not part of a multiple birth.
+            # @return [Integer] The number of siblings the patient was born with.  Leave unset if the patient
+            #  was not part of a multiple birth.
             attr_reader :multiple_birth
             # @return [CandidApiClient::PreEncounter::Common::Types::Address] The primary address for the patient.
             attr_reader :primary_address
@@ -80,7 +80,7 @@ module CandidApiClient
             attr_reader :photo
             # @return [String]
             attr_reader :language
-            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data. Leave unset
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data.  Leave unset
             #  if Candid owns patient data.
             attr_reader :external_provenance
             # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
@@ -132,9 +132,9 @@ module CandidApiClient
             # @param ethnicity [CandidApiClient::PreEncounter::Common::Types::Ethnicity]
             # @param disability_status [CandidApiClient::PreEncounter::Common::Types::DisabilityStatus]
             # @param marital_status [CandidApiClient::PreEncounter::Patients::V1::Types::MaritalStatus]
-            # @param deceased [DateTime] Time of death for the patient. Leave unset if the patient is not deceased.
-            # @param multiple_birth [Integer] The number of siblings the patient was born with. Leave unset if the patient was
-            #  not part of a multiple birth.
+            # @param deceased [DateTime] Time of death for the patient.  Leave unset if the patient is not deceased.
+            # @param multiple_birth [Integer] The number of siblings the patient was born with.  Leave unset if the patient
+            #  was not part of a multiple birth.
             # @param primary_address [CandidApiClient::PreEncounter::Common::Types::Address] The primary address for the patient.
             # @param other_addresses [Array<CandidApiClient::PreEncounter::Common::Types::Address>] Other addresses for the patient.
             # @param primary_telecom [CandidApiClient::PreEncounter::Common::Types::ContactPoint] The primary phone number for the patient.
@@ -143,7 +143,7 @@ module CandidApiClient
             # @param electronic_communication_opt_in [Boolean]
             # @param photo [String]
             # @param language [String]
-            # @param external_provenance [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data. Leave unset
+            # @param external_provenance [CandidApiClient::PreEncounter::Patients::V1::Types::ExternalProvenance] Information about the upstream system that owns this patient data.  Leave unset
             #  if Candid owns patient data.
             # @param contacts [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Contact>] Contacts for the patient.
             # @param general_practitioners [Array<CandidApiClient::PreEncounter::Common::Types::ExternalProvider>]

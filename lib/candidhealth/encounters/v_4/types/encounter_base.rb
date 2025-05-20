@@ -78,31 +78,31 @@ module CandidApiClient
           # @return [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
           attr_reader :additional_information
-          # @return [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
+          # @return [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
           #  Required when mandated by government law or regulation to obtain authorization
           #  for specific service(s) but, for the
           #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
           #  the service was performed without
           #  obtaining the authorization.
           attr_reader :service_authorization_exception_code
-          # @return [Date] 837p Loop2300 DTP\*435, CMS-1500 Box 18
+          # @return [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
           #  Required on all ambulance claims when the patient was known to be admitted to
           #  the hospital.
           #  OR
           #  Required on all claims involving inpatient medical visits.
           attr_reader :admission_date
-          # @return [Date] 837p Loop2300 DTP\*096, CMS-1500 Box 18
+          # @return [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
           #  Required for inpatient claims when the patient was discharged from the facility
           #  and the discharge date is known.
           attr_reader :discharge_date
-          # @return [Date] 837p Loop2300 DTP\*431, CMS-1500 Box 14
+          # @return [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
           #  Required for the initial medical service or visit performed in response to a
           #  medical emergency when the date is available and is different than the date of
           #  service.
           #  OR
           #  This date is the onset of acute symptoms for the current illness or condition.
           attr_reader :onset_of_current_illness_or_symptom_date
-          # @return [Date] 837p Loop2300 DTP\*484, CMS-1500 Box 14
+          # @return [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
           #  Required when, in the judgment of the provider, the services on this claim are
           #  related to the patient's pregnancy.
           attr_reader :last_menstrual_period_date
@@ -164,27 +164,27 @@ module CandidApiClient
           #  billing the responsible_party.
           # @param additional_information [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
-          # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
+          # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
           #  Required when mandated by government law or regulation to obtain authorization
           #  for specific service(s) but, for the
           #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
           #  the service was performed without
           #  obtaining the authorization.
-          # @param admission_date [Date] 837p Loop2300 DTP\*435, CMS-1500 Box 18
+          # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
           #  Required on all ambulance claims when the patient was known to be admitted to
           #  the hospital.
           #  OR
           #  Required on all claims involving inpatient medical visits.
-          # @param discharge_date [Date] 837p Loop2300 DTP\*096, CMS-1500 Box 18
+          # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
           #  Required for inpatient claims when the patient was discharged from the facility
           #  and the discharge date is known.
-          # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP\*431, CMS-1500 Box 14
+          # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
           #  Required for the initial medical service or visit performed in response to a
           #  medical emergency when the date is available and is different than the date of
           #  service.
           #  OR
           #  This date is the onset of acute symptoms for the current illness or condition.
-          # @param last_menstrual_period_date [Date] 837p Loop2300 DTP\*484, CMS-1500 Box 14
+          # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
           #  Required when, in the judgment of the provider, the services on this claim are
           #  related to the patient's pregnancy.
           # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20

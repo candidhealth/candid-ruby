@@ -63,21 +63,7 @@ module CandidApiClient
         # @return [CandidApiClient::Tasks::V3::Types::TaskPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.tasks.v_3.get_multi(
-        #    limit: 1,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    status: FINISHED,
-        #    task_type: CUSTOMER_DATA_REQUEST,
-        #    categories: "string",
-        #    updated_since: DateTime.parse(2024-01-15T09:30:00.000Z),
-        #    encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    search_term: "string",
-        #    assigned_to_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    date_of_service_min: DateTime.parse(2023-01-15),
-        #    date_of_service_max: DateTime.parse(2023-01-15),
-        #    billing_provider_npi: "string",
-        #    sort: UPDATED_AT_ASC
-        #  )
+        #  api.tasks.v_3.get_multi
         def get_multi(limit: nil, page_token: nil, status: nil, task_type: nil, categories: nil, updated_since: nil,
                       encounter_id: nil, search_term: nil, assigned_to_id: nil, date_of_service_min: nil, date_of_service_max: nil, billing_provider_npi: nil, sort: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -142,7 +128,7 @@ module CandidApiClient
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.tasks.v_3.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", task_type: CUSTOMER_DATA_REQUEST, description: "string", blocks_claim_submission: true, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", category: OTHER, work_queue_id: "string" })
+        #  api.tasks.v_3.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", task_type: CUSTOMER_DATA_REQUEST, description: "description", work_queue_id: "work_queue_id" })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -167,7 +153,7 @@ module CandidApiClient
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { status: FINISHED, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", blocks_claim_submission: true })
+        #  api.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update(task_id:, request:, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -235,21 +221,7 @@ module CandidApiClient
         # @return [CandidApiClient::Tasks::V3::Types::TaskPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.tasks.v_3.get_multi(
-        #    limit: 1,
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    status: FINISHED,
-        #    task_type: CUSTOMER_DATA_REQUEST,
-        #    categories: "string",
-        #    updated_since: DateTime.parse(2024-01-15T09:30:00.000Z),
-        #    encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    search_term: "string",
-        #    assigned_to_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    date_of_service_min: DateTime.parse(2023-01-15),
-        #    date_of_service_max: DateTime.parse(2023-01-15),
-        #    billing_provider_npi: "string",
-        #    sort: UPDATED_AT_ASC
-        #  )
+        #  api.tasks.v_3.get_multi
         def get_multi(limit: nil, page_token: nil, status: nil, task_type: nil, categories: nil, updated_since: nil,
                       encounter_id: nil, search_term: nil, assigned_to_id: nil, date_of_service_min: nil, date_of_service_max: nil, billing_provider_npi: nil, sort: nil, request_options: nil)
           Async do
@@ -319,7 +291,7 @@ module CandidApiClient
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.tasks.v_3.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", task_type: CUSTOMER_DATA_REQUEST, description: "string", blocks_claim_submission: true, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", category: OTHER, work_queue_id: "string" })
+        #  api.tasks.v_3.create(request: { encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", task_type: CUSTOMER_DATA_REQUEST, description: "description", work_queue_id: "work_queue_id" })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -347,7 +319,7 @@ module CandidApiClient
         # @return [CandidApiClient::Tasks::V3::Types::Task]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { status: FINISHED, assignee_user_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", blocks_claim_submission: true })
+        #  api.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
         def update(task_id:, request:, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "json"
+require_relative "empty_object"
 require_relative "../../../commons/types/insurance_type_code"
 
 module CandidApiClient
@@ -34,9 +35,9 @@ module CandidApiClient
                      when "insurance_type_code"
                        json_object.value
                      when "unknown_insurance_type_code"
-                       nil
+                       CandidApiClient::ExpectedNetworkStatus::V2::Types::EmptyObject.from_json(json_object: json_object)
                      when "not_applicable"
-                       nil
+                       CandidApiClient::ExpectedNetworkStatus::V2::Types::EmptyObject.from_json(json_object: json_object)
                      else
                        json_object
                      end
@@ -51,9 +52,9 @@ module CandidApiClient
             when "insurance_type_code"
               { "type": @discriminant, "value": @member }.to_json
             when "unknown_insurance_type_code"
-              { type: @discriminant }.to_json
+              { **@member.to_json, type: @discriminant }.to_json
             when "not_applicable"
-              { type: @discriminant }.to_json
+              { **@member.to_json, type: @discriminant }.to_json
             else
               { "type": @discriminant, value: @member }.to_json
             end
@@ -71,9 +72,9 @@ module CandidApiClient
             when "insurance_type_code"
               obj.is_a?(CandidApiClient::Commons::Types::InsuranceTypeCode) != false || raise("Passed value for field obj is not the expected type, validation failed.")
             when "unknown_insurance_type_code"
-              # noop
+              CandidApiClient::ExpectedNetworkStatus::V2::Types::EmptyObject.validate_raw(obj: obj)
             when "not_applicable"
-              # noop
+              CandidApiClient::ExpectedNetworkStatus::V2::Types::EmptyObject.validate_raw(obj: obj)
             else
               raise("Passed value matched no type within the union, validation failed.")
             end
@@ -93,14 +94,16 @@ module CandidApiClient
             new(member: member, discriminant: "insurance_type_code")
           end
 
+          # @param member [CandidApiClient::ExpectedNetworkStatus::V2::Types::EmptyObject]
           # @return [CandidApiClient::ExpectedNetworkStatus::V2::Types::InsuranceTypeCodes]
-          def self.unknown_insurance_type_code
-            new(member: nil, discriminant: "unknown_insurance_type_code")
+          def self.unknown_insurance_type_code(member:)
+            new(member: member, discriminant: "unknown_insurance_type_code")
           end
 
+          # @param member [CandidApiClient::ExpectedNetworkStatus::V2::Types::EmptyObject]
           # @return [CandidApiClient::ExpectedNetworkStatus::V2::Types::InsuranceTypeCodes]
-          def self.not_applicable
-            new(member: nil, discriminant: "not_applicable")
+          def self.not_applicable(member:)
+            new(member: member, discriminant: "not_applicable")
           end
         end
       end

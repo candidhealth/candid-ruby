@@ -45,7 +45,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::ELIGIBILITY_RESPONSE]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.eligibility_checks.v_1.post(request: { payer_id: "string", provider: { first_name: "string", last_name: "string", npi: "string" }, subscriber: { member_id: "string", first_name: "string", last_name: "string", date_of_birth: DateTime.parse(2023-01-15) }, dependent: { member_id: "string", first_name: "string", last_name: "string", date_of_birth: DateTime.parse(2023-01-15) }, encounter: { date_of_service: DateTime.parse(2023-01-15), service_type_codes: ["string"] } })
+          #  api.pre_encounter.eligibility_checks.v_1.post(request: { payer_id: "payer_id", provider: { npi: "npi" }, subscriber: { first_name: "first_name", last_name: "last_name" } })
           def post(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -99,7 +99,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::ELIGIBILITY_RESPONSE]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.eligibility_checks.v_1.post(request: { payer_id: "string", provider: { first_name: "string", last_name: "string", npi: "string" }, subscriber: { member_id: "string", first_name: "string", last_name: "string", date_of_birth: DateTime.parse(2023-01-15) }, dependent: { member_id: "string", first_name: "string", last_name: "string", date_of_birth: DateTime.parse(2023-01-15) }, encounter: { date_of_service: DateTime.parse(2023-01-15), service_type_codes: ["string"] } })
+          #  api.pre_encounter.eligibility_checks.v_1.post(request: { payer_id: "payer_id", provider: { npi: "npi" }, subscriber: { first_name: "first_name", last_name: "last_name" } })
           def post(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|

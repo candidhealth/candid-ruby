@@ -32,7 +32,7 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # Gets the rate that matches a service line. No result means no rate exists
+        # Gets the rate that matches a service line.  No result means no rate exists
         #  matching the service line's dimensions.
         #
         # @param service_line_id [String]
@@ -100,21 +100,7 @@ module CandidApiClient
         # @return [CandidApiClient::FeeSchedules::V3::Types::RatesPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.fee_schedules.v_3.get_multi(
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    limit: 1,
-        #    active_date: DateTime.parse(2023-01-15),
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    organization_billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    states: AA,
-        #    zip_codes: "string",
-        #    license_types: MD,
-        #    facility_type_codes: PHARMACY,
-        #    network_types: PPO,
-        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    cpt_code: "string",
-        #    modifiers: AV
-        #  )
+        #  api.fee_schedules.v_3.get_multi
         def get_multi(page_token: nil, limit: nil, active_date: nil, payer_uuid: nil,
                       organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -168,21 +154,7 @@ module CandidApiClient
         # @return [CandidApiClient::FeeSchedules::V3::Types::DimensionsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.fee_schedules.v_3.get_unique_values_for_dimension(
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    limit: 1,
-        #    pivot_dimension: PAYER_UUID,
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    organization_billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    states: AA,
-        #    zip_codes: "string",
-        #    license_types: MD,
-        #    facility_type_codes: PHARMACY,
-        #    network_types: PPO,
-        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    cpt_code: "string",
-        #    modifiers: AV
-        #  )
+        #  api.fee_schedules.v_3.get_unique_values_for_dimension(pivot_dimension: PAYER_UUID)
         def get_unique_values_for_dimension(pivot_dimension:, page_token: nil, limit: nil, payer_uuid: nil,
                                             organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           response = @request_client.conn.get do |req|
@@ -246,7 +218,7 @@ module CandidApiClient
         #  by it's dimensions or a new version for an existing rate.\n If adding a new
         #  version to an existing rate, the rate must be posted with the next version
         #  number (previous version + 1) or a EntityConflictError will be returned.\n Use
-        #  the dry run flag to discover already existing rates and to run validations. If
+        #  the dry run flag to discover already existing rates and to run validations.  If
         #  validations for any rate fail, no rates will be saved to the system.
         #
         # @param dry_run [Boolean]
@@ -276,7 +248,7 @@ module CandidApiClient
           end
         end
 
-        # Soft deletes a rate from the system. Only the most recent version of a rate can
+        # Soft deletes a rate from the system.  Only the most recent version of a rate can
         #  be deleted.
         #
         # @param rate_id [String]
@@ -357,7 +329,7 @@ module CandidApiClient
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThreshold]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.fee_schedules.v_3.set_payer_threshold(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { upper_threshold_cents: 1, lower_threshold_cents: 1, disable_paid_incorrectly: true })
+        #  api.fee_schedules.v_3.set_payer_threshold(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { disable_paid_incorrectly: true })
         def set_payer_threshold(payer_uuid:, request:, request_options: nil)
           response = @request_client.conn.put do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -385,7 +357,7 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # Gets the rate that matches a service line. No result means no rate exists
+        # Gets the rate that matches a service line.  No result means no rate exists
         #  matching the service line's dimensions.
         #
         # @param service_line_id [String]
@@ -457,21 +429,7 @@ module CandidApiClient
         # @return [CandidApiClient::FeeSchedules::V3::Types::RatesPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.fee_schedules.v_3.get_multi(
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    limit: 1,
-        #    active_date: DateTime.parse(2023-01-15),
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    organization_billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    states: AA,
-        #    zip_codes: "string",
-        #    license_types: MD,
-        #    facility_type_codes: PHARMACY,
-        #    network_types: PPO,
-        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    cpt_code: "string",
-        #    modifiers: AV
-        #  )
+        #  api.fee_schedules.v_3.get_multi
         def get_multi(page_token: nil, limit: nil, active_date: nil, payer_uuid: nil,
                       organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           Async do
@@ -527,21 +485,7 @@ module CandidApiClient
         # @return [CandidApiClient::FeeSchedules::V3::Types::DimensionsPage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.fee_schedules.v_3.get_unique_values_for_dimension(
-        #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
-        #    limit: 1,
-        #    pivot_dimension: PAYER_UUID,
-        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    organization_billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    states: AA,
-        #    zip_codes: "string",
-        #    license_types: MD,
-        #    facility_type_codes: PHARMACY,
-        #    network_types: PPO,
-        #    payer_plan_group_ids: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
-        #    cpt_code: "string",
-        #    modifiers: AV
-        #  )
+        #  api.fee_schedules.v_3.get_unique_values_for_dimension(pivot_dimension: PAYER_UUID)
         def get_unique_values_for_dimension(pivot_dimension:, page_token: nil, limit: nil, payer_uuid: nil,
                                             organization_billing_provider_id: nil, states: nil, zip_codes: nil, license_types: nil, facility_type_codes: nil, network_types: nil, payer_plan_group_ids: nil, cpt_code: nil, modifiers: nil, request_options: nil)
           Async do
@@ -609,7 +553,7 @@ module CandidApiClient
         #  by it's dimensions or a new version for an existing rate.\n If adding a new
         #  version to an existing rate, the rate must be posted with the next version
         #  number (previous version + 1) or a EntityConflictError will be returned.\n Use
-        #  the dry run flag to discover already existing rates and to run validations. If
+        #  the dry run flag to discover already existing rates and to run validations.  If
         #  validations for any rate fail, no rates will be saved to the system.
         #
         # @param dry_run [Boolean]
@@ -645,7 +589,7 @@ module CandidApiClient
           end
         end
 
-        # Soft deletes a rate from the system. Only the most recent version of a rate can
+        # Soft deletes a rate from the system.  Only the most recent version of a rate can
         #  be deleted.
         #
         # @param rate_id [String]
@@ -735,7 +679,7 @@ module CandidApiClient
         # @return [CandidApiClient::FeeSchedules::V3::Types::PayerThreshold]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.fee_schedules.v_3.set_payer_threshold(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { upper_threshold_cents: 1, lower_threshold_cents: 1, disable_paid_incorrectly: true })
+        #  api.fee_schedules.v_3.set_payer_threshold(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { disable_paid_incorrectly: true })
         def set_payer_threshold(payer_uuid:, request:, request_options: nil)
           Async do
             response = @request_client.conn.put do |req|

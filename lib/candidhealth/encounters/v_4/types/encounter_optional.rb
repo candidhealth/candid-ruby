@@ -42,7 +42,7 @@ module CandidApiClient
           #  same, updating the encounter's date_of_service will update all service line
           #  date_of_service values.
           attr_reader :date_of_service
-          # @return [Array<String>] Names of tags that should be on the encounter. Note all tags on encounter will
+          # @return [Array<String>] Names of tags that should be on the encounter.  Note all tags on encounter will
           #  be overridden with this list.
           attr_reader :tag_ids
           # @return [Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>] Holds a collection of clinical observations made by healthcare providers during
@@ -90,31 +90,31 @@ module CandidApiClient
           # @return [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
           attr_reader :additional_information
-          # @return [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
+          # @return [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
           #  Required when mandated by government law or regulation to obtain authorization
           #  for specific service(s) but, for the
           #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
           #  the service was performed without
           #  obtaining the authorization.
           attr_reader :service_authorization_exception_code
-          # @return [Date] 837p Loop2300 DTP\*435, CMS-1500 Box 18
+          # @return [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
           #  Required on all ambulance claims when the patient was known to be admitted to
           #  the hospital.
           #  OR
           #  Required on all claims involving inpatient medical visits.
           attr_reader :admission_date
-          # @return [Date] 837p Loop2300 DTP\*096, CMS-1500 Box 18
+          # @return [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
           #  Required for inpatient claims when the patient was discharged from the facility
           #  and the discharge date is known.
           attr_reader :discharge_date
-          # @return [Date] 837p Loop2300 DTP\*431, CMS-1500 Box 14
+          # @return [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
           #  Required for the initial medical service or visit performed in response to a
           #  medical emergency when the date is available and is different than the date of
           #  service.
           #  OR
           #  This date is the onset of acute symptoms for the current illness or condition.
           attr_reader :onset_of_current_illness_or_symptom_date
-          # @return [Date] 837p Loop2300 DTP\*484, CMS-1500 Box 14
+          # @return [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
           #  Required when, in the judgment of the provider, the services on this claim are
           #  related to the patient's pregnancy.de
           attr_reader :last_menstrual_period_date
@@ -143,7 +143,7 @@ module CandidApiClient
           attr_reader :existing_medications
           # @return [CandidApiClient::Guarantor::V1::Types::GuarantorUpdate] Personal and contact info for the guarantor of the patient responsibility.
           attr_reader :guarantor
-          # @return [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
+          # @return [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
           attr_reader :referral_number
           # @return [CandidApiClient::Encounters::V4::Types::EpsdtReferral] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
           #  837P form
@@ -177,7 +177,7 @@ module CandidApiClient
           #  date_of_service will fail. If all service line date_of_service values are the
           #  same, updating the encounter's date_of_service will update all service line
           #  date_of_service values.
-          # @param tag_ids [Array<String>] Names of tags that should be on the encounter. Note all tags on encounter will
+          # @param tag_ids [Array<String>] Names of tags that should be on the encounter.  Note all tags on encounter will
           #  be overridden with this list.
           # @param clinical_notes [Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>] Holds a collection of clinical observations made by healthcare providers during
           #  patient encounters.
@@ -212,27 +212,27 @@ module CandidApiClient
           # @param subscriber_tertiary [CandidApiClient::Individual::Types::SubscriberCreate] Contains details of the tertiary insurance subscriber.
           # @param additional_information [String] Defines additional information on the claim needed by the payer.
           #  Box 19 on the CMS-1500 claim form.
-          # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF\*4N
+          # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
           #  Required when mandated by government law or regulation to obtain authorization
           #  for specific service(s) but, for the
           #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
           #  the service was performed without
           #  obtaining the authorization.
-          # @param admission_date [Date] 837p Loop2300 DTP\*435, CMS-1500 Box 18
+          # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
           #  Required on all ambulance claims when the patient was known to be admitted to
           #  the hospital.
           #  OR
           #  Required on all claims involving inpatient medical visits.
-          # @param discharge_date [Date] 837p Loop2300 DTP\*096, CMS-1500 Box 18
+          # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
           #  Required for inpatient claims when the patient was discharged from the facility
           #  and the discharge date is known.
-          # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP\*431, CMS-1500 Box 14
+          # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
           #  Required for the initial medical service or visit performed in response to a
           #  medical emergency when the date is available and is different than the date of
           #  service.
           #  OR
           #  This date is the onset of acute symptoms for the current illness or condition.
-          # @param last_menstrual_period_date [Date] 837p Loop2300 DTP\*484, CMS-1500 Box 14
+          # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
           #  Required when, in the judgment of the provider, the services on this claim are
           #  related to the patient's pregnancy.de
           # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
@@ -254,7 +254,7 @@ module CandidApiClient
           #  Note all current existing medications on encounter will be overridden with this
           #  list.
           # @param guarantor [CandidApiClient::Guarantor::V1::Types::GuarantorUpdate] Personal and contact info for the guarantor of the patient responsibility.
-          # @param referral_number [String] Refers to REF\*9F on the 837p. Value cannot be greater than 50 characters.
+          # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
           # @param epsdt_referral [CandidApiClient::Encounters::V4::Types::EpsdtReferral] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
           #  837P form
           # @param claim_supplemental_information [Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are

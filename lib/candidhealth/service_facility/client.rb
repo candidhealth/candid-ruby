@@ -32,7 +32,7 @@ module CandidApiClient
     # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-    #  api.service_facility.update(service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
+    #  api.service_facility.update(service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
     def update(service_facility_id:, request:, request_options: nil)
       response = @request_client.conn.patch do |req|
         req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -76,7 +76,7 @@ module CandidApiClient
     # @return [CandidApiClient::ServiceFacility::Types::EncounterServiceFacility]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-    #  api.service_facility.update(service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: { organization_name: "Test Organization", address: { address_1: "123 Main St", address_2: "Apt 1", city: "New York", state: NY, zip_code: "10001", zip_plus_four_code: "1234" } })
+    #  api.service_facility.update(service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", request: {  })
     def update(service_facility_id:, request:, request_options: nil)
       Async do
         response = @request_client.conn.patch do |req|

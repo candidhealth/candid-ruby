@@ -10,6 +10,7 @@ module CandidApiClient
           MEDICAL_RECORDS_REQUESTED = "Medical Records Requested"
           TIMELY_FILING = "Timely Filing"
           DUPLICATE_CLAIM = "Duplicate Claim"
+          FULL_CONTRACTUAL_ADJUSTMENT = "Full Contractual Adjustment"
           INCORRECT_PLACE_OF_SERVICE = "Incorrect Place of Service"
           INCORRECT_PATIENT_GENDER = "Incorrect Patient Gender"
           BUNDLED = "Bundled"

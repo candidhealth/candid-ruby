@@ -50,6 +50,8 @@ module CandidApiClient
           attr_reader :assignments
           # @return [CandidApiClient::Tasks::Commons::Types::TaskCategory]
           attr_reader :category
+          # @return [String]
+          attr_reader :configurable_rule_id
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -76,10 +78,11 @@ module CandidApiClient
           # @param date_of_service [Date]
           # @param assignments [Array<CandidApiClient::Tasks::V3::Types::TaskAssignment>]
           # @param category [CandidApiClient::Tasks::Commons::Types::TaskCategory]
+          # @param configurable_rule_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Tasks::V3::Types::Task]
           def initialize(task_id:, encounter_id:, task_type:, description:, blocks_claim_submission:, external_id:,
-                         patient_name:, patient_external_id:, status:, notes:, created_at:, updated_at:, agg_updated_at:, date_of_service:, assignments:, payer_name: OMIT, payer_id: OMIT, category: OMIT, additional_properties: nil)
+                         patient_name:, patient_external_id:, status:, notes:, created_at:, updated_at:, agg_updated_at:, date_of_service:, assignments:, payer_name: OMIT, payer_id: OMIT, category: OMIT, configurable_rule_id: OMIT, additional_properties: nil)
             @task_id = task_id
             @encounter_id = encounter_id
             @task_type = task_type
@@ -98,6 +101,7 @@ module CandidApiClient
             @date_of_service = date_of_service
             @assignments = assignments
             @category = category if category != OMIT
+            @configurable_rule_id = configurable_rule_id if configurable_rule_id != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "task_id": task_id,
@@ -117,7 +121,8 @@ module CandidApiClient
               "agg_updated_at": agg_updated_at,
               "date_of_service": date_of_service,
               "assignments": assignments,
-              "category": category
+              "category": category,
+              "configurable_rule_id": configurable_rule_id
             }.reject do |_k, v|
               v == OMIT
             end
@@ -154,6 +159,7 @@ module CandidApiClient
               CandidApiClient::Tasks::V3::Types::TaskAssignment.from_json(json_object: item)
             end
             category = struct["category"]
+            configurable_rule_id = struct["configurable_rule_id"]
             new(
               task_id: task_id,
               encounter_id: encounter_id,
@@ -173,6 +179,7 @@ module CandidApiClient
               date_of_service: date_of_service,
               assignments: assignments,
               category: category,
+              configurable_rule_id: configurable_rule_id,
               additional_properties: struct
             )
           end
@@ -209,6 +216,7 @@ module CandidApiClient
             obj.date_of_service.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.assignments.is_a?(Array) != false || raise("Passed value for field obj.assignments is not the expected type, validation failed.")
             obj.category&.is_a?(CandidApiClient::Tasks::Commons::Types::TaskCategory) != false || raise("Passed value for field obj.category is not the expected type, validation failed.")
+            obj.configurable_rule_id&.is_a?(String) != false || raise("Passed value for field obj.configurable_rule_id is not the expected type, validation failed.")
           end
         end
       end

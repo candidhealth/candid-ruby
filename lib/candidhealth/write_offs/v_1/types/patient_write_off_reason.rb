@@ -15,6 +15,7 @@ module CandidApiClient
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"
           UNCOLLECTIBLE_OR_NON_BILLABLE = "UNCOLLECTIBLE_OR_NON_BILLABLE"
+          DECEASED = "DECEASED"
         end
       end
     end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "eligibility_check_error"
 require_relative "eligibility_request"
 require_relative "parsed_response"
 require_relative "request_correction"
@@ -12,7 +13,9 @@ module CandidApiClient
       module V1
         module Types
           class EligibilityCheck
-            # @return [Object]
+            # @return [String]
+            attr_reader :batch_id
+            # @return [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckError>]
             attr_reader :errors
             # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRequest]
             attr_reader :request
@@ -30,15 +33,17 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param errors [Object]
+            # @param batch_id [String]
+            # @param errors [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckError>]
             # @param request [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRequest]
             # @param response [Object]
             # @param parsed_response [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::ParsedResponse]
             # @param request_corrections [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::RequestCorrection>]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck]
-            def initialize(response:, errors: OMIT, request: OMIT, parsed_response: OMIT, request_corrections: OMIT,
-                           additional_properties: nil)
+            def initialize(response:, batch_id: OMIT, errors: OMIT, request: OMIT, parsed_response: OMIT,
+                           request_corrections: OMIT, additional_properties: nil)
+              @batch_id = batch_id if batch_id != OMIT
               @errors = errors if errors != OMIT
               @request = request if request != OMIT
               @response = response
@@ -46,6 +51,7 @@ module CandidApiClient
               @request_corrections = request_corrections if request_corrections != OMIT
               @additional_properties = additional_properties
               @_field_set = {
+                "batch_id": batch_id,
                 "errors": errors,
                 "request": request,
                 "response": response,
@@ -63,7 +69,11 @@ module CandidApiClient
             def self.from_json(json_object:)
               struct = JSON.parse(json_object, object_class: OpenStruct)
               parsed_json = JSON.parse(json_object)
-              errors = struct["errors"]
+              batch_id = struct["batch_id"]
+              errors = parsed_json["errors"]&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckError.from_json(json_object: item)
+              end
               if parsed_json["request"].nil?
                 request = nil
               else
@@ -82,6 +92,7 @@ module CandidApiClient
                 CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::RequestCorrection.from_json(json_object: item)
               end
               new(
+                batch_id: batch_id,
                 errors: errors,
                 request: request,
                 response: response,
@@ -105,7 +116,8 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              obj.errors&.is_a?(Object) != false || raise("Passed value for field obj.errors is not the expected type, validation failed.")
+              obj.batch_id&.is_a?(String) != false || raise("Passed value for field obj.batch_id is not the expected type, validation failed.")
+              obj.errors&.is_a?(Array) != false || raise("Passed value for field obj.errors is not the expected type, validation failed.")
               obj.request.nil? || CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRequest.validate_raw(obj: obj.request)
               obj.response.is_a?(Object) != false || raise("Passed value for field obj.response is not the expected type, validation failed.")
               obj.parsed_response.nil? || CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::ParsedResponse.validate_raw(obj: obj.parsed_response)

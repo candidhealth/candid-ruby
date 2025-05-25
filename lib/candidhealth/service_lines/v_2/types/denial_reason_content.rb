@@ -13,6 +13,7 @@ module CandidApiClient
           FULL_CONTRACTUAL_ADJUSTMENT = "Full Contractual Adjustment"
           INCORRECT_PLACE_OF_SERVICE = "Incorrect Place of Service"
           INCORRECT_PATIENT_GENDER = "Incorrect Patient Gender"
+          INCORRECT_PATIENT_INFO = "Incorrect Patient Info"
           BUNDLED = "Bundled"
           EXCEEDED_BILLABLE_TIME = "Exceeded Billable Time"
           INVALID_PROVIDER_INFORMATION = "Invalid Provider Information"

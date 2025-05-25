@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../coverages/v_1/types/eligibility_status"
+require_relative "eligibility_status"
 require_relative "../../../coverages/v_1/types/plan_metadata"
 require_relative "../../../coverages/v_1/types/coverage_benefits"
 require "ostruct"
@@ -12,7 +12,7 @@ module CandidApiClient
       module V1
         module Types
           class ParsedResponse
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus]
+            # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus]
             attr_reader :eligibility_status
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanMetadata]
             attr_reader :plan_metadata
@@ -26,7 +26,7 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param eligibility_status [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus]
+            # @param eligibility_status [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus]
             # @param plan_metadata [CandidApiClient::PreEncounter::Coverages::V1::Types::PlanMetadata]
             # @param benefits [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
@@ -87,7 +87,7 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              obj.eligibility_status.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus) != false || raise("Passed value for field obj.eligibility_status is not the expected type, validation failed.")
+              obj.eligibility_status.is_a?(CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus) != false || raise("Passed value for field obj.eligibility_status is not the expected type, validation failed.")
               obj.plan_metadata.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::PlanMetadata.validate_raw(obj: obj.plan_metadata)
               obj.benefits.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits.validate_raw(obj: obj.benefits)
             end

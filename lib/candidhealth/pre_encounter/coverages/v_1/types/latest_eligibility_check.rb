@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "eligibility_status"
+require_relative "../../../eligibility_checks/v_1/types/eligibility_status"
 require "date"
 require "ostruct"
 require "json"
@@ -14,7 +14,7 @@ module CandidApiClient
           class LatestEligibilityCheck
             # @return [String]
             attr_reader :check_id
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus]
+            # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus]
             attr_reader :status
             # @return [DateTime]
             attr_reader :initiated_at
@@ -27,7 +27,7 @@ module CandidApiClient
             OMIT = Object.new
 
             # @param check_id [String]
-            # @param status [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus]
+            # @param status [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus]
             # @param initiated_at [DateTime]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck]
@@ -72,7 +72,7 @@ module CandidApiClient
             # @return [Void]
             def self.validate_raw(obj:)
               obj.check_id.is_a?(String) != false || raise("Passed value for field obj.check_id is not the expected type, validation failed.")
-              obj.status.is_a?(CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
+              obj.status.is_a?(CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
               obj.initiated_at.is_a?(DateTime) != false || raise("Passed value for field obj.initiated_at is not the expected type, validation failed.")
             end
           end

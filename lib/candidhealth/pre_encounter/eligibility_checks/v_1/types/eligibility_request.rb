@@ -13,6 +13,11 @@ module CandidApiClient
         module Types
           # An object representing the data for an eligibility request.
           class EligibilityRequest
+            # @return [String] A unique identifier for the eligibility check within the batch. Candid returns
+            #  this identifier in the response for the
+            #  /batch/{batch_id} polling endpoint so you can correlate benefit responses with
+            #  the original eligibility check.
+            attr_reader :submitter_transaction_identifier
             # @return [String] Supported payer ID values can be found
             #  [here](https://www.stedi.com/healthcare/network).
             attr_reader :payer_id
@@ -35,6 +40,10 @@ module CandidApiClient
 
             OMIT = Object.new
 
+            # @param submitter_transaction_identifier [String] A unique identifier for the eligibility check within the batch. Candid returns
+            #  this identifier in the response for the
+            #  /batch/{batch_id} polling endpoint so you can correlate benefit responses with
+            #  the original eligibility check.
             # @param payer_id [String] Supported payer ID values can be found
             #  [here](https://www.stedi.com/healthcare/network).
             # @param provider [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::Provider]
@@ -46,8 +55,11 @@ module CandidApiClient
             # @param encounter [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::Encounter]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRequest]
-            def initialize(payer_id:, provider:, subscriber:, dependent: OMIT, encounter: OMIT,
-                           additional_properties: nil)
+            def initialize(payer_id:, provider:, subscriber:, submitter_transaction_identifier: OMIT, dependent: OMIT,
+                           encounter: OMIT, additional_properties: nil)
+              if submitter_transaction_identifier != OMIT
+                @submitter_transaction_identifier = submitter_transaction_identifier
+              end
               @payer_id = payer_id
               @provider = provider
               @subscriber = subscriber
@@ -55,6 +67,7 @@ module CandidApiClient
               @encounter = encounter if encounter != OMIT
               @additional_properties = additional_properties
               @_field_set = {
+                "submitter_transaction_identifier": submitter_transaction_identifier,
                 "payer_id": payer_id,
                 "provider": provider,
                 "subscriber": subscriber,
@@ -72,6 +85,7 @@ module CandidApiClient
             def self.from_json(json_object:)
               struct = JSON.parse(json_object, object_class: OpenStruct)
               parsed_json = JSON.parse(json_object)
+              submitter_transaction_identifier = struct["submitter_transaction_identifier"]
               payer_id = struct["payer_id"]
               if parsed_json["provider"].nil?
                 provider = nil
@@ -98,6 +112,7 @@ module CandidApiClient
                 encounter = CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::Encounter.from_json(json_object: encounter)
               end
               new(
+                submitter_transaction_identifier: submitter_transaction_identifier,
                 payer_id: payer_id,
                 provider: provider,
                 subscriber: subscriber,
@@ -121,6 +136,7 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
+              obj.submitter_transaction_identifier&.is_a?(String) != false || raise("Passed value for field obj.submitter_transaction_identifier is not the expected type, validation failed.")
               obj.payer_id.is_a?(String) != false || raise("Passed value for field obj.payer_id is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::Provider.validate_raw(obj: obj.provider)
               CandidApiClient::PreEncounter::Coverages::V1::Types::MemberInfo.validate_raw(obj: obj.subscriber)

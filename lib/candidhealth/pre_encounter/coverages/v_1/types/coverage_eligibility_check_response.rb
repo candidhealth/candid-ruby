@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "eligibility_check_metadata"
-require_relative "eligibility_check"
+require_relative "../../../eligibility_checks/v_1/types/eligibility_check_metadata"
+require_relative "../../../eligibility_checks/v_1/types/eligibility_check"
 require "ostruct"
 require "json"
 
@@ -11,9 +11,9 @@ module CandidApiClient
       module V1
         module Types
           class CoverageEligibilityCheckResponse
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata]
+            # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata]
             attr_reader :metadata
-            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck]
+            # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck]
             attr_reader :check
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
@@ -23,8 +23,8 @@ module CandidApiClient
 
             OMIT = Object.new
 
-            # @param metadata [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata]
-            # @param check [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck]
+            # @param metadata [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata]
+            # @param check [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageEligibilityCheckResponse]
             def initialize(metadata:, check: OMIT, additional_properties: nil)
@@ -47,13 +47,13 @@ module CandidApiClient
                 metadata = nil
               else
                 metadata = parsed_json["metadata"].to_json
-                metadata = CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.from_json(json_object: metadata)
+                metadata = CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata.from_json(json_object: metadata)
               end
               if parsed_json["check"].nil?
                 check = nil
               else
                 check = parsed_json["check"].to_json
-                check = CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck.from_json(json_object: check)
+                check = CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck.from_json(json_object: check)
               end
               new(
                 metadata: metadata,
@@ -76,8 +76,8 @@ module CandidApiClient
             # @param obj [Object]
             # @return [Void]
             def self.validate_raw(obj:)
-              CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.validate_raw(obj: obj.metadata)
-              obj.check.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheck.validate_raw(obj: obj.check)
+              CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata.validate_raw(obj: obj.metadata)
+              obj.check.nil? || CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck.validate_raw(obj: obj.check)
             end
           end
         end

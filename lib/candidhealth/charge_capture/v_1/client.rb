@@ -319,26 +319,6 @@ module CandidApiClient
         end
 
         # @param charge_capture_id [String]
-        # @param request_options [CandidApiClient::RequestOptions]
-        # @return [Void]
-        # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.delete(charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
-        def delete(charge_capture_id:, request_options: nil)
-          @request_client.conn.delete do |req|
-            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
-            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-            req.headers = {
-          **(req.headers || {}),
-          **@request_client.get_headers,
-          **(request_options&.additional_headers || {})
-            }.compact
-            req.url "#{@request_client.get_url(environment: CandidApi,
-                                               request_options: request_options)}/api/charge_captures/v1/#{charge_capture_id}"
-          end
-        end
-
-        # @param charge_capture_id [String]
         # @param data [Hash] Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreate>)
         #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::Intervention>)
@@ -1099,28 +1079,6 @@ module CandidApiClient
                                                  request_options: request_options)}/api/charge_captures/v1"
             end
             CandidApiClient::ChargeCapture::V1::Types::ChargeCapture.from_json(json_object: response.body)
-          end
-        end
-
-        # @param charge_capture_id [String]
-        # @param request_options [CandidApiClient::RequestOptions]
-        # @return [Void]
-        # @example
-        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.charge_capture.v_1.delete(charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
-        def delete(charge_capture_id:, request_options: nil)
-          Async do
-            @request_client.conn.delete do |req|
-              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
-              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
-              req.headers = {
-            **(req.headers || {}),
-            **@request_client.get_headers,
-            **(request_options&.additional_headers || {})
-              }.compact
-              req.url "#{@request_client.get_url(environment: CandidApi,
-                                                 request_options: request_options)}/api/charge_captures/v1/#{charge_capture_id}"
-            end
           end
         end
 

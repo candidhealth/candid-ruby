@@ -5,7 +5,7 @@ require_relative "coverage_status"
 require_relative "subscriber"
 require_relative "../../../common/types/relationship"
 require_relative "insurance_plan"
-require_relative "eligibility_check_metadata"
+require_relative "../../../eligibility_checks/v_1/types/eligibility_check_metadata"
 require_relative "latest_eligibility_check"
 require_relative "coverage_benefits"
 require "ostruct"
@@ -47,7 +47,7 @@ module CandidApiClient
             attr_reader :insurance_plan
             # @return [Boolean] A boolean indicating if the coverage has been verified by a user.
             attr_reader :verified
-            # @return [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.
+            # @return [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.
             attr_reader :eligibility_checks
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck] The latest eligibility check metadata that has been initiated on this coverage.
             attr_reader :latest_eligibility_check
@@ -78,7 +78,7 @@ module CandidApiClient
             # @param patient [String] The patient who benefits from the insurance coverage
             # @param insurance_plan [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
             # @param verified [Boolean] A boolean indicating if the coverage has been verified by a user.
-            # @param eligibility_checks [Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.
+            # @param eligibility_checks [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.
             # @param latest_eligibility_check [CandidApiClient::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck] The latest eligibility check metadata that has been initiated on this coverage.
             # @param benefits [CandidApiClient::PreEncounter::Coverages::V1::Types::CoverageBenefits] The eligibility of the patient for the coverage, manually verified by users.
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
@@ -153,7 +153,7 @@ module CandidApiClient
               verified = struct["verified"]
               eligibility_checks = parsed_json["eligibility_checks"]&.map do |item|
                 item = item.to_json
-                CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.from_json(json_object: item)
+                CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata.from_json(json_object: item)
               end
               if parsed_json["latest_eligibility_check"].nil?
                 latest_eligibility_check = nil

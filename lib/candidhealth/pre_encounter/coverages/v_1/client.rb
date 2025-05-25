@@ -8,7 +8,7 @@ require "json"
 require "date"
 require_relative "types/payer_plan_group_fields"
 require_relative "types/service_type_code"
-require_relative "types/eligibility_check_metadata"
+require_relative "../../eligibility_checks/v_1/types/eligibility_check_metadata"
 require_relative "types/coverage_eligibility_check_response"
 require "async"
 
@@ -76,10 +76,10 @@ module CandidApiClient
           #     * :insurance_card_image_locator (String)
           #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
-          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
+          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
           #     * :check_id (String)
-          #     * :status (CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus)
+          #     * :status (CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus)
           #     * :initiated_at (DateTime)
           #   * :benefits (Hash)
           #     * :plan_coverage (Hash)
@@ -242,10 +242,10 @@ module CandidApiClient
           #     * :insurance_card_image_locator (String)
           #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
-          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
+          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
           #     * :check_id (String)
-          #     * :status (CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus)
+          #     * :status (CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus)
           #     * :initiated_at (DateTime)
           #   * :benefits (Hash)
           #     * :plan_coverage (Hash)
@@ -542,7 +542,7 @@ module CandidApiClient
           # @param date_of_service [Date]
           # @param npi [String]
           # @param request_options [CandidApiClient::RequestOptions]
-          # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata]
+          # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.check_eligibility(
@@ -569,7 +569,7 @@ module CandidApiClient
               req.url "#{@request_client.get_url(environment: PreEncounter,
                                                  request_options: request_options)}/coverages/v1/#{id}/eligibility"
             end
-            CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.from_json(json_object: response.body)
+            CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata.from_json(json_object: response.body)
           end
 
           # Gets the eligibility of a patient for a specific coverage if successful.
@@ -657,10 +657,10 @@ module CandidApiClient
           #     * :insurance_card_image_locator (String)
           #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
-          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
+          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
           #     * :check_id (String)
-          #     * :status (CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus)
+          #     * :status (CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus)
           #     * :initiated_at (DateTime)
           #   * :benefits (Hash)
           #     * :plan_coverage (Hash)
@@ -825,10 +825,10 @@ module CandidApiClient
           #     * :insurance_card_image_locator (String)
           #     * :payer_plan_group_id (String)
           #   * :verified (Boolean)
-          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata>)
+          #   * :eligibility_checks (Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>)
           #   * :latest_eligibility_check (Hash)
           #     * :check_id (String)
-          #     * :status (CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityStatus)
+          #     * :status (CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus)
           #     * :initiated_at (DateTime)
           #   * :benefits (Hash)
           #     * :plan_coverage (Hash)
@@ -1142,7 +1142,7 @@ module CandidApiClient
           # @param date_of_service [Date]
           # @param npi [String]
           # @param request_options [CandidApiClient::RequestOptions]
-          # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata]
+          # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.coverages.v_1.check_eligibility(
@@ -1170,7 +1170,7 @@ module CandidApiClient
                 req.url "#{@request_client.get_url(environment: PreEncounter,
                                                    request_options: request_options)}/coverages/v1/#{id}/eligibility"
               end
-              CandidApiClient::PreEncounter::Coverages::V1::Types::EligibilityCheckMetadata.from_json(json_object: response.body)
+              CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata.from_json(json_object: response.body)
             end
           end
 

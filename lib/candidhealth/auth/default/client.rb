@@ -6,13 +6,13 @@ require "async"
 
 module CandidApiClient
   module Auth
-    module V2
-      class V2Client
+    module Default
+      class DefaultClient
         # @return [CandidApiClient::RequestClient]
         attr_reader :request_client
 
         # @param request_client [CandidApiClient::RequestClient]
-        # @return [CandidApiClient::Auth::V2::V2Client]
+        # @return [CandidApiClient::Auth::Default::DefaultClient]
         def initialize(request_client:)
           @request_client = request_client
         end
@@ -25,11 +25,24 @@ module CandidApiClient
         #  Candid Health utilizes the [OAuth 2.0 bearer token authentication
         #  scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) in our
         #  auth flow. You obtain the bearer token for all
-        #  subsequent API requests via the `/auth/token` endpoint defined below, which
+        #  subsequent API requests via the `/auth/v2/token` endpoint defined below, which
         #  requires you to provide your `client_id` and `client_secret`. Your `client_id`
         #  and `client_secret` can be
         #  incandidhealth.com/hc/en-us/articles/23065219476244--Generating-Candid-API-Keys)
         #  from the "Users & Credentials" tab by your org admin.
+        #  The `/auth/v2/token` endpoint accepts both `Content-Type: application/json` and
+        #  `Content-Type: application/x-www-form-urlencoded`. The request body should
+        #  contain the `client_id` and `client_secret` as follows:
+        #  ```json
+        #  {
+        #  "client_id": "YOUR_CLIENT_ID",
+        #  "client_secret": "YOUR_CLIENT_SECRET"
+        #  }
+        #  ```
+        #  or as URL-encoded form data:
+        #  ```
+        #  client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET
+        #  ```
         #  The bearer token is a signed [JWT](https://jwt.io/). The public key for the JWT
         #  can be found [here](https://candidhealth.auth0.com/pem) for any verification
         #  workflows.
@@ -47,10 +60,10 @@ module CandidApiClient
         # @param client_id [String] Your application's Client ID.
         # @param client_secret [String] Your application's Client Secret.
         # @param request_options [CandidApiClient::RequestOptions]
-        # @return [CandidApiClient::Auth::V2::Types::AuthGetTokenResponse]
+        # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.auth.v_2.get_token(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
+        #  api.auth.default.get_token(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
         def get_token(client_id:, client_secret:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -68,16 +81,16 @@ module CandidApiClient
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/auth/v2/token"
           end
-          CandidApiClient::Auth::V2::Types::AuthGetTokenResponse.from_json(json_object: response.body)
+          CandidApiClient::Auth::Default::Types::AuthGetTokenResponse.from_json(json_object: response.body)
         end
       end
 
-      class AsyncV2Client
+      class AsyncDefaultClient
         # @return [CandidApiClient::AsyncRequestClient]
         attr_reader :request_client
 
         # @param request_client [CandidApiClient::AsyncRequestClient]
-        # @return [CandidApiClient::Auth::V2::AsyncV2Client]
+        # @return [CandidApiClient::Auth::Default::AsyncDefaultClient]
         def initialize(request_client:)
           @request_client = request_client
         end
@@ -90,11 +103,24 @@ module CandidApiClient
         #  Candid Health utilizes the [OAuth 2.0 bearer token authentication
         #  scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) in our
         #  auth flow. You obtain the bearer token for all
-        #  subsequent API requests via the `/auth/token` endpoint defined below, which
+        #  subsequent API requests via the `/auth/v2/token` endpoint defined below, which
         #  requires you to provide your `client_id` and `client_secret`. Your `client_id`
         #  and `client_secret` can be
         #  incandidhealth.com/hc/en-us/articles/23065219476244--Generating-Candid-API-Keys)
         #  from the "Users & Credentials" tab by your org admin.
+        #  The `/auth/v2/token` endpoint accepts both `Content-Type: application/json` and
+        #  `Content-Type: application/x-www-form-urlencoded`. The request body should
+        #  contain the `client_id` and `client_secret` as follows:
+        #  ```json
+        #  {
+        #  "client_id": "YOUR_CLIENT_ID",
+        #  "client_secret": "YOUR_CLIENT_SECRET"
+        #  }
+        #  ```
+        #  or as URL-encoded form data:
+        #  ```
+        #  client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET
+        #  ```
         #  The bearer token is a signed [JWT](https://jwt.io/). The public key for the JWT
         #  can be found [here](https://candidhealth.auth0.com/pem) for any verification
         #  workflows.
@@ -112,10 +138,10 @@ module CandidApiClient
         # @param client_id [String] Your application's Client ID.
         # @param client_secret [String] Your application's Client Secret.
         # @param request_options [CandidApiClient::RequestOptions]
-        # @return [CandidApiClient::Auth::V2::Types::AuthGetTokenResponse]
+        # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.auth.v_2.get_token(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
+        #  api.auth.default.get_token(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
         def get_token(client_id:, client_secret:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
@@ -134,7 +160,7 @@ module CandidApiClient
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/auth/v2/token"
             end
-            CandidApiClient::Auth::V2::Types::AuthGetTokenResponse.from_json(json_object: response.body)
+            CandidApiClient::Auth::Default::Types::AuthGetTokenResponse.from_json(json_object: response.body)
           end
         end
       end

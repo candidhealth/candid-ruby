@@ -37,6 +37,9 @@ module CandidApiClient
     module V4
       module Types
         class Encounter
+          # @return [String] If the encounter was created from ingested charge captures, this is the
+          #  associated Charge Capture Claim Creation Id.
+          attr_reader :claim_creation_id
           # @return [String] A patient control number (PCN) is a unique identifier assigned to a patient
           #  within a healthcare system or facility.
           #  It's used to track and manage a patient's medical records, treatments, and other
@@ -107,7 +110,8 @@ module CandidApiClient
           #  that will be submitted to the payor.
           attr_reader :diagnoses
           # @return [Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategory>] Holds a collection of clinical observations made by healthcare providers during
-          #  patient encounters.
+          #  patient encounters. Please note that medical records for appeals should be sent
+          #  using the Encounter Attachments API.
           attr_reader :clinical_notes
           # @return [Array<CandidApiClient::BillingNotes::V2::Types::BillingNote>] Spot to store misc, human-readable, notes about this encounter to be
           #  used in the billing process.
@@ -260,6 +264,8 @@ module CandidApiClient
 
           OMIT = Object.new
 
+          # @param claim_creation_id [String] If the encounter was created from ingested charge captures, this is the
+          #  associated Charge Capture Claim Creation Id.
           # @param patient_control_number [String] A patient control number (PCN) is a unique identifier assigned to a patient
           #  within a healthcare system or facility.
           #  It's used to track and manage a patient's medical records, treatments, and other
@@ -312,7 +318,8 @@ module CandidApiClient
           #  diagnoses may be submitted at this time, and coders will later prioritize the 12
           #  that will be submitted to the payor.
           # @param clinical_notes [Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategory>] Holds a collection of clinical observations made by healthcare providers during
-          #  patient encounters.
+          #  patient encounters. Please note that medical records for appeals should be sent
+          #  using the Encounter Attachments API.
           # @param billing_notes [Array<CandidApiClient::BillingNotes::V2::Types::BillingNote>] Spot to store misc, human-readable, notes about this encounter to be
           #  used in the billing process.
           # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for
@@ -420,8 +427,9 @@ module CandidApiClient
           #  Code indicating the reason why a request was delayed
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
-          def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
-                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, patient_control_number: OMIT, guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+          def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:, responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, claim_creation_id: OMIT, patient_control_number: OMIT,
+                         guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+            @claim_creation_id = claim_creation_id if claim_creation_id != OMIT
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
             @claims = claims
@@ -489,6 +497,7 @@ module CandidApiClient
             @delay_reason_code = delay_reason_code if delay_reason_code != OMIT
             @additional_properties = additional_properties
             @_field_set = {
+              "claim_creation_id": claim_creation_id,
               "patient_control_number": patient_control_number,
               "encounter_id": encounter_id,
               "claims": claims,
@@ -558,6 +567,7 @@ module CandidApiClient
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
+            claim_creation_id = struct["claim_creation_id"]
             patient_control_number = struct["patient_control_number"]
             encounter_id = struct["encounter_id"]
             claims = parsed_json["claims"]&.map do |item|
@@ -729,6 +739,7 @@ module CandidApiClient
                                          end
             delay_reason_code = struct["delay_reason_code"]
             new(
+              claim_creation_id: claim_creation_id,
               patient_control_number: patient_control_number,
               encounter_id: encounter_id,
               claims: claims,
@@ -804,6 +815,7 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
+            obj.claim_creation_id&.is_a?(String) != false || raise("Passed value for field obj.claim_creation_id is not the expected type, validation failed.")
             obj.patient_control_number&.is_a?(String) != false || raise("Passed value for field obj.patient_control_number is not the expected type, validation failed.")
             obj.encounter_id.is_a?(String) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
             obj.claims.is_a?(Array) != false || raise("Passed value for field obj.claims is not the expected type, validation failed.")

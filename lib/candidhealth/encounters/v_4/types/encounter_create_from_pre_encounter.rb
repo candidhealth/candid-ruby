@@ -76,7 +76,8 @@ module CandidApiClient
           #  submitted to the payor.
           attr_reader :diagnoses
           # @return [Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>] Holds a collection of clinical observations made by healthcare providers during
-          #  patient encounters.
+          #  patient encounters. Please note that medical records for appeals should be sent
+          #  using the Encounter Attachments API.
           attr_reader :clinical_notes
           # @return [Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>] Spot to store misc, human-readable, notes about this encounter to be used
           #  in the billing process.
@@ -239,7 +240,8 @@ module CandidApiClient
           #  be
           #  submitted to the payor.
           # @param clinical_notes [Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>] Holds a collection of clinical observations made by healthcare providers during
-          #  patient encounters.
+          #  patient encounters. Please note that medical records for appeals should be sent
+          #  using the Encounter Attachments API.
           # @param billing_notes [Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBase>] Spot to store misc, human-readable, notes about this encounter to be used
           #  in the billing process.
           # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Box 24B on the CMS-1500 claim form. 837p Loop2300, CLM-05-1. 02 for

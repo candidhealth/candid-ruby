@@ -397,10 +397,12 @@ module CandidApiClient
         W_1 = "W1"
         W_2 = "W2"
         W_3 = "W3"
+        X_4 = "X4"
         XE = "XE"
         XP = "XP"
         XS = "XS"
         XU = "XU"
+        XY = "XY"
       end
     end
   end

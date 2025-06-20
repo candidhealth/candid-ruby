@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../requests"
-require_relative "../candidhealth/auth/v_2/client"
+require_relative "../candidhealth/auth/default/client"
 require_relative "oauth"
 
 module CandidApiClient
@@ -38,7 +38,7 @@ module CandidApiClient
     def initialize(client_id:, client_secret:, request_client:)
       @client_id = client_id
       @client_secret = client_secret
-      @auth_client = CandidApiClient::Auth::V2::V2Client.new(request_client: request_client)
+      @auth_client = CandidApiClient::Auth::Default::DefaultClient.new(request_client: request_client)
     end
 
     # Returns a cached access token retrieved from the provided client credentials,

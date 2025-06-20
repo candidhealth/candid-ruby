@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 require_relative "../../../diagnoses/types/diagnosis_create_optional"
-require_relative "../../../encounters/v_4/types/clinical_note_category_create_optional"
-require_relative "../../../encounters/v_4/types/claim_supplemental_information_optional"
-require_relative "../../../encounters/v_4/types/epsdt_referral_optional"
-require_relative "../../../encounters/v_4/types/medication_optional"
+require_relative "clinical_note_category_create_optional"
+require_relative "claim_supplemental_information_optional"
+require_relative "epsdt_referral_optional"
+require_relative "medication_optional"
 require_relative "../../../guarantor/v_1/types/guarantor_optional"
 require_relative "../../../individual/types/subscriber_create_optional"
-require_relative "../../../encounters/v_4/types/intervention_optional"
+require_relative "intervention_optional"
 require_relative "../../../custom_schemas/v_1/types/schema_instance_optional"
 require_relative "../../../claim_submission/v_1/types/external_claim_submission_create_optional"
 require_relative "../../../service_lines/v_2/types/service_line_create_optional"
-require_relative "../../../encounters/v_4/types/patient_history_category_optional"
+require_relative "patient_history_category_optional"
 require_relative "../../../billing_notes/v_2/types/billing_note_base_optional"
 require_relative "../../../individual/types/patient_update_with_optional_address"
 require_relative "../../../service_facility/types/encounter_service_facility_update_with_optional_address"
@@ -22,21 +22,21 @@ require_relative "../../../encounter_providers/v_2/types/supervising_provider_up
 require_relative "../../../encounter_providers/v_2/types/billing_provider_update_with_optional_address"
 require_relative "../../../commons/types/street_address_short_zip_optional"
 require "date"
-require_relative "../../../encounters/v_4/types/billable_status_type"
-require_relative "../../../encounters/v_4/types/responsible_party_type"
-require_relative "../../../encounters/v_4/types/synchronicity_type"
+require_relative "billable_status_type"
+require_relative "responsible_party_type"
+require_relative "synchronicity_type"
 require_relative "../../../commons/types/facility_type_code"
-require_relative "../../../encounters/v_4/types/service_authorization_exception_code"
+require_relative "service_authorization_exception_code"
 require_relative "../../../commons/types/delay_reason_code"
-require_relative "../../../encounters/v_4/types/vitals_update"
+require_relative "vitals_update"
 require "ostruct"
 require "json"
 
 module CandidApiClient
-  module ChargeCapture
-    module V1
+  module Encounters
+    module V4
       module Types
-        class ChargeCaptureData
+        class EncounterDeepOptional
           # @return [Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>] Ideally, this field should contain no more than 12 diagnoses. However, more
           #  diagnoses
           #  may be submitted at this time, and coders will later prioritize the 12 that will
@@ -394,7 +394,7 @@ module CandidApiClient
           # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
           #  identify the primary payer. This is required for certain states.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData]
+          # @return [CandidApiClient::Encounters::V4::Types::EncounterDeepOptional]
           def initialize(diagnoses: OMIT, clinical_notes: OMIT, claim_supplemental_information: OMIT,
                          epsdt_referral: OMIT, existing_medications: OMIT, guarantor: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, interventions: OMIT, schema_instances: OMIT, external_claim_submission: OMIT, service_lines: OMIT, patient_histories: OMIT, billing_notes: OMIT, patient: OMIT, service_facility: OMIT, rendering_provider: OMIT, initial_referring_provider: OMIT, referring_provider: OMIT, supervising_provider: OMIT, billing_provider: OMIT, pay_to_address: OMIT, benefits_assigned_to_provider: OMIT, prior_authorization_number: OMIT, external_id: OMIT, date_of_service: OMIT, tag_ids: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient_authorized_release: OMIT, vitals: OMIT, referral_number: OMIT, secondary_payer_carrier_code: OMIT, additional_properties: nil)
             @diagnoses = diagnoses if diagnoses != OMIT
@@ -500,10 +500,10 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of ChargeCaptureData
+          # Deserialize a JSON object to an instance of EncounterDeepOptional
           #
           # @param json_object [String]
-          # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData]
+          # @return [CandidApiClient::Encounters::V4::Types::EncounterDeepOptional]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
@@ -712,7 +712,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of ChargeCaptureData to a JSON object
+          # Serialize an instance of EncounterDeepOptional to a JSON object
           #
           # @return [String]
           def to_json(*_args)

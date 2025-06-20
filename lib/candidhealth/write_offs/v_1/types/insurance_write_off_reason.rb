@@ -21,6 +21,7 @@ module CandidApiClient
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"
           CONTRACTUAL_ADJUSTMENT = "CONTRACTUAL_ADJUSTMENT"
+          PRIMARY_PAID_MAX_BENEFITS = "PRIMARY_PAID_MAX_BENEFITS"
         end
       end
     end

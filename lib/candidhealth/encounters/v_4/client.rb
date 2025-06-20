@@ -486,8 +486,10 @@ module CandidApiClient
         #   * :name (String)
         #   * :code_type (CandidApiClient::Diagnoses::Types::DiagnosisTypeCode)
         #   * :code (String)
+        #   * :present_on_admission_indicator (CandidApiClient::YesNoIndicator::Types::YesNoIndicator)
         # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
-        #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
+        #  patient encounters. Please note that medical records for appeals should be sent
+        #  using the Encounter Attachments API.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
         #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
         # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
@@ -830,10 +832,6 @@ module CandidApiClient
         #  date_of_service values.
         # @param tag_ids [Array<String>] Names of tags that should be on the encounter.  Note all tags on encounter will
         #  be overridden with this list.
-        # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
-        #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
-        #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
-        #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
         # @param billable_status [CandidApiClient::Encounters::V4::Types::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party.
         #  Examples for when this should be set to NOT_BILLABLE include if the Encounter
         #  has not occurred yet or if there is no intention of ever billing the
@@ -860,6 +858,100 @@ module CandidApiClient
         #  encounter's end_date_of_service will fail. If all service line
         #  end_date_of_service values are the same, updating the encounter's
         #  end_date_of_service will update all service line date_of_service values.
+        # @param additional_information [String] Defines additional information on the claim needed by the payer.
+        #  Box 19 on the CMS-1500 claim form.
+        # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
+        #  Required when mandated by government law or regulation to obtain authorization
+        #  for specific service(s) but, for the
+        #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
+        #  the service was performed without
+        #  obtaining the authorization.
+        # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
+        #  Required on all ambulance claims when the patient was known to be admitted to
+        #  the hospital.
+        #  OR
+        #  Required on all claims involving inpatient medical visits.
+        # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
+        #  Required for inpatient claims when the patient was discharged from the facility
+        #  and the discharge date is known.
+        # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
+        #  Required for the initial medical service or visit performed in response to a
+        #  medical emergency when the date is available and is different than the date of
+        #  service.
+        #  OR
+        #  This date is the onset of acute symptoms for the current illness or condition.
+        # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
+        #  Required when, in the judgment of the provider, the services on this claim are
+        #  related to the patient's pregnancy.de
+        # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
+        #  Code indicating the reason why a request was delayed
+        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
+        #  for billing purpose.
+        #  Box 12 on the CMS-1500 claim form.
+        # @param vitals [Hash] If a vitals entity already exists for the encounter, then all values will be
+        #  updated to the provided values.
+        #  Otherwise, a new vitals object will be created for the encounter.Request of type CandidApiClient::Encounters::V4::Types::VitalsUpdate, as a Hash
+        #   * :height_in (Integer)
+        #   * :weight_lbs (Integer)
+        #   * :blood_pressure_systolic_mmhg (Integer)
+        #   * :blood_pressure_diastolic_mmhg (Integer)
+        #   * :body_temperature_f (Float)
+        #   * :hemoglobin_gdl (Float)
+        #   * :hematocrit_pct (Float)
+        # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
+        # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
+        #  identify the primary payer. This is required for certain states.
+        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+        # @param _field_set [Object]
+        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
+        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
+        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
+        #  patient encounters. Please note that medical records for appeals should be sent
+        #  using the Encounter Attachments API.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
+        #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
+        #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
+        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
+        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
+        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
+        #   * :attachment_control_number (String)
+        # @param schema_instances [Array<Hash>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
+        #  Multiple schema
+        #  instances cannot be created for the same schema on an encounter. Updating schema
+        #  instances utilizes PUT
+        #  semantics, so the schema instances on the encounter will be set to whatever
+        #  inputs are provided. If null
+        #  is provided as an input, then the encounter's schema instances will be cleared.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
+        #   * :schema_id (String)
+        #   * :content (Hash{String => Object})
+        # @param existing_medications [Array<Hash>] Existing medications that should be on the encounter.
+        #  Note all current existing medications on encounter will be overridden with this
+        #  list.Request of type Array<CandidApiClient::Encounters::V4::Types::Medication>, as a Hash
+        #   * :name (String)
+        #   * :rx_cui (String)
+        #   * :dosage (String)
+        #   * :dosage_form (String)
+        #   * :frequency (String)
+        #   * :as_needed (Boolean)
+        # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorUpdate, as a Hash
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :external_id (String)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
+        #   * :phone_consent (Boolean)
+        #   * :email (String)
+        #   * :email_consent (Boolean)
         # @param subscriber_primary [Hash] Contains details of the primary insurance subscriber.Request of type CandidApiClient::Individual::Types::SubscriberCreate, as a Hash
         #   * :insurance_card (Hash)
         #     * :member_id (String)
@@ -941,95 +1033,6 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :gender (CandidApiClient::Individual::Types::Gender)
-        # @param additional_information [String] Defines additional information on the claim needed by the payer.
-        #  Box 19 on the CMS-1500 claim form.
-        # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
-        #  Required when mandated by government law or regulation to obtain authorization
-        #  for specific service(s) but, for the
-        #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
-        #  the service was performed without
-        #  obtaining the authorization.
-        # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
-        #  Required on all ambulance claims when the patient was known to be admitted to
-        #  the hospital.
-        #  OR
-        #  Required on all claims involving inpatient medical visits.
-        # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
-        #  Required for inpatient claims when the patient was discharged from the facility
-        #  and the discharge date is known.
-        # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
-        #  Required for the initial medical service or visit performed in response to a
-        #  medical emergency when the date is available and is different than the date of
-        #  service.
-        #  OR
-        #  This date is the onset of acute symptoms for the current illness or condition.
-        # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
-        #  Required when, in the judgment of the provider, the services on this claim are
-        #  related to the patient's pregnancy.de
-        # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
-        #  Code indicating the reason why a request was delayed
-        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
-        #  for billing purpose.
-        #  Box 12 on the CMS-1500 claim form.
-        # @param schema_instances [Array<Hash>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
-        #  Multiple schema
-        #  instances cannot be created for the same schema on an encounter. Updating schema
-        #  instances utilizes PUT
-        #  semantics, so the schema instances on the encounter will be set to whatever
-        #  inputs are provided. If null
-        #  is provided as an input, then the encounter's schema instances will be cleared.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
-        #   * :schema_id (String)
-        #   * :content (Hash{String => Object})
-        # @param vitals [Hash] If a vitals entity already exists for the encounter, then all values will be
-        #  updated to the provided values.
-        #  Otherwise, a new vitals object will be created for the encounter.Request of type CandidApiClient::Encounters::V4::Types::VitalsUpdate, as a Hash
-        #   * :height_in (Integer)
-        #   * :weight_lbs (Integer)
-        #   * :blood_pressure_systolic_mmhg (Integer)
-        #   * :blood_pressure_diastolic_mmhg (Integer)
-        #   * :body_temperature_f (Float)
-        #   * :hemoglobin_gdl (Float)
-        #   * :hematocrit_pct (Float)
-        # @param existing_medications [Array<Hash>] Existing medications that should be on the encounter.
-        #  Note all current existing medications on encounter will be overridden with this
-        #  list.Request of type Array<CandidApiClient::Encounters::V4::Types::Medication>, as a Hash
-        #   * :name (String)
-        #   * :rx_cui (String)
-        #   * :dosage (String)
-        #   * :dosage_form (String)
-        #   * :frequency (String)
-        #   * :as_needed (Boolean)
-        # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorUpdate, as a Hash
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :external_id (String)
-        #   * :date_of_birth (Date)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
-        #   * :phone_consent (Boolean)
-        #   * :email (String)
-        #   * :email_consent (Boolean)
-        # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
-        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
-        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
-        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
-        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
-        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
-        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
-        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
-        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
-        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
-        #   * :attachment_control_number (String)
-        # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
-        #  identify the primary payer. This is required for certain states.
-        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @param _field_set [Object]
         # @param pay_to_address [Hash] Specifies the address to which payments for the claim should be sent.Request of type CandidApiClient::Commons::Types::StreetAddressLongZip, as a Hash
         #   * :zip_plus_four_code (String)
         #   * :address_1 (String)
@@ -1177,7 +1180,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.update(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, guarantor: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, secondary_payer_carrier_code: nil, additional_properties: nil, _field_set: nil, pay_to_address: nil, diagnosis_ids: nil, initial_referring_provider: nil, referring_provider: nil, patient: nil, rendering_provider: nil, service_facility: nil, supervising_provider: nil, billing_provider: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, vitals: nil, referral_number: nil, secondary_payer_carrier_code: nil, additional_properties: nil, _field_set: nil, epsdt_referral: nil, clinical_notes: nil, claim_supplemental_information: nil, schema_instances: nil, existing_medications: nil, guarantor: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, pay_to_address: nil, diagnosis_ids: nil, initial_referring_provider: nil, referring_provider: nil, patient: nil, rendering_provider: nil, service_facility: nil, supervising_provider: nil, billing_provider: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           response = @request_client.conn.patch do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1193,7 +1196,6 @@ module CandidApiClient
               external_id: external_id,
               date_of_service: date_of_service,
               tag_ids: tag_ids,
-              clinical_notes: clinical_notes,
               billable_status: billable_status,
               responsible_party: responsible_party,
               provider_accepts_assignment: provider_accepts_assignment,
@@ -1201,9 +1203,6 @@ module CandidApiClient
               place_of_service_code: place_of_service_code,
               appointment_type: appointment_type,
               end_date_of_service: end_date_of_service,
-              subscriber_primary: subscriber_primary,
-              subscriber_secondary: subscriber_secondary,
-              subscriber_tertiary: subscriber_tertiary,
               additional_information: additional_information,
               service_authorization_exception_code: service_authorization_exception_code,
               admission_date: admission_date,
@@ -1212,16 +1211,20 @@ module CandidApiClient
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
               patient_authorized_release: patient_authorized_release,
-              schema_instances: schema_instances,
               vitals: vitals,
-              existing_medications: existing_medications,
-              guarantor: guarantor,
               referral_number: referral_number,
-              epsdt_referral: epsdt_referral,
-              claim_supplemental_information: claim_supplemental_information,
               secondary_payer_carrier_code: secondary_payer_carrier_code,
               additional_properties: additional_properties,
               _field_set: _field_set,
+              epsdt_referral: epsdt_referral,
+              clinical_notes: clinical_notes,
+              claim_supplemental_information: claim_supplemental_information,
+              schema_instances: schema_instances,
+              existing_medications: existing_medications,
+              guarantor: guarantor,
+              subscriber_primary: subscriber_primary,
+              subscriber_secondary: subscriber_secondary,
+              subscriber_tertiary: subscriber_tertiary,
               pay_to_address: pay_to_address,
               diagnosis_ids: diagnosis_ids,
               initial_referring_provider: initial_referring_provider,
@@ -1679,8 +1682,10 @@ module CandidApiClient
         #   * :name (String)
         #   * :code_type (CandidApiClient::Diagnoses::Types::DiagnosisTypeCode)
         #   * :code (String)
+        #   * :present_on_admission_indicator (CandidApiClient::YesNoIndicator::Types::YesNoIndicator)
         # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
-        #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
+        #  patient encounters. Please note that medical records for appeals should be sent
+        #  using the Encounter Attachments API.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
         #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
         #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
         # @param billing_notes [Array<Hash>] Spot to store misc, human-readable, notes about this encounter to be used
@@ -2027,10 +2032,6 @@ module CandidApiClient
         #  date_of_service values.
         # @param tag_ids [Array<String>] Names of tags that should be on the encounter.  Note all tags on encounter will
         #  be overridden with this list.
-        # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
-        #  patient encounters.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
-        #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
-        #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
         # @param billable_status [CandidApiClient::Encounters::V4::Types::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party.
         #  Examples for when this should be set to NOT_BILLABLE include if the Encounter
         #  has not occurred yet or if there is no intention of ever billing the
@@ -2057,6 +2058,100 @@ module CandidApiClient
         #  encounter's end_date_of_service will fail. If all service line
         #  end_date_of_service values are the same, updating the encounter's
         #  end_date_of_service will update all service line date_of_service values.
+        # @param additional_information [String] Defines additional information on the claim needed by the payer.
+        #  Box 19 on the CMS-1500 claim form.
+        # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
+        #  Required when mandated by government law or regulation to obtain authorization
+        #  for specific service(s) but, for the
+        #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
+        #  the service was performed without
+        #  obtaining the authorization.
+        # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
+        #  Required on all ambulance claims when the patient was known to be admitted to
+        #  the hospital.
+        #  OR
+        #  Required on all claims involving inpatient medical visits.
+        # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
+        #  Required for inpatient claims when the patient was discharged from the facility
+        #  and the discharge date is known.
+        # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
+        #  Required for the initial medical service or visit performed in response to a
+        #  medical emergency when the date is available and is different than the date of
+        #  service.
+        #  OR
+        #  This date is the onset of acute symptoms for the current illness or condition.
+        # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
+        #  Required when, in the judgment of the provider, the services on this claim are
+        #  related to the patient's pregnancy.de
+        # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
+        #  Code indicating the reason why a request was delayed
+        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
+        #  for billing purpose.
+        #  Box 12 on the CMS-1500 claim form.
+        # @param vitals [Hash] If a vitals entity already exists for the encounter, then all values will be
+        #  updated to the provided values.
+        #  Otherwise, a new vitals object will be created for the encounter.Request of type CandidApiClient::Encounters::V4::Types::VitalsUpdate, as a Hash
+        #   * :height_in (Integer)
+        #   * :weight_lbs (Integer)
+        #   * :blood_pressure_systolic_mmhg (Integer)
+        #   * :blood_pressure_diastolic_mmhg (Integer)
+        #   * :body_temperature_f (Float)
+        #   * :hemoglobin_gdl (Float)
+        #   * :hematocrit_pct (Float)
+        # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
+        # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
+        #  identify the primary payer. This is required for certain states.
+        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
+        # @param _field_set [Object]
+        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
+        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
+        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        # @param clinical_notes [Array<Hash>] Holds a collection of clinical observations made by healthcare providers during
+        #  patient encounters. Please note that medical records for appeals should be sent
+        #  using the Encounter Attachments API.Request of type Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreate>, as a Hash
+        #   * :category (CandidApiClient::Encounters::V4::Types::NoteCategory)
+        #   * :notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNote>)
+        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
+        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
+        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
+        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
+        #   * :attachment_control_number (String)
+        # @param schema_instances [Array<Hash>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
+        #  Multiple schema
+        #  instances cannot be created for the same schema on an encounter. Updating schema
+        #  instances utilizes PUT
+        #  semantics, so the schema instances on the encounter will be set to whatever
+        #  inputs are provided. If null
+        #  is provided as an input, then the encounter's schema instances will be cleared.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
+        #   * :schema_id (String)
+        #   * :content (Hash{String => Object})
+        # @param existing_medications [Array<Hash>] Existing medications that should be on the encounter.
+        #  Note all current existing medications on encounter will be overridden with this
+        #  list.Request of type Array<CandidApiClient::Encounters::V4::Types::Medication>, as a Hash
+        #   * :name (String)
+        #   * :rx_cui (String)
+        #   * :dosage (String)
+        #   * :dosage_form (String)
+        #   * :frequency (String)
+        #   * :as_needed (Boolean)
+        # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorUpdate, as a Hash
+        #   * :first_name (String)
+        #   * :last_name (String)
+        #   * :external_id (String)
+        #   * :date_of_birth (Date)
+        #   * :address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
+        #   * :phone_consent (Boolean)
+        #   * :email (String)
+        #   * :email_consent (Boolean)
         # @param subscriber_primary [Hash] Contains details of the primary insurance subscriber.Request of type CandidApiClient::Individual::Types::SubscriberCreate, as a Hash
         #   * :insurance_card (Hash)
         #     * :member_id (String)
@@ -2138,95 +2233,6 @@ module CandidApiClient
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :gender (CandidApiClient::Individual::Types::Gender)
-        # @param additional_information [String] Defines additional information on the claim needed by the payer.
-        #  Box 19 on the CMS-1500 claim form.
-        # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
-        #  Required when mandated by government law or regulation to obtain authorization
-        #  for specific service(s) but, for the
-        #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
-        #  the service was performed without
-        #  obtaining the authorization.
-        # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
-        #  Required on all ambulance claims when the patient was known to be admitted to
-        #  the hospital.
-        #  OR
-        #  Required on all claims involving inpatient medical visits.
-        # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
-        #  Required for inpatient claims when the patient was discharged from the facility
-        #  and the discharge date is known.
-        # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
-        #  Required for the initial medical service or visit performed in response to a
-        #  medical emergency when the date is available and is different than the date of
-        #  service.
-        #  OR
-        #  This date is the onset of acute symptoms for the current illness or condition.
-        # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
-        #  Required when, in the judgment of the provider, the services on this claim are
-        #  related to the patient's pregnancy.de
-        # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
-        #  Code indicating the reason why a request was delayed
-        # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
-        #  for billing purpose.
-        #  Box 12 on the CMS-1500 claim form.
-        # @param schema_instances [Array<Hash>] Key-value pairs that must adhere to a schema created via the Custom Schema API.
-        #  Multiple schema
-        #  instances cannot be created for the same schema on an encounter. Updating schema
-        #  instances utilizes PUT
-        #  semantics, so the schema instances on the encounter will be set to whatever
-        #  inputs are provided. If null
-        #  is provided as an input, then the encounter's schema instances will be cleared.Request of type Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstance>, as a Hash
-        #   * :schema_id (String)
-        #   * :content (Hash{String => Object})
-        # @param vitals [Hash] If a vitals entity already exists for the encounter, then all values will be
-        #  updated to the provided values.
-        #  Otherwise, a new vitals object will be created for the encounter.Request of type CandidApiClient::Encounters::V4::Types::VitalsUpdate, as a Hash
-        #   * :height_in (Integer)
-        #   * :weight_lbs (Integer)
-        #   * :blood_pressure_systolic_mmhg (Integer)
-        #   * :blood_pressure_diastolic_mmhg (Integer)
-        #   * :body_temperature_f (Float)
-        #   * :hemoglobin_gdl (Float)
-        #   * :hematocrit_pct (Float)
-        # @param existing_medications [Array<Hash>] Existing medications that should be on the encounter.
-        #  Note all current existing medications on encounter will be overridden with this
-        #  list.Request of type Array<CandidApiClient::Encounters::V4::Types::Medication>, as a Hash
-        #   * :name (String)
-        #   * :rx_cui (String)
-        #   * :dosage (String)
-        #   * :dosage_form (String)
-        #   * :frequency (String)
-        #   * :as_needed (Boolean)
-        # @param guarantor [Hash] Personal and contact info for the guarantor of the patient responsibility.Request of type CandidApiClient::Guarantor::V1::Types::GuarantorUpdate, as a Hash
-        #   * :first_name (String)
-        #   * :last_name (String)
-        #   * :external_id (String)
-        #   * :date_of_birth (Date)
-        #   * :address (Hash)
-        #     * :zip_plus_four_code (String)
-        #     * :address_1 (String)
-        #     * :address_2 (String)
-        #     * :city (String)
-        #     * :state (CandidApiClient::Commons::Types::State)
-        #     * :zip_code (String)
-        #   * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumber>)
-        #   * :phone_consent (Boolean)
-        #   * :email (String)
-        #   * :email_consent (Boolean)
-        # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
-        # @param epsdt_referral [Hash] Refers Box 24H on the CMS1500 form and Loop 2300 CRC - EPSDT Referral on the
-        #  837P formRequest of type CandidApiClient::Encounters::V4::Types::EpsdtReferral, as a Hash
-        #   * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
-        #   * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
-        #   * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
-        # @param claim_supplemental_information [Array<Hash>] Refers to Loop 2300 - Segment PWK on the 837P form. No more than 10 entries are
-        #  permitted.Request of type Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformation>, as a Hash
-        #   * :attachment_report_type_code (CandidApiClient::Encounters::V4::Types::ReportTypeCode)
-        #   * :attachment_transmission_code (CandidApiClient::Encounters::V4::Types::ReportTransmissionCode)
-        #   * :attachment_control_number (String)
-        # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
-        #  identify the primary payer. This is required for certain states.
-        # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @param _field_set [Object]
         # @param pay_to_address [Hash] Specifies the address to which payments for the claim should be sent.Request of type CandidApiClient::Commons::Types::StreetAddressLongZip, as a Hash
         #   * :zip_plus_four_code (String)
         #   * :address_1 (String)
@@ -2374,7 +2380,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.encounters.v_4.update(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
         def update(encounter_id:, benefits_assigned_to_provider: nil, prior_authorization_number: nil,
-                   external_id: nil, date_of_service: nil, tag_ids: nil, clinical_notes: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, schema_instances: nil, vitals: nil, existing_medications: nil, guarantor: nil, referral_number: nil, epsdt_referral: nil, claim_supplemental_information: nil, secondary_payer_carrier_code: nil, additional_properties: nil, _field_set: nil, pay_to_address: nil, diagnosis_ids: nil, initial_referring_provider: nil, referring_provider: nil, patient: nil, rendering_provider: nil, service_facility: nil, supervising_provider: nil, billing_provider: nil, place_of_service_code_as_submitted: nil, request_options: nil)
+                   external_id: nil, date_of_service: nil, tag_ids: nil, billable_status: nil, responsible_party: nil, provider_accepts_assignment: nil, synchronicity: nil, place_of_service_code: nil, appointment_type: nil, end_date_of_service: nil, additional_information: nil, service_authorization_exception_code: nil, admission_date: nil, discharge_date: nil, onset_of_current_illness_or_symptom_date: nil, last_menstrual_period_date: nil, delay_reason_code: nil, patient_authorized_release: nil, vitals: nil, referral_number: nil, secondary_payer_carrier_code: nil, additional_properties: nil, _field_set: nil, epsdt_referral: nil, clinical_notes: nil, claim_supplemental_information: nil, schema_instances: nil, existing_medications: nil, guarantor: nil, subscriber_primary: nil, subscriber_secondary: nil, subscriber_tertiary: nil, pay_to_address: nil, diagnosis_ids: nil, initial_referring_provider: nil, referring_provider: nil, patient: nil, rendering_provider: nil, service_facility: nil, supervising_provider: nil, billing_provider: nil, place_of_service_code_as_submitted: nil, request_options: nil)
           Async do
             response = @request_client.conn.patch do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2391,7 +2397,6 @@ module CandidApiClient
                 external_id: external_id,
                 date_of_service: date_of_service,
                 tag_ids: tag_ids,
-                clinical_notes: clinical_notes,
                 billable_status: billable_status,
                 responsible_party: responsible_party,
                 provider_accepts_assignment: provider_accepts_assignment,
@@ -2399,9 +2404,6 @@ module CandidApiClient
                 place_of_service_code: place_of_service_code,
                 appointment_type: appointment_type,
                 end_date_of_service: end_date_of_service,
-                subscriber_primary: subscriber_primary,
-                subscriber_secondary: subscriber_secondary,
-                subscriber_tertiary: subscriber_tertiary,
                 additional_information: additional_information,
                 service_authorization_exception_code: service_authorization_exception_code,
                 admission_date: admission_date,
@@ -2410,16 +2412,20 @@ module CandidApiClient
                 last_menstrual_period_date: last_menstrual_period_date,
                 delay_reason_code: delay_reason_code,
                 patient_authorized_release: patient_authorized_release,
-                schema_instances: schema_instances,
                 vitals: vitals,
-                existing_medications: existing_medications,
-                guarantor: guarantor,
                 referral_number: referral_number,
-                epsdt_referral: epsdt_referral,
-                claim_supplemental_information: claim_supplemental_information,
                 secondary_payer_carrier_code: secondary_payer_carrier_code,
                 additional_properties: additional_properties,
                 _field_set: _field_set,
+                epsdt_referral: epsdt_referral,
+                clinical_notes: clinical_notes,
+                claim_supplemental_information: claim_supplemental_information,
+                schema_instances: schema_instances,
+                existing_medications: existing_medications,
+                guarantor: guarantor,
+                subscriber_primary: subscriber_primary,
+                subscriber_secondary: subscriber_secondary,
+                subscriber_tertiary: subscriber_tertiary,
                 pay_to_address: pay_to_address,
                 diagnosis_ids: diagnosis_ids,
                 initial_referring_provider: initial_referring_provider,

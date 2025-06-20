@@ -5,9 +5,9 @@ require "json"
 
 module CandidApiClient
   module Auth
-    module V2
+    module Default
       module Types
-        class TooManyRequestsErrorType
+        class InvalidContentTypeErrorType
           # @return [String]
           attr_reader :message
           # @return [OpenStruct] Additional properties unmapped to the current class definition
@@ -20,24 +20,24 @@ module CandidApiClient
 
           # @param message [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::Auth::V2::Types::TooManyRequestsErrorType]
+          # @return [CandidApiClient::Auth::Default::Types::InvalidContentTypeErrorType]
           def initialize(message:, additional_properties: nil)
             @message = message
             @additional_properties = additional_properties
             @_field_set = { "message": message }
           end
 
-          # Deserialize a JSON object to an instance of TooManyRequestsErrorType
+          # Deserialize a JSON object to an instance of InvalidContentTypeErrorType
           #
           # @param json_object [String]
-          # @return [CandidApiClient::Auth::V2::Types::TooManyRequestsErrorType]
+          # @return [CandidApiClient::Auth::Default::Types::InvalidContentTypeErrorType]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             message = struct["message"]
             new(message: message, additional_properties: struct)
           end
 
-          # Serialize an instance of TooManyRequestsErrorType to a JSON object
+          # Serialize an instance of InvalidContentTypeErrorType to a JSON object
           #
           # @return [String]
           def to_json(*_args)

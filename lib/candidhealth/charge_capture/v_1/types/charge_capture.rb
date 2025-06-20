@@ -27,6 +27,10 @@ module CandidApiClient
           attr_reader :charge_external_id
           # @return [String]
           attr_reader :ehr_source_url
+          # @return [String]
+          attr_reader :originating_system
+          # @return [String]
+          attr_reader :claim_creation_category
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           attr_reader :error
           # @return [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
@@ -48,13 +52,15 @@ module CandidApiClient
           # @param patient_external_id [String]
           # @param charge_external_id [String]
           # @param ehr_source_url [String]
+          # @param originating_system [String]
+          # @param claim_creation_category [String]
           # @param error [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError]
           # @param updates [Array<CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePostBilledChange>]
           # @param claim_creation_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
           def initialize(id:, status:, charge_capture_data:, patient_external_id:, charge_external_id:, updates:,
-                         date_of_service: OMIT, ehr_source_url: OMIT, error: OMIT, claim_creation_id: OMIT, additional_properties: nil)
+                         date_of_service: OMIT, ehr_source_url: OMIT, originating_system: OMIT, claim_creation_category: OMIT, error: OMIT, claim_creation_id: OMIT, additional_properties: nil)
             @id = id
             @status = status
             @charge_capture_data = charge_capture_data
@@ -62,6 +68,8 @@ module CandidApiClient
             @patient_external_id = patient_external_id
             @charge_external_id = charge_external_id
             @ehr_source_url = ehr_source_url if ehr_source_url != OMIT
+            @originating_system = originating_system if originating_system != OMIT
+            @claim_creation_category = claim_creation_category if claim_creation_category != OMIT
             @error = error if error != OMIT
             @updates = updates
             @claim_creation_id = claim_creation_id if claim_creation_id != OMIT
@@ -74,6 +82,8 @@ module CandidApiClient
               "patient_external_id": patient_external_id,
               "charge_external_id": charge_external_id,
               "ehr_source_url": ehr_source_url,
+              "originating_system": originating_system,
+              "claim_creation_category": claim_creation_category,
               "error": error,
               "updates": updates,
               "claim_creation_id": claim_creation_id
@@ -101,6 +111,8 @@ module CandidApiClient
             patient_external_id = struct["patient_external_id"]
             charge_external_id = struct["charge_external_id"]
             ehr_source_url = struct["ehr_source_url"]
+            originating_system = struct["originating_system"]
+            claim_creation_category = struct["claim_creation_category"]
             if parsed_json["error"].nil?
               error = nil
             else
@@ -120,6 +132,8 @@ module CandidApiClient
               patient_external_id: patient_external_id,
               charge_external_id: charge_external_id,
               ehr_source_url: ehr_source_url,
+              originating_system: originating_system,
+              claim_creation_category: claim_creation_category,
               error: error,
               updates: updates,
               claim_creation_id: claim_creation_id,
@@ -148,6 +162,8 @@ module CandidApiClient
             obj.patient_external_id.is_a?(String) != false || raise("Passed value for field obj.patient_external_id is not the expected type, validation failed.")
             obj.charge_external_id.is_a?(String) != false || raise("Passed value for field obj.charge_external_id is not the expected type, validation failed.")
             obj.ehr_source_url&.is_a?(String) != false || raise("Passed value for field obj.ehr_source_url is not the expected type, validation failed.")
+            obj.originating_system&.is_a?(String) != false || raise("Passed value for field obj.originating_system is not the expected type, validation failed.")
+            obj.claim_creation_category&.is_a?(String) != false || raise("Passed value for field obj.claim_creation_category is not the expected type, validation failed.")
             obj.error.nil? || CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureError.validate_raw(obj: obj.error)
             obj.updates.is_a?(Array) != false || raise("Passed value for field obj.updates is not the expected type, validation failed.")
             obj.claim_creation_id&.is_a?(String) != false || raise("Passed value for field obj.claim_creation_id is not the expected type, validation failed.")

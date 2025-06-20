@@ -65,6 +65,34 @@ module CandidApiClient
           CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationSummary.from_json(json_object: response.body)
         end
 
+        # @param charge_capture_bundle_error_id [String]
+        # @param resolved_by [String] A string, denoting who resolved the error for audit trail purposes.
+        # @param resolution_reason [String] A string denoting why or how the error was dealt with for audit trail purposes.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture_bundles.v_1.resolve_charge_creation_error(charge_capture_bundle_error_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def resolve_charge_creation_error(charge_capture_bundle_error_id:, resolved_by: nil, resolution_reason: nil,
+                                          request_options: nil)
+          @request_client.conn.patch do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = {
+              **(request_options&.additional_body_parameters || {}),
+              resolved_by: resolved_by,
+              resolution_reason: resolution_reason
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/charge_capture_claim_creation/v1/error/#{charge_capture_bundle_error_id}"
+          end
+        end
+
         # @param limit [Integer] Maximum number of entities per page, defaults to 100.
         # @param sort [CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationSortField] Defaults to created_at
         # @param sort_direction [CandidApiClient::Commons::Types::SortDirection] Sort direction. Defaults to descending order if not provided.
@@ -203,6 +231,36 @@ module CandidApiClient
                                                  request_options: request_options)}/api/charge_capture_claim_creation/v1/all/summary"
             end
             CandidApiClient::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationSummary.from_json(json_object: response.body)
+          end
+        end
+
+        # @param charge_capture_bundle_error_id [String]
+        # @param resolved_by [String] A string, denoting who resolved the error for audit trail purposes.
+        # @param resolution_reason [String] A string denoting why or how the error was dealt with for audit trail purposes.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture_bundles.v_1.resolve_charge_creation_error(charge_capture_bundle_error_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def resolve_charge_creation_error(charge_capture_bundle_error_id:, resolved_by: nil, resolution_reason: nil,
+                                          request_options: nil)
+          Async do
+            @request_client.conn.patch do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = {
+                **(request_options&.additional_body_parameters || {}),
+                resolved_by: resolved_by,
+                resolution_reason: resolution_reason
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/charge_capture_claim_creation/v1/error/#{charge_capture_bundle_error_id}"
+            end
           end
         end
 

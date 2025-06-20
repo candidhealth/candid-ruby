@@ -5,7 +5,7 @@ require "json"
 
 module CandidApiClient
   module Auth
-    module V2
+    module Default
       module Types
         class AuthGetTokenResponse
           # @return [String]
@@ -26,7 +26,7 @@ module CandidApiClient
           # @param expires_in [Integer] Time in seconds.
           # @param token_type [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::Auth::V2::Types::AuthGetTokenResponse]
+          # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
           def initialize(access_token:, expires_in:, token_type:, additional_properties: nil)
             @access_token = access_token
             @expires_in = expires_in
@@ -38,7 +38,7 @@ module CandidApiClient
           # Deserialize a JSON object to an instance of AuthGetTokenResponse
           #
           # @param json_object [String]
-          # @return [CandidApiClient::Auth::V2::Types::AuthGetTokenResponse]
+          # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             access_token = struct["access_token"]

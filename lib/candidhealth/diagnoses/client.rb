@@ -4,6 +4,7 @@ require_relative "../../requests"
 require_relative "types/standalone_diagnosis_create"
 require_relative "types/diagnosis"
 require_relative "types/diagnosis_type_code"
+require_relative "../yes_no_indicator/types/yes_no_indicator"
 require "async"
 
 module CandidApiClient
@@ -24,6 +25,7 @@ module CandidApiClient
     #   * :name (String)
     #   * :code_type (CandidApiClient::Diagnoses::Types::DiagnosisTypeCode)
     #   * :code (String)
+    #   * :present_on_admission_indicator (CandidApiClient::YesNoIndicator::Types::YesNoIndicator)
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
@@ -62,12 +64,19 @@ module CandidApiClient
     #  - Digit or the letter `A` or `B`
     #  - (Optional) Period `.`
     #  - Up to 4 (or as few as 0) letters and digits
+    # @param present_on_admission_indicator [CandidApiClient::YesNoIndicator::Types::YesNoIndicator] For Institutional claims only.
+    #  A "Y" indicates that the onset occurred prior to admission to the hospital.
+    #  An "N" indicates that the onset did NOT occur prior to admission to the
+    #  hospital.
+    #  A "U" indicates that it is unknown whether the onset occurred prior to admission
+    #  to the hospital or not.
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
     #  api.diagnoses.update(diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
-    def update(diagnosis_id:, name: nil, code_type: nil, code: nil, request_options: nil)
+    def update(diagnosis_id:, name: nil, code_type: nil, code: nil, present_on_admission_indicator: nil,
+               request_options: nil)
       response = @request_client.conn.patch do |req|
         req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
         req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -80,7 +89,8 @@ module CandidApiClient
           **(request_options&.additional_body_parameters || {}),
           name: name,
           code_type: code_type,
-          code: code
+          code: code,
+          present_on_admission_indicator: present_on_admission_indicator
         }.compact
         req.url "#{@request_client.get_url(environment: CandidApi,
                                            request_options: request_options)}/api/diagnoses/v2/#{diagnosis_id}"
@@ -128,6 +138,7 @@ module CandidApiClient
     #   * :name (String)
     #   * :code_type (CandidApiClient::Diagnoses::Types::DiagnosisTypeCode)
     #   * :code (String)
+    #   * :present_on_admission_indicator (CandidApiClient::YesNoIndicator::Types::YesNoIndicator)
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
@@ -169,12 +180,19 @@ module CandidApiClient
     #  - Digit or the letter `A` or `B`
     #  - (Optional) Period `.`
     #  - Up to 4 (or as few as 0) letters and digits
+    # @param present_on_admission_indicator [CandidApiClient::YesNoIndicator::Types::YesNoIndicator] For Institutional claims only.
+    #  A "Y" indicates that the onset occurred prior to admission to the hospital.
+    #  An "N" indicates that the onset did NOT occur prior to admission to the
+    #  hospital.
+    #  A "U" indicates that it is unknown whether the onset occurred prior to admission
+    #  to the hospital or not.
     # @param request_options [CandidApiClient::RequestOptions]
     # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
     # @example
     #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
     #  api.diagnoses.update(diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
-    def update(diagnosis_id:, name: nil, code_type: nil, code: nil, request_options: nil)
+    def update(diagnosis_id:, name: nil, code_type: nil, code: nil, present_on_admission_indicator: nil,
+               request_options: nil)
       Async do
         response = @request_client.conn.patch do |req|
           req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -188,7 +206,8 @@ module CandidApiClient
             **(request_options&.additional_body_parameters || {}),
             name: name,
             code_type: code_type,
-            code: code
+            code: code,
+            present_on_admission_indicator: present_on_admission_indicator
           }.compact
           req.url "#{@request_client.get_url(environment: CandidApi,
                                              request_options: request_options)}/api/diagnoses/v2/#{diagnosis_id}"

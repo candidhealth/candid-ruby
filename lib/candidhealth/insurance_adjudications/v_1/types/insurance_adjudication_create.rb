@@ -21,6 +21,8 @@ module CandidApiClient
           attr_reader :check_number
           # @return [Date]
           attr_reader :check_date
+          # @return [Integer]
+          attr_reader :check_amount_cents
           # @return [String]
           attr_reader :note
           # @return [Hash{String => Array}]
@@ -40,18 +42,20 @@ module CandidApiClient
           # @param post_date [Date]
           # @param check_number [String]
           # @param check_date [Date]
+          # @param check_amount_cents [Integer]
           # @param note [String]
           # @param claims [Hash{String => Array}]
           # @param remit_draft_id [String]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::InsuranceAdjudications::V1::Types::InsuranceAdjudicationCreate]
           def initialize(payer_identifier:, payee:, check_date:, claims:, post_date: OMIT, check_number: OMIT,
-                         note: OMIT, remit_draft_id: OMIT, additional_properties: nil)
+                         check_amount_cents: OMIT, note: OMIT, remit_draft_id: OMIT, additional_properties: nil)
             @payer_identifier = payer_identifier
             @payee = payee
             @post_date = post_date if post_date != OMIT
             @check_number = check_number if check_number != OMIT
             @check_date = check_date
+            @check_amount_cents = check_amount_cents if check_amount_cents != OMIT
             @note = note if note != OMIT
             @claims = claims
             @remit_draft_id = remit_draft_id if remit_draft_id != OMIT
@@ -62,6 +66,7 @@ module CandidApiClient
               "post_date": post_date,
               "check_number": check_number,
               "check_date": check_date,
+              "check_amount_cents": check_amount_cents,
               "note": note,
               "claims": claims,
               "remit_draft_id": remit_draft_id
@@ -92,6 +97,7 @@ module CandidApiClient
             post_date = (Date.parse(parsed_json["post_date"]) unless parsed_json["post_date"].nil?)
             check_number = struct["check_number"]
             check_date = (Date.parse(parsed_json["check_date"]) unless parsed_json["check_date"].nil?)
+            check_amount_cents = struct["check_amount_cents"]
             note = struct["note"]
             claims = parsed_json["claims"]&.transform_values do |value|
               value&.map do |item|
@@ -106,6 +112,7 @@ module CandidApiClient
               post_date: post_date,
               check_number: check_number,
               check_date: check_date,
+              check_amount_cents: check_amount_cents,
               note: note,
               claims: claims,
               remit_draft_id: remit_draft_id,
@@ -132,6 +139,7 @@ module CandidApiClient
             obj.post_date&.is_a?(Date) != false || raise("Passed value for field obj.post_date is not the expected type, validation failed.")
             obj.check_number&.is_a?(String) != false || raise("Passed value for field obj.check_number is not the expected type, validation failed.")
             obj.check_date.is_a?(Date) != false || raise("Passed value for field obj.check_date is not the expected type, validation failed.")
+            obj.check_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.check_amount_cents is not the expected type, validation failed.")
             obj.note&.is_a?(String) != false || raise("Passed value for field obj.note is not the expected type, validation failed.")
             obj.claims.is_a?(Hash) != false || raise("Passed value for field obj.claims is not the expected type, validation failed.")
             obj.remit_draft_id&.is_a?(String) != false || raise("Passed value for field obj.remit_draft_id is not the expected type, validation failed.")

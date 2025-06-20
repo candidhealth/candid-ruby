@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "date"
 require_relative "diagnosis_type_code"
 require_relative "../../yes_no_indicator/types/yes_no_indicator"
 require "ostruct"
@@ -9,15 +8,7 @@ require "json"
 module CandidApiClient
   module Diagnoses
     module Types
-      class Diagnosis
-        # @return [String]
-        attr_reader :diagnosis_id
-        # @return [DateTime]
-        attr_reader :created_at
-        # @return [DateTime]
-        attr_reader :updated_at
-        # @return [String]
-        attr_reader :encounter_id
+      class DiagnosisCreateOptional
         # @return [String] Empty string not allowed.
         attr_reader :name
         # @return [CandidApiClient::Diagnoses::Types::DiagnosisTypeCode] Typically, providers submitting claims to Candid are using ICD-10 diagnosis
@@ -51,10 +42,6 @@ module CandidApiClient
 
         OMIT = Object.new
 
-        # @param diagnosis_id [String]
-        # @param created_at [DateTime]
-        # @param updated_at [DateTime]
-        # @param encounter_id [String]
         # @param name [String] Empty string not allowed.
         # @param code_type [CandidApiClient::Diagnoses::Types::DiagnosisTypeCode] Typically, providers submitting claims to Candid are using ICD-10 diagnosis
         #  codes. If you are using ICD-10 codes, the primary diagnosis code listed on the
@@ -77,23 +64,15 @@ module CandidApiClient
         #  A "U" indicates that it is unknown whether the onset occurred prior to admission
         #  to the hospital or not.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-        # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
-        def initialize(diagnosis_id:, created_at:, updated_at:, encounter_id:, code_type:, code:, name: OMIT,
-                       present_on_admission_indicator: OMIT, additional_properties: nil)
-          @diagnosis_id = diagnosis_id
-          @created_at = created_at
-          @updated_at = updated_at
-          @encounter_id = encounter_id
+        # @return [CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional]
+        def initialize(name: OMIT, code_type: OMIT, code: OMIT, present_on_admission_indicator: OMIT,
+                       additional_properties: nil)
           @name = name if name != OMIT
-          @code_type = code_type
-          @code = code
+          @code_type = code_type if code_type != OMIT
+          @code = code if code != OMIT
           @present_on_admission_indicator = present_on_admission_indicator if present_on_admission_indicator != OMIT
           @additional_properties = additional_properties
           @_field_set = {
-            "diagnosis_id": diagnosis_id,
-            "created_at": created_at,
-            "updated_at": updated_at,
-            "encounter_id": encounter_id,
             "name": name,
             "code_type": code_type,
             "code": code,
@@ -103,26 +82,17 @@ module CandidApiClient
           end
         end
 
-        # Deserialize a JSON object to an instance of Diagnosis
+        # Deserialize a JSON object to an instance of DiagnosisCreateOptional
         #
         # @param json_object [String]
-        # @return [CandidApiClient::Diagnoses::Types::Diagnosis]
+        # @return [CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional]
         def self.from_json(json_object:)
           struct = JSON.parse(json_object, object_class: OpenStruct)
-          parsed_json = JSON.parse(json_object)
-          diagnosis_id = struct["diagnosis_id"]
-          created_at = (DateTime.parse(parsed_json["created_at"]) unless parsed_json["created_at"].nil?)
-          updated_at = (DateTime.parse(parsed_json["updated_at"]) unless parsed_json["updated_at"].nil?)
-          encounter_id = struct["encounter_id"]
           name = struct["name"]
           code_type = struct["code_type"]
           code = struct["code"]
           present_on_admission_indicator = struct["present_on_admission_indicator"]
           new(
-            diagnosis_id: diagnosis_id,
-            created_at: created_at,
-            updated_at: updated_at,
-            encounter_id: encounter_id,
             name: name,
             code_type: code_type,
             code: code,
@@ -131,7 +101,7 @@ module CandidApiClient
           )
         end
 
-        # Serialize an instance of Diagnosis to a JSON object
+        # Serialize an instance of DiagnosisCreateOptional to a JSON object
         #
         # @return [String]
         def to_json(*_args)
@@ -145,13 +115,9 @@ module CandidApiClient
         # @param obj [Object]
         # @return [Void]
         def self.validate_raw(obj:)
-          obj.diagnosis_id.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id is not the expected type, validation failed.")
-          obj.created_at.is_a?(DateTime) != false || raise("Passed value for field obj.created_at is not the expected type, validation failed.")
-          obj.updated_at.is_a?(DateTime) != false || raise("Passed value for field obj.updated_at is not the expected type, validation failed.")
-          obj.encounter_id.is_a?(String) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
           obj.name&.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
-          obj.code_type.is_a?(CandidApiClient::Diagnoses::Types::DiagnosisTypeCode) != false || raise("Passed value for field obj.code_type is not the expected type, validation failed.")
-          obj.code.is_a?(String) != false || raise("Passed value for field obj.code is not the expected type, validation failed.")
+          obj.code_type&.is_a?(CandidApiClient::Diagnoses::Types::DiagnosisTypeCode) != false || raise("Passed value for field obj.code_type is not the expected type, validation failed.")
+          obj.code&.is_a?(String) != false || raise("Passed value for field obj.code is not the expected type, validation failed.")
           obj.present_on_admission_indicator&.is_a?(CandidApiClient::YesNoIndicator::Types::YesNoIndicator) != false || raise("Passed value for field obj.present_on_admission_indicator is not the expected type, validation failed.")
         end
       end

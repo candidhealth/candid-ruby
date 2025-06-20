@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "diagnosis_type_code"
+require_relative "../../yes_no_indicator/types/yes_no_indicator"
 require "ostruct"
 require "json"
 
@@ -26,6 +27,13 @@ module CandidApiClient
         #  - (Optional) Period `.`
         #  - Up to 4 (or as few as 0) letters and digits
         attr_reader :code
+        # @return [CandidApiClient::YesNoIndicator::Types::YesNoIndicator] For Institutional claims only.
+        #  A "Y" indicates that the onset occurred prior to admission to the hospital.
+        #  An "N" indicates that the onset did NOT occur prior to admission to the
+        #  hospital.
+        #  A "U" indicates that it is unknown whether the onset occurred prior to admission
+        #  to the hospital or not.
+        attr_reader :present_on_admission_indicator
         # @return [OpenStruct] Additional properties unmapped to the current class definition
         attr_reader :additional_properties
         # @return [Object]
@@ -49,14 +57,26 @@ module CandidApiClient
         #  - Digit or the letter `A` or `B`
         #  - (Optional) Period `.`
         #  - Up to 4 (or as few as 0) letters and digits
+        # @param present_on_admission_indicator [CandidApiClient::YesNoIndicator::Types::YesNoIndicator] For Institutional claims only.
+        #  A "Y" indicates that the onset occurred prior to admission to the hospital.
+        #  An "N" indicates that the onset did NOT occur prior to admission to the
+        #  hospital.
+        #  A "U" indicates that it is unknown whether the onset occurred prior to admission
+        #  to the hospital or not.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::Diagnoses::Types::DiagnosisCreate]
-        def initialize(code_type:, code:, name: OMIT, additional_properties: nil)
+        def initialize(code_type:, code:, name: OMIT, present_on_admission_indicator: OMIT, additional_properties: nil)
           @name = name if name != OMIT
           @code_type = code_type
           @code = code
+          @present_on_admission_indicator = present_on_admission_indicator if present_on_admission_indicator != OMIT
           @additional_properties = additional_properties
-          @_field_set = { "name": name, "code_type": code_type, "code": code }.reject do |_k, v|
+          @_field_set = {
+            "name": name,
+            "code_type": code_type,
+            "code": code,
+            "present_on_admission_indicator": present_on_admission_indicator
+          }.reject do |_k, v|
             v == OMIT
           end
         end
@@ -70,10 +90,12 @@ module CandidApiClient
           name = struct["name"]
           code_type = struct["code_type"]
           code = struct["code"]
+          present_on_admission_indicator = struct["present_on_admission_indicator"]
           new(
             name: name,
             code_type: code_type,
             code: code,
+            present_on_admission_indicator: present_on_admission_indicator,
             additional_properties: struct
           )
         end
@@ -95,6 +117,7 @@ module CandidApiClient
           obj.name&.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
           obj.code_type.is_a?(CandidApiClient::Diagnoses::Types::DiagnosisTypeCode) != false || raise("Passed value for field obj.code_type is not the expected type, validation failed.")
           obj.code.is_a?(String) != false || raise("Passed value for field obj.code is not the expected type, validation failed.")
+          obj.present_on_admission_indicator&.is_a?(CandidApiClient::YesNoIndicator::Types::YesNoIndicator) != false || raise("Passed value for field obj.present_on_admission_indicator is not the expected type, validation failed.")
         end
       end
     end

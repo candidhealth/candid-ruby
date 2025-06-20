@@ -3,8 +3,8 @@
 require_relative "gender"
 require "date"
 require_relative "../../commons/types/street_address_short_zip_optional"
-require_relative "../../commons/types/phone_number"
-require_relative "patient_non_insurance_payer_info_create"
+require_relative "../../commons/types/phone_number_optional"
+require_relative "patient_non_insurance_payer_info_create_optional"
 require "ostruct"
 require "json"
 
@@ -26,7 +26,7 @@ module CandidApiClient
         attr_reader :date_of_birth
         # @return [CandidApiClient::Commons::Types::StreetAddressShortZipOptional] Box 5 on the CMS-1500 claim form.
         attr_reader :address
-        # @return [Array<CandidApiClient::Commons::Types::PhoneNumber>]
+        # @return [Array<CandidApiClient::Commons::Types::PhoneNumberOptional>]
         attr_reader :phone_numbers
         # @return [Boolean]
         attr_reader :phone_consent
@@ -37,7 +37,7 @@ module CandidApiClient
         # @return [Array<String>] On update, we will replace the existing list of non-insurance payers with the
         #  new list if populated.
         attr_reader :non_insurance_payers
-        # @return [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate>] On update, we will replace the existing list of non-insurance payers with the
+        # @return [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>] On update, we will replace the existing list of non-insurance payers with the
         #  new list if populated.
         attr_reader :non_insurance_payers_info
         # @return [OpenStruct] Additional properties unmapped to the current class definition
@@ -56,13 +56,13 @@ module CandidApiClient
         # @param date_of_birth [Date] Box 3 on the CMS-1500 claim form. The date format should be in ISO 8601 date;
         #  formatted YYYY-MM-DD (i.e. 2012-02-01)
         # @param address [CandidApiClient::Commons::Types::StreetAddressShortZipOptional] Box 5 on the CMS-1500 claim form.
-        # @param phone_numbers [Array<CandidApiClient::Commons::Types::PhoneNumber>]
+        # @param phone_numbers [Array<CandidApiClient::Commons::Types::PhoneNumberOptional>]
         # @param phone_consent [Boolean]
         # @param email [String]
         # @param email_consent [Boolean]
         # @param non_insurance_payers [Array<String>] On update, we will replace the existing list of non-insurance payers with the
         #  new list if populated.
-        # @param non_insurance_payers_info [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate>] On update, we will replace the existing list of non-insurance payers with the
+        # @param non_insurance_payers_info [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>] On update, we will replace the existing list of non-insurance payers with the
         #  new list if populated.
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::Individual::Types::PatientUpdateWithOptionalAddress]
@@ -119,7 +119,7 @@ module CandidApiClient
           end
           phone_numbers = parsed_json["phone_numbers"]&.map do |item|
             item = item.to_json
-            CandidApiClient::Commons::Types::PhoneNumber.from_json(json_object: item)
+            CandidApiClient::Commons::Types::PhoneNumberOptional.from_json(json_object: item)
           end
           phone_consent = struct["phone_consent"]
           email = struct["email"]
@@ -127,7 +127,7 @@ module CandidApiClient
           non_insurance_payers = struct["non_insurance_payers"]
           non_insurance_payers_info = parsed_json["non_insurance_payers_info"]&.map do |item|
             item = item.to_json
-            CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate.from_json(json_object: item)
+            CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional.from_json(json_object: item)
           end
           new(
             first_name: first_name,

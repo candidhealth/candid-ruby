@@ -115,7 +115,7 @@ module CandidApiClient
         # @param contracting_provider_id [String] The UUID of the provider under agreement to the contract
         # @param rendering_provider_ids [Set<String>] A rendering provider isn't contracted directly with the payer but can render
         #  services under the contract held by the contracting provider.
-        #  Max items is 100.
+        #  Max items is 1000.
         # @param payer_uuid [String] The UUID of the insurance company under agreement to the contract
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
@@ -181,7 +181,7 @@ module CandidApiClient
         # @param contract_id [String]
         # @param rendering_provider_ids [Set<String>] A rendering provider isn't contracted directly with the payer but can render
         #  services under the contract held by the contracting provider.
-        #  Max items is 100.
+        #  Max items is 1000.
         # @param effective_date [String] The starting day upon which the contract is effective
         # @param expiration_date [CandidApiClient::Contracts::V2::Types::DateUpdate] An optional end day upon which the contract expires
         # @param regions [CandidApiClient::Contracts::V2::Types::RegionsUpdate] If present, the contract's rendering providers will be patched to this exact
@@ -324,7 +324,7 @@ module CandidApiClient
         # @param contracting_provider_id [String] The UUID of the provider under agreement to the contract
         # @param rendering_provider_ids [Set<String>] A rendering provider isn't contracted directly with the payer but can render
         #  services under the contract held by the contracting provider.
-        #  Max items is 100.
+        #  Max items is 1000.
         # @param payer_uuid [String] The UUID of the insurance company under agreement to the contract
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Contracts::V2::Types::ContractWithProviders]
@@ -394,7 +394,7 @@ module CandidApiClient
         # @param contract_id [String]
         # @param rendering_provider_ids [Set<String>] A rendering provider isn't contracted directly with the payer but can render
         #  services under the contract held by the contracting provider.
-        #  Max items is 100.
+        #  Max items is 1000.
         # @param effective_date [String] The starting day upon which the contract is effective
         # @param expiration_date [CandidApiClient::Contracts::V2::Types::DateUpdate] An optional end day upon which the contract expires
         # @param regions [CandidApiClient::Contracts::V2::Types::RegionsUpdate] If present, the contract's rendering providers will be patched to this exact

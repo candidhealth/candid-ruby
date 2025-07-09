@@ -103,6 +103,7 @@ module CandidApiClient
           SLP_CF = "SLP-CF"
           NP_C = "NP-C"
           PA_C = "PA-C"
+          AMFT = "AMFT"
         end
       end
     end

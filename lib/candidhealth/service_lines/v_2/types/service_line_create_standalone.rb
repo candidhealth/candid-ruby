@@ -74,6 +74,8 @@ module CandidApiClient
           #  If the value is true, the box will be populated with "Y". Otherwise, the box
           #  will not be populated.
           attr_reader :has_family_planning_indicator
+          # @return [String] Maps to NTE02 loop 2400 on the EDI 837.
+          attr_reader :note
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -120,10 +122,11 @@ module CandidApiClient
           # @param has_family_planning_indicator [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
           #  If the value is true, the box will be populated with "Y". Otherwise, the box
           #  will not be populated.
+          # @param note [String] Maps to NTE02 loop 2400 on the EDI 837.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateStandalone]
           def initialize(procedure_code:, quantity:, units:, claim_id:, modifiers: OMIT, charge_amount_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT,
-                         diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, drug_identification: OMIT, ordering_provider: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, additional_properties: nil)
+                         diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, drug_identification: OMIT, ordering_provider: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, note: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @diagnosis_id_zero = diagnosis_id_zero if diagnosis_id_zero != OMIT
@@ -144,6 +147,7 @@ module CandidApiClient
             @test_results = test_results if test_results != OMIT
             @has_epsdt_indicator = has_epsdt_indicator if has_epsdt_indicator != OMIT
             @has_family_planning_indicator = has_family_planning_indicator if has_family_planning_indicator != OMIT
+            @note = note if note != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
@@ -165,7 +169,8 @@ module CandidApiClient
               "ordering_provider": ordering_provider,
               "test_results": test_results,
               "has_epsdt_indicator": has_epsdt_indicator,
-              "has_family_planning_indicator": has_family_planning_indicator
+              "has_family_planning_indicator": has_family_planning_indicator,
+              "note": note
             }.reject do |_k, v|
               v == OMIT
             end
@@ -218,6 +223,7 @@ module CandidApiClient
             end
             has_epsdt_indicator = struct["has_epsdt_indicator"]
             has_family_planning_indicator = struct["has_family_planning_indicator"]
+            note = struct["note"]
             new(
               modifiers: modifiers,
               charge_amount_cents: charge_amount_cents,
@@ -239,6 +245,7 @@ module CandidApiClient
               test_results: test_results,
               has_epsdt_indicator: has_epsdt_indicator,
               has_family_planning_indicator: has_family_planning_indicator,
+              note: note,
               additional_properties: struct
             )
           end
@@ -277,6 +284,7 @@ module CandidApiClient
             obj.test_results&.is_a?(Array) != false || raise("Passed value for field obj.test_results is not the expected type, validation failed.")
             obj.has_epsdt_indicator&.is_a?(Boolean) != false || raise("Passed value for field obj.has_epsdt_indicator is not the expected type, validation failed.")
             obj.has_family_planning_indicator&.is_a?(Boolean) != false || raise("Passed value for field obj.has_family_planning_indicator is not the expected type, validation failed.")
+            obj.note&.is_a?(String) != false || raise("Passed value for field obj.note is not the expected type, validation failed.")
           end
         end
       end

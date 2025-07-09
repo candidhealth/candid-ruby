@@ -7,6 +7,8 @@ require_relative "types/charge_capture"
 require_relative "types/charge_capture_sort_field"
 require_relative "../../commons/types/sort_direction"
 require "date"
+require_relative "../../encounters/v_4/types/billable_status_type"
+require_relative "../../encounters/v_4/types/responsible_party_type"
 require_relative "types/charge_capture_page"
 require_relative "types/charge_capture_post_billed_change"
 require "json"
@@ -679,6 +681,15 @@ module CandidApiClient
         #  This date must be the local date in the timezone where the service occurred.
         # @param date_of_service_max_ranked_sort [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
+        # @param search_term [String] Filter by any of the following fields: charge_id, claim_id, patient external_id,
+        #  patient date of birth, patient first name, patient last name,
+        #  or charge external id.
+        # @param billable_status [CandidApiClient::Encounters::V4::Types::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party.
+        #  Examples for when this should be set to NOT_BILLABLE include if the Encounter
+        #  has not occurred yet or if there is no intention of ever billing the
+        #  responsible_party.
+        # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim. Use
+        #  SELF_PAY if you intend to bill self pay/cash pay.
         # @param claim_ids_ranked_sort [String] A list of claim IDs to show first. This will return all charge captures that
         #  have a resulting claim with one of the IDs in this list.
         # @param claim_creation_ids_ranked_sort [String] A list of Claim Creation IDs to show first.
@@ -702,7 +713,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, search_term: nil, billable_status: nil, responsible_party: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -737,6 +748,9 @@ module CandidApiClient
               "charge_external_id_ranked_sort": charge_external_id_ranked_sort,
               "date_of_service_min_ranked_sort": date_of_service_min_ranked_sort,
               "date_of_service_max_ranked_sort": date_of_service_max_ranked_sort,
+              "search_term": search_term,
+              "billable_status": billable_status,
+              "responsible_party": responsible_party,
               "claim_ids_ranked_sort": claim_ids_ranked_sort,
               "claim_creation_ids_ranked_sort": claim_creation_ids_ranked_sort,
               "billing_provider_npis_ranked_sort": billing_provider_npis_ranked_sort,
@@ -1458,6 +1472,15 @@ module CandidApiClient
         #  This date must be the local date in the timezone where the service occurred.
         # @param date_of_service_max_ranked_sort [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
         #  This date must be the local date in the timezone where the service occurred.
+        # @param search_term [String] Filter by any of the following fields: charge_id, claim_id, patient external_id,
+        #  patient date of birth, patient first name, patient last name,
+        #  or charge external id.
+        # @param billable_status [CandidApiClient::Encounters::V4::Types::BillableStatusType] Defines if the Encounter is to be billed by Candid to the responsible_party.
+        #  Examples for when this should be set to NOT_BILLABLE include if the Encounter
+        #  has not occurred yet or if there is no intention of ever billing the
+        #  responsible_party.
+        # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim. Use
+        #  SELF_PAY if you intend to bill self pay/cash pay.
         # @param claim_ids_ranked_sort [String] A list of claim IDs to show first. This will return all charge captures that
         #  have a resulting claim with one of the IDs in this list.
         # @param claim_creation_ids_ranked_sort [String] A list of Claim Creation IDs to show first.
@@ -1481,7 +1504,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, search_term: nil, billable_status: nil, responsible_party: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -1517,6 +1540,9 @@ module CandidApiClient
                 "charge_external_id_ranked_sort": charge_external_id_ranked_sort,
                 "date_of_service_min_ranked_sort": date_of_service_min_ranked_sort,
                 "date_of_service_max_ranked_sort": date_of_service_max_ranked_sort,
+                "search_term": search_term,
+                "billable_status": billable_status,
+                "responsible_party": responsible_party,
                 "claim_ids_ranked_sort": claim_ids_ranked_sort,
                 "claim_creation_ids_ranked_sort": claim_creation_ids_ranked_sort,
                 "billing_provider_npis_ranked_sort": billing_provider_npis_ranked_sort,

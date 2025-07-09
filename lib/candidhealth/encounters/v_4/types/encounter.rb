@@ -21,6 +21,7 @@ require_relative "encounter_submission_origin_type"
 require_relative "../../../custom_schemas/v_1/types/schema_instance"
 require_relative "epsdt_referral"
 require_relative "claim_supplemental_information"
+require_relative "../../../commons/types/next_responsible_party"
 require_relative "medication"
 require_relative "vitals"
 require_relative "intervention"
@@ -164,6 +165,9 @@ module CandidApiClient
           attr_reader :last_submitted_at
           # @return [DateTime] The date and time the encounter was created.
           attr_reader :created_at
+          # @return [CandidApiClient::Commons::Types::NextResponsibleParty] The party (payer, patient, etc.) responsible for the remainder of the balance on
+          #  the claim.
+          attr_reader :next_responsible_party
           # @return [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -353,6 +357,8 @@ module CandidApiClient
           #  identify the primary payer. This is required for certain states.
           # @param last_submitted_at [DateTime] The date and time the encounter was last submitted to a payer.
           # @param created_at [DateTime] The date and time the encounter was created.
+          # @param next_responsible_party [CandidApiClient::Commons::Types::NextResponsibleParty] The party (payer, patient, etc.) responsible for the remainder of the balance on
+          #  the claim.
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
@@ -428,7 +434,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
           def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:, responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, claim_creation_id: OMIT, patient_control_number: OMIT,
-                         guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+                         guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, next_responsible_party: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
             @claim_creation_id = claim_creation_id if claim_creation_id != OMIT
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
@@ -471,6 +477,7 @@ module CandidApiClient
             @secondary_payer_carrier_code = secondary_payer_carrier_code if secondary_payer_carrier_code != OMIT
             @last_submitted_at = last_submitted_at if last_submitted_at != OMIT
             @created_at = created_at
+            @next_responsible_party = next_responsible_party if next_responsible_party != OMIT
             @external_id = external_id
             @date_of_service = date_of_service if date_of_service != OMIT
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
@@ -535,6 +542,7 @@ module CandidApiClient
               "secondary_payer_carrier_code": secondary_payer_carrier_code,
               "last_submitted_at": last_submitted_at,
               "created_at": created_at,
+              "next_responsible_party": next_responsible_party,
               "external_id": external_id,
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
@@ -696,6 +704,7 @@ module CandidApiClient
                                   DateTime.parse(parsed_json["last_submitted_at"])
                                 end
             created_at = (DateTime.parse(parsed_json["created_at"]) unless parsed_json["created_at"].nil?)
+            next_responsible_party = struct["next_responsible_party"]
             external_id = struct["external_id"]
             date_of_service = (Date.parse(parsed_json["date_of_service"]) unless parsed_json["date_of_service"].nil?)
             end_date_of_service = unless parsed_json["end_date_of_service"].nil?
@@ -777,6 +786,7 @@ module CandidApiClient
               secondary_payer_carrier_code: secondary_payer_carrier_code,
               last_submitted_at: last_submitted_at,
               created_at: created_at,
+              next_responsible_party: next_responsible_party,
               external_id: external_id,
               date_of_service: date_of_service,
               end_date_of_service: end_date_of_service,
@@ -853,6 +863,7 @@ module CandidApiClient
             obj.secondary_payer_carrier_code&.is_a?(String) != false || raise("Passed value for field obj.secondary_payer_carrier_code is not the expected type, validation failed.")
             obj.last_submitted_at&.is_a?(DateTime) != false || raise("Passed value for field obj.last_submitted_at is not the expected type, validation failed.")
             obj.created_at.is_a?(DateTime) != false || raise("Passed value for field obj.created_at is not the expected type, validation failed.")
+            obj.next_responsible_party&.is_a?(CandidApiClient::Commons::Types::NextResponsibleParty) != false || raise("Passed value for field obj.next_responsible_party is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.date_of_service is not the expected type, validation failed.")
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")

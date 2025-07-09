@@ -61,6 +61,7 @@ module CandidApiClient
         #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         #   * :has_epsdt_indicator (Boolean)
         #   * :has_family_planning_indicator (Boolean)
+        #   * :note (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
@@ -112,6 +113,7 @@ module CandidApiClient
         #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         #   * :has_epsdt_indicator (Boolean)
         #   * :has_family_planning_indicator (Boolean)
+        #   * :note (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
@@ -206,6 +208,7 @@ module CandidApiClient
         #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         #   * :has_epsdt_indicator (Boolean)
         #   * :has_family_planning_indicator (Boolean)
+        #   * :note (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
@@ -259,6 +262,7 @@ module CandidApiClient
         #   * :test_results (Array<CandidApiClient::ServiceLines::V2::Types::TestResult>)
         #   * :has_epsdt_indicator (Boolean)
         #   * :has_family_planning_indicator (Boolean)
+        #   * :note (String)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example

@@ -63,6 +63,8 @@ module CandidApiClient
           #  837-P (ex: Hemoglobin, Hematocrit).
           #  No more than 5 MEA-02 test results may be submitted per service line.
           attr_reader :test_results
+          # @return [String] Maps to NTE02 loop 2400 on the EDI 837.
+          attr_reader :note
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -104,10 +106,11 @@ module CandidApiClient
           # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResultOptional>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
           #  No more than 5 MEA-02 test results may be submitted per service line.
+          # @param note [String] Maps to NTE02 loop 2400 on the EDI 837.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateOptional]
           def initialize(modifiers: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT,
-                         procedure_code: OMIT, quantity: OMIT, units: OMIT, charge_amount_cents: OMIT, diagnosis_pointers: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_results: OMIT, additional_properties: nil)
+                         procedure_code: OMIT, quantity: OMIT, units: OMIT, charge_amount_cents: OMIT, diagnosis_pointers: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_results: OMIT, note: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @has_epsdt_indicator = has_epsdt_indicator if has_epsdt_indicator != OMIT
             @has_family_planning_indicator = has_family_planning_indicator if has_family_planning_indicator != OMIT
@@ -123,6 +126,7 @@ module CandidApiClient
             @end_date_of_service = end_date_of_service if end_date_of_service != OMIT
             @ordering_provider = ordering_provider if ordering_provider != OMIT
             @test_results = test_results if test_results != OMIT
+            @note = note if note != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
@@ -139,7 +143,8 @@ module CandidApiClient
               "date_of_service": date_of_service,
               "end_date_of_service": end_date_of_service,
               "ordering_provider": ordering_provider,
-              "test_results": test_results
+              "test_results": test_results,
+              "note": note
             }.reject do |_k, v|
               v == OMIT
             end
@@ -182,6 +187,7 @@ module CandidApiClient
               item = item.to_json
               CandidApiClient::ServiceLines::V2::Types::TestResultOptional.from_json(json_object: item)
             end
+            note = struct["note"]
             new(
               modifiers: modifiers,
               has_epsdt_indicator: has_epsdt_indicator,
@@ -198,6 +204,7 @@ module CandidApiClient
               end_date_of_service: end_date_of_service,
               ordering_provider: ordering_provider,
               test_results: test_results,
+              note: note,
               additional_properties: struct
             )
           end
@@ -231,6 +238,7 @@ module CandidApiClient
             obj.end_date_of_service&.is_a?(Date) != false || raise("Passed value for field obj.end_date_of_service is not the expected type, validation failed.")
             obj.ordering_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::OrderingProviderOptional.validate_raw(obj: obj.ordering_provider)
             obj.test_results&.is_a?(Array) != false || raise("Passed value for field obj.test_results is not the expected type, validation failed.")
+            obj.note&.is_a?(String) != false || raise("Passed value for field obj.note is not the expected type, validation failed.")
           end
         end
       end

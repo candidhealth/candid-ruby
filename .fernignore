@@ -1,3 +1,6 @@
 # Specify files that shouldn't be modified by Fern
 README.md
 test/test_candidhealth.rb
+
+# Ignore test CI changes
+.github/workflows/publish.yml

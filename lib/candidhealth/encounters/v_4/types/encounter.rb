@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
+require_relative "../../../commons/types/state"
 require_relative "../../../claims/types/claim"
 require_relative "../../../individual/types/patient"
 require_relative "../../../guarantor/v_1/types/guarantor"
 require_relative "../../../encounter_providers/v_2/types/encounter_provider"
+require_relative "../../../encounter_providers/v_2/types/rendering_provider"
+require_relative "../../../x_12/v_1/types/type_of_admission_or_visit_code"
+require_relative "../../../x_12/v_1/types/point_of_origin_for_admission_or_visit_code"
+require_relative "../../../x_12/v_1/types/patient_discharge_status_code"
+require_relative "encounter_submission_expectation"
+require_relative "../../../x_12/v_1/types/type_of_bill_composite"
 require_relative "../../../service_facility/types/encounter_service_facility"
 require_relative "../../../individual/types/subscriber"
 require_relative "responsible_party_type"
@@ -38,6 +45,9 @@ module CandidApiClient
     module V4
       module Types
         class Encounter
+          # @return [CandidApiClient::Commons::Types::State] 837i-REF1000 -- an optional state indicating where an accident related to the
+          #  encounter occurred.
+          attr_reader :accident_state_or_province_code
           # @return [String] If the encounter was created from ingested charge captures, this is the
           #  associated Charge Capture Claim Creation Id.
           attr_reader :claim_creation_id
@@ -71,6 +81,41 @@ module CandidApiClient
           #  communication, or other service. The rendering provider address should generally
           #  be the same as the service facility address.
           attr_reader :rendering_provider
+          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider] 837i NM1 2500 variant for Loop ID-2310.  Used to indicate the individual whom
+          #  has overall responsibility for the patient in institutional claims processing.
+          attr_reader :attending_provider
+          # @return [Integer] 837i Loop 2300 DTP-03
+          #  Extension of the admission date with hour (0-23) details.
+          #  Required for institutional submission.
+          attr_reader :admission_hour
+          # @return [CandidApiClient::X12::V1::Types::TypeOfAdmissionOrVisitCode] 837i Loop 2300 CL1-01
+          #  Code used to indicate the priority of an admission or visit.
+          attr_reader :admission_type_code
+          # @return [CandidApiClient::X12::V1::Types::PointOfOriginForAdmissionOrVisitCode] 837i Loop 2300 CLI1-02
+          #  Code used to indicate the conditions under which an admission occurs.
+          attr_reader :admission_source_code
+          # @return [Integer] 837i Loop 2300 DTP-03
+          #  Extension of the discharge date with hour (0-23) details.
+          #  Required for institutional submission.
+          attr_reader :discharge_hour
+          # @return [CandidApiClient::X12::V1::Types::PatientDischargeStatusCode] 837i CL1-03
+          #  Code indicating patient status as of the "statement covers through date".
+          attr_reader :discharge_status
+          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider] 837i NM1 2500 variant for Loop ID-2310.  Used to indicate the individual whom
+          #  has primary responsibility for surgical procedures in institutional claims
+          #  processing.
+          attr_reader :operating_provider
+          # @return [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider] 837i NM1 2500 variant for Loop ID-2310.  Used to indicate the individual whom
+          #  has secondary responsibility for surgical procedures in institutional claims
+          #  processing.  Only used when operating_provider is also set.
+          attr_reader :other_operating_provider
+          # @return [CandidApiClient::Encounters::V4::Types::EncounterSubmissionExpectation] Describes the currently expected target form for this encounter.  This effects
+          #  what validations and queues the form is processed under.  When this value is not
+          #  set, it should be assumed to be TARGET_PROFESSIONAL.
+          attr_reader :submission_expectation
+          # @return [CandidApiClient::X12::V1::Types::TypeOfBillComposite] Used by institutional forms to indicate how the bill is to be interpreted.
+          #  Professional forms are not required to submit this attribute.
+          attr_reader :type_of_bill
           # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           attr_reader :referring_provider
           # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
@@ -268,6 +313,8 @@ module CandidApiClient
 
           OMIT = Object.new
 
+          # @param accident_state_or_province_code [CandidApiClient::Commons::Types::State] 837i-REF1000 -- an optional state indicating where an accident related to the
+          #  encounter occurred.
           # @param claim_creation_id [String] If the encounter was created from ingested charge captures, this is the
           #  associated Charge Capture Claim Creation Id.
           # @param patient_control_number [String] A patient control number (PCN) is a unique identifier assigned to a patient
@@ -293,6 +340,31 @@ module CandidApiClient
           #  For telehealth services, the rendering provider performs the visit, asynchronous
           #  communication, or other service. The rendering provider address should generally
           #  be the same as the service facility address.
+          # @param attending_provider [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider] 837i NM1 2500 variant for Loop ID-2310.  Used to indicate the individual whom
+          #  has overall responsibility for the patient in institutional claims processing.
+          # @param admission_hour [Integer] 837i Loop 2300 DTP-03
+          #  Extension of the admission date with hour (0-23) details.
+          #  Required for institutional submission.
+          # @param admission_type_code [CandidApiClient::X12::V1::Types::TypeOfAdmissionOrVisitCode] 837i Loop 2300 CL1-01
+          #  Code used to indicate the priority of an admission or visit.
+          # @param admission_source_code [CandidApiClient::X12::V1::Types::PointOfOriginForAdmissionOrVisitCode] 837i Loop 2300 CLI1-02
+          #  Code used to indicate the conditions under which an admission occurs.
+          # @param discharge_hour [Integer] 837i Loop 2300 DTP-03
+          #  Extension of the discharge date with hour (0-23) details.
+          #  Required for institutional submission.
+          # @param discharge_status [CandidApiClient::X12::V1::Types::PatientDischargeStatusCode] 837i CL1-03
+          #  Code indicating patient status as of the "statement covers through date".
+          # @param operating_provider [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider] 837i NM1 2500 variant for Loop ID-2310.  Used to indicate the individual whom
+          #  has primary responsibility for surgical procedures in institutional claims
+          #  processing.
+          # @param other_operating_provider [CandidApiClient::EncounterProviders::V2::Types::RenderingProvider] 837i NM1 2500 variant for Loop ID-2310.  Used to indicate the individual whom
+          #  has secondary responsibility for surgical procedures in institutional claims
+          #  processing.  Only used when operating_provider is also set.
+          # @param submission_expectation [CandidApiClient::Encounters::V4::Types::EncounterSubmissionExpectation] Describes the currently expected target form for this encounter.  This effects
+          #  what validations and queues the form is processed under.  When this value is not
+          #  set, it should be assumed to be TARGET_PROFESSIONAL.
+          # @param type_of_bill [CandidApiClient::X12::V1::Types::TypeOfBillComposite] Used by institutional forms to indicate how the bill is to be interpreted.
+          #  Professional forms are not required to submit this attribute.
           # @param referring_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           # @param initial_referring_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           # @param supervising_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
@@ -433,8 +505,11 @@ module CandidApiClient
           #  Code indicating the reason why a request was delayed
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::Encounter]
-          def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:, responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, claim_creation_id: OMIT, patient_control_number: OMIT,
-                         guarantor: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, next_responsible_party: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+          def initialize(encounter_id:, claims:, patient:, billing_provider:, rendering_provider:, service_facility:,
+                         responsible_party:, url:, diagnoses:, clinical_notes:, patient_histories:, patient_payments:, tags:, owner_of_next_action:, submission_origin:, schema_instances:, created_at:, external_id:, patient_authorized_release:, benefits_assigned_to_provider:, provider_accepts_assignment:, billable_status:, accident_state_or_province_code: OMIT, claim_creation_id: OMIT, patient_control_number: OMIT, guarantor: OMIT, attending_provider: OMIT, admission_hour: OMIT, admission_type_code: OMIT, admission_source_code: OMIT, discharge_hour: OMIT, discharge_status: OMIT, operating_provider: OMIT, other_operating_provider: OMIT, submission_expectation: OMIT, type_of_bill: OMIT, referring_provider: OMIT, initial_referring_provider: OMIT, supervising_provider: OMIT, subscriber_primary: OMIT, subscriber_secondary: OMIT, subscriber_tertiary: OMIT, prior_authorization_number: OMIT, billing_notes: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, coding_attribution: OMIT, work_queue_id: OMIT, work_queue_membership_activated_at: OMIT, referral_number: OMIT, epsdt_referral: OMIT, claim_supplemental_information: OMIT, secondary_payer_carrier_code: OMIT, last_submitted_at: OMIT, next_responsible_party: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, appointment_type: OMIT, existing_medications: OMIT, vitals: OMIT, interventions: OMIT, pay_to_address: OMIT, synchronicity: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, additional_properties: nil)
+            if accident_state_or_province_code != OMIT
+              @accident_state_or_province_code = accident_state_or_province_code
+            end
             @claim_creation_id = claim_creation_id if claim_creation_id != OMIT
             @patient_control_number = patient_control_number if patient_control_number != OMIT
             @encounter_id = encounter_id
@@ -443,6 +518,16 @@ module CandidApiClient
             @guarantor = guarantor if guarantor != OMIT
             @billing_provider = billing_provider
             @rendering_provider = rendering_provider
+            @attending_provider = attending_provider if attending_provider != OMIT
+            @admission_hour = admission_hour if admission_hour != OMIT
+            @admission_type_code = admission_type_code if admission_type_code != OMIT
+            @admission_source_code = admission_source_code if admission_source_code != OMIT
+            @discharge_hour = discharge_hour if discharge_hour != OMIT
+            @discharge_status = discharge_status if discharge_status != OMIT
+            @operating_provider = operating_provider if operating_provider != OMIT
+            @other_operating_provider = other_operating_provider if other_operating_provider != OMIT
+            @submission_expectation = submission_expectation if submission_expectation != OMIT
+            @type_of_bill = type_of_bill if type_of_bill != OMIT
             @referring_provider = referring_provider if referring_provider != OMIT
             @initial_referring_provider = initial_referring_provider if initial_referring_provider != OMIT
             @supervising_provider = supervising_provider if supervising_provider != OMIT
@@ -504,6 +589,7 @@ module CandidApiClient
             @delay_reason_code = delay_reason_code if delay_reason_code != OMIT
             @additional_properties = additional_properties
             @_field_set = {
+              "accident_state_or_province_code": accident_state_or_province_code,
               "claim_creation_id": claim_creation_id,
               "patient_control_number": patient_control_number,
               "encounter_id": encounter_id,
@@ -512,6 +598,16 @@ module CandidApiClient
               "guarantor": guarantor,
               "billing_provider": billing_provider,
               "rendering_provider": rendering_provider,
+              "attending_provider": attending_provider,
+              "admission_hour": admission_hour,
+              "admission_type_code": admission_type_code,
+              "admission_source_code": admission_source_code,
+              "discharge_hour": discharge_hour,
+              "discharge_status": discharge_status,
+              "operating_provider": operating_provider,
+              "other_operating_provider": other_operating_provider,
+              "submission_expectation": submission_expectation,
+              "type_of_bill": type_of_bill,
               "referring_provider": referring_provider,
               "initial_referring_provider": initial_referring_provider,
               "supervising_provider": supervising_provider,
@@ -575,6 +671,7 @@ module CandidApiClient
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
+            accident_state_or_province_code = struct["accident_state_or_province_code"]
             claim_creation_id = struct["claim_creation_id"]
             patient_control_number = struct["patient_control_number"]
             encounter_id = struct["encounter_id"]
@@ -605,6 +702,36 @@ module CandidApiClient
             else
               rendering_provider = parsed_json["rendering_provider"].to_json
               rendering_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: rendering_provider)
+            end
+            if parsed_json["attending_provider"].nil?
+              attending_provider = nil
+            else
+              attending_provider = parsed_json["attending_provider"].to_json
+              attending_provider = CandidApiClient::EncounterProviders::V2::Types::RenderingProvider.from_json(json_object: attending_provider)
+            end
+            admission_hour = struct["admission_hour"]
+            admission_type_code = struct["admission_type_code"]
+            admission_source_code = struct["admission_source_code"]
+            discharge_hour = struct["discharge_hour"]
+            discharge_status = struct["discharge_status"]
+            if parsed_json["operating_provider"].nil?
+              operating_provider = nil
+            else
+              operating_provider = parsed_json["operating_provider"].to_json
+              operating_provider = CandidApiClient::EncounterProviders::V2::Types::RenderingProvider.from_json(json_object: operating_provider)
+            end
+            if parsed_json["other_operating_provider"].nil?
+              other_operating_provider = nil
+            else
+              other_operating_provider = parsed_json["other_operating_provider"].to_json
+              other_operating_provider = CandidApiClient::EncounterProviders::V2::Types::RenderingProvider.from_json(json_object: other_operating_provider)
+            end
+            submission_expectation = struct["submission_expectation"]
+            if parsed_json["type_of_bill"].nil?
+              type_of_bill = nil
+            else
+              type_of_bill = parsed_json["type_of_bill"].to_json
+              type_of_bill = CandidApiClient::X12::V1::Types::TypeOfBillComposite.from_json(json_object: type_of_bill)
             end
             if parsed_json["referring_provider"].nil?
               referring_provider = nil
@@ -748,6 +875,7 @@ module CandidApiClient
                                          end
             delay_reason_code = struct["delay_reason_code"]
             new(
+              accident_state_or_province_code: accident_state_or_province_code,
               claim_creation_id: claim_creation_id,
               patient_control_number: patient_control_number,
               encounter_id: encounter_id,
@@ -756,6 +884,16 @@ module CandidApiClient
               guarantor: guarantor,
               billing_provider: billing_provider,
               rendering_provider: rendering_provider,
+              attending_provider: attending_provider,
+              admission_hour: admission_hour,
+              admission_type_code: admission_type_code,
+              admission_source_code: admission_source_code,
+              discharge_hour: discharge_hour,
+              discharge_status: discharge_status,
+              operating_provider: operating_provider,
+              other_operating_provider: other_operating_provider,
+              submission_expectation: submission_expectation,
+              type_of_bill: type_of_bill,
               referring_provider: referring_provider,
               initial_referring_provider: initial_referring_provider,
               supervising_provider: supervising_provider,
@@ -825,6 +963,7 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
+            obj.accident_state_or_province_code&.is_a?(CandidApiClient::Commons::Types::State) != false || raise("Passed value for field obj.accident_state_or_province_code is not the expected type, validation failed.")
             obj.claim_creation_id&.is_a?(String) != false || raise("Passed value for field obj.claim_creation_id is not the expected type, validation failed.")
             obj.patient_control_number&.is_a?(String) != false || raise("Passed value for field obj.patient_control_number is not the expected type, validation failed.")
             obj.encounter_id.is_a?(String) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
@@ -833,6 +972,16 @@ module CandidApiClient
             obj.guarantor.nil? || CandidApiClient::Guarantor::V1::Types::Guarantor.validate_raw(obj: obj.guarantor)
             CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.billing_provider)
             CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.rendering_provider)
+            obj.attending_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::RenderingProvider.validate_raw(obj: obj.attending_provider)
+            obj.admission_hour&.is_a?(Integer) != false || raise("Passed value for field obj.admission_hour is not the expected type, validation failed.")
+            obj.admission_type_code&.is_a?(CandidApiClient::X12::V1::Types::TypeOfAdmissionOrVisitCode) != false || raise("Passed value for field obj.admission_type_code is not the expected type, validation failed.")
+            obj.admission_source_code&.is_a?(CandidApiClient::X12::V1::Types::PointOfOriginForAdmissionOrVisitCode) != false || raise("Passed value for field obj.admission_source_code is not the expected type, validation failed.")
+            obj.discharge_hour&.is_a?(Integer) != false || raise("Passed value for field obj.discharge_hour is not the expected type, validation failed.")
+            obj.discharge_status&.is_a?(CandidApiClient::X12::V1::Types::PatientDischargeStatusCode) != false || raise("Passed value for field obj.discharge_status is not the expected type, validation failed.")
+            obj.operating_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::RenderingProvider.validate_raw(obj: obj.operating_provider)
+            obj.other_operating_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::RenderingProvider.validate_raw(obj: obj.other_operating_provider)
+            obj.submission_expectation&.is_a?(CandidApiClient::Encounters::V4::Types::EncounterSubmissionExpectation) != false || raise("Passed value for field obj.submission_expectation is not the expected type, validation failed.")
+            obj.type_of_bill.nil? || CandidApiClient::X12::V1::Types::TypeOfBillComposite.validate_raw(obj: obj.type_of_bill)
             obj.referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.referring_provider)
             obj.initial_referring_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.initial_referring_provider)
             obj.supervising_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.supervising_provider)

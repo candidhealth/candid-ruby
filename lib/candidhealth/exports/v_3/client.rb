@@ -18,7 +18,14 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # Retrieve CSV-formatted reports on claim submissions and outcomes. This endpoint
+        # <Warning>
+        #  API-based exports are in the process of being deprecated in favor of Candid Data
+        #  Share and are not being offered to new customers.
+        #  Please see the [Candid Data Share
+        #  docs](https://docs.joincandidhealth.com/introduction/candid-data-share) for more
+        #  information.
+        #  </Warning>
+        #  Retrieve CSV-formatted reports on claim submissions and outcomes. This endpoint
         #  returns Export objects that contain an
         #  authenticated URL to a customer's reports with a 2min TTL. The schema for the
         #  CSV export can be found
@@ -40,10 +47,6 @@ module CandidApiClient
         #  up to 90 days in the past by default. Please email our [Support
         #  team](mailto:support@joincandidhealth.com) with any data requests
         #  outside of these stated guarantees.
-        #  **New Customers:** This endpoint is not enabled by default for new Candid
-        #  customers. To have this endpoint enabled for your organization,
-        #  please email our [Support team](mailto:support@joincandidhealth.com) with the
-        #  request.
         #
         # @param start_date [Date] Beginning date of claim versions returned in the export, ISO 8601 date e.g.
         #  2019-08-24.
@@ -87,7 +90,14 @@ module CandidApiClient
           @request_client = request_client
         end
 
-        # Retrieve CSV-formatted reports on claim submissions and outcomes. This endpoint
+        # <Warning>
+        #  API-based exports are in the process of being deprecated in favor of Candid Data
+        #  Share and are not being offered to new customers.
+        #  Please see the [Candid Data Share
+        #  docs](https://docs.joincandidhealth.com/introduction/candid-data-share) for more
+        #  information.
+        #  </Warning>
+        #  Retrieve CSV-formatted reports on claim submissions and outcomes. This endpoint
         #  returns Export objects that contain an
         #  authenticated URL to a customer's reports with a 2min TTL. The schema for the
         #  CSV export can be found
@@ -109,10 +119,6 @@ module CandidApiClient
         #  up to 90 days in the past by default. Please email our [Support
         #  team](mailto:support@joincandidhealth.com) with any data requests
         #  outside of these stated guarantees.
-        #  **New Customers:** This endpoint is not enabled by default for new Candid
-        #  customers. To have this endpoint enabled for your organization,
-        #  please email our [Support team](mailto:support@joincandidhealth.com) with the
-        #  request.
         #
         # @param start_date [Date] Beginning date of claim versions returned in the export, ISO 8601 date e.g.
         #  2019-08-24.

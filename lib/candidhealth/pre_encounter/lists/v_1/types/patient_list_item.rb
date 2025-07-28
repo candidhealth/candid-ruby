@@ -16,6 +16,10 @@ module CandidApiClient
             attr_reader :patient
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
             attr_reader :primary_coverage
+            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
+            attr_reader :secondary_coverage
+            # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
+            attr_reader :tertiary_coverage
             # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment]
             attr_reader :next_appointment
             # @return [OpenStruct] Additional properties unmapped to the current class definition
@@ -28,17 +32,24 @@ module CandidApiClient
 
             # @param patient [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
             # @param primary_coverage [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
+            # @param secondary_coverage [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
+            # @param tertiary_coverage [CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage]
             # @param next_appointment [CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment]
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Lists::V1::Types::PatientListItem]
-            def initialize(patient:, primary_coverage: OMIT, next_appointment: OMIT, additional_properties: nil)
+            def initialize(patient:, primary_coverage: OMIT, secondary_coverage: OMIT, tertiary_coverage: OMIT,
+                           next_appointment: OMIT, additional_properties: nil)
               @patient = patient
               @primary_coverage = primary_coverage if primary_coverage != OMIT
+              @secondary_coverage = secondary_coverage if secondary_coverage != OMIT
+              @tertiary_coverage = tertiary_coverage if tertiary_coverage != OMIT
               @next_appointment = next_appointment if next_appointment != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "patient": patient,
                 "primary_coverage": primary_coverage,
+                "secondary_coverage": secondary_coverage,
+                "tertiary_coverage": tertiary_coverage,
                 "next_appointment": next_appointment
               }.reject do |_k, v|
                 v == OMIT
@@ -64,6 +75,18 @@ module CandidApiClient
                 primary_coverage = parsed_json["primary_coverage"].to_json
                 primary_coverage = CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.from_json(json_object: primary_coverage)
               end
+              if parsed_json["secondary_coverage"].nil?
+                secondary_coverage = nil
+              else
+                secondary_coverage = parsed_json["secondary_coverage"].to_json
+                secondary_coverage = CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.from_json(json_object: secondary_coverage)
+              end
+              if parsed_json["tertiary_coverage"].nil?
+                tertiary_coverage = nil
+              else
+                tertiary_coverage = parsed_json["tertiary_coverage"].to_json
+                tertiary_coverage = CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.from_json(json_object: tertiary_coverage)
+              end
               if parsed_json["next_appointment"].nil?
                 next_appointment = nil
               else
@@ -73,6 +96,8 @@ module CandidApiClient
               new(
                 patient: patient,
                 primary_coverage: primary_coverage,
+                secondary_coverage: secondary_coverage,
+                tertiary_coverage: tertiary_coverage,
                 next_appointment: next_appointment,
                 additional_properties: struct
               )
@@ -94,6 +119,8 @@ module CandidApiClient
             def self.validate_raw(obj:)
               CandidApiClient::PreEncounter::Patients::V1::Types::Patient.validate_raw(obj: obj.patient)
               obj.primary_coverage.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.validate_raw(obj: obj.primary_coverage)
+              obj.secondary_coverage.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.validate_raw(obj: obj.secondary_coverage)
+              obj.tertiary_coverage.nil? || CandidApiClient::PreEncounter::Coverages::V1::Types::MutableCoverage.validate_raw(obj: obj.tertiary_coverage)
               obj.next_appointment.nil? || CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment.validate_raw(obj: obj.next_appointment)
             end
           end

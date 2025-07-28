@@ -76,6 +76,8 @@ module CandidApiClient
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Tags::V1::Types::MutableTag, as a Hash
           #   * :value (String)
+          #   * :description (String)
+          #   * :alert (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
@@ -102,6 +104,8 @@ module CandidApiClient
           # @param version [String]
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Tags::V1::Types::MutableTag, as a Hash
           #   * :value (String)
+          #   * :description (String)
+          #   * :alert (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
@@ -223,6 +227,8 @@ module CandidApiClient
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Tags::V1::Types::MutableTag, as a Hash
           #   * :value (String)
+          #   * :description (String)
+          #   * :alert (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example
@@ -252,6 +258,8 @@ module CandidApiClient
           # @param version [String]
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::Tags::V1::Types::MutableTag, as a Hash
           #   * :value (String)
+          #   * :description (String)
+          #   * :alert (Boolean)
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::Tags::V1::Types::Tag]
           # @example

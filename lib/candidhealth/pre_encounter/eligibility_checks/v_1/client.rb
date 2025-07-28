@@ -5,6 +5,10 @@ require_relative "types/eligibility_request"
 require_relative "types/eligibility_response"
 require_relative "types/batch_eligibility_response"
 require_relative "types/eligibility_check_page"
+require_relative "types/payer_search_response"
+require_relative "types/eligibility_recommendation"
+require "json"
+require_relative "types/post_eligibility_recommendation_request"
 require "async"
 
 module CandidApiClient
@@ -111,12 +115,13 @@ module CandidApiClient
           #  path-parameters:
           #
           # @param batch_id [String]
+          # @param page_token [String]
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.eligibility_checks.v_1.poll_batch(batch_id: "batch_id")
-          def poll_batch(batch_id:, request_options: nil)
+          def poll_batch(batch_id:, page_token: nil, request_options: nil)
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
               req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -125,10 +130,104 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
+              req.params = { **(request_options&.additional_query_parameters || {}), "page_token": page_token }.compact
               req.url "#{@request_client.get_url(environment: PreEncounter,
                                                  request_options: request_options)}/eligibility-checks/v1/batch/#{batch_id}"
             end
             CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage.from_json(json_object: response.body)
+          end
+
+          # Searches for payers that match the query parameters.
+          #
+          # @param page_size [Integer]
+          # @param page_token [String]
+          # @param query [String]
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::PayerSearchResponse]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.eligibility_checks.v_1.payer_search
+          def payer_search(page_size: nil, page_token: nil, query: nil, request_options: nil)
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.params = {
+                **(request_options&.additional_query_parameters || {}),
+                "page_size": page_size,
+                "page_token": page_token,
+                "query": query
+              }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/eligibility-checks/v1/payer/search"
+            end
+            CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::PayerSearchResponse.from_json(json_object: response.body)
+          end
+
+          # Gets recommendation for eligibility checks based on the request.
+          #
+          # @param filters [String]
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation>]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.eligibility_checks.v_1.recommendation
+          def recommendation(filters: nil, request_options: nil)
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.params = { **(request_options&.additional_query_parameters || {}), "filters": filters }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/eligibility-checks/v1/recommendation"
+            end
+            parsed_json = JSON.parse(response.body)
+            parsed_json&.map do |item|
+              item = item.to_json
+              CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation.from_json(json_object: item)
+            end
+          end
+
+          # Create an eligibiilty recommendation based on the request.
+          #
+          # @param request [Hash] Request of type CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::PostEligibilityRecommendationRequest, as a Hash
+          #   * :eligibility_check_id (String)
+          #   * :patient (Hash)
+          #     * :id (String)
+          #     * :mrn (String)
+          #     * :organization_id (String)
+          #     * :last_name (String)
+          #     * :first_name (String)
+          #     * :date_of_birth (Date)
+          #     * :member_id (String)
+          #   * :recommendation (Hash)
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.eligibility_checks.v_1.create_recommendation(request: { eligibility_check_id: "eligibility_check_id", patient: {  } })
+          def create_recommendation(request:, request_options: nil)
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+              req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                 request_options: request_options)}/eligibility-checks/v1/recommendation"
+            end
+            CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation.from_json(json_object: response.body)
           end
         end
 
@@ -236,12 +335,13 @@ module CandidApiClient
           #  path-parameters:
           #
           # @param batch_id [String]
+          # @param page_token [String]
           # @param request_options [CandidApiClient::RequestOptions]
           # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
           #  api.pre_encounter.eligibility_checks.v_1.poll_batch(batch_id: "batch_id")
-          def poll_batch(batch_id:, request_options: nil)
+          def poll_batch(batch_id:, page_token: nil, request_options: nil)
             Async do
               response = @request_client.conn.get do |req|
                 req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -251,10 +351,113 @@ module CandidApiClient
               **@request_client.get_headers,
               **(request_options&.additional_headers || {})
                 }.compact
+                req.params = {
+                  **(request_options&.additional_query_parameters || {}),
+                  "page_token": page_token
+                }.compact
                 req.url "#{@request_client.get_url(environment: PreEncounter,
                                                    request_options: request_options)}/eligibility-checks/v1/batch/#{batch_id}"
               end
               CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage.from_json(json_object: response.body)
+            end
+          end
+
+          # Searches for payers that match the query parameters.
+          #
+          # @param page_size [Integer]
+          # @param page_token [String]
+          # @param query [String]
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::PayerSearchResponse]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.eligibility_checks.v_1.payer_search
+          def payer_search(page_size: nil, page_token: nil, query: nil, request_options: nil)
+            Async do
+              response = @request_client.conn.get do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.params = {
+                  **(request_options&.additional_query_parameters || {}),
+                  "page_size": page_size,
+                  "page_token": page_token,
+                  "query": query
+                }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/eligibility-checks/v1/payer/search"
+              end
+              CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::PayerSearchResponse.from_json(json_object: response.body)
+            end
+          end
+
+          # Gets recommendation for eligibility checks based on the request.
+          #
+          # @param filters [String]
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation>]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.eligibility_checks.v_1.recommendation
+          def recommendation(filters: nil, request_options: nil)
+            Async do
+              response = @request_client.conn.get do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.params = { **(request_options&.additional_query_parameters || {}), "filters": filters }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/eligibility-checks/v1/recommendation"
+              end
+              parsed_json = JSON.parse(response.body)
+              parsed_json&.map do |item|
+                item = item.to_json
+                CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation.from_json(json_object: item)
+              end
+            end
+          end
+
+          # Create an eligibiilty recommendation based on the request.
+          #
+          # @param request [Hash] Request of type CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::PostEligibilityRecommendationRequest, as a Hash
+          #   * :eligibility_check_id (String)
+          #   * :patient (Hash)
+          #     * :id (String)
+          #     * :mrn (String)
+          #     * :organization_id (String)
+          #     * :last_name (String)
+          #     * :first_name (String)
+          #     * :date_of_birth (Date)
+          #     * :member_id (String)
+          #   * :recommendation (Hash)
+          # @param request_options [CandidApiClient::RequestOptions]
+          # @return [CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation]
+          # @example
+          #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+          #  api.pre_encounter.eligibility_checks.v_1.create_recommendation(request: { eligibility_check_id: "eligibility_check_id", patient: {  } })
+          def create_recommendation(request:, request_options: nil)
+            Async do
+              response = @request_client.conn.post do |req|
+                req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+                req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+                req.headers = {
+              **(req.headers || {}),
+              **@request_client.get_headers,
+              **(request_options&.additional_headers || {})
+                }.compact
+                req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+                req.url "#{@request_client.get_url(environment: PreEncounter,
+                                                   request_options: request_options)}/eligibility-checks/v1/recommendation"
+              end
+              CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation.from_json(json_object: response.body)
             end
           end
         end

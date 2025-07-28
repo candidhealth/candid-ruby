@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "date"
-require_relative "claim_frequency_type_code"
+require_relative "../../../x_12/v_1/types/type_of_bill_frequency_code"
 require_relative "../../../commons/types/claim_submission_payer_responsibility_type"
 require_relative "../../../commons/types/intended_submission_medium"
 require "ostruct"
@@ -15,7 +15,7 @@ module CandidApiClient
         class ClaimSubmissionRecordCreateOptional
           # @return [DateTime] When the claim was submitted to the payer.
           attr_reader :submitted_at
-          # @return [CandidApiClient::ClaimSubmission::V1::Types::ClaimFrequencyTypeCode]
+          # @return [CandidApiClient::X12::V1::Types::TypeOfBillFrequencyCode]
           attr_reader :claim_frequency_code
           # @return [CandidApiClient::Commons::Types::ClaimSubmissionPayerResponsibilityType]
           attr_reader :payer_responsibility
@@ -31,7 +31,7 @@ module CandidApiClient
           OMIT = Object.new
 
           # @param submitted_at [DateTime] When the claim was submitted to the payer.
-          # @param claim_frequency_code [CandidApiClient::ClaimSubmission::V1::Types::ClaimFrequencyTypeCode]
+          # @param claim_frequency_code [CandidApiClient::X12::V1::Types::TypeOfBillFrequencyCode]
           # @param payer_responsibility [CandidApiClient::Commons::Types::ClaimSubmissionPayerResponsibilityType]
           # @param intended_submission_medium [CandidApiClient::Commons::Types::IntendedSubmissionMedium] The medium by which the claim was submitted to the payer: paper or electronic.
           #  If omitted, defaults to electronic.
@@ -89,7 +89,7 @@ module CandidApiClient
           # @return [Void]
           def self.validate_raw(obj:)
             obj.submitted_at&.is_a?(DateTime) != false || raise("Passed value for field obj.submitted_at is not the expected type, validation failed.")
-            obj.claim_frequency_code&.is_a?(CandidApiClient::ClaimSubmission::V1::Types::ClaimFrequencyTypeCode) != false || raise("Passed value for field obj.claim_frequency_code is not the expected type, validation failed.")
+            obj.claim_frequency_code&.is_a?(CandidApiClient::X12::V1::Types::TypeOfBillFrequencyCode) != false || raise("Passed value for field obj.claim_frequency_code is not the expected type, validation failed.")
             obj.payer_responsibility&.is_a?(CandidApiClient::Commons::Types::ClaimSubmissionPayerResponsibilityType) != false || raise("Passed value for field obj.payer_responsibility is not the expected type, validation failed.")
             obj.intended_submission_medium&.is_a?(CandidApiClient::Commons::Types::IntendedSubmissionMedium) != false || raise("Passed value for field obj.intended_submission_medium is not the expected type, validation failed.")
           end

@@ -81,6 +81,8 @@ module CandidApiClient
           attr_reader :procedure_code
           # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           attr_reader :ordering_provider
+          # @return [String]
+          attr_reader :revenue_code
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
           #  Example: 1.1 is valid, 1.11 is not.
@@ -153,6 +155,7 @@ module CandidApiClient
           # @param service_line_id [String]
           # @param procedure_code [String]
           # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
+          # @param revenue_code [String]
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
           #  A ServiceLine quantity cannot contain more than one digit of precision.
           #  Example: 1.1 is valid, 1.11 is not.
@@ -178,7 +181,7 @@ module CandidApiClient
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
           def initialize(created_at:, service_line_id:, procedure_code:, quantity:, units:, claim_id:, date_of_service_range:, date_of_service:, modifiers: OMIT, charge_amount_cents: OMIT, allowed_amount_cents: OMIT,
-                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, copay_cents: OMIT, coinsurance_cents: OMIT, deductible_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, description: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, note: OMIT, additional_properties: nil)
+                         insurance_balance_cents: OMIT, patient_balance_cents: OMIT, paid_amount_cents: OMIT, primary_paid_amount_cents: OMIT, secondary_paid_amount_cents: OMIT, tertiary_paid_amount_cents: OMIT, patient_responsibility_cents: OMIT, copay_cents: OMIT, coinsurance_cents: OMIT, deductible_cents: OMIT, diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, service_line_era_data: OMIT, service_line_manual_adjustments: OMIT, related_invoices: OMIT, related_invoice_info: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, place_of_service_code_as_submitted: OMIT, ordering_provider: OMIT, revenue_code: OMIT, description: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, note: OMIT, additional_properties: nil)
             @created_at = created_at
             @modifiers = modifiers if modifiers != OMIT
             @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
@@ -212,6 +215,7 @@ module CandidApiClient
             @service_line_id = service_line_id
             @procedure_code = procedure_code
             @ordering_provider = ordering_provider if ordering_provider != OMIT
+            @revenue_code = revenue_code if revenue_code != OMIT
             @quantity = quantity
             @units = units
             @claim_id = claim_id
@@ -254,6 +258,7 @@ module CandidApiClient
               "service_line_id": service_line_id,
               "procedure_code": procedure_code,
               "ordering_provider": ordering_provider,
+              "revenue_code": revenue_code,
               "quantity": quantity,
               "units": units,
               "claim_id": claim_id,
@@ -335,6 +340,7 @@ module CandidApiClient
               ordering_provider = parsed_json["ordering_provider"].to_json
               ordering_provider = CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.from_json(json_object: ordering_provider)
             end
+            revenue_code = struct["revenue_code"]
             quantity = struct["quantity"]
             units = struct["units"]
             claim_id = struct["claim_id"]
@@ -386,6 +392,7 @@ module CandidApiClient
               service_line_id: service_line_id,
               procedure_code: procedure_code,
               ordering_provider: ordering_provider,
+              revenue_code: revenue_code,
               quantity: quantity,
               units: units,
               claim_id: claim_id,
@@ -444,6 +451,7 @@ module CandidApiClient
             obj.service_line_id.is_a?(String) != false || raise("Passed value for field obj.service_line_id is not the expected type, validation failed.")
             obj.procedure_code.is_a?(String) != false || raise("Passed value for field obj.procedure_code is not the expected type, validation failed.")
             obj.ordering_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::EncounterProvider.validate_raw(obj: obj.ordering_provider)
+            obj.revenue_code&.is_a?(String) != false || raise("Passed value for field obj.revenue_code is not the expected type, validation failed.")
             obj.quantity.is_a?(String) != false || raise("Passed value for field obj.quantity is not the expected type, validation failed.")
             obj.units.is_a?(CandidApiClient::Commons::Types::ServiceLineUnits) != false || raise("Passed value for field obj.units is not the expected type, validation failed.")
             obj.claim_id.is_a?(String) != false || raise("Passed value for field obj.claim_id is not the expected type, validation failed.")

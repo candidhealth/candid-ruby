@@ -26,10 +26,6 @@ module CandidApiClient
           end
 
           # Sends real-time eligibility checks to payers through Stedi.
-          #  <Warning>Please only send one concurrent request to this endpoint. Batch
-          #  requests must be made in succession, otherwise, it will cause this service to
-          #  fail. A batch endpoint is in development - please reach out to the Candid team
-          #  for more information.</Warning>
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRequest, as a Hash
           #   * :submitter_transaction_identifier (String)
@@ -110,9 +106,6 @@ module CandidApiClient
           end
 
           # Polls the status of a batch eligibility check.
-          #  <Note>Batch eligibility checks are not yet available. Please reach out to the
-          #  Candid team for more information.</Note>
-          #  path-parameters:
           #
           # @param batch_id [String]
           # @param page_token [String]
@@ -242,10 +235,6 @@ module CandidApiClient
           end
 
           # Sends real-time eligibility checks to payers through Stedi.
-          #  <Warning>Please only send one concurrent request to this endpoint. Batch
-          #  requests must be made in succession, otherwise, it will cause this service to
-          #  fail. A batch endpoint is in development - please reach out to the Candid team
-          #  for more information.</Warning>
           #
           # @param request [Hash] Request of type CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityRequest, as a Hash
           #   * :submitter_transaction_identifier (String)
@@ -330,9 +319,6 @@ module CandidApiClient
           end
 
           # Polls the status of a batch eligibility check.
-          #  <Note>Batch eligibility checks are not yet available. Please reach out to the
-          #  Candid team for more information.</Note>
-          #  path-parameters:
           #
           # @param batch_id [String]
           # @param page_token [String]

@@ -25,7 +25,8 @@ module CandidApiClient
             # @return [CandidApiClient::PreEncounter::Common::Types::Relationship] The relationship of beneficiary (patient) to the subscriber.
             #  https://hl7.org/fhir/valueset-relationship.html
             attr_reader :relationship
-            # @return [String] The patient who benefits from the insurance coverage
+            # @return [String] The canonical Candid patient UUID corresponding with the patient who benefits
+            #  from the insurance coverage
             attr_reader :patient
             # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
             attr_reader :insurance_plan
@@ -51,7 +52,8 @@ module CandidApiClient
             #  their family is due.
             # @param relationship [CandidApiClient::PreEncounter::Common::Types::Relationship] The relationship of beneficiary (patient) to the subscriber.
             #  https://hl7.org/fhir/valueset-relationship.html
-            # @param patient [String] The patient who benefits from the insurance coverage
+            # @param patient [String] The canonical Candid patient UUID corresponding with the patient who benefits
+            #  from the insurance coverage
             # @param insurance_plan [CandidApiClient::PreEncounter::Coverages::V1::Types::InsurancePlan]
             # @param verified [Boolean] A boolean indicating if the coverage has been verified by a user.
             # @param eligibility_checks [Array<CandidApiClient::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata>] A list of eligibility check metadata that have been initiated on this coverage.

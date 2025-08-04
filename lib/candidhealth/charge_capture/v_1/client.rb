@@ -326,6 +326,330 @@ module CandidApiClient
           CandidApiClient::ChargeCapture::V1::Types::ChargeCapture.from_json(json_object: response.body)
         end
 
+        # Create a Charge Capture from a pre-encounter patient and appointment. This
+        #  endpoint is intended to be used by consumers who are managing
+        #  patients and appointments in the pre-encounter service and is currently under
+        #  development. Consumers who are not taking advantage
+        #  of the pre-encounter service should use the standard create endpoint.
+        #  At encounter creation time, information from the provided patient and
+        #  appointment objects will be populated
+        #  where applicable. In particular, the following fields are populated from the
+        #  patient and appointment objects:
+        #  - Patient
+        #  - Referring Provider
+        #  - Subscriber Primary
+        #  - Subscriber Secondary
+        #  - Referral Number
+        #  - Responsible Party
+        #  - Guarantor
+        #  Note that these fields should not be populated in the ChargeCaptureData property
+        #  of this endpoint, as they will be overwritten at encounter creation time.
+        #  Utilizing this endpoint opts you into automatic updating of the encounter when
+        #  the patient or appointment is updated, assuming the
+        #  encounter has not already been submitted or adjudicated.
+        #
+        # @param data [Hash] Charge Capture data contains all the fields needed to create an encounter, but
+        #  listed as optional. Candid will use this data when attempting to bundle multiple
+        #  Charge Captures into a single encounter.Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
+        #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
+        #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
+        #   * :epsdt_referral (Hash)
+        #     * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #     * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #     * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :existing_medications (Array<CandidApiClient::Encounters::V4::Types::MedicationOptional>)
+        #   * :guarantor (Hash)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :external_id (String)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumberOptional>)
+        #     * :phone_consent (Boolean)
+        #     * :email (String)
+        #     * :email_consent (Boolean)
+        #   * :subscriber_primary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_secondary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_tertiary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::InterventionOptional>)
+        #   * :schema_instances (Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstanceOptional>)
+        #   * :external_claim_submission (Hash)
+        #     * :claim_created_at (DateTime)
+        #     * :patient_control_number (String)
+        #     * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreateOptional>)
+        #   * :service_lines (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateOptional>)
+        #   * :patient_histories (Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryOptional>)
+        #   * :billing_notes (Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBaseOptional>)
+        #   * :patient (Hash)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #     * :external_id (String)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumberOptional>)
+        #     * :phone_consent (Boolean)
+        #     * :email (String)
+        #     * :email_consent (Boolean)
+        #     * :non_insurance_payers (Array<String>)
+        #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
+        #   * :service_facility (Hash)
+        #     * :organization_name (String)
+        #     * :npi (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :secondary_identification (String)
+        #   * :rendering_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :initial_referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :supervising_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :billing_provider (Hash)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :tax_id (String)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :pay_to_address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :benefits_assigned_to_provider (Boolean)
+        #   * :prior_authorization_number (String)
+        #   * :external_id (String)
+        #   * :date_of_service (Date)
+        #   * :tag_ids (Array<String>)
+        #   * :billable_status (CandidApiClient::Encounters::V4::Types::BillableStatusType)
+        #   * :responsible_party (CandidApiClient::Encounters::V4::Types::ResponsiblePartyType)
+        #   * :provider_accepts_assignment (Boolean)
+        #   * :synchronicity (CandidApiClient::Encounters::V4::Types::SynchronicityType)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
+        #   * :appointment_type (String)
+        #   * :end_date_of_service (Date)
+        #   * :additional_information (String)
+        #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
+        #   * :admission_date (Date)
+        #   * :discharge_date (Date)
+        #   * :onset_of_current_illness_or_symptom_date (Date)
+        #   * :last_menstrual_period_date (Date)
+        #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
+        #   * :patient_authorized_release (Boolean)
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
+        #   * :referral_number (String)
+        #   * :secondary_payer_carrier_code (String)
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
+        #  internal encounter ID or a Dr. Chrono encounter ID. This field should not
+        #  contain PHI.
+        # @param pre_encounter_patient_id [String]
+        # @param pre_encounter_appointment_ids [Array<String>]
+        # @param originating_system [String] An optional string field denoting the originating system of the charge.
+        # @param claim_creation_category [String] An optional string field denoting the user defined category of the claim
+        #  creation.
+        # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
+        #  system (e.g. the EHR visit page). Send full URL format for the external link
+        #  (e.g. https://emr_charge_capture_url.com/123).
+        # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture.v_1.create_from_pre_encounter_patient(
+        #    data: {  },
+        #    charge_external_id: "charge_external_id",
+        #    pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
+        #    status: PLANNED
+        #  )
+        def create_from_pre_encounter_patient(data:, charge_external_id:, pre_encounter_patient_id:,
+                                              pre_encounter_appointment_ids:, status:, originating_system: nil, claim_creation_category: nil, ehr_source_url: nil, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = {
+              **(request_options&.additional_body_parameters || {}),
+              data: data,
+              charge_external_id: charge_external_id,
+              pre_encounter_patient_id: pre_encounter_patient_id,
+              pre_encounter_appointment_ids: pre_encounter_appointment_ids,
+              originating_system: originating_system,
+              claim_creation_category: claim_creation_category,
+              ehr_source_url: ehr_source_url,
+              status: status
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/charge_captures/v1/create-from-pre-encounter"
+          end
+          CandidApiClient::ChargeCapture::V1::Types::ChargeCapture.from_json(json_object: response.body)
+        end
+
         # @param charge_capture_id [String]
         # @param data [Hash] Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
@@ -1108,6 +1432,332 @@ module CandidApiClient
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1"
+            end
+            CandidApiClient::ChargeCapture::V1::Types::ChargeCapture.from_json(json_object: response.body)
+          end
+        end
+
+        # Create a Charge Capture from a pre-encounter patient and appointment. This
+        #  endpoint is intended to be used by consumers who are managing
+        #  patients and appointments in the pre-encounter service and is currently under
+        #  development. Consumers who are not taking advantage
+        #  of the pre-encounter service should use the standard create endpoint.
+        #  At encounter creation time, information from the provided patient and
+        #  appointment objects will be populated
+        #  where applicable. In particular, the following fields are populated from the
+        #  patient and appointment objects:
+        #  - Patient
+        #  - Referring Provider
+        #  - Subscriber Primary
+        #  - Subscriber Secondary
+        #  - Referral Number
+        #  - Responsible Party
+        #  - Guarantor
+        #  Note that these fields should not be populated in the ChargeCaptureData property
+        #  of this endpoint, as they will be overwritten at encounter creation time.
+        #  Utilizing this endpoint opts you into automatic updating of the encounter when
+        #  the patient or appointment is updated, assuming the
+        #  encounter has not already been submitted or adjudicated.
+        #
+        # @param data [Hash] Charge Capture data contains all the fields needed to create an encounter, but
+        #  listed as optional. Candid will use this data when attempting to bundle multiple
+        #  Charge Captures into a single encounter.Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
+        #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
+        #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
+        #   * :epsdt_referral (Hash)
+        #     * :condition_indicator_1 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #     * :condition_indicator_2 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #     * :condition_indicator_3 (CandidApiClient::Commons::Types::EpsdtReferralConditionIndicatorCode)
+        #   * :existing_medications (Array<CandidApiClient::Encounters::V4::Types::MedicationOptional>)
+        #   * :guarantor (Hash)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :external_id (String)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumberOptional>)
+        #     * :phone_consent (Boolean)
+        #     * :email (String)
+        #     * :email_consent (Boolean)
+        #   * :subscriber_primary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_secondary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :subscriber_tertiary (Hash)
+        #     * :insurance_card (Hash)
+        #       * :member_id (String)
+        #       * :payer_name (String)
+        #       * :payer_id (String)
+        #       * :rx_bin (String)
+        #       * :rx_pcn (String)
+        #       * :image_url_front (String)
+        #       * :image_url_back (String)
+        #       * :emr_payer_crosswalk (CandidApiClient::Commons::Types::EmrPayerCrosswalk)
+        #       * :group_number (String)
+        #       * :plan_name (String)
+        #       * :plan_type (CandidApiClient::Commons::Types::SourceOfPaymentCode)
+        #       * :insurance_type (CandidApiClient::Commons::Types::InsuranceTypeCode)
+        #       * :payer_plan_group_id (String)
+        #     * :patient_relationship_to_subscriber_code (CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #   * :interventions (Array<CandidApiClient::Encounters::V4::Types::InterventionOptional>)
+        #   * :schema_instances (Array<CandidApiClient::CustomSchemas::V1::Types::SchemaInstanceOptional>)
+        #   * :external_claim_submission (Hash)
+        #     * :claim_created_at (DateTime)
+        #     * :patient_control_number (String)
+        #     * :submission_records (Array<CandidApiClient::ClaimSubmission::V1::Types::ClaimSubmissionRecordCreateOptional>)
+        #   * :service_lines (Array<CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateOptional>)
+        #   * :patient_histories (Array<CandidApiClient::Encounters::V4::Types::PatientHistoryCategoryOptional>)
+        #   * :billing_notes (Array<CandidApiClient::BillingNotes::V2::Types::BillingNoteBaseOptional>)
+        #   * :patient (Hash)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :gender (CandidApiClient::Individual::Types::Gender)
+        #     * :external_id (String)
+        #     * :date_of_birth (Date)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :phone_numbers (Array<CandidApiClient::Commons::Types::PhoneNumberOptional>)
+        #     * :phone_consent (Boolean)
+        #     * :email (String)
+        #     * :email_consent (Boolean)
+        #     * :non_insurance_payers (Array<String>)
+        #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
+        #   * :service_facility (Hash)
+        #     * :organization_name (String)
+        #     * :npi (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :secondary_identification (String)
+        #   * :rendering_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :initial_referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :qualifier (CandidApiClient::Commons::Types::QualifierCode)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :referring_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :supervising_provider (Hash)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :billing_provider (Hash)
+        #     * :address (Hash)
+        #       * :zip_plus_four_code (String)
+        #       * :address_1 (String)
+        #       * :address_2 (String)
+        #       * :city (String)
+        #       * :state (CandidApiClient::Commons::Types::State)
+        #       * :zip_code (String)
+        #     * :tax_id (String)
+        #     * :npi (String)
+        #     * :taxonomy_code (String)
+        #     * :provider_commercial_license_type (CandidApiClient::Commons::Types::BillingProviderCommercialLicenseType)
+        #     * :first_name (String)
+        #     * :last_name (String)
+        #     * :organization_name (String)
+        #   * :pay_to_address (Hash)
+        #     * :zip_plus_four_code (String)
+        #     * :address_1 (String)
+        #     * :address_2 (String)
+        #     * :city (String)
+        #     * :state (CandidApiClient::Commons::Types::State)
+        #     * :zip_code (String)
+        #   * :benefits_assigned_to_provider (Boolean)
+        #   * :prior_authorization_number (String)
+        #   * :external_id (String)
+        #   * :date_of_service (Date)
+        #   * :tag_ids (Array<String>)
+        #   * :billable_status (CandidApiClient::Encounters::V4::Types::BillableStatusType)
+        #   * :responsible_party (CandidApiClient::Encounters::V4::Types::ResponsiblePartyType)
+        #   * :provider_accepts_assignment (Boolean)
+        #   * :synchronicity (CandidApiClient::Encounters::V4::Types::SynchronicityType)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
+        #   * :appointment_type (String)
+        #   * :end_date_of_service (Date)
+        #   * :additional_information (String)
+        #   * :service_authorization_exception_code (CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode)
+        #   * :admission_date (Date)
+        #   * :discharge_date (Date)
+        #   * :onset_of_current_illness_or_symptom_date (Date)
+        #   * :last_menstrual_period_date (Date)
+        #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
+        #   * :patient_authorized_release (Boolean)
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
+        #   * :referral_number (String)
+        #   * :secondary_payer_carrier_code (String)
+        # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
+        #  internal encounter ID or a Dr. Chrono encounter ID. This field should not
+        #  contain PHI.
+        # @param pre_encounter_patient_id [String]
+        # @param pre_encounter_appointment_ids [Array<String>]
+        # @param originating_system [String] An optional string field denoting the originating system of the charge.
+        # @param claim_creation_category [String] An optional string field denoting the user defined category of the claim
+        #  creation.
+        # @param ehr_source_url [String] External URL reference that links to Charge Capture details within the external
+        #  system (e.g. the EHR visit page). Send full URL format for the external link
+        #  (e.g. https://emr_charge_capture_url.com/123).
+        # @param status [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] the status of the charge capture
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapture]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.charge_capture.v_1.create_from_pre_encounter_patient(
+        #    data: {  },
+        #    charge_external_id: "charge_external_id",
+        #    pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    pre_encounter_appointment_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"],
+        #    status: PLANNED
+        #  )
+        def create_from_pre_encounter_patient(data:, charge_external_id:, pre_encounter_patient_id:,
+                                              pre_encounter_appointment_ids:, status:, originating_system: nil, claim_creation_category: nil, ehr_source_url: nil, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = {
+                **(request_options&.additional_body_parameters || {}),
+                data: data,
+                charge_external_id: charge_external_id,
+                pre_encounter_patient_id: pre_encounter_patient_id,
+                pre_encounter_appointment_ids: pre_encounter_appointment_ids,
+                originating_system: originating_system,
+                claim_creation_category: claim_creation_category,
+                ehr_source_url: ehr_source_url,
+                status: status
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/charge_captures/v1/create-from-pre-encounter"
             end
             CandidApiClient::ChargeCapture::V1::Types::ChargeCapture.from_json(json_object: response.body)
           end

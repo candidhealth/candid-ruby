@@ -47,6 +47,7 @@ module CandidApiClient
         # @param npi [String] Filter to a specific NPI.
         # @param is_rendering [Boolean] Filter to only rendering providers.
         # @param is_billing [Boolean] Filter to only billing providers.
+        # @param organization_provider_ids [String] Filter to the provided organization provider IDs.
         # @param page_token [String] The page token to continue paging through a previous request.
         # @param sort [CandidApiClient::OrganizationProviders::V2::Types::OrganizationProviderSortOptions] Defaults to PROVIDER_NAME_ASC.
         # @param request_options [CandidApiClient::RequestOptions]
@@ -62,8 +63,8 @@ module CandidApiClient
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    sort: PROVIDER_NAME_ASC
         #  )
-        def get_multi(limit: nil, search_term: nil, npi: nil, is_rendering: nil, is_billing: nil, page_token: nil,
-                      sort: nil, request_options: nil)
+        def get_multi(limit: nil, search_term: nil, npi: nil, is_rendering: nil, is_billing: nil,
+                      organization_provider_ids: nil, page_token: nil, sort: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -79,6 +80,7 @@ module CandidApiClient
               "npi": npi,
               "is_rendering": is_rendering,
               "is_billing": is_billing,
+              "organization_provider_ids": organization_provider_ids,
               "page_token": page_token,
               "sort": sort
             }.compact
@@ -200,6 +202,7 @@ module CandidApiClient
         # @param npi [String] Filter to a specific NPI.
         # @param is_rendering [Boolean] Filter to only rendering providers.
         # @param is_billing [Boolean] Filter to only billing providers.
+        # @param organization_provider_ids [String] Filter to the provided organization provider IDs.
         # @param page_token [String] The page token to continue paging through a previous request.
         # @param sort [CandidApiClient::OrganizationProviders::V2::Types::OrganizationProviderSortOptions] Defaults to PROVIDER_NAME_ASC.
         # @param request_options [CandidApiClient::RequestOptions]
@@ -215,8 +218,8 @@ module CandidApiClient
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
         #    sort: PROVIDER_NAME_ASC
         #  )
-        def get_multi(limit: nil, search_term: nil, npi: nil, is_rendering: nil, is_billing: nil, page_token: nil,
-                      sort: nil, request_options: nil)
+        def get_multi(limit: nil, search_term: nil, npi: nil, is_rendering: nil, is_billing: nil,
+                      organization_provider_ids: nil, page_token: nil, sort: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -233,6 +236,7 @@ module CandidApiClient
                 "npi": npi,
                 "is_rendering": is_rendering,
                 "is_billing": is_billing,
+                "organization_provider_ids": organization_provider_ids,
                 "page_token": page_token,
                 "sort": sort
               }.compact

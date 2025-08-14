@@ -40,6 +40,8 @@ module CandidApiClient
             attr_reader :estimated_patient_responsibility_cents
             # @return [Integer]
             attr_reader :patient_deposit_cents
+            # @return [String]
+            attr_reader :appointment_details
             # @return [DateTime] The timestamp when the patient checked in for their appointment. If status is
             #  CHECKED_IN, checked_in_timestamp must be set. If checked_in_timestamp is set,
             #  status must be CHECKED_IN.
@@ -81,6 +83,7 @@ module CandidApiClient
             # @param estimated_copay_cents [Integer]
             # @param estimated_patient_responsibility_cents [Integer]
             # @param patient_deposit_cents [Integer]
+            # @param appointment_details [String]
             # @param checked_in_timestamp [DateTime] The timestamp when the patient checked in for their appointment. If status is
             #  CHECKED_IN, checked_in_timestamp must be set. If checked_in_timestamp is set,
             #  status must be CHECKED_IN.
@@ -97,7 +100,7 @@ module CandidApiClient
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Appointments::V1::Types::MutableAppointment]
             def initialize(patient_id:, start_timestamp:, service_duration:, services:, status: OMIT,
-                           placer_appointment_id: OMIT, attending_doctor: OMIT, estimated_copay_cents: OMIT, estimated_patient_responsibility_cents: OMIT, patient_deposit_cents: OMIT, checked_in_timestamp: OMIT, notes: OMIT, location_resource_id: OMIT, automated_eligibility_check_complete: OMIT, work_queue: OMIT, additional_properties: nil)
+                           placer_appointment_id: OMIT, attending_doctor: OMIT, estimated_copay_cents: OMIT, estimated_patient_responsibility_cents: OMIT, patient_deposit_cents: OMIT, appointment_details: OMIT, checked_in_timestamp: OMIT, notes: OMIT, location_resource_id: OMIT, automated_eligibility_check_complete: OMIT, work_queue: OMIT, additional_properties: nil)
               @patient_id = patient_id
               @start_timestamp = start_timestamp
               @status = status if status != OMIT
@@ -110,6 +113,7 @@ module CandidApiClient
                 @estimated_patient_responsibility_cents = estimated_patient_responsibility_cents
               end
               @patient_deposit_cents = patient_deposit_cents if patient_deposit_cents != OMIT
+              @appointment_details = appointment_details if appointment_details != OMIT
               @checked_in_timestamp = checked_in_timestamp if checked_in_timestamp != OMIT
               @notes = notes if notes != OMIT
               @location_resource_id = location_resource_id if location_resource_id != OMIT
@@ -129,6 +133,7 @@ module CandidApiClient
                 "estimated_copay_cents": estimated_copay_cents,
                 "estimated_patient_responsibility_cents": estimated_patient_responsibility_cents,
                 "patient_deposit_cents": patient_deposit_cents,
+                "appointment_details": appointment_details,
                 "checked_in_timestamp": checked_in_timestamp,
                 "notes": notes,
                 "location_resource_id": location_resource_id,
@@ -166,6 +171,7 @@ module CandidApiClient
               estimated_copay_cents = struct["estimated_copay_cents"]
               estimated_patient_responsibility_cents = struct["estimated_patient_responsibility_cents"]
               patient_deposit_cents = struct["patient_deposit_cents"]
+              appointment_details = struct["appointment_details"]
               checked_in_timestamp = unless parsed_json["checked_in_timestamp"].nil?
                                        DateTime.parse(parsed_json["checked_in_timestamp"])
                                      end
@@ -184,6 +190,7 @@ module CandidApiClient
                 estimated_copay_cents: estimated_copay_cents,
                 estimated_patient_responsibility_cents: estimated_patient_responsibility_cents,
                 patient_deposit_cents: patient_deposit_cents,
+                appointment_details: appointment_details,
                 checked_in_timestamp: checked_in_timestamp,
                 notes: notes,
                 location_resource_id: location_resource_id,
@@ -217,6 +224,7 @@ module CandidApiClient
               obj.estimated_copay_cents&.is_a?(Integer) != false || raise("Passed value for field obj.estimated_copay_cents is not the expected type, validation failed.")
               obj.estimated_patient_responsibility_cents&.is_a?(Integer) != false || raise("Passed value for field obj.estimated_patient_responsibility_cents is not the expected type, validation failed.")
               obj.patient_deposit_cents&.is_a?(Integer) != false || raise("Passed value for field obj.patient_deposit_cents is not the expected type, validation failed.")
+              obj.appointment_details&.is_a?(String) != false || raise("Passed value for field obj.appointment_details is not the expected type, validation failed.")
               obj.checked_in_timestamp&.is_a?(DateTime) != false || raise("Passed value for field obj.checked_in_timestamp is not the expected type, validation failed.")
               obj.notes&.is_a?(String) != false || raise("Passed value for field obj.notes is not the expected type, validation failed.")
               obj.location_resource_id&.is_a?(String) != false || raise("Passed value for field obj.location_resource_id is not the expected type, validation failed.")

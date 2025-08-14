@@ -12,7 +12,9 @@ module CandidApiClient
   module Individual
     module Types
       class SubscriberCreateOptional
-        # @return [CandidApiClient::InsuranceCards::V2::Types::InsuranceCardCreateOptional]
+        # @return [CandidApiClient::InsuranceCards::V2::Types::InsuranceCardCreateOptional] Please reference our [Payer
+        #  Information](https://docs.joincandidhealth.com/introduction/payer-information)
+        #  documentation for more details on how to populate the `insurance_card` fields.
         attr_reader :insurance_card
         # @return [CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll]
         attr_reader :patient_relationship_to_subscriber_code
@@ -34,7 +36,9 @@ module CandidApiClient
 
         OMIT = Object.new
 
-        # @param insurance_card [CandidApiClient::InsuranceCards::V2::Types::InsuranceCardCreateOptional]
+        # @param insurance_card [CandidApiClient::InsuranceCards::V2::Types::InsuranceCardCreateOptional] Please reference our [Payer
+        #  Information](https://docs.joincandidhealth.com/introduction/payer-information)
+        #  documentation for more details on how to populate the `insurance_card` fields.
         # @param patient_relationship_to_subscriber_code [CandidApiClient::Commons::Types::PatientRelationshipToInsuredCodeAll]
         # @param date_of_birth [Date]
         # @param address [CandidApiClient::Commons::Types::StreetAddressShortZipOptional]

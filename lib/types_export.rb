@@ -244,6 +244,7 @@ require_relative "candidhealth/non_insurance_payers/v_1/types/non_insurance_paye
 require_relative "candidhealth/non_insurance_payers/v_1/types/non_insurance_payer_address_update"
 require_relative "candidhealth/non_insurance_payers/v_1/types/toggle_non_insurance_payer_enablement_request"
 require_relative "candidhealth/non_insurance_payers/v_1/types/non_insurance_payer_update_request"
+require_relative "candidhealth/non_insurance_payers/v_1/types/non_insurance_payer_categories_page"
 require_relative "candidhealth/organization_service_facilities/v_2/types/service_facility_status"
 require_relative "candidhealth/organization_service_facilities/v_2/types/service_facility_operational_status"
 require_relative "candidhealth/organization_service_facilities/v_2/types/service_facility_mode"

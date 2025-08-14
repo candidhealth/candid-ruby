@@ -43,6 +43,7 @@ module CandidApiClient
 
         # @param limit [Integer] Limit the number of results returned. Defaults to 100.
         # @param name [String] Filter to a name or a part of a name.
+        # @param organization_service_facility_ids [String] Filter to the provided organization service facility IDs.
         # @param page_token [String] The page token to continue paging through a previous request.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
@@ -53,7 +54,8 @@ module CandidApiClient
         #    name: "Test Service Facility",
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
         #  )
-        def get_multi(limit: nil, name: nil, page_token: nil, request_options: nil)
+        def get_multi(limit: nil, name: nil, organization_service_facility_ids: nil, page_token: nil,
+                      request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -66,6 +68,7 @@ module CandidApiClient
               **(request_options&.additional_query_parameters || {}),
               "limit": limit,
               "name": name,
+              "organization_service_facility_ids": organization_service_facility_ids,
               "page_token": page_token
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
@@ -209,6 +212,7 @@ module CandidApiClient
 
         # @param limit [Integer] Limit the number of results returned. Defaults to 100.
         # @param name [String] Filter to a name or a part of a name.
+        # @param organization_service_facility_ids [String] Filter to the provided organization service facility IDs.
         # @param page_token [String] The page token to continue paging through a previous request.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
@@ -219,7 +223,8 @@ module CandidApiClient
         #    name: "Test Service Facility",
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
         #  )
-        def get_multi(limit: nil, name: nil, page_token: nil, request_options: nil)
+        def get_multi(limit: nil, name: nil, organization_service_facility_ids: nil, page_token: nil,
+                      request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -233,6 +238,7 @@ module CandidApiClient
                 **(request_options&.additional_query_parameters || {}),
                 "limit": limit,
                 "name": name,
+                "organization_service_facility_ids": organization_service_facility_ids,
                 "page_token": page_token
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,

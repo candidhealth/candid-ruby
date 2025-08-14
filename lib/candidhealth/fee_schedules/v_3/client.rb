@@ -17,6 +17,7 @@ require "json"
 require_relative "types/rate_upload"
 require_relative "types/payer_threshold"
 require_relative "types/payer_thresholds_page"
+require_relative "types/optional_dimensions"
 require "async"
 
 module CandidApiClient
@@ -344,6 +345,45 @@ module CandidApiClient
                                                request_options: request_options)}/api/fee-schedules/v3/payer-threshold/#{payer_uuid}"
           end
           CandidApiClient::FeeSchedules::V3::Types::PayerThreshold.from_json(json_object: response.body)
+        end
+
+        # Hard deletes rates from the system that match the provided dimensions.  This is
+        #  a destructive operation and cannot be undone.  If an empty dimensions object is
+        #  provided, all rates will be hard deleted.  The maximum number of rates this API
+        #  will delete at a time is 10000.  Returns the number of rates deleted and if that
+        #  number is the maximum, the caller should call this API again to continue
+        #  deleting rates.
+        #
+        # @param request [Hash] Request of type CandidApiClient::FeeSchedules::V3::Types::OptionalDimensions, as a Hash
+        #   * :payer_uuid (String)
+        #   * :organization_billing_provider_id (String)
+        #   * :states (Set<CandidApiClient::Commons::Types::State>)
+        #   * :zip_codes (Set<String>)
+        #   * :license_types (Set<CandidApiClient::OrganizationProviders::V2::Types::LicenseType>)
+        #   * :facility_type_codes (Set<CandidApiClient::Commons::Types::FacilityTypeCode>)
+        #   * :network_types (Set<CandidApiClient::Commons::Types::NetworkType>)
+        #   * :payer_plan_group_ids (Set<String>)
+        #   * :cpt_code (String)
+        #   * :modifiers (Set<CandidApiClient::Commons::Types::ProcedureModifier>)
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Integer]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.fee_schedules.v_3.hard_delete_rates(request: { states: Set[AA], zip_codes: Set["zip_codes"], license_types: Set[MD], facility_type_codes: Set[PHARMACY], network_types: Set[PPO], payer_plan_group_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], modifiers: Set[AV] })
+        def hard_delete_rates(request:, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/hard-delete"
+          end
+          JSON.parse(response.body)
         end
       end
 
@@ -695,6 +735,48 @@ module CandidApiClient
                                                  request_options: request_options)}/api/fee-schedules/v3/payer-threshold/#{payer_uuid}"
             end
             CandidApiClient::FeeSchedules::V3::Types::PayerThreshold.from_json(json_object: response.body)
+          end
+        end
+
+        # Hard deletes rates from the system that match the provided dimensions.  This is
+        #  a destructive operation and cannot be undone.  If an empty dimensions object is
+        #  provided, all rates will be hard deleted.  The maximum number of rates this API
+        #  will delete at a time is 10000.  Returns the number of rates deleted and if that
+        #  number is the maximum, the caller should call this API again to continue
+        #  deleting rates.
+        #
+        # @param request [Hash] Request of type CandidApiClient::FeeSchedules::V3::Types::OptionalDimensions, as a Hash
+        #   * :payer_uuid (String)
+        #   * :organization_billing_provider_id (String)
+        #   * :states (Set<CandidApiClient::Commons::Types::State>)
+        #   * :zip_codes (Set<String>)
+        #   * :license_types (Set<CandidApiClient::OrganizationProviders::V2::Types::LicenseType>)
+        #   * :facility_type_codes (Set<CandidApiClient::Commons::Types::FacilityTypeCode>)
+        #   * :network_types (Set<CandidApiClient::Commons::Types::NetworkType>)
+        #   * :payer_plan_group_ids (Set<String>)
+        #   * :cpt_code (String)
+        #   * :modifiers (Set<CandidApiClient::Commons::Types::ProcedureModifier>)
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Integer]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.fee_schedules.v_3.hard_delete_rates(request: { states: Set[AA], zip_codes: Set["zip_codes"], license_types: Set[MD], facility_type_codes: Set[PHARMACY], network_types: Set[PPO], payer_plan_group_ids: Set["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"], modifiers: Set[AV] })
+        def hard_delete_rates(request:, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/hard-delete"
+            end
+            parsed_json = JSON.parse(response.body)
+            parsed_json
           end
         end
       end

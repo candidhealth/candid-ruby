@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../../organization_service_facilities/v_2/types/organization_service_facility"
 require_relative "../../../organization_providers/v_3/types/organization_provider_v_2"
-require_relative "../../../commons/types/regions"
 require_relative "../../../payers/v_3/types/payer"
 require "date"
 require_relative "credentialing_span_status"
@@ -12,18 +12,11 @@ module CandidApiClient
   module Credentialing
     module V2
       module Types
-        class ProviderCredentialingSpan
+        class FacilityCredentialingSpan
           # @return [String]
-          attr_reader :provider_credentialing_span_id
-          # @return [CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2] The rendering provider covered by the credentialing span.
-          attr_reader :rendering_provider
-          # @return [CandidApiClient::Commons::Types::Regions] The states covered by the credentialing span. A span may be national and cover
-          #  all states.
-          attr_reader :regions
-          # @return [String] Provider ID for the related medallion payer enrollment.
-          attr_reader :medallion_payer_enrollment_id
-          # @return [String] Source of the credentialing span.
-          attr_reader :source
+          attr_reader :facility_credentialing_span_id
+          # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility] The service facility covered by the credentialing span.
+          attr_reader :service_facility
           # @return [CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2] The practice location at which the rendering provider is covered by the
           #  credentialing span.
           attr_reader :contracting_provider
@@ -49,12 +42,8 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param provider_credentialing_span_id [String]
-          # @param rendering_provider [CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2] The rendering provider covered by the credentialing span.
-          # @param regions [CandidApiClient::Commons::Types::Regions] The states covered by the credentialing span. A span may be national and cover
-          #  all states.
-          # @param medallion_payer_enrollment_id [String] Provider ID for the related medallion payer enrollment.
-          # @param source [String] Source of the credentialing span.
+          # @param facility_credentialing_span_id [String]
+          # @param service_facility [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility] The service facility covered by the credentialing span.
           # @param contracting_provider [CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2] The practice location at which the rendering provider is covered by the
           #  credentialing span.
           # @param payer [CandidApiClient::Payers::V3::Types::Payer] The payer doing the credentialing.
@@ -65,14 +54,11 @@ module CandidApiClient
           # @param payer_loaded_date [Date] Date that the payer loaded the credentialing span into their system.
           # @param is_enabled [Boolean] Is the credentialing span enabled?
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpan]
-          def initialize(provider_credentialing_span_id:, rendering_provider:, regions:, source:, contracting_provider:, payer:, credentialing_status:, is_enabled:,
-                         medallion_payer_enrollment_id: OMIT, start_date: OMIT, end_date: OMIT, submitted_date: OMIT, payer_loaded_date: OMIT, additional_properties: nil)
-            @provider_credentialing_span_id = provider_credentialing_span_id
-            @rendering_provider = rendering_provider
-            @regions = regions
-            @medallion_payer_enrollment_id = medallion_payer_enrollment_id if medallion_payer_enrollment_id != OMIT
-            @source = source
+          # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+          def initialize(facility_credentialing_span_id:, service_facility:, contracting_provider:, payer:, credentialing_status:, is_enabled:,
+                         start_date: OMIT, end_date: OMIT, submitted_date: OMIT, payer_loaded_date: OMIT, additional_properties: nil)
+            @facility_credentialing_span_id = facility_credentialing_span_id
+            @service_facility = service_facility
             @contracting_provider = contracting_provider
             @payer = payer
             @start_date = start_date if start_date != OMIT
@@ -83,11 +69,8 @@ module CandidApiClient
             @is_enabled = is_enabled
             @additional_properties = additional_properties
             @_field_set = {
-              "provider_credentialing_span_id": provider_credentialing_span_id,
-              "rendering_provider": rendering_provider,
-              "regions": regions,
-              "medallion_payer_enrollment_id": medallion_payer_enrollment_id,
-              "source": source,
+              "facility_credentialing_span_id": facility_credentialing_span_id,
+              "service_facility": service_facility,
               "contracting_provider": contracting_provider,
               "payer": payer,
               "start_date": start_date,
@@ -101,28 +84,20 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of ProviderCredentialingSpan
+          # Deserialize a JSON object to an instance of FacilityCredentialingSpan
           #
           # @param json_object [String]
-          # @return [CandidApiClient::Credentialing::V2::Types::ProviderCredentialingSpan]
+          # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
-            provider_credentialing_span_id = struct["provider_credentialing_span_id"]
-            if parsed_json["rendering_provider"].nil?
-              rendering_provider = nil
+            facility_credentialing_span_id = struct["facility_credentialing_span_id"]
+            if parsed_json["service_facility"].nil?
+              service_facility = nil
             else
-              rendering_provider = parsed_json["rendering_provider"].to_json
-              rendering_provider = CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2.from_json(json_object: rendering_provider)
+              service_facility = parsed_json["service_facility"].to_json
+              service_facility = CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: service_facility)
             end
-            if parsed_json["regions"].nil?
-              regions = nil
-            else
-              regions = parsed_json["regions"].to_json
-              regions = CandidApiClient::Commons::Types::Regions.from_json(json_object: regions)
-            end
-            medallion_payer_enrollment_id = struct["medallion_payer_enrollment_id"]
-            source = struct["source"]
             if parsed_json["contracting_provider"].nil?
               contracting_provider = nil
             else
@@ -144,11 +119,8 @@ module CandidApiClient
                                 end
             is_enabled = struct["is_enabled"]
             new(
-              provider_credentialing_span_id: provider_credentialing_span_id,
-              rendering_provider: rendering_provider,
-              regions: regions,
-              medallion_payer_enrollment_id: medallion_payer_enrollment_id,
-              source: source,
+              facility_credentialing_span_id: facility_credentialing_span_id,
+              service_facility: service_facility,
               contracting_provider: contracting_provider,
               payer: payer,
               start_date: start_date,
@@ -161,7 +133,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of ProviderCredentialingSpan to a JSON object
+          # Serialize an instance of FacilityCredentialingSpan to a JSON object
           #
           # @return [String]
           def to_json(*_args)
@@ -175,11 +147,8 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.provider_credentialing_span_id.is_a?(String) != false || raise("Passed value for field obj.provider_credentialing_span_id is not the expected type, validation failed.")
-            CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2.validate_raw(obj: obj.rendering_provider)
-            CandidApiClient::Commons::Types::Regions.validate_raw(obj: obj.regions)
-            obj.medallion_payer_enrollment_id&.is_a?(String) != false || raise("Passed value for field obj.medallion_payer_enrollment_id is not the expected type, validation failed.")
-            obj.source.is_a?(String) != false || raise("Passed value for field obj.source is not the expected type, validation failed.")
+            obj.facility_credentialing_span_id.is_a?(String) != false || raise("Passed value for field obj.facility_credentialing_span_id is not the expected type, validation failed.")
+            CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.validate_raw(obj: obj.service_facility)
             CandidApiClient::OrganizationProviders::V3::Types::OrganizationProviderV2.validate_raw(obj: obj.contracting_provider)
             CandidApiClient::Payers::V3::Types::Payer.validate_raw(obj: obj.payer)
             obj.start_date&.is_a?(Date) != false || raise("Passed value for field obj.start_date is not the expected type, validation failed.")

@@ -83,6 +83,28 @@ module CandidApiClient
           end
           CandidApiClient::Auth::Default::Types::AuthGetTokenResponse.from_json(json_object: response.body)
         end
+
+        # @param org_id [String] Organization ID to generate token for.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.auth.default.get_machine_token_for_org_id(org_id: "org_id")
+        def get_machine_token_for_org_id(org_id:, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = { **(request_options&.additional_body_parameters || {}), org_id: org_id }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/auth/v2/machine-token-for-org-id"
+          end
+          CandidApiClient::Auth::Default::Types::AuthGetTokenResponse.from_json(json_object: response.body)
+        end
       end
 
       class AsyncDefaultClient
@@ -159,6 +181,30 @@ module CandidApiClient
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/auth/v2/token"
+            end
+            CandidApiClient::Auth::Default::Types::AuthGetTokenResponse.from_json(json_object: response.body)
+          end
+        end
+
+        # @param org_id [String] Organization ID to generate token for.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.auth.default.get_machine_token_for_org_id(org_id: "org_id")
+        def get_machine_token_for_org_id(org_id:, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request_options&.additional_body_parameters || {}), org_id: org_id }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/auth/v2/machine-token-for-org-id"
             end
             CandidApiClient::Auth::Default::Types::AuthGetTokenResponse.from_json(json_object: response.body)
           end

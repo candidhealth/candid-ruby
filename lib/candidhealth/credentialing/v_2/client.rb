@@ -2,6 +2,8 @@
 
 require_relative "../../../requests"
 require "date"
+require_relative "types/facility_credentialing_span"
+require_relative "types/facility_credentialing_span_page"
 require_relative "../../commons/types/regions"
 require_relative "types/provider_credentialing_span"
 require_relative "types/provider_credentialing_span_page"
@@ -20,9 +22,170 @@ module CandidApiClient
           @request_client = request_client
         end
 
+        # @param service_facility_id [String] The ID of the service facility covered by the credentialing span.
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
+        # @param payer_uuid [String] The ID of the payer covered by the credentialing span.
+        # @param start_date [Date] Start date of the credentialing span.
+        # @param end_date [Date] End date of the credentialing span.
+        # @param submitted_date [Date] Date that the credential paperwork was submitted.
+        # @param payer_loaded_date [Date] Date that the payer loaded the credentialing span into their system.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.create_facility(
+        #    service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+        #  )
+        def create_facility(service_facility_id:, contracting_provider_id:, payer_uuid:, start_date: nil,
+                            end_date: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = {
+              **(request_options&.additional_body_parameters || {}),
+              service_facility_id: service_facility_id,
+              contracting_provider_id: contracting_provider_id,
+              payer_uuid: payer_uuid,
+              start_date: start_date,
+              end_date: end_date,
+              submitted_date: submitted_date,
+              payer_loaded_date: payer_loaded_date
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/provider-credentialing-span/v2/facility"
+          end
+          CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan.from_json(json_object: response.body)
+        end
+
+        # @param facility_credentialing_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.get_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def get_facility(facility_credentialing_id:, request_options: nil)
+          response = @request_client.conn.get do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/provider-credentialing-span/v2/facility/#{facility_credentialing_id}"
+          end
+          CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan.from_json(json_object: response.body)
+        end
+
+        # @param limit [Integer] Maximum number of entities per page, defaults to 100.
+        # @param page_token [String]
+        # @param payer_uuid [String] Filter by payer.
+        # @param contracting_provider_id [String] Filter to a particular contracting provider.
+        # @param service_facility_id [String] Filter to a particular service facility.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpanPage]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.get_all_facilities
+        def get_all_facilities(limit: nil, page_token: nil, payer_uuid: nil, contracting_provider_id: nil,
+                               service_facility_id: nil, request_options: nil)
+          response = @request_client.conn.get do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.params = {
+              **(request_options&.additional_query_parameters || {}),
+              "limit": limit,
+              "page_token": page_token,
+              "payer_uuid": payer_uuid,
+              "contracting_provider_id": contracting_provider_id,
+              "service_facility_id": service_facility_id
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/provider-credentialing-span/v2/facility"
+          end
+          CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpanPage.from_json(json_object: response.body)
+        end
+
+        # Soft deletes a credentialing span rate from the system.
+        #
+        # @param facility_credentialing_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.delete_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def delete_facility(facility_credentialing_id:, request_options: nil)
+          @request_client.conn.delete do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/provider-credentialing-span/v2/facility/#{facility_credentialing_id}"
+          end
+        end
+
+        # @param facility_credentialing_id [String]
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
+        # @param payer_uuid [String] The ID of the payer doing the credentialing.
+        # @param start_date [Date] Start date of the credentialing span.
+        # @param end_date [Date] End date of the credentialing span.
+        # @param regions [CandidApiClient::Commons::Types::Regions] The states covered by the credentialing span. A span may be national and cover
+        #  all states.
+        # @param submitted_date [Date] Date that the credential paperwork was submitted.
+        # @param payer_loaded_date [Date] Date that the payer loaded the credentialing span into their system.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.update_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def update_facility(facility_credentialing_id:, contracting_provider_id:, payer_uuid: nil, start_date: nil,
+                            end_date: nil, regions: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
+          response = @request_client.conn.patch do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = {
+              **(request_options&.additional_body_parameters || {}),
+              contracting_provider_id: contracting_provider_id,
+              payer_uuid: payer_uuid,
+              start_date: start_date,
+              end_date: end_date,
+              regions: regions,
+              submitted_date: submitted_date,
+              payer_loaded_date: payer_loaded_date
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/provider-credentialing-span/v2/facility/#{facility_credentialing_id}"
+          end
+          CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan.from_json(json_object: response.body)
+        end
+
         # @param rendering_provider_id [String] The ID of the rendering provider covered by the credentialing span.
-        # @param contracting_provider_id [String] The ID of the practice location at which the rendering provider is covered by
-        #  the credentialing span.
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
         # @param payer_uuid [String] The ID of the payer covered by the credentialing span.
         # @param start_date [Date] Start date of the credentialing span.
         # @param end_date [Date] End date of the credentialing span.
@@ -149,8 +312,8 @@ module CandidApiClient
         end
 
         # @param provider_credentialing_id [String]
-        # @param contracting_provider_id [String] The ID of the practice location at which the rendering provider is covered by
-        #  the credentialing span.
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
         # @param payer_uuid [String] The ID of the payer doing the credentialing.
         # @param start_date [Date] Start date of the credentialing span.
         # @param end_date [Date] End date of the credentialing span.
@@ -200,9 +363,180 @@ module CandidApiClient
           @request_client = request_client
         end
 
+        # @param service_facility_id [String] The ID of the service facility covered by the credentialing span.
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
+        # @param payer_uuid [String] The ID of the payer covered by the credentialing span.
+        # @param start_date [Date] Start date of the credentialing span.
+        # @param end_date [Date] End date of the credentialing span.
+        # @param submitted_date [Date] Date that the credential paperwork was submitted.
+        # @param payer_loaded_date [Date] Date that the payer loaded the credentialing span into their system.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.create_facility(
+        #    service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+        #    payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+        #  )
+        def create_facility(service_facility_id:, contracting_provider_id:, payer_uuid:, start_date: nil,
+                            end_date: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = {
+                **(request_options&.additional_body_parameters || {}),
+                service_facility_id: service_facility_id,
+                contracting_provider_id: contracting_provider_id,
+                payer_uuid: payer_uuid,
+                start_date: start_date,
+                end_date: end_date,
+                submitted_date: submitted_date,
+                payer_loaded_date: payer_loaded_date
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/provider-credentialing-span/v2/facility"
+            end
+            CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan.from_json(json_object: response.body)
+          end
+        end
+
+        # @param facility_credentialing_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.get_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def get_facility(facility_credentialing_id:, request_options: nil)
+          Async do
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/provider-credentialing-span/v2/facility/#{facility_credentialing_id}"
+            end
+            CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan.from_json(json_object: response.body)
+          end
+        end
+
+        # @param limit [Integer] Maximum number of entities per page, defaults to 100.
+        # @param page_token [String]
+        # @param payer_uuid [String] Filter by payer.
+        # @param contracting_provider_id [String] Filter to a particular contracting provider.
+        # @param service_facility_id [String] Filter to a particular service facility.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpanPage]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.get_all_facilities
+        def get_all_facilities(limit: nil, page_token: nil, payer_uuid: nil, contracting_provider_id: nil,
+                               service_facility_id: nil, request_options: nil)
+          Async do
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.params = {
+                **(request_options&.additional_query_parameters || {}),
+                "limit": limit,
+                "page_token": page_token,
+                "payer_uuid": payer_uuid,
+                "contracting_provider_id": contracting_provider_id,
+                "service_facility_id": service_facility_id
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/provider-credentialing-span/v2/facility"
+            end
+            CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpanPage.from_json(json_object: response.body)
+          end
+        end
+
+        # Soft deletes a credentialing span rate from the system.
+        #
+        # @param facility_credentialing_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Void]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.delete_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def delete_facility(facility_credentialing_id:, request_options: nil)
+          Async do
+            @request_client.conn.delete do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/provider-credentialing-span/v2/facility/#{facility_credentialing_id}"
+            end
+          end
+        end
+
+        # @param facility_credentialing_id [String]
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
+        # @param payer_uuid [String] The ID of the payer doing the credentialing.
+        # @param start_date [Date] Start date of the credentialing span.
+        # @param end_date [Date] End date of the credentialing span.
+        # @param regions [CandidApiClient::Commons::Types::Regions] The states covered by the credentialing span. A span may be national and cover
+        #  all states.
+        # @param submitted_date [Date] Date that the credential paperwork was submitted.
+        # @param payer_loaded_date [Date] Date that the payer loaded the credentialing span into their system.
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.credentialing.v_2.update_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+        def update_facility(facility_credentialing_id:, contracting_provider_id:, payer_uuid: nil, start_date: nil,
+                            end_date: nil, regions: nil, submitted_date: nil, payer_loaded_date: nil, request_options: nil)
+          Async do
+            response = @request_client.conn.patch do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = {
+                **(request_options&.additional_body_parameters || {}),
+                contracting_provider_id: contracting_provider_id,
+                payer_uuid: payer_uuid,
+                start_date: start_date,
+                end_date: end_date,
+                regions: regions,
+                submitted_date: submitted_date,
+                payer_loaded_date: payer_loaded_date
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/provider-credentialing-span/v2/facility/#{facility_credentialing_id}"
+            end
+            CandidApiClient::Credentialing::V2::Types::FacilityCredentialingSpan.from_json(json_object: response.body)
+          end
+        end
+
         # @param rendering_provider_id [String] The ID of the rendering provider covered by the credentialing span.
-        # @param contracting_provider_id [String] The ID of the practice location at which the rendering provider is covered by
-        #  the credentialing span.
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
         # @param payer_uuid [String] The ID of the payer covered by the credentialing span.
         # @param start_date [Date] Start date of the credentialing span.
         # @param end_date [Date] End date of the credentialing span.
@@ -337,8 +671,8 @@ module CandidApiClient
         end
 
         # @param provider_credentialing_id [String]
-        # @param contracting_provider_id [String] The ID of the practice location at which the rendering provider is covered by
-        #  the credentialing span.
+        # @param contracting_provider_id [String] The ID of the billing provider for which the service facility is covered by the
+        #  credentialing span.
         # @param payer_uuid [String] The ID of the payer doing the credentialing.
         # @param start_date [Date] Start date of the credentialing span.
         # @param end_date [Date] End date of the credentialing span.

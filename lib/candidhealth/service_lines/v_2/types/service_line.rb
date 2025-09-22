@@ -69,7 +69,10 @@ module CandidApiClient
           attr_reader :related_invoice_info
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
           attr_reader :denial_reason
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
           # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
@@ -81,11 +84,16 @@ module CandidApiClient
           attr_reader :procedure_code
           # @return [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
           attr_reader :ordering_provider
-          # @return [String]
+          # @return [String] A 4 digit code that specifies facility department or type of service arrangement
+          #  for institutional service line items (837i). This code is not required for
+          #  professional claim billing (837p).
           attr_reader :revenue_code
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
-          #  A ServiceLine quantity cannot contain more than one digit of precision.
-          #  Example: 1.1 is valid, 1.11 is not.
+          #  For professional claims, a ServiceLine quantity cannot contain more than one
+          #  digit of precision
+          #  (Example: 1.1 is valid, 1.11 is not). For institutional claims, a ServiceLine
+          #  quantity cannot contain
+          #  more than three decimal digits of precision.
           attr_reader :quantity
           # @return [CandidApiClient::Commons::Types::ServiceLineUnits]
           attr_reader :units
@@ -96,7 +104,7 @@ module CandidApiClient
           #  will be empty.
           attr_reader :date_of_service_range
           # @return [String] A free-form description to clarify the related data elements and their content.
-          #  Maps to SV1-01, C003-07 on the 837-P.
+          #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.
           attr_reader :description
           # @return [Date]
           attr_reader :date_of_service
@@ -104,6 +112,7 @@ module CandidApiClient
           attr_reader :end_date_of_service
           # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
+          #  This is unused by 837-i and ignored for institutional service lines.
           #  No more than 5 MEA-02 test results may be submitted per service line.
           attr_reader :test_results
           # @return [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
@@ -148,28 +157,37 @@ module CandidApiClient
           # @param related_invoices [Array<CandidApiClient::Invoices::Types::Invoice>]
           # @param related_invoice_info [Array<CandidApiClient::Invoices::V2::Types::InvoiceInfo>]
           # @param denial_reason [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param place_of_service_code_as_submitted [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. 02 for telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param service_line_id [String]
           # @param procedure_code [String]
           # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::EncounterProvider]
-          # @param revenue_code [String]
+          # @param revenue_code [String] A 4 digit code that specifies facility department or type of service arrangement
+          #  for institutional service line items (837i). This code is not required for
+          #  professional claim billing (837p).
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
-          #  A ServiceLine quantity cannot contain more than one digit of precision.
-          #  Example: 1.1 is valid, 1.11 is not.
+          #  For professional claims, a ServiceLine quantity cannot contain more than one
+          #  digit of precision
+          #  (Example: 1.1 is valid, 1.11 is not). For institutional claims, a ServiceLine
+          #  quantity cannot contain
+          #  more than three decimal digits of precision.
           # @param units [CandidApiClient::Commons::Types::ServiceLineUnits]
           # @param claim_id [String]
           # @param date_of_service_range [CandidApiClient::Commons::Types::DateRangeOptionalEnd] A range of dates of service for this service line. If the service line is for a
           #  single date, the end date
           #  will be empty.
           # @param description [String] A free-form description to clarify the related data elements and their content.
-          #  Maps to SV1-01, C003-07 on the 837-P.
+          #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.
           # @param date_of_service [Date]
           # @param end_date_of_service [Date]
           # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
+          #  This is unused by 837-i and ignored for institutional service lines.
           #  No more than 5 MEA-02 test results may be submitted per service line.
           # @param has_epsdt_indicator [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
           #  If the value is true, the box will be populated with "Y". Otherwise, the box

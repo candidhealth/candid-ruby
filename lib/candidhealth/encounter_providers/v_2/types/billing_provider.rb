@@ -21,7 +21,7 @@ module CandidApiClient
         #  tax ID (TIN) that the provider gave to the payer during contracting.
         #  In other cases, the billing entity will be a medical group. If so, submit the
         #  group NPI and the group's tax ID.
-        #  Box 33 on the CMS-1500 claim form.
+        #  Box 33 on the CMS-1500 claim or Form Locator 1 on a UB-04 claim form.
         class BillingProvider
           # @return [CandidApiClient::Commons::Types::StreetAddressLongZip]
           attr_reader :address

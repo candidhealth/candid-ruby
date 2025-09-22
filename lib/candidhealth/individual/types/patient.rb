@@ -30,10 +30,10 @@ module CandidApiClient
         # @return [String] The ID used to identify this individual in your system. For example, your
         #  internal patient ID or an EHR patient ID.
         attr_reader :external_id
-        # @return [Date] Box 3 on the CMS-1500 claim form. The date format should be in ISO 8601 date;
-        #  formatted YYYY-MM-DD (i.e. 2012-02-01)
+        # @return [Date] Box 3 on the CMS-1500 claim form or Form Locator 10 on a UB-04 claim form. The
+        #  date format should be in ISO 8601 date; formatted YYYY-MM-DD (i.e. 2012-02-01)
         attr_reader :date_of_birth
-        # @return [CandidApiClient::Commons::Types::StreetAddressShortZip] Box 5 on the CMS-1500 claim form.
+        # @return [CandidApiClient::Commons::Types::StreetAddressShortZip] Box 5 on the CMS-1500 claim form or Form Locator 9 on a UB-04 claim form.
         attr_reader :address
         # @return [String]
         attr_reader :first_name
@@ -58,9 +58,9 @@ module CandidApiClient
         # @param non_insurance_payers_info [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfo>]
         # @param external_id [String] The ID used to identify this individual in your system. For example, your
         #  internal patient ID or an EHR patient ID.
-        # @param date_of_birth [Date] Box 3 on the CMS-1500 claim form. The date format should be in ISO 8601 date;
-        #  formatted YYYY-MM-DD (i.e. 2012-02-01)
-        # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip] Box 5 on the CMS-1500 claim form.
+        # @param date_of_birth [Date] Box 3 on the CMS-1500 claim form or Form Locator 10 on a UB-04 claim form. The
+        #  date format should be in ISO 8601 date; formatted YYYY-MM-DD (i.e. 2012-02-01)
+        # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip] Box 5 on the CMS-1500 claim form or Form Locator 9 on a UB-04 claim form.
         # @param first_name [String]
         # @param last_name [String]
         # @param gender [CandidApiClient::Individual::Types::Gender]

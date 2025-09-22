@@ -16,7 +16,7 @@ module CandidApiClient
           # @return [CandidApiClient::X12::V1::Types::TypeOfFacilityCode] The FL04 Institutional type of facility code for the bill.  The second digit of
           #  the composite code.
           attr_reader :type_of_facility
-          # @return [CandidApiClient::X12::V1::Types::TypeOfCareCode] The FL04 Institutional type of care code for the bill.  The second digit of the
+          # @return [CandidApiClient::X12::V1::Types::TypeOfCareCode] The FL04 Institutional type of care code for the bill.  The third digit of the
           #  composite code.
           attr_reader :type_of_care
           # @return [CandidApiClient::X12::V1::Types::TypeOfBillFrequencyCode] The FL04 Institutional frequency code for the bill.  The fourth digit of the
@@ -33,7 +33,7 @@ module CandidApiClient
           # @param code [String] The composite, 4 digit code of the composite, starting with a padding code 0.
           # @param type_of_facility [CandidApiClient::X12::V1::Types::TypeOfFacilityCode] The FL04 Institutional type of facility code for the bill.  The second digit of
           #  the composite code.
-          # @param type_of_care [CandidApiClient::X12::V1::Types::TypeOfCareCode] The FL04 Institutional type of care code for the bill.  The second digit of the
+          # @param type_of_care [CandidApiClient::X12::V1::Types::TypeOfCareCode] The FL04 Institutional type of care code for the bill.  The third digit of the
           #  composite code.
           # @param frequency_code [CandidApiClient::X12::V1::Types::TypeOfBillFrequencyCode] The FL04 Institutional frequency code for the bill.  The fourth digit of the
           #  composite code.

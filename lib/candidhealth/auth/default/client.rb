@@ -85,12 +85,20 @@ module CandidApiClient
         end
 
         # @param org_id [String] Organization ID to generate token for.
+        # @param client_id [String] Your application's Client ID.
+        # @param client_secret [String] Your application's Client Secret.
+        # @param force_token_refresh [Boolean] Refreshes auth token for a given user <> org pair.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.auth.default.get_machine_token_for_org_id(org_id: "org_id")
-        def get_machine_token_for_org_id(org_id:, request_options: nil)
+        #  api.auth.default.get_machine_token_for_org_id(
+        #    org_id: "org_id",
+        #    client_id: "client_id",
+        #    client_secret: "client_secret"
+        #  )
+        def get_machine_token_for_org_id(org_id:, client_id:, client_secret:, force_token_refresh: nil,
+                                         request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -99,7 +107,13 @@ module CandidApiClient
           **@request_client.get_headers,
           **(request_options&.additional_headers || {})
             }.compact
-            req.body = { **(request_options&.additional_body_parameters || {}), org_id: org_id }.compact
+            req.body = {
+              **(request_options&.additional_body_parameters || {}),
+              org_id: org_id,
+              client_id: client_id,
+              client_secret: client_secret,
+              force_token_refresh: force_token_refresh
+            }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/auth/v2/machine-token-for-org-id"
           end
@@ -187,12 +201,20 @@ module CandidApiClient
         end
 
         # @param org_id [String] Organization ID to generate token for.
+        # @param client_id [String] Your application's Client ID.
+        # @param client_secret [String] Your application's Client Secret.
+        # @param force_token_refresh [Boolean] Refreshes auth token for a given user <> org pair.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Auth::Default::Types::AuthGetTokenResponse]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.auth.default.get_machine_token_for_org_id(org_id: "org_id")
-        def get_machine_token_for_org_id(org_id:, request_options: nil)
+        #  api.auth.default.get_machine_token_for_org_id(
+        #    org_id: "org_id",
+        #    client_id: "client_id",
+        #    client_secret: "client_secret"
+        #  )
+        def get_machine_token_for_org_id(org_id:, client_id:, client_secret:, force_token_refresh: nil,
+                                         request_options: nil)
           Async do
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -202,7 +224,13 @@ module CandidApiClient
             **@request_client.get_headers,
             **(request_options&.additional_headers || {})
               }.compact
-              req.body = { **(request_options&.additional_body_parameters || {}), org_id: org_id }.compact
+              req.body = {
+                **(request_options&.additional_body_parameters || {}),
+                org_id: org_id,
+                client_id: client_id,
+                client_secret: client_secret,
+                force_token_refresh: force_token_refresh
+              }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/auth/v2/machine-token-for-org-id"
             end

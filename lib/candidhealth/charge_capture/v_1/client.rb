@@ -30,6 +30,14 @@ module CandidApiClient
         # @param data [Hash] Charge Capture data contains all the fields needed to create an encounter, but
         #  listed as optional. Candid will use this data when attempting to bundle multiple
         #  Charge Captures into a single encounter.Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
         #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
         #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
@@ -269,14 +277,6 @@ module CandidApiClient
         #   * :last_menstrual_period_date (Date)
         #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         #   * :patient_authorized_release (Boolean)
-        #   * :vitals (Hash)
-        #     * :height_in (Integer)
-        #     * :weight_lbs (Integer)
-        #     * :blood_pressure_systolic_mmhg (Integer)
-        #     * :blood_pressure_diastolic_mmhg (Integer)
-        #     * :body_temperature_f (Float)
-        #     * :hemoglobin_gdl (Float)
-        #     * :hematocrit_pct (Float)
         #   * :referral_number (String)
         #   * :secondary_payer_carrier_code (String)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
@@ -351,6 +351,14 @@ module CandidApiClient
         # @param data [Hash] Charge Capture data contains all the fields needed to create an encounter, but
         #  listed as optional. Candid will use this data when attempting to bundle multiple
         #  Charge Captures into a single encounter.Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
         #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
         #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
@@ -590,14 +598,6 @@ module CandidApiClient
         #   * :last_menstrual_period_date (Date)
         #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         #   * :patient_authorized_release (Boolean)
-        #   * :vitals (Hash)
-        #     * :height_in (Integer)
-        #     * :weight_lbs (Integer)
-        #     * :blood_pressure_systolic_mmhg (Integer)
-        #     * :blood_pressure_diastolic_mmhg (Integer)
-        #     * :body_temperature_f (Float)
-        #     * :hemoglobin_gdl (Float)
-        #     * :hematocrit_pct (Float)
         #   * :referral_number (String)
         #   * :secondary_payer_carrier_code (String)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
@@ -652,6 +652,14 @@ module CandidApiClient
 
         # @param charge_capture_id [String]
         # @param data [Hash] Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
         #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
         #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
@@ -891,14 +899,6 @@ module CandidApiClient
         #   * :last_menstrual_period_date (Date)
         #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         #   * :patient_authorized_release (Boolean)
-        #   * :vitals (Hash)
-        #     * :height_in (Integer)
-        #     * :weight_lbs (Integer)
-        #     * :blood_pressure_systolic_mmhg (Integer)
-        #     * :blood_pressure_diastolic_mmhg (Integer)
-        #     * :body_temperature_f (Float)
-        #     * :hemoglobin_gdl (Float)
-        #     * :hematocrit_pct (Float)
         #   * :referral_number (String)
         #   * :secondary_payer_carrier_code (String)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;
@@ -1139,6 +1139,14 @@ module CandidApiClient
         # @param data [Hash] Charge Capture data contains all the fields needed to create an encounter, but
         #  listed as optional. Candid will use this data when attempting to bundle multiple
         #  Charge Captures into a single encounter.Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
         #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
         #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
@@ -1378,14 +1386,6 @@ module CandidApiClient
         #   * :last_menstrual_period_date (Date)
         #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         #   * :patient_authorized_release (Boolean)
-        #   * :vitals (Hash)
-        #     * :height_in (Integer)
-        #     * :weight_lbs (Integer)
-        #     * :blood_pressure_systolic_mmhg (Integer)
-        #     * :blood_pressure_diastolic_mmhg (Integer)
-        #     * :body_temperature_f (Float)
-        #     * :hemoglobin_gdl (Float)
-        #     * :hematocrit_pct (Float)
         #   * :referral_number (String)
         #   * :secondary_payer_carrier_code (String)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
@@ -1462,6 +1462,14 @@ module CandidApiClient
         # @param data [Hash] Charge Capture data contains all the fields needed to create an encounter, but
         #  listed as optional. Candid will use this data when attempting to bundle multiple
         #  Charge Captures into a single encounter.Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
         #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
         #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
@@ -1701,14 +1709,6 @@ module CandidApiClient
         #   * :last_menstrual_period_date (Date)
         #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         #   * :patient_authorized_release (Boolean)
-        #   * :vitals (Hash)
-        #     * :height_in (Integer)
-        #     * :weight_lbs (Integer)
-        #     * :blood_pressure_systolic_mmhg (Integer)
-        #     * :blood_pressure_diastolic_mmhg (Integer)
-        #     * :body_temperature_f (Float)
-        #     * :hemoglobin_gdl (Float)
-        #     * :hematocrit_pct (Float)
         #   * :referral_number (String)
         #   * :secondary_payer_carrier_code (String)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter; for example, your
@@ -1765,6 +1765,14 @@ module CandidApiClient
 
         # @param charge_capture_id [String]
         # @param data [Hash] Request of type CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureData, as a Hash
+        #   * :vitals (Hash)
+        #     * :height_in (Integer)
+        #     * :weight_lbs (Integer)
+        #     * :blood_pressure_systolic_mmhg (Integer)
+        #     * :blood_pressure_diastolic_mmhg (Integer)
+        #     * :body_temperature_f (Float)
+        #     * :hemoglobin_gdl (Float)
+        #     * :hematocrit_pct (Float)
         #   * :diagnoses (Array<CandidApiClient::Diagnoses::Types::DiagnosisCreateOptional>)
         #   * :clinical_notes (Array<CandidApiClient::Encounters::V4::Types::ClinicalNoteCategoryCreateOptional>)
         #   * :claim_supplemental_information (Array<CandidApiClient::Encounters::V4::Types::ClaimSupplementalInformationOptional>)
@@ -2004,14 +2012,6 @@ module CandidApiClient
         #   * :last_menstrual_period_date (Date)
         #   * :delay_reason_code (CandidApiClient::Commons::Types::DelayReasonCode)
         #   * :patient_authorized_release (Boolean)
-        #   * :vitals (Hash)
-        #     * :height_in (Integer)
-        #     * :weight_lbs (Integer)
-        #     * :blood_pressure_systolic_mmhg (Integer)
-        #     * :blood_pressure_diastolic_mmhg (Integer)
-        #     * :body_temperature_f (Float)
-        #     * :hemoglobin_gdl (Float)
-        #     * :hematocrit_pct (Float)
         #   * :referral_number (String)
         #   * :secondary_payer_carrier_code (String)
         # @param charge_external_id [String] A client-specified unique ID to associate with this encounter;

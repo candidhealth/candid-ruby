@@ -176,7 +176,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true })
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true })
           def create(request:, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -347,7 +347,7 @@ module CandidApiClient
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "version",
-          #    request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true }
+          #    request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true }
           #  )
           def update(id:, version:, request:, request_options: nil)
             response = @request_client.conn.put do |req|
@@ -759,7 +759,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Coverages::V1::Types::Coverage]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true })
+          #  api.pre_encounter.coverages.v_1.create(request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true })
           def create(request:, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -932,7 +932,7 @@ module CandidApiClient
           #  api.pre_encounter.coverages.v_1.update(
           #    id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
           #    version: "version",
-          #    request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, date_of_birth: DateTime.parse(2023-01-15), biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true }
+          #    request: { status: ACTIVE, subscriber: { name: { family: "family", given: ["given", "given"], use: USUAL }, biological_sex: FEMALE }, relationship: SELF, patient: "patient", insurance_plan: { member_id: "member_id", payer_id: "payer_id", payer_name: "payer_name" }, verified: true }
           #  )
           def update(id:, version:, request:, request_options: nil)
             Async do

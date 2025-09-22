@@ -11,6 +11,7 @@ module CandidApiClient
         ELATION = "ELATION"
         CEDAR = "CEDAR"
         HEALTHIE = "HEALTHIE"
+        REALLOCATION = "REALLOCATION"
       end
     end
   end

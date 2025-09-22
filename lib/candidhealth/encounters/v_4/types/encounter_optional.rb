@@ -7,7 +7,6 @@ require_relative "synchronicity_type"
 require_relative "../../../commons/types/facility_type_code"
 require_relative "service_authorization_exception_code"
 require_relative "../../../commons/types/delay_reason_code"
-require_relative "vitals_update"
 require "ostruct"
 require "json"
 
@@ -18,9 +17,9 @@ module CandidApiClient
         class EncounterOptional
           # @return [Boolean] Whether this patient has authorized insurance payments to be made to you, not
           #  them. If false, patient may receive reimbursement. Box 13 on the CMS-1500 claim
-          #  form.
+          #  form or Form Locator 53 on a UB-04 claim form.
           attr_reader :benefits_assigned_to_provider
-          # @return [String] Box 23 on the CMS-1500 claim form.
+          # @return [String] Box 23 on the CMS-1500 claim form or Form Locator 63 on a UB-04 claim form.
           attr_reader :prior_authorization_number
           # @return [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
@@ -28,7 +27,7 @@ module CandidApiClient
           attr_reader :external_id
           # @return [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
           #  This date must be the local date in the timezone where the service occurred.
-          #  Box 24a on the CMS-1500 claim form.
+          #  Box 24a on the CMS-1500 claim form or Form Locator 45 on the UB-04 claim form.
           #  If service occurred over a range of dates, this should be the start date.
           #  If service lines have distinct date_of_service values, updating the encounter's
           #  date_of_service will fail. If all service line date_of_service values are the
@@ -47,7 +46,9 @@ module CandidApiClient
           #  SELF_PAY if you intend to bill self pay/cash pay.
           attr_reader :responsible_party
           # @return [Boolean] Whether you have accepted the patient's authorization for insurance payments to
-          #  be made to you, not them. Box 27 on the CMS-1500 claim form.
+          #  be made to you, not them. Box 27 on the CMS-1500 claim form. There is no exact
+          #  equivalent of this field on a UB-04 claim, however contributes to the concept of
+          #  Form Locator 53.
           attr_reader :provider_accepts_assignment
           # @return [CandidApiClient::Encounters::V4::Types::SynchronicityType] Whether or not this was a synchronous or asynchronous encounter. Asynchronous
           #  encounters occur when providers and patients communicate online using forms,
@@ -72,7 +73,7 @@ module CandidApiClient
           #  end_date_of_service will update all service line date_of_service values.
           attr_reader :end_date_of_service
           # @return [String] Defines additional information on the claim needed by the payer.
-          #  Box 19 on the CMS-1500 claim form.
+          #  Box 19 on the CMS-1500 claim form or Form Locator 80 on a UB-04 claim form.
           attr_reader :additional_information
           # @return [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
           #  Required when mandated by government law or regulation to obtain authorization
@@ -81,15 +82,15 @@ module CandidApiClient
           #  the service was performed without
           #  obtaining the authorization.
           attr_reader :service_authorization_exception_code
-          # @return [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
+          # @return [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18 or UB-04 Form Locator 12.
           #  Required on all ambulance claims when the patient was known to be admitted to
           #  the hospital.
           #  OR
           #  Required on all claims involving inpatient medical visits.
           attr_reader :admission_date
-          # @return [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
-          #  Required for inpatient claims when the patient was discharged from the facility
-          #  and the discharge date is known.
+          # @return [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18 Required for inpatient claims when the
+          #  patient was discharged from the facility and the discharge date is known. Not
+          #  used on an institutional claim.
           attr_reader :discharge_date
           # @return [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
           #  Required for the initial medical service or visit performed in response to a
@@ -97,22 +98,20 @@ module CandidApiClient
           #  service.
           #  OR
           #  This date is the onset of acute symptoms for the current illness or condition.
+          #  For UB-04 claims, this is populated separately via occurrence codes.
           attr_reader :onset_of_current_illness_or_symptom_date
           # @return [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
           #  Required when, in the judgment of the provider, the services on this claim are
           #  related to the patient's pregnancy.de
+          #  This field is populated separately via occurrence codes for UB-04 claim forms.
           attr_reader :last_menstrual_period_date
           # @return [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
           #  Code indicating the reason why a request was delayed
           attr_reader :delay_reason_code
           # @return [Boolean] Whether this patient has authorized the release of medical information
           #  for billing purpose.
-          #  Box 12 on the CMS-1500 claim form.
+          #  Box 12 on the CMS-1500 claim form  or Form Locator 52 on a UB-04 claim form.
           attr_reader :patient_authorized_release
-          # @return [CandidApiClient::Encounters::V4::Types::VitalsUpdate] If a vitals entity already exists for the encounter, then all values will be
-          #  updated to the provided values.
-          #  Otherwise, a new vitals object will be created for the encounter.
-          attr_reader :vitals
           # @return [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
           attr_reader :referral_number
           # @return [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
@@ -128,14 +127,14 @@ module CandidApiClient
 
           # @param benefits_assigned_to_provider [Boolean] Whether this patient has authorized insurance payments to be made to you, not
           #  them. If false, patient may receive reimbursement. Box 13 on the CMS-1500 claim
-          #  form.
-          # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form.
+          #  form or Form Locator 53 on a UB-04 claim form.
+          # @param prior_authorization_number [String] Box 23 on the CMS-1500 claim form or Form Locator 63 on a UB-04 claim form.
           # @param external_id [String] A client-specified unique ID to associate with this encounter;
           #  for example, your internal encounter ID or a Dr. Chrono encounter ID.
           #  This field should not contain PHI.
           # @param date_of_service [Date] Date formatted as YYYY-MM-DD; eg: 2019-08-24.
           #  This date must be the local date in the timezone where the service occurred.
-          #  Box 24a on the CMS-1500 claim form.
+          #  Box 24a on the CMS-1500 claim form or Form Locator 45 on the UB-04 claim form.
           #  If service occurred over a range of dates, this should be the start date.
           #  If service lines have distinct date_of_service values, updating the encounter's
           #  date_of_service will fail. If all service line date_of_service values are the
@@ -150,7 +149,9 @@ module CandidApiClient
           # @param responsible_party [CandidApiClient::Encounters::V4::Types::ResponsiblePartyType] Defines the party to be billed with the initial balance owed on the claim. Use
           #  SELF_PAY if you intend to bill self pay/cash pay.
           # @param provider_accepts_assignment [Boolean] Whether you have accepted the patient's authorization for insurance payments to
-          #  be made to you, not them. Box 27 on the CMS-1500 claim form.
+          #  be made to you, not them. Box 27 on the CMS-1500 claim form. There is no exact
+          #  equivalent of this field on a UB-04 claim, however contributes to the concept of
+          #  Form Locator 53.
           # @param synchronicity [CandidApiClient::Encounters::V4::Types::SynchronicityType] Whether or not this was a synchronous or asynchronous encounter. Asynchronous
           #  encounters occur when providers and patients communicate online using forms,
           #  instant messaging, or other pre-recorded digital mediums. Synchronous encounters
@@ -170,45 +171,44 @@ module CandidApiClient
           #  end_date_of_service values are the same, updating the encounter's
           #  end_date_of_service will update all service line date_of_service values.
           # @param additional_information [String] Defines additional information on the claim needed by the payer.
-          #  Box 19 on the CMS-1500 claim form.
+          #  Box 19 on the CMS-1500 claim form or Form Locator 80 on a UB-04 claim form.
           # @param service_authorization_exception_code [CandidApiClient::Encounters::V4::Types::ServiceAuthorizationExceptionCode] 837p Loop2300 REF*4N
           #  Required when mandated by government law or regulation to obtain authorization
           #  for specific service(s) but, for the
           #  reasons listed in one of the enum values of ServiceAuthorizationExceptionCode,
           #  the service was performed without
           #  obtaining the authorization.
-          # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18
+          # @param admission_date [Date] 837p Loop2300 DTP*435, CMS-1500 Box 18 or UB-04 Form Locator 12.
           #  Required on all ambulance claims when the patient was known to be admitted to
           #  the hospital.
           #  OR
           #  Required on all claims involving inpatient medical visits.
-          # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18
-          #  Required for inpatient claims when the patient was discharged from the facility
-          #  and the discharge date is known.
+          # @param discharge_date [Date] 837p Loop2300 DTP*096, CMS-1500 Box 18 Required for inpatient claims when the
+          #  patient was discharged from the facility and the discharge date is known. Not
+          #  used on an institutional claim.
           # @param onset_of_current_illness_or_symptom_date [Date] 837p Loop2300 DTP*431, CMS-1500 Box 14
           #  Required for the initial medical service or visit performed in response to a
           #  medical emergency when the date is available and is different than the date of
           #  service.
           #  OR
           #  This date is the onset of acute symptoms for the current illness or condition.
+          #  For UB-04 claims, this is populated separately via occurrence codes.
           # @param last_menstrual_period_date [Date] 837p Loop2300 DTP*484, CMS-1500 Box 14
           #  Required when, in the judgment of the provider, the services on this claim are
           #  related to the patient's pregnancy.de
+          #  This field is populated separately via occurrence codes for UB-04 claim forms.
           # @param delay_reason_code [CandidApiClient::Commons::Types::DelayReasonCode] 837i Loop2300, CLM-1300 Box 20
           #  Code indicating the reason why a request was delayed
           # @param patient_authorized_release [Boolean] Whether this patient has authorized the release of medical information
           #  for billing purpose.
-          #  Box 12 on the CMS-1500 claim form.
-          # @param vitals [CandidApiClient::Encounters::V4::Types::VitalsUpdate] If a vitals entity already exists for the encounter, then all values will be
-          #  updated to the provided values.
-          #  Otherwise, a new vitals object will be created for the encounter.
+          #  Box 12 on the CMS-1500 claim form  or Form Locator 52 on a UB-04 claim form.
           # @param referral_number [String] Refers to REF*9F on the 837p. Value cannot be greater than 50 characters.
           # @param secondary_payer_carrier_code [String] When Medicaid is billed as the secondary payer the Carrier Code is used to
           #  identify the primary payer. This is required for certain states.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Encounters::V4::Types::EncounterOptional]
           def initialize(benefits_assigned_to_provider: OMIT, prior_authorization_number: OMIT, external_id: OMIT,
-                         date_of_service: OMIT, tag_ids: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient_authorized_release: OMIT, vitals: OMIT, referral_number: OMIT, secondary_payer_carrier_code: OMIT, additional_properties: nil)
+                         date_of_service: OMIT, tag_ids: OMIT, billable_status: OMIT, responsible_party: OMIT, provider_accepts_assignment: OMIT, synchronicity: OMIT, place_of_service_code: OMIT, appointment_type: OMIT, end_date_of_service: OMIT, additional_information: OMIT, service_authorization_exception_code: OMIT, admission_date: OMIT, discharge_date: OMIT, onset_of_current_illness_or_symptom_date: OMIT, last_menstrual_period_date: OMIT, delay_reason_code: OMIT, patient_authorized_release: OMIT, referral_number: OMIT, secondary_payer_carrier_code: OMIT, additional_properties: nil)
             @benefits_assigned_to_provider = benefits_assigned_to_provider if benefits_assigned_to_provider != OMIT
             @prior_authorization_number = prior_authorization_number if prior_authorization_number != OMIT
             @external_id = external_id if external_id != OMIT
@@ -233,7 +233,6 @@ module CandidApiClient
             @last_menstrual_period_date = last_menstrual_period_date if last_menstrual_period_date != OMIT
             @delay_reason_code = delay_reason_code if delay_reason_code != OMIT
             @patient_authorized_release = patient_authorized_release if patient_authorized_release != OMIT
-            @vitals = vitals if vitals != OMIT
             @referral_number = referral_number if referral_number != OMIT
             @secondary_payer_carrier_code = secondary_payer_carrier_code if secondary_payer_carrier_code != OMIT
             @additional_properties = additional_properties
@@ -258,7 +257,6 @@ module CandidApiClient
               "last_menstrual_period_date": last_menstrual_period_date,
               "delay_reason_code": delay_reason_code,
               "patient_authorized_release": patient_authorized_release,
-              "vitals": vitals,
               "referral_number": referral_number,
               "secondary_payer_carrier_code": secondary_payer_carrier_code
             }.reject do |_k, v|
@@ -299,12 +297,6 @@ module CandidApiClient
                                          end
             delay_reason_code = struct["delay_reason_code"]
             patient_authorized_release = struct["patient_authorized_release"]
-            if parsed_json["vitals"].nil?
-              vitals = nil
-            else
-              vitals = parsed_json["vitals"].to_json
-              vitals = CandidApiClient::Encounters::V4::Types::VitalsUpdate.from_json(json_object: vitals)
-            end
             referral_number = struct["referral_number"]
             secondary_payer_carrier_code = struct["secondary_payer_carrier_code"]
             new(
@@ -328,7 +320,6 @@ module CandidApiClient
               last_menstrual_period_date: last_menstrual_period_date,
               delay_reason_code: delay_reason_code,
               patient_authorized_release: patient_authorized_release,
-              vitals: vitals,
               referral_number: referral_number,
               secondary_payer_carrier_code: secondary_payer_carrier_code,
               additional_properties: struct
@@ -369,7 +360,6 @@ module CandidApiClient
             obj.last_menstrual_period_date&.is_a?(Date) != false || raise("Passed value for field obj.last_menstrual_period_date is not the expected type, validation failed.")
             obj.delay_reason_code&.is_a?(CandidApiClient::Commons::Types::DelayReasonCode) != false || raise("Passed value for field obj.delay_reason_code is not the expected type, validation failed.")
             obj.patient_authorized_release&.is_a?(Boolean) != false || raise("Passed value for field obj.patient_authorized_release is not the expected type, validation failed.")
-            obj.vitals.nil? || CandidApiClient::Encounters::V4::Types::VitalsUpdate.validate_raw(obj: obj.vitals)
             obj.referral_number&.is_a?(String) != false || raise("Passed value for field obj.referral_number is not the expected type, validation failed.")
             obj.secondary_payer_carrier_code&.is_a?(String) != false || raise("Passed value for field obj.secondary_payer_carrier_code is not the expected type, validation failed.")
           end

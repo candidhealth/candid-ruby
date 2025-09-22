@@ -16,17 +16,6 @@ module CandidApiClient
       module Types
         class ServiceLineUpdate
           # @return [String]
-          attr_reader :edit_reason
-          # @return [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
-          attr_reader :modifiers
-          # @return [Integer] The total amount charged for this service line, factoring in quantity. If
-          #  `procedure_code` is updated and this is not, the system will attempt
-          #  to set it based on chargemasters entries and the service line's quantity. For
-          #  example, if a single unit has an entry of 100 cents and 2
-          #  units were rendered, the `charge_amount_cents` will be set to 200, if this field
-          #  is unfilled.
-          attr_reader :charge_amount_cents
-          # @return [String]
           attr_reader :diagnosis_id_zero
           # @return [String]
           attr_reader :diagnosis_id_one
@@ -34,13 +23,25 @@ module CandidApiClient
           attr_reader :diagnosis_id_two
           # @return [String]
           attr_reader :diagnosis_id_three
+          # @return [String]
+          attr_reader :edit_reason
+          # @return [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
+          attr_reader :modifiers
+          # @return [Integer] The total amount charged for this service line, factoring in quantity. If
+          #  procedure_code is updated and this is not, the system will attempt to set it
+          #  based on chargemasters entries and the service line’s quantity. For example, if
+          #  a single unit has an entry of 100 cents and 2 units were rendered, the
+          #  charge_amount_cents will be set to 200, if there is no chargemaster entry, it
+          #  will default to the amount set in this field.
+          attr_reader :charge_amount_cents
           # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
           attr_reader :drug_identification
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
           attr_reader :denial_reason
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
-          #  a different place of service at the service line level, this field should not be
-          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
           # @return [CandidApiClient::Commons::Types::ServiceLineUnits]
@@ -49,11 +50,14 @@ module CandidApiClient
           #  `charge_amount_cents` will be set by the system.
           attr_reader :procedure_code
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
-          #  A ServiceLine quantity cannot contain more than one digit of precision.
-          #  Example: 1.1 is valid, 1.11 is not.
+          #  For professional claims, a ServiceLine quantity cannot contain more than one
+          #  digit of precision
+          #  (Example: 1.1 is valid, 1.11 is not). For institutional claims, a ServiceLine
+          #  quantity cannot contain
+          #  more than three decimal digits of precision.
           attr_reader :quantity
           # @return [String] A free-form description to clarify the related data elements and their content.
-          #  Maps to SV1-01, C003-07 on the 837-P.
+          #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.
           attr_reader :description
           # @return [Date] date_of_service must be defined on either the encounter or the service lines but
           #  not both.
@@ -62,13 +66,14 @@ module CandidApiClient
           attr_reader :end_date_of_service
           # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
+          #  This is unused by 837-i and ignored for institutional service lines.
           #  No more than 5 MEA-02 test results may be submitted per service line.
           #  Updating test results utilizes PUT semantics, so the test results on the service
           #  line will be set to whatever inputs are provided.
           attr_reader :test_results
-          # @return [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
-          #  If the value is true, the box will be populated with "Y". Otherwise, the box
-          #  will not be populated.
+          # @return [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500. If the value is true,
+          #  the box will be populated with “Y”. Otherwise, the box will not be populated.
+          #  This box is not used on an 837i.
           attr_reader :has_epsdt_indicator
           # @return [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
           #  If the value is true, the box will be populated with "Y". Otherwise, the box
@@ -84,58 +89,63 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param edit_reason [String]
-          # @param modifiers [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
-          # @param charge_amount_cents [Integer] The total amount charged for this service line, factoring in quantity. If
-          #  `procedure_code` is updated and this is not, the system will attempt
-          #  to set it based on chargemasters entries and the service line's quantity. For
-          #  example, if a single unit has an entry of 100 cents and 2
-          #  units were rendered, the `charge_amount_cents` will be set to 200, if this field
-          #  is unfilled.
           # @param diagnosis_id_zero [String]
           # @param diagnosis_id_one [String]
           # @param diagnosis_id_two [String]
           # @param diagnosis_id_three [String]
+          # @param edit_reason [String]
+          # @param modifiers [Array<CandidApiClient::Commons::Types::ProcedureModifier>]
+          # @param charge_amount_cents [Integer] The total amount charged for this service line, factoring in quantity. If
+          #  procedure_code is updated and this is not, the system will attempt to set it
+          #  based on chargemasters entries and the service line’s quantity. For example, if
+          #  a single unit has an entry of 100 cents and 2 units were rendered, the
+          #  charge_amount_cents will be set to 200, if there is no chargemaster entry, it
+          #  will default to the amount set in this field.
           # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
           # @param denial_reason [CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
-          #  a different place of service at the service line level, this field should not be
-          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param units [CandidApiClient::Commons::Types::ServiceLineUnits]
           # @param procedure_code [String] If `procedure_code` is updated, and `charge_amount_cents` is not, then
           #  `charge_amount_cents` will be set by the system.
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
-          #  A ServiceLine quantity cannot contain more than one digit of precision.
-          #  Example: 1.1 is valid, 1.11 is not.
+          #  For professional claims, a ServiceLine quantity cannot contain more than one
+          #  digit of precision
+          #  (Example: 1.1 is valid, 1.11 is not). For institutional claims, a ServiceLine
+          #  quantity cannot contain
+          #  more than three decimal digits of precision.
           # @param description [String] A free-form description to clarify the related data elements and their content.
-          #  Maps to SV1-01, C003-07 on the 837-P.
+          #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.
           # @param date_of_service [Date] date_of_service must be defined on either the encounter or the service lines but
           #  not both.
           # @param end_date_of_service [Date]
           # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResult>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
+          #  This is unused by 837-i and ignored for institutional service lines.
           #  No more than 5 MEA-02 test results may be submitted per service line.
           #  Updating test results utilizes PUT semantics, so the test results on the service
           #  line will be set to whatever inputs are provided.
-          # @param has_epsdt_indicator [Boolean] Maps to SV1-11 on the 837-P and Box 24H on the CMS-1500.
-          #  If the value is true, the box will be populated with "Y". Otherwise, the box
-          #  will not be populated.
+          # @param has_epsdt_indicator [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500. If the value is true,
+          #  the box will be populated with “Y”. Otherwise, the box will not be populated.
+          #  This box is not used on an 837i.
           # @param has_family_planning_indicator [Boolean] Maps to SV1-12 on the 837-P and Box 24I on the CMS-1500.
           #  If the value is true, the box will be populated with "Y". Otherwise, the box
           #  will not be populated.
           # @param note [String] Maps to NTE02 loop 2400 on the EDI 837.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineUpdate]
-          def initialize(edit_reason: OMIT, modifiers: OMIT, charge_amount_cents: OMIT, diagnosis_id_zero: OMIT,
-                         diagnosis_id_one: OMIT, diagnosis_id_two: OMIT, diagnosis_id_three: OMIT, drug_identification: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, units: OMIT, procedure_code: OMIT, quantity: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, note: OMIT, additional_properties: nil)
-            @edit_reason = edit_reason if edit_reason != OMIT
-            @modifiers = modifiers if modifiers != OMIT
-            @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
+          def initialize(diagnosis_id_zero: OMIT, diagnosis_id_one: OMIT, diagnosis_id_two: OMIT,
+                         diagnosis_id_three: OMIT, edit_reason: OMIT, modifiers: OMIT, charge_amount_cents: OMIT, drug_identification: OMIT, denial_reason: OMIT, place_of_service_code: OMIT, units: OMIT, procedure_code: OMIT, quantity: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, test_results: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT, note: OMIT, additional_properties: nil)
             @diagnosis_id_zero = diagnosis_id_zero if diagnosis_id_zero != OMIT
             @diagnosis_id_one = diagnosis_id_one if diagnosis_id_one != OMIT
             @diagnosis_id_two = diagnosis_id_two if diagnosis_id_two != OMIT
             @diagnosis_id_three = diagnosis_id_three if diagnosis_id_three != OMIT
+            @edit_reason = edit_reason if edit_reason != OMIT
+            @modifiers = modifiers if modifiers != OMIT
+            @charge_amount_cents = charge_amount_cents if charge_amount_cents != OMIT
             @drug_identification = drug_identification if drug_identification != OMIT
             @denial_reason = denial_reason if denial_reason != OMIT
             @place_of_service_code = place_of_service_code if place_of_service_code != OMIT
@@ -151,13 +161,13 @@ module CandidApiClient
             @note = note if note != OMIT
             @additional_properties = additional_properties
             @_field_set = {
-              "edit_reason": edit_reason,
-              "modifiers": modifiers,
-              "charge_amount_cents": charge_amount_cents,
               "diagnosis_id_zero": diagnosis_id_zero,
               "diagnosis_id_one": diagnosis_id_one,
               "diagnosis_id_two": diagnosis_id_two,
               "diagnosis_id_three": diagnosis_id_three,
+              "edit_reason": edit_reason,
+              "modifiers": modifiers,
+              "charge_amount_cents": charge_amount_cents,
               "drug_identification": drug_identification,
               "denial_reason": denial_reason,
               "place_of_service_code": place_of_service_code,
@@ -183,13 +193,13 @@ module CandidApiClient
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             parsed_json = JSON.parse(json_object)
-            edit_reason = struct["edit_reason"]
-            modifiers = struct["modifiers"]
-            charge_amount_cents = struct["charge_amount_cents"]
             diagnosis_id_zero = struct["diagnosis_id_zero"]
             diagnosis_id_one = struct["diagnosis_id_one"]
             diagnosis_id_two = struct["diagnosis_id_two"]
             diagnosis_id_three = struct["diagnosis_id_three"]
+            edit_reason = struct["edit_reason"]
+            modifiers = struct["modifiers"]
+            charge_amount_cents = struct["charge_amount_cents"]
             if parsed_json["drug_identification"].nil?
               drug_identification = nil
             else
@@ -219,13 +229,13 @@ module CandidApiClient
             has_family_planning_indicator = struct["has_family_planning_indicator"]
             note = struct["note"]
             new(
-              edit_reason: edit_reason,
-              modifiers: modifiers,
-              charge_amount_cents: charge_amount_cents,
               diagnosis_id_zero: diagnosis_id_zero,
               diagnosis_id_one: diagnosis_id_one,
               diagnosis_id_two: diagnosis_id_two,
               diagnosis_id_three: diagnosis_id_three,
+              edit_reason: edit_reason,
+              modifiers: modifiers,
+              charge_amount_cents: charge_amount_cents,
               drug_identification: drug_identification,
               denial_reason: denial_reason,
               place_of_service_code: place_of_service_code,
@@ -257,13 +267,13 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.edit_reason&.is_a?(String) != false || raise("Passed value for field obj.edit_reason is not the expected type, validation failed.")
-            obj.modifiers&.is_a?(Array) != false || raise("Passed value for field obj.modifiers is not the expected type, validation failed.")
-            obj.charge_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.charge_amount_cents is not the expected type, validation failed.")
             obj.diagnosis_id_zero&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_zero is not the expected type, validation failed.")
             obj.diagnosis_id_one&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_one is not the expected type, validation failed.")
             obj.diagnosis_id_two&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_two is not the expected type, validation failed.")
             obj.diagnosis_id_three&.is_a?(String) != false || raise("Passed value for field obj.diagnosis_id_three is not the expected type, validation failed.")
+            obj.edit_reason&.is_a?(String) != false || raise("Passed value for field obj.edit_reason is not the expected type, validation failed.")
+            obj.modifiers&.is_a?(Array) != false || raise("Passed value for field obj.modifiers is not the expected type, validation failed.")
+            obj.charge_amount_cents&.is_a?(Integer) != false || raise("Passed value for field obj.charge_amount_cents is not the expected type, validation failed.")
             obj.drug_identification.nil? || CandidApiClient::ServiceLines::V2::Types::DrugIdentification.validate_raw(obj: obj.drug_identification)
             obj.denial_reason.nil? || CandidApiClient::ServiceLines::V2::Types::ServiceLineDenialReason.validate_raw(obj: obj.denial_reason)
             obj.place_of_service_code&.is_a?(CandidApiClient::Commons::Types::FacilityTypeCode) != false || raise("Passed value for field obj.place_of_service_code is not the expected type, validation failed.")

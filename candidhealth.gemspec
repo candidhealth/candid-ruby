@@ -4,7 +4,7 @@ require_relative "lib/gemconfig"
 
 Gem::Specification.new do |spec|
   spec.name = "candidhealth"
-  spec.version = "1.7.0"
+  spec.version = "1.8.0"
   spec.authors = CandidApiClient::Gemconfig::AUTHORS
   spec.email = CandidApiClient::Gemconfig::EMAIL
   spec.summary = CandidApiClient::Gemconfig::SUMMARY

@@ -8,6 +8,7 @@ module CandidApiClient
           class ReferralType
             DIRECTED = "DIRECTED"
             ROTATION = "ROTATION"
+            OVERNIGHT = "OVERNIGHT"
           end
         end
       end

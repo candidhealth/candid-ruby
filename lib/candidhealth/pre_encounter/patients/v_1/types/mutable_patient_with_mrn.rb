@@ -22,6 +22,7 @@ require_relative "authorization"
 require_relative "referral"
 require_relative "do_not_invoice_reason"
 require_relative "origination_detail"
+require_relative "inferred_patient_metadata"
 require "ostruct"
 require "json"
 
@@ -113,6 +114,8 @@ module CandidApiClient
             attr_reader :tag_ids
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::OriginationDetail] Information about the patient source, if applicable.
             attr_reader :origination_detail
+            # @return [CandidApiClient::PreEncounter::Patients::V1::Types::InferredPatientMetadata] Metadata for the patient used for patient inference from encounters.
+            attr_reader :inferred_patient_metadata
             # @return [OpenStruct] Additional properties unmapped to the current class definition
             attr_reader :additional_properties
             # @return [Object]
@@ -164,10 +167,11 @@ module CandidApiClient
             # @param note_ids [Array<String>]
             # @param tag_ids [Array<String>]
             # @param origination_detail [CandidApiClient::PreEncounter::Patients::V1::Types::OriginationDetail] Information about the patient source, if applicable.
+            # @param inferred_patient_metadata [CandidApiClient::PreEncounter::Patients::V1::Types::InferredPatientMetadata] Metadata for the patient used for patient inference from encounters.
             # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::MutablePatientWithMrn]
-            def initialize(mrn:, name:, other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, primary_telecom:, other_telecoms:, contacts:, general_practitioners:, filing_order:, other_identifiers: OMIT, gender: OMIT,
-                           social_security_number: OMIT, sexual_orientation: OMIT, pronouns: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, origination_detail: OMIT, additional_properties: nil)
+            def initialize(mrn:, name:, other_names:, birth_date:, biological_sex:, primary_address:, other_addresses:, other_telecoms:, contacts:, general_practitioners:, filing_order:, other_identifiers: OMIT, gender: OMIT,
+                           social_security_number: OMIT, sexual_orientation: OMIT, pronouns: OMIT, race: OMIT, ethnicity: OMIT, disability_status: OMIT, marital_status: OMIT, deceased: OMIT, multiple_birth: OMIT, primary_telecom: OMIT, email: OMIT, electronic_communication_opt_in: OMIT, photo: OMIT, language: OMIT, external_provenance: OMIT, non_insurance_payers: OMIT, non_insurance_payer_associations: OMIT, guarantor: OMIT, self_pay: OMIT, authorizations: OMIT, referrals: OMIT, primary_service_facility_id: OMIT, do_not_invoice_reason: OMIT, note_ids: OMIT, tag_ids: OMIT, origination_detail: OMIT, inferred_patient_metadata: OMIT, additional_properties: nil)
               @mrn = mrn
               @name = name
               @other_names = other_names
@@ -186,7 +190,7 @@ module CandidApiClient
               @multiple_birth = multiple_birth if multiple_birth != OMIT
               @primary_address = primary_address
               @other_addresses = other_addresses
-              @primary_telecom = primary_telecom
+              @primary_telecom = primary_telecom if primary_telecom != OMIT
               @other_telecoms = other_telecoms
               @email = email if email != OMIT
               if electronic_communication_opt_in != OMIT
@@ -211,6 +215,7 @@ module CandidApiClient
               @note_ids = note_ids if note_ids != OMIT
               @tag_ids = tag_ids if tag_ids != OMIT
               @origination_detail = origination_detail if origination_detail != OMIT
+              @inferred_patient_metadata = inferred_patient_metadata if inferred_patient_metadata != OMIT
               @additional_properties = additional_properties
               @_field_set = {
                 "mrn": mrn,
@@ -251,7 +256,8 @@ module CandidApiClient
                 "do_not_invoice_reason": do_not_invoice_reason,
                 "note_ids": note_ids,
                 "tag_ids": tag_ids,
-                "origination_detail": origination_detail
+                "origination_detail": origination_detail,
+                "inferred_patient_metadata": inferred_patient_metadata
               }.reject do |_k, v|
                 v == OMIT
               end
@@ -365,6 +371,12 @@ module CandidApiClient
                 origination_detail = parsed_json["origination_detail"].to_json
                 origination_detail = CandidApiClient::PreEncounter::Patients::V1::Types::OriginationDetail.from_json(json_object: origination_detail)
               end
+              if parsed_json["inferred_patient_metadata"].nil?
+                inferred_patient_metadata = nil
+              else
+                inferred_patient_metadata = parsed_json["inferred_patient_metadata"].to_json
+                inferred_patient_metadata = CandidApiClient::PreEncounter::Patients::V1::Types::InferredPatientMetadata.from_json(json_object: inferred_patient_metadata)
+              end
               new(
                 mrn: mrn,
                 name: name,
@@ -405,6 +417,7 @@ module CandidApiClient
                 note_ids: note_ids,
                 tag_ids: tag_ids,
                 origination_detail: origination_detail,
+                inferred_patient_metadata: inferred_patient_metadata,
                 additional_properties: struct
               )
             end
@@ -441,7 +454,7 @@ module CandidApiClient
               obj.multiple_birth&.is_a?(Integer) != false || raise("Passed value for field obj.multiple_birth is not the expected type, validation failed.")
               CandidApiClient::PreEncounter::Common::Types::Address.validate_raw(obj: obj.primary_address)
               obj.other_addresses.is_a?(Array) != false || raise("Passed value for field obj.other_addresses is not the expected type, validation failed.")
-              CandidApiClient::PreEncounter::Common::Types::ContactPoint.validate_raw(obj: obj.primary_telecom)
+              obj.primary_telecom.nil? || CandidApiClient::PreEncounter::Common::Types::ContactPoint.validate_raw(obj: obj.primary_telecom)
               obj.other_telecoms.is_a?(Array) != false || raise("Passed value for field obj.other_telecoms is not the expected type, validation failed.")
               obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
               obj.electronic_communication_opt_in&.is_a?(Boolean) != false || raise("Passed value for field obj.electronic_communication_opt_in is not the expected type, validation failed.")
@@ -462,6 +475,7 @@ module CandidApiClient
               obj.note_ids&.is_a?(Array) != false || raise("Passed value for field obj.note_ids is not the expected type, validation failed.")
               obj.tag_ids&.is_a?(Array) != false || raise("Passed value for field obj.tag_ids is not the expected type, validation failed.")
               obj.origination_detail.nil? || CandidApiClient::PreEncounter::Patients::V1::Types::OriginationDetail.validate_raw(obj: obj.origination_detail)
+              obj.inferred_patient_metadata.nil? || CandidApiClient::PreEncounter::Patients::V1::Types::InferredPatientMetadata.validate_raw(obj: obj.inferred_patient_metadata)
             end
           end
         end

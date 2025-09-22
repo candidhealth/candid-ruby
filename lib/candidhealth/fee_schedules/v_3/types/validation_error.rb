@@ -48,6 +48,8 @@ module CandidApiClient
               member = CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.from_json(json_object: json_object)
             when "payer_plan_group_does_not_match_rate_payer"
               member = CandidApiClient::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError.from_json(json_object: json_object)
+            when "payer_plan_group_network_type_mutual_exclusion"
+              member = CandidApiClient::Commons::Types::EntityConflictErrorMessage.from_json(json_object: json_object)
             else
               member = CandidApiClient::FeeSchedules::V3::Types::OverlappingRateEntriesError.from_json(json_object: json_object)
             end
@@ -72,6 +74,8 @@ module CandidApiClient
             when "payer_plan_group_not_found"
               { **@member.to_json, type: @discriminant }.to_json
             when "payer_plan_group_does_not_match_rate_payer"
+              { **@member.to_json, type: @discriminant }.to_json
+            when "payer_plan_group_network_type_mutual_exclusion"
               { **@member.to_json, type: @discriminant }.to_json
             else
               { "type": @discriminant, value: @member }.to_json
@@ -101,6 +105,8 @@ module CandidApiClient
               CandidApiClient::Commons::Types::EntityNotFoundErrorMessage.validate_raw(obj: obj)
             when "payer_plan_group_does_not_match_rate_payer"
               CandidApiClient::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError.validate_raw(obj: obj)
+            when "payer_plan_group_network_type_mutual_exclusion"
+              CandidApiClient::Commons::Types::EntityConflictErrorMessage.validate_raw(obj: obj)
             else
               raise("Passed value matched no type within the union, validation failed.")
             end
@@ -152,6 +158,12 @@ module CandidApiClient
           # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
           def self.payer_plan_group_does_not_match_rate_payer(member:)
             new(member: member, discriminant: "payer_plan_group_does_not_match_rate_payer")
+          end
+
+          # @param member [CandidApiClient::Commons::Types::EntityConflictErrorMessage]
+          # @return [CandidApiClient::FeeSchedules::V3::Types::ValidationError]
+          def self.payer_plan_group_network_type_mutual_exclusion(member:)
+            new(member: member, discriminant: "payer_plan_group_network_type_mutual_exclusion")
           end
         end
       end

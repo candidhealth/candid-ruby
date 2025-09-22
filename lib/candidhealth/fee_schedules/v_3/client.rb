@@ -385,6 +385,33 @@ module CandidApiClient
           end
           JSON.parse(response.body)
         end
+
+        # Hard deletes specific rates from the system by their IDs. This is a destructive
+        #  operation and cannot be undone. Limited to 100 rate IDs maximum per request. For
+        #  bulk deletion of more than 100 rates, use the hard_delete_rates endpoint with
+        #  dimension filters. Returns the number of rates deleted.
+        #
+        # @param rate_ids [Array<String>]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Integer]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.fee_schedules.v_3.hard_delete_rates_by_ids(rate_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+        def hard_delete_rates_by_ids(rate_ids:, request_options: nil)
+          response = @request_client.conn.post do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.body = { **(request_options&.additional_body_parameters || {}), rate_ids: rate_ids }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/fee-schedules/v3/hard-delete-by-ids"
+          end
+          JSON.parse(response.body)
+        end
       end
 
       class AsyncV3Client
@@ -774,6 +801,36 @@ module CandidApiClient
               req.body = { **(request || {}), **(request_options&.additional_body_parameters || {}) }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/fee-schedules/v3/hard-delete"
+            end
+            parsed_json = JSON.parse(response.body)
+            parsed_json
+          end
+        end
+
+        # Hard deletes specific rates from the system by their IDs. This is a destructive
+        #  operation and cannot be undone. Limited to 100 rate IDs maximum per request. For
+        #  bulk deletion of more than 100 rates, use the hard_delete_rates endpoint with
+        #  dimension filters. Returns the number of rates deleted.
+        #
+        # @param rate_ids [Array<String>]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [Integer]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.fee_schedules.v_3.hard_delete_rates_by_ids(rate_ids: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+        def hard_delete_rates_by_ids(rate_ids:, request_options: nil)
+          Async do
+            response = @request_client.conn.post do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.body = { **(request_options&.additional_body_parameters || {}), rate_ids: rate_ids }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/fee-schedules/v3/hard-delete-by-ids"
             end
             parsed_json = JSON.parse(response.body)
             parsed_json

@@ -28,28 +28,33 @@ module CandidApiClient
           # @return [String]
           attr_reader :procedure_code
           # @return [String] String representation of a Decimal that can be parsed by most libraries.
-          #  A ServiceLine quantity cannot contain more than one digit of precision.
-          #  Example: 1.1 is valid, 1.11 is not.
+          #  For professional claims, a ServiceLine quantity cannot contain more than one
+          #  digit of precision
+          #  (Example: 1.1 is valid, 1.11 is not). For institutional claims, a ServiceLine
+          #  quantity cannot contain
+          #  more than three decimal digits of precision.
           attr_reader :quantity
           # @return [CandidApiClient::Commons::Types::ServiceLineUnits]
           attr_reader :units
-          # @return [Integer] The total amount charged for this service line taking quantity into account. For
-          #  example, if a single unit
-          #  costs 100 cents and 2 units were rendered, the `charge_amount_cents` should be
-          #  200. Should be greater than or
-          #  equal to 0.
+          # @return [Integer] The total amount charged for this service line, factoring in quantity. If
+          #  procedure_code is updated and this is not, the system will attempt to set it
+          #  based on chargemasters entries and the service line’s quantity. For example, if
+          #  a single unit has an entry of 100 cents and 2 units were rendered, the
+          #  charge_amount_cents will be set to 200, if there is no chargemaster entry, it
+          #  will default to the amount set in this field.
           attr_reader :charge_amount_cents
           # @return [Array<Integer>] Indices (zero-indexed) of all the diagnoses this service line references
           attr_reader :diagnosis_pointers
           # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentificationOptional]
           attr_reader :drug_identification
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
-          #  a different place of service at the service line level, this field should not be
-          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
           # @return [String] A free-form description to clarify the related data elements and their content.
-          #  Maps to SV1-01, C003-07 on the 837-P.
+          #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.
           attr_reader :description
           # @return [Date]
           attr_reader :date_of_service
@@ -61,10 +66,15 @@ module CandidApiClient
           attr_reader :ordering_provider
           # @return [Array<CandidApiClient::ServiceLines::V2::Types::TestResultOptional>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
+          #  This is unused by 837-i and ignored for institutional service lines.
           #  No more than 5 MEA-02 test results may be submitted per service line.
           attr_reader :test_results
           # @return [String] Maps to NTE02 loop 2400 on the EDI 837.
           attr_reader :note
+          # @return [String] A 4 digit code that specifies facility department or type of service arrangement
+          #  for institutional service line items (837i). This code is not required for
+          #  professional claim billing (837p).
+          attr_reader :revenue_code
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -82,22 +92,27 @@ module CandidApiClient
           #  will not be populated.
           # @param procedure_code [String]
           # @param quantity [String] String representation of a Decimal that can be parsed by most libraries.
-          #  A ServiceLine quantity cannot contain more than one digit of precision.
-          #  Example: 1.1 is valid, 1.11 is not.
+          #  For professional claims, a ServiceLine quantity cannot contain more than one
+          #  digit of precision
+          #  (Example: 1.1 is valid, 1.11 is not). For institutional claims, a ServiceLine
+          #  quantity cannot contain
+          #  more than three decimal digits of precision.
           # @param units [CandidApiClient::Commons::Types::ServiceLineUnits]
-          # @param charge_amount_cents [Integer] The total amount charged for this service line taking quantity into account. For
-          #  example, if a single unit
-          #  costs 100 cents and 2 units were rendered, the `charge_amount_cents` should be
-          #  200. Should be greater than or
-          #  equal to 0.
+          # @param charge_amount_cents [Integer] The total amount charged for this service line, factoring in quantity. If
+          #  procedure_code is updated and this is not, the system will attempt to set it
+          #  based on chargemasters entries and the service line’s quantity. For example, if
+          #  a single unit has an entry of 100 cents and 2 units were rendered, the
+          #  charge_amount_cents will be set to 200, if there is no chargemaster entry, it
+          #  will default to the amount set in this field.
           # @param diagnosis_pointers [Array<Integer>] Indices (zero-indexed) of all the diagnoses this service line references
           # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentificationOptional]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. If your organization does not intend to submit claims with
-          #  a different place of service at the service line level, this field should not be
-          #  populated. 02 for telemedicine, 11 for in-person. Full list
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param description [String] A free-form description to clarify the related data elements and their content.
-          #  Maps to SV1-01, C003-07 on the 837-P.
+          #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.
           # @param date_of_service [Date]
           # @param end_date_of_service [Date]
           # @param ordering_provider [CandidApiClient::EncounterProviders::V2::Types::OrderingProviderOptional] Required when the service or supply was ordered by a provider who is different
@@ -105,12 +120,16 @@ module CandidApiClient
           #  If not required by this implementation guide, do not send.
           # @param test_results [Array<CandidApiClient::ServiceLines::V2::Types::TestResultOptional>] Contains a list of test results. Test result types may map to MEA-02 on the
           #  837-P (ex: Hemoglobin, Hematocrit).
+          #  This is unused by 837-i and ignored for institutional service lines.
           #  No more than 5 MEA-02 test results may be submitted per service line.
           # @param note [String] Maps to NTE02 loop 2400 on the EDI 837.
+          # @param revenue_code [String] A 4 digit code that specifies facility department or type of service arrangement
+          #  for institutional service line items (837i). This code is not required for
+          #  professional claim billing (837p).
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLineCreateOptional]
           def initialize(modifiers: OMIT, has_epsdt_indicator: OMIT, has_family_planning_indicator: OMIT,
-                         procedure_code: OMIT, quantity: OMIT, units: OMIT, charge_amount_cents: OMIT, diagnosis_pointers: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_results: OMIT, note: OMIT, additional_properties: nil)
+                         procedure_code: OMIT, quantity: OMIT, units: OMIT, charge_amount_cents: OMIT, diagnosis_pointers: OMIT, drug_identification: OMIT, place_of_service_code: OMIT, description: OMIT, date_of_service: OMIT, end_date_of_service: OMIT, ordering_provider: OMIT, test_results: OMIT, note: OMIT, revenue_code: OMIT, additional_properties: nil)
             @modifiers = modifiers if modifiers != OMIT
             @has_epsdt_indicator = has_epsdt_indicator if has_epsdt_indicator != OMIT
             @has_family_planning_indicator = has_family_planning_indicator if has_family_planning_indicator != OMIT
@@ -127,6 +146,7 @@ module CandidApiClient
             @ordering_provider = ordering_provider if ordering_provider != OMIT
             @test_results = test_results if test_results != OMIT
             @note = note if note != OMIT
+            @revenue_code = revenue_code if revenue_code != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "modifiers": modifiers,
@@ -144,7 +164,8 @@ module CandidApiClient
               "end_date_of_service": end_date_of_service,
               "ordering_provider": ordering_provider,
               "test_results": test_results,
-              "note": note
+              "note": note,
+              "revenue_code": revenue_code
             }.reject do |_k, v|
               v == OMIT
             end
@@ -188,6 +209,7 @@ module CandidApiClient
               CandidApiClient::ServiceLines::V2::Types::TestResultOptional.from_json(json_object: item)
             end
             note = struct["note"]
+            revenue_code = struct["revenue_code"]
             new(
               modifiers: modifiers,
               has_epsdt_indicator: has_epsdt_indicator,
@@ -205,6 +227,7 @@ module CandidApiClient
               ordering_provider: ordering_provider,
               test_results: test_results,
               note: note,
+              revenue_code: revenue_code,
               additional_properties: struct
             )
           end
@@ -239,6 +262,7 @@ module CandidApiClient
             obj.ordering_provider.nil? || CandidApiClient::EncounterProviders::V2::Types::OrderingProviderOptional.validate_raw(obj: obj.ordering_provider)
             obj.test_results&.is_a?(Array) != false || raise("Passed value for field obj.test_results is not the expected type, validation failed.")
             obj.note&.is_a?(String) != false || raise("Passed value for field obj.note is not the expected type, validation failed.")
+            obj.revenue_code&.is_a?(String) != false || raise("Passed value for field obj.revenue_code is not the expected type, validation failed.")
           end
         end
       end

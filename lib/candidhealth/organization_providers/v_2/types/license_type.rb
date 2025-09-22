@@ -104,6 +104,8 @@ module CandidApiClient
           NP_C = "NP-C"
           PA_C = "PA-C"
           AMFT = "AMFT"
+          CDN = "CDN"
+          CNS = "CNS"
         end
       end
     end

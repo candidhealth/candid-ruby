@@ -7,7 +7,7 @@ module CandidApiClient
   module Payers
     module V4
       module Types
-        class PayerIds
+        class PrimaryPayerIds
           # @return [String] The payer ID for claim submission
           attr_reader :claims_payer_id
           # @return [String] The payer ID for eligibility
@@ -26,10 +26,10 @@ module CandidApiClient
           # @param eligibility_payer_id [String] The payer ID for eligibility
           # @param remittance_payer_id [String] The payer ID for remittance
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
-          # @return [CandidApiClient::Payers::V4::Types::PayerIds]
-          def initialize(claims_payer_id: OMIT, eligibility_payer_id: OMIT, remittance_payer_id: OMIT,
+          # @return [CandidApiClient::Payers::V4::Types::PrimaryPayerIds]
+          def initialize(claims_payer_id:, eligibility_payer_id: OMIT, remittance_payer_id: OMIT,
                          additional_properties: nil)
-            @claims_payer_id = claims_payer_id if claims_payer_id != OMIT
+            @claims_payer_id = claims_payer_id
             @eligibility_payer_id = eligibility_payer_id if eligibility_payer_id != OMIT
             @remittance_payer_id = remittance_payer_id if remittance_payer_id != OMIT
             @additional_properties = additional_properties
@@ -42,10 +42,10 @@ module CandidApiClient
             end
           end
 
-          # Deserialize a JSON object to an instance of PayerIds
+          # Deserialize a JSON object to an instance of PrimaryPayerIds
           #
           # @param json_object [String]
-          # @return [CandidApiClient::Payers::V4::Types::PayerIds]
+          # @return [CandidApiClient::Payers::V4::Types::PrimaryPayerIds]
           def self.from_json(json_object:)
             struct = JSON.parse(json_object, object_class: OpenStruct)
             claims_payer_id = struct["claims_payer_id"]
@@ -59,7 +59,7 @@ module CandidApiClient
             )
           end
 
-          # Serialize an instance of PayerIds to a JSON object
+          # Serialize an instance of PrimaryPayerIds to a JSON object
           #
           # @return [String]
           def to_json(*_args)
@@ -73,7 +73,7 @@ module CandidApiClient
           # @param obj [Object]
           # @return [Void]
           def self.validate_raw(obj:)
-            obj.claims_payer_id&.is_a?(String) != false || raise("Passed value for field obj.claims_payer_id is not the expected type, validation failed.")
+            obj.claims_payer_id.is_a?(String) != false || raise("Passed value for field obj.claims_payer_id is not the expected type, validation failed.")
             obj.eligibility_payer_id&.is_a?(String) != false || raise("Passed value for field obj.eligibility_payer_id is not the expected type, validation failed.")
             obj.remittance_payer_id&.is_a?(String) != false || raise("Passed value for field obj.remittance_payer_id is not the expected type, validation failed.")
           end

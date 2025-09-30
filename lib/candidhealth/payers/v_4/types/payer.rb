@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "payer_ids"
+require_relative "primary_payer_ids"
 require_relative "../../../commons/types/street_address_long_zip"
 require "ostruct"
 require "json"
@@ -12,7 +12,7 @@ module CandidApiClient
         class Payer
           # @return [String] Auto-generated ID set on creation.
           attr_reader :payer_uuid
-          # @return [CandidApiClient::Payers::V4::Types::PayerIds] The primary national payer IDs of the payer.
+          # @return [CandidApiClient::Payers::V4::Types::PrimaryPayerIds] The primary national payer IDs of the payer.
           attr_reader :payer_ids
           # @return [String] The primary display name of the payer.
           attr_reader :payer_name
@@ -29,7 +29,7 @@ module CandidApiClient
           OMIT = Object.new
 
           # @param payer_uuid [String] Auto-generated ID set on creation.
-          # @param payer_ids [CandidApiClient::Payers::V4::Types::PayerIds] The primary national payer IDs of the payer.
+          # @param payer_ids [CandidApiClient::Payers::V4::Types::PrimaryPayerIds] The primary national payer IDs of the payer.
           # @param payer_name [String] The primary display name of the payer.
           # @param clearinghouse_payer_info [Hash{CandidApiClient::Commons::Types::Clearinghouse => CandidApiClient::Payers::V4::Types::ClearinghousePayerInfo}]
           # @param street_address [CandidApiClient::Commons::Types::StreetAddressLongZip]
@@ -66,7 +66,7 @@ module CandidApiClient
               payer_ids = nil
             else
               payer_ids = parsed_json["payer_ids"].to_json
-              payer_ids = CandidApiClient::Payers::V4::Types::PayerIds.from_json(json_object: payer_ids)
+              payer_ids = CandidApiClient::Payers::V4::Types::PrimaryPayerIds.from_json(json_object: payer_ids)
             end
             payer_name = struct["payer_name"]
             clearinghouse_payer_info = parsed_json["clearinghouse_payer_info"]&.transform_values do |value|
@@ -104,7 +104,7 @@ module CandidApiClient
           # @return [Void]
           def self.validate_raw(obj:)
             obj.payer_uuid.is_a?(String) != false || raise("Passed value for field obj.payer_uuid is not the expected type, validation failed.")
-            CandidApiClient::Payers::V4::Types::PayerIds.validate_raw(obj: obj.payer_ids)
+            CandidApiClient::Payers::V4::Types::PrimaryPayerIds.validate_raw(obj: obj.payer_ids)
             obj.payer_name.is_a?(String) != false || raise("Passed value for field obj.payer_name is not the expected type, validation failed.")
             obj.clearinghouse_payer_info.is_a?(Hash) != false || raise("Passed value for field obj.clearinghouse_payer_info is not the expected type, validation failed.")
             obj.street_address.nil? || CandidApiClient::Commons::Types::StreetAddressLongZip.validate_raw(obj: obj.street_address)

@@ -8,6 +8,7 @@ require_relative "../../commons/types/sort_direction"
 require_relative "types/charge_capture_claim_creation_status"
 require_relative "../../charge_capture/v_1/types/charge_capture_status"
 require "date"
+require_relative "../../claims/types/claim_status"
 require_relative "types/charge_capture_claim_creation_page"
 require "async"
 
@@ -131,6 +132,16 @@ module CandidApiClient
         # @param supervising_provider_names [String] A list of supervising provider names to filter by. This will return all charge
         #  capture claim_creations which include one or more charges with one of the names
         #  in this list.
+        # @param claim_status [CandidApiClient::Claims::Types::ClaimStatus] the status of the claim to filter by created from charge capture bundle.
+        # @param claim_creation_category [String] A list of claim creation categories to filter by. This will return all charge
+        #  capture claim_creations which include one or more charges with one of the names
+        #  in this list.
+        # @param tags [String] A list of tags to filter by. This will return all charge captures with one of
+        #  the tags.
+        # @param primary_payer_names [String] A list of primary payer names to filter by. This will return all charge captures
+        #  with one of the names.
+        # @param patient_names [String] A list of patient names to filter by. This will return all charge captures with
+        #  one of the names.
         # @param has_charge_capture_updates [Boolean] If true, only return claim_creations that have charge captures that have been
         #  updated since the Claim Creation has had a status of BILLED. See the updates
         #  property on ChargeCapture for more details.
@@ -140,7 +151,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture_bundles.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil,
-                    claim_creation_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
+                    claim_creation_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, claim_status: nil, claim_creation_category: nil, tags: nil, primary_payer_names: nil, patient_names: nil, has_charge_capture_updates: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -170,6 +181,11 @@ module CandidApiClient
               "rendering_provider_names": rendering_provider_names,
               "supervising_provider_npis": supervising_provider_npis,
               "supervising_provider_names": supervising_provider_names,
+              "claim_status": claim_status,
+              "claim_creation_category": claim_creation_category,
+              "tags": tags,
+              "primary_payer_names": primary_payer_names,
+              "patient_names": patient_names,
               "has_charge_capture_updates": has_charge_capture_updates
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
@@ -302,6 +318,16 @@ module CandidApiClient
         # @param supervising_provider_names [String] A list of supervising provider names to filter by. This will return all charge
         #  capture claim_creations which include one or more charges with one of the names
         #  in this list.
+        # @param claim_status [CandidApiClient::Claims::Types::ClaimStatus] the status of the claim to filter by created from charge capture bundle.
+        # @param claim_creation_category [String] A list of claim creation categories to filter by. This will return all charge
+        #  capture claim_creations which include one or more charges with one of the names
+        #  in this list.
+        # @param tags [String] A list of tags to filter by. This will return all charge captures with one of
+        #  the tags.
+        # @param primary_payer_names [String] A list of primary payer names to filter by. This will return all charge captures
+        #  with one of the names.
+        # @param patient_names [String] A list of patient names to filter by. This will return all charge captures with
+        #  one of the names.
         # @param has_charge_capture_updates [Boolean] If true, only return claim_creations that have charge captures that have been
         #  updated since the Claim Creation has had a status of BILLED. See the updates
         #  property on ChargeCapture for more details.
@@ -311,7 +337,7 @@ module CandidApiClient
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture_bundles.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil,
-                    claim_creation_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, has_charge_capture_updates: nil, request_options: nil)
+                    claim_creation_status: nil, charge_status: nil, charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, claim_status: nil, claim_creation_category: nil, tags: nil, primary_payer_names: nil, patient_names: nil, has_charge_capture_updates: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -342,6 +368,11 @@ module CandidApiClient
                 "rendering_provider_names": rendering_provider_names,
                 "supervising_provider_npis": supervising_provider_npis,
                 "supervising_provider_names": supervising_provider_names,
+                "claim_status": claim_status,
+                "claim_creation_category": claim_creation_category,
+                "tags": tags,
+                "primary_payer_names": primary_payer_names,
+                "patient_names": patient_names,
                 "has_charge_capture_updates": has_charge_capture_updates
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,

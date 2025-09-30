@@ -9,6 +9,7 @@ require_relative "../../commons/types/sort_direction"
 require "date"
 require_relative "../../encounters/v_4/types/billable_status_type"
 require_relative "../../encounters/v_4/types/responsible_party_type"
+require_relative "../../claims/types/claim_status"
 require_relative "types/charge_capture_page"
 require_relative "types/charge_capture_post_billed_change"
 require "json"
@@ -62,6 +63,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #   * :subscriber_primary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
@@ -169,6 +171,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #     * :non_insurance_payers (Array<String>)
         #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
         #   * :service_facility (Hash)
@@ -383,6 +386,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #   * :subscriber_primary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
@@ -490,6 +494,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #     * :non_insurance_payers (Array<String>)
         #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
         #   * :service_facility (Hash)
@@ -684,6 +689,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #   * :subscriber_primary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
@@ -791,6 +797,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #     * :non_insurance_payers (Array<String>)
         #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
         #   * :service_facility (Hash)
@@ -995,6 +1002,15 @@ module CandidApiClient
         #  captures with one of the NPIs in this list.
         # @param supervising_provider_names [String] A list of supervising provider names to filter by. This will return all charge
         #  captures with one of the names in this list.
+        # @param claim_creation_category [String] A list of claim creation categories to filter by. This will return all charge
+        #  capture claim_creations which include one or more charges with one of the names
+        #  in this list.
+        # @param tags [String] A list of tags to filter by. This will return all charge captures with one of
+        #  the tags.
+        # @param primary_payer_names [String] A list of primary payer names to filter by. This will return all charge captures
+        #  with one of the names.
+        # @param patient_names [String] A list of patient names to filter by. This will return all charge captures with
+        #  one of the names.
         # @param exclude_charges_linked_to_claims [Boolean] Whether to exclude charge captures which are part of a claim creation.
         # @param patient_external_id_ranked_sort [String] The patient ID from the external EMR platform for the patient
         # @param status_ranked_sort [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] The charge capture status to show first
@@ -1031,13 +1047,22 @@ module CandidApiClient
         #  captures with one of the NPIs in this list.
         # @param supervising_provider_names_ranked_sort [String] A list of supervising provider names to show first. This will return all charge
         #  captures with one of the names in this list.
+        # @param claim_status [CandidApiClient::Claims::Types::ClaimStatus] the status of the claim to filter by created from charge capture bundle.
+        # @param claim_creation_category_ranked_sort [String] A list of claim creation categories to sort by. This will return all charge
+        #  capture claim_creations which include one or more charges with one of the names
+        #  in this list.
+        # @param tags_ranked_sort [String] A list of tags. This will return all charge captures with one of the tags.
+        # @param primary_payer_names_ranked_sort [String] A list of primary payer names to sort by. This will return all charge captures
+        #  with one of the names.
+        # @param patient_names_ranked_sort [String] A list of patient names to sort by. This will return all charge captures with
+        #  one of the names.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, search_term: nil, billable_status: nil, responsible_party: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, claim_creation_category: nil, tags: nil, primary_payer_names: nil, patient_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, search_term: nil, billable_status: nil, responsible_party: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, claim_status: nil, claim_creation_category_ranked_sort: nil, tags_ranked_sort: nil, primary_payer_names_ranked_sort: nil, patient_names_ranked_sort: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -1066,6 +1091,10 @@ module CandidApiClient
               "rendering_provider_names": rendering_provider_names,
               "supervising_provider_npis": supervising_provider_npis,
               "supervising_provider_names": supervising_provider_names,
+              "claim_creation_category": claim_creation_category,
+              "tags": tags,
+              "primary_payer_names": primary_payer_names,
+              "patient_names": patient_names,
               "exclude_charges_linked_to_claims": exclude_charges_linked_to_claims,
               "patient_external_id_ranked_sort": patient_external_id_ranked_sort,
               "status_ranked_sort": status_ranked_sort,
@@ -1083,7 +1112,12 @@ module CandidApiClient
               "rendering_provider_npis_ranked_sort": rendering_provider_npis_ranked_sort,
               "rendering_provider_names_ranked_sort": rendering_provider_names_ranked_sort,
               "supervising_provider_npis_ranked_sort": supervising_provider_npis_ranked_sort,
-              "supervising_provider_names_ranked_sort": supervising_provider_names_ranked_sort
+              "supervising_provider_names_ranked_sort": supervising_provider_names_ranked_sort,
+              "claim_status": claim_status,
+              "claim_creation_category_ranked_sort": claim_creation_category_ranked_sort,
+              "tags_ranked_sort": tags_ranked_sort,
+              "primary_payer_names_ranked_sort": primary_payer_names_ranked_sort,
+              "patient_names_ranked_sort": patient_names_ranked_sort
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
                                                request_options: request_options)}/api/charge_captures/v1"
@@ -1171,6 +1205,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #   * :subscriber_primary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
@@ -1278,6 +1313,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #     * :non_insurance_payers (Array<String>)
         #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
         #   * :service_facility (Hash)
@@ -1494,6 +1530,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #   * :subscriber_primary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
@@ -1601,6 +1638,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #     * :non_insurance_payers (Array<String>)
         #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
         #   * :service_facility (Hash)
@@ -1797,6 +1835,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #   * :subscriber_primary (Hash)
         #     * :insurance_card (Hash)
         #       * :member_id (String)
@@ -1904,6 +1943,7 @@ module CandidApiClient
         #     * :phone_consent (Boolean)
         #     * :email (String)
         #     * :email_consent (Boolean)
+        #     * :auto_charge_consent (Boolean)
         #     * :non_insurance_payers (Array<String>)
         #     * :non_insurance_payers_info (Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreateOptional>)
         #   * :service_facility (Hash)
@@ -2112,6 +2152,15 @@ module CandidApiClient
         #  captures with one of the NPIs in this list.
         # @param supervising_provider_names [String] A list of supervising provider names to filter by. This will return all charge
         #  captures with one of the names in this list.
+        # @param claim_creation_category [String] A list of claim creation categories to filter by. This will return all charge
+        #  capture claim_creations which include one or more charges with one of the names
+        #  in this list.
+        # @param tags [String] A list of tags to filter by. This will return all charge captures with one of
+        #  the tags.
+        # @param primary_payer_names [String] A list of primary payer names to filter by. This will return all charge captures
+        #  with one of the names.
+        # @param patient_names [String] A list of patient names to filter by. This will return all charge captures with
+        #  one of the names.
         # @param exclude_charges_linked_to_claims [Boolean] Whether to exclude charge captures which are part of a claim creation.
         # @param patient_external_id_ranked_sort [String] The patient ID from the external EMR platform for the patient
         # @param status_ranked_sort [CandidApiClient::ChargeCapture::V1::Types::ChargeCaptureStatus] The charge capture status to show first
@@ -2148,13 +2197,22 @@ module CandidApiClient
         #  captures with one of the NPIs in this list.
         # @param supervising_provider_names_ranked_sort [String] A list of supervising provider names to show first. This will return all charge
         #  captures with one of the names in this list.
+        # @param claim_status [CandidApiClient::Claims::Types::ClaimStatus] the status of the claim to filter by created from charge capture bundle.
+        # @param claim_creation_category_ranked_sort [String] A list of claim creation categories to sort by. This will return all charge
+        #  capture claim_creations which include one or more charges with one of the names
+        #  in this list.
+        # @param tags_ranked_sort [String] A list of tags. This will return all charge captures with one of the tags.
+        # @param primary_payer_names_ranked_sort [String] A list of primary payer names to sort by. This will return all charge captures
+        #  with one of the names.
+        # @param patient_names_ranked_sort [String] A list of patient names to sort by. This will return all charge captures with
+        #  one of the names.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::ChargeCapture::V1::Types::ChargeCapturePage]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
         #  api.charge_capture.v_1.get_all
         def get_all(limit: nil, sort: nil, sort_direction: nil, page_token: nil, patient_external_id: nil, status: nil,
-                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, search_term: nil, billable_status: nil, responsible_party: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, request_options: nil)
+                    charge_external_id: nil, date_of_service_min: nil, date_of_service_max: nil, claim_ids: nil, claim_creation_ids: nil, billing_provider_npis: nil, service_facility_name: nil, primary_payer_ids: nil, rendering_provider_npis: nil, rendering_provider_names: nil, supervising_provider_npis: nil, supervising_provider_names: nil, claim_creation_category: nil, tags: nil, primary_payer_names: nil, patient_names: nil, exclude_charges_linked_to_claims: nil, patient_external_id_ranked_sort: nil, status_ranked_sort: nil, charge_external_id_ranked_sort: nil, date_of_service_min_ranked_sort: nil, date_of_service_max_ranked_sort: nil, search_term: nil, billable_status: nil, responsible_party: nil, claim_ids_ranked_sort: nil, claim_creation_ids_ranked_sort: nil, billing_provider_npis_ranked_sort: nil, service_facility_name_ranked_sort: nil, primary_payer_ids_ranked_sort: nil, rendering_provider_npis_ranked_sort: nil, rendering_provider_names_ranked_sort: nil, supervising_provider_npis_ranked_sort: nil, supervising_provider_names_ranked_sort: nil, claim_status: nil, claim_creation_category_ranked_sort: nil, tags_ranked_sort: nil, primary_payer_names_ranked_sort: nil, patient_names_ranked_sort: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -2184,6 +2242,10 @@ module CandidApiClient
                 "rendering_provider_names": rendering_provider_names,
                 "supervising_provider_npis": supervising_provider_npis,
                 "supervising_provider_names": supervising_provider_names,
+                "claim_creation_category": claim_creation_category,
+                "tags": tags,
+                "primary_payer_names": primary_payer_names,
+                "patient_names": patient_names,
                 "exclude_charges_linked_to_claims": exclude_charges_linked_to_claims,
                 "patient_external_id_ranked_sort": patient_external_id_ranked_sort,
                 "status_ranked_sort": status_ranked_sort,
@@ -2201,7 +2263,12 @@ module CandidApiClient
                 "rendering_provider_npis_ranked_sort": rendering_provider_npis_ranked_sort,
                 "rendering_provider_names_ranked_sort": rendering_provider_names_ranked_sort,
                 "supervising_provider_npis_ranked_sort": supervising_provider_npis_ranked_sort,
-                "supervising_provider_names_ranked_sort": supervising_provider_names_ranked_sort
+                "supervising_provider_names_ranked_sort": supervising_provider_names_ranked_sort,
+                "claim_status": claim_status,
+                "claim_creation_category_ranked_sort": claim_creation_category_ranked_sort,
+                "tags_ranked_sort": tags_ranked_sort,
+                "primary_payer_names_ranked_sort": primary_payer_names_ranked_sort,
+                "patient_names_ranked_sort": patient_names_ranked_sort
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
                                                  request_options: request_options)}/api/charge_captures/v1"

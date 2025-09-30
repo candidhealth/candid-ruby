@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "payer_ids"
+require_relative "support_state"
 require "ostruct"
 require "json"
 
@@ -15,6 +16,14 @@ module CandidApiClient
           attr_reader :professional_payer_ids
           # @return [CandidApiClient::Payers::V4::Types::PayerIds] Payer IDs for institutional claims
           attr_reader :institutional_payer_ids
+          # @return [CandidApiClient::Payers::V4::Types::SupportState] The support state for claims submission
+          attr_reader :professional_claims_support
+          # @return [CandidApiClient::Payers::V4::Types::SupportState] The support state for institutional claims submission
+          attr_reader :institutional_claims_support
+          # @return [CandidApiClient::Payers::V4::Types::SupportState] The support state for eligibility
+          attr_reader :eligibility_support
+          # @return [CandidApiClient::Payers::V4::Types::SupportState] The support state for remittance
+          attr_reader :remittance_support
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -26,17 +35,30 @@ module CandidApiClient
           # @param payer_name [String] The clearinghouse display name of the payer.
           # @param professional_payer_ids [CandidApiClient::Payers::V4::Types::PayerIds] Payer IDs for professional claims
           # @param institutional_payer_ids [CandidApiClient::Payers::V4::Types::PayerIds] Payer IDs for institutional claims
+          # @param professional_claims_support [CandidApiClient::Payers::V4::Types::SupportState] The support state for claims submission
+          # @param institutional_claims_support [CandidApiClient::Payers::V4::Types::SupportState] The support state for institutional claims submission
+          # @param eligibility_support [CandidApiClient::Payers::V4::Types::SupportState] The support state for eligibility
+          # @param remittance_support [CandidApiClient::Payers::V4::Types::SupportState] The support state for remittance
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Payers::V4::Types::ClearinghousePayerInfo]
-          def initialize(payer_name:, professional_payer_ids:, institutional_payer_ids:, additional_properties: nil)
+          def initialize(payer_name:, professional_payer_ids:, institutional_payer_ids:, professional_claims_support:,
+                         institutional_claims_support:, eligibility_support:, remittance_support:, additional_properties: nil)
             @payer_name = payer_name
             @professional_payer_ids = professional_payer_ids
             @institutional_payer_ids = institutional_payer_ids
+            @professional_claims_support = professional_claims_support
+            @institutional_claims_support = institutional_claims_support
+            @eligibility_support = eligibility_support
+            @remittance_support = remittance_support
             @additional_properties = additional_properties
             @_field_set = {
               "payer_name": payer_name,
               "professional_payer_ids": professional_payer_ids,
-              "institutional_payer_ids": institutional_payer_ids
+              "institutional_payer_ids": institutional_payer_ids,
+              "professional_claims_support": professional_claims_support,
+              "institutional_claims_support": institutional_claims_support,
+              "eligibility_support": eligibility_support,
+              "remittance_support": remittance_support
             }
           end
 
@@ -60,10 +82,18 @@ module CandidApiClient
               institutional_payer_ids = parsed_json["institutional_payer_ids"].to_json
               institutional_payer_ids = CandidApiClient::Payers::V4::Types::PayerIds.from_json(json_object: institutional_payer_ids)
             end
+            professional_claims_support = struct["professional_claims_support"]
+            institutional_claims_support = struct["institutional_claims_support"]
+            eligibility_support = struct["eligibility_support"]
+            remittance_support = struct["remittance_support"]
             new(
               payer_name: payer_name,
               professional_payer_ids: professional_payer_ids,
               institutional_payer_ids: institutional_payer_ids,
+              professional_claims_support: professional_claims_support,
+              institutional_claims_support: institutional_claims_support,
+              eligibility_support: eligibility_support,
+              remittance_support: remittance_support,
               additional_properties: struct
             )
           end
@@ -85,6 +115,10 @@ module CandidApiClient
             obj.payer_name.is_a?(String) != false || raise("Passed value for field obj.payer_name is not the expected type, validation failed.")
             CandidApiClient::Payers::V4::Types::PayerIds.validate_raw(obj: obj.professional_payer_ids)
             CandidApiClient::Payers::V4::Types::PayerIds.validate_raw(obj: obj.institutional_payer_ids)
+            obj.professional_claims_support.is_a?(CandidApiClient::Payers::V4::Types::SupportState) != false || raise("Passed value for field obj.professional_claims_support is not the expected type, validation failed.")
+            obj.institutional_claims_support.is_a?(CandidApiClient::Payers::V4::Types::SupportState) != false || raise("Passed value for field obj.institutional_claims_support is not the expected type, validation failed.")
+            obj.eligibility_support.is_a?(CandidApiClient::Payers::V4::Types::SupportState) != false || raise("Passed value for field obj.eligibility_support is not the expected type, validation failed.")
+            obj.remittance_support.is_a?(CandidApiClient::Payers::V4::Types::SupportState) != false || raise("Passed value for field obj.remittance_support is not the expected type, validation failed.")
           end
         end
       end

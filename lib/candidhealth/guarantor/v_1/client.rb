@@ -27,6 +27,7 @@ module CandidApiClient
         #   * :phone_consent (Boolean)
         #   * :email (String)
         #   * :email_consent (Boolean)
+        #   * :auto_charge_consent (Boolean)
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :external_id (String)
@@ -101,6 +102,7 @@ module CandidApiClient
         #   * :phone_consent (Boolean)
         #   * :email (String)
         #   * :email_consent (Boolean)
+        #   * :auto_charge_consent (Boolean)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example
@@ -141,6 +143,7 @@ module CandidApiClient
         #   * :phone_consent (Boolean)
         #   * :email (String)
         #   * :email_consent (Boolean)
+        #   * :auto_charge_consent (Boolean)
         #   * :first_name (String)
         #   * :last_name (String)
         #   * :external_id (String)
@@ -219,6 +222,7 @@ module CandidApiClient
         #   * :phone_consent (Boolean)
         #   * :email (String)
         #   * :email_consent (Boolean)
+        #   * :auto_charge_consent (Boolean)
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
         # @example

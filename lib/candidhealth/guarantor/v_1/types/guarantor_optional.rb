@@ -29,6 +29,8 @@ module CandidApiClient
           attr_reader :email
           # @return [Boolean]
           attr_reader :email_consent
+          # @return [Boolean]
+          attr_reader :auto_charge_consent
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -46,10 +48,11 @@ module CandidApiClient
           # @param phone_consent [Boolean]
           # @param email [String]
           # @param email_consent [Boolean]
+          # @param auto_charge_consent [Boolean]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Guarantor::V1::Types::GuarantorOptional]
           def initialize(first_name: OMIT, last_name: OMIT, external_id: OMIT, date_of_birth: OMIT, address: OMIT,
-                         phone_numbers: OMIT, phone_consent: OMIT, email: OMIT, email_consent: OMIT, additional_properties: nil)
+                         phone_numbers: OMIT, phone_consent: OMIT, email: OMIT, email_consent: OMIT, auto_charge_consent: OMIT, additional_properties: nil)
             @first_name = first_name if first_name != OMIT
             @last_name = last_name if last_name != OMIT
             @external_id = external_id if external_id != OMIT
@@ -59,6 +62,7 @@ module CandidApiClient
             @phone_consent = phone_consent if phone_consent != OMIT
             @email = email if email != OMIT
             @email_consent = email_consent if email_consent != OMIT
+            @auto_charge_consent = auto_charge_consent if auto_charge_consent != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "first_name": first_name,
@@ -69,7 +73,8 @@ module CandidApiClient
               "phone_numbers": phone_numbers,
               "phone_consent": phone_consent,
               "email": email,
-              "email_consent": email_consent
+              "email_consent": email_consent,
+              "auto_charge_consent": auto_charge_consent
             }.reject do |_k, v|
               v == OMIT
             end
@@ -99,6 +104,7 @@ module CandidApiClient
             phone_consent = struct["phone_consent"]
             email = struct["email"]
             email_consent = struct["email_consent"]
+            auto_charge_consent = struct["auto_charge_consent"]
             new(
               first_name: first_name,
               last_name: last_name,
@@ -109,6 +115,7 @@ module CandidApiClient
               phone_consent: phone_consent,
               email: email,
               email_consent: email_consent,
+              auto_charge_consent: auto_charge_consent,
               additional_properties: struct
             )
           end
@@ -136,6 +143,7 @@ module CandidApiClient
             obj.phone_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
             obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
             obj.email_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
+            obj.auto_charge_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.auto_charge_consent is not the expected type, validation failed.")
           end
         end
       end

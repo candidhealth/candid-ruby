@@ -34,6 +34,8 @@ module CandidApiClient
         attr_reader :email
         # @return [Boolean]
         attr_reader :email_consent
+        # @return [Boolean]
+        attr_reader :auto_charge_consent
         # @return [Array<String>] On update, we will replace the existing list of non-insurance payers with the
         #  new list if populated.
         attr_reader :non_insurance_payers
@@ -60,6 +62,7 @@ module CandidApiClient
         # @param phone_consent [Boolean]
         # @param email [String]
         # @param email_consent [Boolean]
+        # @param auto_charge_consent [Boolean]
         # @param non_insurance_payers [Array<String>] On update, we will replace the existing list of non-insurance payers with the
         #  new list if populated.
         # @param non_insurance_payers_info [Array<CandidApiClient::Individual::Types::PatientNonInsurancePayerInfoCreate>] On update, we will replace the existing list of non-insurance payers with the
@@ -67,7 +70,7 @@ module CandidApiClient
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::Individual::Types::PatientUpdate]
         def initialize(first_name: OMIT, last_name: OMIT, gender: OMIT, external_id: OMIT, date_of_birth: OMIT,
-                       address: OMIT, phone_numbers: OMIT, phone_consent: OMIT, email: OMIT, email_consent: OMIT, non_insurance_payers: OMIT, non_insurance_payers_info: OMIT, additional_properties: nil)
+                       address: OMIT, phone_numbers: OMIT, phone_consent: OMIT, email: OMIT, email_consent: OMIT, auto_charge_consent: OMIT, non_insurance_payers: OMIT, non_insurance_payers_info: OMIT, additional_properties: nil)
           @first_name = first_name if first_name != OMIT
           @last_name = last_name if last_name != OMIT
           @gender = gender if gender != OMIT
@@ -78,6 +81,7 @@ module CandidApiClient
           @phone_consent = phone_consent if phone_consent != OMIT
           @email = email if email != OMIT
           @email_consent = email_consent if email_consent != OMIT
+          @auto_charge_consent = auto_charge_consent if auto_charge_consent != OMIT
           @non_insurance_payers = non_insurance_payers if non_insurance_payers != OMIT
           @non_insurance_payers_info = non_insurance_payers_info if non_insurance_payers_info != OMIT
           @additional_properties = additional_properties
@@ -92,6 +96,7 @@ module CandidApiClient
             "phone_consent": phone_consent,
             "email": email,
             "email_consent": email_consent,
+            "auto_charge_consent": auto_charge_consent,
             "non_insurance_payers": non_insurance_payers,
             "non_insurance_payers_info": non_insurance_payers_info
           }.reject do |_k, v|
@@ -124,6 +129,7 @@ module CandidApiClient
           phone_consent = struct["phone_consent"]
           email = struct["email"]
           email_consent = struct["email_consent"]
+          auto_charge_consent = struct["auto_charge_consent"]
           non_insurance_payers = struct["non_insurance_payers"]
           non_insurance_payers_info = parsed_json["non_insurance_payers_info"]&.map do |item|
             item = item.to_json
@@ -140,6 +146,7 @@ module CandidApiClient
             phone_consent: phone_consent,
             email: email,
             email_consent: email_consent,
+            auto_charge_consent: auto_charge_consent,
             non_insurance_payers: non_insurance_payers,
             non_insurance_payers_info: non_insurance_payers_info,
             additional_properties: struct
@@ -170,6 +177,7 @@ module CandidApiClient
           obj.phone_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
           obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
           obj.email_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
+          obj.auto_charge_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.auto_charge_consent is not the expected type, validation failed.")
           obj.non_insurance_payers&.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers is not the expected type, validation failed.")
           obj.non_insurance_payers_info&.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers_info is not the expected type, validation failed.")
         end

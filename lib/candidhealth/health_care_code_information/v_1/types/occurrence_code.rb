@@ -4,6 +4,7 @@ module CandidApiClient
   module HealthCareCodeInformation
     module V1
       module Types
+        # An enumeration.
         class OccurrenceCode
           C_01 = "01"
           C_02 = "02"

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "../../../commons/types/facility_type_code"
 require_relative "service_facility_status"
 require_relative "service_facility_operational_status"
 require_relative "service_facility_mode"
@@ -20,10 +21,15 @@ module CandidApiClient
           attr_reader :aliases
           # @return [String] A description of the service facility.
           attr_reader :description
+          # @return [String] An ID for this service facility used in an external system (e.g. your EMR).
+          #  Service facilities can be queried by this field.
+          attr_reader :external_id
           # @return [String] An NPI specific to the service facility if applicable, i.e. if it has one and is
           #  not under the billing provider's NPI.
           #  Box 32 section (a) of the CMS-1500 claim form.
           attr_reader :npi
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] The Place of Service (POS) code for this service facility.
+          attr_reader :place_of_service_code
           # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus] The status of the service facility.
           attr_reader :status
           # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus] The operational status of the service facility.
@@ -49,9 +55,12 @@ module CandidApiClient
           # @param name [String] The name of the service facility.
           # @param aliases [Array<String>] A list of alternate names for the service facility.
           # @param description [String] A description of the service facility.
+          # @param external_id [String] An ID for this service facility used in an external system (e.g. your EMR).
+          #  Service facilities can be queried by this field.
           # @param npi [String] An NPI specific to the service facility if applicable, i.e. if it has one and is
           #  not under the billing provider's NPI.
           #  Box 32 section (a) of the CMS-1500 claim form.
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] The Place of Service (POS) code for this service facility.
           # @param status [CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus] The status of the service facility.
           # @param operational_status [CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus] The operational status of the service facility.
           # @param mode [CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityMode] The mode of the service facility.
@@ -61,12 +70,14 @@ module CandidApiClient
           # @param address [CandidApiClient::Commons::Types::StreetAddressLongZip] The address of the service facility.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityUpdate]
-          def initialize(name: OMIT, aliases: OMIT, description: OMIT, npi: OMIT, status: OMIT,
-                         operational_status: OMIT, mode: OMIT, type: OMIT, physical_type: OMIT, telecoms: OMIT, address: OMIT, additional_properties: nil)
+          def initialize(name: OMIT, aliases: OMIT, description: OMIT, external_id: OMIT, npi: OMIT,
+                         place_of_service_code: OMIT, status: OMIT, operational_status: OMIT, mode: OMIT, type: OMIT, physical_type: OMIT, telecoms: OMIT, address: OMIT, additional_properties: nil)
             @name = name if name != OMIT
             @aliases = aliases if aliases != OMIT
             @description = description if description != OMIT
+            @external_id = external_id if external_id != OMIT
             @npi = npi if npi != OMIT
+            @place_of_service_code = place_of_service_code if place_of_service_code != OMIT
             @status = status if status != OMIT
             @operational_status = operational_status if operational_status != OMIT
             @mode = mode if mode != OMIT
@@ -79,7 +90,9 @@ module CandidApiClient
               "name": name,
               "aliases": aliases,
               "description": description,
+              "external_id": external_id,
               "npi": npi,
+              "place_of_service_code": place_of_service_code,
               "status": status,
               "operational_status": operational_status,
               "mode": mode,
@@ -102,7 +115,9 @@ module CandidApiClient
             name = struct["name"]
             aliases = struct["aliases"]
             description = struct["description"]
+            external_id = struct["external_id"]
             npi = struct["npi"]
+            place_of_service_code = struct["place_of_service_code"]
             status = struct["status"]
             operational_status = struct["operational_status"]
             mode = struct["mode"]
@@ -119,7 +134,9 @@ module CandidApiClient
               name: name,
               aliases: aliases,
               description: description,
+              external_id: external_id,
               npi: npi,
+              place_of_service_code: place_of_service_code,
               status: status,
               operational_status: operational_status,
               mode: mode,
@@ -148,7 +165,9 @@ module CandidApiClient
             obj.name&.is_a?(String) != false || raise("Passed value for field obj.name is not the expected type, validation failed.")
             obj.aliases&.is_a?(Array) != false || raise("Passed value for field obj.aliases is not the expected type, validation failed.")
             obj.description&.is_a?(String) != false || raise("Passed value for field obj.description is not the expected type, validation failed.")
+            obj.external_id&.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")
             obj.npi&.is_a?(String) != false || raise("Passed value for field obj.npi is not the expected type, validation failed.")
+            obj.place_of_service_code&.is_a?(CandidApiClient::Commons::Types::FacilityTypeCode) != false || raise("Passed value for field obj.place_of_service_code is not the expected type, validation failed.")
             obj.status&.is_a?(CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus) != false || raise("Passed value for field obj.status is not the expected type, validation failed.")
             obj.operational_status&.is_a?(CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus) != false || raise("Passed value for field obj.operational_status is not the expected type, validation failed.")
             obj.mode&.is_a?(CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityMode) != false || raise("Passed value for field obj.mode is not the expected type, validation failed.")

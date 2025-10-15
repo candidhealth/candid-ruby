@@ -9,9 +9,15 @@ module CandidApiClient
     module V1
       module Types
         class Rd8Date
-          # @return [DateTime]
+          # @return [DateTime] An [RFC 3339, section 5.6 datetime](https://ijmacd.github.io/rfc3339-iso8601/).
+          #  For example, 2017-07-21T17:32:28Z.
+          #  In practice, only the date portion of this is used for claim submission, so
+          #  midnight time is fine.
           attr_reader :start
-          # @return [DateTime]
+          # @return [DateTime] An [RFC 3339, section 5.6 datetime](https://ijmacd.github.io/rfc3339-iso8601/).
+          #  For example, 2017-07-21T17:32:28Z.
+          #  In practice, only the date portion of this is used for claim submission, so
+          #  midnight time is fine.
           attr_reader :end_
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
@@ -21,8 +27,14 @@ module CandidApiClient
 
           OMIT = Object.new
 
-          # @param start [DateTime]
-          # @param end_ [DateTime]
+          # @param start [DateTime] An [RFC 3339, section 5.6 datetime](https://ijmacd.github.io/rfc3339-iso8601/).
+          #  For example, 2017-07-21T17:32:28Z.
+          #  In practice, only the date portion of this is used for claim submission, so
+          #  midnight time is fine.
+          # @param end_ [DateTime] An [RFC 3339, section 5.6 datetime](https://ijmacd.github.io/rfc3339-iso8601/).
+          #  For example, 2017-07-21T17:32:28Z.
+          #  In practice, only the date portion of this is used for claim submission, so
+          #  midnight time is fine.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::HealthCareCodeInformation::V1::Types::Rd8Date]
           def initialize(start:, end_:, additional_properties: nil)

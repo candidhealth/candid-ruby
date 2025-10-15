@@ -2,6 +2,7 @@
 
 require_relative "../../../requests"
 require_relative "types/organization_service_facility"
+require_relative "../../commons/types/facility_type_code"
 require_relative "types/organization_service_facility_page"
 require_relative "types/organization_service_facility_create"
 require_relative "types/organization_service_facility_update"
@@ -44,6 +45,8 @@ module CandidApiClient
         # @param limit [Integer] Limit the number of results returned. Defaults to 100.
         # @param name [String] Filter to a name or a part of a name.
         # @param organization_service_facility_ids [String] Filter to the provided organization service facility IDs.
+        # @param external_ids [String] Filter by one or more external_ids.
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Filter by Place of Service (POS) code.
         # @param page_token [String] The page token to continue paging through a previous request.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
@@ -54,8 +57,8 @@ module CandidApiClient
         #    name: "Test Service Facility",
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
         #  )
-        def get_multi(limit: nil, name: nil, organization_service_facility_ids: nil, page_token: nil,
-                      request_options: nil)
+        def get_multi(limit: nil, name: nil, organization_service_facility_ids: nil, external_ids: nil,
+                      place_of_service_code: nil, page_token: nil, request_options: nil)
           response = @request_client.conn.get do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
             req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
@@ -69,6 +72,8 @@ module CandidApiClient
               "limit": limit,
               "name": name,
               "organization_service_facility_ids": organization_service_facility_ids,
+              "external_ids": external_ids,
+              "place_of_service_code": place_of_service_code,
               "page_token": page_token
             }.compact
             req.url "#{@request_client.get_url(environment: CandidApi,
@@ -77,11 +82,40 @@ module CandidApiClient
           CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage.from_json(json_object: response.body)
         end
 
+        # Looks up a single organization service facility by its `external_id` field. This
+        #  can be useful
+        #  for finding service facilities within Candid which are associated with service
+        #  facilities in
+        #  an external system.
+        #
+        # @param external_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.organization_service_facilities.v_2.get_by_external_id(external_id: "external_id")
+        def get_by_external_id(external_id:, request_options: nil)
+          response = @request_client.conn.get do |req|
+            req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+            req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+            req.headers = {
+          **(req.headers || {}),
+          **@request_client.get_headers,
+          **(request_options&.additional_headers || {})
+            }.compact
+            req.url "#{@request_client.get_url(environment: CandidApi,
+                                               request_options: request_options)}/api/organization-service-facilities/v2/external-id/#{external_id}"
+          end
+          CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
+        end
+
         # @param request [Hash] Request of type CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityCreate, as a Hash
         #   * :name (String)
         #   * :aliases (Array<String>)
         #   * :description (String)
+        #   * :external_id (String)
         #   * :npi (String)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus)
         #   * :operational_status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus)
         #   * :mode (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityMode)
@@ -121,7 +155,9 @@ module CandidApiClient
         #   * :name (String)
         #   * :aliases (Array<String>)
         #   * :description (String)
+        #   * :external_id (String)
         #   * :npi (String)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus)
         #   * :operational_status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus)
         #   * :mode (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityMode)
@@ -213,6 +249,8 @@ module CandidApiClient
         # @param limit [Integer] Limit the number of results returned. Defaults to 100.
         # @param name [String] Filter to a name or a part of a name.
         # @param organization_service_facility_ids [String] Filter to the provided organization service facility IDs.
+        # @param external_ids [String] Filter by one or more external_ids.
+        # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] Filter by Place of Service (POS) code.
         # @param page_token [String] The page token to continue paging through a previous request.
         # @param request_options [CandidApiClient::RequestOptions]
         # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
@@ -223,8 +261,8 @@ module CandidApiClient
         #    name: "Test Service Facility",
         #    page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
         #  )
-        def get_multi(limit: nil, name: nil, organization_service_facility_ids: nil, page_token: nil,
-                      request_options: nil)
+        def get_multi(limit: nil, name: nil, organization_service_facility_ids: nil, external_ids: nil,
+                      place_of_service_code: nil, page_token: nil, request_options: nil)
           Async do
             response = @request_client.conn.get do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -239,6 +277,8 @@ module CandidApiClient
                 "limit": limit,
                 "name": name,
                 "organization_service_facility_ids": organization_service_facility_ids,
+                "external_ids": external_ids,
+                "place_of_service_code": place_of_service_code,
                 "page_token": page_token
               }.compact
               req.url "#{@request_client.get_url(environment: CandidApi,
@@ -248,11 +288,42 @@ module CandidApiClient
           end
         end
 
+        # Looks up a single organization service facility by its `external_id` field. This
+        #  can be useful
+        #  for finding service facilities within Candid which are associated with service
+        #  facilities in
+        #  an external system.
+        #
+        # @param external_id [String]
+        # @param request_options [CandidApiClient::RequestOptions]
+        # @return [CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
+        # @example
+        #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
+        #  api.organization_service_facilities.v_2.get_by_external_id(external_id: "external_id")
+        def get_by_external_id(external_id:, request_options: nil)
+          Async do
+            response = @request_client.conn.get do |req|
+              req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
+              req.headers["Authorization"] = request_options.token unless request_options&.token.nil?
+              req.headers = {
+            **(req.headers || {}),
+            **@request_client.get_headers,
+            **(request_options&.additional_headers || {})
+              }.compact
+              req.url "#{@request_client.get_url(environment: CandidApi,
+                                                 request_options: request_options)}/api/organization-service-facilities/v2/external-id/#{external_id}"
+            end
+            CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility.from_json(json_object: response.body)
+          end
+        end
+
         # @param request [Hash] Request of type CandidApiClient::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityCreate, as a Hash
         #   * :name (String)
         #   * :aliases (Array<String>)
         #   * :description (String)
+        #   * :external_id (String)
         #   * :npi (String)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus)
         #   * :operational_status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus)
         #   * :mode (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityMode)
@@ -294,7 +365,9 @@ module CandidApiClient
         #   * :name (String)
         #   * :aliases (Array<String>)
         #   * :description (String)
+        #   * :external_id (String)
         #   * :npi (String)
+        #   * :place_of_service_code (CandidApiClient::Commons::Types::FacilityTypeCode)
         #   * :status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus)
         #   * :operational_status (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityOperationalStatus)
         #   * :mode (CandidApiClient::OrganizationServiceFacilities::V2::Types::ServiceFacilityMode)

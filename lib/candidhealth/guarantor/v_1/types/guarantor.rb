@@ -54,14 +54,14 @@ module CandidApiClient
           # @param address [CandidApiClient::Commons::Types::StreetAddressShortZip]
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::Guarantor::V1::Types::Guarantor]
-          def initialize(guarantor_id:, phone_numbers:, phone_consent:, email_consent:, first_name:, last_name:, external_id:, address:, email: OMIT,
-                         auto_charge_consent: OMIT, date_of_birth: OMIT, additional_properties: nil)
+          def initialize(guarantor_id:, phone_numbers:, phone_consent:, email_consent:, auto_charge_consent:,
+                         first_name:, last_name:, external_id:, address:, email: OMIT, date_of_birth: OMIT, additional_properties: nil)
             @guarantor_id = guarantor_id
             @phone_numbers = phone_numbers
             @phone_consent = phone_consent
             @email = email if email != OMIT
             @email_consent = email_consent
-            @auto_charge_consent = auto_charge_consent if auto_charge_consent != OMIT
+            @auto_charge_consent = auto_charge_consent
             @first_name = first_name
             @last_name = last_name
             @external_id = external_id
@@ -146,7 +146,7 @@ module CandidApiClient
             obj.phone_consent.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
             obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
             obj.email_consent.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
-            obj.auto_charge_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.auto_charge_consent is not the expected type, validation failed.")
+            obj.auto_charge_consent.is_a?(Boolean) != false || raise("Passed value for field obj.auto_charge_consent is not the expected type, validation failed.")
             obj.first_name.is_a?(String) != false || raise("Passed value for field obj.first_name is not the expected type, validation failed.")
             obj.last_name.is_a?(String) != false || raise("Passed value for field obj.last_name is not the expected type, validation failed.")
             obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")

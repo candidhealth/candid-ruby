@@ -45,10 +45,10 @@ module CandidApiClient
           attr_reader :charge_amount_cents
           # @return [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
           attr_reader :drug_identification
-          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required for institutional
-          #  claims. If your organization does not intend to submit claims with a different
-          #  place of service at the service line level, this field should not be populated.
-          #  02 for telemedicine, 11 for in-person. Full list
+          # @return [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           attr_reader :place_of_service_code
           # @return [String] A free-form description to clarify the related data elements and their content.
@@ -99,10 +99,10 @@ module CandidApiClient
           #  charge_amount_cents will be set to 200, if there is no chargemaster entry, it
           #  will default to the amount set in this field.
           # @param drug_identification [CandidApiClient::ServiceLines::V2::Types::DrugIdentification]
-          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required for institutional
-          #  claims. If your organization does not intend to submit claims with a different
-          #  place of service at the service line level, this field should not be populated.
-          #  02 for telemedicine, 11 for in-person. Full list
+          # @param place_of_service_code [CandidApiClient::Commons::Types::FacilityTypeCode] 837p Loop2300, SV105. This enum is not used or required in 837i claims. If your
+          #  organization does not intend to submit claims with a different place of service
+          #  at the service line level, this field should not be populated. 02 for
+          #  telemedicine, 11 for in-person. Full list
           #  //www.cms.gov/Medicare/Coding/place-of-service-codes/Place_of_Service_Code_Set).
           # @param description [String] A free-form description to clarify the related data elements and their content.
           #  Maps to SV1-01, C003-07 on a 837-P and SV2-02, C003-07 on a 837-I form.

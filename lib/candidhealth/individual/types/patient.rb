@@ -69,14 +69,14 @@ module CandidApiClient
         # @param gender [CandidApiClient::Individual::Types::Gender]
         # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
         # @return [CandidApiClient::Individual::Types::Patient]
-        def initialize(individual_id:, phone_numbers:, phone_consent:, email_consent:, non_insurance_payers:, non_insurance_payers_info:, external_id:, date_of_birth:, address:, first_name:, last_name:, gender:, email: OMIT,
-                       auto_charge_consent: OMIT, additional_properties: nil)
+        def initialize(individual_id:, phone_numbers:, phone_consent:, email_consent:, auto_charge_consent:,
+                       non_insurance_payers:, non_insurance_payers_info:, external_id:, date_of_birth:, address:, first_name:, last_name:, gender:, email: OMIT, additional_properties: nil)
           @individual_id = individual_id
           @phone_numbers = phone_numbers
           @phone_consent = phone_consent
           @email = email if email != OMIT
           @email_consent = email_consent
-          @auto_charge_consent = auto_charge_consent if auto_charge_consent != OMIT
+          @auto_charge_consent = auto_charge_consent
           @non_insurance_payers = non_insurance_payers
           @non_insurance_payers_info = non_insurance_payers_info
           @external_id = external_id
@@ -179,7 +179,7 @@ module CandidApiClient
           obj.phone_consent.is_a?(Boolean) != false || raise("Passed value for field obj.phone_consent is not the expected type, validation failed.")
           obj.email&.is_a?(String) != false || raise("Passed value for field obj.email is not the expected type, validation failed.")
           obj.email_consent.is_a?(Boolean) != false || raise("Passed value for field obj.email_consent is not the expected type, validation failed.")
-          obj.auto_charge_consent&.is_a?(Boolean) != false || raise("Passed value for field obj.auto_charge_consent is not the expected type, validation failed.")
+          obj.auto_charge_consent.is_a?(Boolean) != false || raise("Passed value for field obj.auto_charge_consent is not the expected type, validation failed.")
           obj.non_insurance_payers.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers is not the expected type, validation failed.")
           obj.non_insurance_payers_info.is_a?(Array) != false || raise("Passed value for field obj.non_insurance_payers_info is not the expected type, validation failed.")
           obj.external_id.is_a?(String) != false || raise("Passed value for field obj.external_id is not the expected type, validation failed.")

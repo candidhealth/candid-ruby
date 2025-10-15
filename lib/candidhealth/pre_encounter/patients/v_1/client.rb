@@ -114,6 +114,7 @@ module CandidApiClient
           #   * :authorizations (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>)
           #   * :referrals (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>)
           #   * :primary_service_facility_id (String)
+          #   * :service_facilities (Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>)
           #   * :do_not_invoice_reason (CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason)
           #   * :note_ids (Array<String>)
           #   * :tag_ids (Array<String>)
@@ -259,6 +260,7 @@ module CandidApiClient
           #   * :authorizations (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>)
           #   * :referrals (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>)
           #   * :primary_service_facility_id (String)
+          #   * :service_facilities (Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>)
           #   * :do_not_invoice_reason (CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason)
           #   * :note_ids (Array<String>)
           #   * :tag_ids (Array<String>)
@@ -291,7 +293,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create_with_mrn(request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, mrn: "mrn" })
+          #  api.pre_encounter.patients.v_1.create_with_mrn(request: { mrn: "mrn", name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create_with_mrn(request:, skip_duplicate_check: nil, request_options: nil)
             response = @request_client.conn.post do |req|
               req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -548,6 +550,7 @@ module CandidApiClient
           #   * :authorizations (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>)
           #   * :referrals (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>)
           #   * :primary_service_facility_id (String)
+          #   * :service_facilities (Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>)
           #   * :do_not_invoice_reason (CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason)
           #   * :note_ids (Array<String>)
           #   * :tag_ids (Array<String>)
@@ -813,6 +816,7 @@ module CandidApiClient
           #   * :authorizations (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>)
           #   * :referrals (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>)
           #   * :primary_service_facility_id (String)
+          #   * :service_facilities (Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>)
           #   * :do_not_invoice_reason (CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason)
           #   * :note_ids (Array<String>)
           #   * :tag_ids (Array<String>)
@@ -960,6 +964,7 @@ module CandidApiClient
           #   * :authorizations (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>)
           #   * :referrals (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>)
           #   * :primary_service_facility_id (String)
+          #   * :service_facilities (Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>)
           #   * :do_not_invoice_reason (CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason)
           #   * :note_ids (Array<String>)
           #   * :tag_ids (Array<String>)
@@ -992,7 +997,7 @@ module CandidApiClient
           # @return [CandidApiClient::PreEncounter::Patients::V1::Types::Patient]
           # @example
           #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-          #  api.pre_encounter.patients.v_1.create_with_mrn(request: { name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] }, mrn: "mrn" })
+          #  api.pre_encounter.patients.v_1.create_with_mrn(request: { mrn: "mrn", name: { family: "family", given: ["given", "given"], use: USUAL }, other_names: [{ family: "family", given: ["given", "given"], use: USUAL }, { family: "family", given: ["given", "given"], use: USUAL }], birth_date: DateTime.parse(2023-01-15), biological_sex: FEMALE, primary_address: { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, other_addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }], other_telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], contacts: [{ relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }, { relationship: [SELF, SELF], name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }], addresses: [{ use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }, { use: HOME, line: ["line", "line"], city: "city", state: "state", postal_code: "postal_code", country: "country" }] }], general_practitioners: [{ name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }, { name: { family: "family", given: ["given", "given"], use: USUAL }, telecoms: [{ value: "value", use: HOME }, { value: "value", use: HOME }] }], filing_order: { coverages: ["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"] } })
           def create_with_mrn(request:, skip_duplicate_check: nil, request_options: nil)
             Async do
               response = @request_client.conn.post do |req|
@@ -1261,6 +1266,7 @@ module CandidApiClient
           #   * :authorizations (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>)
           #   * :referrals (Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>)
           #   * :primary_service_facility_id (String)
+          #   * :service_facilities (Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>)
           #   * :do_not_invoice_reason (CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason)
           #   * :note_ids (Array<String>)
           #   * :tag_ids (Array<String>)

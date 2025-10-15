@@ -68,7 +68,7 @@ module CandidApiClient
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { quantity: "quantity", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", procedure_code: "procedure_code" })
+        #  api.service_lines.v_2.create(request: { procedure_code: "procedure_code", quantity: "quantity", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
         def create(request:, request_options: nil)
           response = @request_client.conn.post do |req|
             req.options.timeout = request_options.timeout_in_seconds unless request_options&.timeout_in_seconds.nil?
@@ -333,7 +333,7 @@ module CandidApiClient
         # @return [CandidApiClient::ServiceLines::V2::Types::ServiceLine]
         # @example
         #  api = CandidApiClient::Client.new(base_url: "https://api.example.com", environment: CandidApiClient::Environment::PRODUCTION)
-        #  api.service_lines.v_2.create(request: { quantity: "quantity", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32", procedure_code: "procedure_code" })
+        #  api.service_lines.v_2.create(request: { procedure_code: "procedure_code", quantity: "quantity", units: MJ, claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32" })
         def create(request:, request_options: nil)
           Async do
             response = @request_client.conn.post do |req|

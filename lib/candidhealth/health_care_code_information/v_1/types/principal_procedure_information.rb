@@ -2,8 +2,6 @@
 
 require_relative "principal_procedure_information_code_qualifier"
 require "date"
-require_relative "code_list_qualifier_code"
-require_relative "date_time_period_format_qualifier"
 require "ostruct"
 require "json"
 
@@ -17,7 +15,10 @@ module CandidApiClient
           attr_reader :principal_procedure_code_qualifier
           # @return [String]
           attr_reader :principal_procedure_code
-          # @return [DateTime]
+          # @return [DateTime] An [RFC 3339, section 5.6 datetime](https://ijmacd.github.io/rfc3339-iso8601/).
+          #  For example, 2017-07-21T17:32:28Z.
+          #  In practice, only the date portion of this is used for claim submission, so
+          #  midnight time is fine.
           attr_reader :procedure_date
           # @return [String] The id of this health care code information if it is already stored.
           #  If this is not set, this is referring to a new health care code information to
@@ -30,50 +31,6 @@ module CandidApiClient
           #  This will be set by the server in responses, but clients are not expected to set
           #  it.
           attr_reader :encounter_id
-          # @return [CandidApiClient::HealthCareCodeInformation::V1::Types::CodeListQualifierCode]
-          attr_reader :code_list_qualifier
-          # @return [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :industry_code_1
-          # @return [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :industry_code_2
-          # @return [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :industry_code_3
-          # @return [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :industry_code_4
-          # @return [CandidApiClient::HealthCareCodeInformation::V1::Types::DateTimePeriodFormatQualifier] Controls how the date_time_period field is interpreted and is submitted
-          #  as part of claim process.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :date_time_period_format_qualifier
-          # @return [String] A string, formatted according to date_time_period_format_qualifier, which
-          #  ultimately represents the date time period in which an information object
-          #  is covering.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :date_time_period
-          # @return [String] A decimal used to represent ValueInformation results.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :monetary_amount
-          # @return [String] You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          attr_reader :quantity
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -84,7 +41,10 @@ module CandidApiClient
 
           # @param principal_procedure_code_qualifier [CandidApiClient::HealthCareCodeInformation::V1::Types::PrincipalProcedureInformationCodeQualifier]
           # @param principal_procedure_code [String]
-          # @param procedure_date [DateTime]
+          # @param procedure_date [DateTime] An [RFC 3339, section 5.6 datetime](https://ijmacd.github.io/rfc3339-iso8601/).
+          #  For example, 2017-07-21T17:32:28Z.
+          #  In practice, only the date portion of this is used for claim submission, so
+          #  midnight time is fine.
           # @param id [String] The id of this health care code information if it is already stored.
           #  If this is not set, this is referring to a new health care code information to
           #  be added
@@ -94,77 +54,22 @@ module CandidApiClient
           # @param encounter_id [String] The encounter_id of this health care code information if it is already stored.
           #  This will be set by the server in responses, but clients are not expected to set
           #  it.
-          # @param code_list_qualifier [CandidApiClient::HealthCareCodeInformation::V1::Types::CodeListQualifierCode]
-          # @param industry_code_1 [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param industry_code_2 [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param industry_code_3 [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param industry_code_4 [String] A code string whose interpretation depends on the code_list_qualifier being set.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param date_time_period_format_qualifier [CandidApiClient::HealthCareCodeInformation::V1::Types::DateTimePeriodFormatQualifier] Controls how the date_time_period field is interpreted and is submitted
-          #  as part of claim process.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param date_time_period [String] A string, formatted according to date_time_period_format_qualifier, which
-          #  ultimately represents the date time period in which an information object
-          #  is covering.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param monetary_amount [String] A decimal used to represent ValueInformation results.
-          #  You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
-          # @param quantity [String] You do not need to set this field generally, instead it is provided as advisory
-          #  context on how this HealthCareCodeInformation's data will be available in
-          #  reporting.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::HealthCareCodeInformation::V1::Types::PrincipalProcedureInformation]
           def initialize(principal_procedure_code_qualifier:, principal_procedure_code:, procedure_date:, id: OMIT,
-                         encounter_id: OMIT, code_list_qualifier: OMIT, industry_code_1: OMIT, industry_code_2: OMIT, industry_code_3: OMIT, industry_code_4: OMIT, date_time_period_format_qualifier: OMIT, date_time_period: OMIT, monetary_amount: OMIT, quantity: OMIT, additional_properties: nil)
+                         encounter_id: OMIT, additional_properties: nil)
             @principal_procedure_code_qualifier = principal_procedure_code_qualifier
             @principal_procedure_code = principal_procedure_code
             @procedure_date = procedure_date
             @id = id if id != OMIT
             @encounter_id = encounter_id if encounter_id != OMIT
-            @code_list_qualifier = code_list_qualifier if code_list_qualifier != OMIT
-            @industry_code_1 = industry_code_1 if industry_code_1 != OMIT
-            @industry_code_2 = industry_code_2 if industry_code_2 != OMIT
-            @industry_code_3 = industry_code_3 if industry_code_3 != OMIT
-            @industry_code_4 = industry_code_4 if industry_code_4 != OMIT
-            if date_time_period_format_qualifier != OMIT
-              @date_time_period_format_qualifier = date_time_period_format_qualifier
-            end
-            @date_time_period = date_time_period if date_time_period != OMIT
-            @monetary_amount = monetary_amount if monetary_amount != OMIT
-            @quantity = quantity if quantity != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "principal_procedure_code_qualifier": principal_procedure_code_qualifier,
               "principal_procedure_code": principal_procedure_code,
               "procedure_date": procedure_date,
               "id": id,
-              "encounter_id": encounter_id,
-              "code_list_qualifier": code_list_qualifier,
-              "industry_code_1": industry_code_1,
-              "industry_code_2": industry_code_2,
-              "industry_code_3": industry_code_3,
-              "industry_code_4": industry_code_4,
-              "date_time_period_format_qualifier": date_time_period_format_qualifier,
-              "date_time_period": date_time_period,
-              "monetary_amount": monetary_amount,
-              "quantity": quantity
+              "encounter_id": encounter_id
             }.reject do |_k, v|
               v == OMIT
             end
@@ -182,30 +87,12 @@ module CandidApiClient
             procedure_date = (DateTime.parse(parsed_json["procedure_date"]) unless parsed_json["procedure_date"].nil?)
             id = struct["id"]
             encounter_id = struct["encounter_id"]
-            code_list_qualifier = struct["code_list_qualifier"]
-            industry_code_1 = struct["industry_code_1"]
-            industry_code_2 = struct["industry_code_2"]
-            industry_code_3 = struct["industry_code_3"]
-            industry_code_4 = struct["industry_code_4"]
-            date_time_period_format_qualifier = struct["date_time_period_format_qualifier"]
-            date_time_period = struct["date_time_period"]
-            monetary_amount = struct["monetary_amount"]
-            quantity = struct["quantity"]
             new(
               principal_procedure_code_qualifier: principal_procedure_code_qualifier,
               principal_procedure_code: principal_procedure_code,
               procedure_date: procedure_date,
               id: id,
               encounter_id: encounter_id,
-              code_list_qualifier: code_list_qualifier,
-              industry_code_1: industry_code_1,
-              industry_code_2: industry_code_2,
-              industry_code_3: industry_code_3,
-              industry_code_4: industry_code_4,
-              date_time_period_format_qualifier: date_time_period_format_qualifier,
-              date_time_period: date_time_period,
-              monetary_amount: monetary_amount,
-              quantity: quantity,
               additional_properties: struct
             )
           end
@@ -229,15 +116,6 @@ module CandidApiClient
             obj.procedure_date.is_a?(DateTime) != false || raise("Passed value for field obj.procedure_date is not the expected type, validation failed.")
             obj.id&.is_a?(String) != false || raise("Passed value for field obj.id is not the expected type, validation failed.")
             obj.encounter_id&.is_a?(String) != false || raise("Passed value for field obj.encounter_id is not the expected type, validation failed.")
-            obj.code_list_qualifier&.is_a?(CandidApiClient::HealthCareCodeInformation::V1::Types::CodeListQualifierCode) != false || raise("Passed value for field obj.code_list_qualifier is not the expected type, validation failed.")
-            obj.industry_code_1&.is_a?(String) != false || raise("Passed value for field obj.industry_code_1 is not the expected type, validation failed.")
-            obj.industry_code_2&.is_a?(String) != false || raise("Passed value for field obj.industry_code_2 is not the expected type, validation failed.")
-            obj.industry_code_3&.is_a?(String) != false || raise("Passed value for field obj.industry_code_3 is not the expected type, validation failed.")
-            obj.industry_code_4&.is_a?(String) != false || raise("Passed value for field obj.industry_code_4 is not the expected type, validation failed.")
-            obj.date_time_period_format_qualifier&.is_a?(CandidApiClient::HealthCareCodeInformation::V1::Types::DateTimePeriodFormatQualifier) != false || raise("Passed value for field obj.date_time_period_format_qualifier is not the expected type, validation failed.")
-            obj.date_time_period&.is_a?(String) != false || raise("Passed value for field obj.date_time_period is not the expected type, validation failed.")
-            obj.monetary_amount&.is_a?(String) != false || raise("Passed value for field obj.monetary_amount is not the expected type, validation failed.")
-            obj.quantity&.is_a?(String) != false || raise("Passed value for field obj.quantity is not the expected type, validation failed.")
           end
         end
       end

@@ -106,6 +106,8 @@ module CandidApiClient
           AMFT = "AMFT"
           CDN = "CDN"
           CNS = "CNS"
+          MDPHD = "MDPHD"
+          AUD = "AuD"
         end
       end
     end

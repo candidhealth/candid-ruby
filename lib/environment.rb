@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module CandidApiClient
+  #  Environment service identifiers used as hash keys
+  CandidApi = :CandidApi
+
   class Environment
     PRODUCTION = {
       CandidApi: "https://api.joincandidhealth.com",

@@ -20,7 +20,7 @@ require_relative "../../../common/types/canonical_non_insurance_payer_associatio
 require_relative "guarantor"
 require_relative "authorization"
 require_relative "referral"
-require_relative "patient_service_facility"
+require_relative "../../../common/types/patient_service_facility"
 require_relative "do_not_invoice_reason"
 require_relative "origination_detail"
 require_relative "inferred_patient_metadata"
@@ -38,8 +38,8 @@ module CandidApiClient
             #  contexts.
             attr_reader :id
             # @return [String] The medical record number for the patient.  Human-friendly Candid generated MRNs
-            #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
-            #  and "XXXX" is a zero-padded incrementing integer.
+            #  are of the form "YYMMDDXXXX", where "YYMMDD" is the date of patient creation and
+            #  "XXXX" is a zero-padded incrementing integer.
             attr_reader :mrn
             # @return [String] The organization that owns this object.
             attr_reader :organization_id
@@ -125,7 +125,7 @@ module CandidApiClient
             attr_reader :referrals
             # @return [String]
             attr_reader :primary_service_facility_id
-            # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>] Associated service facilities for this patient.
+            # @return [Array<CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility>] Associated service facilities for this patient.
             attr_reader :service_facilities
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             attr_reader :do_not_invoice_reason
@@ -148,8 +148,8 @@ module CandidApiClient
             # @param id [String] The unique UUID identifier for a Patient.  Patient ID is used in machine
             #  contexts.
             # @param mrn [String] The medical record number for the patient.  Human-friendly Candid generated MRNs
-            #  are of the form "YYMMDDXXXX", where "YYYYMMDD" is the date of patient creation
-            #  and "XXXX" is a zero-padded incrementing integer.
+            #  are of the form "YYMMDDXXXX", where "YYMMDD" is the date of patient creation and
+            #  "XXXX" is a zero-padded incrementing integer.
             # @param organization_id [String] The organization that owns this object.
             # @param deactivated [Boolean] True if the object is deactivated.  Deactivated objects are not returned in
             #  search results but are returned in all other endpoints including scan.
@@ -195,7 +195,7 @@ module CandidApiClient
             # @param authorizations [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>]
             # @param referrals [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>]
             # @param primary_service_facility_id [String]
-            # @param service_facilities [Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>] Associated service facilities for this patient.
+            # @param service_facilities [Array<CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility>] Associated service facilities for this patient.
             # @param do_not_invoice_reason [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             # @param note_ids [Array<String>]
             # @param tag_ids [Array<String>]
@@ -417,7 +417,7 @@ module CandidApiClient
               primary_service_facility_id = struct["primary_service_facility_id"]
               service_facilities = parsed_json["service_facilities"]&.map do |item|
                 item = item.to_json
-                CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility.from_json(json_object: item)
+                CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility.from_json(json_object: item)
               end
               do_not_invoice_reason = struct["do_not_invoice_reason"]
               note_ids = struct["note_ids"]

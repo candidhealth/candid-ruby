@@ -20,7 +20,7 @@ require_relative "../../../common/types/canonical_non_insurance_payer_associatio
 require_relative "guarantor"
 require_relative "authorization"
 require_relative "referral"
-require_relative "patient_service_facility"
+require_relative "../../../common/types/patient_service_facility"
 require_relative "do_not_invoice_reason"
 require_relative "origination_detail"
 require_relative "inferred_patient_metadata"
@@ -106,7 +106,7 @@ module CandidApiClient
             attr_reader :referrals
             # @return [String]
             attr_reader :primary_service_facility_id
-            # @return [Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>] Associated service facilities for this patient.
+            # @return [Array<CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility>] Associated service facilities for this patient.
             attr_reader :service_facilities
             # @return [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             attr_reader :do_not_invoice_reason
@@ -164,7 +164,7 @@ module CandidApiClient
             # @param authorizations [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Authorization>]
             # @param referrals [Array<CandidApiClient::PreEncounter::Patients::V1::Types::Referral>]
             # @param primary_service_facility_id [String]
-            # @param service_facilities [Array<CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility>] Associated service facilities for this patient.
+            # @param service_facilities [Array<CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility>] Associated service facilities for this patient.
             # @param do_not_invoice_reason [CandidApiClient::PreEncounter::Patients::V1::Types::DoNotInvoiceReason] If this value is defined, the customer will not be invoiced.
             # @param note_ids [Array<String>]
             # @param tag_ids [Array<String>]
@@ -365,7 +365,7 @@ module CandidApiClient
               primary_service_facility_id = struct["primary_service_facility_id"]
               service_facilities = parsed_json["service_facilities"]&.map do |item|
                 item = item.to_json
-                CandidApiClient::PreEncounter::Patients::V1::Types::PatientServiceFacility.from_json(json_object: item)
+                CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility.from_json(json_object: item)
               end
               do_not_invoice_reason = struct["do_not_invoice_reason"]
               note_ids = struct["note_ids"]

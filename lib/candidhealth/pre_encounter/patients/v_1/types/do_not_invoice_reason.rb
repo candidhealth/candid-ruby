@@ -10,6 +10,9 @@ module CandidApiClient
             DECEASED = "DECEASED"
             HARDSHIP = "HARDSHIP"
             OTHER = "OTHER"
+            COLLECTIONS = "COLLECTIONS"
+            BAD_ADDRESS = "BAD_ADDRESS"
+            PROFESSIONAL_COURTESY = "PROFESSIONAL_COURTESY"
           end
         end
       end

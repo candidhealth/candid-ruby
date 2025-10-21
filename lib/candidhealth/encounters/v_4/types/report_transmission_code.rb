@@ -6,6 +6,7 @@ module CandidApiClient
       module Types
         class ReportTransmissionCode
           CBM = "BM"
+          CEL = "EL"
           CFX = "FX"
         end
       end

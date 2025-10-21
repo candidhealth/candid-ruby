@@ -5,6 +5,7 @@ require_relative "external_provider_type"
 require_relative "contact_point"
 require_relative "address"
 require_relative "period"
+require_relative "patient_service_facility"
 require "ostruct"
 require "json"
 
@@ -29,6 +30,8 @@ module CandidApiClient
           attr_reader :canonical_id
           # @return [String]
           attr_reader :fax
+          # @return [Array<CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility>] Associated service facilities for this provider.
+          attr_reader :service_facilities
           # @return [OpenStruct] Additional properties unmapped to the current class definition
           attr_reader :additional_properties
           # @return [Object]
@@ -45,10 +48,11 @@ module CandidApiClient
           # @param period [CandidApiClient::PreEncounter::Common::Types::Period]
           # @param canonical_id [String]
           # @param fax [String]
+          # @param service_facilities [Array<CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility>] Associated service facilities for this provider.
           # @param additional_properties [OpenStruct] Additional properties unmapped to the current class definition
           # @return [CandidApiClient::PreEncounter::Common::Types::ExternalProvider]
           def initialize(name:, telecoms:, type: OMIT, npi: OMIT, addresses: OMIT, period: OMIT, canonical_id: OMIT,
-                         fax: OMIT, additional_properties: nil)
+                         fax: OMIT, service_facilities: OMIT, additional_properties: nil)
             @name = name
             @type = type if type != OMIT
             @npi = npi if npi != OMIT
@@ -57,6 +61,7 @@ module CandidApiClient
             @period = period if period != OMIT
             @canonical_id = canonical_id if canonical_id != OMIT
             @fax = fax if fax != OMIT
+            @service_facilities = service_facilities if service_facilities != OMIT
             @additional_properties = additional_properties
             @_field_set = {
               "name": name,
@@ -66,7 +71,8 @@ module CandidApiClient
               "addresses": addresses,
               "period": period,
               "canonical_id": canonical_id,
-              "fax": fax
+              "fax": fax,
+              "service_facilities": service_facilities
             }.reject do |_k, v|
               v == OMIT
             end
@@ -103,6 +109,10 @@ module CandidApiClient
             end
             canonical_id = struct["canonical_id"]
             fax = struct["fax"]
+            service_facilities = parsed_json["service_facilities"]&.map do |item|
+              item = item.to_json
+              CandidApiClient::PreEncounter::Common::Types::PatientServiceFacility.from_json(json_object: item)
+            end
             new(
               name: name,
               type: type,
@@ -112,6 +122,7 @@ module CandidApiClient
               period: period,
               canonical_id: canonical_id,
               fax: fax,
+              service_facilities: service_facilities,
               additional_properties: struct
             )
           end
@@ -138,6 +149,7 @@ module CandidApiClient
             obj.period.nil? || CandidApiClient::PreEncounter::Common::Types::Period.validate_raw(obj: obj.period)
             obj.canonical_id&.is_a?(String) != false || raise("Passed value for field obj.canonical_id is not the expected type, validation failed.")
             obj.fax&.is_a?(String) != false || raise("Passed value for field obj.fax is not the expected type, validation failed.")
+            obj.service_facilities&.is_a?(Array) != false || raise("Passed value for field obj.service_facilities is not the expected type, validation failed.")
           end
         end
       end

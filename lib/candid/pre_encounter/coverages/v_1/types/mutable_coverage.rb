@@ -15,6 +15,7 @@ module Candid
             field :eligibility_checks, -> { Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata] }, optional: true, nullable: false
             field :latest_eligibility_check, -> { Candid::PreEncounter::Coverages::V1::Types::LatestEligibilityCheck }, optional: true, nullable: false
             field :benefits, -> { Candid::PreEncounter::Coverages::V1::Types::CoverageBenefits }, optional: true, nullable: false
+            field :orcon, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
           end
         end

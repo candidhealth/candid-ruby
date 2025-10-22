@@ -47,6 +47,7 @@ module Candid
             field :tag_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
             field :origination_detail, -> { Candid::PreEncounter::Patients::V1::Types::OriginationDetail }, optional: true, nullable: false
             field :inferred_patient_metadata, -> { Candid::PreEncounter::Patients::V1::Types::InferredPatientMetadata }, optional: true, nullable: false
+            field :orcon, -> { Internal::Types::Boolean }, optional: true, nullable: false
 
           end
         end

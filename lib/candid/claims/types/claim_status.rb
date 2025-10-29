@@ -5,6 +5,7 @@ module Candid
     module Types
       module ClaimStatus
         extend Candid::Internal::Types::Enum
+
         BILLER_RECEIVED = "biller_received"
         CODED = "coded"
         SUBMITTED_TO_PAYER = "submitted_to_payer"
@@ -19,7 +20,8 @@ module Candid
         FINALIZED_PAID = "finalized_paid"
         FINALIZED_DENIED = "finalized_denied"
         HELD_BY_CUSTOMER = "held_by_customer"
-        ERA_REQUIRES_REVIEW = "era_requires_review"end
+        ERA_REQUIRES_REVIEW = "era_requires_review"
+      end
     end
   end
 end

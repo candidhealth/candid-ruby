@@ -7,8 +7,9 @@ module Candid
         module Types
           # An object representing a Medicare Advantage recommendation.
           class MedicareAdvantageRecommendation < Internal::Types::Model
-            field :payload, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::MedicareAdvantageRecommendationPayload }, optional: false, nullable: false
-
+            field :payload, lambda {
+              Candid::PreEncounter::EligibilityChecks::V1::Types::MedicareAdvantageRecommendationPayload
+            }, optional: false, nullable: false
           end
         end
       end

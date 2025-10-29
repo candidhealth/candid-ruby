@@ -9,10 +9,13 @@ module Candid
           field :insurance_allowed_amount_cents, -> { Integer }, optional: true, nullable: false
           field :insurance_paid_amount_cents, -> { Integer }, optional: true, nullable: false
           field :charge_amount_cents, -> { Integer }, optional: true, nullable: false
-          field :service_lines, -> { Internal::Types::Hash[String, Internal::Types::Array[Candid::InsuranceAdjudications::V1::Types::ServiceLineAdjudication]] }, optional: false, nullable: false
+          field :service_lines, lambda {
+            Internal::Types::Hash[String, Internal::Types::Array[Candid::InsuranceAdjudications::V1::Types::ServiceLineAdjudication]]
+          }, optional: false, nullable: false
           field :payer_claim_number, -> { String }, optional: true, nullable: false
-          field :carcs, -> { Internal::Types::Array[Candid::X12::V1::Types::ClaimAdjustmentReasonCode] }, optional: false, nullable: false
-
+          field :carcs, lambda {
+            Internal::Types::Array[Candid::X12::V1::Types::ClaimAdjustmentReasonCode]
+          }, optional: false, nullable: false
         end
       end
     end

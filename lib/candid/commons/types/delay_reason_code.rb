@@ -5,6 +5,7 @@ module Candid
     module Types
       module DelayReasonCode
         extend Candid::Internal::Types::Enum
+
         C_1 = "1"
         C_2 = "2"
         C_3 = "3"
@@ -18,7 +19,8 @@ module Candid
         C_11 = "11"
         C_15 = "15"
         C_16 = "16"
-        C_17 = "17"end
+        C_17 = "17"
+      end
     end
   end
 end

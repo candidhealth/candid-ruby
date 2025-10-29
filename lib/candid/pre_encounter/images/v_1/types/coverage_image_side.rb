@@ -7,8 +7,10 @@ module Candid
         module Types
           module CoverageImageSide
             extend Candid::Internal::Types::Enum
+
             FRONT = "FRONT"
-            BACK = "BACK"end
+            BACK = "BACK"
+          end
         end
       end
     end

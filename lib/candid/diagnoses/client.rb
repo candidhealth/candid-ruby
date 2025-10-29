@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Diagnoses
@@ -12,15 +13,22 @@ module Candid
       # @return [Candid::Diagnoses::Types::Diagnosis]
       def create(request_options: {}, **params)
         _request = Candid::Internal::JSON::Request.new(
-          method: POST,
+          base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+          method: "POST",
           path: "/api/diagnoses/v2",
-          body: Candid::Diagnoses::Types::StandaloneDiagnosisCreate.new(params[:request]).to_h,
+          body: Candid::Diagnoses::Types::StandaloneDiagnosisCreate.new(params).to_h
         )
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Candid::Diagnoses::Types::Diagnosis.load(_response.body)
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Candid::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Candid::Diagnoses::Types::Diagnosis.load(_response.body)
         else
-          raise _response.body
+          error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
         end
       end
 
@@ -28,12 +36,25 @@ module Candid
       #
       # @return [Candid::Diagnoses::Types::Diagnosis]
       def update(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return Candid::Diagnoses::Types::Diagnosis.load(_response.body)
+        _path_param_names = ["diagnosis_id"]
+
+        _request = Candid::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+          method: "PATCH",
+          path: "/api/diagnoses/v2/#{params[:diagnosis_id]}",
+          body: params.except(*_path_param_names)
+        )
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Candid::Errors::TimeoutError
+        end
+        code = _response.code.to_i
+        if code.between?(200, 299)
+          Candid::Diagnoses::Types::Diagnosis.load(_response.body)
         else
-          raise _response.body
+          error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(_response.body, code: code)
         end
       end
 
@@ -41,15 +62,22 @@ module Candid
       #
       # @return [untyped]
       def delete(request_options: {}, **params)
-        _request = params
-        _response = @client.send(_request)
-        if _response.code >= "200" && _response.code < "300"
-          return
-        else
-          raise _response.body
+        _request = Candid::Internal::JSON::Request.new(
+          base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+          method: "DELETE",
+          path: "/api/diagnoses/v2/#{params[:diagnosis_id]}"
+        )
+        begin
+          _response = @client.send(_request)
+        rescue Net::HTTPRequestTimeout
+          raise Candid::Errors::TimeoutError
         end
-      end
+        code = _response.code.to_i
+        return if code.between?(200, 299)
 
+        error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(_response.body, code: code)
+      end
     end
   end
 end

@@ -6,8 +6,10 @@ module Candid
       module Types
         module EncounterSubmissionOriginType
           extend Candid::Internal::Types::Enum
+
           CANDID = "CANDID"
-          EXTERNAL = "EXTERNAL"end
+          EXTERNAL = "EXTERNAL"
+        end
       end
     end
   end

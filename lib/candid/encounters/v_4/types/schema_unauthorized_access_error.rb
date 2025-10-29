@@ -6,7 +6,6 @@ module Candid
       module Types
         class SchemaUnauthorizedAccessError < Internal::Types::Model
           field :schema_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

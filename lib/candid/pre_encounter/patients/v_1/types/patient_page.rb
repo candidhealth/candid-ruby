@@ -6,8 +6,9 @@ module Candid
       module V1
         module Types
           class PatientPage < Internal::Types::Model
-            field :items, -> { Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient] }, optional: false, nullable: false
-
+            field :items, lambda {
+              Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]
+            }, optional: false, nullable: false
           end
         end
       end

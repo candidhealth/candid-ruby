@@ -10,7 +10,6 @@ module Candid
           field :end_date, -> { String }, optional: true, nullable: false
           field :rate_cents, -> { Integer }, optional: false, nullable: false
           field :is_deactivated, -> { Internal::Types::Boolean }, optional: false, nullable: false
-
         end
       end
     end

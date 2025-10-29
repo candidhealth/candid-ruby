@@ -6,6 +6,7 @@ module Candid
       module Types
         module ServiceType
           extend Candid::Internal::Types::Enum
+
           NEW_PATIENT_VIDEO_APPT = "new_patient_video_appt"
           NEW_PATIENT_PREV_VIDEO_APPT = "new_patient_prev_video_appt"
           NEW_PATIENT_OFFICE_APPT = "new_patient_office_appt"
@@ -46,7 +47,8 @@ module Candid
           LACTATION_CONSULTING = "lactation_consulting"
           SLEEP_STUDY = "sleep_study"
           CMS_TELEHEALTH_CODES = "cms_telehealth_codes"
-          CMS_TELEHEALTH_AUDIO_CODES = "cms_telehealth_audio_codes"end
+          CMS_TELEHEALTH_AUDIO_CODES = "cms_telehealth_audio_codes"
+        end
       end
     end
   end

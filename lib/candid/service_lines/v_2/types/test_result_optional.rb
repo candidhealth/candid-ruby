@@ -7,7 +7,6 @@ module Candid
         class TestResultOptional < Internal::Types::Model
           field :value, -> { Integer }, optional: true, nullable: false
           field :result_type, -> { Candid::ServiceLines::V2::Types::TestResultType }, optional: true, nullable: false
-
         end
       end
     end

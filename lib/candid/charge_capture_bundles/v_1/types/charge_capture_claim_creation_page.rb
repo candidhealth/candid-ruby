@@ -5,8 +5,9 @@ module Candid
     module V1
       module Types
         class ChargeCaptureClaimCreationPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation]
+          }, optional: false, nullable: false
         end
       end
     end

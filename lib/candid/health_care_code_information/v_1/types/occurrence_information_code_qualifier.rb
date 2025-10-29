@@ -6,7 +6,9 @@ module Candid
       module Types
         module OccurrenceInformationCodeQualifier
           extend Candid::Internal::Types::Enum
-          CBH = "BH"end
+
+          CBH = "BH"
+        end
       end
     end
   end

@@ -6,7 +6,9 @@ module Candid
       module Types
         module ConditionInformationCodeQualifier
           extend Candid::Internal::Types::Enum
-          CBG = "BG"end
+
+          CBG = "BG"
+        end
       end
     end
   end

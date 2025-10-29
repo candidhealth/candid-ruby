@@ -6,6 +6,7 @@ module Candid
       module Types
         module ServiceFacilityType
           extend Candid::Internal::Types::Enum
+
           DIAGNOSTICS_OR_THERAPEUTICS_UNIT = "DX"
           CARDIOVASCULAR_DIAGNOSTICS_OR_THERAPEUTICS_UNIT = "CVDX"
           CARDIAC_CATHETERIZATION_LAB = "CATH"
@@ -128,7 +129,8 @@ module Candid
           PATIENTS_RESIDENCE = "PTRES"
           SCHOOL = "SCHOOL"
           UNDERAGE_PROTECTION_CENTER = "UPC"
-          WORK_SITE = "WORK"end
+          WORK_SITE = "WORK"
+        end
       end
     end
   end

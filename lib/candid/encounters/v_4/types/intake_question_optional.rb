@@ -7,8 +7,9 @@ module Candid
         class IntakeQuestionOptional < Internal::Types::Model
           field :id, -> { String }, optional: true, nullable: false
           field :text, -> { String }, optional: true, nullable: false
-          field :responses, -> { Internal::Types::Array[Candid::Encounters::V4::Types::IntakeResponseAndFollowUps] }, optional: true, nullable: false
-
+          field :responses, lambda {
+            Internal::Types::Array[Candid::Encounters::V4::Types::IntakeResponseAndFollowUps]
+          }, optional: true, nullable: false
         end
       end
     end

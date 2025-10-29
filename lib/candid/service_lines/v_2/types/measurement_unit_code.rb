@@ -6,11 +6,13 @@ module Candid
       module Types
         module MeasurementUnitCode
           extend Candid::Internal::Types::Enum
+
           MILLILITERS = "ML"
           UNITS = "UN"
           GRAMS = "GR"
           INTERNATIONAL_UNIT = "F2"
-          MILLIGRAM = "ME"end
+          MILLIGRAM = "ME"
+        end
       end
     end
   end

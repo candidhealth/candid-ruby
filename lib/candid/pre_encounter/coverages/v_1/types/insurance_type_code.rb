@@ -7,6 +7,7 @@ module Candid
         module Types
           module InsuranceTypeCode
             extend Candid::Internal::Types::Enum
+
             C_01 = "01"
             C_12 = "12"
             C_13 = "13"
@@ -76,7 +77,8 @@ module Candid
             CTF = "TF"
             CU = "U"
             CWC = "WC"
-            CWU = "WU"end
+            CWU = "WU"
+          end
         end
       end
     end

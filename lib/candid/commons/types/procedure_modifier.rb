@@ -5,6 +5,7 @@ module Candid
     module Types
       module ProcedureModifier
         extend Candid::Internal::Types::Enum
+
         AV = "AV"
         AU = "AU"
         AW = "AW"
@@ -414,7 +415,8 @@ module Candid
         XP = "XP"
         XS = "XS"
         XU = "XU"
-        XY = "XY"end
+        XY = "XY"
+      end
     end
   end
 end

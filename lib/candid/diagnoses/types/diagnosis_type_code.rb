@@ -5,6 +5,7 @@ module Candid
     module Types
       module DiagnosisTypeCode
         extend Candid::Internal::Types::Enum
+
         ABF = "ABF"
         ABJ = "ABJ"
         ABK = "ABK"
@@ -14,7 +15,8 @@ module Candid
         BK = "BK"
         PR = "PR"
         DR = "DR"
-        LOI = "LOI"end
+        LOI = "LOI"
+      end
     end
   end
 end

@@ -6,7 +6,6 @@ module Candid
       module Types
         class EncounterExternalIdUniquenessErrorType < Internal::Types::Model
           field :external_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

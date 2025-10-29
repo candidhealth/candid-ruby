@@ -10,9 +10,10 @@ module Candid
           field :payment_timestamp, -> { String }, optional: true, nullable: false
           field :payment_note, -> { String }, optional: true, nullable: false
           field :check_number, -> { String }, optional: true, nullable: false
-          field :allocations, -> { Internal::Types::Array[Candid::Financials::Types::AllocationCreate] }, optional: false, nullable: false
+          field :allocations, lambda {
+            Internal::Types::Array[Candid::Financials::Types::AllocationCreate]
+          }, optional: false, nullable: false
           field :invoice_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

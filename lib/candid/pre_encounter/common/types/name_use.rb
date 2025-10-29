@@ -6,13 +6,15 @@ module Candid
       module Types
         module NameUse
           extend Candid::Internal::Types::Enum
+
           USUAL = "USUAL"
           OFFICIAL = "OFFICIAL"
           TEMP = "TEMP"
           NICKNAME = "NICKNAME"
           ANONYMOUS = "ANONYMOUS"
           OLD = "OLD"
-          MAIDEN = "MAIDEN"end
+          MAIDEN = "MAIDEN"
+        end
       end
     end
   end

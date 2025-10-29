@@ -6,8 +6,10 @@ module Candid
       module Types
         module LabCodeType
           extend Candid::Internal::Types::Enum
+
           QUEST = "quest"
-          LABCORP = "labcorp"end
+          LABCORP = "labcorp"
+        end
       end
     end
   end

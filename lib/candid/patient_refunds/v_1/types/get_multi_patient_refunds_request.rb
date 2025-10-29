@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PatientRefunds
@@ -15,7 +16,6 @@ module Candid
           field :sort, -> { Candid::PatientRefunds::V1::Types::PatientRefundSortField }, optional: true, nullable: false
           field :sort_direction, -> { Candid::Commons::Types::SortDirection }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
-
         end
       end
     end

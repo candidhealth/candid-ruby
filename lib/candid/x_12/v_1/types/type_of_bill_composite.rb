@@ -6,7 +6,6 @@ module Candid
       module Types
         class TypeOfBillComposite < Internal::Types::Model
           field :code, -> { String }, optional: false, nullable: false
-
         end
       end
     end

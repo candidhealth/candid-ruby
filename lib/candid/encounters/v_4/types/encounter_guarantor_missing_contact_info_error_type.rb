@@ -6,7 +6,6 @@ module Candid
       module Types
         class EncounterGuarantorMissingContactInfoErrorType < Internal::Types::Model
           field :missing_fields, -> { Internal::Types::Array[String] }, optional: false, nullable: false
-
         end
       end
     end

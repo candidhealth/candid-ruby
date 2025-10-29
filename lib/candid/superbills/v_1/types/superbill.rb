@@ -11,7 +11,6 @@ module Candid
           field :date_range_min, -> { String }, optional: false, nullable: false
           field :date_range_max, -> { String }, optional: false, nullable: false
           field :file_name, -> { String }, optional: false, nullable: false
-
         end
       end
     end

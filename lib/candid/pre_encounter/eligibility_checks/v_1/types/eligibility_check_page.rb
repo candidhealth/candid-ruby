@@ -6,8 +6,9 @@ module Candid
       module V1
         module Types
           class EligibilityCheckPage < Internal::Types::Model
-            field :items, -> { Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck] }, optional: false, nullable: false
-
+            field :items, lambda {
+              Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck]
+            }, optional: false, nullable: false
           end
         end
       end

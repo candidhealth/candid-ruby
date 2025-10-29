@@ -5,6 +5,7 @@ module Candid
     module Types
       module FacilityTypeCode
         extend Candid::Internal::Types::Enum
+
         PHARMACY = "01"
         TELEHEALTH = "02"
         SCHOOL = "03"
@@ -54,7 +55,8 @@ module Candid
         STATE_OR_LOCAL_PUBLIC_HEALTH_CLINIC = "71"
         RURAL_HEALTH_CLINIC = "72"
         INDEPENDENT_LABORATORY = "81"
-        OTHER_UNLISTED_FACILITY = "99"end
+        OTHER_UNLISTED_FACILITY = "99"
+      end
     end
   end
 end

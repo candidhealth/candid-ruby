@@ -6,6 +6,7 @@ module Candid
       module Types
         module PatientPaymentStatus
           extend Candid::Internal::Types::Enum
+
           PENDING = "PENDING"
           PAID = "paid"
           CANCELED = "CANCELED"
@@ -16,7 +17,8 @@ module Candid
           STRIPE_PENDING = "pending"
           STRIPE_FAILED = "failed"
           STRIPE_REQUIRES_ACTION = "requires_action"
-          STRIPE_CANCELED = "canceled"end
+          STRIPE_CANCELED = "canceled"
+        end
       end
     end
   end

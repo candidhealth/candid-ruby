@@ -10,7 +10,6 @@ module Candid
           field :description, -> { String }, optional: false, nullable: false
           field :content_type, -> { String }, optional: false, nullable: false
           field :authed_url, -> { String }, optional: false, nullable: false
-
         end
       end
     end

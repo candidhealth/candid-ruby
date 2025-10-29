@@ -13,7 +13,6 @@ module Candid
             field :postal_code, -> { String }, optional: true, nullable: false
             field :country_code, -> { String }, optional: true, nullable: false
             field :country_sub_division_code, -> { String }, optional: true, nullable: false
-
           end
         end
       end

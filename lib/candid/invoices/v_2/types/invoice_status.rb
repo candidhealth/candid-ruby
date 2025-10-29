@@ -6,12 +6,14 @@ module Candid
       module Types
         module InvoiceStatus
           extend Candid::Internal::Types::Enum
+
           DRAFT = "DRAFT"
           OPEN = "OPEN"
           PAID = "PAID"
           VOID = "VOID"
           UNCOLLECTIBLE = "UNCOLLECTIBLE"
-          HELD = "HELD"end
+          HELD = "HELD"
+        end
       end
     end
   end

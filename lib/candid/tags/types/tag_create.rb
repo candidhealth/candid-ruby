@@ -7,7 +7,6 @@ module Candid
         field :tag_id, -> { String }, optional: false, nullable: false
         field :description, -> { String }, optional: false, nullable: false
         field :color, -> { Candid::Tags::Types::TagColorEnum }, optional: false, nullable: false
-
       end
     end
   end

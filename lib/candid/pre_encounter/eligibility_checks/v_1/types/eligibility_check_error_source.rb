@@ -7,8 +7,10 @@ module Candid
         module Types
           module EligibilityCheckErrorSource
             extend Candid::Internal::Types::Enum
+
             CANDID = "CANDID"
-            STEDI = "STEDI"end
+            STEDI = "STEDI"
+          end
         end
       end
     end

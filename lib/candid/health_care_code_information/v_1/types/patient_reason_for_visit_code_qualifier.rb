@@ -6,8 +6,10 @@ module Candid
       module Types
         module PatientReasonForVisitCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CPR = "PR"
-          CAPR = "APR"end
+          CAPR = "APR"
+        end
       end
     end
   end

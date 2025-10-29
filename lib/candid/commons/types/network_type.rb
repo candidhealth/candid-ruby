@@ -5,6 +5,7 @@ module Candid
     module Types
       module NetworkType
         extend Candid::Internal::Types::Enum
+
         PPO = "12"
         POS = "13"
         EPO = "14"
@@ -25,7 +26,8 @@ module Candid
         WORKERS_COMP_HEALTH_CLAIM = "WC"
         MUTUALLY_DEFINED = "ZZ"
         COMMERCIAL_INSURANCE_CO = "CI"
-        BLUE_CROSS_BLUE_SHIELD = "BL"end
+        BLUE_CROSS_BLUE_SHIELD = "BL"
+      end
     end
   end
 end

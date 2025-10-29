@@ -6,6 +6,7 @@ module Candid
       module Types
         module DenialReasonContent
           extend Candid::Internal::Types::Enum
+
           AUTHORIZATION_REQUIRED = "Authorization Required"
           REFERRAL_REQUIRED = "Referral Required"
           MEDICAL_RECORDS_REQUESTED = "Medical Records Requested"
@@ -37,7 +38,8 @@ module Candid
           INFO_REQUESTED_FROM_PATIENT = "Info Requested from Patient"
           BILLING_ERROR = "Billing Error"
           UNKNOWN = "Unknown"
-          MAX_BENEFIT_REACHED = "Max Benefit Reached"end
+          MAX_BENEFIT_REACHED = "Max Benefit Reached"
+        end
       end
     end
   end

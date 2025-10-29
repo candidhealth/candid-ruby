@@ -10,7 +10,6 @@ module Candid
           field :use, -> { Candid::PreEncounter::Common::Types::NameUse }, optional: false, nullable: false
           field :period, -> { Candid::PreEncounter::Common::Types::Period }, optional: true, nullable: false
           field :suffix, -> { String }, optional: true, nullable: false
-
         end
       end
     end

@@ -5,10 +5,15 @@ module Candid
     module V4
       module Types
         class EpsdtReferralOptional < Internal::Types::Model
-          field :condition_indicator_1, -> { Candid::Commons::Types::EpsdtReferralConditionIndicatorCode }, optional: true, nullable: false
-          field :condition_indicator_2, -> { Candid::Commons::Types::EpsdtReferralConditionIndicatorCode }, optional: true, nullable: false
-          field :condition_indicator_3, -> { Candid::Commons::Types::EpsdtReferralConditionIndicatorCode }, optional: true, nullable: false
-
+          field :condition_indicator_1, lambda {
+            Candid::Commons::Types::EpsdtReferralConditionIndicatorCode
+          }, optional: true, nullable: false
+          field :condition_indicator_2, lambda {
+            Candid::Commons::Types::EpsdtReferralConditionIndicatorCode
+          }, optional: true, nullable: false
+          field :condition_indicator_3, lambda {
+            Candid::Commons::Types::EpsdtReferralConditionIndicatorCode
+          }, optional: true, nullable: false
         end
       end
     end

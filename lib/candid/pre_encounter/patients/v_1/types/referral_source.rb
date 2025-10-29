@@ -7,10 +7,12 @@ module Candid
         module Types
           module ReferralSource
             extend Candid::Internal::Types::Enum
+
             HOSPITAL = "HOSPITAL"
             REFERRING_MD = "REFERRING_MD"
             SELF = "SELF"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+          end
         end
       end
     end

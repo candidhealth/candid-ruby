@@ -6,8 +6,10 @@ module Candid
       module Types
         module ChargeCaptureSortField
           extend Candid::Internal::Types::Enum
+
           CREATED_AT = "created_at"
-          DATE_OF_SERVICE = "date_of_service"end
+          DATE_OF_SERVICE = "date_of_service"
+        end
       end
     end
   end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module FeeSchedules
@@ -5,7 +6,6 @@ module Candid
       module Types
         class PayerThresholdGetRequest < Internal::Types::Model
           field :payer_uuids, -> { String }, optional: false, nullable: false
-
         end
       end
     end

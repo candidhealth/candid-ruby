@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Contracts
@@ -13,7 +14,6 @@ module Candid
           field :contract_status, -> { Candid::Contracts::V2::Types::ContractStatus }, optional: true, nullable: false
           field :sort, -> { Candid::Contracts::V2::Types::ContractSortField }, optional: true, nullable: false
           field :sort_direction, -> { Candid::Commons::Types::SortDirection }, optional: true, nullable: false
-
         end
       end
     end

@@ -5,9 +5,11 @@ module Candid
     module Types
       module AccountType
         extend Candid::Internal::Types::Enum
+
         PATIENT = "PATIENT"
         INSURANCE = "INSURANCE"
-        THIRD_PARTY_PAYER = "THIRD_PARTY_PAYER"end
+        THIRD_PARTY_PAYER = "THIRD_PARTY_PAYER"
+      end
     end
   end
 end

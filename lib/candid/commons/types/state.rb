@@ -5,6 +5,7 @@ module Candid
     module Types
       module State
         extend Candid::Internal::Types::Enum
+
         AA = "AA"
         AE = "AE"
         AP = "AP"
@@ -66,7 +67,8 @@ module Candid
         WA = "WA"
         WV = "WV"
         WI = "WI"
-        WY = "WY"end
+        WY = "WY"
+      end
     end
   end
 end

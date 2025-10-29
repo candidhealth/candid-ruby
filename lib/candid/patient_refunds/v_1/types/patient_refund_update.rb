@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PatientRefunds
@@ -9,7 +10,6 @@ module Candid
           field :refund_note, -> { Candid::Financials::Types::NoteUpdate }, optional: true, nullable: false
           field :invoice, -> { Candid::Financials::Types::InvoiceUpdate }, optional: true, nullable: false
           field :refund_reason, -> { Candid::Financials::Types::RefundReasonUpdate }, optional: true, nullable: false
-
         end
       end
     end

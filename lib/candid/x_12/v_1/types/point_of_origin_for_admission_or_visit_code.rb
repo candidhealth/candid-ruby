@@ -6,6 +6,7 @@ module Candid
       module Types
         module PointOfOriginForAdmissionOrVisitCode
           extend Candid::Internal::Types::Enum
+
           C_1 = "1"
           C_2 = "2"
           C_4 = "4"
@@ -16,7 +17,8 @@ module Candid
           CD = "D"
           CE = "E"
           CF = "F"
-          CG = "G"end
+          CG = "G"
+        end
       end
     end
   end

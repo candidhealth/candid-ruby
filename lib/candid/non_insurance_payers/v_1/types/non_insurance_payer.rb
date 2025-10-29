@@ -11,8 +11,9 @@ module Candid
           field :category, -> { String }, optional: true, nullable: false
           field :enabled, -> { Internal::Types::Boolean }, optional: false, nullable: false
           field :address, -> { Candid::Commons::Types::StreetAddressShortZip }, optional: true, nullable: false
-          field :clinical_trials, -> { Internal::Types::Array[Candid::ClinicalTrials::V1::Types::ClinicalTrial] }, optional: false, nullable: false
-
+          field :clinical_trials, lambda {
+            Internal::Types::Array[Candid::ClinicalTrials::V1::Types::ClinicalTrial]
+          }, optional: false, nullable: false
         end
       end
     end

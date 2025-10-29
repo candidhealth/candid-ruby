@@ -6,10 +6,11 @@ module Candid
       module Types
         class IndeterminateNetworkStatus < Internal::Types::Model
           field :error, -> { String }, optional: false, nullable: false
-          field :explanation, -> { Candid::ExpectedNetworkStatus::V2::Types::Explanation }, optional: false, nullable: false
+          field :explanation, lambda {
+            Candid::ExpectedNetworkStatus::V2::Types::Explanation
+          }, optional: false, nullable: false
           field :routed_payer_uuid, -> { String }, optional: true, nullable: false
           field :routed_billing_provider_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

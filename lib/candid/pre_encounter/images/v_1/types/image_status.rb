@@ -7,9 +7,11 @@ module Candid
         module Types
           module ImageStatus
             extend Candid::Internal::Types::Enum
+
             PENDING = "PENDING"
             UPLOADED = "UPLOADED"
-            FAILED = "FAILED"end
+            FAILED = "FAILED"
+          end
         end
       end
     end

@@ -5,6 +5,7 @@ module Candid
     module Types
       module PatientTransactionSource
         extend Candid::Internal::Types::Enum
+
         MANUAL_ENTRY = "MANUAL_ENTRY"
         CHARGEBEE = "CHARGEBEE"
         SQUARE = "SQUARE"
@@ -12,7 +13,8 @@ module Candid
         ELATION = "ELATION"
         CEDAR = "CEDAR"
         HEALTHIE = "HEALTHIE"
-        REALLOCATION = "REALLOCATION"end
+        REALLOCATION = "REALLOCATION"
+      end
     end
   end
 end

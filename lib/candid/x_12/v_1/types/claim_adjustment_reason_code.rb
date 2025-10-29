@@ -8,7 +8,6 @@ module Candid
           field :group_code, -> { Candid::Commons::Types::ClaimAdjustmentGroupCodes }, optional: false, nullable: false
           field :reason_code, -> { Candid::X12::V1::Types::Carc }, optional: false, nullable: false
           field :amount_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

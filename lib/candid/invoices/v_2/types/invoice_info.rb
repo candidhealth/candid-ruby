@@ -8,7 +8,6 @@ module Candid
           field :id, -> { String }, optional: false, nullable: false
           field :invoice, -> { Candid::Invoices::V2::Types::Invoice }, optional: false, nullable: false
           field :invoice_type, -> { Candid::Invoices::V2::Types::InvoiceDestination }, optional: false, nullable: false
-
         end
       end
     end

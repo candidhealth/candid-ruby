@@ -6,6 +6,7 @@ module Candid
       module Types
         module ConditionCode
           extend Candid::Internal::Types::Enum
+
           C_01 = "01"
           C_02 = "02"
           C_03 = "03"
@@ -158,7 +159,8 @@ module Candid
           CW_2 = "W2"
           CW_3 = "W3"
           CW_4 = "W4"
-          CW_5 = "W5"end
+          CW_5 = "W5"
+        end
       end
     end
   end

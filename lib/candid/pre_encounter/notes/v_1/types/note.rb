@@ -9,7 +9,6 @@ module Candid
           class Note < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
             field :created_at, -> { String }, optional: false, nullable: false
-
           end
         end
       end

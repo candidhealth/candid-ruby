@@ -6,7 +6,9 @@ module Candid
       module Types
         module OccurrenceSpanCodeQualifier
           extend Candid::Internal::Types::Enum
-          CBI = "BI"end
+
+          CBI = "BI"
+        end
       end
     end
   end

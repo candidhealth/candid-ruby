@@ -11,7 +11,6 @@ module Candid
           field :diagnosis_id_three, -> { String }, optional: true, nullable: false
           field :revenue_code, -> { String }, optional: true, nullable: false
           field :procedure_code, -> { String }, optional: true, nullable: false
-
         end
       end
     end

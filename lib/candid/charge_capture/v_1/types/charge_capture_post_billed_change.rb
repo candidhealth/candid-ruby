@@ -9,7 +9,6 @@ module Candid
           field :id, -> { String }, optional: false, nullable: false
           field :message, -> { String }, optional: false, nullable: false
           field :resolved, -> { Internal::Types::Boolean }, optional: false, nullable: false
-
         end
       end
     end

@@ -14,10 +14,15 @@ module Candid
             field :group_number, -> { String }, optional: true, nullable: false
             field :start_date, -> { String }, optional: true, nullable: false
             field :end_date, -> { String }, optional: true, nullable: false
-            field :plan_dates, -> { Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::PlanDate] }, optional: true, nullable: false
-            field :subscriber, -> { Candid::PreEncounter::Coverages::V1::Types::ExpandedMemberInfo }, optional: true, nullable: false
-            field :dependent, -> { Candid::PreEncounter::Coverages::V1::Types::ExpandedMemberInfo }, optional: true, nullable: false
-
+            field :plan_dates, lambda {
+              Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::PlanDate]
+            }, optional: true, nullable: false
+            field :subscriber, lambda {
+              Candid::PreEncounter::Coverages::V1::Types::ExpandedMemberInfo
+            }, optional: true, nullable: false
+            field :dependent, lambda {
+              Candid::PreEncounter::Coverages::V1::Types::ExpandedMemberInfo
+            }, optional: true, nullable: false
           end
         end
       end

@@ -11,15 +11,22 @@ module Candid
           field :first_name, -> { String }, optional: true, nullable: false
           field :last_name, -> { String }, optional: true, nullable: false
           field :organization_name, -> { String }, optional: true, nullable: false
-          field :provider_type, -> { Candid::OrganizationProviders::V2::Types::ProviderType }, optional: false, nullable: false
+          field :provider_type, lambda {
+            Candid::OrganizationProviders::V2::Types::ProviderType
+          }, optional: false, nullable: false
           field :tax_id, -> { String }, optional: true, nullable: false
           field :taxonomy_code, -> { String }, optional: true, nullable: false
-          field :license_type, -> { Candid::OrganizationProviders::V2::Types::LicenseType }, optional: false, nullable: false
-          field :addresses, -> { Internal::Types::Array[Candid::OrganizationProviders::V2::Types::OrganizationProviderAddress] }, optional: true, nullable: false
+          field :license_type, lambda {
+            Candid::OrganizationProviders::V2::Types::LicenseType
+          }, optional: false, nullable: false
+          field :addresses, lambda {
+            Internal::Types::Array[Candid::OrganizationProviders::V2::Types::OrganizationProviderAddress]
+          }, optional: true, nullable: false
           field :employment_start_date, -> { String }, optional: true, nullable: false
           field :employment_termination_date, -> { String }, optional: true, nullable: false
-          field :qualifications, -> { Internal::Types::Array[Candid::Identifiers::Types::IdentifierCreate] }, optional: false, nullable: false
-
+          field :qualifications, lambda {
+            Internal::Types::Array[Candid::Identifiers::Types::IdentifierCreate]
+          }, optional: false, nullable: false
         end
       end
     end

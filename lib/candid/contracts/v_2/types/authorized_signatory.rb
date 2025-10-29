@@ -11,7 +11,6 @@ module Candid
           field :email, -> { String }, optional: true, nullable: false
           field :phone, -> { String }, optional: true, nullable: false
           field :fax, -> { String }, optional: true, nullable: false
-
         end
       end
     end

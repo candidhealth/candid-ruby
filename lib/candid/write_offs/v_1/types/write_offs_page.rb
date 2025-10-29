@@ -5,8 +5,9 @@ module Candid
     module V1
       module Types
         class WriteOffsPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::WriteOffs::V1::Types::WriteOff] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::WriteOffs::V1::Types::WriteOff]
+          }, optional: false, nullable: false
         end
       end
     end

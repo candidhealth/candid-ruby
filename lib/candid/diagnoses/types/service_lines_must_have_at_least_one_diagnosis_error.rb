@@ -7,7 +7,6 @@ module Candid
         field :diagnosis_id, -> { String }, optional: false, nullable: false
         field :service_line_id, -> { String }, optional: false, nullable: false
         field :message, -> { String }, optional: false, nullable: false
-
       end
     end
   end

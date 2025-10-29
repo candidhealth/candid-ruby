@@ -6,6 +6,7 @@ module Candid
       module Types
         module OccurrenceSpanCode
           extend Candid::Internal::Types::Enum
+
           C_70 = "70"
           C_71 = "71"
           C_72 = "72"
@@ -22,7 +23,8 @@ module Candid
           CM_1 = "M1"
           CM_2 = "M2"
           CM_3 = "M3"
-          CM_4 = "M4"end
+          CM_4 = "M4"
+        end
       end
     end
   end

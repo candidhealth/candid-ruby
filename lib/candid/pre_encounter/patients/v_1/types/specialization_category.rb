@@ -7,6 +7,7 @@ module Candid
         module Types
           module SpecializationCategory
             extend Candid::Internal::Types::Enum
+
             BEHAVIORAL_HEALTH_THERAPY = "BEHAVIORAL_HEALTH_THERAPY"
             CARDIOLOGY = "CARDIOLOGY"
             DERMATOLOGY = "DERMATOLOGY"
@@ -34,7 +35,8 @@ module Candid
             RHEUMATOLOGY = "RHEUMATOLOGY"
             SCREENING = "SCREENING"
             UROLOGY = "UROLOGY"
-            OTHER = "OTHER"end
+            OTHER = "OTHER"
+          end
         end
       end
     end

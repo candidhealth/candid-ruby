@@ -6,6 +6,7 @@ module Candid
       module Types
         module ServiceFacilityPhysicalType
           extend Candid::Internal::Types::Enum
+
           SITE = "si"
           BUILDING = "bu"
           WING = "wi"
@@ -19,7 +20,8 @@ module Candid
           CABINET = "ca"
           ROAD = "rd"
           AREA = "area"
-          JURISDICTION = "jdn"end
+          JURISDICTION = "jdn"
+        end
       end
     end
   end

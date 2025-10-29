@@ -6,7 +6,9 @@ module Candid
       module Types
         module TreatmentCodeQualifier
           extend Candid::Internal::Types::Enum
-          CTC = "TC"end
+
+          CTC = "TC"
+        end
       end
     end
   end

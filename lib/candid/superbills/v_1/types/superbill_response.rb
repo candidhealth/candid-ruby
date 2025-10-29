@@ -5,8 +5,9 @@ module Candid
     module V1
       module Types
         class SuperbillResponse < Internal::Types::Model
-          field :superbills, -> { Internal::Types::Array[Candid::Superbills::V1::Types::Superbill] }, optional: false, nullable: false
-
+          field :superbills, lambda {
+            Internal::Types::Array[Candid::Superbills::V1::Types::Superbill]
+          }, optional: false, nullable: false
         end
       end
     end

@@ -8,7 +8,6 @@ module Candid
           field :first_name, -> { String }, optional: true, nullable: false
           field :last_name, -> { String }, optional: true, nullable: false
           field :organization_name, -> { String }, optional: true, nullable: false
-
         end
       end
     end

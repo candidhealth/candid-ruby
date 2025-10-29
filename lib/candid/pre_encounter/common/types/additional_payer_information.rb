@@ -9,7 +9,6 @@ module Candid
           field :availity_payer_id, -> { String }, optional: true, nullable: false
           field :availity_payer_name, -> { String }, optional: true, nullable: false
           field :availity_remittance_payer_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

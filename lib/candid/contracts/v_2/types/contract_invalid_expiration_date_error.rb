@@ -6,7 +6,6 @@ module Candid
       module Types
         class ContractInvalidExpirationDateError < Internal::Types::Model
           field :message, -> { String }, optional: false, nullable: false
-
         end
       end
     end

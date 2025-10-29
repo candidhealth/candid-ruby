@@ -11,7 +11,6 @@ module Candid
             field :payer_id, -> { String }, optional: true, nullable: false
             field :payer_name, -> { String }, optional: true, nullable: false
             field :member_id, -> { String }, optional: true, nullable: false
-
           end
         end
       end

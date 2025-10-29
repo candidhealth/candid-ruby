@@ -7,6 +7,7 @@ module Candid
         module Types
           module MaritalStatus
             extend Candid::Internal::Types::Enum
+
             ANNULLED = "ANNULLED"
             DIVORCED = "DIVORCED"
             INTERLOCUTORY = "INTERLOCUTORY"
@@ -18,7 +19,8 @@ module Candid
             UNMARRIED = "UNMARRIED"
             NEVER_MARRIED = "NEVER_MARRIED"
             WIDOWED = "WIDOWED"
-            UNKNOWN = "UNKNOWN"end
+            UNKNOWN = "UNKNOWN"
+          end
         end
       end
     end

@@ -6,9 +6,11 @@ module Candid
       module Types
         module ExpectedNetworkStatus
           extend Candid::Internal::Types::Enum
+
           IN_NETWORK = "in_network"
           OUT_OF_NETWORK = "out_of_network"
-          UNKNOWN = "unknown"end
+          UNKNOWN = "unknown"
+        end
       end
     end
   end

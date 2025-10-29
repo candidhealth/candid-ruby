@@ -6,10 +6,12 @@ module Candid
       module Types
         module NonInsurancePayerSortField
           extend Candid::Internal::Types::Enum
+
           NAME = "NAME"
           CATEGORY = "CATEGORY"
           ENABLED = "ENABLED"
-          UPDATED_AT = "UPDATED_AT"end
+          UPDATED_AT = "UPDATED_AT"
+        end
       end
     end
   end

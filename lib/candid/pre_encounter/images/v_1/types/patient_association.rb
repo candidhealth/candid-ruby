@@ -9,7 +9,6 @@ module Candid
           class PatientAssociation < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
             field :notes, -> { String }, optional: true, nullable: false
-
           end
         end
       end

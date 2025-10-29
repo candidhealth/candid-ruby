@@ -11,8 +11,9 @@ module Candid
           field :check_number, -> { String }, optional: true, nullable: false
           field :check_date, -> { String }, optional: false, nullable: false
           field :note, -> { String }, optional: true, nullable: false
-          field :claims, -> { Internal::Types::Hash[String, Internal::Types::Array[Candid::InsuranceAdjudications::V1::Types::ClaimAdjudication]] }, optional: false, nullable: false
-
+          field :claims, lambda {
+            Internal::Types::Hash[String, Internal::Types::Array[Candid::InsuranceAdjudications::V1::Types::ClaimAdjudication]]
+          }, optional: false, nullable: false
         end
       end
     end

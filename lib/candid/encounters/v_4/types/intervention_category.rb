@@ -6,10 +6,12 @@ module Candid
       module Types
         module InterventionCategory
           extend Candid::Internal::Types::Enum
+
           ALLOPATHIC = "allopathic"
           NATUROPATHIC = "naturopathic"
           TESTS = "tests"
-          LIFESTYLE = "lifestyle"end
+          LIFESTYLE = "lifestyle"
+        end
       end
     end
   end

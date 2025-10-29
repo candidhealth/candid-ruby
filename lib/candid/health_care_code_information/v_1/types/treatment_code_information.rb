@@ -6,9 +6,10 @@ module Candid
       module Types
         # This corresponds to the TC code qualifier value.
         class TreatmentCodeInformation < Internal::Types::Model
-          field :treatment_code_qualifier, -> { Candid::HealthCareCodeInformation::V1::Types::TreatmentCodeQualifier }, optional: false, nullable: false
+          field :treatment_code_qualifier, lambda {
+            Candid::HealthCareCodeInformation::V1::Types::TreatmentCodeQualifier
+          }, optional: false, nullable: false
           field :treatment_code, -> { String }, optional: false, nullable: false
-
         end
       end
     end

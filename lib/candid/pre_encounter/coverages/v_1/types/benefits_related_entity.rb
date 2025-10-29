@@ -9,9 +9,12 @@ module Candid
             field :entity_identifier, -> { String }, optional: true, nullable: false
             field :entity_type, -> { String }, optional: true, nullable: false
             field :entity_name, -> { String }, optional: true, nullable: false
-            field :contact_information, -> { Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::RelatedEntityContact] }, optional: true, nullable: false
-            field :service_type_codes, -> { Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::ServiceTypeCode] }, optional: true, nullable: false
-
+            field :contact_information, lambda {
+              Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::RelatedEntityContact]
+            }, optional: true, nullable: false
+            field :service_type_codes, lambda {
+              Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::ServiceTypeCode]
+            }, optional: true, nullable: false
           end
         end
       end

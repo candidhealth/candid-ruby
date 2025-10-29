@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+module Candid
+  module EncounterSupplementalInformation
+    module V1
+      module Types
+        class SupplementalInformation < Internal::Types::Model
+          field :supplemental_information_id, -> { String }, optional: false, nullable: false
+          field :attachment_id, -> { String }, optional: true, nullable: false
+          field :attachment_report_type_code, lambda {
+            Candid::Commons::Types::ReportTypeCode
+          }, optional: false, nullable: false
+          field :attachment_transmission_code, lambda {
+            Candid::Commons::Types::ReportTransmissionCode
+          }, optional: false, nullable: false
+          field :attachment_control_number, -> { String }, optional: true, nullable: false
+          field :attachment_inclusion, lambda {
+            Candid::EncounterSupplementalInformation::V1::Types::AttachmentInclusion
+          }, optional: false, nullable: false
+          field :encounter_id, -> { String }, optional: false, nullable: false
+        end
+      end
+    end
+  end
+end

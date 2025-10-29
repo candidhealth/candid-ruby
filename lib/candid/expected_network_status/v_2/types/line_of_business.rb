@@ -6,9 +6,11 @@ module Candid
       module Types
         module LineOfBusiness
           extend Candid::Internal::Types::Enum
+
           MEDICARE = "medicare"
           MEDICAID = "medicaid"
-          COMMERCIAL = "commercial"end
+          COMMERCIAL = "commercial"
+        end
       end
     end
   end

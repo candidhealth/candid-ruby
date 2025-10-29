@@ -5,8 +5,9 @@ module Candid
     module V1
       module Types
         class InsurancePaymentsPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::InsurancePayments::V1::Types::InsurancePayment] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::InsurancePayments::V1::Types::InsurancePayment]
+          }, optional: false, nullable: false
         end
       end
     end

@@ -7,9 +7,11 @@ module Candid
         module Types
           module EligibilityCheckStatus
             extend Candid::Internal::Types::Enum
+
             COMPLETED = "COMPLETED"
             FAILED = "FAILED"
-            PENDING = "PENDING"end
+            PENDING = "PENDING"
+          end
         end
       end
     end

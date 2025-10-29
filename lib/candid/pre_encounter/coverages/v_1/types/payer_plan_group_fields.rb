@@ -9,8 +9,9 @@ module Candid
             field :payer_plan_group_id, -> { String }, optional: false, nullable: false
             field :payer_id, -> { String }, optional: false, nullable: false
             field :payer_name, -> { String }, optional: false, nullable: false
-            field :plan_type, -> { Candid::PreEncounter::Coverages::V1::Types::NetworkType }, optional: false, nullable: false
-
+            field :plan_type, lambda {
+              Candid::PreEncounter::Coverages::V1::Types::NetworkType
+            }, optional: false, nullable: false
           end
         end
       end

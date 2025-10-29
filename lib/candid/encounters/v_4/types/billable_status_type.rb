@@ -6,8 +6,10 @@ module Candid
       module Types
         module BillableStatusType
           extend Candid::Internal::Types::Enum
+
           BILLABLE = "BILLABLE"
-          NOT_BILLABLE = "NOT_BILLABLE"end
+          NOT_BILLABLE = "NOT_BILLABLE"
+        end
       end
     end
   end

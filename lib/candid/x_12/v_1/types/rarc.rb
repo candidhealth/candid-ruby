@@ -6,6 +6,7 @@ module Candid
       module Types
         module Rarc
           extend Candid::Internal::Types::Enum
+
           M_1 = "M1"
           M_2 = "M2"
           M_3 = "M3"
@@ -1192,7 +1193,8 @@ module Candid
           N_908 = "N908"
           N_909 = "N909"
           N_910 = "N910"
-          N_911 = "N911"end
+          N_911 = "N911"
+        end
       end
     end
   end

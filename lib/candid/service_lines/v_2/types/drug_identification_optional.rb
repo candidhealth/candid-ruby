@@ -5,15 +5,18 @@ module Candid
     module V2
       module Types
         class DrugIdentificationOptional < Internal::Types::Model
-          field :service_id_qualifier, -> { Candid::ServiceLines::V2::Types::ServiceIdQualifier }, optional: true, nullable: false
+          field :service_id_qualifier, lambda {
+            Candid::ServiceLines::V2::Types::ServiceIdQualifier
+          }, optional: true, nullable: false
           field :national_drug_code, -> { String }, optional: true, nullable: false
           field :national_drug_unit_count, -> { String }, optional: true, nullable: false
-          field :measurement_unit_code, -> { Candid::ServiceLines::V2::Types::MeasurementUnitCode }, optional: true, nullable: false
+          field :measurement_unit_code, lambda {
+            Candid::ServiceLines::V2::Types::MeasurementUnitCode
+          }, optional: true, nullable: false
           field :link_sequence_number, -> { String }, optional: true, nullable: false
           field :pharmacy_prescription_number, -> { String }, optional: true, nullable: false
           field :conversion_formula, -> { String }, optional: true, nullable: false
           field :drug_description, -> { String }, optional: true, nullable: false
-
         end
       end
     end

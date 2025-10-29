@@ -6,6 +6,7 @@ module Candid
       module Types
         module Gender
           extend Candid::Internal::Types::Enum
+
           MAN = "MAN"
           WOMAN = "WOMAN"
           NON_BINARY = "NON_BINARY"
@@ -14,7 +15,8 @@ module Candid
           MALE_TO_FEMALE = "MALE_TO_FEMALE"
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"
-          REFUSED = "REFUSED"end
+          REFUSED = "REFUSED"
+        end
       end
     end
   end

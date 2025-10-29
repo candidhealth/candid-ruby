@@ -6,8 +6,10 @@ module Candid
       module Types
         module InvoiceItemUpdateType
           extend Candid::Internal::Types::Enum
+
           APPEND = "APPEND"
-          OVERWRITE = "OVERWRITE"end
+          OVERWRITE = "OVERWRITE"
+        end
       end
     end
   end

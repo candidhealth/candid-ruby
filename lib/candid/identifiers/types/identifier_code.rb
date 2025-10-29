@@ -5,8 +5,10 @@ module Candid
     module Types
       module IdentifierCode
         extend Candid::Internal::Types::Enum
+
         MCR = "MCR"
-        MCD = "MCD"end
+        MCD = "MCD"
+      end
     end
   end
 end

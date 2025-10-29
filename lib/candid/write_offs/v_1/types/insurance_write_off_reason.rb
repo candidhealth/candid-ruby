@@ -6,6 +6,7 @@ module Candid
       module Types
         module InsuranceWriteOffReason
           extend Candid::Internal::Types::Enum
+
           SMALL_BALANCE = "SMALL_BALANCE"
           NO_AUTHORIZATION_REFERRAL = "NO_AUTHORIZATION_REFERRAL"
           TIMELY_FILING = "TIMELY_FILING"
@@ -22,7 +23,8 @@ module Candid
           OTHER = "OTHER"
           UNKNOWN = "UNKNOWN"
           CONTRACTUAL_ADJUSTMENT = "CONTRACTUAL_ADJUSTMENT"
-          PRIMARY_PAID_MAX_BENEFITS = "PRIMARY_PAID_MAX_BENEFITS"end
+          PRIMARY_PAID_MAX_BENEFITS = "PRIMARY_PAID_MAX_BENEFITS"
+        end
       end
     end
   end

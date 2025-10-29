@@ -7,9 +7,11 @@ module Candid
         module Types
           module CoverageValueUnit
             extend Candid::Internal::Types::Enum
+
             PERCENT = "PERCENT"
             CURRENCY = "CURRENCY"
-            COUNT = "COUNT"end
+            COUNT = "COUNT"
+          end
         end
       end
     end

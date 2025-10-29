@@ -5,8 +5,10 @@ module Candid
     module Types
       module SortDirection
         extend Candid::Internal::Types::Enum
+
         ASC = "asc"
-        DESC = "desc"end
+        DESC = "desc"
+      end
     end
   end
 end

@@ -6,10 +6,12 @@ module Candid
       module Types
         module CredentialingSpanStatus
           extend Candid::Internal::Types::Enum
+
           WORK_IN_PROGRESS = "work_in_progress"
           PENDING = "pending"
           EFFECTIVE = "effective"
-          EXPIRED = "expired"end
+          EXPIRED = "expired"
+        end
       end
     end
   end

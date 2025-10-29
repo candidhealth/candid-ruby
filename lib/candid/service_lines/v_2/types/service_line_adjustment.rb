@@ -10,7 +10,6 @@ module Candid
           field :adjustment_reason_code, -> { String }, optional: true, nullable: false
           field :adjustment_amount_cents, -> { Integer }, optional: true, nullable: false
           field :adjustment_note, -> { String }, optional: true, nullable: false
-
         end
       end
     end

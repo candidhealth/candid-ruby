@@ -6,11 +6,13 @@ module Candid
       module Types
         module InvoiceDestination
           extend Candid::Internal::Types::Enum
+
           STRIPE = "STRIPE"
           CEDAR = "CEDAR"
           HEALTHIE = "HEALTHIE"
           COLLECTLY = "COLLECTLY"
-          THIRD_PARTY_PAYERS = "THIRD_PARTY_PAYERS"end
+          THIRD_PARTY_PAYERS = "THIRD_PARTY_PAYERS"
+        end
       end
     end
   end

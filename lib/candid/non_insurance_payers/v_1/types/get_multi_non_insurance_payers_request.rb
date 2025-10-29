@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module NonInsurancePayers
@@ -9,11 +10,12 @@ module Candid
           field :categories_exact, -> { String }, optional: true, nullable: false
           field :clinical_trial_ids, -> { String }, optional: true, nullable: false
           field :enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
-          field :sort, -> { Candid::NonInsurancePayers::V1::Types::NonInsurancePayerSortField }, optional: true, nullable: false
+          field :sort, lambda {
+            Candid::NonInsurancePayers::V1::Types::NonInsurancePayerSortField
+          }, optional: true, nullable: false
           field :sort_direction, -> { Candid::Commons::Types::SortDirection }, optional: true, nullable: false
           field :limit, -> { Integer }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
-
         end
       end
     end

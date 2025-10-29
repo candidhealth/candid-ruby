@@ -6,7 +6,6 @@ module Candid
       module Types
         class UnattributedInvoiceItem < Internal::Types::Model
           field :amount_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

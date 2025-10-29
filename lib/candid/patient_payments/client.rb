@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PatientPayments
@@ -7,6 +8,10 @@ module Candid
         @client = client
       end
 
+      # @return [Candid::V4::Client]
+      def v_4
+        @v_4 ||= Candid::PatientPayments::V4::Client.new(client: @client)
+      end
     end
   end
 end

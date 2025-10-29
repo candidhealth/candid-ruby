@@ -6,7 +6,9 @@ module Candid
       module Types
         module ChargeCaptureClaimCreationSortField
           extend Candid::Internal::Types::Enum
-          CREATED_AT = "created_at"end
+
+          CREATED_AT = "created_at"
+        end
       end
     end
   end

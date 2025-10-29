@@ -5,12 +5,21 @@ module Candid
     module V4
       module Types
         class EncounterCreate < Internal::Types::Model
-          field :billing_provider, -> { Candid::EncounterProviders::V2::Types::BillingProvider }, optional: false, nullable: false
-          field :diagnoses, -> { Internal::Types::Array[Candid::Diagnoses::Types::DiagnosisCreate] }, optional: false, nullable: false
-          field :place_of_service_code, -> { Candid::Commons::Types::FacilityTypeCode }, optional: false, nullable: false
-          field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProvider }, optional: false, nullable: false
-          field :service_lines, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::ServiceLineCreate] }, optional: true, nullable: false
-
+          field :billing_provider, lambda {
+            Candid::EncounterProviders::V2::Types::BillingProvider
+          }, optional: false, nullable: false
+          field :diagnoses, lambda {
+            Internal::Types::Array[Candid::Diagnoses::Types::DiagnosisCreate]
+          }, optional: false, nullable: false
+          field :place_of_service_code, lambda {
+            Candid::Commons::Types::FacilityTypeCode
+          }, optional: false, nullable: false
+          field :rendering_provider, lambda {
+            Candid::EncounterProviders::V2::Types::RenderingProvider
+          }, optional: false, nullable: false
+          field :service_lines, lambda {
+            Internal::Types::Array[Candid::ServiceLines::V2::Types::ServiceLineCreate]
+          }, optional: true, nullable: false
         end
       end
     end

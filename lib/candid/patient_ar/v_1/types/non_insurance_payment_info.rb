@@ -6,7 +6,6 @@ module Candid
       module Types
         class NonInsurancePaymentInfo < Internal::Types::Model
           field :total_payment_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

@@ -5,6 +5,7 @@ module Candid
     module Types
       module ClaimAdjustmentGroupCodes
         extend Candid::Internal::Types::Enum
+
         CO = "CO"
         CR = "CR"
         DE = "DE"
@@ -14,7 +15,8 @@ module Candid
         PR = "PR"
         RR = "RR"
         NC = "NC"
-        UNKNOWN = "UNKNOWN"end
+        UNKNOWN = "UNKNOWN"
+      end
     end
   end
 end

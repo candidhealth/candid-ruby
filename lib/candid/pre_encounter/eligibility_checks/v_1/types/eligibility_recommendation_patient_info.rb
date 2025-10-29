@@ -5,7 +5,7 @@ module Candid
     module EligibilityChecks
       module V1
         module Types
-          # An object representing patient information for an eligibility recommendation. 
+          # An object representing patient information for an eligibility recommendation.
           # This is used to find recommendations. Each field helps us find the right corresponding
           # eligibility recommendation for the patient.
           class EligibilityRecommendationPatientInfo < Internal::Types::Model
@@ -16,7 +16,6 @@ module Candid
             field :first_name, -> { String }, optional: true, nullable: false
             field :date_of_birth, -> { String }, optional: true, nullable: false
             field :member_id, -> { String }, optional: true, nullable: false
-
           end
         end
       end

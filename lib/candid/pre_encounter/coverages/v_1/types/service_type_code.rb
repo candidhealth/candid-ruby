@@ -7,6 +7,7 @@ module Candid
         module Types
           module ServiceTypeCode
             extend Candid::Internal::Types::Enum
+
             MEDICAL_CARE = "1"
             SURGICAL = "2"
             CONSULTATION = "3"
@@ -193,7 +194,8 @@ module Candid
             RESIDENTIAL_PSYCHIATRIC_TREATMENT = "RT"
             TRANSITIONAL_CARE = "TC"
             TRANSITIONAL_NURSERY_CARE = "TN"
-            URGENT_CARE = "UC"end
+            URGENT_CARE = "UC"
+          end
         end
       end
     end

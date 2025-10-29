@@ -6,9 +6,11 @@ module Candid
       module Types
         module ContractStatus
           extend Candid::Internal::Types::Enum
+
           PENDING = "pending"
           EFFECTIVE = "effective"
-          CANCELLED = "cancelled"end
+          CANCELLED = "cancelled"
+        end
       end
     end
   end

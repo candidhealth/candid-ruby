@@ -12,7 +12,6 @@ module Candid
           field :postal_code, -> { String }, optional: false, nullable: false
           field :country, -> { String }, optional: false, nullable: false
           field :period, -> { Candid::PreEncounter::Common::Types::Period }, optional: true, nullable: false
-
         end
       end
     end

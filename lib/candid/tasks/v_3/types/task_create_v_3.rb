@@ -12,7 +12,6 @@ module Candid
           field :assignee_user_id, -> { String }, optional: true, nullable: false
           field :category, -> { Candid::Tasks::Commons::Types::TaskCategory }, optional: true, nullable: false
           field :work_queue_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

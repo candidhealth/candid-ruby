@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Candid
   module Internal
     module Types
@@ -24,4 +25,4 @@ module Candid
       end
     end
   end
-end 
+end

@@ -8,7 +8,6 @@ module Candid
         field :npi, -> { String }, optional: true, nullable: false
         field :address, -> { Candid::Commons::Types::StreetAddressShortZipOptional }, optional: true, nullable: false
         field :secondary_identification, -> { String }, optional: true, nullable: false
-
       end
     end
   end

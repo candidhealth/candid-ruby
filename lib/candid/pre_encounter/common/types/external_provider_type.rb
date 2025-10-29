@@ -6,9 +6,11 @@ module Candid
       module Types
         module ExternalProviderType
           extend Candid::Internal::Types::Enum
+
           PRIMARY = "PRIMARY"
           REFERRING = "REFERRING"
-          ATTENDING = "ATTENDING"end
+          ATTENDING = "ATTENDING"
+        end
       end
     end
   end

@@ -6,7 +6,9 @@ module Candid
       module Types
         module AddressType
           extend Candid::Internal::Types::Enum
-          DEFAULT = "DEFAULT"end
+
+          DEFAULT = "DEFAULT"
+        end
       end
     end
   end

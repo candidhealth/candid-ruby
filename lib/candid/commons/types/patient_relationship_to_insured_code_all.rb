@@ -5,6 +5,7 @@ module Candid
     module Types
       module PatientRelationshipToInsuredCodeAll
         extend Candid::Internal::Types::Enum
+
         SPOUSE = "01"
         GRANDPARENT = "04"
         GRANDCHILD = "05"
@@ -28,7 +29,8 @@ module Candid
         INJURED_PLAINTIFF = "41"
         CHILD_NO_FINANCIAL_RESPONSIBILITY = "43"
         LIFE_PARTNER = "53"
-        OTHER_RELATIONSHIP = "G8"end
+        OTHER_RELATIONSHIP = "G8"
+      end
     end
   end
 end

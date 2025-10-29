@@ -5,8 +5,10 @@ module Candid
     module Types
       module EmrPayerCrosswalk
         extend Candid::Internal::Types::Enum
+
         HEALTHIE = "HEALTHIE"
-        CANVAS = "CANVAS"end
+        CANVAS = "CANVAS"
+      end
     end
   end
 end

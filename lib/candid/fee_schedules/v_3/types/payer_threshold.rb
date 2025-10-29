@@ -9,7 +9,6 @@ module Candid
           field :upper_threshold_cents, -> { Integer }, optional: true, nullable: false
           field :lower_threshold_cents, -> { Integer }, optional: true, nullable: false
           field :disable_paid_incorrectly, -> { Internal::Types::Boolean }, optional: false, nullable: false
-
         end
       end
     end

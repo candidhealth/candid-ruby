@@ -10,7 +10,6 @@ module Candid
           field :created_at, -> { String }, optional: false, nullable: false
           field :author_name, -> { String }, optional: false, nullable: false
           field :author_organization_name, -> { String }, optional: false, nullable: false
-
         end
       end
     end

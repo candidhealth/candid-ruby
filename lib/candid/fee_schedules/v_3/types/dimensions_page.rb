@@ -5,8 +5,9 @@ module Candid
     module V3
       module Types
         class DimensionsPage < Internal::Types::Model
-          field :dimensions, -> { Internal::Types::Array[Candid::FeeSchedules::V3::Types::OptionalDimensions] }, optional: false, nullable: false
-
+          field :dimensions, lambda {
+            Internal::Types::Array[Candid::FeeSchedules::V3::Types::OptionalDimensions]
+          }, optional: false, nullable: false
         end
       end
     end

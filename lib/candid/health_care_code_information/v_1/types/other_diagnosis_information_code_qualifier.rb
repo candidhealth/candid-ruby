@@ -6,8 +6,10 @@ module Candid
       module Types
         module OtherDiagnosisInformationCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CBF = "BF"
-          CABF = "ABF"end
+          CABF = "ABF"
+        end
       end
     end
   end

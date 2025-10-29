@@ -10,11 +10,12 @@ module Candid
           field :external_customer_identifier, -> { String }, optional: false, nullable: false
           field :note, -> { String }, optional: true, nullable: false
           field :due_date, -> { String }, optional: true, nullable: false
-          field :items, -> { Internal::Types::Array[Candid::Invoices::V2::Types::InvoiceItemCreate] }, optional: false, nullable: false
+          field :items, lambda {
+            Internal::Types::Array[Candid::Invoices::V2::Types::InvoiceItemCreate]
+          }, optional: false, nullable: false
           field :status, -> { Candid::Invoices::V2::Types::InvoiceStatus }, optional: false, nullable: false
           field :external_identifier, -> { String }, optional: false, nullable: false
           field :customer_invoice_url, -> { String }, optional: true, nullable: false
-
         end
       end
     end

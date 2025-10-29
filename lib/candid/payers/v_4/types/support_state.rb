@@ -6,9 +6,11 @@ module Candid
       module Types
         module SupportState
           extend Candid::Internal::Types::Enum
+
           NOT_SUPPORTED = "NOT_SUPPORTED"
           SUPPORTED_ENROLLMENT_NOT_REQUIRED = "SUPPORTED_ENROLLMENT_NOT_REQUIRED"
-          SUPPORTED_ENROLLMENT_REQUIRED = "SUPPORTED_ENROLLMENT_REQUIRED"end
+          SUPPORTED_ENROLLMENT_REQUIRED = "SUPPORTED_ENROLLMENT_REQUIRED"
+        end
       end
     end
   end

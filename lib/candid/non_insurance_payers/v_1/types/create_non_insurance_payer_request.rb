@@ -9,8 +9,9 @@ module Candid
           field :description, -> { String }, optional: true, nullable: false
           field :category, -> { String }, optional: true, nullable: false
           field :address, -> { Candid::Commons::Types::StreetAddressShortZip }, optional: true, nullable: false
-          field :clinical_trials, -> { Internal::Types::Array[Candid::ClinicalTrials::V1::Types::MutableClinicalTrial] }, optional: true, nullable: false
-
+          field :clinical_trials, lambda {
+            Internal::Types::Array[Candid::ClinicalTrials::V1::Types::MutableClinicalTrial]
+          }, optional: true, nullable: false
         end
       end
     end

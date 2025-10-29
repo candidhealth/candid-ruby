@@ -8,7 +8,6 @@ module Candid
           # An object representing a Coordination Of Benefits recommendation.
           class CoordinationOfBenefitsRecommendation < Internal::Types::Model
             field :payload, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
-
           end
         end
       end

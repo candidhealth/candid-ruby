@@ -6,6 +6,7 @@ module Candid
       module Types
         module NoteCategory
           extend Candid::Internal::Types::Enum
+
           CLINICAL = "clinical"
           CARE_PLAN = "care_plan"
           DIAGNOSES = "diagnoses"
@@ -19,7 +20,8 @@ module Candid
           HEALTH_RECORD = "health_record"
           CONSENT = "consent"
           PROCEDURE = "procedure"
-          TIME_IN_APPOINTMENT = "time_in_appointment"end
+          TIME_IN_APPOINTMENT = "time_in_appointment"
+        end
       end
     end
   end

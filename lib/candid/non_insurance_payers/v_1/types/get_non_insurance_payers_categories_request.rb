@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module NonInsurancePayers
@@ -7,7 +8,6 @@ module Candid
           field :search_term, -> { String }, optional: true, nullable: false
           field :limit, -> { Integer }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
-
         end
       end
     end

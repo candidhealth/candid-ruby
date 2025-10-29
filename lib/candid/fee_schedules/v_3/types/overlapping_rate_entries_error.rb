@@ -9,7 +9,6 @@ module Candid
           field :message, -> { String }, optional: false, nullable: false
           field :rate_a, -> { Candid::FeeSchedules::V3::Types::RateEntry }, optional: false, nullable: false
           field :rate_b, -> { Candid::FeeSchedules::V3::Types::RateEntry }, optional: false, nullable: false
-
         end
       end
     end

@@ -6,7 +6,6 @@ module Candid
       module Types
         class InsuranceAdjustmentInfo < Internal::Types::Model
           field :total_adjustment_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -7,7 +8,6 @@ module Candid
           class PatientGetMultiRequest < Internal::Types::Model
             field :mrn, -> { String }, optional: true, nullable: false
             field :similar_name_ordering, -> { String }, optional: true, nullable: false
-
           end
         end
       end

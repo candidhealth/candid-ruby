@@ -10,7 +10,6 @@ module Candid
           field :rate_cents, -> { Integer }, optional: false, nullable: false
           field :match, -> { Internal::Types::Boolean }, optional: false, nullable: false
           field :explanation, -> { String }, optional: false, nullable: false
-
         end
       end
     end

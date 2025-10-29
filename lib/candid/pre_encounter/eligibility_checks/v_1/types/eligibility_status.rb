@@ -7,9 +7,11 @@ module Candid
         module Types
           module EligibilityStatus
             extend Candid::Internal::Types::Enum
+
             ACTIVE = "ACTIVE"
             INACTIVE = "INACTIVE"
-            UNKNOWN = "UNKNOWN"end
+            UNKNOWN = "UNKNOWN"
+          end
         end
       end
     end

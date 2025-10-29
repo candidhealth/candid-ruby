@@ -6,7 +6,6 @@ module Candid
       module Types
         class TaskPage < Internal::Types::Model
           field :items, -> { Internal::Types::Array[Candid::Tasks::V3::Types::Task] }, optional: false, nullable: false
-
         end
       end
     end

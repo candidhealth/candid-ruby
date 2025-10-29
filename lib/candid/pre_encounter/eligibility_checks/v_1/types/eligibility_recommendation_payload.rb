@@ -10,8 +10,12 @@ module Candid
 
             discriminant :type
 
-            member -> { Candid::PreEncounter::EligibilityChecks::V1::Types::MedicareAdvantageRecommendation }, key: "MEDICARE_ADVANTAGE"
-            member -> { Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRecommendation }, key: "COORDINATION_OF_BENEFITS"
+            member lambda {
+              Candid::PreEncounter::EligibilityChecks::V1::Types::MedicareAdvantageRecommendation
+            }, key: "MEDICARE_ADVANTAGE"
+            member lambda {
+              Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRecommendation
+            }, key: "COORDINATION_OF_BENEFITS"
           end
         end
       end

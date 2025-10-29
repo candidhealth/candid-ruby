@@ -6,12 +6,15 @@ module Candid
       module Types
         class InsuranceWriteOffCreate < Internal::Types::Model
           field :payer_identifier, -> { Candid::Payers::V3::Types::PayerIdentifier }, optional: false, nullable: false
-          field :write_off_target, -> { Candid::WriteOffs::V1::Types::InsuranceWriteOffTarget }, optional: false, nullable: false
+          field :write_off_target, lambda {
+            Candid::WriteOffs::V1::Types::InsuranceWriteOffTarget
+          }, optional: false, nullable: false
           field :write_off_timestamp, -> { String }, optional: false, nullable: false
           field :write_off_note, -> { String }, optional: true, nullable: false
-          field :write_off_reason, -> { Candid::WriteOffs::V1::Types::InsuranceWriteOffReason }, optional: false, nullable: false
+          field :write_off_reason, lambda {
+            Candid::WriteOffs::V1::Types::InsuranceWriteOffReason
+          }, optional: false, nullable: false
           field :amount_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

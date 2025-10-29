@@ -12,7 +12,6 @@ module Candid
           field :body_temperature_f, -> { Integer }, optional: true, nullable: false
           field :hemoglobin_gdl, -> { Integer }, optional: true, nullable: false
           field :hematocrit_pct, -> { Integer }, optional: true, nullable: false
-
         end
       end
     end

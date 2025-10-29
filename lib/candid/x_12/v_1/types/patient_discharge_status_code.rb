@@ -6,6 +6,7 @@ module Candid
       module Types
         module PatientDischargeStatusCode
           extend Candid::Internal::Types::Enum
+
           C_01 = "01"
           C_02 = "02"
           C_03 = "03"
@@ -45,7 +46,8 @@ module Candid
           C_92 = "92"
           C_93 = "93"
           C_94 = "94"
-          C_95 = "95"end
+          C_95 = "95"
+        end
       end
     end
   end

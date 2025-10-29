@@ -6,11 +6,13 @@ module Candid
       module Types
         module AddressUse
           extend Candid::Internal::Types::Enum
+
           HOME = "HOME"
           WORK = "WORK"
           TEMP = "TEMP"
           OLD = "OLD"
-          BILLING = "BILLING"end
+          BILLING = "BILLING"
+        end
       end
     end
   end

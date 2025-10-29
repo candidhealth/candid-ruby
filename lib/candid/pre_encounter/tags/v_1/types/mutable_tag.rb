@@ -10,7 +10,6 @@ module Candid
             field :value, -> { String }, optional: false, nullable: false
             field :description, -> { String }, optional: true, nullable: false
             field :alert, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
           end
         end
       end

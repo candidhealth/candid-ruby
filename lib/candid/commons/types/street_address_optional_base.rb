@@ -9,7 +9,6 @@ module Candid
         field :city, -> { String }, optional: true, nullable: false
         field :state, -> { Candid::Commons::Types::State }, optional: true, nullable: false
         field :zip_code, -> { String }, optional: true, nullable: false
-
       end
     end
   end

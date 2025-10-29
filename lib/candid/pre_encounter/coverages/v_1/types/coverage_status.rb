@@ -7,10 +7,12 @@ module Candid
         module Types
           module CoverageStatus
             extend Candid::Internal::Types::Enum
+
             ACTIVE = "ACTIVE"
             CANCELLED = "CANCELLED"
             DRAFT = "DRAFT"
-            ENTERED_IN_ERROR = "ENTERED_IN_ERROR"end
+            ENTERED_IN_ERROR = "ENTERED_IN_ERROR"
+          end
         end
       end
     end

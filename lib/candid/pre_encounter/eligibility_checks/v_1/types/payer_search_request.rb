@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -8,7 +9,6 @@ module Candid
             field :page_size, -> { Integer }, optional: true, nullable: false
             field :page_token, -> { String }, optional: true, nullable: false
             field :query, -> { String }, optional: true, nullable: false
-
           end
         end
       end

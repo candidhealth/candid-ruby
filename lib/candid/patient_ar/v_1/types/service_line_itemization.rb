@@ -10,16 +10,27 @@ module Candid
           field :date_of_service, -> { String }, optional: false, nullable: false
           field :patient_balance_cents, -> { Integer }, optional: false, nullable: false
           field :charge_amount_cents, -> { Integer }, optional: false, nullable: false
-          field :insurance_adjustments, -> { Candid::PatientAr::V1::Types::InsuranceAdjustmentInfo }, optional: false, nullable: false
-          field :insurance_payments, -> { Candid::PatientAr::V1::Types::InsurancePaymentInfo }, optional: false, nullable: false
-          field :non_insurance_adjustments, -> { Candid::PatientAr::V1::Types::NonInsuranceAdjustmentInfo }, optional: false, nullable: false
-          field :non_insurance_payments, -> { Candid::PatientAr::V1::Types::NonInsurancePaymentInfo }, optional: false, nullable: false
-          field :patient_adjustments, -> { Candid::PatientAr::V1::Types::PatientAdjustmentInfo }, optional: false, nullable: false
-          field :patient_payments, -> { Candid::PatientAr::V1::Types::PatientPaymentInfo }, optional: false, nullable: false
+          field :insurance_adjustments, lambda {
+            Candid::PatientAr::V1::Types::InsuranceAdjustmentInfo
+          }, optional: false, nullable: false
+          field :insurance_payments, lambda {
+            Candid::PatientAr::V1::Types::InsurancePaymentInfo
+          }, optional: false, nullable: false
+          field :non_insurance_adjustments, lambda {
+            Candid::PatientAr::V1::Types::NonInsuranceAdjustmentInfo
+          }, optional: false, nullable: false
+          field :non_insurance_payments, lambda {
+            Candid::PatientAr::V1::Types::NonInsurancePaymentInfo
+          }, optional: false, nullable: false
+          field :patient_adjustments, lambda {
+            Candid::PatientAr::V1::Types::PatientAdjustmentInfo
+          }, optional: false, nullable: false
+          field :patient_payments, lambda {
+            Candid::PatientAr::V1::Types::PatientPaymentInfo
+          }, optional: false, nullable: false
           field :copay_cents, -> { Integer }, optional: false, nullable: false
           field :coinsurance_cents, -> { Integer }, optional: false, nullable: false
           field :deductible_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

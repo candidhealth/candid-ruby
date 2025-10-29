@@ -7,7 +7,6 @@ module Candid
         field :period, -> { Candid::Commons::Types::DateRangeOptionalEnd }, optional: true, nullable: false
         field :identifier_code, -> { Candid::Identifiers::Types::IdentifierCode }, optional: false, nullable: false
         field :identifier_value, -> { Candid::Identifiers::Types::IdentifierValue }, optional: false, nullable: false
-
       end
     end
   end

@@ -5,7 +5,6 @@ module Candid
     module Types
       class OrganizationNotAuthorizedErrorMessage < Internal::Types::Model
         field :message, -> { String }, optional: false, nullable: false
-
       end
     end
   end

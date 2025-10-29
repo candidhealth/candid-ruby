@@ -28,4 +28,4 @@ module Candid
       end
     end
   end
-end 
+end

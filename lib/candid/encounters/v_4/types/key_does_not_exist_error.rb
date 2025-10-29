@@ -7,7 +7,6 @@ module Candid
         class KeyDoesNotExistError < Internal::Types::Model
           field :key, -> { String }, optional: false, nullable: false
           field :schema_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

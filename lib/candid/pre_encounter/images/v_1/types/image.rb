@@ -9,7 +9,6 @@ module Candid
           class Image < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
             field :signed_url, -> { String }, optional: false, nullable: false
-
           end
         end
       end

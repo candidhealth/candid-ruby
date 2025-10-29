@@ -5,8 +5,9 @@ module Candid
     module V2
       module Types
         class FacilityCredentialingSpanPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::Credentialing::V2::Types::FacilityCredentialingSpan] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::Credentialing::V2::Types::FacilityCredentialingSpan]
+          }, optional: false, nullable: false
         end
       end
     end

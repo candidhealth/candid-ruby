@@ -7,9 +7,11 @@ module Candid
         module Types
           module ReferralType
             extend Candid::Internal::Types::Enum
+
             DIRECTED = "DIRECTED"
             ROTATION = "ROTATION"
-            OVERNIGHT = "OVERNIGHT"end
+            OVERNIGHT = "OVERNIGHT"
+          end
         end
       end
     end

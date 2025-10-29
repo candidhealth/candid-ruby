@@ -5,8 +5,9 @@ module Candid
     module V1
       module Types
         class ImportInvoicesPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::ImportInvoice::V1::Types::ImportInvoice] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::ImportInvoice::V1::Types::ImportInvoice]
+          }, optional: false, nullable: false
         end
       end
     end

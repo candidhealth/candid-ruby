@@ -5,10 +5,12 @@ module Candid
     module Types
       module EpsdtReferralConditionIndicatorCode
         extend Candid::Internal::Types::Enum
+
         AV = "AV"
         NU = "NU"
         S_2 = "S2"
-        ST = "ST"end
+        ST = "ST"
+      end
     end
   end
 end

@@ -6,7 +6,6 @@ module Candid
       class Allocation < Internal::Types::Model
         field :amount_cents, -> { Integer }, optional: false, nullable: false
         field :target, -> { Candid::Financials::Types::AllocationTarget }, optional: false, nullable: false
-
       end
     end
   end

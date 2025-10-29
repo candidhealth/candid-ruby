@@ -11,7 +11,6 @@ module Candid
             field :email, -> { String }, optional: true, nullable: false
             field :birth_date, -> { String }, optional: true, nullable: false
             field :address, -> { Candid::PreEncounter::Common::Types::Address }, optional: false, nullable: false
-
           end
         end
       end

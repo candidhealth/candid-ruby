@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module NonInsurancePayerPayments
@@ -8,7 +9,6 @@ module Candid
           field :payment_timestamp, -> { String }, optional: true, nullable: false
           field :payment_note, -> { Candid::Financials::Types::NoteUpdate }, optional: true, nullable: false
           field :invoice_id, -> { Candid::Financials::Types::InvoiceUpdate }, optional: true, nullable: false
-
         end
       end
     end

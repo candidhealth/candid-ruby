@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -6,8 +7,9 @@ module Candid
         module Types
           class CreatePatientRequest < Internal::Types::Model
             field :skip_duplicate_check, -> { Internal::Types::Boolean }, optional: true, nullable: false
-            field :body, -> { Candid::PreEncounter::Patients::V1::Types::MutablePatient }, optional: false, nullable: false
-
+            field :body, lambda {
+              Candid::PreEncounter::Patients::V1::Types::MutablePatient
+            }, optional: false, nullable: false
           end
         end
       end

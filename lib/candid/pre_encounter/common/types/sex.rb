@@ -6,10 +6,12 @@ module Candid
       module Types
         module Sex
           extend Candid::Internal::Types::Enum
+
           FEMALE = "FEMALE"
           MALE = "MALE"
           UNKNOWN = "UNKNOWN"
-          REFUSED = "REFUSED"end
+          REFUSED = "REFUSED"
+        end
       end
     end
   end

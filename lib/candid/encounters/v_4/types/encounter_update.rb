@@ -7,7 +7,6 @@ module Candid
         class EncounterUpdate < Internal::Types::Model
           field :vitals, -> { Candid::Encounters::V4::Types::VitalsUpdate }, optional: true, nullable: false
           field :diagnosis_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-
         end
       end
     end

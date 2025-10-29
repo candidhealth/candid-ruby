@@ -6,6 +6,7 @@ module Candid
       module Types
         module LicenseType
           extend Candid::Internal::Types::Enum
+
           MD = "MD"
           NP = "NP"
           PA = "PA"
@@ -108,7 +109,8 @@ module Candid
           CDN = "CDN"
           CNS = "CNS"
           MDPHD = "MDPHD"
-          AUD = "AuD"end
+          AUD = "AuD"
+        end
       end
     end
   end

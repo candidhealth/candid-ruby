@@ -6,7 +6,6 @@ module Candid
       module Types
         class BillingNoteBase < Internal::Types::Model
           field :text, -> { String }, optional: false, nullable: false
-
         end
       end
     end

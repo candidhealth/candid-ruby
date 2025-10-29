@@ -6,8 +6,10 @@ module Candid
       module Types
         module ProviderType
           extend Candid::Internal::Types::Enum
+
           INDIVIDUAL = "INDIVIDUAL"
-          ORGANIZATION = "ORGANIZATION"end
+          ORGANIZATION = "ORGANIZATION"
+        end
       end
     end
   end

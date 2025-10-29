@@ -6,7 +6,9 @@ module Candid
       module Types
         module DiagnosisRelatedGroupCodeQualifier
           extend Candid::Internal::Types::Enum
-          CDR = "DR"end
+
+          CDR = "DR"
+        end
       end
     end
   end

@@ -6,9 +6,11 @@ module Candid
       module Types
         module EncounterAttachmentType
           extend Candid::Internal::Types::Enum
+
           DOCUMENTATION = "DOCUMENTATION"
           EOB = "EOB"
-          OTHER = "OTHER"end
+          OTHER = "OTHER"
+        end
       end
     end
   end

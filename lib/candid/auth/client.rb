@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Auth
@@ -7,6 +8,10 @@ module Candid
         @client = client
       end
 
+      # @return [Candid::Default::Client]
+      def default
+        @default ||= Candid::Auth::Default::Client.new(client: @client)
+      end
     end
   end
 end

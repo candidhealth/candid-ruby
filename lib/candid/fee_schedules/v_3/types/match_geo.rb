@@ -10,7 +10,6 @@ module Candid
           field :state, -> { Candid::Commons::Types::State }, optional: true, nullable: false
           field :match, -> { Internal::Types::Boolean }, optional: false, nullable: false
           field :explanation, -> { String }, optional: false, nullable: false
-
         end
       end
     end

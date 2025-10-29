@@ -6,11 +6,13 @@ module Candid
       module Types
         module Relationship
           extend Candid::Internal::Types::Enum
+
           SELF = "SELF"
           SPOUSE = "SPOUSE"
           CHILD = "CHILD"
           COMMON_LAW_SPOUSE = "COMMON_LAW_SPOUSE"
-          OTHER = "OTHER"end
+          OTHER = "OTHER"
+        end
       end
     end
   end

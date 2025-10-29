@@ -6,9 +6,11 @@ module Candid
       module Types
         module ServiceFacilityStatus
           extend Candid::Internal::Types::Enum
+
           ACTIVE = "active"
           INACTIVE = "inactive"
-          SUSPENDED = "suspended"end
+          SUSPENDED = "suspended"
+        end
       end
     end
   end

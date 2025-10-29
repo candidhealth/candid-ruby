@@ -13,7 +13,6 @@ module Candid
           field :availity_eligibility_id, -> { String }, optional: true, nullable: false
           field :availity_remittance_payer_id, -> { String }, optional: true, nullable: false
           field :street_address, -> { Candid::Commons::Types::StreetAddressLongZip }, optional: true, nullable: false
-
         end
       end
     end

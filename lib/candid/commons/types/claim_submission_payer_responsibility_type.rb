@@ -5,8 +5,10 @@ module Candid
     module Types
       module ClaimSubmissionPayerResponsibilityType
         extend Candid::Internal::Types::Enum
+
         PRIMARY = "primary"
-        SECONDARY = "secondary"end
+        SECONDARY = "secondary"
+      end
     end
   end
 end

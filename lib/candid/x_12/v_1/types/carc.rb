@@ -6,6 +6,7 @@ module Candid
       module Types
         module Carc
           extend Candid::Internal::Types::Enum
+
           CARC_1 = "1"
           CARC_2 = "2"
           CARC_3 = "3"
@@ -408,7 +409,8 @@ module Candid
           CARC_Y_1 = "Y1"
           CARC_Y_2 = "Y2"
           CARC_Y_3 = "Y3"
-          UNKNOWN = "UNKNOWN"end
+          UNKNOWN = "UNKNOWN"
+        end
       end
     end
   end

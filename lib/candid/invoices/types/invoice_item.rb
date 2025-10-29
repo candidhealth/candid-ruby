@@ -6,7 +6,6 @@ module Candid
       class InvoiceItem < Internal::Types::Model
         field :service_line_id, -> { String }, optional: false, nullable: false
         field :amount_cents, -> { Integer }, optional: false, nullable: false
-
       end
     end
   end

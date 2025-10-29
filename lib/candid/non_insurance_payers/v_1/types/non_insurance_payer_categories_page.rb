@@ -6,7 +6,6 @@ module Candid
       module Types
         class NonInsurancePayerCategoriesPage < Internal::Types::Model
           field :items, -> { Internal::Types::Array[String] }, optional: false, nullable: false
-
         end
       end
     end

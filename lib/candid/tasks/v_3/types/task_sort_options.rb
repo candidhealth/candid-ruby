@@ -6,6 +6,7 @@ module Candid
       module Types
         module TaskSortOptions
           extend Candid::Internal::Types::Enum
+
           UPDATED_AT_ASC = "updated_at:asc"
           UPDATED_AT_DESC = "updated_at:desc"
           PATIENT_NAME_ASC = "patient_name:asc"
@@ -27,7 +28,8 @@ module Candid
           DATE_OF_SERVICE_ASC = "date_of_service:asc"
           DATE_OF_SERVICE_DESC = "date_of_service:desc"
           BLOCKS_CLAIM_SUBMISSION_ASC = "blocks_claim_submission:asc"
-          BLOCKS_CLAIM_SUBMISSION_DESC = "blocks_claim_submission:desc"end
+          BLOCKS_CLAIM_SUBMISSION_DESC = "blocks_claim_submission:desc"
+        end
       end
     end
   end

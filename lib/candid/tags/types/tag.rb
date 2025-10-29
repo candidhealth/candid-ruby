@@ -5,7 +5,6 @@ module Candid
     module Types
       class Tag < Internal::Types::Model
         field :creator_id, -> { String }, optional: false, nullable: false
-
       end
     end
   end

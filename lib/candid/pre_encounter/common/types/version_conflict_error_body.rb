@@ -6,7 +6,6 @@ module Candid
       module Types
         class VersionConflictErrorBody < Internal::Types::Model
           field :latest_version, -> { Integer }, optional: true, nullable: false
-
         end
       end
     end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -7,7 +8,6 @@ module Candid
           class ImageGetMultiRequest < Internal::Types::Model
             field :patient_id, -> { String }, optional: true, nullable: false
             field :coverage_id, -> { String }, optional: true, nullable: false
-
           end
         end
       end

@@ -8,7 +8,6 @@ module Candid
           # A Tag object with immutable server-owned properties.
           class Tag < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
-
           end
         end
       end

@@ -6,8 +6,10 @@ module Candid
       module Types
         module PatientArStatus
           extend Candid::Internal::Types::Enum
+
           INVOICEABLE = "invoiceable"
-          NON_INVOICEABLE = "non_invoiceable"end
+          NON_INVOICEABLE = "non_invoiceable"
+        end
       end
     end
   end

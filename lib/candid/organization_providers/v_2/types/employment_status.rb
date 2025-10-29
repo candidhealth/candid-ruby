@@ -6,8 +6,10 @@ module Candid
       module Types
         module EmploymentStatus
           extend Candid::Internal::Types::Enum
+
           ACTIVE = "ACTIVE"
-          TERMINATED = "TERMINATED"end
+          TERMINATED = "TERMINATED"
+        end
       end
     end
   end

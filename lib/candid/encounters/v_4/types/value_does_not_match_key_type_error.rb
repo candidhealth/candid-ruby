@@ -9,7 +9,6 @@ module Candid
           field :key, -> { String }, optional: false, nullable: false
           field :expected_value_type, -> { Candid::Commons::Types::Primitive }, optional: false, nullable: false
           field :value, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
-
         end
       end
     end

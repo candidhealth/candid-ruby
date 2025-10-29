@@ -9,7 +9,6 @@ module Candid
             field :property, -> { String }, optional: false, nullable: false
             field :request_value, -> { String }, optional: false, nullable: false
             field :corrected_value, -> { String }, optional: false, nullable: false
-
           end
         end
       end

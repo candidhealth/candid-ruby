@@ -6,6 +6,7 @@ module Candid
       module Types
         module TaskCategory
           extend Candid::Internal::Types::Enum
+
           OTHER = "other"
           PROVIDER_CREDENTIALING = "provider_credentialing"
           AUTHORIZATION_REQUIRED = "authorization_required"
@@ -47,7 +48,8 @@ module Candid
           HELD_BY_CUSTOMER = "held_by_customer"
           PENDING_MANUAL_REMIT_POSTING = "pending_manual_remit_posting"
           INCORRECT_REFERRING_PROVIDER_INFO = "incorrect_referring_provider_info"
-          PAYER_CONFIGURATION_ERROR = "payer_configuration_error"end
+          PAYER_CONFIGURATION_ERROR = "payer_configuration_error"
+        end
       end
     end
   end

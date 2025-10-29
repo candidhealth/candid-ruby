@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module ChargeCapture
@@ -12,7 +13,6 @@ module Candid
           field :claim_creation_category, -> { String }, optional: true, nullable: false
           field :ehr_source_url, -> { String }, optional: true, nullable: false
           field :status, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureStatus }, optional: false, nullable: false
-
         end
       end
     end

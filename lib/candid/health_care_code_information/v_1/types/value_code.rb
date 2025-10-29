@@ -6,6 +6,7 @@ module Candid
       module Types
         module ValueCode
           extend Candid::Internal::Types::Enum
+
           C_01_MONEY = "01"
           C_02_MONEY = "02"
           C_04_MONEY = "04"
@@ -112,7 +113,8 @@ module Candid
           CY_2_MONEY = "Y2"
           CY_3_MONEY = "Y3"
           CY_4_MONEY = "Y4"
-          CY_5_MONEY = "Y5"end
+          CY_5_MONEY = "Y5"
+        end
       end
     end
   end

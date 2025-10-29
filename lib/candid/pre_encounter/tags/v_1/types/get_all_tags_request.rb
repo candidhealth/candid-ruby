@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -7,7 +8,6 @@ module Candid
           class GetAllTagsRequest < Internal::Types::Model
             field :limit, -> { Integer }, optional: true, nullable: false
             field :page_token, -> { String }, optional: true, nullable: false
-
           end
         end
       end

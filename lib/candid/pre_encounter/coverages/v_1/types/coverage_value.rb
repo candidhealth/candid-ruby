@@ -10,7 +10,6 @@ module Candid
             field :individual, -> { Integer }, optional: true, nullable: false
             field :employee_and_spouse, -> { Integer }, optional: true, nullable: false
             field :employee_and_children, -> { Integer }, optional: true, nullable: false
-
           end
         end
       end

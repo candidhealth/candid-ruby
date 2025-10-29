@@ -6,7 +6,6 @@ module Candid
       module Types
         class ServiceLineCreate < Internal::Types::Model
           field :diagnosis_pointers, -> { Internal::Types::Array[Integer] }, optional: false, nullable: false
-
         end
       end
     end

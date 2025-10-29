@@ -6,9 +6,10 @@ module Candid
       module V1
         module Types
           class Service < Internal::Types::Model
-            field :universal_service_identifier, -> { Candid::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier }, optional: true, nullable: false
+            field :universal_service_identifier, lambda {
+              Candid::PreEncounter::Appointments::V1::Types::UniversalServiceIdentifier
+            }, optional: true, nullable: false
             field :start_timestamp, -> { String }, optional: true, nullable: false
-
           end
         end
       end

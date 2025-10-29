@@ -5,7 +5,6 @@ module Candid
     module Types
       class BillingProviderAllocationTarget < Internal::Types::Model
         field :billing_provider_id, -> { String }, optional: false, nullable: false
-
       end
     end
   end

@@ -6,9 +6,11 @@ module Candid
       module Types
         module PrincipalProcedureInformationCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CBBR = "BBR"
           CBR = "BR"
-          CCAH = "CAH"end
+          CCAH = "CAH"
+        end
       end
     end
   end

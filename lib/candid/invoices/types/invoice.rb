@@ -16,8 +16,9 @@ module Candid
         field :status, -> { Candid::Invoices::Types::InvoiceStatus }, optional: false, nullable: false
         field :url, -> { String }, optional: true, nullable: false
         field :customer_invoice_url, -> { String }, optional: true, nullable: false
-        field :items, -> { Internal::Types::Array[Candid::Invoices::Types::InvoiceItem] }, optional: false, nullable: false
-
+        field :items, lambda {
+          Internal::Types::Array[Candid::Invoices::Types::InvoiceItem]
+        }, optional: false, nullable: false
       end
     end
   end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Tasks
@@ -17,7 +18,6 @@ module Candid
           field :date_of_service_max, -> { String }, optional: true, nullable: false
           field :billing_provider_npi, -> { String }, optional: true, nullable: false
           field :sort, -> { Candid::Tasks::V3::Types::TaskSortOptions }, optional: true, nullable: false
-
         end
       end
     end

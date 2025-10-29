@@ -6,6 +6,7 @@ module Candid
       module Types
         module PatientWriteOffReason
           extend Candid::Internal::Types::Enum
+
           SMALL_BALANCE = "SMALL_BALANCE"
           CHARITY_OR_FINANCIAL_ASSISTANCE = "CHARITY_OR_FINANCIAL_ASSISTANCE"
           PATIENT_EXPERIENCE_OR_SERVICE_RECOVERY = "PATIENT_EXPERIENCE_OR_SERVICE_RECOVERY"
@@ -17,7 +18,8 @@ module Candid
           UNKNOWN = "UNKNOWN"
           UNCOLLECTIBLE_OR_NON_BILLABLE = "UNCOLLECTIBLE_OR_NON_BILLABLE"
           DECEASED = "DECEASED"
-          BANKRUPTCY = "BANKRUPTCY"end
+          BANKRUPTCY = "BANKRUPTCY"
+        end
       end
     end
   end

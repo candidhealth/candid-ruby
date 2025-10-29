@@ -5,8 +5,9 @@ module Candid
     module V1
       module Types
         class SetOrClearPrincipalDiagnosis < Internal::Types::Model
-          field :value, -> { Candid::HealthCareCodeInformation::V1::Types::PrincipalDiagnosis }, optional: true, nullable: false
-
+          field :value, lambda {
+            Candid::HealthCareCodeInformation::V1::Types::PrincipalDiagnosis
+          }, optional: true, nullable: false
         end
       end
     end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module OrganizationServiceFacilities
@@ -10,7 +11,6 @@ module Candid
           field :external_ids, -> { String }, optional: true, nullable: false
           field :place_of_service_code, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
-
         end
       end
     end

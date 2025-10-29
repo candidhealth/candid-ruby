@@ -6,7 +6,9 @@ module Candid
       module Types
         module ValueCodeQualifier
           extend Candid::Internal::Types::Enum
-          CBE = "BE"end
+
+          CBE = "BE"
+        end
       end
     end
   end

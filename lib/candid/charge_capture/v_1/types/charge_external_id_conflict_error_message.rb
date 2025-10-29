@@ -6,7 +6,6 @@ module Candid
       module Types
         class ChargeExternalIdConflictErrorMessage < Internal::Types::Model
           field :message, -> { String }, optional: true, nullable: false
-
         end
       end
     end

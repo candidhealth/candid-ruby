@@ -9,7 +9,6 @@ module Candid
           class Patient < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
             field :mrn, -> { String }, optional: false, nullable: false
-
           end
         end
       end

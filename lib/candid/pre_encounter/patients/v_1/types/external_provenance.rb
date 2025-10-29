@@ -9,7 +9,6 @@ module Candid
           class ExternalProvenance < Internal::Types::Model
             field :external_id, -> { String }, optional: false, nullable: false
             field :system_name, -> { String }, optional: false, nullable: false
-
           end
         end
       end

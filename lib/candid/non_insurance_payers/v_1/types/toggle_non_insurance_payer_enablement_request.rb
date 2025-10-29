@@ -6,7 +6,6 @@ module Candid
       module Types
         class ToggleNonInsurancePayerEnablementRequest < Internal::Types::Model
           field :enabled, -> { Internal::Types::Boolean }, optional: false, nullable: false
-
         end
       end
     end

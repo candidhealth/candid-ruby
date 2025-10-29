@@ -6,8 +6,9 @@ module Candid
       module Types
         class PatientPaymentInfo < Internal::Types::Model
           field :total_payment_cents, -> { Integer }, optional: false, nullable: false
-          field :items, -> { Internal::Types::Array[Candid::PatientAr::V1::Types::PatientPaymentAllocation] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::PatientAr::V1::Types::PatientPaymentAllocation]
+          }, optional: false, nullable: false
         end
       end
     end

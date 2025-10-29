@@ -10,7 +10,6 @@ module Candid
           field :plan_type, -> { Candid::Commons::Types::SourceOfPaymentCode }, optional: true, nullable: false
           field :insurance_type, -> { Candid::Commons::Types::InsuranceTypeCode }, optional: true, nullable: false
           field :payer_plan_group_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

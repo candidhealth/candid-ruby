@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Credentialing
@@ -11,7 +12,6 @@ module Candid
           field :end_date, -> { String }, optional: true, nullable: false
           field :submitted_date, -> { String }, optional: true, nullable: false
           field :payer_loaded_date, -> { String }, optional: true, nullable: false
-
         end
       end
     end

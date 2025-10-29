@@ -13,7 +13,6 @@ module Candid
           field :rx_pcn, -> { String }, optional: true, nullable: false
           field :image_url_front, -> { String }, optional: true, nullable: false
           field :image_url_back, -> { String }, optional: true, nullable: false
-
         end
       end
     end

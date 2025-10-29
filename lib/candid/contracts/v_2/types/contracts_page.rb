@@ -5,8 +5,9 @@ module Candid
     module V2
       module Types
         class ContractsPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::Contracts::V2::Types::Contract] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::Contracts::V2::Types::Contract]
+          }, optional: false, nullable: false
         end
       end
     end

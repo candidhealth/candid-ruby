@@ -10,7 +10,6 @@ module Candid
             field :date_of_birth, -> { String }, optional: true, nullable: false
             field :biological_sex, -> { Candid::PreEncounter::Common::Types::Sex }, optional: false, nullable: false
             field :address, -> { Candid::PreEncounter::Common::Types::Address }, optional: true, nullable: false
-
           end
         end
       end

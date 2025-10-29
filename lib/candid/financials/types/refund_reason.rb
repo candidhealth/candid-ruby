@@ -5,7 +5,9 @@ module Candid
     module Types
       module RefundReason
         extend Candid::Internal::Types::Enum
-        OVERCHARGED = "OVERCHARGED"end
+
+        OVERCHARGED = "OVERCHARGED"
+      end
     end
   end
 end

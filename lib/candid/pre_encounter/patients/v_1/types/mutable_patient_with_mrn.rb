@@ -7,7 +7,6 @@ module Candid
         module Types
           class MutablePatientWithMrn < Internal::Types::Model
             field :mrn, -> { String }, optional: false, nullable: false
-
           end
         end
       end

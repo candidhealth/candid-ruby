@@ -6,8 +6,10 @@ module Candid
       module Types
         module DisabilityStatus
           extend Candid::Internal::Types::Enum
+
           DISABLED = "DISABLED"
-          NON_DISABLED = "NON_DISABLED"end
+          NON_DISABLED = "NON_DISABLED"
+        end
       end
     end
   end

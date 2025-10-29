@@ -6,8 +6,10 @@ module Candid
       module Types
         module ServiceFacilityMode
           extend Candid::Internal::Types::Enum
+
           INSTANCE = "instance"
-          KIND = "kind"end
+          KIND = "kind"
+        end
       end
     end
   end

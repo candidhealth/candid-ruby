@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -6,7 +7,6 @@ module Candid
         module Types
           class EligibilityRecommendationRequest < Internal::Types::Model
             field :filters, -> { String }, optional: true, nullable: false
-
           end
         end
       end

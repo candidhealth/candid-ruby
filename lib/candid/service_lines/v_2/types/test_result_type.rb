@@ -6,9 +6,11 @@ module Candid
       module Types
         module TestResultType
           extend Candid::Internal::Types::Enum
+
           HEMATOCRIT = "HEMATOCRIT"
           HEMOGLOBIN = "HEMOGLOBIN"
-          LDL = "LDL"end
+          LDL = "LDL"
+        end
       end
     end
   end

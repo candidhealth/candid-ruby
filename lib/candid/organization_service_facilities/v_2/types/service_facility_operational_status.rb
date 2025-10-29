@@ -6,12 +6,14 @@ module Candid
       module Types
         module ServiceFacilityOperationalStatus
           extend Candid::Internal::Types::Enum
+
           CLOSED = "C"
           HOUSEKEEPING = "H"
           ISOLATED = "I"
           CONTAMINATED = "K"
           OCCUPIED = "O"
-          UNOCCUPIED = "U"end
+          UNOCCUPIED = "U"
+        end
       end
     end
   end

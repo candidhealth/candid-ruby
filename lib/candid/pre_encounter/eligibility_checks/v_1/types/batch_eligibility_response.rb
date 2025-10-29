@@ -9,7 +9,6 @@ module Candid
           class BatchEligibilityResponse < Internal::Types::Model
             field :batch_id, -> { String }, optional: false, nullable: false
             field :submitted_at, -> { String }, optional: false, nullable: false
-
           end
         end
       end

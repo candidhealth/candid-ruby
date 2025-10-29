@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module InsuranceRefunds
@@ -8,7 +9,6 @@ module Candid
           field :refund_timestamp, -> { String }, optional: true, nullable: false
           field :refund_note, -> { Candid::Financials::Types::NoteUpdate }, optional: true, nullable: false
           field :refund_reason, -> { Candid::Financials::Types::RefundReasonUpdate }, optional: true, nullable: false
-
         end
       end
     end

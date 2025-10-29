@@ -9,7 +9,6 @@ module Candid
           field :value, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :match, -> { Internal::Types::Boolean }, optional: false, nullable: false
           field :explanation, -> { String }, optional: false, nullable: false
-
         end
       end
     end

@@ -8,7 +8,6 @@ module Candid
           # An appointment object with immutable server-owned properties.
           class Appointment < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
-
           end
         end
       end

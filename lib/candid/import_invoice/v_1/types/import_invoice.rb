@@ -17,7 +17,6 @@ module Candid
           field :customer_invoice_url, -> { String }, optional: true, nullable: false
           field :due_date, -> { String }, optional: false, nullable: false
           field :amount_cents, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

@@ -6,8 +6,10 @@ module Candid
       module Types
         module SynchronicityType
           extend Candid::Internal::Types::Enum
+
           SYNCHRONOUS = "Synchronous"
-          ASYNCHRONOUS = "Asynchronous"end
+          ASYNCHRONOUS = "Asynchronous"
+        end
       end
     end
   end

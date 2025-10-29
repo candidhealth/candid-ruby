@@ -9,8 +9,12 @@ module Candid
 
           discriminant :type
 
-          member -> { Candid::Encounters::V4::Types::MultipleInstancesForSchemaError }, key: "MULTIPLE_INSTANCES_FOR_SCHEMA"
-          member -> { Candid::Encounters::V4::Types::ValueDoesNotMatchKeyTypeError }, key: "VALUE_DOES_NOT_MATCH_KEY_TYPE"
+          member lambda {
+            Candid::Encounters::V4::Types::MultipleInstancesForSchemaError
+          }, key: "MULTIPLE_INSTANCES_FOR_SCHEMA"
+          member lambda {
+            Candid::Encounters::V4::Types::ValueDoesNotMatchKeyTypeError
+          }, key: "VALUE_DOES_NOT_MATCH_KEY_TYPE"
           member -> { Candid::Encounters::V4::Types::KeyDoesNotExistError }, key: "KEY_DOES_NOT_EXIST"
           member -> { Candid::Encounters::V4::Types::SchemaDoesNotExistError }, key: "SCHEMA_DOES_NOT_EXIST"
           member -> { Candid::Encounters::V4::Types::SchemaUnauthorizedAccessError }, key: "SCHEMA_UNAUTHORIZED_ACCESS"

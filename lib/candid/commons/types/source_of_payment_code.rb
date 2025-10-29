@@ -5,6 +5,7 @@ module Candid
     module Types
       module SourceOfPaymentCode
         extend Candid::Internal::Types::Enum
+
         SELF_PAY = "09"
         OTHER_NON_FEDERAL_PROGRAMS = "11"
         PPO = "12"
@@ -28,7 +29,8 @@ module Candid
         TITLE_V = "TV"
         VETERANS_AFFAIRS_PLAN = "VA"
         WORKERS_COMP_HEALTH_CLAIM = "WC"
-        MUTUALLY_DEFINED = "ZZ"end
+        MUTUALLY_DEFINED = "ZZ"
+      end
     end
   end
 end

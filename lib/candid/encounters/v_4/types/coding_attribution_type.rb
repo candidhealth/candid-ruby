@@ -6,10 +6,12 @@ module Candid
       module Types
         module CodingAttributionType
           extend Candid::Internal::Types::Enum
+
           CANDID = "CANDID"
           CUSTOMER = "CUSTOMER"
           TCN = "TCN"
-          PJF = "PJF"end
+          PJF = "PJF"
+        end
       end
     end
   end

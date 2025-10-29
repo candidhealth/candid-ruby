@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module EncounterAttachments
@@ -6,7 +7,6 @@ module Candid
         class DeleteAttachmentRequest < Internal::Types::Model
           field :encounter_id, -> { String }, optional: false, nullable: false
           field :attachment_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

@@ -8,7 +8,6 @@ module Candid
           class OrganizationProvider < Internal::Types::Model
             field :organization_name, -> { String }, optional: true, nullable: false
             field :npi, -> { String }, optional: false, nullable: false
-
           end
         end
       end

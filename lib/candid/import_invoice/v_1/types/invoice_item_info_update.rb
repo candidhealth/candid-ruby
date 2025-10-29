@@ -5,9 +5,12 @@ module Candid
     module V1
       module Types
         class InvoiceItemInfoUpdate < Internal::Types::Model
-          field :update_type, -> { Candid::ImportInvoice::V1::Types::InvoiceItemUpdateType }, optional: false, nullable: false
-          field :items, -> { Internal::Types::Array[Candid::Invoices::V2::Types::InvoiceItemCreate] }, optional: false, nullable: false
-
+          field :update_type, lambda {
+            Candid::ImportInvoice::V1::Types::InvoiceItemUpdateType
+          }, optional: false, nullable: false
+          field :items, lambda {
+            Internal::Types::Array[Candid::Invoices::V2::Types::InvoiceItemCreate]
+          }, optional: false, nullable: false
         end
       end
     end

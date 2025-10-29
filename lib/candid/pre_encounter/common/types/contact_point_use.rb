@@ -6,11 +6,13 @@ module Candid
       module Types
         module ContactPointUse
           extend Candid::Internal::Types::Enum
+
           HOME = "HOME"
           WORK = "WORK"
           TEMP = "TEMP"
           OLD = "OLD"
-          MOBILE = "MOBILE"end
+          MOBILE = "MOBILE"
+        end
       end
     end
   end

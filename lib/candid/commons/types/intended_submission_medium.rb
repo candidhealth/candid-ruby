@@ -5,8 +5,10 @@ module Candid
     module Types
       module IntendedSubmissionMedium
         extend Candid::Internal::Types::Enum
+
         PAPER = "paper"
-        ELECTRONIC = "electronic"end
+        ELECTRONIC = "electronic"
+      end
     end
   end
 end

@@ -13,7 +13,6 @@ module Candid
             field :possible_resolutions, -> { String }, optional: true, nullable: false
             field :code, -> { String }, optional: true, nullable: false
             field :followup_action, -> { String }, optional: true, nullable: false
-
           end
         end
       end

@@ -6,8 +6,9 @@ module Candid
       module V1
         module Types
           class VisitsPage < Internal::Types::Model
-            field :items, -> { Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Visit] }, optional: false, nullable: false
-
+            field :items, lambda {
+              Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Visit]
+            }, optional: false, nullable: false
           end
         end
       end

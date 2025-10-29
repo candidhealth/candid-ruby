@@ -5,6 +5,7 @@ module Candid
     module Types
       module TagColorEnum
         extend Candid::Internal::Types::Enum
+
         BLACK = "black"
         WHITE = "white"
         GRAY = "gray"
@@ -14,7 +15,8 @@ module Candid
         BLUE = "blue"
         INDIGO = "indigo"
         PURPLE = "purple"
-        PINK = "pink"end
+        PINK = "pink"
+      end
     end
   end
 end

@@ -5,7 +5,6 @@ module Candid
     module Types
       class EntityNotFoundErrorMessage < Internal::Types::Model
         field :id, -> { String }, optional: false, nullable: false
-
       end
     end
   end

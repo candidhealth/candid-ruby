@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Credentialing
@@ -10,7 +11,6 @@ module Candid
           field :provider_id, -> { String }, optional: true, nullable: false
           field :as_rendering_provider, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :as_contracting_provider, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
         end
       end
     end

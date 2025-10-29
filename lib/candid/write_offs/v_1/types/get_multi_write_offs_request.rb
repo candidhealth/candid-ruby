@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module WriteOffs
@@ -14,7 +15,6 @@ module Candid
           field :sort_direction, -> { Candid::Commons::Types::SortDirection }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
           field :account_types, -> { Candid::Financials::Types::AccountType }, optional: true, nullable: false
-
         end
       end
     end

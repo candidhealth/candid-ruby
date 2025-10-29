@@ -6,8 +6,10 @@ module Candid
       module Types
         module ExternalCauseOfInjuryCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CBN = "BN"
-          CABN = "ABN"end
+          CABN = "ABN"
+        end
       end
     end
   end

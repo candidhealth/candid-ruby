@@ -13,7 +13,6 @@ module Candid
           field :resolution_reason, -> { String }, optional: true, nullable: false
           field :field_in_error, -> { String }, optional: true, nullable: false
           field :claim_creation_id, -> { String }, optional: false, nullable: false
-
         end
       end
     end

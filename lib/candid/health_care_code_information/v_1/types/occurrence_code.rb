@@ -6,6 +6,7 @@ module Candid
       module Types
         module OccurrenceCode
           extend Candid::Internal::Types::Enum
+
           C_01 = "01"
           C_02 = "02"
           C_03 = "03"
@@ -64,7 +65,8 @@ module Candid
           CB_3 = "B3"
           CC_1 = "C1"
           CC_2 = "C2"
-          CC_3 = "C3"end
+          CC_3 = "C3"
+        end
       end
     end
   end

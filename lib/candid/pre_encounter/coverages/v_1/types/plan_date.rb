@@ -9,7 +9,6 @@ module Candid
             field :start_date, -> { String }, optional: false, nullable: false
             field :end_date, -> { String }, optional: true, nullable: false
             field :field_name, -> { String }, optional: false, nullable: false
-
           end
         end
       end

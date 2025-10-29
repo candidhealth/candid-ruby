@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Encounters
@@ -16,11 +17,16 @@ module Candid
           field :diagnoses_updated_since, -> { String }, optional: true, nullable: false
           field :tag_ids, -> { String }, optional: true, nullable: false
           field :work_queue_id, -> { String }, optional: true, nullable: false
-          field :billable_status, -> { Candid::Encounters::V4::Types::BillableStatusType }, optional: true, nullable: false
-          field :responsible_party, -> { Candid::Encounters::V4::Types::ResponsiblePartyType }, optional: true, nullable: false
-          field :owner_of_next_action, -> { Candid::Encounters::V4::Types::EncounterOwnerOfNextActionType }, optional: true, nullable: false
+          field :billable_status, lambda {
+            Candid::Encounters::V4::Types::BillableStatusType
+          }, optional: true, nullable: false
+          field :responsible_party, lambda {
+            Candid::Encounters::V4::Types::ResponsiblePartyType
+          }, optional: true, nullable: false
+          field :owner_of_next_action, lambda {
+            Candid::Encounters::V4::Types::EncounterOwnerOfNextActionType
+          }, optional: true, nullable: false
           field :patient_external_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

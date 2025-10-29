@@ -8,7 +8,6 @@ module Candid
           # A coverage object with immutable server-owned properties.
           class Coverage < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
-
           end
         end
       end

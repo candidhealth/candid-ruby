@@ -8,7 +8,6 @@ module Candid
           field :npi, -> { String }, optional: false, nullable: false
           field :taxonomy_code, -> { String }, optional: true, nullable: false
           field :address, -> { Candid::Commons::Types::StreetAddressLongZip }, optional: true, nullable: false
-
         end
       end
     end

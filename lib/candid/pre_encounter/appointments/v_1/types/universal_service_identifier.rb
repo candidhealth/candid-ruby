@@ -7,10 +7,12 @@ module Candid
         module Types
           module UniversalServiceIdentifier
             extend Candid::Internal::Types::Enum
+
             MD_VISIT = "MD_Visit"
             TREATMENT = "Treatment"
             TESTS = "Tests"
-            ACTIVITY = "Activity"end
+            ACTIVITY = "Activity"
+          end
         end
       end
     end

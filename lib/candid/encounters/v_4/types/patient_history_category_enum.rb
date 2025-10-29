@@ -6,10 +6,12 @@ module Candid
       module Types
         module PatientHistoryCategoryEnum
           extend Candid::Internal::Types::Enum
+
           PRESENT_ILLNESS = "present_illness"
           MEDICAL = "medical"
           FAMILY = "family"
-          SOCIAL = "social"end
+          SOCIAL = "social"
+        end
       end
     end
   end

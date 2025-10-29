@@ -6,7 +6,6 @@ module Candid
       module Types
         class ServiceLineCreateStandaloneBase < Internal::Types::Model
           field :procedure_code, -> { String }, optional: false, nullable: false
-
         end
       end
     end

@@ -8,7 +8,6 @@ module Candid
           field :id, -> { String }, optional: false, nullable: false
           field :clinical_trial_arm, -> { String }, optional: true, nullable: false
           field :period, -> { Candid::PreEncounter::Common::Types::Period }, optional: true, nullable: false
-
         end
       end
     end

@@ -7,7 +7,6 @@ module Candid
         class ErrorBase4Xx < Internal::Types::Model
           field :message, -> { String }, optional: false, nullable: false
           field :data, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
-
         end
       end
     end

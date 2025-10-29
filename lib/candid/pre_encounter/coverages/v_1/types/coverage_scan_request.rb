@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module PreEncounter
@@ -6,7 +7,6 @@ module Candid
         module Types
           class CoverageScanRequest < Internal::Types::Model
             field :since, -> { String }, optional: false, nullable: false
-
           end
         end
       end

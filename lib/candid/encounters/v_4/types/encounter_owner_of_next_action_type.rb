@@ -6,10 +6,12 @@ module Candid
       module Types
         module EncounterOwnerOfNextActionType
           extend Candid::Internal::Types::Enum
+
           CANDID = "CANDID"
           CUSTOMER = "CUSTOMER"
           CODER = "CODER"
-          NONE = "NONE"end
+          NONE = "NONE"
+        end
       end
     end
   end

@@ -9,7 +9,6 @@ module Candid
           field :diagnosis_id_one, -> { String }, optional: true, nullable: false
           field :diagnosis_id_two, -> { String }, optional: true, nullable: false
           field :diagnosis_id_three, -> { String }, optional: true, nullable: false
-
         end
       end
     end

@@ -5,9 +5,10 @@ module Candid
     module V1
       module Types
         class ChargeCapturePage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::ChargeCapture::V1::Types::ChargeCapture] }, optional: false, nullable: false
+          field :items, lambda {
+            Internal::Types::Array[Candid::ChargeCapture::V1::Types::ChargeCapture]
+          }, optional: false, nullable: false
           field :item_count, -> { Integer }, optional: false, nullable: false
-
         end
       end
     end

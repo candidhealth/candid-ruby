@@ -6,11 +6,13 @@ module Candid
       module Types
         module PresentOnAdmissionIndicatorCode
           extend Candid::Internal::Types::Enum
+
           CY = "Y"
           CN = "N"
           CU = "U"
           CW = "W"
-          C_1 = "1"end
+          C_1 = "1"
+        end
       end
     end
   end

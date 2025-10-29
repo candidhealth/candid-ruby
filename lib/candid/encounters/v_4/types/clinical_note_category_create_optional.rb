@@ -6,8 +6,9 @@ module Candid
       module Types
         class ClinicalNoteCategoryCreateOptional < Internal::Types::Model
           field :category, -> { Candid::Encounters::V4::Types::NoteCategory }, optional: true, nullable: false
-          field :notes, -> { Internal::Types::Array[Candid::Encounters::V4::Types::ClinicalNoteOptional] }, optional: true, nullable: false
-
+          field :notes, lambda {
+            Internal::Types::Array[Candid::Encounters::V4::Types::ClinicalNoteOptional]
+          }, optional: true, nullable: false
         end
       end
     end

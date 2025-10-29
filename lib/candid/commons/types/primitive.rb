@@ -5,10 +5,12 @@ module Candid
     module Types
       module Primitive
         extend Candid::Internal::Types::Enum
+
         BOOLEAN = "BOOLEAN"
         DOUBLE = "DOUBLE"
         INTEGER = "INTEGER"
-        STRING = "STRING"end
+        STRING = "STRING"
+      end
     end
   end
 end

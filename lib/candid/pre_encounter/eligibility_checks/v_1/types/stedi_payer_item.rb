@@ -7,8 +7,9 @@ module Candid
         module Types
           class StediPayerItem < Internal::Types::Model
             field :score, -> { Integer }, optional: false, nullable: false
-            field :payer, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::StediPayer }, optional: false, nullable: false
-
+            field :payer, lambda {
+              Candid::PreEncounter::EligibilityChecks::V1::Types::StediPayer
+            }, optional: false, nullable: false
           end
         end
       end

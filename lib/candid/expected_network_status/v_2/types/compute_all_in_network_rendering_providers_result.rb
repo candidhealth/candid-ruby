@@ -9,7 +9,9 @@ module Candid
 
           discriminant :type
 
-          member -> { Candid::ExpectedNetworkStatus::V2::Types::InNetworkRenderingProvidersDetail }, key: "RENDERING_PROVIDERS"
+          member lambda {
+            Candid::ExpectedNetworkStatus::V2::Types::InNetworkRenderingProvidersDetail
+          }, key: "RENDERING_PROVIDERS"
           member -> { Candid::ExpectedNetworkStatus::V2::Types::IndeterminateNetworkStatus }, key: "INDETERMINATE"
           member -> { Candid::ExpectedNetworkStatus::V2::Types::OutOfNetworkStatus }, key: "OUT_OF_NETWORK"
         end

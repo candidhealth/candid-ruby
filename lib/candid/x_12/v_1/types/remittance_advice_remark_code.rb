@@ -6,7 +6,6 @@ module Candid
       module Types
         class RemittanceAdviceRemarkCode < Internal::Types::Model
           field :reason_code, -> { Candid::X12::V1::Types::Rarc }, optional: false, nullable: false
-
         end
       end
     end

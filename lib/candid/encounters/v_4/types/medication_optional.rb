@@ -11,7 +11,6 @@ module Candid
           field :dosage_form, -> { String }, optional: true, nullable: false
           field :frequency, -> { String }, optional: true, nullable: false
           field :as_needed, -> { Internal::Types::Boolean }, optional: true, nullable: false
-
         end
       end
     end

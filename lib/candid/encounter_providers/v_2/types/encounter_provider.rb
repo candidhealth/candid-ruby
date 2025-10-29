@@ -11,8 +11,9 @@ module Candid
           field :npi, -> { String }, optional: false, nullable: false
           field :taxonomy_code, -> { String }, optional: true, nullable: false
           field :qualifier, -> { Candid::Commons::Types::QualifierCode }, optional: true, nullable: false
-          field :provider_commercial_license_type, -> { Candid::Commons::Types::BillingProviderCommercialLicenseType }, optional: true, nullable: false
-
+          field :provider_commercial_license_type, lambda {
+            Candid::Commons::Types::BillingProviderCommercialLicenseType
+          }, optional: true, nullable: false
         end
       end
     end

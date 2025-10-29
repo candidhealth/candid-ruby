@@ -5,8 +5,9 @@ module Candid
     module V2
       module Types
         class OrganizationServiceFacilityPage < Internal::Types::Model
-          field :items, -> { Internal::Types::Array[Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility] }, optional: false, nullable: false
-
+          field :items, lambda {
+            Internal::Types::Array[Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility]
+          }, optional: false, nullable: false
         end
       end
     end

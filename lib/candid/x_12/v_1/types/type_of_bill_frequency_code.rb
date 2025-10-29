@@ -6,6 +6,7 @@ module Candid
       module Types
         module TypeOfBillFrequencyCode
           extend Candid::Internal::Types::Enum
+
           C_0 = "0"
           C_1 = "1"
           C_2 = "2"
@@ -32,7 +33,8 @@ module Candid
           CQ = "Q"
           CX = "X"
           CY_FREQ = "Y"
-          CZ_FREQ = "Z"end
+          CZ_FREQ = "Z"
+        end
       end
     end
   end

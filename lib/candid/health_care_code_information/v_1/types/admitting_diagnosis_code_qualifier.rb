@@ -6,8 +6,10 @@ module Candid
       module Types
         module AdmittingDiagnosisCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CBJ = "BJ"
-          CABJ = "ABJ"end
+          CABJ = "ABJ"
+        end
       end
     end
   end

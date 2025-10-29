@@ -6,8 +6,10 @@ module Candid
       module Types
         module NonInsurancePayerPaymentSortField
           extend Candid::Internal::Types::Enum
+
           AMOUNT_CENTS = "amount_cents"
-          PAYMENT_TIMESTAMP = "payment_timestamp"end
+          PAYMENT_TIMESTAMP = "payment_timestamp"
+        end
       end
     end
   end

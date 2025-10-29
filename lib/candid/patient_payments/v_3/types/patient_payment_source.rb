@@ -6,6 +6,7 @@ module Candid
       module Types
         module PatientPaymentSource
           extend Candid::Internal::Types::Enum
+
           MANUAL_ENTRY = "MANUAL_ENTRY"
           CHARGEBEE_PAYMENTS = "CHARGEBEE_PAYMENTS"
           CHARGEBEE_MANUALLY_VOIDED_BY_CANDID = "CHARGEBEE MANUALLY VOIDED BY CANDID"
@@ -14,7 +15,8 @@ module Candid
           SQUARE_PAYMENTS = "SQUARE_PAYMENTS"
           STRIPE_CHARGES = "STRIPE_CHARGES"
           STRIPE_REFUNDS = "STRIPE_REFUNDS"
-          ELATION_PAYMENTS = "ELATION_PAYMENTS"end
+          ELATION_PAYMENTS = "ELATION_PAYMENTS"
+        end
       end
     end
   end

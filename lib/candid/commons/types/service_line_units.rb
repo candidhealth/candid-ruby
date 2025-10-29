@@ -5,8 +5,10 @@ module Candid
     module Types
       module ServiceLineUnits
         extend Candid::Internal::Types::Enum
+
         MJ = "MJ"
-        UN = "UN"end
+        UN = "UN"
+      end
     end
   end
 end

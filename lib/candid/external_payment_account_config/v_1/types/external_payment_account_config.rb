@@ -7,7 +7,6 @@ module Candid
         class ExternalPaymentAccountConfig < Internal::Types::Model
           field :id, -> { String }, optional: false, nullable: false
           field :account_name, -> { String }, optional: false, nullable: false
-
         end
       end
     end

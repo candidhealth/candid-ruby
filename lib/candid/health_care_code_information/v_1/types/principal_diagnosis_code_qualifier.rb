@@ -6,8 +6,10 @@ module Candid
       module Types
         module PrincipalDiagnosisCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CBK = "BK"
-          CABK = "ABK"end
+          CABK = "ABK"
+        end
       end
     end
   end

@@ -7,7 +7,6 @@ module Candid
         class Period < Internal::Types::Model
           field :start, -> { String }, optional: true, nullable: false
           field :end_, -> { String }, optional: true, nullable: false
-
         end
       end
     end

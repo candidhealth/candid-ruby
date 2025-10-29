@@ -9,7 +9,6 @@ module Candid
           field :author_name, -> { String }, optional: true, nullable: false
           field :author_npi, -> { String }, optional: true, nullable: false
           field :timestamp, -> { String }, optional: true, nullable: false
-
         end
       end
     end

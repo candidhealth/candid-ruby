@@ -6,8 +6,10 @@ module Candid
       module Types
         module EncounterSubmissionExpectation
           extend Candid::Internal::Types::Enum
+
           TARGET_PROFESSIONAL = "TARGET_PROFESSIONAL"
-          TARGET_INSTITUTIONAL = "TARGET_INSTITUTIONAL"end
+          TARGET_INSTITUTIONAL = "TARGET_INSTITUTIONAL"
+        end
       end
     end
   end

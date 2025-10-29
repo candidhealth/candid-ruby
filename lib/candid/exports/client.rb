@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Exports
@@ -7,6 +8,10 @@ module Candid
         @client = client
       end
 
+      # @return [Candid::V3::Client]
+      def v_3
+        @v_3 ||= Candid::Exports::V3::Client.new(client: @client)
+      end
     end
   end
 end

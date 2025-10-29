@@ -6,8 +6,9 @@ module Candid
       module Types
         class IntakeResponseAndFollowUps < Internal::Types::Model
           field :response, -> { String }, optional: true, nullable: false
-          field :follow_ups, -> { Internal::Types::Array[Candid::Encounters::V4::Types::IntakeFollowUp] }, optional: true, nullable: false
-
+          field :follow_ups, lambda {
+            Internal::Types::Array[Candid::Encounters::V4::Types::IntakeFollowUp]
+          }, optional: true, nullable: false
         end
       end
     end

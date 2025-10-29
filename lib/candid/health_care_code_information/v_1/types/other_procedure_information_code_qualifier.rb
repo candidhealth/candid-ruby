@@ -6,8 +6,10 @@ module Candid
       module Types
         module OtherProcedureInformationCodeQualifier
           extend Candid::Internal::Types::Enum
+
           CBBQ = "BBQ"
-          CBQ = "BQ"end
+          CBQ = "BQ"
+        end
       end
     end
   end

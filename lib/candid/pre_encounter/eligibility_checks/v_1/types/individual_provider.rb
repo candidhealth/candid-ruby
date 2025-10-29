@@ -9,7 +9,6 @@ module Candid
             field :first_name, -> { String }, optional: true, nullable: false
             field :last_name, -> { String }, optional: true, nullable: false
             field :npi, -> { String }, optional: false, nullable: false
-
           end
         end
       end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Candid
   module Credentialing
@@ -9,7 +10,6 @@ module Candid
           field :payer_uuid, -> { String }, optional: true, nullable: false
           field :contracting_provider_id, -> { String }, optional: true, nullable: false
           field :service_facility_id, -> { String }, optional: true, nullable: false
-
         end
       end
     end

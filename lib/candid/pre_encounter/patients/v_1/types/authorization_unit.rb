@@ -7,8 +7,10 @@ module Candid
         module Types
           module AuthorizationUnit
             extend Candid::Internal::Types::Enum
+
             VISIT = "VISIT"
-            UNIT = "UNIT"end
+            UNIT = "UNIT"
+          end
         end
       end
     end

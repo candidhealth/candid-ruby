@@ -8,7 +8,6 @@ module Candid
           field :id, -> { String }, optional: false, nullable: false
           field :text, -> { String }, optional: false, nullable: false
           field :response, -> { String }, optional: true, nullable: false
-
         end
       end
     end

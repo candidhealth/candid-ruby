@@ -21,9 +21,9 @@ jobs:
             env:
               GEM_HOST_API_KEY: ${{ secrets.RUBY_GEMS_API_KEY }}
             run: |
-              gem build candidhealth.gemspec
+              gem build candid.gemspec
 
-              gem push candidhealth-*.gem --host https://rubygems.org/
+              gem push candid-*.gem --host https://rubygems.org/
     alert-on-failure:
       needs: [
         publish,

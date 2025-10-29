@@ -302,6 +302,7 @@ module Candid
           CARC_P_30 = "P30"
           CARC_P_31 = "P31"
           CARC_P_32 = "P32"
+          CARC_15 = "15"
           CARC_17 = "17"
           CARC_25 = "25"
           CARC_28 = "28"

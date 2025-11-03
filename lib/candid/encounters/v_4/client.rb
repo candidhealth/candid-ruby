@@ -59,6 +59,28 @@ module Candid
         end
 
         # @return [Candid::Encounters::V4::Types::Encounter]
+        def create_universal(request_options: {}, **params)
+          _request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+            method: "POST",
+            path: "/api/encounters/v4/universal",
+            body: Candid::EncountersUniversal::Types::UniversalEncounterCreate.new(params).to_h
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Candid::Encounters::V4::Types::Encounter.load(_response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
+        end
+
+        # @return [Candid::Encounters::V4::Types::Encounter]
         def create(request_options: {}, **params)
           _request = Candid::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
@@ -98,12 +120,73 @@ module Candid
         # encounter has not already been submitted or adjudicated.
         #
         # @return [Candid::Encounters::V4::Types::Encounter]
+        def create_from_pre_encounter_patient_universal(request_options: {}, **params)
+          _request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+            method: "POST",
+            path: "/api/encounters/v4/create-from-pre-encounter/universal",
+            body: Candid::EncountersUniversal::Types::UniversalEncounterCreateFromPreEncounter.new(params).to_h
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Candid::Encounters::V4::Types::Encounter.load(_response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
+        end
+
+        # Create an encounter from a pre-encounter patient and appointment. This endpoint is intended to be used by consumers who are managing
+        # patients and appointments in the pre-encounter service and is currently under development. Consumers who are not taking advantage
+        # of the pre-encounter service should use the standard create endpoint.
+        #
+        # The endpoint will create an encounter from the provided fields, pulling information from the provided patient and appointment objects
+        # where applicable. In particular, the following fields are populated from the patient and appointment objects:
+        #   - Patient
+        #   - Referring Provider
+        #   - Subscriber Primary
+        #   - Subscriber Secondary
+        #   - Referral Number
+        #   - Responsible Party
+        #   - Guarantor
+        #
+        # Utilizing this endpoint opts you into automatic updating of the encounter when the patient or appointment is updated, assuming the
+        # encounter has not already been submitted or adjudicated.
+        #
+        # @return [Candid::Encounters::V4::Types::Encounter]
         def create_from_pre_encounter_patient(request_options: {}, **params)
           _request = Candid::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
             method: "POST",
             path: "/api/encounters/v4/create-from-pre-encounter",
             body: Candid::Encounters::V4::Types::EncounterCreateFromPreEncounter.new(params).to_h
+          )
+          begin
+            _response = @client.send(_request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = _response.code.to_i
+          if code.between?(200, 299)
+            Candid::Encounters::V4::Types::Encounter.load(_response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(_response.body, code: code)
+          end
+        end
+
+        # @return [Candid::Encounters::V4::Types::Encounter]
+        def update_universal(request_options: {}, **params)
+          _request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+            method: "PATCH",
+            path: "/api/encounters/v4/#{params[:encounter_id]}/universal",
+            body: Candid::EncountersUniversal::Types::UniversalEncounterUpdate.new(params).to_h
           )
           begin
             _response = @client.send(_request)

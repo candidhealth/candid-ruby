@@ -4065,6 +4065,72 @@ client.encounters.v_4.get();
 </dl>
 </details>
 
+<details><summary><code>client.encounters.v_4.create_universal(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.encounters.v_4.create_universal({
+  billing_provider: {
+    address: {
+      zip_plus_four_code: 'zip_plus_four_code',
+      address1: 'address1',
+      city: 'city',
+      zip_code: 'zip_code'
+    },
+    tax_id: 'tax_id',
+    npi: 'npi'
+  },
+  patient: {
+    external_id: 'external_id',
+    date_of_birth: '2023-01-15',
+    address: {
+      address1: 'address1',
+      city: 'city',
+      zip_code: 'zip_code'
+    },
+    first_name: 'first_name',
+    last_name: 'last_name'
+  },
+  external_id: 'external_id',
+  patient_authorized_release: true,
+  benefits_assigned_to_provider: true,
+  provider_accepts_assignment: true
+});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::EncountersUniversal::Types::UniversalEncounterCreate` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.encounters.v_4.create(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
@@ -4128,6 +4194,92 @@ client.encounters.v_4.create({
 <dd>
 
 **request:** `Candid::Encounters::V4::Types::EncounterCreate` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.encounters.v_4.create_from_pre_encounter_patient_universal(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an encounter from a pre-encounter patient and appointment. This endpoint is intended to be used by consumers who are managing
+patients and appointments in the pre-encounter service and is currently under development. Consumers who are not taking advantage
+of the pre-encounter service should use the standard create endpoint.
+
+The endpoint will create an encounter from the provided fields, pulling information from the provided patient and appointment objects
+where applicable. In particular, the following fields are populated from the patient and appointment objects:
+  - Patient
+  - Referring Provider
+  - Subscriber Primary
+  - Subscriber Secondary
+  - Referral Number
+  - Responsible Party
+  - Guarantor
+
+Utilizing this endpoint opts you into automatic updating of the encounter when the patient or appointment is updated, assuming the
+encounter has not already been submitted or adjudicated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.encounters.v_4.create_from_pre_encounter_patient_universal({
+  pre_encounter_patient_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
+  pre_encounter_appointment_ids: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'],
+  billing_provider: {
+    address: {
+      zip_plus_four_code: 'zip_plus_four_code',
+      address1: 'address1',
+      city: 'city',
+      zip_code: 'zip_code'
+    },
+    tax_id: 'tax_id',
+    npi: 'npi'
+  },
+  external_id: 'external_id',
+  patient_authorized_release: true,
+  benefits_assigned_to_provider: true,
+  provider_accepts_assignment: true
+});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::EncountersUniversal::Types::UniversalEncounterCreateFromPreEncounter` 
     
 </dd>
 </dl>
@@ -4222,6 +4374,54 @@ client.encounters.v_4.create_from_pre_encounter_patient({
 <dd>
 
 **request:** `Candid::Encounters::V4::Types::EncounterCreateFromPreEncounter` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.encounters.v_4.update_universal(encounter_id, request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.encounters.v_4.update_universal({});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**encounter_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Candid::EncountersUniversal::Types::UniversalEncounterUpdate` 
     
 </dd>
 </dl>
@@ -14762,55 +14962,6 @@ client.diagnoses.delete();
 <dd>
 
 **diagnosis_id:** `String` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ServiceFacility
-<details><summary><code>client.service_facility.update(service_facility_id, request) -> Candid::ServiceFacility::Types::EncounterServiceFacility</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.service_facility.update({});
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**service_facility_id:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Candid::ServiceFacility::Types::EncounterServiceFacilityUpdate` 
     
 </dd>
 </dl>

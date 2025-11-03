@@ -125,6 +125,7 @@ module Candid
         EP = "EP"
         ER = "ER"
         ET = "ET"
+        EV = "EV"
         EX = "EX"
         EY = "EY"
         F_1 = "F1"

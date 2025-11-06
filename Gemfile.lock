@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    candid (1.14.0)
+    candid (1.14.1)
 
 GEM
   remote: https://rubygems.org/

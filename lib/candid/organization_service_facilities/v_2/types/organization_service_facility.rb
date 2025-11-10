@@ -13,6 +13,7 @@ module Candid
           field :npi, -> { String }, optional: true, nullable: false
           field :place_of_service_code, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :clia_number, -> { String }, optional: true, nullable: false
+          field :mammography_certification_number, -> { String }, optional: true, nullable: false
           field :status, lambda {
             Candid::OrganizationServiceFacilities::V2::Types::ServiceFacilityStatus
           }, optional: true, nullable: false

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    candid (1.14.1)
+    candid (1.14.2)
 
 GEM
   remote: https://rubygems.org/
@@ -15,11 +15,11 @@ GEM
       bigdecimal
       rexml
     hashdiff (1.2.1)
-    json (2.15.2)
+    json (2.16.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     method_source (1.1.0)
-    minitest (5.26.0)
+    minitest (5.26.1)
     minitest-rg (5.3.0)
       minitest (~> 5.0)
     parallel (1.27.0)
@@ -47,7 +47,7 @@ GEM
       rubocop-ast (>= 1.47.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.47.1)
+    rubocop-ast (1.48.0)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
     rubocop-minitest (0.38.2)

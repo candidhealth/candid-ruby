@@ -6,7 +6,7 @@ require_relative "custom.gemspec"
 # NOTE: A handful of these fields are required as part of the Ruby specification.
 #       You can change them here or overwrite them in the custom gemspec file.
 Gem::Specification.new do |spec|
-  spec.name = "candid"
+  spec.name = "candidhealth"
   spec.authors = ["Candid"]
   spec.version = Candid::VERSION
   spec.summary = "Ruby client library for the Candid API"

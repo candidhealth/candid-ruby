@@ -5,3 +5,6 @@ test/test_candidhealth.rb
 # Ignore workflow changes
 .github/workflows/publish.yml
 .github/actions/
+
+# The 0.0.0 releases can clobber the gemspec, ignoring until we figure that out
+candid.gemspec

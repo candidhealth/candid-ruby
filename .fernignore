@@ -5,3 +5,5 @@ test/test_candidhealth.rb
 # Ignore workflow changes
 .github/workflows/publish.yml
 .github/actions/
+
+candid.gemspec

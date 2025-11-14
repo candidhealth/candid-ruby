@@ -23,7 +23,7 @@ jobs:
             run: |
               gem build candid.gemspec
 
-              gem push candid-*.gem --host https://rubygems.org/
+              gem push candid*.gem --host https://rubygems.org/
     alert-on-failure:
       needs: [
         publish,

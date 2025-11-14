@@ -7,3 +7,4 @@ test/test_candidhealth.rb
 .github/actions/
 
 candid.gemspec
+Gemfile.lock

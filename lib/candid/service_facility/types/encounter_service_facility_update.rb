@@ -8,6 +8,7 @@ module Candid
         field :npi, -> { String }, optional: true, nullable: false
         field :address, -> { Candid::Commons::Types::StreetAddressLongZip }, optional: true, nullable: false
         field :secondary_identification, -> { String }, optional: true, nullable: false
+        field :mammography_certification_number, -> { String }, optional: true, nullable: false
       end
     end
   end

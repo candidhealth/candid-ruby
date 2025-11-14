@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    candidhealth (1.14.2)
+    candid (1.14.3)
 
 GEM
   remote: https://rubygems.org/
@@ -68,7 +68,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  candidhealth!
+  candid!
   minitest (~> 5.16)
   minitest-rg
   pry

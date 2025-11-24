@@ -27,6 +27,7 @@ module Candid
             Internal::Types::Array[Candid::ServiceLines::V2::Types::TestResult]
           }, optional: true, nullable: false
           field :note, -> { String }, optional: true, nullable: false
+          field :prior_authorization_number, -> { String }, optional: true, nullable: false
         end
       end
     end

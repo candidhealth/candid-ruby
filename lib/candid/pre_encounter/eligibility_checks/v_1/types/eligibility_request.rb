@@ -21,6 +21,8 @@ module Candid
             field :encounter, lambda {
               Candid::PreEncounter::EligibilityChecks::V1::Types::Encounter
             }, optional: true, nullable: false
+            field :get_existing_check_initiated_after, -> { String }, optional: true, nullable: false
+            field :source, -> { String }, optional: true, nullable: false
           end
         end
       end

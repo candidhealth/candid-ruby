@@ -6358,6 +6358,61 @@ client.import_invoice.v_1.update({});
 </dl>
 </details>
 
+## InsuranceAdjudications V1
+<details><summary><code>client.insurance_adjudications.v_1.get(insurance_adjudication_id) -> Candid::InsuranceAdjudications::V1::Types::InsuranceAdjudication</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a previously created insurance adjudication by its `insurance_adjudication_id`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.insurance_adjudications.v_1.get();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**insurance_adjudication_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## InsurancePayments V1
 <details><summary><code>client.insurance_payments.v_1.get_multi() -> Candid::InsurancePayments::V1::Types::InsurancePaymentsPage</code></summary>
 <dl>

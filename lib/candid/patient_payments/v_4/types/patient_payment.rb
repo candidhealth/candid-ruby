@@ -19,6 +19,9 @@ module Candid
             Internal::Types::Array[Candid::Financials::Types::Allocation]
           }, optional: false, nullable: false
           field :invoice, -> { String }, optional: true, nullable: false
+          field :payment_method_detail, lambda {
+            Candid::PatientPayments::V4::Types::PaymentMethodDetail
+          }, optional: true, nullable: false
         end
       end
     end

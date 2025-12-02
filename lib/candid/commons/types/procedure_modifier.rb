@@ -417,6 +417,7 @@ module Candid
         XS = "XS"
         XU = "XU"
         XY = "XY"
+        ZZ = "ZZ"
       end
     end
   end

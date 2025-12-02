@@ -30,6 +30,7 @@ module Candid
           }, optional: true, nullable: false
           field :note, -> { String }, optional: true, nullable: false
           field :revenue_code, -> { String }, optional: true, nullable: false
+          field :prior_authorization_number, -> { String }, optional: true, nullable: false
         end
       end
     end

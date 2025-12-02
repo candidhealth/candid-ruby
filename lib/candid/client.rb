@@ -7,7 +7,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url,
         headers: {
-          "User-Agent": "candidhealth/1.15.0",
+          "User-Agent": "candidhealth/1.16.0",
           "X-Fern-Language": "Ruby"
         }
       )
@@ -71,6 +71,11 @@ module Candid
     # @return [Candid::Encounters::Client]
     def encounters
       @encounters ||= Candid::Encounters::Client.new(client: @raw_client)
+    end
+
+    # @return [Candid::Events::Client]
+    def events
+      @events ||= Candid::Events::Client.new(client: @raw_client)
     end
 
     # @return [Candid::ExpectedNetworkStatus::Client]

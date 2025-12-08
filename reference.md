@@ -1442,6 +1442,20 @@ If false, the change will be marked as unresolved.
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+This API provides access to Professional Contracts. For Professional and Institutional Contracts use Contracts V3.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -1481,6 +1495,20 @@ client.contracts.v_2.get();
 <details><summary><code>client.contracts.v_2.get_multi() -> Candid::Contracts::V2::Types::ContractsPage</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+This API provides access to Professional Contracts. For Professional and Institutional Contracts use Contracts V3.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1813,6 +1841,412 @@ value, overriding what was set before.
 <dd>
 
 **medicaid_insurance_types:** `Candid::Contracts::V2::Types::InsuranceTypes` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Contracts V3
+<details><summary><code>client.contracts.v_3.get(contract_id) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.get();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_3.get_multi() -> Candid::Contracts::V3::Types::ContractsPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.get_multi();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Max number of contracts returned. Defaults to 1000. Max is 1000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `Candid::Contracts::V3::Types::ContractType` — The type of contract
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rendering_provider_ids:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_names:** `String` — Filter to contracts that include any of the included payer names.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**states:** `Candid::Commons::Types::State` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_status:** `Candid::Contracts::V2::Types::ContractStatus` — The status of the contract. Defaults to `pending`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `Candid::Contracts::V2::Types::ContractSortField` — Potentially sort by a contract related attribute.  Defaults to created_at
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_direction:** `Candid::Commons::Types::SortDirection` — Direction of sort, defaulting to desc
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_3.create(request) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new contract within the user's current organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.create();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::Contracts::V3::Types::ContractCreateUnion` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_3.delete(contract_id) -> </code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.delete();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_3.update(contract_id, request) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.update();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Candid::Contracts::V3::Types::ContractUpdateUnion` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_3.create_contract_service_facility(contract_id, request) -> Candid::Contracts::V3::Types::ContractServiceFacility</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.create_contract_service_facility(
+  contractId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
+  serviceFacilityId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
+  providerIds: Set.new(['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'])
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_3.update_contract_service_facility(contract_id, contract_service_facility_id, request) -> Candid::Contracts::V3::Types::ContractServiceFacility</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_3.update_contract_service_facility(
+  contractId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
+  contractServiceFacilityId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_service_facility_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**service_facility_id:** `String` — The UUID of the service facility
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider_ids:** `Internal::Types::Array[String]` — The providers who are authorized under the contract
     
 </dd>
 </dl>

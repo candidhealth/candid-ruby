@@ -7,7 +7,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url,
         headers: {
-          "User-Agent": "candidhealth/1.16.0",
+          "User-Agent": "candidhealth/1.17.0",
           "X-Fern-Language": "Ruby"
         }
       )

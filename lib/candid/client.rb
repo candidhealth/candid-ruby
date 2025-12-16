@@ -7,7 +7,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url,
         headers: {
-          "User-Agent": "candidhealth/1.17.0",
+          "User-Agent": "candidhealth/1.17.1",
           "X-Fern-Language": "Ruby"
         }
       )
@@ -116,11 +116,6 @@ module Candid
     # @return [Candid::InsuranceAdjudications::Client]
     def insurance_adjudications
       @insurance_adjudications ||= Candid::InsuranceAdjudications::Client.new(client: @raw_client)
-    end
-
-    # @return [Candid::InsurancePayments::Client]
-    def insurance_payments
-      @insurance_payments ||= Candid::InsurancePayments::Client.new(client: @raw_client)
     end
 
     # @return [Candid::InsuranceRefunds::Client]

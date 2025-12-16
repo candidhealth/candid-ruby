@@ -20,6 +20,9 @@ module Candid
           field :provider_commercial_license_type, lambda {
             Candid::Commons::Types::BillingProviderCommercialLicenseType
           }, optional: true, nullable: false
+          field :secondary_identification, lambda {
+            Candid::EncounterProviders::V2::Types::ProviderSecondaryIdentification
+          }, optional: true, nullable: false
         end
       end
     end

@@ -44,6 +44,9 @@ module Candid
         field :place_of_service_code_as_submitted, lambda {
           Candid::Commons::Types::FacilityTypeCode
         }, optional: true, nullable: false
+        field :related_causes_information, lambda {
+          Candid::RelatedCausesInformation::V1::Types::RelatedCausesInformationUpdate
+        }, optional: true, nullable: false
       end
     end
   end

@@ -34,6 +34,9 @@ module Candid
         field :schema_instances, lambda {
           Internal::Types::Array[Candid::CustomSchemas::V1::Types::SchemaInstance]
         }, optional: true, nullable: false
+        field :related_causes_information, lambda {
+          Candid::RelatedCausesInformation::V1::Types::RelatedCausesInformationCreate
+        }, optional: true, nullable: false
       end
     end
   end

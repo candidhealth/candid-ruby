@@ -38,6 +38,9 @@ module Candid
           field :other_operating_provider, lambda {
             Candid::EncounterProviders::V2::Types::EncounterProvider
           }, optional: true, nullable: false
+          field :related_causes_information, lambda {
+            Candid::RelatedCausesInformation::V1::Types::RelatedCausesInformation
+          }, optional: true, nullable: false
           field :submission_expectation, lambda {
             Candid::Encounters::V4::Types::EncounterSubmissionExpectation
           }, optional: true, nullable: false

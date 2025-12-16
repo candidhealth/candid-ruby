@@ -58,6 +58,11 @@ module Candid
           end
         end
 
+        # Notice: The UB-04 Data File, 2025, is copyrighted by American Hospital Association (AHA), Chicago, Illinois.
+        # No portion of the THE UB-04 Data File, may be reproduced, stored in a retrieval system, or transmitted,
+        # in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior
+        # express, written consent of AHA.
+        #
         # @return [Candid::Encounters::V4::Types::Encounter]
         def create_universal(request_options: {}, **params)
           _request = Candid::Internal::JSON::Request.new(
@@ -118,6 +123,11 @@ module Candid
         #
         # Utilizing this endpoint opts you into automatic updating of the encounter when the patient or appointment is updated, assuming the
         # encounter has not already been submitted or adjudicated.
+        #
+        # Notice: The UB-04 Data File, 2025, is copyrighted by American Hospital Association (AHA), Chicago, Illinois.
+        # No portion of the THE UB-04 Data File, may be reproduced, stored in a retrieval system, or transmitted,
+        # in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior
+        # express, written consent of AHA.
         #
         # @return [Candid::Encounters::V4::Types::Encounter]
         def create_from_pre_encounter_patient_universal(request_options: {}, **params)
@@ -180,6 +190,11 @@ module Candid
           end
         end
 
+        # Notice: The UB-04 Data File, 2025, is copyrighted by American Hospital Association (AHA), Chicago, Illinois.
+        # No portion of the THE UB-04 Data File, may be reproduced, stored in a retrieval system, or transmitted,
+        # in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without prior
+        # express, written consent of AHA.
+        #
         # @return [Candid::Encounters::V4::Types::Encounter]
         def update_universal(request_options: {}, **params)
           _request = Candid::Internal::JSON::Request.new(

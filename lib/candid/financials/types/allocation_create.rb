@@ -8,6 +8,7 @@ module Candid
       class AllocationCreate < Internal::Types::Model
         field :amount_cents, -> { Integer }, optional: false, nullable: false
         field :target, -> { Candid::Financials::Types::AllocationTargetCreate }, optional: false, nullable: false
+        field :earmark, -> { Candid::Financials::Types::AllocationEarmarkType }, optional: true, nullable: false
       end
     end
   end

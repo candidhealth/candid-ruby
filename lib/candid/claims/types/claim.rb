@@ -13,7 +13,7 @@ module Candid
         field :service_lines, lambda {
           Internal::Types::Array[Candid::ServiceLines::V2::Types::ServiceLine]
         }, optional: false, nullable: false
-        field :eras, -> { Internal::Types::Array[Candid::Era::Types::Era] }, optional: false, nullable: false
+        field :eras, -> { Internal::Types::Array[Candid::Eras::Types::Era] }, optional: false, nullable: false
       end
     end
   end

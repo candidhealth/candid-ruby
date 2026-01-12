@@ -73,6 +73,9 @@ module Candid
           field :pay_to_address, lambda {
             Candid::Commons::Types::StreetAddressShortZipOptional
           }, optional: true, nullable: false
+          field :related_causes_information, lambda {
+            Candid::RelatedCausesInformation::V1::Types::RelatedCausesInformationCreate
+          }, optional: true, nullable: false
         end
       end
     end

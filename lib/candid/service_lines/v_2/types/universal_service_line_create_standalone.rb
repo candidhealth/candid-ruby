@@ -12,6 +12,7 @@ module Candid
           field :revenue_code, -> { String }, optional: true, nullable: false
           field :procedure_code, -> { String }, optional: true, nullable: false
           field :prior_authorization_number, -> { String }, optional: true, nullable: false
+          field :external_id, -> { String }, optional: true, nullable: false
         end
       end
     end

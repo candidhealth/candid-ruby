@@ -10,6 +10,7 @@ module Candid
           HEMATOCRIT = "HEMATOCRIT"
           HEMOGLOBIN = "HEMOGLOBIN"
           LDL = "LDL"
+          VITAMIN_D = "VITAMIN_D"
         end
       end
     end

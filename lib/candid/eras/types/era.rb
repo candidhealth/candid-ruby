@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Candid
-  module Era
+  module Eras
     module Types
       class Era < Internal::Types::Model
         field :era_id, -> { String }, optional: false, nullable: false

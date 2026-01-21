@@ -12,7 +12,9 @@ jobs:
           - uses: ruby/setup-ruby@d5126b9b3579e429dd52e51e68624dda2e05be25 # v1.267.0
             with:
               ruby-version: 3.4 # gemspec requires >=3.3.0
-              bundler-cache: true
+              # bundler-cache disabled: Gemfile.lock is in .fernignore and may be
+              # out of sync with the generated version. bundle install in test step
+              # will handle dependency installation.
 
           - name: Test gem
             run: bundle install && bundle exec rake test

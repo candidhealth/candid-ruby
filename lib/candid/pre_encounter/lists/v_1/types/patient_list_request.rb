@@ -13,6 +13,7 @@ module Candid
               Candid::PreEncounter::Common::Types::SortDirection
             }, optional: true, nullable: false
             field :filters, -> { String }, optional: true, nullable: false
+            field :include_deactivated, -> { Internal::Types::Boolean }, optional: true, nullable: false
           end
         end
       end

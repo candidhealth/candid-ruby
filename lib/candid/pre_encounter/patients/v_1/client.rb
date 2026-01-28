@@ -193,6 +193,35 @@ module Candid
             raise error_class.new(_response.body, code: code)
           end
 
+          # Gets a patient along with their coverages at a specific point in time. Note that the date passed in is only used to determine what the filing order was for that patient during that time. The actual data returned will always be the latest version of the patient and coverages.
+          #
+          # @return [Candid::PreEncounter::Patients::V1::Types::PatientCoverageSnapshot]
+          def get_coverage_snapshot(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.symbolize_keys(params)
+            _query_param_names = %i[date]
+            _query = params.slice(*_query_param_names)
+            params = params.except(*_query_param_names)
+
+            _request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+              method: "GET",
+              path: "/patients/v1/#{params[:id]}/snapshot",
+              query: _query
+            )
+            begin
+              _response = @client.send(_request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = _response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::Patients::V1::Types::PatientCoverageSnapshot.load(_response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(_response.body, code: code)
+            end
+          end
+
           # Updates a patient. The path must contain the next version number to prevent race conditions. For example, if the current version of the patient is n, you will need to send a request to this endpoint with `/{id}/n+1` to update the patient. Updating historic versions is not supported.
           #
           # @return [Candid::PreEncounter::Patients::V1::Types::Patient]

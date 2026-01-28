@@ -15,7 +15,7 @@ module Candid
           # @return [Candid::PreEncounter::Lists::V1::Types::PatientListPage]
           def get_patient_list(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.symbolize_keys(params)
-            _query_param_names = %i[page_token limit sort_field sort_direction filters]
+            _query_param_names = %i[page_token limit sort_field sort_direction filters include_deactivated]
             _query = params.slice(*_query_param_names)
             params.except(*_query_param_names)
 
@@ -44,7 +44,7 @@ module Candid
           # @return [Candid::PreEncounter::Lists::V1::Types::AppointmentListPage]
           def get_appointment_list(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.symbolize_keys(params)
-            _query_param_names = %i[sort_field sort_direction limit page_token filters]
+            _query_param_names = %i[sort_field sort_direction limit page_token filters include_deactivated]
             _query = params.slice(*_query_param_names)
             params.except(*_query_param_names)
 

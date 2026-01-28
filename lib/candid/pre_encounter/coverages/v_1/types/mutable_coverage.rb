@@ -30,6 +30,7 @@ module Candid
               Candid::PreEncounter::Coverages::V1::Types::CoverageBenefits
             }, optional: true, nullable: false
             field :orcon, -> { Internal::Types::Boolean }, optional: true, nullable: false
+            field :auto_update_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false
           end
         end
       end

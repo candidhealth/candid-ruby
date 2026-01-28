@@ -27,6 +27,7 @@ module Candid
             Candid::Encounters::V4::Types::EncounterOwnerOfNextActionType
           }, optional: true, nullable: false
           field :patient_external_id, -> { String }, optional: true, nullable: false
+          field :include_merged_patient_data, -> { Internal::Types::Boolean }, optional: true, nullable: false
         end
       end
     end

@@ -110,14 +110,21 @@ module Candid
             end
           end
 
-          # Gets a coverage along with it's full history.  The return list is ordered by version ascending.
+          # Gets a coverage's history. Full history is returned if no filters are
+          # defined. The return list is ordered by version, defaulting to ascending.
           #
           # @return [Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]]
           def get_history(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.symbolize_keys(params)
+            _query_param_names = %i[start end non_auto_updated_coverages_only sort_direction limit]
+            _query = params.slice(*_query_param_names)
+            params = params.except(*_query_param_names)
+
             _request = Candid::Internal::JSON::Request.new(
               base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
               method: "GET",
-              path: "/coverages/v1/#{params[:id]}/history"
+              path: "/coverages/v1/#{params[:id]}/history",
+              query: _query
             )
             begin
               _response = @client.send(_request)

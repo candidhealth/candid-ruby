@@ -16,6 +16,7 @@ module Candid
               Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::BenefitsRelatedEntity]
             }, optional: true, nullable: false
             field :notes, -> { String }, optional: true, nullable: false
+            field :auto_updated_eligibility_check_id, -> { String }, optional: true, nullable: false
           end
         end
       end

@@ -13,6 +13,7 @@ module Candid
             field :limit, -> { Integer }, optional: true, nullable: false
             field :page_token, -> { String }, optional: true, nullable: false
             field :filters, -> { String }, optional: true, nullable: false
+            field :include_deactivated, -> { Internal::Types::Boolean }, optional: true, nullable: false
           end
         end
       end

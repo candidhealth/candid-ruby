@@ -4381,6 +4381,14 @@ or encounter external id.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**include_merged_patient_data:** `Internal::Types::Boolean` — If true and patient_external_id is set, then also include the encounters of all alternative patients.
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11390,6 +11398,17 @@ client.pre_encounter.appointments.v_1.create({
 <dd>
 
 Gets all Visits within a given time range. The return list is ordered by start_time ascending.
+
+**IMPORTANT:** This endpoint requires a date filter on `appointment.startTimestamp` to ensure acceptable query performance.
+Without date filtering, the query can take 50+ seconds on large datasets due to grouping and aggregation operations.
+
+Example filters:
+- `appointment.startTimestamp|gt|2024-01-01` - appointments after January 1, 2024
+- `appointment.startTimestamp|eq|2024-12-08` - appointments on December 8, 2024
+- `appointment.startTimestamp|lt|2024-12-31` - appointments before December 31, 2024
+
+You can combine the date filter with other filters using commas:
+- `appointment.startTimestamp|gt|2024-01-01,appointment.status|eq|PENDING`
 </dd>
 </dl>
 </dd>
@@ -11452,6 +11471,9 @@ client.pre_encounter.appointments.v_1.get_visits();
 <dd>
 
 **filters:** `String` 
+
+**Required:** Must include a date filter on appointment.startTimestamp (using gt, lt, or eq operators).
+Example: appointment.startTimestamp|gt|2024-01-01
     
 </dd>
 </dl>
@@ -12059,7 +12081,8 @@ client.pre_encounter.coverages.v_1.get();
 <dl>
 <dd>
 
-Gets a coverage along with it's full history.  The return list is ordered by version ascending.
+Gets a coverage's history. Full history is returned if no filters are 
+defined. The return list is ordered by version, defaulting to ascending.
 </dd>
 </dl>
 </dd>
@@ -12074,7 +12097,7 @@ Gets a coverage along with it's full history.  The return list is ordered by ver
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.get_history();
+client.pre_encounter.coverages.v_1.get_history(id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
 ```
 </dd>
 </dl>
@@ -12090,6 +12113,46 @@ client.pre_encounter.coverages.v_1.get_history();
 <dd>
 
 **id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**non_auto_updated_coverages_only:** `Internal::Types::Boolean` — If true, only returns coverages that have NOT been auto-updated by the system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_direction:** `Candid::PreEncounter::Common::Types::SortDirection` — Defaults to ascending. Sorts by version.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Must be between 0 and 1000. No default.
     
 </dd>
 </dl>
@@ -13181,6 +13244,14 @@ client.pre_encounter.lists.v_1.get_patient_list();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**include_deactivated:** `Internal::Types::Boolean` — If true, includes deactivated patients in the results. Defaults to false.
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13264,6 +13335,14 @@ client.pre_encounter.lists.v_1.get_appointment_list();
 <dd>
 
 **filters:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_deactivated:** `Internal::Types::Boolean` — If true, includes deactivated appointments in the results. Defaults to false.
     
 </dd>
 </dl>
@@ -13936,6 +14015,68 @@ client.pre_encounter.patients.v_1.get_history();
 <dd>
 
 **id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.patients.v_1.get_coverage_snapshot(id) -> Candid::PreEncounter::Patients::V1::Types::PatientCoverageSnapshot</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets a patient along with their coverages at a specific point in time. Note that the date passed in is only used to determine what the filing order was for that patient during that time. The actual data returned will always be the latest version of the patient and coverages.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.patients.v_1.get_coverage_snapshot(id: 'id');
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `String` 
     
 </dd>
 </dl>

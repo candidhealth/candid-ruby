@@ -19,6 +19,8 @@ module Candid
             field :next_appointment, lambda {
               Candid::PreEncounter::Appointments::V1::Types::MutableAppointment
             }, optional: true, nullable: false
+            field :primary_mrn, -> { String }, optional: true, nullable: false
+            field :alternative_mrns, -> { Internal::Types::Array[String] }, optional: false, nullable: false
           end
         end
       end

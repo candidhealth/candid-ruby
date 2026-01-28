@@ -18,6 +18,9 @@ module Candid
             field :primary_coverage_status, lambda {
               Candid::PreEncounter::Coverages::V1::Types::CoverageStatus
             }, optional: true, nullable: false
+            field :secondary_coverage_status, lambda {
+              Candid::PreEncounter::Coverages::V1::Types::CoverageStatus
+            }, optional: true, nullable: false
           end
         end
       end

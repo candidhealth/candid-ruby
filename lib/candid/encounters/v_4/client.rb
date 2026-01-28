@@ -13,7 +13,7 @@ module Candid
         def get_all(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.symbolize_keys(params)
           _query_param_names = %i[limit claim_status sort page_token date_of_service_min date_of_service_max
-                                  primary_payer_names search_term external_id diagnoses_updated_since tag_ids work_queue_id billable_status responsible_party owner_of_next_action patient_external_id]
+                                  primary_payer_names search_term external_id diagnoses_updated_since tag_ids work_queue_id billable_status responsible_party owner_of_next_action patient_external_id include_merged_patient_data]
           _query = params.slice(*_query_param_names)
           params.except(*_query_param_names)
 

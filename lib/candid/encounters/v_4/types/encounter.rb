@@ -41,6 +41,8 @@ module Candid
           field :related_causes_information, lambda {
             Candid::RelatedCausesInformation::V1::Types::RelatedCausesInformation
           }, optional: true, nullable: false
+          field :property_casualty_claim_number, -> { String }, optional: true, nullable: false
+          field :accident_date, -> { String }, optional: true, nullable: false
           field :submission_expectation, lambda {
             Candid::Encounters::V4::Types::EncounterSubmissionExpectation
           }, optional: true, nullable: false

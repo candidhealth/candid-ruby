@@ -44,7 +44,8 @@ module Candid
           # @return [Candid::PreEncounter::Lists::V1::Types::AppointmentListPage]
           def get_appointment_list(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.symbolize_keys(params)
-            _query_param_names = %i[sort_field sort_direction limit page_token filters include_deactivated]
+            _query_param_names = %i[sort_field sort_direction limit page_token filters include_deactivated
+                                    include_merged_patient_data]
             _query = params.slice(*_query_param_names)
             params.except(*_query_param_names)
 

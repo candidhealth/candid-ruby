@@ -166,6 +166,30 @@ module Candid
               raise error_class.new(_response.body, code: code)
             end
           end
+
+          # Submit user feedback on an eligibility recommendation. The path must contain the next version number to prevent race conditions. For example, if the current version of the recommendation is n, you will need to send a request to this endpoint with `/{recommendation_id}/{n+1}/vote` to update the vote.
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation]
+          def vote_recommendation(request_options: {}, **params)
+            _request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+              method: "PUT",
+              path: "/eligibility-checks/v1/recommendation/#{params[:recommendation_id]}/#{params[:version]}/vote",
+              body: Candid::PreEncounter::EligibilityChecks::V1::Types::Vote.new(params).to_h
+            )
+            begin
+              _response = @client.send(_request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = _response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation.load(_response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(_response.body, code: code)
+            end
+          end
         end
       end
     end

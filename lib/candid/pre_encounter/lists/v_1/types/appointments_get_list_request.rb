@@ -14,6 +14,7 @@ module Candid
             field :page_token, -> { String }, optional: true, nullable: false
             field :filters, -> { String }, optional: true, nullable: false
             field :include_deactivated, -> { Internal::Types::Boolean }, optional: true, nullable: false
+            field :include_merged_patient_data, -> { Internal::Types::Boolean }, optional: true, nullable: false
           end
         end
       end

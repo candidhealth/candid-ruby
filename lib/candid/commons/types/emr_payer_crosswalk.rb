@@ -8,7 +8,7 @@ module Candid
 
         HEALTHIE = "HEALTHIE"
         CANVAS = "CANVAS"
-        HL_7_WEBPT_E_34_EPIC = "HL7_WEBPT_E34_EPIC"
+        WAYSTAR = "WAYSTAR"
       end
     end
   end

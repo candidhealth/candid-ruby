@@ -60,6 +60,9 @@ module Candid
             field :filing_order, lambda {
               Candid::PreEncounter::Patients::V1::Types::FilingOrder
             }, optional: false, nullable: false
+            field :coverages_for_related_causes, lambda {
+              Candid::PreEncounter::Patients::V1::Types::CoveragesForRelatedCauses
+            }, optional: true, nullable: false
             field :non_insurance_payers, -> { Internal::Types::Array[String] }, optional: true, nullable: false
             field :non_insurance_payer_associations, lambda {
               Internal::Types::Array[Candid::PreEncounter::Common::Types::CanonicalNonInsurancePayerAssociation]

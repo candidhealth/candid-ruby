@@ -9,6 +9,8 @@ module Candid
       class BalanceEarmark < Internal::Types::Model
         field :id, -> { String }, optional: false, nullable: false
         field :target, -> { Candid::Financials::Types::AllocationEarmarkType }, optional: false, nullable: false
+        field :amount_earmarked_cents, -> { Integer }, optional: true, nullable: false
+        field :created_by_allocation_id, -> { String }, optional: true, nullable: false
       end
     end
   end

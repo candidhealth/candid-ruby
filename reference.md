@@ -12854,6 +12854,78 @@ client.pre_encounter.eligibility_checks.v_1.create_recommendation({
 </dl>
 </details>
 
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.vote_recommendation(recommendation_id, version, request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submit user feedback on an eligibility recommendation. The path must contain the next version number to prevent race conditions. For example, if the current version of the recommendation is n, you will need to send a request to this endpoint with `/{recommendation_id}/{n+1}/vote` to update the vote.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.vote_recommendation({
+  user_id: 'user_id'
+});
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**recommendation_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::Vote` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## PreEncounter Images V1
 <details><summary><code>client.pre_encounter.images.v_1.create(request) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
 <dl>
@@ -13343,6 +13415,14 @@ client.pre_encounter.lists.v_1.get_appointment_list();
 <dd>
 
 **include_deactivated:** `Internal::Types::Boolean` — If true, includes deactivated appointments in the results. Defaults to false.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_merged_patient_data:** `Internal::Types::Boolean` — If true and a patient id is specified, then also include appointments from any alternative patients that are merged into this patient. Defaults to false.
     
 </dd>
 </dl>

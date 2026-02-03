@@ -16,6 +16,9 @@ module Candid
             field :tertiary_coverage, lambda {
               Candid::PreEncounter::Coverages::V1::Types::Coverage
             }, optional: true, nullable: false
+            field :coverages_for_related_causes, lambda {
+              Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]
+            }, optional: false, nullable: false
           end
         end
       end

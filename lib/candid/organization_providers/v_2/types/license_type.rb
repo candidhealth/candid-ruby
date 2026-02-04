@@ -110,6 +110,8 @@ module Candid
           CNS = "CNS"
           MDPHD = "MDPHD"
           AUD = "AuD"
+          ATC = "ATC"
+          LAT = "LAT"
         end
       end
     end

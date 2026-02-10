@@ -680,6 +680,14 @@ client.charge_capture.v_1.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**attachment_external_document_ids:** `Internal::Types::Array[String]` — Provide external attachment IDs which have been uploaded to Candid. They will be associated with the Encounter at Encounter creation time.
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -813,6 +821,14 @@ client.charge_capture.v_1.create_from_pre_encounter_patient(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**attachment_external_document_ids:** `Internal::Types::Array[String]` — Provide external attachment IDs which have been uploaded to Candid. They will be associated with the Encounter at Encounter creation time.
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -913,6 +929,14 @@ Send full URL format for the external link (e.g. https://emr_charge_capture_url.
 <dd>
 
 **status:** `Candid::ChargeCapture::V1::Types::ChargeCaptureStatus` — the status of the charge capture
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_external_document_ids:** `Internal::Types::Array[String]` — Provide external attachment IDs which have been uploaded to Candid. They will be associated with the Encounter at Encounter creation time.
     
 </dd>
 </dl>
@@ -10607,6 +10631,14 @@ client.superbills.v_1.create_superbill(
 <dd>
 
 **pay_to_address:** `Candid::Commons::Types::StreetAddressShortZip` — Address that will be displayed on the superbill as the 'Pay to' Address. If not provided this value will be set from available encounter data.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**output_format:** `Candid::Superbills::V1::Types::SuperbillOutputFormat` — Output format for the superbill. Defaults to DOCX if not specified.
     
 </dd>
 </dl>

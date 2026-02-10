@@ -13,6 +13,9 @@ module Candid
           field :claim_creation_category, -> { String }, optional: true, nullable: false
           field :ehr_source_url, -> { String }, optional: true, nullable: false
           field :status, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureStatus }, optional: false, nullable: false
+          field :attachment_external_document_ids, lambda {
+            Internal::Types::Array[String]
+          }, optional: true, nullable: false
         end
       end
     end

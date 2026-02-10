@@ -7,6 +7,7 @@ module Candid
         extend Candid::Internal::Types::Enum
 
         OVERCHARGED = "OVERCHARGED"
+        ENTERED_IN_ERROR = "ENTERED_IN_ERROR"
       end
     end
   end

@@ -10,6 +10,7 @@ module Candid
         OLIVE = "OLIVE"
         UCSF_CIRIUS = "UCSF_CIRIUS"
         AVAILITY = "AVAILITY"
+        JOPARI = "JOPARI"
         PAYER_PORTAL = "PAYER_PORTAL"
         STEDI = "STEDI"
         WAYSTAR = "WAYSTAR"

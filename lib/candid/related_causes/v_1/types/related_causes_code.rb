@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Candid
-  module RelatedCausesInformation
+  module RelatedCauses
     module V1
       module Types
         module RelatedCausesCode

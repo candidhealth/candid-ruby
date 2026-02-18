@@ -13,6 +13,7 @@ module Candid
             Internal::Types::Array[Candid::Financials::Types::AllocationCreate]
           }, optional: false, nullable: false
           field :invoice, -> { String }, optional: true, nullable: false
+          field :source_internal_id, -> { String }, optional: true, nullable: false
         end
       end
     end

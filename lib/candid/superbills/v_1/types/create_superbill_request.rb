@@ -12,6 +12,7 @@ module Candid
           field :output_format, lambda {
             Candid::Superbills::V1::Types::SuperbillOutputFormat
           }, optional: true, nullable: false
+          field :include_merged_patient_data, -> { Internal::Types::Boolean }, optional: true, nullable: false
         end
       end
     end

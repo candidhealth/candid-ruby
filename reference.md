@@ -9200,6 +9200,14 @@ client.patient_payments.v_4.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**source_internal_id:** `String` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10639,6 +10647,14 @@ client.superbills.v_1.create_superbill(
 <dd>
 
 **output_format:** `Candid::Superbills::V1::Types::SuperbillOutputFormat` — Output format for the superbill. Defaults to DOCX if not specified.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_merged_patient_data:** `Internal::Types::Boolean` — If true will include claims from any alternative patients the given patient_external_id has.
     
 </dd>
 </dl>

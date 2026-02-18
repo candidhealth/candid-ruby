@@ -39,10 +39,13 @@ module Candid
             Candid::EncounterProviders::V2::Types::EncounterProvider
           }, optional: true, nullable: false
           field :related_causes_information, lambda {
-            Candid::RelatedCausesInformation::V1::Types::RelatedCausesInformation
+            Candid::RelatedCauses::V1::Types::RelatedCausesInformation
           }, optional: true, nullable: false
           field :property_casualty_claim_number, -> { String }, optional: true, nullable: false
           field :accident_date, -> { String }, optional: true, nullable: false
+          field :property_casualty_patient_identifier, lambda {
+            Candid::PropertyAndCasualty::V1::Types::PropertyCasualtyPatientIdentifier
+          }, optional: true, nullable: false
           field :submission_expectation, lambda {
             Candid::Encounters::V4::Types::EncounterSubmissionExpectation
           }, optional: true, nullable: false

@@ -8,6 +8,7 @@ module Candid
 
         OVERCHARGED = "OVERCHARGED"
         ENTERED_IN_ERROR = "ENTERED_IN_ERROR"
+        TRANSFER = "TRANSFER"
       end
     end
   end

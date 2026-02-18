@@ -14,6 +14,7 @@ module Candid
         CEDAR = "CEDAR"
         HEALTHIE = "HEALTHIE"
         REALLOCATION = "REALLOCATION"
+        PHREESIA = "PHREESIA"
       end
     end
   end

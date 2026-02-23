@@ -15,7 +15,8 @@ module Candid
           # @return [Candid::PreEncounter::Lists::V1::Types::PatientListPage]
           def get_patient_list(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.symbolize_keys(params)
-            _query_param_names = %i[page_token limit sort_field sort_direction filters include_deactivated]
+            _query_param_names = %i[page_token limit sort_field sort_direction filters include_deactivated
+                                    redirect_to_primary]
             _query = params.slice(*_query_param_names)
             params.except(*_query_param_names)
 

@@ -12,6 +12,7 @@ module Candid
           member -> { Candid::PatientPayments::V4::Types::CashPaymentMethod }, key: "CASH"
           member -> { Candid::PatientPayments::V4::Types::CheckPaymentMethod }, key: "CHECK"
           member -> { Candid::PatientPayments::V4::Types::CardPaymentMethod }, key: "CARD"
+          member -> { Candid::PatientPayments::V4::Types::MoneyOrderPaymentMethod }, key: "MONEY_ORDER"
         end
       end
     end

@@ -116,7 +116,8 @@ module Candid
             end
           end
 
-          # Gets recommendation for eligibility checks based on the request.
+          # Gets recommendation for eligibility checks based on filters. This endpoint will retrieve all the latest eligibility recommendations for each
+          # eligibility recommendation type for the given filters. If you want to get a specific recommendation type, you can use the `type` query parameter.
           #
           # @return [Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation]]
           def recommendation(request_options: {}, **params)
@@ -185,6 +186,34 @@ module Candid
             code = _response.code.to_i
             if code.between?(200, 299)
               Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation.load(_response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(_response.body, code: code)
+            end
+          end
+
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage]
+          def get_multi(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.symbolize_keys(params)
+            _query_param_names = %i[page_token limit subscriber_member_id payer_id provider_npi date_of_service
+                                    initiated_at_min initiated_at_max]
+            _query = params.slice(*_query_param_names)
+            params.except(*_query_param_names)
+
+            _request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+              method: "GET",
+              path: "/eligibility-checks/v1/get-multi/",
+              query: _query
+            )
+            begin
+              _response = @client.send(_request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = _response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage.load(_response.body)
             else
               error_class = Candid::Errors::ResponseError.subclass_for_code(code)
               raise error_class.new(_response.body, code: code)

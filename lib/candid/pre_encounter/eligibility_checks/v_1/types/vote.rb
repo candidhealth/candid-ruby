@@ -11,7 +11,6 @@ module Candid
             field :value, lambda {
               Candid::PreEncounter::EligibilityChecks::V1::Types::VoteValue
             }, optional: false, nullable: false
-            field :comment, -> { String }, optional: true, nullable: false
           end
         end
       end

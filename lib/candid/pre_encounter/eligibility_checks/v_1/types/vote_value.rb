@@ -8,9 +8,8 @@ module Candid
           module VoteValue
             extend Candid::Internal::Types::Enum
 
-            GOOD = "GOOD"
-            BAD = "BAD"
-            OK = "OK"
+            UPVOTE = "UPVOTE"
+            DOWNVOTE = "DOWNVOTE"
           end
         end
       end

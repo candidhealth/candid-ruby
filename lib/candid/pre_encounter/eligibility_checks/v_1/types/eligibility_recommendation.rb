@@ -12,11 +12,12 @@ module Candid
             field :recommendation, lambda {
               Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendationPayload
             }, optional: false, nullable: false
+            field :coverage_id, -> { String }, optional: true, nullable: false
             field :patient, lambda {
               Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendationPatientInfo
             }, optional: false, nullable: false
-            field :vote, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::Vote
+            field :votes, lambda {
+              Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::Vote]
             }, optional: true, nullable: false
           end
         end

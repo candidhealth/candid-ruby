@@ -12803,7 +12803,8 @@ client.pre_encounter.eligibility_checks.v_1.payer_search();
 <dl>
 <dd>
 
-Gets recommendation for eligibility checks based on the request.
+Gets recommendation for eligibility checks based on filters. This endpoint will retrieve all the latest eligibility recommendations for each 
+eligibility recommendation type for the given filters. If you want to get a specific recommendation type, you can use the `type` query parameter.
 </dd>
 </dl>
 </dd>
@@ -12963,6 +12964,102 @@ client.pre_encounter.eligibility_checks.v_1.vote_recommendation({
 <dd>
 
 **request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::Vote` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.get_multi() -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.get_multi();
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subscriber_member_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider_npi:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_of_service:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initiated_at_min:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**initiated_at_max:** `String` 
     
 </dd>
 </dl>
@@ -13369,6 +13466,14 @@ client.pre_encounter.lists.v_1.get_patient_list();
 <dd>
 
 **include_deactivated:** `Internal::Types::Boolean` — If true, includes deactivated patients in the results. Defaults to false.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirect_to_primary:** `Internal::Types::Boolean` — If true, and filtering by mrn equals, then only return the primary version of the patient requested
     
 </dd>
 </dl>

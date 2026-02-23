@@ -107,6 +107,7 @@ module Candid
           PA_C = "PA-C"
           AMFT = "AMFT"
           CDN = "CDN"
+          CGC = "CGC"
           CNS = "CNS"
           MDPHD = "MDPHD"
           AUD = "AuD"

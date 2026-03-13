@@ -4,14 +4,20 @@ module Candid
   module PreEncounter
     module Lists
       class Client
-        # @return [Candid::PreEncounter::Lists::Client]
-        def initialize(client:)
+        # @param client [Candid::Internal::Http::RawClient]
+        # @param base_url [String, nil]
+        # @param environment [Hash[Symbol, String], nil]
+        #
+        # @return [void]
+        def initialize(client:, base_url: nil, environment: nil)
           @client = client
+          @base_url = base_url
+          @environment = environment
         end
 
         # @return [Candid::V1::Client]
         def v_1
-          @v_1 ||= Candid::PreEncounter::Lists::V1::Client.new(client: @client)
+          @v_1 ||= Candid::PreEncounter::Lists::V1::Client.new(client: @client, base_url: @base_url, environment: @environment)
         end
       end
     end

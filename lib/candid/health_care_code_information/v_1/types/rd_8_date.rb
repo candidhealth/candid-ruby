@@ -6,7 +6,7 @@ module Candid
       module Types
         class Rd8Date < Internal::Types::Model
           field :start, -> { String }, optional: false, nullable: false
-          field :end_, -> { String }, optional: false, nullable: false
+          field :end_, -> { String }, optional: false, nullable: false, api_name: "end"
         end
       end
     end

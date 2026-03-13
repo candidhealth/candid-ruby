@@ -29,19 +29,13 @@ module Candid
           field :patient_names, -> { String }, optional: true, nullable: false
           field :exclude_charges_linked_to_claims, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :patient_external_id_ranked_sort, -> { String }, optional: true, nullable: false
-          field :status_ranked_sort, lambda {
-            Candid::ChargeCapture::V1::Types::ChargeCaptureStatus
-          }, optional: true, nullable: false
+          field :status_ranked_sort, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureStatus }, optional: true, nullable: false
           field :charge_external_id_ranked_sort, -> { String }, optional: true, nullable: false
           field :date_of_service_min_ranked_sort, -> { String }, optional: true, nullable: false
           field :date_of_service_max_ranked_sort, -> { String }, optional: true, nullable: false
           field :search_term, -> { String }, optional: true, nullable: false
-          field :billable_status, lambda {
-            Candid::Encounters::V4::Types::BillableStatusType
-          }, optional: true, nullable: false
-          field :responsible_party, lambda {
-            Candid::Encounters::V4::Types::ResponsiblePartyType
-          }, optional: true, nullable: false
+          field :billable_status, -> { Candid::Encounters::V4::Types::BillableStatusType }, optional: true, nullable: false
+          field :responsible_party, -> { Candid::Encounters::V4::Types::ResponsiblePartyType }, optional: true, nullable: false
           field :claim_ids_ranked_sort, -> { String }, optional: true, nullable: false
           field :claim_creation_ids_ranked_sort, -> { String }, optional: true, nullable: false
           field :billing_provider_npis_ranked_sort, -> { String }, optional: true, nullable: false

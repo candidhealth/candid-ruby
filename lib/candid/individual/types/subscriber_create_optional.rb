@@ -4,9 +4,7 @@ module Candid
   module Individual
     module Types
       class SubscriberCreateOptional < Internal::Types::Model
-        field :insurance_card, lambda {
-          Candid::InsuranceCards::V2::Types::InsuranceCardCreateOptional
-        }, optional: true, nullable: false
+        field :insurance_card, -> { Candid::InsuranceCards::V2::Types::InsuranceCardCreateOptional }, optional: true, nullable: false
       end
     end
   end

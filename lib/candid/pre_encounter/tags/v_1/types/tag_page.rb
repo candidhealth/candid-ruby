@@ -6,9 +6,7 @@ module Candid
       module V1
         module Types
           class TagPage < Internal::Types::Model
-            field :items, lambda {
-              Internal::Types::Array[Candid::PreEncounter::Tags::V1::Types::Tag]
-            }, optional: false, nullable: false
+            field :items, -> { Internal::Types::Array[Candid::PreEncounter::Tags::V1::Types::Tag] }, optional: false, nullable: false
           end
         end
       end

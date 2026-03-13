@@ -4,84 +4,131 @@ module Candid
   module Eligibility
     module V2
       class Client
-        # @return [Candid::Eligibility::V2::Client]
-        def initialize(client:)
+        # @param client [Candid::Internal::Http::RawClient]
+        # @param base_url [String, nil]
+        # @param environment [Hash[Symbol, String], nil]
+        #
+        # @return [void]
+        def initialize(client:, base_url: nil, environment: nil)
           @client = client
+          @base_url = base_url
+          @environment = environment
         end
 
-        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended to use [Candid's Stedi passthrough endpoint](https://docs.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
-        # For assistance with the transition, please reference the [Transitioning to Candid's New Eligibility Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980) document in the Candid Support Center.</Tip>
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended to use [Candid's Stedi
+        # passthrough
+        # endpoint](https://docs.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
+        # For assistance with the transition, please reference the [Transitioning to Candid's New Eligibility
+        # Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980) document in the Candid
+        # Support Center.</Tip>
         #
-        # **Availity has transitioned their GET endpoint to a POST endpoint. Candid has updated their pass-through integration to enable backwards compatibility for the GET endpoint so that customers do not have to immediately update their integrations.**
+        # **Availity has transitioned their GET endpoint to a POST endpoint. Candid has updated their pass-through
+        # integration to enable backwards compatibility for the GET endpoint so that customers do not have to
+        # immediately update their integrations.**
         #
-        # **Candid recommends integrations with the [POST endpoint](https://docs.joincandidhealth.com/api-reference/eligibility/v-2/submit-eligibility-check-availity-post) to ensure the best possible integration experience. Given the transition, Availity’s documentation will be out of sync with this endpoint.**
+        # **Candid recommends integrations with the [POST
+        # endpoint](https://docs.joincandidhealth.com/api-reference/eligibility/v-2/submit-eligibility-check-availity-post)
+        # to ensure the best possible integration experience. Given the transition, Availity’s documentation will be out
+        # of sync with this endpoint.**
         #
-        # If you'd like access to this endpoint, please reach out to support@joincandidhealth.com with the subject line "Action: Activate Availity Eligibility API Endpoint
+        # If you'd like access to this endpoint, please reach out to support@joincandidhealth.com with the subject line
+        # "Action: Activate Availity Eligibility API Endpoint
         #
         # This API is a wrapper around Availity's coverages API. Below are some helpful documentation links:
         #
-        # - [Availity - Coverages 1.0.0 API](https://developer.availity.com/partner/documentation#c_coverages_references)
-        # - [Candid Availity Eligibility Integration Guide](https://support.joincandidhealth.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
+        # - [Availity - Coverages 1.0.0
+        # API](https://developer.availity.com/partner/documentation#c_coverages_references)
+        # - [Candid Availity Eligibility Integration
+        # Guide](https://support.joincandidhealth.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
         #
-        # A schema of the response object can be found here: [Availity Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
+        # A schema of the response object can be found here: [Availity
+        # Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
         # * Note Availity requires a free developer account to access this documentation.
         #
         # Check connection status of Availity API and partners here:
         # - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #
-        # @return [Hash[String, Object]]
-        def submit_eligibility_check_availity(request_options: {}, **_params)
-          _request = Candid::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @return [Object]
+        def submit_eligibility_check_availity(request_options: {}, **params)
+          Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
             method: "GET",
-            path: "/api/eligibility/v2/availity"
+            path: "/api/eligibility/v2/availity",
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Candid::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           return if code.between?(200, 299)
 
           error_class = Candid::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
 
-        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended to use [Candid's Stedi passthrough endpoint](https://docs.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
-        # For assistance with the transition, please reference the [Transitioning to Candid's New Eligibility Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980) document in the Candid Support Center.</Tip>
+        # <Tip>Candid is deprecating support for this endpoint. It is instead recommended to use [Candid's Stedi
+        # passthrough
+        # endpoint](https://docs.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
+        # For assistance with the transition, please reference the [Transitioning to Candid's New Eligibility
+        # Endpoint](https://support.joincandidhealth.com/hc/en-us/articles/34918552872980) document in the Candid
+        # Support Center.</Tip>
         #
-        # If you'd like access to this endpoint, please reach out to support@joincandidhealth.com with the subject line "Action: Activate Availity Eligibility API Endpoint
+        # If you'd like access to this endpoint, please reach out to support@joincandidhealth.com with the subject line
+        # "Action: Activate Availity Eligibility API Endpoint
         #
         # This API is a wrapper around Availity's coverages API. Below are some helpful documentation links:
         #
-        # - [Availity - Coverages 1.0.0 API](https://developer.availity.com/partner/documentation#c_coverages_references)
-        # - [Candid Availity Eligibility Integration Guide](https://support.joincandidhealth.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
+        # - [Availity - Coverages 1.0.0
+        # API](https://developer.availity.com/partner/documentation#c_coverages_references)
+        # - [Candid Availity Eligibility Integration
+        # Guide](https://support.joincandidhealth.com/hc/en-us/articles/24218441631892--Availity-Eligibility-Integration-Guide)
         #
-        # A schema of the response object can be found here: [Availity Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
+        # A schema of the response object can be found here: [Availity
+        # Docs](https://developer.availity.com/partner/product/191210/api/190898#/Coverages_100/operation/%2Fcoverages%2F{id}/get)
         # * Note Availity requires a free developer account to access this documentation.
         #
         # Check connection status of Availity API and partners here:
         # - [Availity Trading Partner Connection Status](https://www.availity.com/status/)
         #
-        # @return [Hash[String, Object]]
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @return [Object]
         def submit_eligibility_check_availity_post(request_options: {}, **params)
-          _request = Candid::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
             method: "POST",
             path: "/api/eligibility/v2/availity",
-            body: params
+            body: params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Candid::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           return if code.between?(200, 299)
 
           error_class = Candid::Errors::ResponseError.subclass_for_code(code)
-          raise error_class.new(_response.body, code: code)
+          raise error_class.new(response.body, code: code)
         end
       end
     end

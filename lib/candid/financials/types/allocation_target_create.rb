@@ -14,9 +14,7 @@ module Candid
         member -> { String }, key: "CLAIM_BY_ID"
         member -> { String }, key: "CLAIM_BY_ENCOUNTER_EXTERNAL_ID"
         member -> { String }, key: "BILLING_PROVIDER_BY_ID"
-        member lambda {
-          Candid::Financials::Types::AppointmentByIdAndPatientExternalId
-        }, key: "APPOINTMENT_BY_ID_AND_PATIENT_EXTERNAL_ID"
+        member -> { Candid::Financials::Types::AppointmentByIdAndPatientExternalId }, key: "APPOINTMENT_BY_ID_AND_PATIENT_EXTERNAL_ID"
         member -> { Object }, key: "UNATTRIBUTED"
       end
     end

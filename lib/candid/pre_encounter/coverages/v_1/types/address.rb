@@ -6,8 +6,8 @@ module Candid
       module V1
         module Types
           class Address < Internal::Types::Model
-            field :address_1, -> { String }, optional: true, nullable: false
-            field :address_2, -> { String }, optional: true, nullable: false
+            field :address_1, -> { String }, optional: true, nullable: false, api_name: "address1"
+            field :address_2, -> { String }, optional: true, nullable: false, api_name: "address2"
             field :city, -> { String }, optional: true, nullable: false
             field :state, -> { String }, optional: true, nullable: false
             field :postal_code, -> { String }, optional: true, nullable: false

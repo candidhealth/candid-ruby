@@ -10,7 +10,7 @@ module Candid
           field :timestamp, -> { String }, optional: false, nullable: false
           field :event_type, -> { String }, optional: false, nullable: false
           field :schema_version, -> { String }, optional: false, nullable: false
-          field :payload, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
+          field :payload, -> { Object }, optional: false, nullable: false
         end
       end
     end

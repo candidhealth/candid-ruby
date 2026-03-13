@@ -5,9 +5,7 @@ module Candid
     module V1
       module Types
         class ExternalPaymentAccountConfigPage < Internal::Types::Model
-          field :items, lambda {
-            Internal::Types::Array[Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfig]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfig] }, optional: false, nullable: false
         end
       end
     end

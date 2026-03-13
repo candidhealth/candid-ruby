@@ -7,6 +7,8 @@ module Candid
         module ProviderSecondaryIdentificationQualifier
           extend Candid::Internal::Types::Enum
 
+          ZERO_B = "0B"
+          ONE_G = "1G"
           G_2 = "G2"
           LU = "LU"
         end

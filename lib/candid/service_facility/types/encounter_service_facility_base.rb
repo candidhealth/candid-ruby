@@ -3,8 +3,10 @@
 module Candid
   module ServiceFacility
     module Types
-      # Encounter Service facility is typically the location a medical service was rendered, such as a provider office or hospital.
-      # For telehealth, service facility can represent the provider's location when the service was delivered (e.g., home),
+      # Encounter Service facility is typically the location a medical service was rendered, such as a provider office
+      # or hospital.
+      # For telehealth, service facility can represent the provider's location when the service was delivered (e.g.,
+      # home),
       # or the location where an in-person visit would have taken place, whichever is easier to identify.
       # If the provider is in-network, service facility may be defined in payer contracts.
       # Box 32 on the CMS-1500 claim form.

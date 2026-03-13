@@ -5,9 +5,7 @@ module Candid
     module V3
       module Types
         class InstitutionalContractCreate < Internal::Types::Model
-          field :contract_service_facilities, lambda {
-            Internal::Types::Array[Candid::Contracts::V3::Types::ContractServiceFacilityBase]
-          }, optional: false, nullable: false
+          field :contract_service_facilities, -> { Internal::Types::Array[Candid::Contracts::V3::Types::ContractServiceFacilityBase] }, optional: false, nullable: false
         end
       end
     end

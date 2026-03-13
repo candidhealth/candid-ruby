@@ -5,12 +5,8 @@ module Candid
     module V4
       module Types
         class ClaimSupplementalInformation < Internal::Types::Model
-          field :attachment_report_type_code, lambda {
-            Candid::Commons::Types::ReportTypeCode
-          }, optional: false, nullable: false
-          field :attachment_transmission_code, lambda {
-            Candid::Commons::Types::ReportTransmissionCode
-          }, optional: false, nullable: false
+          field :attachment_report_type_code, -> { Candid::Commons::Types::ReportTypeCode }, optional: false, nullable: false
+          field :attachment_transmission_code, -> { Candid::Commons::Types::ReportTransmissionCode }, optional: false, nullable: false
           field :attachment_control_number, -> { String }, optional: true, nullable: false
         end
       end

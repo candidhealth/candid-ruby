@@ -6,7 +6,7 @@ module Candid
       module Types
         class Period < Internal::Types::Model
           field :start, -> { String }, optional: true, nullable: false
-          field :end_, -> { String }, optional: true, nullable: false
+          field :end_, -> { String }, optional: true, nullable: false, api_name: "end"
         end
       end
     end

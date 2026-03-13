@@ -8,9 +8,7 @@ module Candid
           # User feedback on a recommendation
           class Vote < Internal::Types::Model
             field :user_id, -> { String }, optional: false, nullable: false
-            field :value, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::VoteValue
-            }, optional: false, nullable: false
+            field :value, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::VoteValue }, optional: false, nullable: false
           end
         end
       end

@@ -6,9 +6,7 @@ module Candid
       module Types
         class ProviderSecondaryIdentification < Internal::Types::Model
           field :reference_identification, -> { String }, optional: false, nullable: false
-          field :reference_identification_qualifier, lambda {
-            Candid::EncounterProviders::V2::Types::ProviderSecondaryIdentificationQualifier
-          }, optional: true, nullable: false
+          field :reference_identification_qualifier, -> { Candid::EncounterProviders::V2::Types::ProviderSecondaryIdentificationQualifier }, optional: true, nullable: false
         end
       end
     end

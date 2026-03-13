@@ -5,9 +5,7 @@ module Candid
     module V4
       module Types
         class EncounterPage < Internal::Types::Model
-          field :items, lambda {
-            Internal::Types::Array[Candid::Encounters::V4::Types::Encounter]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::Encounters::V4::Types::Encounter] }, optional: false, nullable: false
         end
       end
     end

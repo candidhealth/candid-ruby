@@ -4,35 +4,54 @@ module Candid
   module ExternalPaymentAccountConfig
     module V1
       class Client
-        # @return [Candid::ExternalPaymentAccountConfig::V1::Client]
-        def initialize(client:)
+        # @param client [Candid::Internal::Http::RawClient]
+        # @param base_url [String, nil]
+        # @param environment [Hash[Symbol, String], nil]
+        #
+        # @return [void]
+        def initialize(client:, base_url: nil, environment: nil)
           @client = client
+          @base_url = base_url
+          @environment = environment
         end
 
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Integer, nil] :limit
+        # @option params [String, nil] :page_token
+        #
         # @return [Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage]
         def get_multi(request_options: {}, **params)
-          params = Candid::Internal::Types::Utils.symbolize_keys(params)
-          _query_param_names = %i[limit page_token]
-          _query = params.slice(*_query_param_names)
-          params.except(*_query_param_names)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          query_param_names = %i[limit page_token]
+          query_params = {}
+          query_params["limit"] = params[:limit] if params.key?(:limit)
+          query_params["page_token"] = params[:page_token] if params.key?(:page_token)
+          params.except(*query_param_names)
 
-          _request = Candid::Internal::JSON::Request.new(
-            base_url: request_options[:base_url] || Candid::Environment::PRODUCTION,
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
             method: "GET",
             path: "/api/external-payment-account-config/v1",
-            query: _query
+            query: query_params,
+            request_options: request_options
           )
           begin
-            _response = @client.send(_request)
+            response = @client.send(request)
           rescue Net::HTTPRequestTimeout
             raise Candid::Errors::TimeoutError
           end
-          code = _response.code.to_i
+          code = response.code.to_i
           if code.between?(200, 299)
-            Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage.load(_response.body)
+            Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage.load(response.body)
           else
             error_class = Candid::Errors::ResponseError.subclass_for_code(code)
-            raise error_class.new(_response.body, code: code)
+            raise error_class.new(response.body, code: code)
           end
         end
       end

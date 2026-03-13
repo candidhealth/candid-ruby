@@ -10,18 +10,10 @@ module Candid
 
             discriminant :type
 
-            member lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::MedicareAdvantageRecommendation
-            }, key: "MEDICARE_ADVANTAGE"
-            member lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRecommendation
-            }, key: "COORDINATION_OF_BENEFITS"
-            member lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::CopayEstimationRecommendation
-            }, key: "COPAY_ESTIMATION"
-            member lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::UserConfiguredPromptsRecommendation
-            }, key: "USER_CONFIGURED_PROMPTS"
+            member -> { Candid::PreEncounter::EligibilityChecks::V1::Types::MedicareAdvantageRecommendation }, key: "MEDICARE_ADVANTAGE"
+            member -> { Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRecommendation }, key: "COORDINATION_OF_BENEFITS"
+            member -> { Candid::PreEncounter::EligibilityChecks::V1::Types::CopayEstimationRecommendation }, key: "COPAY_ESTIMATION"
+            member -> { Candid::PreEncounter::EligibilityChecks::V1::Types::UserConfiguredPromptsRecommendation }, key: "USER_CONFIGURED_PROMPTS"
           end
         end
       end

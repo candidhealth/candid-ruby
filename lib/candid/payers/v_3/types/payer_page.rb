@@ -5,9 +5,7 @@ module Candid
     module V3
       module Types
         class PayerPage < Internal::Types::Model
-          field :items, lambda {
-            Internal::Types::Array[Candid::Payers::V3::Types::Payer]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::Payers::V3::Types::Payer] }, optional: false, nullable: false
         end
       end
     end

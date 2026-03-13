@@ -10,9 +10,7 @@ module Candid
             field :mrn, -> { String }, optional: true, nullable: false
             field :page_token, -> { String }, optional: true, nullable: false
             field :sort_field, -> { String }, optional: true, nullable: false
-            field :sort_direction, lambda {
-              Candid::PreEncounter::Common::Types::SortDirection
-            }, optional: true, nullable: false
+            field :sort_direction, -> { Candid::PreEncounter::Common::Types::SortDirection }, optional: true, nullable: false
           end
         end
       end

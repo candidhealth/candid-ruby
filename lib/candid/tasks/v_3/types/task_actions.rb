@@ -5,9 +5,7 @@ module Candid
     module V3
       module Types
         class TaskActions < Internal::Types::Model
-          field :actions, lambda {
-            Internal::Types::Array[Candid::Tasks::V3::Types::TaskAction]
-          }, optional: false, nullable: false
+          field :actions, -> { Internal::Types::Array[Candid::Tasks::V3::Types::TaskAction] }, optional: false, nullable: false
         end
       end
     end

@@ -9,18 +9,10 @@ module Candid
           class EligibilityRequest < Internal::Types::Model
             field :submitter_transaction_identifier, -> { String }, optional: true, nullable: false
             field :payer_id, -> { String }, optional: false, nullable: false
-            field :provider, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::Provider
-            }, optional: false, nullable: false
-            field :subscriber, lambda {
-              Candid::PreEncounter::Coverages::V1::Types::MemberInfo
-            }, optional: false, nullable: false
-            field :dependent, lambda {
-              Candid::PreEncounter::Coverages::V1::Types::MemberInfo
-            }, optional: true, nullable: false
-            field :encounter, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::Encounter
-            }, optional: true, nullable: false
+            field :provider, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::Provider }, optional: false, nullable: false
+            field :subscriber, -> { Candid::PreEncounter::Coverages::V1::Types::MemberInfo }, optional: false, nullable: false
+            field :dependent, -> { Candid::PreEncounter::Coverages::V1::Types::MemberInfo }, optional: true, nullable: false
+            field :encounter, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::Encounter }, optional: true, nullable: false
             field :get_existing_check_initiated_after, -> { String }, optional: true, nullable: false
             field :source, -> { String }, optional: true, nullable: false
           end

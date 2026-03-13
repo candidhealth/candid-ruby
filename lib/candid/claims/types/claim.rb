@@ -10,9 +10,7 @@ module Candid
         field :clearinghouse_claim_id, -> { String }, optional: true, nullable: false
         field :payer_claim_id, -> { String }, optional: true, nullable: false
         field :clia_number, -> { String }, optional: true, nullable: false
-        field :service_lines, lambda {
-          Internal::Types::Array[Candid::ServiceLines::V2::Types::ServiceLine]
-        }, optional: false, nullable: false
+        field :service_lines, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::ServiceLine] }, optional: false, nullable: false
         field :eras, -> { Internal::Types::Array[Candid::Eras::Types::Era] }, optional: false, nullable: false
       end
     end

@@ -7,9 +7,7 @@ module Candid
         module Types
           # An object representing a copay estimation recommendation from AI analysis
           class CopayEstimationRecommendation < Internal::Types::Model
-            field :payload, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::CopayEstimationRecommendationPayload
-            }, optional: false, nullable: false
+            field :payload, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::CopayEstimationRecommendationPayload }, optional: false, nullable: false
           end
         end
       end

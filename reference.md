@@ -1,6 +1,6 @@
 # Reference
 ## Auth Default
-<details><summary><code>client.auth.default.get_token(request) -> Candid::Auth::Default::Types::AuthGetTokenResponse</code></summary>
+<details><summary><code>client.auth.default.<a href="/lib/candid/auth/default/client.rb">get_token</a>(request) -> Candid::Auth::Default::Types::AuthGetTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -58,9 +58,9 @@ requests; if the client attempts to generate a token too often, it will be rate-
 
 ```ruby
 client.auth.default.get_token(
-  clientId: 'YOUR_CLIENT_ID',
-  clientSecret: 'YOUR_CLIENT_SECRET'
-);
+  client_id: "YOUR_CLIENT_ID",
+  client_secret: "YOUR_CLIENT_SECRET"
+)
 ```
 </dd>
 </dl>
@@ -87,6 +87,14 @@ client.auth.default.get_token(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Auth::Default::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -96,7 +104,7 @@ client.auth.default.get_token(
 </details>
 
 ## BillingNotes V2
-<details><summary><code>client.billing_notes.v_2.create(request) -> Candid::BillingNotes::V2::Types::BillingNote</code></summary>
+<details><summary><code>client.billing_notes.v_2.<a href="/lib/candid/billing_notes/v_2/client.rb">create</a>(request) -> Candid::BillingNotes::V2::Types::BillingNote</code></summary>
 <dl>
 <dd>
 
@@ -110,9 +118,9 @@ client.auth.default.get_token(
 
 ```ruby
 client.billing_notes.v_2.create(
-  text: 'text',
-  encounterId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-);
+  text: "text",
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -131,6 +139,14 @@ client.billing_notes.v_2.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::BillingNotes::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -139,7 +155,7 @@ client.billing_notes.v_2.create(
 </dl>
 </details>
 
-<details><summary><code>client.billing_notes.v_2.delete(billing_note_id) -> </code></summary>
+<details><summary><code>client.billing_notes.v_2.<a href="/lib/candid/billing_notes/v_2/client.rb">delete</a>(billing_note_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -152,7 +168,7 @@ client.billing_notes.v_2.create(
 <dd>
 
 ```ruby
-client.billing_notes.v_2.delete();
+client.billing_notes.v_2.delete(billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -171,6 +187,14 @@ client.billing_notes.v_2.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::BillingNotes::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -179,7 +203,7 @@ client.billing_notes.v_2.delete();
 </dl>
 </details>
 
-<details><summary><code>client.billing_notes.v_2.update(billing_note_id, request) -> Candid::BillingNotes::V2::Types::BillingNote</code></summary>
+<details><summary><code>client.billing_notes.v_2.<a href="/lib/candid/billing_notes/v_2/client.rb">update</a>(billing_note_id, request) -> Candid::BillingNotes::V2::Types::BillingNote</code></summary>
 <dl>
 <dd>
 
@@ -193,9 +217,9 @@ client.billing_notes.v_2.delete();
 
 ```ruby
 client.billing_notes.v_2.update(
-  billingNoteId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  text: 'text'
-);
+  billing_note_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  text: "text"
+)
 ```
 </dd>
 </dl>
@@ -222,6 +246,14 @@ client.billing_notes.v_2.update(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::BillingNotes::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -231,7 +263,7 @@ client.billing_notes.v_2.update(
 </details>
 
 ## ChargeCaptureBundles V1
-<details><summary><code>client.charge_capture_bundles.v_1.get(charge_capture_claim_creation_id) -> Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation</code></summary>
+<details><summary><code>client.charge_capture_bundles.v_1.<a href="/lib/candid/charge_capture_bundles/v_1/client.rb">get</a>(charge_capture_claim_creation_id) -> Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreation</code></summary>
 <dl>
 <dd>
 
@@ -244,7 +276,7 @@ client.billing_notes.v_2.update(
 <dd>
 
 ```ruby
-client.charge_capture_bundles.v_1.get();
+client.charge_capture_bundles.v_1.get(charge_capture_claim_creation_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -263,6 +295,14 @@ client.charge_capture_bundles.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCaptureBundles::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -271,7 +311,7 @@ client.charge_capture_bundles.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture_bundles.v_1.get_summary() -> Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationSummary</code></summary>
+<details><summary><code>client.charge_capture_bundles.v_1.<a href="/lib/candid/charge_capture_bundles/v_1/client.rb">get_summary</a>() -> Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationSummary</code></summary>
 <dl>
 <dd>
 
@@ -284,19 +324,34 @@ client.charge_capture_bundles.v_1.get();
 <dd>
 
 ```ruby
-client.charge_capture_bundles.v_1.get_summary();
+client.charge_capture_bundles.v_1.get_summary
 ```
 </dd>
 </dl>
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCaptureBundles::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture_bundles.v_1.resolve_charge_creation_error(charge_capture_bundle_error_id, request) -> </code></summary>
+<details><summary><code>client.charge_capture_bundles.v_1.<a href="/lib/candid/charge_capture_bundles/v_1/client.rb">resolve_charge_creation_error</a>(charge_capture_bundle_error_id, request) -> </code></summary>
 <dl>
 <dd>
 
@@ -309,7 +364,7 @@ client.charge_capture_bundles.v_1.get_summary();
 <dd>
 
 ```ruby
-client.charge_capture_bundles.v_1.resolve_charge_creation_error(chargeCaptureBundleErrorId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.charge_capture_bundles.v_1.resolve_charge_creation_error(charge_capture_bundle_error_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -344,6 +399,14 @@ client.charge_capture_bundles.v_1.resolve_charge_creation_error(chargeCaptureBun
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCaptureBundles::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -352,7 +415,7 @@ client.charge_capture_bundles.v_1.resolve_charge_creation_error(chargeCaptureBun
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture_bundles.v_1.get_all() -> Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationPage</code></summary>
+<details><summary><code>client.charge_capture_bundles.v_1.<a href="/lib/candid/charge_capture_bundles/v_1/client.rb">get_all</a>() -> Candid::ChargeCaptureBundles::V1::Types::ChargeCaptureClaimCreationPage</code></summary>
 <dl>
 <dd>
 
@@ -365,7 +428,7 @@ client.charge_capture_bundles.v_1.resolve_charge_creation_error(chargeCaptureBun
 <dd>
 
 ```ruby
-client.charge_capture_bundles.v_1.get_all();
+client.charge_capture_bundles.v_1.get_all
 ```
 </dd>
 </dl>
@@ -586,6 +649,14 @@ This date must be the local date in the timezone where the service occurred.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCaptureBundles::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -595,7 +666,7 @@ This date must be the local date in the timezone where the service occurred.
 </details>
 
 ## ChargeCapture V1
-<details><summary><code>client.charge_capture.v_1.create(request) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
+<details><summary><code>client.charge_capture.v_1.<a href="/lib/candid/charge_capture/v_1/client.rb">create</a>(request) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
 <dl>
 <dd>
 
@@ -610,10 +681,10 @@ This date must be the local date in the timezone where the service occurred.
 ```ruby
 client.charge_capture.v_1.create(
   data: {},
-  chargeExternalId: 'charge_external_id',
-  patientExternalId: 'patient_external_id',
-  status: 
-);
+  charge_external_id: "charge_external_id",
+  patient_external_id: "patient_external_id",
+  status: "planned"
+)
 ```
 </dd>
 </dl>
@@ -688,6 +759,14 @@ client.charge_capture.v_1.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCapture::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -696,7 +775,7 @@ client.charge_capture.v_1.create(
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture.v_1.create_from_pre_encounter_patient(request) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
+<details><summary><code>client.charge_capture.v_1.<a href="/lib/candid/charge_capture/v_1/client.rb">create_from_pre_encounter_patient</a>(request) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
 <dl>
 <dd>
 
@@ -742,11 +821,11 @@ encounter has not already been submitted or adjudicated.
 ```ruby
 client.charge_capture.v_1.create_from_pre_encounter_patient(
   data: {},
-  chargeExternalId: 'charge_external_id',
-  preEncounterPatientId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  preEncounterAppointmentIds: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'],
-  status: 
-);
+  charge_external_id: "charge_external_id",
+  pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  pre_encounter_appointment_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
+  status: "planned"
+)
 ```
 </dd>
 </dl>
@@ -829,6 +908,14 @@ client.charge_capture.v_1.create_from_pre_encounter_patient(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCapture::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -837,7 +924,7 @@ client.charge_capture.v_1.create_from_pre_encounter_patient(
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture.v_1.update(charge_capture_id, request) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
+<details><summary><code>client.charge_capture.v_1.<a href="/lib/candid/charge_capture/v_1/client.rb">update_post_billed_changes</a>(request) -> Internal::Types::Array[Candid::ChargeCapture::V1::Types::ChargeCapturePostBilledChange]</code></summary>
 <dl>
 <dd>
 
@@ -850,7 +937,72 @@ client.charge_capture.v_1.create_from_pre_encounter_patient(
 <dd>
 
 ```ruby
-client.charge_capture.v_1.update(chargeCaptureId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.charge_capture.v_1.update_post_billed_changes(
+  charge_capture_change_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
+  resolved: true
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**charge_capture_change_ids:** `Internal::Types::Array[String]` 
+
+A list of UUIDs corresponding to ChargeCapturePostBilledChanges.
+All of the charges sent will be marked as resolved
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resolved:** `Internal::Types::Boolean` 
+
+Whether the change has been resolved. If true, the change will be marked as resolved.
+If false, the change will be marked as unresolved.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCapture::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.charge_capture.v_1.<a href="/lib/candid/charge_capture/v_1/client.rb">update</a>(charge_capture_id, request) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.charge_capture.v_1.update(charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -940,6 +1092,14 @@ Send full URL format for the external link (e.g. https://emr_charge_capture_url.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCapture::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -948,7 +1108,7 @@ Send full URL format for the external link (e.g. https://emr_charge_capture_url.
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture.v_1.get(charge_capture_id) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
+<details><summary><code>client.charge_capture.v_1.<a href="/lib/candid/charge_capture/v_1/client.rb">get</a>(charge_capture_id) -> Candid::ChargeCapture::V1::Types::ChargeCapture</code></summary>
 <dl>
 <dd>
 
@@ -961,7 +1121,7 @@ Send full URL format for the external link (e.g. https://emr_charge_capture_url.
 <dd>
 
 ```ruby
-client.charge_capture.v_1.get();
+client.charge_capture.v_1.get(charge_capture_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -980,6 +1140,14 @@ client.charge_capture.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ChargeCapture::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -988,7 +1156,7 @@ client.charge_capture.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.charge_capture.v_1.get_all() -> Candid::ChargeCapture::V1::Types::ChargeCapturePage</code></summary>
+<details><summary><code>client.charge_capture.v_1.<a href="/lib/candid/charge_capture/v_1/client.rb">get_all</a>() -> Candid::ChargeCapture::V1::Types::ChargeCapturePage</code></summary>
 <dl>
 <dd>
 
@@ -1001,7 +1169,7 @@ client.charge_capture.v_1.get();
 <dd>
 
 ```ruby
-client.charge_capture.v_1.get_all();
+client.charge_capture.v_1.get_all
 ```
 </dd>
 </dl>
@@ -1396,60 +1564,11 @@ or charge external id.
     
 </dd>
 </dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.charge_capture.v_1.update_post_billed_changes(request) -> Internal::Types::Array[Candid::ChargeCapture::V1::Types::ChargeCapturePostBilledChange]</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
 
 <dl>
 <dd>
 
-<dl>
-<dd>
-
-```ruby
-client.charge_capture.v_1.update_post_billed_changes(
-  chargeCaptureChangeIds: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'],
-  resolved: true
-);
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**charge_capture_change_ids:** `Internal::Types::Array[String]` 
-
-A list of UUIDs corresponding to ChargeCapturePostBilledChanges.
-All of the charges sent will be marked as resolved
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**resolved:** `Internal::Types::Boolean` 
-
-Whether the change has been resolved. If true, the change will be marked as resolved.
-If false, the change will be marked as unresolved.
+**request_options:** `Candid::ChargeCapture::V1::RequestOptions` 
     
 </dd>
 </dl>
@@ -1462,7 +1581,7 @@ If false, the change will be marked as unresolved.
 </details>
 
 ## Contracts V2
-<details><summary><code>client.contracts.v_2.get(contract_id) -> Candid::Contracts::V2::Types::ContractWithProviders</code></summary>
+<details><summary><code>client.contracts.v_2.<a href="/lib/candid/contracts/v_2/client.rb">get</a>(contract_id) -> Candid::Contracts::V2::Types::ContractWithProviders</code></summary>
 <dl>
 <dd>
 
@@ -1489,7 +1608,7 @@ This API provides access to Professional Contracts. For Professional and Institu
 <dd>
 
 ```ruby
-client.contracts.v_2.get();
+client.contracts.v_2.get(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -1508,6 +1627,14 @@ client.contracts.v_2.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1516,7 +1643,7 @@ client.contracts.v_2.get();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_2.get_multi() -> Candid::Contracts::V2::Types::ContractsPage</code></summary>
+<details><summary><code>client.contracts.v_2.<a href="/lib/candid/contracts/v_2/client.rb">get_multi</a>() -> Candid::Contracts::V2::Types::ContractsPage</code></summary>
 <dl>
 <dd>
 
@@ -1543,7 +1670,7 @@ This API provides access to Professional Contracts. For Professional and Institu
 <dd>
 
 ```ruby
-client.contracts.v_2.get_multi();
+client.contracts.v_2.get_multi
 ```
 </dd>
 </dl>
@@ -1626,6 +1753,14 @@ client.contracts.v_2.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1634,7 +1769,7 @@ client.contracts.v_2.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_2.create(request) -> Candid::Contracts::V2::Types::ContractWithProviders</code></summary>
+<details><summary><code>client.contracts.v_2.<a href="/lib/candid/contracts/v_2/client.rb">create</a>(request) -> Candid::Contracts::V2::Types::ContractWithProviders</code></summary>
 <dl>
 <dd>
 
@@ -1662,15 +1797,14 @@ Creates a new contract within the user's current organization
 
 ```ruby
 client.contracts.v_2.create(
-  effectiveDate: 'effective_date',
-  regions: ,
-  commercialInsuranceTypes: ,
-  medicareInsuranceTypes: ,
-  medicaidInsuranceTypes: ,
-  contractingProviderId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  renderingProviderIds: Set.new(['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32']),
-  payerUuid: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-);
+  effective_date: "effective_date",
+  commercial_insurance_types: {},
+  medicare_insurance_types: {},
+  medicaid_insurance_types: {},
+  contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  rendering_provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"]),
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -1709,6 +1843,14 @@ Max items is 4000.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1717,7 +1859,7 @@ Max items is 4000.
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_2.delete(contract_id) -> </code></summary>
+<details><summary><code>client.contracts.v_2.<a href="/lib/candid/contracts/v_2/client.rb">delete</a>(contract_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -1730,7 +1872,7 @@ Max items is 4000.
 <dd>
 
 ```ruby
-client.contracts.v_2.delete();
+client.contracts.v_2.delete(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -1749,6 +1891,14 @@ client.contracts.v_2.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1757,7 +1907,7 @@ client.contracts.v_2.delete();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_2.update(contract_id, request) -> Candid::Contracts::V2::Types::ContractWithProviders</code></summary>
+<details><summary><code>client.contracts.v_2.<a href="/lib/candid/contracts/v_2/client.rb">update</a>(contract_id, request) -> Candid::Contracts::V2::Types::ContractWithProviders</code></summary>
 <dl>
 <dd>
 
@@ -1770,7 +1920,7 @@ client.contracts.v_2.delete();
 <dd>
 
 ```ruby
-client.contracts.v_2.update(contractId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.contracts.v_2.update(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -1868,6 +2018,14 @@ value, overriding what was set before.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1877,7 +2035,7 @@ value, overriding what was set before.
 </details>
 
 ## Contracts V3
-<details><summary><code>client.contracts.v_3.get(contract_id) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">get</a>(contract_id) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
 <dl>
 <dd>
 
@@ -1890,7 +2048,7 @@ value, overriding what was set before.
 <dd>
 
 ```ruby
-client.contracts.v_3.get();
+client.contracts.v_3.get(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -1909,6 +2067,14 @@ client.contracts.v_3.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1917,7 +2083,7 @@ client.contracts.v_3.get();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_3.get_multi() -> Candid::Contracts::V3::Types::ContractsPage</code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">get_multi</a>() -> Candid::Contracts::V3::Types::ContractsPage</code></summary>
 <dl>
 <dd>
 
@@ -1930,7 +2096,7 @@ client.contracts.v_3.get();
 <dd>
 
 ```ruby
-client.contracts.v_3.get_multi();
+client.contracts.v_3.get_multi
 ```
 </dd>
 </dl>
@@ -2021,6 +2187,14 @@ client.contracts.v_3.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2029,7 +2203,7 @@ client.contracts.v_3.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_3.create(request) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">create</a>(request) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
 <dl>
 <dd>
 
@@ -2056,7 +2230,7 @@ Creates a new contract within the user's current organization
 <dd>
 
 ```ruby
-client.contracts.v_3.create();
+client.contracts.v_3.create
 ```
 </dd>
 </dl>
@@ -2075,6 +2249,14 @@ client.contracts.v_3.create();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2083,7 +2265,7 @@ client.contracts.v_3.create();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_3.delete(contract_id) -> </code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">delete</a>(contract_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -2096,7 +2278,7 @@ client.contracts.v_3.create();
 <dd>
 
 ```ruby
-client.contracts.v_3.delete();
+client.contracts.v_3.delete(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -2115,6 +2297,14 @@ client.contracts.v_3.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2123,7 +2313,7 @@ client.contracts.v_3.delete();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_3.update(contract_id, request) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">update</a>(contract_id, request) -> Candid::Contracts::V3::Types::ContractWithProvidersUnion</code></summary>
 <dl>
 <dd>
 
@@ -2136,7 +2326,7 @@ client.contracts.v_3.delete();
 <dd>
 
 ```ruby
-client.contracts.v_3.update();
+client.contracts.v_3.update(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -2163,6 +2353,14 @@ client.contracts.v_3.update();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2171,7 +2369,7 @@ client.contracts.v_3.update();
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_3.create_contract_service_facility(contract_id, request) -> Candid::Contracts::V3::Types::ContractServiceFacility</code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">create_contract_service_facility</a>(contract_id, request) -> Candid::Contracts::V3::Types::ContractServiceFacility</code></summary>
 <dl>
 <dd>
 
@@ -2185,10 +2383,10 @@ client.contracts.v_3.update();
 
 ```ruby
 client.contracts.v_3.create_contract_service_facility(
-  contractId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  serviceFacilityId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  providerIds: Set.new(['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'])
-);
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+)
 ```
 </dd>
 </dl>
@@ -2207,6 +2405,14 @@ client.contracts.v_3.create_contract_service_facility(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2215,7 +2421,7 @@ client.contracts.v_3.create_contract_service_facility(
 </dl>
 </details>
 
-<details><summary><code>client.contracts.v_3.update_contract_service_facility(contract_id, contract_service_facility_id, request) -> Candid::Contracts::V3::Types::ContractServiceFacility</code></summary>
+<details><summary><code>client.contracts.v_3.<a href="/lib/candid/contracts/v_3/client.rb">update_contract_service_facility</a>(contract_id, contract_service_facility_id, request) -> Candid::Contracts::V3::Types::ContractServiceFacility</code></summary>
 <dl>
 <dd>
 
@@ -2229,9 +2435,9 @@ client.contracts.v_3.create_contract_service_facility(
 
 ```ruby
 client.contracts.v_3.update_contract_service_facility(
-  contractId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  contractServiceFacilityId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-);
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contract_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -2274,6 +2480,14 @@ client.contracts.v_3.update_contract_service_facility(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2283,7 +2497,7 @@ client.contracts.v_3.update_contract_service_facility(
 </details>
 
 ## Credentialing V2
-<details><summary><code>client.credentialing.v_2.create_facility(request) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">create_facility</a>(request) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
 <dl>
 <dd>
 
@@ -2297,10 +2511,10 @@ client.contracts.v_3.update_contract_service_facility(
 
 ```ruby
 client.credentialing.v_2.create_facility(
-  serviceFacilityId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  contractingProviderId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  payerUuid: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-);
+  service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -2367,6 +2581,14 @@ client.credentialing.v_2.create_facility(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2375,7 +2597,7 @@ client.credentialing.v_2.create_facility(
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.get_facility(facility_credentialing_id) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">get_facility</a>(facility_credentialing_id) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
 <dl>
 <dd>
 
@@ -2388,7 +2610,7 @@ client.credentialing.v_2.create_facility(
 <dd>
 
 ```ruby
-client.credentialing.v_2.get_facility();
+client.credentialing.v_2.get_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -2407,6 +2629,14 @@ client.credentialing.v_2.get_facility();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2415,7 +2645,7 @@ client.credentialing.v_2.get_facility();
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.get_all_facilities() -> Candid::Credentialing::V2::Types::FacilityCredentialingSpanPage</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">get_all_facilities</a>() -> Candid::Credentialing::V2::Types::FacilityCredentialingSpanPage</code></summary>
 <dl>
 <dd>
 
@@ -2428,7 +2658,7 @@ client.credentialing.v_2.get_facility();
 <dd>
 
 ```ruby
-client.credentialing.v_2.get_all_facilities();
+client.credentialing.v_2.get_all_facilities
 ```
 </dd>
 </dl>
@@ -2479,6 +2709,14 @@ client.credentialing.v_2.get_all_facilities();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2487,7 +2725,7 @@ client.credentialing.v_2.get_all_facilities();
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.delete_facility(facility_credentialing_id) -> </code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">delete_facility</a>(facility_credentialing_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -2514,7 +2752,7 @@ Soft deletes a credentialing span rate from the system.
 <dd>
 
 ```ruby
-client.credentialing.v_2.delete_facility();
+client.credentialing.v_2.delete_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -2533,6 +2771,14 @@ client.credentialing.v_2.delete_facility();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2541,7 +2787,7 @@ client.credentialing.v_2.delete_facility();
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.update_facility(facility_credentialing_id, request) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">update_facility</a>(facility_credentialing_id, request) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
 <dl>
 <dd>
 
@@ -2555,9 +2801,9 @@ client.credentialing.v_2.delete_facility();
 
 ```ruby
 client.credentialing.v_2.update_facility(
-  facilityCredentialingId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  contractingProviderId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-);
+  facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -2632,6 +2878,14 @@ client.credentialing.v_2.update_facility(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2640,7 +2894,7 @@ client.credentialing.v_2.update_facility(
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.create(request) -> Candid::Credentialing::V2::Types::ProviderCredentialingSpan</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">create</a>(request) -> Candid::Credentialing::V2::Types::ProviderCredentialingSpan</code></summary>
 <dl>
 <dd>
 
@@ -2654,11 +2908,10 @@ client.credentialing.v_2.update_facility(
 
 ```ruby
 client.credentialing.v_2.create(
-  renderingProviderId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  contractingProviderId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  payerUuid: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  regions: 
-);
+  rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -2733,6 +2986,14 @@ client.credentialing.v_2.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2741,7 +3002,7 @@ client.credentialing.v_2.create(
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.get(provider_credentialing_id) -> Candid::Credentialing::V2::Types::ProviderCredentialingSpan</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">get</a>(provider_credentialing_id) -> Candid::Credentialing::V2::Types::ProviderCredentialingSpan</code></summary>
 <dl>
 <dd>
 
@@ -2754,7 +3015,7 @@ client.credentialing.v_2.create(
 <dd>
 
 ```ruby
-client.credentialing.v_2.get();
+client.credentialing.v_2.get(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -2773,6 +3034,14 @@ client.credentialing.v_2.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2781,7 +3050,7 @@ client.credentialing.v_2.get();
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.get_all() -> Candid::Credentialing::V2::Types::ProviderCredentialingSpanPage</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">get_all</a>() -> Candid::Credentialing::V2::Types::ProviderCredentialingSpanPage</code></summary>
 <dl>
 <dd>
 
@@ -2794,7 +3063,7 @@ client.credentialing.v_2.get();
 <dd>
 
 ```ruby
-client.credentialing.v_2.get_all();
+client.credentialing.v_2.get_all
 ```
 </dd>
 </dl>
@@ -2853,6 +3122,14 @@ client.credentialing.v_2.get_all();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2861,7 +3138,7 @@ client.credentialing.v_2.get_all();
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.delete(provider_credentialing_id) -> </code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">delete</a>(provider_credentialing_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -2888,7 +3165,7 @@ Soft deletes a credentialing span rate from the system.
 <dd>
 
 ```ruby
-client.credentialing.v_2.delete();
+client.credentialing.v_2.delete(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -2907,6 +3184,14 @@ client.credentialing.v_2.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2915,7 +3200,7 @@ client.credentialing.v_2.delete();
 </dl>
 </details>
 
-<details><summary><code>client.credentialing.v_2.update(provider_credentialing_id, request) -> Candid::Credentialing::V2::Types::ProviderCredentialingSpan</code></summary>
+<details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">update</a>(provider_credentialing_id, request) -> Candid::Credentialing::V2::Types::ProviderCredentialingSpan</code></summary>
 <dl>
 <dd>
 
@@ -2928,7 +3213,7 @@ client.credentialing.v_2.delete();
 <dd>
 
 ```ruby
-client.credentialing.v_2.update(providerCredentialingId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.credentialing.v_2.update(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3003,6 +3288,14 @@ client.credentialing.v_2.update(providerCredentialingId: 'd5e9c84f-c2b2-4bf4-b4b
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3012,7 +3305,7 @@ client.credentialing.v_2.update(providerCredentialingId: 'd5e9c84f-c2b2-4bf4-b4b
 </details>
 
 ## CustomSchemas V1
-<details><summary><code>client.custom_schemas.v_1.get_multi() -> Candid::CustomSchemas::V1::Types::SchemaGetMultiResponse</code></summary>
+<details><summary><code>client.custom_schemas.v_1.<a href="/lib/candid/custom_schemas/v_1/client.rb">get_multi</a>() -> Candid::CustomSchemas::V1::Types::SchemaGetMultiResponse</code></summary>
 <dl>
 <dd>
 
@@ -3039,8 +3332,23 @@ Returns all custom schemas.
 <dd>
 
 ```ruby
-client.custom_schemas.v_1.get_multi();
+client.custom_schemas.v_1.get_multi
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::CustomSchemas::V1::RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
@@ -3051,7 +3359,7 @@ client.custom_schemas.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.custom_schemas.v_1.get(schema_id) -> Candid::CustomSchemas::V1::Types::Schema</code></summary>
+<details><summary><code>client.custom_schemas.v_1.<a href="/lib/candid/custom_schemas/v_1/client.rb">get</a>(schema_id) -> Candid::CustomSchemas::V1::Types::Schema</code></summary>
 <dl>
 <dd>
 
@@ -3078,7 +3386,7 @@ Return a custom schema with a given ID.
 <dd>
 
 ```ruby
-client.custom_schemas.v_1.get();
+client.custom_schemas.v_1.get(schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582")
 ```
 </dd>
 </dl>
@@ -3097,6 +3405,14 @@ client.custom_schemas.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::CustomSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3105,7 +3421,7 @@ client.custom_schemas.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.custom_schemas.v_1.create(request) -> Candid::CustomSchemas::V1::Types::Schema</code></summary>
+<details><summary><code>client.custom_schemas.v_1.<a href="/lib/candid/custom_schemas/v_1/client.rb">create</a>(request) -> Candid::CustomSchemas::V1::Types::Schema</code></summary>
 <dl>
 <dd>
 
@@ -3134,18 +3450,22 @@ Engine, and key-value pairs can be attached to claims via the Encounters API.
 
 ```ruby
 client.custom_schemas.v_1.create(
-  name: 'General Medicine',
-  description: 'Values associated with a generic visit',
+  name: "General Medicine",
+  description: "Values associated with a generic visit",
   fields: [{
-    key: 'provider_category'
+    key: "provider_category",
+    type: "STRING"
   }, {
-    key: 'is_urgent_care'
+    key: "is_urgent_care",
+    type: "BOOLEAN"
   }, {
-    key: 'bmi'
+    key: "bmi",
+    type: "DOUBLE"
   }, {
-    key: 'age'
+    key: "age",
+    type: "INTEGER"
   }]
-);
+)
 ```
 </dd>
 </dl>
@@ -3180,6 +3500,14 @@ client.custom_schemas.v_1.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::CustomSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3188,7 +3516,7 @@ client.custom_schemas.v_1.create(
 </dl>
 </details>
 
-<details><summary><code>client.custom_schemas.v_1.update(schema_id, request) -> Candid::CustomSchemas::V1::Types::Schema</code></summary>
+<details><summary><code>client.custom_schemas.v_1.<a href="/lib/candid/custom_schemas/v_1/client.rb">update</a>(schema_id, request) -> Candid::CustomSchemas::V1::Types::Schema</code></summary>
 <dl>
 <dd>
 
@@ -3216,13 +3544,14 @@ Update the name, description, or keys on a preexisting schema.
 
 ```ruby
 client.custom_schemas.v_1.update(
-  schemaId: 'ec096b13-f80a-471d-aaeb-54b021c9d582',
-  name: 'General Medicine and Health',
-  description: 'Values collected during all visits',
-  fieldsToAdd: [{
-    key: 'visit_type'
+  schema_id: "ec096b13-f80a-471d-aaeb-54b021c9d582",
+  name: "General Medicine and Health",
+  description: "Values collected during all visits",
+  fields_to_add: [{
+    key: "visit_type",
+    type: "STRING"
   }]
-);
+)
 ```
 </dd>
 </dl>
@@ -3265,6 +3594,14 @@ client.custom_schemas.v_1.update(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::CustomSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3274,7 +3611,7 @@ client.custom_schemas.v_1.update(
 </details>
 
 ## Eligibility V2
-<details><summary><code>client.eligibility.v_2.submit_eligibility_check_availity() -> Internal::Types::Hash[String, Object]</code></summary>
+<details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">submit_eligibility_check_availity</a>() -> Object</code></summary>
 <dl>
 <dd>
 
@@ -3319,8 +3656,23 @@ Check connection status of Availity API and partners here:
 <dd>
 
 ```ruby
-client.eligibility.v_2.submit_eligibility_check_availity();
+client.eligibility.v_2.submit_eligibility_check_availity
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Eligibility::V2::RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
@@ -3331,7 +3683,7 @@ client.eligibility.v_2.submit_eligibility_check_availity();
 </dl>
 </details>
 
-<details><summary><code>client.eligibility.v_2.submit_eligibility_check_availity_post(request) -> Internal::Types::Hash[String, Object]</code></summary>
+<details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">submit_eligibility_check_availity_post</a>(request) -> Object</code></summary>
 <dl>
 <dd>
 
@@ -3372,7 +3724,7 @@ Check connection status of Availity API and partners here:
 <dd>
 
 ```ruby
-client.eligibility.v_2.submit_eligibility_check_availity_post();
+client.eligibility.v_2.submit_eligibility_check_availity_post
 ```
 </dd>
 </dl>
@@ -3387,7 +3739,15 @@ client.eligibility.v_2.submit_eligibility_check_availity_post();
 <dl>
 <dd>
 
-**request:** `Internal::Types::Hash[String, Object]` 
+**request:** `Object` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Eligibility::V2::RequestOptions` 
     
 </dd>
 </dl>
@@ -3400,7 +3760,7 @@ client.eligibility.v_2.submit_eligibility_check_availity_post();
 </details>
 
 ## EncounterAttachments V1
-<details><summary><code>client.encounter_attachments.v_1.get(encounter_id) -> Internal::Types::Array[Candid::EncounterAttachments::V1::Types::EncounterAttachment]</code></summary>
+<details><summary><code>client.encounter_attachments.v_1.<a href="/lib/candid/encounter_attachments/v_1/client.rb">get</a>(encounter_id) -> Internal::Types::Array[Candid::EncounterAttachments::V1::Types::EncounterAttachment]</code></summary>
 <dl>
 <dd>
 
@@ -3413,7 +3773,7 @@ client.eligibility.v_2.submit_eligibility_check_availity_post();
 <dd>
 
 ```ruby
-client.encounter_attachments.v_1.get();
+client.encounter_attachments.v_1.get(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3432,6 +3792,14 @@ client.encounter_attachments.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterAttachments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3440,7 +3808,142 @@ client.encounter_attachments.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.encounter_attachments.v_1.delete(encounter_id, request) -> </code></summary>
+<details><summary><code>client.encounter_attachments.v_1.<a href="/lib/candid/encounter_attachments/v_1/client.rb">get_by_charge_capture_external_id</a>(charge_capture_external_id) -> Internal::Types::Array[Candid::EncounterAttachments::V1::Types::ChargeCaptureAttachment]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns all attachments associated with the given charge capture external ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.encounter_attachments.v_1.get_by_charge_capture_external_id(charge_capture_external_id: "charge_capture_external_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**charge_capture_external_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterAttachments::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.encounter_attachments.v_1.<a href="/lib/candid/encounter_attachments/v_1/client.rb">delete_by_charge_capture_external_id</a>(charge_capture_external_id, request) -> </code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes an attachment associated with the given charge capture external ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.encounter_attachments.v_1.delete_by_charge_capture_external_id(
+  charge_capture_external_id: "charge_capture_external_id",
+  attachment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**charge_capture_external_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterAttachments::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.encounter_attachments.v_1.<a href="/lib/candid/encounter_attachments/v_1/client.rb">delete</a>(encounter_id, request) -> </code></summary>
 <dl>
 <dd>
 
@@ -3454,9 +3957,9 @@ client.encounter_attachments.v_1.get();
 
 ```ruby
 client.encounter_attachments.v_1.delete(
-  encounterId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  attachmentId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-);
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  attachment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -3483,6 +3986,14 @@ client.encounter_attachments.v_1.delete(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterAttachments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3492,7 +4003,7 @@ client.encounter_attachments.v_1.delete(
 </details>
 
 ## EncounterProviders V2
-<details><summary><code>client.encounter_providers.v_2.update_referring_provider(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">update_referring_provider</a>(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3505,7 +4016,7 @@ client.encounter_attachments.v_1.delete(
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.update_referring_provider({});
+client.encounter_providers.v_2.update_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3532,6 +4043,14 @@ client.encounter_providers.v_2.update_referring_provider({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3540,7 +4059,7 @@ client.encounter_providers.v_2.update_referring_provider({});
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.update_initial_referring_provider(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">update_initial_referring_provider</a>(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3553,7 +4072,7 @@ client.encounter_providers.v_2.update_referring_provider({});
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.update_initial_referring_provider({});
+client.encounter_providers.v_2.update_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3580,6 +4099,14 @@ client.encounter_providers.v_2.update_initial_referring_provider({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3588,7 +4115,7 @@ client.encounter_providers.v_2.update_initial_referring_provider({});
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.update_supervising_provider(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">update_supervising_provider</a>(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3601,7 +4128,7 @@ client.encounter_providers.v_2.update_initial_referring_provider({});
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.update_supervising_provider({});
+client.encounter_providers.v_2.update_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3628,6 +4155,14 @@ client.encounter_providers.v_2.update_supervising_provider({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3636,7 +4171,7 @@ client.encounter_providers.v_2.update_supervising_provider({});
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.update_ordering_provider(service_line_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">update_ordering_provider</a>(service_line_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3649,7 +4184,7 @@ client.encounter_providers.v_2.update_supervising_provider({});
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.update_ordering_provider({});
+client.encounter_providers.v_2.update_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3676,6 +4211,14 @@ client.encounter_providers.v_2.update_ordering_provider({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3684,7 +4227,7 @@ client.encounter_providers.v_2.update_ordering_provider({});
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.create_referring_provider(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">create_referring_provider</a>(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3697,9 +4240,10 @@ client.encounter_providers.v_2.update_ordering_provider({});
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.create_referring_provider({
-  npi: 'npi'
-});
+client.encounter_providers.v_2.create_referring_provider(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  npi: "npi"
+)
 ```
 </dd>
 </dl>
@@ -3726,6 +4270,14 @@ client.encounter_providers.v_2.create_referring_provider({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3734,7 +4286,7 @@ client.encounter_providers.v_2.create_referring_provider({
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.create_initial_referring_provider(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">create_initial_referring_provider</a>(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3747,9 +4299,10 @@ client.encounter_providers.v_2.create_referring_provider({
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.create_initial_referring_provider({
-  npi: 'npi'
-});
+client.encounter_providers.v_2.create_initial_referring_provider(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  npi: "npi"
+)
 ```
 </dd>
 </dl>
@@ -3776,6 +4329,14 @@ client.encounter_providers.v_2.create_initial_referring_provider({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3784,7 +4345,7 @@ client.encounter_providers.v_2.create_initial_referring_provider({
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.create_supervising_provider(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">create_supervising_provider</a>(encounter_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3797,9 +4358,10 @@ client.encounter_providers.v_2.create_initial_referring_provider({
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.create_supervising_provider({
-  npi: 'npi'
-});
+client.encounter_providers.v_2.create_supervising_provider(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  npi: "npi"
+)
 ```
 </dd>
 </dl>
@@ -3826,6 +4388,14 @@ client.encounter_providers.v_2.create_supervising_provider({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3834,7 +4404,7 @@ client.encounter_providers.v_2.create_supervising_provider({
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.create_ordering_provider(service_line_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">create_ordering_provider</a>(service_line_id, request) -> Candid::EncounterProviders::V2::Types::EncounterProvider</code></summary>
 <dl>
 <dd>
 
@@ -3847,9 +4417,10 @@ client.encounter_providers.v_2.create_supervising_provider({
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.create_ordering_provider({
-  npi: 'npi'
-});
+client.encounter_providers.v_2.create_ordering_provider(
+  service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  npi: "npi"
+)
 ```
 </dd>
 </dl>
@@ -3876,6 +4447,14 @@ client.encounter_providers.v_2.create_ordering_provider({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3884,7 +4463,7 @@ client.encounter_providers.v_2.create_ordering_provider({
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.delete_referring_provider(encounter_id) -> </code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">delete_referring_provider</a>(encounter_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -3897,7 +4476,7 @@ client.encounter_providers.v_2.create_ordering_provider({
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.delete_referring_provider();
+client.encounter_providers.v_2.delete_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3916,6 +4495,14 @@ client.encounter_providers.v_2.delete_referring_provider();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3924,7 +4511,7 @@ client.encounter_providers.v_2.delete_referring_provider();
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.delete_initial_referring_provider(encounter_id) -> </code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">delete_initial_referring_provider</a>(encounter_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -3937,7 +4524,7 @@ client.encounter_providers.v_2.delete_referring_provider();
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.delete_initial_referring_provider();
+client.encounter_providers.v_2.delete_initial_referring_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3956,6 +4543,14 @@ client.encounter_providers.v_2.delete_initial_referring_provider();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -3964,7 +4559,7 @@ client.encounter_providers.v_2.delete_initial_referring_provider();
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.delete_supervising_provider(encounter_id) -> </code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">delete_supervising_provider</a>(encounter_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -3977,7 +4572,7 @@ client.encounter_providers.v_2.delete_initial_referring_provider();
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.delete_supervising_provider();
+client.encounter_providers.v_2.delete_supervising_provider(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -3996,6 +4591,14 @@ client.encounter_providers.v_2.delete_supervising_provider();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4004,7 +4607,7 @@ client.encounter_providers.v_2.delete_supervising_provider();
 </dl>
 </details>
 
-<details><summary><code>client.encounter_providers.v_2.delete_ordering_provider(service_line_id) -> </code></summary>
+<details><summary><code>client.encounter_providers.v_2.<a href="/lib/candid/encounter_providers/v_2/client.rb">delete_ordering_provider</a>(service_line_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -4017,7 +4620,7 @@ client.encounter_providers.v_2.delete_supervising_provider();
 <dd>
 
 ```ruby
-client.encounter_providers.v_2.delete_ordering_provider();
+client.encounter_providers.v_2.delete_ordering_provider(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -4036,6 +4639,14 @@ client.encounter_providers.v_2.delete_ordering_provider();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterProviders::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4045,7 +4656,7 @@ client.encounter_providers.v_2.delete_ordering_provider();
 </details>
 
 ## EncounterSupplementalInformation V1
-<details><summary><code>client.encounter_supplemental_information.v_1.get(encounter_id) -> Internal::Types::Array[Candid::EncounterSupplementalInformation::V1::Types::SupplementalInformation]</code></summary>
+<details><summary><code>client.encounter_supplemental_information.v_1.<a href="/lib/candid/encounter_supplemental_information/v_1/client.rb">get</a>(encounter_id) -> Internal::Types::Array[Candid::EncounterSupplementalInformation::V1::Types::SupplementalInformation]</code></summary>
 <dl>
 <dd>
 
@@ -4058,7 +4669,7 @@ client.encounter_providers.v_2.delete_ordering_provider();
 <dd>
 
 ```ruby
-client.encounter_supplemental_information.v_1.get();
+client.encounter_supplemental_information.v_1.get(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -4077,6 +4688,14 @@ client.encounter_supplemental_information.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterSupplementalInformation::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4085,7 +4704,7 @@ client.encounter_supplemental_information.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.encounter_supplemental_information.v_1.create(encounter_id, request) -> Candid::EncounterSupplementalInformation::V1::Types::SupplementalInformation</code></summary>
+<details><summary><code>client.encounter_supplemental_information.v_1.<a href="/lib/candid/encounter_supplemental_information/v_1/client.rb">create</a>(encounter_id, request) -> Candid::EncounterSupplementalInformation::V1::Types::SupplementalInformation</code></summary>
 <dl>
 <dd>
 
@@ -4098,7 +4717,12 @@ client.encounter_supplemental_information.v_1.get();
 <dd>
 
 ```ruby
-client.encounter_supplemental_information.v_1.create({});
+client.encounter_supplemental_information.v_1.create(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  attachment_report_type_code: "03",
+  attachment_transmission_code: "BM",
+  attachment_inclusion: "not_included"
+)
 ```
 </dd>
 </dl>
@@ -4125,6 +4749,14 @@ client.encounter_supplemental_information.v_1.create({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterSupplementalInformation::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4133,7 +4765,7 @@ client.encounter_supplemental_information.v_1.create({});
 </dl>
 </details>
 
-<details><summary><code>client.encounter_supplemental_information.v_1.update(encounter_id, supplemental_information_id, request) -> Candid::EncounterSupplementalInformation::V1::Types::SupplementalInformation</code></summary>
+<details><summary><code>client.encounter_supplemental_information.v_1.<a href="/lib/candid/encounter_supplemental_information/v_1/client.rb">update</a>(encounter_id, supplemental_information_id, request) -> Candid::EncounterSupplementalInformation::V1::Types::SupplementalInformation</code></summary>
 <dl>
 <dd>
 
@@ -4146,7 +4778,10 @@ client.encounter_supplemental_information.v_1.create({});
 <dd>
 
 ```ruby
-client.encounter_supplemental_information.v_1.update({});
+client.encounter_supplemental_information.v_1.update(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  supplemental_information_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -4181,6 +4816,14 @@ client.encounter_supplemental_information.v_1.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterSupplementalInformation::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4189,7 +4832,7 @@ client.encounter_supplemental_information.v_1.update({});
 </dl>
 </details>
 
-<details><summary><code>client.encounter_supplemental_information.v_1.delete(encounter_id, supplemental_information_id) -> </code></summary>
+<details><summary><code>client.encounter_supplemental_information.v_1.<a href="/lib/candid/encounter_supplemental_information/v_1/client.rb">delete</a>(encounter_id, supplemental_information_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -4202,7 +4845,10 @@ client.encounter_supplemental_information.v_1.update({});
 <dd>
 
 ```ruby
-client.encounter_supplemental_information.v_1.delete();
+client.encounter_supplemental_information.v_1.delete(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  supplemental_information_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -4229,6 +4875,14 @@ client.encounter_supplemental_information.v_1.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EncounterSupplementalInformation::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4238,7 +4892,7 @@ client.encounter_supplemental_information.v_1.delete();
 </details>
 
 ## Encounters V4
-<details><summary><code>client.encounters.v_4.get_all() -> Candid::Encounters::V4::Types::EncounterPage</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">get_all</a>() -> Candid::Encounters::V4::Types::EncounterPage</code></summary>
 <dl>
 <dd>
 
@@ -4253,16 +4907,16 @@ client.encounter_supplemental_information.v_1.delete();
 ```ruby
 client.encounters.v_4.get_all(
   limit: 100,
-  claimStatus: ,
-  sort: ,
-  pageToken: 'eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9',
-  dateOfServiceMin: '2019-08-24',
-  dateOfServiceMax: '2019-08-25',
-  primaryPayerNames: 'Medicare,Medicaid',
-  searchTerm: 'doe',
-  externalId: '123456',
-  diagnosesUpdatedSince: '2019-08-24T14:15:22Z'
-);
+  claim_status: "biller_received",
+  sort: "created_at:asc",
+  page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
+  date_of_service_min: "2019-08-24",
+  date_of_service_max: "2019-08-25",
+  primary_payer_names: "Medicare,Medicaid",
+  search_term: "doe",
+  external_id: "123456",
+  diagnoses_updated_since: "2019-08-24T14:15:22Z"
+)
 ```
 </dd>
 </dl>
@@ -4413,6 +5067,14 @@ or encounter external id.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4421,7 +5083,7 @@ or encounter external id.
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.get(encounter_id) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">get</a>(encounter_id) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4434,7 +5096,7 @@ or encounter external id.
 <dd>
 
 ```ruby
-client.encounters.v_4.get();
+client.encounters.v_4.get(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -4453,6 +5115,14 @@ client.encounters.v_4.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4461,7 +5131,7 @@ client.encounters.v_4.get();
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.create_universal(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">create_universal</a>(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4491,33 +5161,39 @@ express, written consent of AHA.
 <dd>
 
 ```ruby
-client.encounters.v_4.create_universal({
-  billing_provider: {
-    address: {
-      zip_plus_four_code: 'zip_plus_four_code',
-      address1: 'address1',
-      city: 'city',
-      zip_code: 'zip_code'
-    },
-    tax_id: 'tax_id',
-    npi: 'npi'
-  },
+client.encounters.v_4.create_universal(
   patient: {
-    external_id: 'external_id',
-    date_of_birth: '2023-01-15',
+    external_id: "external_id",
+    date_of_birth: "2023-01-15",
     address: {
-      address1: 'address1',
-      city: 'city',
-      zip_code: 'zip_code'
+      address_1: "address1",
+      city: "city",
+      state: "AA",
+      zip_code: "zip_code"
     },
-    first_name: 'first_name',
-    last_name: 'last_name'
+    first_name: "first_name",
+    last_name: "last_name",
+    gender: "male"
   },
-  external_id: 'external_id',
+  responsible_party: "INSURANCE_PAY",
+  external_id: "external_id",
   patient_authorized_release: true,
   benefits_assigned_to_provider: true,
-  provider_accepts_assignment: true
-});
+  provider_accepts_assignment: true,
+  billable_status: "BILLABLE",
+  billing_provider: {
+    address: {
+      zip_plus_four_code: "zip_plus_four_code",
+      address_1: "address1",
+      city: "city",
+      state: "AA",
+      zip_code: "zip_code"
+    },
+    tax_id: "tax_id",
+    npi: "npi"
+  },
+  submission_expectation: "TARGET_PROFESSIONAL"
+)
 ```
 </dd>
 </dl>
@@ -4536,6 +5212,14 @@ client.encounters.v_4.create_universal({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4544,7 +5228,7 @@ client.encounters.v_4.create_universal({
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.create(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">create</a>(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4557,41 +5241,49 @@ client.encounters.v_4.create_universal({
 <dd>
 
 ```ruby
-client.encounters.v_4.create({
-  billing_provider: {
-    address: {
-      zip_plus_four_code: 'zip_plus_four_code',
-      address1: 'address1',
-      city: 'city',
-      zip_code: 'zip_code'
-    },
-    tax_id: 'tax_id',
-    npi: 'npi'
-  },
-  diagnoses: [{
-    code: 'code'
-  }, {
-    code: 'code'
-  }],
-  rendering_provider: {
-    npi: 'npi'
-  },
+client.encounters.v_4.create(
   patient: {
-    external_id: 'external_id',
-    date_of_birth: '2023-01-15',
+    external_id: "external_id",
+    date_of_birth: "2023-01-15",
     address: {
-      address1: 'address1',
-      city: 'city',
-      zip_code: 'zip_code'
+      address_1: "address1",
+      city: "city",
+      state: "AA",
+      zip_code: "zip_code"
     },
-    first_name: 'first_name',
-    last_name: 'last_name'
+    first_name: "first_name",
+    last_name: "last_name",
+    gender: "male"
   },
-  external_id: 'external_id',
+  responsible_party: "INSURANCE_PAY",
+  external_id: "external_id",
   patient_authorized_release: true,
   benefits_assigned_to_provider: true,
-  provider_accepts_assignment: true
-});
+  provider_accepts_assignment: true,
+  billable_status: "BILLABLE",
+  billing_provider: {
+    address: {
+      zip_plus_four_code: "zip_plus_four_code",
+      address_1: "address1",
+      city: "city",
+      state: "AA",
+      zip_code: "zip_code"
+    },
+    tax_id: "tax_id",
+    npi: "npi"
+  },
+  diagnoses: [{
+    code_type: "ABF",
+    code: "code"
+  }, {
+    code_type: "ABF",
+    code: "code"
+  }],
+  place_of_service_code: "01",
+  rendering_provider: {
+    npi: "npi"
+  }
+)
 ```
 </dd>
 </dl>
@@ -4610,6 +5302,14 @@ client.encounters.v_4.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4618,7 +5318,7 @@ client.encounters.v_4.create({
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.create_from_pre_encounter_patient_universal(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">create_from_pre_encounter_patient_universal</a>(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4665,24 +5365,27 @@ express, written consent of AHA.
 <dd>
 
 ```ruby
-client.encounters.v_4.create_from_pre_encounter_patient_universal({
-  pre_encounter_patient_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  pre_encounter_appointment_ids: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'],
+client.encounters.v_4.create_from_pre_encounter_patient_universal(
+  pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  pre_encounter_appointment_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
   billing_provider: {
     address: {
-      zip_plus_four_code: 'zip_plus_four_code',
-      address1: 'address1',
-      city: 'city',
-      zip_code: 'zip_code'
+      zip_plus_four_code: "zip_plus_four_code",
+      address_1: "address1",
+      city: "city",
+      state: "AA",
+      zip_code: "zip_code"
     },
-    tax_id: 'tax_id',
-    npi: 'npi'
+    tax_id: "tax_id",
+    npi: "npi"
   },
-  external_id: 'external_id',
+  external_id: "external_id",
   patient_authorized_release: true,
   benefits_assigned_to_provider: true,
-  provider_accepts_assignment: true
-});
+  provider_accepts_assignment: true,
+  billable_status: "BILLABLE",
+  submission_expectation: "TARGET_PROFESSIONAL"
+)
 ```
 </dd>
 </dl>
@@ -4701,6 +5404,14 @@ client.encounters.v_4.create_from_pre_encounter_patient_universal({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4709,7 +5420,7 @@ client.encounters.v_4.create_from_pre_encounter_patient_universal({
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.create_from_pre_encounter_patient(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">create_from_pre_encounter_patient</a>(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4751,32 +5462,37 @@ encounter has not already been submitted or adjudicated.
 <dd>
 
 ```ruby
-client.encounters.v_4.create_from_pre_encounter_patient({
-  rendering_provider: {
-    npi: 'npi'
-  },
-  diagnoses: [{
-    code: 'code'
-  }, {
-    code: 'code'
-  }],
-  pre_encounter_patient_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  pre_encounter_appointment_ids: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'],
+client.encounters.v_4.create_from_pre_encounter_patient(
+  pre_encounter_patient_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  pre_encounter_appointment_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
   billing_provider: {
     address: {
-      zip_plus_four_code: 'zip_plus_four_code',
-      address1: 'address1',
-      city: 'city',
-      zip_code: 'zip_code'
+      zip_plus_four_code: "zip_plus_four_code",
+      address_1: "address1",
+      city: "city",
+      state: "AA",
+      zip_code: "zip_code"
     },
-    tax_id: 'tax_id',
-    npi: 'npi'
+    tax_id: "tax_id",
+    npi: "npi"
   },
-  external_id: 'external_id',
+  external_id: "external_id",
   patient_authorized_release: true,
   benefits_assigned_to_provider: true,
-  provider_accepts_assignment: true
-});
+  provider_accepts_assignment: true,
+  billable_status: "BILLABLE",
+  rendering_provider: {
+    npi: "npi"
+  },
+  place_of_service_code: "01",
+  diagnoses: [{
+    code_type: "ABF",
+    code: "code"
+  }, {
+    code_type: "ABF",
+    code: "code"
+  }]
+)
 ```
 </dd>
 </dl>
@@ -4795,6 +5511,14 @@ client.encounters.v_4.create_from_pre_encounter_patient({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4803,7 +5527,7 @@ client.encounters.v_4.create_from_pre_encounter_patient({
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.update_universal(encounter_id, request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">update_universal</a>(encounter_id, request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4833,7 +5557,7 @@ express, written consent of AHA.
 <dd>
 
 ```ruby
-client.encounters.v_4.update_universal({});
+client.encounters.v_4.update_universal(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -4860,6 +5584,14 @@ client.encounters.v_4.update_universal({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4868,7 +5600,7 @@ client.encounters.v_4.update_universal({});
 </dl>
 </details>
 
-<details><summary><code>client.encounters.v_4.update(encounter_id, request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.encounters.v_4.<a href="/lib/candid/encounters/v_4/client.rb">update</a>(encounter_id, request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -4881,7 +5613,7 @@ client.encounters.v_4.update_universal({});
 <dd>
 
 ```ruby
-client.encounters.v_4.update({});
+client.encounters.v_4.update(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -4908,6 +5640,14 @@ client.encounters.v_4.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4917,7 +5657,7 @@ client.encounters.v_4.update({});
 </details>
 
 ## Events V1
-<details><summary><code>client.events.v_1.scan() -> Candid::Events::V1::Types::EventScanPage</code></summary>
+<details><summary><code>client.events.v_1.<a href="/lib/candid/events/v_1/client.rb">scan</a>() -> Candid::Events::V1::Types::EventScanPage</code></summary>
 <dl>
 <dd>
 
@@ -4944,7 +5684,7 @@ Scans the last 30 days of events. All results are sorted by created date, descen
 <dd>
 
 ```ruby
-client.events.v_1.scan();
+client.events.v_1.scan
 ```
 </dd>
 </dl>
@@ -5008,6 +5748,14 @@ Event types to filter on. Defaults to showing all event types.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Events::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5016,7 +5764,7 @@ Event types to filter on. Defaults to showing all event types.
 </dl>
 </details>
 
-<details><summary><code>client.events.v_1.get(event_id) -> Candid::Events::V1::Types::Event</code></summary>
+<details><summary><code>client.events.v_1.<a href="/lib/candid/events/v_1/client.rb">get</a>(event_id) -> Candid::Events::V1::Types::Event</code></summary>
 <dl>
 <dd>
 
@@ -5029,7 +5777,7 @@ Event types to filter on. Defaults to showing all event types.
 <dd>
 
 ```ruby
-client.events.v_1.get();
+client.events.v_1.get(event_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -5048,6 +5796,14 @@ client.events.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Events::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5057,7 +5813,7 @@ client.events.v_1.get();
 </details>
 
 ## Exports V3
-<details><summary><code>client.exports.v_3.get_exports() -> Candid::Exports::V3::Types::GetExportsResponse</code></summary>
+<details><summary><code>client.exports.v_3.<a href="/lib/candid/exports/v_3/client.rb">get_exports</a>() -> Candid::Exports::V3::Types::GetExportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5102,9 +5858,9 @@ outside of these stated guarantees.
 
 ```ruby
 client.exports.v_3.get_exports(
-  startDate: '2023-10-01',
-  endDate: '2023-10-02'
-);
+  start_date: "2023-10-01",
+  end_date: "2023-10-02"
+)
 ```
 </dd>
 </dl>
@@ -5137,6 +5893,14 @@ Must be within 30 days of start_date.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Exports::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5146,7 +5910,7 @@ Must be within 30 days of start_date.
 </details>
 
 ## ExternalPaymentAccountConfig V1
-<details><summary><code>client.external_payment_account_config.v_1.get_multi() -> Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage</code></summary>
+<details><summary><code>client.external_payment_account_config.v_1.<a href="/lib/candid/external_payment_account_config/v_1/client.rb">get_multi</a>() -> Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage</code></summary>
 <dl>
 <dd>
 
@@ -5159,7 +5923,7 @@ Must be within 30 days of start_date.
 <dd>
 
 ```ruby
-client.external_payment_account_config.v_1.get_multi();
+client.external_payment_account_config.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -5186,6 +5950,14 @@ client.external_payment_account_config.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ExternalPaymentAccountConfig::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5195,7 +5967,7 @@ client.external_payment_account_config.v_1.get_multi();
 </details>
 
 ## FeeSchedules V3
-<details><summary><code>client.fee_schedules.v_3.get_match(service_line_id) -> Candid::FeeSchedules::V3::Types::MatchResult</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">get_match</a>(service_line_id) -> Candid::FeeSchedules::V3::Types::MatchResult</code></summary>
 <dl>
 <dd>
 
@@ -5222,7 +5994,7 @@ Gets the rate that matches a service line.  No result means no rate exists match
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.get_match();
+client.fee_schedules.v_3.get_match(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -5241,6 +6013,14 @@ client.fee_schedules.v_3.get_match();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5249,7 +6029,7 @@ client.fee_schedules.v_3.get_match();
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.test_match(service_line_id, rate_id) -> Candid::FeeSchedules::V3::Types::MatchTestResult</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">test_match</a>(service_line_id, rate_id) -> Candid::FeeSchedules::V3::Types::MatchTestResult</code></summary>
 <dl>
 <dd>
 
@@ -5276,7 +6056,10 @@ Tests a service line against a rate to see if it matches.
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.test_match();
+client.fee_schedules.v_3.test_match(
+  service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -5303,6 +6086,14 @@ client.fee_schedules.v_3.test_match();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5311,7 +6102,7 @@ client.fee_schedules.v_3.test_match();
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.get_multi() -> Candid::FeeSchedules::V3::Types::RatesPage</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">get_multi</a>() -> Candid::FeeSchedules::V3::Types::RatesPage</code></summary>
 <dl>
 <dd>
 
@@ -5338,7 +6129,7 @@ Gets a list of dimensions with their rates. The rates returned will always be th
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.get_multi();
+client.fee_schedules.v_3.get_multi
 ```
 </dd>
 </dl>
@@ -5453,6 +6244,14 @@ client.fee_schedules.v_3.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5461,7 +6260,7 @@ client.fee_schedules.v_3.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.get_unique_values_for_dimension() -> Candid::FeeSchedules::V3::Types::DimensionsPage</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">get_unique_values_for_dimension</a>() -> Candid::FeeSchedules::V3::Types::DimensionsPage</code></summary>
 <dl>
 <dd>
 
@@ -5488,7 +6287,7 @@ Gets unique values for a dimension based on other selection criteria. The respon
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.get_unique_values_for_dimension(pivotDimension: );
+client.fee_schedules.v_3.get_unique_values_for_dimension(pivot_dimension: "payer_uuid")
 ```
 </dd>
 </dl>
@@ -5603,6 +6402,14 @@ client.fee_schedules.v_3.get_unique_values_for_dimension(pivotDimension: );
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5611,7 +6418,7 @@ client.fee_schedules.v_3.get_unique_values_for_dimension(pivotDimension: );
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.get_rate_history(rate_id) -> Internal::Types::Array[Candid::FeeSchedules::V3::Types::Rate]</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">get_rate_history</a>(rate_id) -> Internal::Types::Array[Candid::FeeSchedules::V3::Types::Rate]</code></summary>
 <dl>
 <dd>
 
@@ -5638,7 +6445,7 @@ Gets every version of a rate.
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.get_rate_history();
+client.fee_schedules.v_3.get_rate_history(rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -5657,6 +6464,14 @@ client.fee_schedules.v_3.get_rate_history();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5665,7 +6480,7 @@ client.fee_schedules.v_3.get_rate_history();
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.upload_fee_schedule(request) -> Internal::Types::Array[Candid::FeeSchedules::V3::Types::Rate]</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">upload_fee_schedule</a>(request) -> Internal::Types::Array[Candid::FeeSchedules::V3::Types::Rate]</code></summary>
 <dl>
 <dd>
 
@@ -5701,9 +6516,9 @@ be saved to the system.
 
 ```ruby
 client.fee_schedules.v_3.upload_fee_schedule(
-  dryRun: true,
+  dry_run: true,
   rates: []
-);
+)
 ```
 </dd>
 </dl>
@@ -5730,6 +6545,14 @@ client.fee_schedules.v_3.upload_fee_schedule(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5738,7 +6561,7 @@ client.fee_schedules.v_3.upload_fee_schedule(
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.delete_rate(rate_id, version) -> </code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">delete_rate</a>(rate_id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -5765,7 +6588,10 @@ Soft deletes a rate from the system.  Only the most recent version of a rate can
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.delete_rate();
+client.fee_schedules.v_3.delete_rate(
+  rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  version: 1
+)
 ```
 </dd>
 </dl>
@@ -5792,6 +6618,14 @@ client.fee_schedules.v_3.delete_rate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5800,7 +6634,7 @@ client.fee_schedules.v_3.delete_rate();
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.get_payer_thresholds_default() -> Candid::FeeSchedules::V3::Types::PayerThreshold</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">get_payer_thresholds_default</a>() -> Candid::FeeSchedules::V3::Types::PayerThreshold</code></summary>
 <dl>
 <dd>
 
@@ -5827,8 +6661,23 @@ Gets the default payer threshold
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.get_payer_thresholds_default();
+client.fee_schedules.v_3.get_payer_thresholds_default
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
 </dd>
 </dl>
 </dd>
@@ -5839,7 +6688,7 @@ client.fee_schedules.v_3.get_payer_thresholds_default();
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.get_payer_thresholds() -> Candid::FeeSchedules::V3::Types::PayerThresholdsPage</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">get_payer_thresholds</a>() -> Candid::FeeSchedules::V3::Types::PayerThresholdsPage</code></summary>
 <dl>
 <dd>
 
@@ -5866,7 +6715,7 @@ Gets a list of payers and thresholds by their uuids
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.get_payer_thresholds(payerUuids: );
+client.fee_schedules.v_3.get_payer_thresholds
 ```
 </dd>
 </dl>
@@ -5885,6 +6734,14 @@ client.fee_schedules.v_3.get_payer_thresholds(payerUuids: );
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5893,7 +6750,7 @@ client.fee_schedules.v_3.get_payer_thresholds(payerUuids: );
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.set_payer_threshold(payer_uuid, request) -> Candid::FeeSchedules::V3::Types::PayerThreshold</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">set_payer_threshold</a>(payer_uuid, request) -> Candid::FeeSchedules::V3::Types::PayerThreshold</code></summary>
 <dl>
 <dd>
 
@@ -5920,9 +6777,10 @@ Sets the threshold information for a payer
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.set_payer_threshold({
+client.fee_schedules.v_3.set_payer_threshold(
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
   disable_paid_incorrectly: true
-});
+)
 ```
 </dd>
 </dl>
@@ -5949,6 +6807,14 @@ client.fee_schedules.v_3.set_payer_threshold({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -5957,7 +6823,7 @@ client.fee_schedules.v_3.set_payer_threshold({
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.hard_delete_rates(request) -> Integer</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">hard_delete_rates</a>(request) -> Integer</code></summary>
 <dl>
 <dd>
 
@@ -5984,15 +6850,15 @@ Hard deletes rates from the system that match the provided dimensions.  This is 
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.hard_delete_rates({
-  states: Set.new([]),
-  zip_codes: Set.new(['zip_codes']),
-  license_types: Set.new([]),
-  facility_type_codes: Set.new([]),
-  network_types: Set.new([]),
-  payer_plan_group_ids: Set.new(['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32']),
-  modifiers: Set.new([])
-});
+client.fee_schedules.v_3.hard_delete_rates(
+  states: Set.new(["AA"]),
+  zip_codes: Set.new(["zip_codes"]),
+  license_types: Set.new(["MD"]),
+  facility_type_codes: Set.new(["01"]),
+  network_types: Set.new(["12"]),
+  payer_plan_group_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"]),
+  modifiers: Set.new(["AV"])
+)
 ```
 </dd>
 </dl>
@@ -6011,6 +6877,14 @@ client.fee_schedules.v_3.hard_delete_rates({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6019,7 +6893,7 @@ client.fee_schedules.v_3.hard_delete_rates({
 </dl>
 </details>
 
-<details><summary><code>client.fee_schedules.v_3.hard_delete_rates_by_ids(request) -> Integer</code></summary>
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">hard_delete_rates_by_ids</a>(request) -> Integer</code></summary>
 <dl>
 <dd>
 
@@ -6046,7 +6920,7 @@ Hard deletes specific rates from the system by their IDs. This is a destructive 
 <dd>
 
 ```ruby
-client.fee_schedules.v_3.hard_delete_rates_by_ids(rateIds: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32']);
+client.fee_schedules.v_3.hard_delete_rates_by_ids(rate_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32])
 ```
 </dd>
 </dl>
@@ -6065,6 +6939,14 @@ client.fee_schedules.v_3.hard_delete_rates_by_ids(rateIds: ['d5e9c84f-c2b2-4bf4-
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6074,7 +6956,7 @@ client.fee_schedules.v_3.hard_delete_rates_by_ids(rateIds: ['d5e9c84f-c2b2-4bf4-
 </details>
 
 ## Guarantor V1
-<details><summary><code>client.guarantor.v_1.create(encounter_id, request) -> Candid::Guarantor::V1::Types::Guarantor</code></summary>
+<details><summary><code>client.guarantor.v_1.<a href="/lib/candid/guarantor/v_1/client.rb">create</a>(encounter_id, request) -> Candid::Guarantor::V1::Types::Guarantor</code></summary>
 <dl>
 <dd>
 
@@ -6101,16 +6983,18 @@ Creates a new guarantor and returns the newly created Guarantor object.
 <dd>
 
 ```ruby
-client.guarantor.v_1.create({
-  first_name: 'first_name',
-  last_name: 'last_name',
-  external_id: 'external_id',
+client.guarantor.v_1.create(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  first_name: "first_name",
+  last_name: "last_name",
+  external_id: "external_id",
   address: {
-    address1: 'address1',
-    city: 'city',
-    zip_code: 'zip_code'
+    address_1: "address1",
+    city: "city",
+    state: "AA",
+    zip_code: "zip_code"
   }
-});
+)
 ```
 </dd>
 </dl>
@@ -6137,6 +7021,14 @@ client.guarantor.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Guarantor::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6145,7 +7037,7 @@ client.guarantor.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.guarantor.v_1.get(guarantor_id) -> Candid::Guarantor::V1::Types::Guarantor</code></summary>
+<details><summary><code>client.guarantor.v_1.<a href="/lib/candid/guarantor/v_1/client.rb">get</a>(guarantor_id) -> Candid::Guarantor::V1::Types::Guarantor</code></summary>
 <dl>
 <dd>
 
@@ -6172,7 +7064,7 @@ Retrieves a guarantor by its `guarantor_id`.
 <dd>
 
 ```ruby
-client.guarantor.v_1.get();
+client.guarantor.v_1.get(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6191,6 +7083,14 @@ client.guarantor.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Guarantor::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6199,7 +7099,7 @@ client.guarantor.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.guarantor.v_1.update(guarantor_id, request) -> Candid::Guarantor::V1::Types::Guarantor</code></summary>
+<details><summary><code>client.guarantor.v_1.<a href="/lib/candid/guarantor/v_1/client.rb">update</a>(guarantor_id, request) -> Candid::Guarantor::V1::Types::Guarantor</code></summary>
 <dl>
 <dd>
 
@@ -6226,7 +7126,7 @@ Updates a guarantor by its `guarantor_id`.
 <dd>
 
 ```ruby
-client.guarantor.v_1.update({});
+client.guarantor.v_1.update(guarantor_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6253,6 +7153,14 @@ client.guarantor.v_1.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Guarantor::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6262,7 +7170,7 @@ client.guarantor.v_1.update({});
 </details>
 
 ## HealthCareCodeInformation V1
-<details><summary><code>client.health_care_code_information.v_1.update(encounter_id, request) -> Candid::HealthCareCodeInformation::V1::Types::HealthCareCodeInformationGetAllResponse</code></summary>
+<details><summary><code>client.health_care_code_information.v_1.<a href="/lib/candid/health_care_code_information/v_1/client.rb">update</a>(encounter_id, request) -> Candid::HealthCareCodeInformation::V1::Types::HealthCareCodeInformationGetAllResponse</code></summary>
 <dl>
 <dd>
 
@@ -6275,7 +7183,7 @@ client.guarantor.v_1.update({});
 <dd>
 
 ```ruby
-client.health_care_code_information.v_1.update({});
+client.health_care_code_information.v_1.update(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6302,6 +7210,14 @@ client.health_care_code_information.v_1.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::HealthCareCodeInformation::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6310,7 +7226,7 @@ client.health_care_code_information.v_1.update({});
 </dl>
 </details>
 
-<details><summary><code>client.health_care_code_information.v_1.get_all_for_encounter(encounter_id) -> Candid::HealthCareCodeInformation::V1::Types::HealthCareCodeInformationGetAllResponse</code></summary>
+<details><summary><code>client.health_care_code_information.v_1.<a href="/lib/candid/health_care_code_information/v_1/client.rb">get_all_for_encounter</a>(encounter_id) -> Candid::HealthCareCodeInformation::V1::Types::HealthCareCodeInformationGetAllResponse</code></summary>
 <dl>
 <dd>
 
@@ -6323,7 +7239,7 @@ client.health_care_code_information.v_1.update({});
 <dd>
 
 ```ruby
-client.health_care_code_information.v_1.get_all_for_encounter();
+client.health_care_code_information.v_1.get_all_for_encounter(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6342,6 +7258,14 @@ client.health_care_code_information.v_1.get_all_for_encounter();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::HealthCareCodeInformation::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6351,7 +7275,7 @@ client.health_care_code_information.v_1.get_all_for_encounter();
 </details>
 
 ## ImportInvoice V1
-<details><summary><code>client.import_invoice.v_1.import_invoice(request) -> Candid::ImportInvoice::V1::Types::ImportInvoice</code></summary>
+<details><summary><code>client.import_invoice.v_1.<a href="/lib/candid/import_invoice/v_1/client.rb">import_invoice</a>(request) -> Candid::ImportInvoice::V1::Types::ImportInvoice</code></summary>
 <dl>
 <dd>
 
@@ -6378,17 +7302,20 @@ Import an existing invoice from a third party service to reflect state in Candid
 <dd>
 
 ```ruby
-client.import_invoice.v_1.import_invoice({
-  external_payment_account_config_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  patient_external_id: 'patient_external_id',
-  external_customer_identifier: 'external_customer_identifier',
+client.import_invoice.v_1.import_invoice(
+  external_payment_account_config_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  patient_external_id: "patient_external_id",
+  external_customer_identifier: "external_customer_identifier",
   items: [{
+    attribution: {},
     amount_cents: 1
   }, {
+    attribution: {},
     amount_cents: 1
   }],
-  external_identifier: 'external_identifier'
-});
+  status: "DRAFT",
+  external_identifier: "external_identifier"
+)
 ```
 </dd>
 </dl>
@@ -6407,6 +7334,14 @@ client.import_invoice.v_1.import_invoice({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ImportInvoice::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6415,7 +7350,7 @@ client.import_invoice.v_1.import_invoice({
 </dl>
 </details>
 
-<details><summary><code>client.import_invoice.v_1.get_multi() -> Candid::ImportInvoice::V1::Types::ImportInvoicesPage</code></summary>
+<details><summary><code>client.import_invoice.v_1.<a href="/lib/candid/import_invoice/v_1/client.rb">get_multi</a>() -> Candid::ImportInvoice::V1::Types::ImportInvoicesPage</code></summary>
 <dl>
 <dd>
 
@@ -6442,7 +7377,7 @@ Returns all Invoices for the authenticated user's organziation with all filters 
 <dd>
 
 ```ruby
-client.import_invoice.v_1.get_multi();
+client.import_invoice.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -6533,6 +7468,14 @@ client.import_invoice.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ImportInvoice::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6541,7 +7484,7 @@ client.import_invoice.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.import_invoice.v_1.get(invoice_id) -> Candid::ImportInvoice::V1::Types::ImportInvoice</code></summary>
+<details><summary><code>client.import_invoice.v_1.<a href="/lib/candid/import_invoice/v_1/client.rb">get</a>(invoice_id) -> Candid::ImportInvoice::V1::Types::ImportInvoice</code></summary>
 <dl>
 <dd>
 
@@ -6568,7 +7511,7 @@ Retrieve and view an import invoice
 <dd>
 
 ```ruby
-client.import_invoice.v_1.get();
+client.import_invoice.v_1.get(invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6587,6 +7530,14 @@ client.import_invoice.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ImportInvoice::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6595,7 +7546,7 @@ client.import_invoice.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.import_invoice.v_1.update(invoice_id, request) -> Candid::ImportInvoice::V1::Types::ImportInvoice</code></summary>
+<details><summary><code>client.import_invoice.v_1.<a href="/lib/candid/import_invoice/v_1/client.rb">update</a>(invoice_id, request) -> Candid::ImportInvoice::V1::Types::ImportInvoice</code></summary>
 <dl>
 <dd>
 
@@ -6622,7 +7573,7 @@ Update the information on the imported invoice
 <dd>
 
 ```ruby
-client.import_invoice.v_1.update({});
+client.import_invoice.v_1.update(invoice_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6649,6 +7600,14 @@ client.import_invoice.v_1.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ImportInvoice::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6658,7 +7617,7 @@ client.import_invoice.v_1.update({});
 </details>
 
 ## InsuranceAdjudications V1
-<details><summary><code>client.insurance_adjudications.v_1.get(insurance_adjudication_id) -> Candid::InsuranceAdjudications::V1::Types::InsuranceAdjudication</code></summary>
+<details><summary><code>client.insurance_adjudications.v_1.<a href="/lib/candid/insurance_adjudications/v_1/client.rb">get</a>(insurance_adjudication_id) -> Candid::InsuranceAdjudications::V1::Types::InsuranceAdjudication</code></summary>
 <dl>
 <dd>
 
@@ -6685,7 +7644,7 @@ Retrieves a previously created insurance adjudication by its `insurance_adjudica
 <dd>
 
 ```ruby
-client.insurance_adjudications.v_1.get();
+client.insurance_adjudications.v_1.get(insurance_adjudication_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6704,6 +7663,14 @@ client.insurance_adjudications.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::InsuranceAdjudications::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6713,7 +7680,7 @@ client.insurance_adjudications.v_1.get();
 </details>
 
 ## InsuranceRefunds V1
-<details><summary><code>client.insurance_refunds.v_1.get_multi() -> Candid::InsuranceRefunds::V1::Types::InsuranceRefundsPage</code></summary>
+<details><summary><code>client.insurance_refunds.v_1.<a href="/lib/candid/insurance_refunds/v_1/client.rb">get_multi</a>() -> Candid::InsuranceRefunds::V1::Types::InsuranceRefundsPage</code></summary>
 <dl>
 <dd>
 
@@ -6741,7 +7708,7 @@ the current organization_id of the authenticated user.
 <dd>
 
 ```ruby
-client.insurance_refunds.v_1.get_multi();
+client.insurance_refunds.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -6816,6 +7783,14 @@ client.insurance_refunds.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::InsuranceRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6824,7 +7799,7 @@ client.insurance_refunds.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.insurance_refunds.v_1.get(insurance_refund_id) -> Candid::InsuranceRefunds::V1::Types::InsuranceRefund</code></summary>
+<details><summary><code>client.insurance_refunds.v_1.<a href="/lib/candid/insurance_refunds/v_1/client.rb">get</a>(insurance_refund_id) -> Candid::InsuranceRefunds::V1::Types::InsuranceRefund</code></summary>
 <dl>
 <dd>
 
@@ -6852,7 +7827,7 @@ If the refund does not exist, a `403` will be thrown.
 <dd>
 
 ```ruby
-client.insurance_refunds.v_1.get();
+client.insurance_refunds.v_1.get(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -6871,6 +7846,14 @@ client.insurance_refunds.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::InsuranceRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6879,7 +7862,7 @@ client.insurance_refunds.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.insurance_refunds.v_1.create(request) -> Candid::InsuranceRefunds::V1::Types::InsuranceRefund</code></summary>
+<details><summary><code>client.insurance_refunds.v_1.<a href="/lib/candid/insurance_refunds/v_1/client.rb">create</a>(request) -> Candid::InsuranceRefunds::V1::Types::InsuranceRefund</code></summary>
 <dl>
 <dd>
 
@@ -6908,14 +7891,16 @@ claim, or billing provider.
 <dd>
 
 ```ruby
-client.insurance_refunds.v_1.create({
+client.insurance_refunds.v_1.create(
   amount_cents: 1,
   allocations: [{
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }, {
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }]
-});
+)
 ```
 </dd>
 </dl>
@@ -6934,6 +7919,14 @@ client.insurance_refunds.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::InsuranceRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6942,7 +7935,7 @@ client.insurance_refunds.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.insurance_refunds.v_1.update(insurance_refund_id, request) -> Candid::InsuranceRefunds::V1::Types::InsuranceRefund</code></summary>
+<details><summary><code>client.insurance_refunds.v_1.<a href="/lib/candid/insurance_refunds/v_1/client.rb">update</a>(insurance_refund_id, request) -> Candid::InsuranceRefunds::V1::Types::InsuranceRefund</code></summary>
 <dl>
 <dd>
 
@@ -6970,7 +7963,7 @@ then the allocations must be appropriately updated as well.
 <dd>
 
 ```ruby
-client.insurance_refunds.v_1.update(insuranceRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.insurance_refunds.v_1.update(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7013,6 +8006,14 @@ client.insurance_refunds.v_1.update(insuranceRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::InsuranceRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7021,7 +8022,7 @@ client.insurance_refunds.v_1.update(insuranceRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-
 </dl>
 </details>
 
-<details><summary><code>client.insurance_refunds.v_1.delete(insurance_refund_id) -> </code></summary>
+<details><summary><code>client.insurance_refunds.v_1.<a href="/lib/candid/insurance_refunds/v_1/client.rb">delete</a>(insurance_refund_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -7050,7 +8051,7 @@ current organization_id, then a response code of `403` will be returned.
 <dd>
 
 ```ruby
-client.insurance_refunds.v_1.delete();
+client.insurance_refunds.v_1.delete(insurance_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7069,6 +8070,14 @@ client.insurance_refunds.v_1.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::InsuranceRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7078,7 +8087,7 @@ client.insurance_refunds.v_1.delete();
 </details>
 
 ## MedicationDispense V1
-<details><summary><code>client.medication_dispense.v_1.create(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
+<details><summary><code>client.medication_dispense.v_1.<a href="/lib/candid/medication_dispense/v_1/client.rb">create</a>(request) -> Candid::Encounters::V4::Types::Encounter</code></summary>
 <dl>
 <dd>
 
@@ -7091,13 +8100,14 @@ client.insurance_refunds.v_1.delete();
 <dd>
 
 ```ruby
-client.medication_dispense.v_1.create({
-  medication_dispense_external_id: 'medication_dispense_external_id',
-  patient_external_id: 'patient_external_id',
-  procedure_code: 'procedure_code',
-  quantity: 'quantity',
-  date_of_service: '2023-01-15'
-});
+client.medication_dispense.v_1.create(
+  medication_dispense_external_id: "medication_dispense_external_id",
+  patient_external_id: "patient_external_id",
+  procedure_code: "procedure_code",
+  quantity: "quantity",
+  units: "MJ",
+  date_of_service: "2023-01-15"
+)
 ```
 </dd>
 </dl>
@@ -7116,6 +8126,14 @@ client.medication_dispense.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::MedicationDispense::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7125,7 +8143,7 @@ client.medication_dispense.v_1.create({
 </details>
 
 ## NonInsurancePayerPayments V1
-<details><summary><code>client.non_insurance_payer_payments.v_1.get_multi() -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPaymentsPage</code></summary>
+<details><summary><code>client.non_insurance_payer_payments.v_1.<a href="/lib/candid/non_insurance_payer_payments/v_1/client.rb">get_multi</a>() -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPaymentsPage</code></summary>
 <dl>
 <dd>
 
@@ -7152,7 +8170,7 @@ Returns all non-insurance payer payments
 <dd>
 
 ```ruby
-client.non_insurance_payer_payments.v_1.get_multi();
+client.non_insurance_payer_payments.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -7219,6 +8237,14 @@ client.non_insurance_payer_payments.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerPayments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7227,7 +8253,7 @@ client.non_insurance_payer_payments.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_payments.v_1.get(non_insurance_payer_payment_id) -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPayment</code></summary>
+<details><summary><code>client.non_insurance_payer_payments.v_1.<a href="/lib/candid/non_insurance_payer_payments/v_1/client.rb">get</a>(non_insurance_payer_payment_id) -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPayment</code></summary>
 <dl>
 <dd>
 
@@ -7254,7 +8280,7 @@ Retrieves a previously created non-insurance payer payment by its `non_insurance
 <dd>
 
 ```ruby
-client.non_insurance_payer_payments.v_1.get();
+client.non_insurance_payer_payments.v_1.get(non_insurance_payer_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7273,6 +8299,14 @@ client.non_insurance_payer_payments.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerPayments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7281,7 +8315,7 @@ client.non_insurance_payer_payments.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_payments.v_1.create(request) -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPayment</code></summary>
+<details><summary><code>client.non_insurance_payer_payments.v_1.<a href="/lib/candid/non_insurance_payer_payments/v_1/client.rb">create</a>(request) -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPayment</code></summary>
 <dl>
 <dd>
 
@@ -7294,15 +8328,17 @@ client.non_insurance_payer_payments.v_1.get();
 <dd>
 
 ```ruby
-client.non_insurance_payer_payments.v_1.create({
-  non_insurance_payer_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
+client.non_insurance_payer_payments.v_1.create(
+  non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
   amount_cents: 1,
   allocations: [{
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }, {
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }]
-});
+)
 ```
 </dd>
 </dl>
@@ -7321,6 +8357,14 @@ client.non_insurance_payer_payments.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerPayments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7329,7 +8373,7 @@ client.non_insurance_payer_payments.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_payments.v_1.update(non_insurance_payer_payment_id, request) -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPayment</code></summary>
+<details><summary><code>client.non_insurance_payer_payments.v_1.<a href="/lib/candid/non_insurance_payer_payments/v_1/client.rb">update</a>(non_insurance_payer_payment_id, request) -> Candid::NonInsurancePayerPayments::V1::Types::NonInsurancePayerPayment</code></summary>
 <dl>
 <dd>
 
@@ -7342,7 +8386,7 @@ client.non_insurance_payer_payments.v_1.create({
 <dd>
 
 ```ruby
-client.non_insurance_payer_payments.v_1.update(nonInsurancePayerPaymentId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.non_insurance_payer_payments.v_1.update(non_insurance_payer_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7385,6 +8429,14 @@ client.non_insurance_payer_payments.v_1.update(nonInsurancePayerPaymentId: 'd5e9
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerPayments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7393,7 +8445,7 @@ client.non_insurance_payer_payments.v_1.update(nonInsurancePayerPaymentId: 'd5e9
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_payments.v_1.delete(non_insurance_payer_payment_id) -> </code></summary>
+<details><summary><code>client.non_insurance_payer_payments.v_1.<a href="/lib/candid/non_insurance_payer_payments/v_1/client.rb">delete</a>(non_insurance_payer_payment_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -7420,7 +8472,7 @@ Deletes the non-insurance payer payment record matching the provided `non_insura
 <dd>
 
 ```ruby
-client.non_insurance_payer_payments.v_1.delete();
+client.non_insurance_payer_payments.v_1.delete(non_insurance_payer_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7439,6 +8491,14 @@ client.non_insurance_payer_payments.v_1.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerPayments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7448,7 +8508,7 @@ client.non_insurance_payer_payments.v_1.delete();
 </details>
 
 ## NonInsurancePayerRefunds V1
-<details><summary><code>client.non_insurance_payer_refunds.v_1.get_multi() -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefundsPage</code></summary>
+<details><summary><code>client.non_insurance_payer_refunds.v_1.<a href="/lib/candid/non_insurance_payer_refunds/v_1/client.rb">get_multi</a>() -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefundsPage</code></summary>
 <dl>
 <dd>
 
@@ -7475,7 +8535,7 @@ Returns all non-insurance payer refunds satisfying the search criteria
 <dd>
 
 ```ruby
-client.non_insurance_payer_refunds.v_1.get_multi();
+client.non_insurance_payer_refunds.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -7542,6 +8602,14 @@ client.non_insurance_payer_refunds.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7550,7 +8618,7 @@ client.non_insurance_payer_refunds.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_refunds.v_1.get(non_insurance_payer_refund_id) -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund</code></summary>
+<details><summary><code>client.non_insurance_payer_refunds.v_1.<a href="/lib/candid/non_insurance_payer_refunds/v_1/client.rb">get</a>(non_insurance_payer_refund_id) -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund</code></summary>
 <dl>
 <dd>
 
@@ -7577,7 +8645,7 @@ Retrieves a previously created non-insurance payer refund by its `non_insurance_
 <dd>
 
 ```ruby
-client.non_insurance_payer_refunds.v_1.get();
+client.non_insurance_payer_refunds.v_1.get(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7596,6 +8664,14 @@ client.non_insurance_payer_refunds.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7604,7 +8680,7 @@ client.non_insurance_payer_refunds.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_refunds.v_1.create(request) -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund</code></summary>
+<details><summary><code>client.non_insurance_payer_refunds.v_1.<a href="/lib/candid/non_insurance_payer_refunds/v_1/client.rb">create</a>(request) -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund</code></summary>
 <dl>
 <dd>
 
@@ -7633,15 +8709,17 @@ claim, or billing provider.
 <dd>
 
 ```ruby
-client.non_insurance_payer_refunds.v_1.create({
-  non_insurance_payer_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
+client.non_insurance_payer_refunds.v_1.create(
+  non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
   amount_cents: 1,
   allocations: [{
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }, {
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }]
-});
+)
 ```
 </dd>
 </dl>
@@ -7660,6 +8738,14 @@ client.non_insurance_payer_refunds.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7668,7 +8754,7 @@ client.non_insurance_payer_refunds.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_refunds.v_1.update(non_insurance_payer_refund_id, request) -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund</code></summary>
+<details><summary><code>client.non_insurance_payer_refunds.v_1.<a href="/lib/candid/non_insurance_payer_refunds/v_1/client.rb">update</a>(non_insurance_payer_refund_id, request) -> Candid::NonInsurancePayerRefunds::V1::Types::NonInsurancePayerRefund</code></summary>
 <dl>
 <dd>
 
@@ -7696,7 +8782,7 @@ then the allocations must be appropriately updated as well.
 <dd>
 
 ```ruby
-client.non_insurance_payer_refunds.v_1.update(nonInsurancePayerRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.non_insurance_payer_refunds.v_1.update(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7747,6 +8833,14 @@ client.non_insurance_payer_refunds.v_1.update(nonInsurancePayerRefundId: 'd5e9c8
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7755,7 +8849,7 @@ client.non_insurance_payer_refunds.v_1.update(nonInsurancePayerRefundId: 'd5e9c8
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payer_refunds.v_1.delete(non_insurance_payer_refund_id) -> </code></summary>
+<details><summary><code>client.non_insurance_payer_refunds.v_1.<a href="/lib/candid/non_insurance_payer_refunds/v_1/client.rb">delete</a>(non_insurance_payer_refund_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -7782,7 +8876,7 @@ Deletes the non-insurance payer refund record matching the provided `non_insuran
 <dd>
 
 ```ruby
-client.non_insurance_payer_refunds.v_1.delete();
+client.non_insurance_payer_refunds.v_1.delete(non_insurance_payer_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -7801,6 +8895,14 @@ client.non_insurance_payer_refunds.v_1.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayerRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7810,7 +8912,7 @@ client.non_insurance_payer_refunds.v_1.delete();
 </details>
 
 ## NonInsurancePayers V1
-<details><summary><code>client.non_insurance_payers.v_1.create(request) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">create</a>(request) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
 <dl>
 <dd>
 
@@ -7823,9 +8925,7 @@ client.non_insurance_payer_refunds.v_1.delete();
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.create({
-  name: 'name'
-});
+client.non_insurance_payers.v_1.create(name: "name")
 ```
 </dd>
 </dl>
@@ -7844,6 +8944,14 @@ client.non_insurance_payers.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7852,7 +8960,7 @@ client.non_insurance_payers.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payers.v_1.toggle_enablement(non_insurance_payer_id, request) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">toggle_enablement</a>(non_insurance_payer_id, request) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
 <dl>
 <dd>
 
@@ -7865,9 +8973,10 @@ client.non_insurance_payers.v_1.create({
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.toggle_enablement({
+client.non_insurance_payers.v_1.toggle_enablement(
+  non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
   enabled: true
-});
+)
 ```
 </dd>
 </dl>
@@ -7894,6 +9003,14 @@ client.non_insurance_payers.v_1.toggle_enablement({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7902,7 +9019,7 @@ client.non_insurance_payers.v_1.toggle_enablement({
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payers.v_1.get_multi() -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayerPage</code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">get_multi</a>() -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayerPage</code></summary>
 <dl>
 <dd>
 
@@ -7915,7 +9032,7 @@ client.non_insurance_payers.v_1.toggle_enablement({
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.get_multi();
+client.non_insurance_payers.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -8006,6 +9123,14 @@ clinical trials will be matched.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8014,7 +9139,7 @@ clinical trials will be matched.
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payers.v_1.get_categories() -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayerCategoriesPage</code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">get_categories</a>() -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayerCategoriesPage</code></summary>
 <dl>
 <dd>
 
@@ -8046,7 +9171,7 @@ longer any non-insurance payers that contain them.
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.get_categories();
+client.non_insurance_payers.v_1.get_categories
 ```
 </dd>
 </dl>
@@ -8081,6 +9206,14 @@ client.non_insurance_payers.v_1.get_categories();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8089,7 +9222,7 @@ client.non_insurance_payers.v_1.get_categories();
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payers.v_1.get(non_insurance_payer_id) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">get</a>(non_insurance_payer_id) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
 <dl>
 <dd>
 
@@ -8102,7 +9235,7 @@ client.non_insurance_payers.v_1.get_categories();
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.get();
+client.non_insurance_payers.v_1.get(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -8121,6 +9254,14 @@ client.non_insurance_payers.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8129,7 +9270,7 @@ client.non_insurance_payers.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payers.v_1.update(non_insurance_payer_id, request) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">update</a>(non_insurance_payer_id, request) -> Candid::NonInsurancePayers::V1::Types::NonInsurancePayer</code></summary>
 <dl>
 <dd>
 
@@ -8142,7 +9283,7 @@ client.non_insurance_payers.v_1.get();
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.update({});
+client.non_insurance_payers.v_1.update(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -8169,6 +9310,14 @@ client.non_insurance_payers.v_1.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8177,7 +9326,7 @@ client.non_insurance_payers.v_1.update({});
 </dl>
 </details>
 
-<details><summary><code>client.non_insurance_payers.v_1.delete(non_insurance_payer_id) -> </code></summary>
+<details><summary><code>client.non_insurance_payers.v_1.<a href="/lib/candid/non_insurance_payers/v_1/client.rb">delete</a>(non_insurance_payer_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -8190,7 +9339,7 @@ client.non_insurance_payers.v_1.update({});
 <dd>
 
 ```ruby
-client.non_insurance_payers.v_1.delete();
+client.non_insurance_payers.v_1.delete(non_insurance_payer_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -8209,6 +9358,14 @@ client.non_insurance_payers.v_1.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::NonInsurancePayers::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8218,7 +9375,7 @@ client.non_insurance_payers.v_1.delete();
 </details>
 
 ## OrganizationProviders V3
-<details><summary><code>client.organization_providers.v_3.get(organization_provider_id) -> Candid::OrganizationProviders::V3::Types::OrganizationProviderV2</code></summary>
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">get</a>(organization_provider_id) -> Candid::OrganizationProviders::V3::Types::OrganizationProviderV2</code></summary>
 <dl>
 <dd>
 
@@ -8231,7 +9388,7 @@ client.non_insurance_payers.v_1.delete();
 <dd>
 
 ```ruby
-client.organization_providers.v_3.get();
+client.organization_providers.v_3.get(organization_provider_id: "965A563A-0285-4910-9569-E3739C0F6EAB")
 ```
 </dd>
 </dl>
@@ -8250,6 +9407,14 @@ client.organization_providers.v_3.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8258,7 +9423,7 @@ client.organization_providers.v_3.get();
 </dl>
 </details>
 
-<details><summary><code>client.organization_providers.v_3.get_multi() -> Candid::OrganizationProviders::V3::Types::OrganizationProviderPageV2</code></summary>
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">get_multi</a>() -> Candid::OrganizationProviders::V3::Types::OrganizationProviderPageV2</code></summary>
 <dl>
 <dd>
 
@@ -8273,13 +9438,13 @@ client.organization_providers.v_3.get();
 ```ruby
 client.organization_providers.v_3.get_multi(
   limit: 100,
-  searchTerm: 'john',
-  npi: '1234567890',
-  isRendering: true,
-  isBilling: true,
-  pageToken: 'eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9',
-  sort: 
-);
+  search_term: "john",
+  npi: "1234567890",
+  is_rendering: true,
+  is_billing: true,
+  page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9",
+  sort: "provider_name:asc"
+)
 ```
 </dd>
 </dl>
@@ -8354,6 +9519,14 @@ client.organization_providers.v_3.get_multi(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8362,7 +9535,7 @@ client.organization_providers.v_3.get_multi(
 </dl>
 </details>
 
-<details><summary><code>client.organization_providers.v_3.create(request) -> Candid::OrganizationProviders::V3::Types::OrganizationProviderV2</code></summary>
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">create</a>(request) -> Candid::OrganizationProviders::V3::Types::OrganizationProviderV2</code></summary>
 <dl>
 <dd>
 
@@ -8375,12 +9548,18 @@ client.organization_providers.v_3.get_multi(
 <dd>
 
 ```ruby
-client.organization_providers.v_3.create({
-  npi: 'npi',
+client.organization_providers.v_3.create(
+  npi: "npi",
   is_rendering: true,
   is_billing: true,
-  qualifications: [{}, {}]
-});
+  provider_type: "INDIVIDUAL",
+  license_type: "MD",
+  qualifications: [{
+    identifier_code: "MCR"
+  }, {
+    identifier_code: "MCR"
+  }]
+)
 ```
 </dd>
 </dl>
@@ -8399,6 +9578,14 @@ client.organization_providers.v_3.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8407,7 +9594,7 @@ client.organization_providers.v_3.create({
 </dl>
 </details>
 
-<details><summary><code>client.organization_providers.v_3.update(organization_provider_id, request) -> Candid::OrganizationProviders::V3::Types::OrganizationProviderV2</code></summary>
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">update</a>(organization_provider_id, request) -> Candid::OrganizationProviders::V3::Types::OrganizationProviderV2</code></summary>
 <dl>
 <dd>
 
@@ -8420,7 +9607,7 @@ client.organization_providers.v_3.create({
 <dd>
 
 ```ruby
-client.organization_providers.v_3.update({});
+client.organization_providers.v_3.update(organization_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -8447,6 +9634,14 @@ client.organization_providers.v_3.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8456,7 +9651,7 @@ client.organization_providers.v_3.update({});
 </details>
 
 ## OrganizationServiceFacilities V2
-<details><summary><code>client.organization_service_facilities.v_2.get(organization_service_facility_id) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
+<details><summary><code>client.organization_service_facilities.v_2.<a href="/lib/candid/organization_service_facilities/v_2/client.rb">get</a>(organization_service_facility_id) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
 <dl>
 <dd>
 
@@ -8469,7 +9664,7 @@ client.organization_providers.v_3.update({});
 <dd>
 
 ```ruby
-client.organization_service_facilities.v_2.get();
+client.organization_service_facilities.v_2.get(organization_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -8488,6 +9683,14 @@ client.organization_service_facilities.v_2.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationServiceFacilities::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8496,7 +9699,7 @@ client.organization_service_facilities.v_2.get();
 </dl>
 </details>
 
-<details><summary><code>client.organization_service_facilities.v_2.get_multi() -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage</code></summary>
+<details><summary><code>client.organization_service_facilities.v_2.<a href="/lib/candid/organization_service_facilities/v_2/client.rb">get_multi</a>() -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage</code></summary>
 <dl>
 <dd>
 
@@ -8511,9 +9714,9 @@ client.organization_service_facilities.v_2.get();
 ```ruby
 client.organization_service_facilities.v_2.get_multi(
   limit: 100,
-  name: 'Test Service Facility',
-  pageToken: 'eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9'
-);
+  name: "Test Service Facility",
+  page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
+)
 ```
 </dd>
 </dl>
@@ -8572,6 +9775,14 @@ client.organization_service_facilities.v_2.get_multi(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationServiceFacilities::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8580,7 +9791,7 @@ client.organization_service_facilities.v_2.get_multi(
 </dl>
 </details>
 
-<details><summary><code>client.organization_service_facilities.v_2.get_by_external_id(external_id) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
+<details><summary><code>client.organization_service_facilities.v_2.<a href="/lib/candid/organization_service_facilities/v_2/client.rb">get_by_external_id</a>(external_id) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
 <dl>
 <dd>
 
@@ -8609,7 +9820,7 @@ an external system.
 <dd>
 
 ```ruby
-client.organization_service_facilities.v_2.get_by_external_id();
+client.organization_service_facilities.v_2.get_by_external_id(external_id: "external_id")
 ```
 </dd>
 </dl>
@@ -8628,6 +9839,14 @@ client.organization_service_facilities.v_2.get_by_external_id();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationServiceFacilities::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8636,7 +9855,7 @@ client.organization_service_facilities.v_2.get_by_external_id();
 </dl>
 </details>
 
-<details><summary><code>client.organization_service_facilities.v_2.create(request) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
+<details><summary><code>client.organization_service_facilities.v_2.<a href="/lib/candid/organization_service_facilities/v_2/client.rb">create</a>(request) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
 <dl>
 <dd>
 
@@ -8649,19 +9868,25 @@ client.organization_service_facilities.v_2.get_by_external_id();
 <dd>
 
 ```ruby
-client.organization_service_facilities.v_2.create({
-  name: 'Test Service Facility',
-  aliases: ['Test Service Facility Alias'],
-  description: 'Test Service Facility Description',
-  telecoms: ['555-555-5555'],
+client.organization_service_facilities.v_2.create(
+  name: "Test Service Facility",
+  aliases: ["Test Service Facility Alias"],
+  description: "Test Service Facility Description",
+  status: "active",
+  operational_status: "C",
+  mode: "instance",
+  type: "DX",
+  physical_type: "si",
+  telecoms: ["555-555-5555"],
   address: {
-    address1: '123 Main St',
-    address2: 'Apt 1',
-    city: 'New York',
-    zip_code: '10001',
-    zip_plus_four_code: '1234'
+    address_1: "123 Main St",
+    address_2: "Apt 1",
+    city: "New York",
+    state: "NY",
+    zip_code: "10001",
+    zip_plus_four_code: "1234"
   }
-});
+)
 ```
 </dd>
 </dl>
@@ -8680,6 +9905,14 @@ client.organization_service_facilities.v_2.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationServiceFacilities::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8688,7 +9921,7 @@ client.organization_service_facilities.v_2.create({
 </dl>
 </details>
 
-<details><summary><code>client.organization_service_facilities.v_2.update(organization_service_facility_id, request) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
+<details><summary><code>client.organization_service_facilities.v_2.<a href="/lib/candid/organization_service_facilities/v_2/client.rb">update</a>(organization_service_facility_id, request) -> Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacility</code></summary>
 <dl>
 <dd>
 
@@ -8701,19 +9934,26 @@ client.organization_service_facilities.v_2.create({
 <dd>
 
 ```ruby
-client.organization_service_facilities.v_2.update({
-  name: 'Test Service Facility',
-  aliases: ['Test Service Facility Alias'],
-  description: 'Test Service Facility Description',
-  telecoms: ['555-555-5555'],
+client.organization_service_facilities.v_2.update(
+  organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569",
+  name: "Test Service Facility",
+  aliases: ["Test Service Facility Alias"],
+  description: "Test Service Facility Description",
+  status: "active",
+  operational_status: "C",
+  mode: "instance",
+  type: "DX",
+  physical_type: "si",
+  telecoms: ["555-555-5555"],
   address: {
-    address1: '123 Main St',
-    address2: 'Apt 1',
-    city: 'New York',
-    zip_code: '10001',
-    zip_plus_four_code: '1234'
+    address_1: "123 Main St",
+    address_2: "Apt 1",
+    city: "New York",
+    state: "NY",
+    zip_code: "10001",
+    zip_plus_four_code: "1234"
   }
-});
+)
 ```
 </dd>
 </dl>
@@ -8740,6 +9980,14 @@ client.organization_service_facilities.v_2.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationServiceFacilities::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8748,7 +9996,7 @@ client.organization_service_facilities.v_2.update({
 </dl>
 </details>
 
-<details><summary><code>client.organization_service_facilities.v_2.delete(organization_service_facility_id) -> </code></summary>
+<details><summary><code>client.organization_service_facilities.v_2.<a href="/lib/candid/organization_service_facilities/v_2/client.rb">delete</a>(organization_service_facility_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -8761,7 +10009,7 @@ client.organization_service_facilities.v_2.update({
 <dd>
 
 ```ruby
-client.organization_service_facilities.v_2.delete();
+client.organization_service_facilities.v_2.delete(organization_service_facility_id: "30F55EE6-8C0E-43FC-A7FC-DAC00D5BF569")
 ```
 </dd>
 </dl>
@@ -8780,6 +10028,14 @@ client.organization_service_facilities.v_2.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationServiceFacilities::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8789,7 +10045,7 @@ client.organization_service_facilities.v_2.delete();
 </details>
 
 ## PatientAr V1
-<details><summary><code>client.patient_ar.v_1.list_inventory() -> Candid::PatientAr::V1::Types::ListInventoryPagedResponse</code></summary>
+<details><summary><code>client.patient_ar.v_1.<a href="/lib/candid/patient_ar/v_1/client.rb">list_inventory</a>() -> Candid::PatientAr::V1::Types::ListInventoryPagedResponse</code></summary>
 <dl>
 <dd>
 
@@ -8817,7 +10073,7 @@ The response is paginated, and the `page_token` can be used to retrieve subseque
 <dd>
 
 ```ruby
-client.patient_ar.v_1.list_inventory();
+client.patient_ar.v_1.list_inventory
 ```
 </dd>
 </dl>
@@ -8852,6 +10108,14 @@ client.patient_ar.v_1.list_inventory();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientAr::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8860,7 +10124,7 @@ client.patient_ar.v_1.list_inventory();
 </dl>
 </details>
 
-<details><summary><code>client.patient_ar.v_1.itemize(claim_id) -> Candid::PatientAr::V1::Types::InvoiceItemizationResponse</code></summary>
+<details><summary><code>client.patient_ar.v_1.<a href="/lib/candid/patient_ar/v_1/client.rb">itemize</a>(claim_id) -> Candid::PatientAr::V1::Types::InvoiceItemizationResponse</code></summary>
 <dl>
 <dd>
 
@@ -8887,7 +10151,7 @@ Provides detailed itemization of invoice data for a specific claim.
 <dd>
 
 ```ruby
-client.patient_ar.v_1.itemize();
+client.patient_ar.v_1.itemize(claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -8906,6 +10170,14 @@ client.patient_ar.v_1.itemize();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientAr::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8915,7 +10187,7 @@ client.patient_ar.v_1.itemize();
 </details>
 
 ## PatientPayments V4
-<details><summary><code>client.patient_payments.v_4.get_multi() -> Candid::PatientPayments::V4::Types::PatientPaymentsPage</code></summary>
+<details><summary><code>client.patient_payments.v_4.<a href="/lib/candid/patient_payments/v_4/client.rb">get_multi</a>() -> Candid::PatientPayments::V4::Types::PatientPaymentsPage</code></summary>
 <dl>
 <dd>
 
@@ -8943,7 +10215,7 @@ the current organization_id of the authenticated user.
 <dd>
 
 ```ruby
-client.patient_payments.v_4.get_multi();
+client.patient_payments.v_4.get_multi
 ```
 </dd>
 </dl>
@@ -9022,6 +10294,14 @@ client.patient_payments.v_4.get_multi();
 <dl>
 <dd>
 
+**source_internal_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **sort:** `Candid::PatientPayments::V4::Types::PatientPaymentSortField` — Defaults to payment_timestamp
     
 </dd>
@@ -9042,6 +10322,14 @@ client.patient_payments.v_4.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientPayments::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9050,7 +10338,7 @@ client.patient_payments.v_4.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.patient_payments.v_4.get(patient_payment_id) -> Candid::PatientPayments::V4::Types::PatientPayment</code></summary>
+<details><summary><code>client.patient_payments.v_4.<a href="/lib/candid/patient_payments/v_4/client.rb">get</a>(patient_payment_id) -> Candid::PatientPayments::V4::Types::PatientPayment</code></summary>
 <dl>
 <dd>
 
@@ -9077,7 +10365,7 @@ Retrieves a previously created patient payment by its `patient_payment_id`.
 <dd>
 
 ```ruby
-client.patient_payments.v_4.get();
+client.patient_payments.v_4.get(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9096,6 +10384,14 @@ client.patient_payments.v_4.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientPayments::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9104,7 +10400,7 @@ client.patient_payments.v_4.get();
 </dl>
 </details>
 
-<details><summary><code>client.patient_payments.v_4.create(request) -> Candid::PatientPayments::V4::Types::PatientPayment</code></summary>
+<details><summary><code>client.patient_payments.v_4.<a href="/lib/candid/patient_payments/v_4/client.rb">create</a>(request) -> Candid::PatientPayments::V4::Types::PatientPayment</code></summary>
 <dl>
 <dd>
 
@@ -9134,14 +10430,16 @@ claim, or billing provider.
 
 ```ruby
 client.patient_payments.v_4.create(
-  amountCents: 1,
-  patientExternalId: 'patient_external_id',
+  amount_cents: 1,
+  patient_external_id: "patient_external_id",
   allocations: [{
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }, {
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }]
-);
+)
 ```
 </dd>
 </dl>
@@ -9204,7 +10502,23 @@ client.patient_payments.v_4.create(
 <dl>
 <dd>
 
+**payment_method_detail:** `Candid::PatientPayments::V4::Types::PaymentMethodDetailCreate` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **source_internal_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientPayments::V4::RequestOptions` 
     
 </dd>
 </dl>
@@ -9216,7 +10530,7 @@ client.patient_payments.v_4.create(
 </dl>
 </details>
 
-<details><summary><code>client.patient_payments.v_4.update(patient_payment_id, request) -> Candid::PatientPayments::V4::Types::PatientPayment</code></summary>
+<details><summary><code>client.patient_payments.v_4.<a href="/lib/candid/patient_payments/v_4/client.rb">update</a>(patient_payment_id, request) -> Candid::PatientPayments::V4::Types::PatientPayment</code></summary>
 <dl>
 <dd>
 
@@ -9243,7 +10557,7 @@ Updates the patient payment record matching the provided patient_payment_id.
 <dd>
 
 ```ruby
-client.patient_payments.v_4.update(patientPaymentId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.patient_payments.v_4.update(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9286,6 +10600,14 @@ client.patient_payments.v_4.update(patientPaymentId: 'd5e9c84f-c2b2-4bf4-b4b0-7f
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientPayments::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9294,7 +10616,7 @@ client.patient_payments.v_4.update(patientPaymentId: 'd5e9c84f-c2b2-4bf4-b4b0-7f
 </dl>
 </details>
 
-<details><summary><code>client.patient_payments.v_4.delete(patient_payment_id) -> </code></summary>
+<details><summary><code>client.patient_payments.v_4.<a href="/lib/candid/patient_payments/v_4/client.rb">delete</a>(patient_payment_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -9321,7 +10643,7 @@ Deletes the patient payment record matching the provided patient_payment_id.
 <dd>
 
 ```ruby
-client.patient_payments.v_4.delete();
+client.patient_payments.v_4.delete(patient_payment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9340,6 +10662,14 @@ client.patient_payments.v_4.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientPayments::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9349,7 +10679,7 @@ client.patient_payments.v_4.delete();
 </details>
 
 ## PatientRefunds V1
-<details><summary><code>client.patient_refunds.v_1.get_multi() -> Candid::PatientRefunds::V1::Types::PatientRefundsPage</code></summary>
+<details><summary><code>client.patient_refunds.v_1.<a href="/lib/candid/patient_refunds/v_1/client.rb">get_multi</a>() -> Candid::PatientRefunds::V1::Types::PatientRefundsPage</code></summary>
 <dl>
 <dd>
 
@@ -9377,7 +10707,7 @@ the current organization_id of the authenticated user.
 <dd>
 
 ```ruby
-client.patient_refunds.v_1.get_multi();
+client.patient_refunds.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -9476,6 +10806,14 @@ client.patient_refunds.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9484,7 +10822,7 @@ client.patient_refunds.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.patient_refunds.v_1.get(patient_refund_id) -> Candid::PatientRefunds::V1::Types::PatientRefund</code></summary>
+<details><summary><code>client.patient_refunds.v_1.<a href="/lib/candid/patient_refunds/v_1/client.rb">get</a>(patient_refund_id) -> Candid::PatientRefunds::V1::Types::PatientRefund</code></summary>
 <dl>
 <dd>
 
@@ -9511,7 +10849,7 @@ Retrieves a previously created patient refund by its `patient_refund_id`.
 <dd>
 
 ```ruby
-client.patient_refunds.v_1.get();
+client.patient_refunds.v_1.get(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9530,6 +10868,14 @@ client.patient_refunds.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9538,7 +10884,7 @@ client.patient_refunds.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.patient_refunds.v_1.create(request) -> Candid::PatientRefunds::V1::Types::PatientRefund</code></summary>
+<details><summary><code>client.patient_refunds.v_1.<a href="/lib/candid/patient_refunds/v_1/client.rb">create</a>(request) -> Candid::PatientRefunds::V1::Types::PatientRefund</code></summary>
 <dl>
 <dd>
 
@@ -9568,14 +10914,16 @@ claim, or billing provider.
 
 ```ruby
 client.patient_refunds.v_1.create(
-  amountCents: 1,
-  patientExternalId: 'patient_external_id',
+  amount_cents: 1,
+  patient_external_id: "patient_external_id",
   allocations: [{
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }, {
-    amount_cents: 1
+    amount_cents: 1,
+    target: {}
   }]
-);
+)
 ```
 </dd>
 </dl>
@@ -9642,6 +10990,14 @@ client.patient_refunds.v_1.create(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9650,7 +11006,7 @@ client.patient_refunds.v_1.create(
 </dl>
 </details>
 
-<details><summary><code>client.patient_refunds.v_1.update(patient_refund_id, request) -> Candid::PatientRefunds::V1::Types::PatientRefund</code></summary>
+<details><summary><code>client.patient_refunds.v_1.<a href="/lib/candid/patient_refunds/v_1/client.rb">update</a>(patient_refund_id, request) -> Candid::PatientRefunds::V1::Types::PatientRefund</code></summary>
 <dl>
 <dd>
 
@@ -9677,7 +11033,7 @@ Updates the patient refund record matching the provided patient_refund_id.
 <dd>
 
 ```ruby
-client.patient_refunds.v_1.update(patientRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.patient_refunds.v_1.update(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9728,6 +11084,14 @@ client.patient_refunds.v_1.update(patientRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9736,7 +11100,7 @@ client.patient_refunds.v_1.update(patientRefundId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd
 </dl>
 </details>
 
-<details><summary><code>client.patient_refunds.v_1.delete(patient_refund_id) -> </code></summary>
+<details><summary><code>client.patient_refunds.v_1.<a href="/lib/candid/patient_refunds/v_1/client.rb">delete</a>(patient_refund_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -9763,7 +11127,7 @@ Deletes the patient refund record matching the provided patient_refund_id.
 <dd>
 
 ```ruby
-client.patient_refunds.v_1.delete();
+client.patient_refunds.v_1.delete(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9782,6 +11146,14 @@ client.patient_refunds.v_1.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PatientRefunds::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9791,7 +11163,7 @@ client.patient_refunds.v_1.delete();
 </details>
 
 ## PayerPlanGroups V1
-<details><summary><code>client.payer_plan_groups.v_1.get_multi() -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroupPage</code></summary>
+<details><summary><code>client.payer_plan_groups.v_1.<a href="/lib/candid/payer_plan_groups/v_1/client.rb">get_multi</a>() -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroupPage</code></summary>
 <dl>
 <dd>
 
@@ -9818,7 +11190,7 @@ Returns all payer plan groups matching filter criteria.
 <dd>
 
 ```ruby
-client.payer_plan_groups.v_1.get_multi();
+client.payer_plan_groups.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -9921,6 +11293,14 @@ will always sort in order of most similar to least similar.
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerPlanGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9929,7 +11309,7 @@ will always sort in order of most similar to least similar.
 </dl>
 </details>
 
-<details><summary><code>client.payer_plan_groups.v_1.get(payer_plan_group_id) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
+<details><summary><code>client.payer_plan_groups.v_1.<a href="/lib/candid/payer_plan_groups/v_1/client.rb">get</a>(payer_plan_group_id) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
 <dl>
 <dd>
 
@@ -9956,7 +11336,7 @@ Return a plan group with a given ID.
 <dd>
 
 ```ruby
-client.payer_plan_groups.v_1.get();
+client.payer_plan_groups.v_1.get(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -9975,6 +11355,14 @@ client.payer_plan_groups.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerPlanGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9983,7 +11371,7 @@ client.payer_plan_groups.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.payer_plan_groups.v_1.create(request) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
+<details><summary><code>client.payer_plan_groups.v_1.<a href="/lib/candid/payer_plan_groups/v_1/client.rb">create</a>(request) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
 <dl>
 <dd>
 
@@ -10010,10 +11398,11 @@ Create a payer plan group
 <dd>
 
 ```ruby
-client.payer_plan_groups.v_1.create({
-  plan_group_name: 'plan_group_name',
-  payer_uuid: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-});
+client.payer_plan_groups.v_1.create(
+  plan_group_name: "plan_group_name",
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  plan_type: "09"
+)
 ```
 </dd>
 </dl>
@@ -10032,6 +11421,14 @@ client.payer_plan_groups.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerPlanGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10040,7 +11437,7 @@ client.payer_plan_groups.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.payer_plan_groups.v_1.update(payer_plan_group_id, request) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
+<details><summary><code>client.payer_plan_groups.v_1.<a href="/lib/candid/payer_plan_groups/v_1/client.rb">update</a>(payer_plan_group_id, request) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
 <dl>
 <dd>
 
@@ -10067,10 +11464,12 @@ Update any of the fields on a payer plan group
 <dd>
 
 ```ruby
-client.payer_plan_groups.v_1.update({
-  plan_group_name: 'plan_group_name',
-  payer_uuid: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-});
+client.payer_plan_groups.v_1.update(
+  payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  plan_group_name: "plan_group_name",
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  plan_type: "09"
+)
 ```
 </dd>
 </dl>
@@ -10097,6 +11496,14 @@ client.payer_plan_groups.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerPlanGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10105,7 +11512,7 @@ client.payer_plan_groups.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.payer_plan_groups.v_1.deactivate(payer_plan_group_id) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
+<details><summary><code>client.payer_plan_groups.v_1.<a href="/lib/candid/payer_plan_groups/v_1/client.rb">deactivate</a>(payer_plan_group_id) -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroup</code></summary>
 <dl>
 <dd>
 
@@ -10132,7 +11539,7 @@ Marks the payer plan group as deactivated
 <dd>
 
 ```ruby
-client.payer_plan_groups.v_1.deactivate();
+client.payer_plan_groups.v_1.deactivate(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10151,6 +11558,14 @@ client.payer_plan_groups.v_1.deactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerPlanGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10160,7 +11575,7 @@ client.payer_plan_groups.v_1.deactivate();
 </details>
 
 ## Payers V3
-<details><summary><code>client.payers.v_3.get(payer_uuid) -> Candid::Payers::V3::Types::Payer</code></summary>
+<details><summary><code>client.payers.v_3.<a href="/lib/candid/payers/v_3/client.rb">get</a>(payer_uuid) -> Candid::Payers::V3::Types::Payer</code></summary>
 <dl>
 <dd>
 
@@ -10173,7 +11588,7 @@ client.payer_plan_groups.v_1.deactivate();
 <dd>
 
 ```ruby
-client.payers.v_3.get();
+client.payers.v_3.get(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10192,6 +11607,14 @@ client.payers.v_3.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Payers::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10200,7 +11623,7 @@ client.payers.v_3.get();
 </dl>
 </details>
 
-<details><summary><code>client.payers.v_3.get_all() -> Candid::Payers::V3::Types::PayerPage</code></summary>
+<details><summary><code>client.payers.v_3.<a href="/lib/candid/payers/v_3/client.rb">get_all</a>() -> Candid::Payers::V3::Types::PayerPage</code></summary>
 <dl>
 <dd>
 
@@ -10215,9 +11638,9 @@ client.payers.v_3.get();
 ```ruby
 client.payers.v_3.get_all(
   limit: 100,
-  searchTerm: 'john',
-  pageToken: 'eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9'
-);
+  search_term: "john",
+  page_token: "eyJ0b2tlbiI6IjEiLCJwYWdlX3Rva2VuIjoiMiJ9"
+)
 ```
 </dd>
 </dl>
@@ -10252,6 +11675,14 @@ client.payers.v_3.get_all(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Payers::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10261,7 +11692,7 @@ client.payers.v_3.get_all(
 </details>
 
 ## Payers V4
-<details><summary><code>client.payers.v_4.get(payer_uuid) -> Candid::Payers::V4::Types::Payer</code></summary>
+<details><summary><code>client.payers.v_4.<a href="/lib/candid/payers/v_4/client.rb">get</a>(payer_uuid) -> Candid::Payers::V4::Types::Payer</code></summary>
 <dl>
 <dd>
 
@@ -10274,7 +11705,7 @@ client.payers.v_3.get_all(
 <dd>
 
 ```ruby
-client.payers.v_4.get();
+client.payers.v_4.get(payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10293,6 +11724,14 @@ client.payers.v_4.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Payers::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10301,7 +11740,7 @@ client.payers.v_4.get();
 </dl>
 </details>
 
-<details><summary><code>client.payers.v_4.get_all() -> Candid::Payers::V4::Types::PayerPage</code></summary>
+<details><summary><code>client.payers.v_4.<a href="/lib/candid/payers/v_4/client.rb">get_all</a>() -> Candid::Payers::V4::Types::PayerPage</code></summary>
 <dl>
 <dd>
 
@@ -10314,7 +11753,7 @@ client.payers.v_4.get();
 <dd>
 
 ```ruby
-client.payers.v_4.get_all();
+client.payers.v_4.get_all
 ```
 </dd>
 </dl>
@@ -10349,6 +11788,14 @@ client.payers.v_4.get_all();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Payers::V4::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10358,7 +11805,7 @@ client.payers.v_4.get_all();
 </details>
 
 ## ServiceLines V2
-<details><summary><code>client.service_lines.v_2.create(request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
+<details><summary><code>client.service_lines.v_2.<a href="/lib/candid/service_lines/v_2/client.rb">create</a>(request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
 <dl>
 <dd>
 
@@ -10371,11 +11818,12 @@ client.payers.v_4.get_all();
 <dd>
 
 ```ruby
-client.service_lines.v_2.create({
-  procedure_code: 'procedure_code',
-  quantity: 'quantity',
-  claim_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-});
+client.service_lines.v_2.create(
+  procedure_code: "procedure_code",
+  quantity: "quantity",
+  units: "MJ",
+  claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -10394,6 +11842,14 @@ client.service_lines.v_2.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ServiceLines::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10402,7 +11858,7 @@ client.service_lines.v_2.create({
 </dl>
 </details>
 
-<details><summary><code>client.service_lines.v_2.create_universal(request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
+<details><summary><code>client.service_lines.v_2.<a href="/lib/candid/service_lines/v_2/client.rb">create_universal</a>(request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
 <dl>
 <dd>
 
@@ -10415,10 +11871,11 @@ client.service_lines.v_2.create({
 <dd>
 
 ```ruby
-client.service_lines.v_2.create_universal({
-  quantity: 'quantity',
-  claim_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32'
-});
+client.service_lines.v_2.create_universal(
+  quantity: "quantity",
+  units: "MJ",
+  claim_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
 ```
 </dd>
 </dl>
@@ -10437,6 +11894,14 @@ client.service_lines.v_2.create_universal({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ServiceLines::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10445,7 +11910,7 @@ client.service_lines.v_2.create_universal({
 </dl>
 </details>
 
-<details><summary><code>client.service_lines.v_2.update_universal(service_line_id, request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
+<details><summary><code>client.service_lines.v_2.<a href="/lib/candid/service_lines/v_2/client.rb">update_universal</a>(service_line_id, request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
 <dl>
 <dd>
 
@@ -10458,7 +11923,7 @@ client.service_lines.v_2.create_universal({
 <dd>
 
 ```ruby
-client.service_lines.v_2.update_universal({});
+client.service_lines.v_2.update_universal(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10485,6 +11950,14 @@ client.service_lines.v_2.update_universal({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ServiceLines::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10493,7 +11966,7 @@ client.service_lines.v_2.update_universal({});
 </dl>
 </details>
 
-<details><summary><code>client.service_lines.v_2.update(service_line_id, request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
+<details><summary><code>client.service_lines.v_2.<a href="/lib/candid/service_lines/v_2/client.rb">update</a>(service_line_id, request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
 <dl>
 <dd>
 
@@ -10506,7 +11979,7 @@ client.service_lines.v_2.update_universal({});
 <dd>
 
 ```ruby
-client.service_lines.v_2.update({});
+client.service_lines.v_2.update(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10533,6 +12006,14 @@ client.service_lines.v_2.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ServiceLines::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10541,7 +12022,7 @@ client.service_lines.v_2.update({});
 </dl>
 </details>
 
-<details><summary><code>client.service_lines.v_2.delete(service_line_id) -> </code></summary>
+<details><summary><code>client.service_lines.v_2.<a href="/lib/candid/service_lines/v_2/client.rb">delete</a>(service_line_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -10554,7 +12035,7 @@ client.service_lines.v_2.update({});
 <dd>
 
 ```ruby
-client.service_lines.v_2.delete();
+client.service_lines.v_2.delete(service_line_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10573,6 +12054,14 @@ client.service_lines.v_2.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ServiceLines::V2::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10582,7 +12071,7 @@ client.service_lines.v_2.delete();
 </details>
 
 ## Superbills V1
-<details><summary><code>client.superbills.v_1.create_superbill(request) -> Candid::Superbills::V1::Types::SuperbillResponse</code></summary>
+<details><summary><code>client.superbills.v_1.<a href="/lib/candid/superbills/v_1/client.rb">create_superbill</a>(request) -> Candid::Superbills::V1::Types::SuperbillResponse</code></summary>
 <dl>
 <dd>
 
@@ -10596,10 +12085,10 @@ client.service_lines.v_2.delete();
 
 ```ruby
 client.superbills.v_1.create_superbill(
-  patientExternalId: 'patient_external_id',
-  dateRangeMin: '2023-01-15',
-  dateRangeMax: '2023-01-15'
-);
+  patient_external_id: "patient_external_id",
+  date_range_min: "2023-01-15",
+  date_range_max: "2023-01-15"
+)
 ```
 </dd>
 </dl>
@@ -10658,6 +12147,14 @@ client.superbills.v_1.create_superbill(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Superbills::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10667,7 +12164,7 @@ client.superbills.v_1.create_superbill(
 </details>
 
 ## Tasks V3
-<details><summary><code>client.tasks.v_3.get_actions(task_id) -> Candid::Tasks::V3::Types::TaskActions</code></summary>
+<details><summary><code>client.tasks.v_3.<a href="/lib/candid/tasks/v_3/client.rb">get_actions</a>(task_id) -> Candid::Tasks::V3::Types::TaskActions</code></summary>
 <dl>
 <dd>
 
@@ -10680,7 +12177,7 @@ client.superbills.v_1.create_superbill(
 <dd>
 
 ```ruby
-client.tasks.v_3.get_actions();
+client.tasks.v_3.get_actions(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10699,6 +12196,14 @@ client.tasks.v_3.get_actions();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Tasks::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10707,7 +12212,7 @@ client.tasks.v_3.get_actions();
 </dl>
 </details>
 
-<details><summary><code>client.tasks.v_3.get_multi() -> Candid::Tasks::V3::Types::TaskPage</code></summary>
+<details><summary><code>client.tasks.v_3.<a href="/lib/candid/tasks/v_3/client.rb">get_multi</a>() -> Candid::Tasks::V3::Types::TaskPage</code></summary>
 <dl>
 <dd>
 
@@ -10720,7 +12225,7 @@ client.tasks.v_3.get_actions();
 <dd>
 
 ```ruby
-client.tasks.v_3.get_multi();
+client.tasks.v_3.get_multi
 ```
 </dd>
 </dl>
@@ -10835,6 +12340,14 @@ client.tasks.v_3.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Tasks::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10843,7 +12356,7 @@ client.tasks.v_3.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.tasks.v_3.get(task_id) -> Candid::Tasks::V3::Types::Task</code></summary>
+<details><summary><code>client.tasks.v_3.<a href="/lib/candid/tasks/v_3/client.rb">get</a>(task_id) -> Candid::Tasks::V3::Types::Task</code></summary>
 <dl>
 <dd>
 
@@ -10856,7 +12369,7 @@ client.tasks.v_3.get_multi();
 <dd>
 
 ```ruby
-client.tasks.v_3.get();
+client.tasks.v_3.get(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10875,6 +12388,14 @@ client.tasks.v_3.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Tasks::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10883,7 +12404,7 @@ client.tasks.v_3.get();
 </dl>
 </details>
 
-<details><summary><code>client.tasks.v_3.create(request) -> Candid::Tasks::V3::Types::Task</code></summary>
+<details><summary><code>client.tasks.v_3.<a href="/lib/candid/tasks/v_3/client.rb">create</a>(request) -> Candid::Tasks::V3::Types::Task</code></summary>
 <dl>
 <dd>
 
@@ -10896,11 +12417,12 @@ client.tasks.v_3.get();
 <dd>
 
 ```ruby
-client.tasks.v_3.create({
-  encounter_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  description: 'description',
-  work_queue_id: 'work_queue_id'
-});
+client.tasks.v_3.create(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  task_type: "CUSTOMER_DATA_REQUEST",
+  description: "description",
+  work_queue_id: "work_queue_id"
+)
 ```
 </dd>
 </dl>
@@ -10919,6 +12441,14 @@ client.tasks.v_3.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Tasks::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10927,7 +12457,7 @@ client.tasks.v_3.create({
 </dl>
 </details>
 
-<details><summary><code>client.tasks.v_3.update(task_id, request) -> Candid::Tasks::V3::Types::Task</code></summary>
+<details><summary><code>client.tasks.v_3.<a href="/lib/candid/tasks/v_3/client.rb">update</a>(task_id, request) -> Candid::Tasks::V3::Types::Task</code></summary>
 <dl>
 <dd>
 
@@ -10940,7 +12470,7 @@ client.tasks.v_3.create({
 <dd>
 
 ```ruby
-client.tasks.v_3.update({});
+client.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -10967,6 +12497,14 @@ client.tasks.v_3.update({});
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Tasks::V3::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10976,7 +12514,7 @@ client.tasks.v_3.update({});
 </details>
 
 ## WriteOffs V1
-<details><summary><code>client.write_offs.v_1.get_multi() -> Candid::WriteOffs::V1::Types::WriteOffsPage</code></summary>
+<details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">get_multi</a>() -> Candid::WriteOffs::V1::Types::WriteOffsPage</code></summary>
 <dl>
 <dd>
 
@@ -11003,7 +12541,7 @@ Returns all write-offs satisfying the search criteria.
 <dd>
 
 ```ruby
-client.write_offs.v_1.get_multi();
+client.write_offs.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -11094,6 +12632,14 @@ client.write_offs.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::WriteOffs::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11102,7 +12648,7 @@ client.write_offs.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.write_offs.v_1.get(write_off_id) -> Candid::WriteOffs::V1::Types::WriteOff</code></summary>
+<details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">get</a>(write_off_id) -> Candid::WriteOffs::V1::Types::WriteOff</code></summary>
 <dl>
 <dd>
 
@@ -11129,7 +12675,7 @@ Retrieves a previously created write off by its `write_off_id`.
 <dd>
 
 ```ruby
-client.write_offs.v_1.get();
+client.write_offs.v_1.get(write_off_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -11148,6 +12694,14 @@ client.write_offs.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::WriteOffs::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11156,7 +12710,7 @@ client.write_offs.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.write_offs.v_1.create(request) -> Candid::WriteOffs::V1::Types::CreateWriteOffsResponse</code></summary>
+<details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">create</a>(request) -> Candid::WriteOffs::V1::Types::CreateWriteOffsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11184,7 +12738,7 @@ claim, or billing provider.
 <dd>
 
 ```ruby
-client.write_offs.v_1.create(writeOffs: []);
+client.write_offs.v_1.create(write_offs: [])
 ```
 </dd>
 </dl>
@@ -11203,6 +12757,14 @@ client.write_offs.v_1.create(writeOffs: []);
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::WriteOffs::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11211,7 +12773,7 @@ client.write_offs.v_1.create(writeOffs: []);
 </dl>
 </details>
 
-<details><summary><code>client.write_offs.v_1.revert(write_off_id) -> Candid::WriteOffs::V1::Types::WriteOff</code></summary>
+<details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">revert</a>(write_off_id) -> Candid::WriteOffs::V1::Types::WriteOff</code></summary>
 <dl>
 <dd>
 
@@ -11238,7 +12800,7 @@ Reverts a write off given a `write_off_id`.
 <dd>
 
 ```ruby
-client.write_offs.v_1.revert();
+client.write_offs.v_1.revert(write_off_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -11257,6 +12819,14 @@ client.write_offs.v_1.revert();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::WriteOffs::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11265,7 +12835,7 @@ client.write_offs.v_1.revert();
 </dl>
 </details>
 
-<details><summary><code>client.write_offs.v_1.revert_insurance_balance_adjustment(adjustment_id) -> Candid::WriteOffs::V1::Types::WriteOff</code></summary>
+<details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">revert_insurance_balance_adjustment</a>(adjustment_id) -> Candid::WriteOffs::V1::Types::WriteOff</code></summary>
 <dl>
 <dd>
 
@@ -11292,7 +12862,7 @@ Reverts an Insurance Balance Adjustment given an `adjustment_id`
 <dd>
 
 ```ruby
-client.write_offs.v_1.revert_insurance_balance_adjustment();
+client.write_offs.v_1.revert_insurance_balance_adjustment(adjustment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -11311,6 +12881,14 @@ client.write_offs.v_1.revert_insurance_balance_adjustment();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::WriteOffs::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11319,7 +12897,7 @@ client.write_offs.v_1.revert_insurance_balance_adjustment();
 </dl>
 </details>
 
-<details><summary><code>client.write_offs.v_1.revert_era_originated_insurance_balance_adjustment(adjustment_id) -> String</code></summary>
+<details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">revert_era_originated_insurance_balance_adjustment</a>(adjustment_id) -> String</code></summary>
 <dl>
 <dd>
 
@@ -11346,7 +12924,7 @@ Reverts an ERA-originated Insurance Balance Adjustment given an `adjustment_id`
 <dd>
 
 ```ruby
-client.write_offs.v_1.revert_era_originated_insurance_balance_adjustment();
+client.write_offs.v_1.revert_era_originated_insurance_balance_adjustment(adjustment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -11365,6 +12943,14 @@ client.write_offs.v_1.revert_era_originated_insurance_balance_adjustment();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::WriteOffs::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11374,7 +12960,7 @@ client.write_offs.v_1.revert_era_originated_insurance_balance_adjustment();
 </details>
 
 ## PreEncounter Appointments V1
-<details><summary><code>client.pre_encounter.appointments.v_1.create(request) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
 <dl>
 <dd>
 
@@ -11401,12 +12987,12 @@ Adds an appointment.  VersionConflictError is returned when the placer_appointme
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.create({
-  patient_id: 'patient_id',
-  start_timestamp: '2024-01-15T09:30:00Z',
+client.pre_encounter.appointments.v_1.create(
+  patient_id: "patient_id",
+  start_timestamp: "2024-01-15T09:30:00Z",
   service_duration: 1,
   services: [{}, {}]
-});
+)
 ```
 </dd>
 </dl>
@@ -11425,6 +13011,14 @@ client.pre_encounter.appointments.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11433,7 +13027,7 @@ client.pre_encounter.appointments.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.appointments.v_1.get_visits() -> Candid::PreEncounter::Appointments::V1::Types::VisitsPage</code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">get_visits</a>() -> Candid::PreEncounter::Appointments::V1::Types::VisitsPage</code></summary>
 <dl>
 <dd>
 
@@ -11471,7 +13065,7 @@ You can combine the date filter with other filters using commas:
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.get_visits();
+client.pre_encounter.appointments.v_1.get_visits
 ```
 </dd>
 </dl>
@@ -11525,6 +13119,14 @@ Example: appointment.startTimestamp|gt|2024-01-01
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11533,7 +13135,7 @@ Example: appointment.startTimestamp|gt|2024-01-01
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.appointments.v_1.get(id) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
 <dl>
 <dd>
 
@@ -11560,7 +13162,7 @@ Gets an appointment.
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.get();
+client.pre_encounter.appointments.v_1.get(id: "id")
 ```
 </dd>
 </dl>
@@ -11579,6 +13181,14 @@ client.pre_encounter.appointments.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11587,7 +13197,7 @@ client.pre_encounter.appointments.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.appointments.v_1.get_history(id) -> Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Appointment]</code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">get_history</a>(id) -> Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Appointment]</code></summary>
 <dl>
 <dd>
 
@@ -11614,7 +13224,7 @@ Gets an appointment along with it's full history.  The return list is ordered by
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.get_history();
+client.pre_encounter.appointments.v_1.get_history(id: "id")
 ```
 </dd>
 </dl>
@@ -11633,6 +13243,14 @@ client.pre_encounter.appointments.v_1.get_history();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11641,7 +13259,7 @@ client.pre_encounter.appointments.v_1.get_history();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.appointments.v_1.update(id, version, request) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
 <dl>
 <dd>
 
@@ -11668,12 +13286,14 @@ Updates an appointment. The path must contain the next version number to prevent
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.update({
-  patient_id: 'patient_id',
-  start_timestamp: '2024-01-15T09:30:00Z',
+client.pre_encounter.appointments.v_1.update(
+  id: "id",
+  version: "version",
+  patient_id: "patient_id",
+  start_timestamp: "2024-01-15T09:30:00Z",
   service_duration: 1,
   services: [{}, {}]
-});
+)
 ```
 </dd>
 </dl>
@@ -11708,6 +13328,14 @@ client.pre_encounter.appointments.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11716,7 +13344,7 @@ client.pre_encounter.appointments.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.appointments.v_1.scan() -> Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Appointment]</code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">scan</a>() -> Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Appointment]</code></summary>
 <dl>
 <dd>
 
@@ -11743,7 +13371,7 @@ Scans up to 100 appointment updates.  The since query parameter is inclusive, an
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.scan(since: '2024-01-15T09:30:00Z');
+client.pre_encounter.appointments.v_1.scan(since: "2024-01-15T09:30:00Z")
 ```
 </dd>
 </dl>
@@ -11762,6 +13390,14 @@ client.pre_encounter.appointments.v_1.scan(since: '2024-01-15T09:30:00Z');
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11770,7 +13406,7 @@ client.pre_encounter.appointments.v_1.scan(since: '2024-01-15T09:30:00Z');
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.appointments.v_1.deactivate(id, version) -> </code></summary>
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">deactivate</a>(id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -11797,7 +13433,10 @@ Sets an appointment as deactivated.  The path must contain the most recent versi
 <dd>
 
 ```ruby
-client.pre_encounter.appointments.v_1.deactivate();
+client.pre_encounter.appointments.v_1.deactivate(
+  id: "id",
+  version: "version"
+)
 ```
 </dd>
 </dl>
@@ -11824,6 +13463,14 @@ client.pre_encounter.appointments.v_1.deactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11833,7 +13480,7 @@ client.pre_encounter.appointments.v_1.deactivate();
 </details>
 
 ## PreEncounter Coverages V1
-<details><summary><code>client.pre_encounter.coverages.v_1.create(request) -> Candid::PreEncounter::Coverages::V1::Types::Coverage</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::Coverages::V1::Types::Coverage</code></summary>
 <dl>
 <dd>
 
@@ -11860,21 +13507,25 @@ Creates a new Coverage. A Coverage provides the high-level identifiers and descr
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.create({
+client.pre_encounter.coverages.v_1.create(
+  status: "ACTIVE",
   subscriber: {
     name: {
-      family: 'family',
-      given: ['given', 'given']
-    }
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    biological_sex: "FEMALE"
   },
-  patient: 'patient',
+  relationship: "SELF",
+  patient: "patient",
   insurance_plan: {
-    member_id: 'member_id',
-    payer_id: 'payer_id',
-    payer_name: 'payer_name'
+    member_id: "member_id",
+    payer_id: "payer_id",
+    payer_name: "payer_name"
   },
   verified: true
-});
+)
 ```
 </dd>
 </dl>
@@ -11893,6 +13544,14 @@ client.pre_encounter.coverages.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11901,7 +13560,7 @@ client.pre_encounter.coverages.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.update(id, version, request) -> Candid::PreEncounter::Coverages::V1::Types::Coverage</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::Coverages::V1::Types::Coverage</code></summary>
 <dl>
 <dd>
 
@@ -11928,21 +13587,27 @@ Updates a Coverage. The path must contain the next version number to prevent rac
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.update({
+client.pre_encounter.coverages.v_1.update(
+  id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  version: "version",
+  status: "ACTIVE",
   subscriber: {
     name: {
-      family: 'family',
-      given: ['given', 'given']
-    }
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    biological_sex: "FEMALE"
   },
-  patient: 'patient',
+  relationship: "SELF",
+  patient: "patient",
   insurance_plan: {
-    member_id: 'member_id',
-    payer_id: 'payer_id',
-    payer_name: 'payer_name'
+    member_id: "member_id",
+    payer_id: "payer_id",
+    payer_name: "payer_name"
   },
   verified: true
-});
+)
 ```
 </dd>
 </dl>
@@ -11977,6 +13642,14 @@ client.pre_encounter.coverages.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11985,7 +13658,7 @@ client.pre_encounter.coverages.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.get_multi_paginated() -> Candid::PreEncounter::Coverages::V1::Types::CoveragesPage</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_multi_paginated</a>() -> Candid::PreEncounter::Coverages::V1::Types::CoveragesPage</code></summary>
 <dl>
 <dd>
 
@@ -12012,7 +13685,7 @@ Returns a page of Coverages based on the search criteria.
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.get_multi_paginated();
+client.pre_encounter.coverages.v_1.get_multi_paginated
 ```
 </dd>
 </dl>
@@ -12055,6 +13728,14 @@ client.pre_encounter.coverages.v_1.get_multi_paginated();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12063,7 +13744,7 @@ client.pre_encounter.coverages.v_1.get_multi_paginated();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.get(id) -> Candid::PreEncounter::Coverages::V1::Types::Coverage</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Coverages::V1::Types::Coverage</code></summary>
 <dl>
 <dd>
 
@@ -12090,7 +13771,7 @@ gets a specific Coverage
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.get();
+client.pre_encounter.coverages.v_1.get(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -12109,6 +13790,14 @@ client.pre_encounter.coverages.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12117,7 +13806,7 @@ client.pre_encounter.coverages.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.get_history(id) -> Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_history</a>(id) -> Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]</code></summary>
 <dl>
 <dd>
 
@@ -12145,7 +13834,7 @@ defined. The return list is ordered by version, defaulting to ascending.
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.get_history(id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.pre_encounter.coverages.v_1.get_history(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -12204,6 +13893,14 @@ client.pre_encounter.coverages.v_1.get_history(id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12212,7 +13909,7 @@ client.pre_encounter.coverages.v_1.get_history(id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.get_multi() -> Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_multi</a>() -> Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]</code></summary>
 <dl>
 <dd>
 
@@ -12239,7 +13936,7 @@ Returns a list of Coverages based on the search criteria.
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.get_multi();
+client.pre_encounter.coverages.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -12258,6 +13955,14 @@ client.pre_encounter.coverages.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12266,7 +13971,7 @@ client.pre_encounter.coverages.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.scan() -> Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">scan</a>() -> Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::Coverage]</code></summary>
 <dl>
 <dd>
 
@@ -12306,7 +14011,7 @@ To continuously poll for updates without gaps:
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.scan(since: '2024-01-15T09:30:00Z');
+client.pre_encounter.coverages.v_1.scan(since: "2024-01-15T09:30:00Z")
 ```
 </dd>
 </dl>
@@ -12325,6 +14030,14 @@ client.pre_encounter.coverages.v_1.scan(since: '2024-01-15T09:30:00Z');
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12333,7 +14046,7 @@ client.pre_encounter.coverages.v_1.scan(since: '2024-01-15T09:30:00Z');
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.batch_update_ppg(ppg_id, request) -> </code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">batch_update_ppg</a>(ppg_id, request) -> </code></summary>
 <dl>
 <dd>
 
@@ -12360,11 +14073,13 @@ Finds all coverages associated with the given ppg_id and updates the ppg_fields 
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.batch_update_ppg({
-  payer_plan_group_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  payer_id: 'payer_id',
-  payer_name: 'payer_name'
-});
+client.pre_encounter.coverages.v_1.batch_update_ppg(
+  ppg_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  payer_id: "payer_id",
+  payer_name: "payer_name",
+  plan_type: "09"
+)
 ```
 </dd>
 </dl>
@@ -12391,6 +14106,14 @@ client.pre_encounter.coverages.v_1.batch_update_ppg({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12399,7 +14122,7 @@ client.pre_encounter.coverages.v_1.batch_update_ppg({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.check_eligibility(id, request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">check_eligibility</a>(id, request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckMetadata</code></summary>
 <dl>
 <dd>
 
@@ -12427,11 +14150,11 @@ Initiates an eligibility check. Returns the metadata of the check if successfull
 
 ```ruby
 client.pre_encounter.coverages.v_1.check_eligibility(
-  id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  serviceCode: ,
-  dateOfService: '2023-01-15',
-  npi: 'npi'
-);
+  id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  service_code: "1",
+  date_of_service: "2023-01-15",
+  npi: "npi"
+)
 ```
 </dd>
 </dl>
@@ -12474,6 +14197,14 @@ client.pre_encounter.coverages.v_1.check_eligibility(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12482,7 +14213,7 @@ client.pre_encounter.coverages.v_1.check_eligibility(
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.coverages.v_1.get_eligibility(id, check_id) -> Candid::PreEncounter::Coverages::V1::Types::CoverageEligibilityCheckResponse</code></summary>
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_eligibility</a>(id, check_id) -> Candid::PreEncounter::Coverages::V1::Types::CoverageEligibilityCheckResponse</code></summary>
 <dl>
 <dd>
 
@@ -12509,7 +14240,10 @@ Gets the eligibility of a patient for a specific coverage if successful.
 <dd>
 
 ```ruby
-client.pre_encounter.coverages.v_1.get_eligibility();
+client.pre_encounter.coverages.v_1.get_eligibility(
+  id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  check_id: "check_id"
+)
 ```
 </dd>
 </dl>
@@ -12536,6 +14270,14 @@ client.pre_encounter.coverages.v_1.get_eligibility();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12545,7 +14287,7 @@ client.pre_encounter.coverages.v_1.get_eligibility();
 </details>
 
 ## PreEncounter EligibilityChecks V1
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.post(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">post</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheck</code></summary>
 <dl>
 <dd>
 
@@ -12572,13 +14314,16 @@ Sends real-time eligibility checks to payers through Stedi.
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.post({
-  payer_id: 'payer_id',
+client.pre_encounter.eligibility_checks.v_1.post(
+  payer_id: "payer_id",
+  provider: {
+    npi: "npi"
+  },
   subscriber: {
-    first_name: 'first_name',
-    last_name: 'last_name'
+    first_name: "first_name",
+    last_name: "last_name"
   }
-});
+)
 ```
 </dd>
 </dl>
@@ -12597,6 +14342,14 @@ client.pre_encounter.eligibility_checks.v_1.post({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12605,7 +14358,7 @@ client.pre_encounter.eligibility_checks.v_1.post({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.batch(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::BatchEligibilityResponse</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">batch</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::BatchEligibilityResponse</code></summary>
 <dl>
 <dd>
 
@@ -12632,7 +14385,25 @@ Sends a batch of eligibility checks to payers through Stedi.
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.batch();
+client.pre_encounter.eligibility_checks.v_1.batch(request: [{
+  payer_id: "payer_id",
+  provider: {
+    npi: "npi"
+  },
+  subscriber: {
+    first_name: "first_name",
+    last_name: "last_name"
+  }
+}, {
+  payer_id: "payer_id",
+  provider: {
+    npi: "npi"
+  },
+  subscriber: {
+    first_name: "first_name",
+    last_name: "last_name"
+  }
+}])
 ```
 </dd>
 </dl>
@@ -12651,6 +14422,14 @@ client.pre_encounter.eligibility_checks.v_1.batch();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12659,7 +14438,7 @@ client.pre_encounter.eligibility_checks.v_1.batch();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.poll_batch(batch_id) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">poll_batch</a>(batch_id) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage</code></summary>
 <dl>
 <dd>
 
@@ -12686,7 +14465,7 @@ Polls the status of a batch eligibility check.
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.poll_batch(batchId: 'batch_id');
+client.pre_encounter.eligibility_checks.v_1.poll_batch(batch_id: "batch_id")
 ```
 </dd>
 </dl>
@@ -12713,6 +14492,14 @@ client.pre_encounter.eligibility_checks.v_1.poll_batch(batchId: 'batch_id');
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12721,7 +14508,7 @@ client.pre_encounter.eligibility_checks.v_1.poll_batch(batchId: 'batch_id');
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.payer_search() -> Candid::PreEncounter::EligibilityChecks::V1::Types::PayerSearchResponse</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">payer_search</a>() -> Candid::PreEncounter::EligibilityChecks::V1::Types::PayerSearchResponse</code></summary>
 <dl>
 <dd>
 
@@ -12748,7 +14535,7 @@ Searches for payers that match the query parameters.
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.payer_search();
+client.pre_encounter.eligibility_checks.v_1.payer_search
 ```
 </dd>
 </dl>
@@ -12783,6 +14570,14 @@ client.pre_encounter.eligibility_checks.v_1.payer_search();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12791,7 +14586,7 @@ client.pre_encounter.eligibility_checks.v_1.payer_search();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.recommendation() -> Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation]</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">recommendation</a>() -> Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation]</code></summary>
 <dl>
 <dd>
 
@@ -12819,7 +14614,7 @@ eligibility recommendation type for the given filters. If you want to get a spec
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.recommendation();
+client.pre_encounter.eligibility_checks.v_1.recommendation
 ```
 </dd>
 </dl>
@@ -12838,6 +14633,14 @@ client.pre_encounter.eligibility_checks.v_1.recommendation();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12846,7 +14649,7 @@ client.pre_encounter.eligibility_checks.v_1.recommendation();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.create_recommendation(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">create_recommendation</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
 <dl>
 <dd>
 
@@ -12873,10 +14676,10 @@ Create an eligibiilty recommendation based on the request.
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.create_recommendation({
-  eligibility_check_id: 'eligibility_check_id',
+client.pre_encounter.eligibility_checks.v_1.create_recommendation(
+  eligibility_check_id: "eligibility_check_id",
   patient: {}
-});
+)
 ```
 </dd>
 </dl>
@@ -12895,6 +14698,14 @@ client.pre_encounter.eligibility_checks.v_1.create_recommendation({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12903,7 +14714,7 @@ client.pre_encounter.eligibility_checks.v_1.create_recommendation({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.vote_recommendation(recommendation_id, version, request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">vote_recommendation</a>(recommendation_id, version, request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
 <dl>
 <dd>
 
@@ -12930,9 +14741,12 @@ Submit user feedback on an eligibility recommendation. The path must contain the
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.vote_recommendation({
-  user_id: 'user_id'
-});
+client.pre_encounter.eligibility_checks.v_1.vote_recommendation(
+  recommendation_id: "recommendation_id",
+  version: "version",
+  user_id: "user_id",
+  value: "UPVOTE"
+)
 ```
 </dd>
 </dl>
@@ -12967,6 +14781,14 @@ client.pre_encounter.eligibility_checks.v_1.vote_recommendation({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12975,7 +14797,7 @@ client.pre_encounter.eligibility_checks.v_1.vote_recommendation({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.get_multi() -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage</code></summary>
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">get_multi</a>() -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage</code></summary>
 <dl>
 <dd>
 
@@ -12988,7 +14810,7 @@ client.pre_encounter.eligibility_checks.v_1.vote_recommendation({
 <dd>
 
 ```ruby
-client.pre_encounter.eligibility_checks.v_1.get_multi();
+client.pre_encounter.eligibility_checks.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -13063,6 +14885,14 @@ client.pre_encounter.eligibility_checks.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13072,7 +14902,7 @@ client.pre_encounter.eligibility_checks.v_1.get_multi();
 </details>
 
 ## PreEncounter Images V1
-<details><summary><code>client.pre_encounter.images.v_1.create(request) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
+<details><summary><code>client.pre_encounter.images.v_1.<a href="/lib/candid/pre_encounter/images/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
 <dl>
 <dd>
 
@@ -13099,11 +14929,12 @@ Adds an image.  VersionConflictError is returned if a front or back of this cove
 <dd>
 
 ```ruby
-client.pre_encounter.images.v_1.create({
-  file_name: 'file_name',
-  display_name: 'display_name',
-  file_type: 'file_type'
-});
+client.pre_encounter.images.v_1.create(
+  file_name: "file_name",
+  display_name: "display_name",
+  file_type: "file_type",
+  status: "PENDING"
+)
 ```
 </dd>
 </dl>
@@ -13122,6 +14953,14 @@ client.pre_encounter.images.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Images::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13130,7 +14969,7 @@ client.pre_encounter.images.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.images.v_1.get(id) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
+<details><summary><code>client.pre_encounter.images.v_1.<a href="/lib/candid/pre_encounter/images/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
 <dl>
 <dd>
 
@@ -13157,7 +14996,7 @@ Gets an image by imageId.
 <dd>
 
 ```ruby
-client.pre_encounter.images.v_1.get();
+client.pre_encounter.images.v_1.get(id: "id")
 ```
 </dd>
 </dl>
@@ -13176,6 +15015,14 @@ client.pre_encounter.images.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Images::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13184,7 +15031,7 @@ client.pre_encounter.images.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.images.v_1.update(id, version, request) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
+<details><summary><code>client.pre_encounter.images.v_1.<a href="/lib/candid/pre_encounter/images/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::Images::V1::Types::Image</code></summary>
 <dl>
 <dd>
 
@@ -13211,11 +15058,14 @@ Updates an Image.  The path must contain the most recent version to prevent race
 <dd>
 
 ```ruby
-client.pre_encounter.images.v_1.update({
-  file_name: 'file_name',
-  display_name: 'display_name',
-  file_type: 'file_type'
-});
+client.pre_encounter.images.v_1.update(
+  id: "id",
+  version: "version",
+  file_name: "file_name",
+  display_name: "display_name",
+  file_type: "file_type",
+  status: "PENDING"
+)
 ```
 </dd>
 </dl>
@@ -13250,6 +15100,14 @@ client.pre_encounter.images.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Images::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13258,7 +15116,7 @@ client.pre_encounter.images.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.images.v_1.deactivate(id, version) -> </code></summary>
+<details><summary><code>client.pre_encounter.images.v_1.<a href="/lib/candid/pre_encounter/images/v_1/client.rb">deactivate</a>(id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -13285,7 +15143,10 @@ Sets an Image as deactivated.  The path must contain the most recent version to 
 <dd>
 
 ```ruby
-client.pre_encounter.images.v_1.deactivate();
+client.pre_encounter.images.v_1.deactivate(
+  id: "id",
+  version: "version"
+)
 ```
 </dd>
 </dl>
@@ -13312,6 +15173,14 @@ client.pre_encounter.images.v_1.deactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Images::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13320,7 +15189,7 @@ client.pre_encounter.images.v_1.deactivate();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.images.v_1.get_multi() -> Internal::Types::Array[Candid::PreEncounter::Images::V1::Types::Image]</code></summary>
+<details><summary><code>client.pre_encounter.images.v_1.<a href="/lib/candid/pre_encounter/images/v_1/client.rb">get_multi</a>() -> Internal::Types::Array[Candid::PreEncounter::Images::V1::Types::Image]</code></summary>
 <dl>
 <dd>
 
@@ -13347,7 +15216,7 @@ Searches for images that match the query parameters.
 <dd>
 
 ```ruby
-client.pre_encounter.images.v_1.get_multi();
+client.pre_encounter.images.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -13374,6 +15243,14 @@ client.pre_encounter.images.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Images::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13383,7 +15260,7 @@ client.pre_encounter.images.v_1.get_multi();
 </details>
 
 ## PreEncounter Lists V1
-<details><summary><code>client.pre_encounter.lists.v_1.get_patient_list() -> Candid::PreEncounter::Lists::V1::Types::PatientListPage</code></summary>
+<details><summary><code>client.pre_encounter.lists.v_1.<a href="/lib/candid/pre_encounter/lists/v_1/client.rb">get_patient_list</a>() -> Candid::PreEncounter::Lists::V1::Types::PatientListPage</code></summary>
 <dl>
 <dd>
 
@@ -13410,7 +15287,7 @@ Gets patients with dependent objects for patients that match the query parameter
 <dd>
 
 ```ruby
-client.pre_encounter.lists.v_1.get_patient_list();
+client.pre_encounter.lists.v_1.get_patient_list
 ```
 </dd>
 </dl>
@@ -13477,6 +15354,14 @@ client.pre_encounter.lists.v_1.get_patient_list();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Lists::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13485,7 +15370,7 @@ client.pre_encounter.lists.v_1.get_patient_list();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.lists.v_1.get_appointment_list() -> Candid::PreEncounter::Lists::V1::Types::AppointmentListPage</code></summary>
+<details><summary><code>client.pre_encounter.lists.v_1.<a href="/lib/candid/pre_encounter/lists/v_1/client.rb">get_appointment_list</a>() -> Candid::PreEncounter::Lists::V1::Types::AppointmentListPage</code></summary>
 <dl>
 <dd>
 
@@ -13512,7 +15397,7 @@ Searches for appointments that match the query parameters.
 <dd>
 
 ```ruby
-client.pre_encounter.lists.v_1.get_appointment_list();
+client.pre_encounter.lists.v_1.get_appointment_list
 ```
 </dd>
 </dl>
@@ -13579,6 +15464,14 @@ client.pre_encounter.lists.v_1.get_appointment_list();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Lists::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13588,7 +15481,7 @@ client.pre_encounter.lists.v_1.get_appointment_list();
 </details>
 
 ## PreEncounter Notes V1
-<details><summary><code>client.pre_encounter.notes.v_1.get(id) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
+<details><summary><code>client.pre_encounter.notes.v_1.<a href="/lib/candid/pre_encounter/notes/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
 <dl>
 <dd>
 
@@ -13615,7 +15508,7 @@ Gets a note by NoteId.
 <dd>
 
 ```ruby
-client.pre_encounter.notes.v_1.get();
+client.pre_encounter.notes.v_1.get(id: "id")
 ```
 </dd>
 </dl>
@@ -13634,6 +15527,14 @@ client.pre_encounter.notes.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Notes::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13642,7 +15543,7 @@ client.pre_encounter.notes.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.notes.v_1.create(request) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
+<details><summary><code>client.pre_encounter.notes.v_1.<a href="/lib/candid/pre_encounter/notes/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
 <dl>
 <dd>
 
@@ -13669,9 +15570,7 @@ Adds a new note.
 <dd>
 
 ```ruby
-client.pre_encounter.notes.v_1.create({
-  value: 'value'
-});
+client.pre_encounter.notes.v_1.create(value: "value")
 ```
 </dd>
 </dl>
@@ -13690,6 +15589,14 @@ client.pre_encounter.notes.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Notes::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13698,7 +15605,7 @@ client.pre_encounter.notes.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.notes.v_1.update(id, version, request) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
+<details><summary><code>client.pre_encounter.notes.v_1.<a href="/lib/candid/pre_encounter/notes/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
 <dl>
 <dd>
 
@@ -13725,9 +15632,11 @@ Updates a note. The path must contain the most recent version to prevent races.
 <dd>
 
 ```ruby
-client.pre_encounter.notes.v_1.update({
-  value: 'value'
-});
+client.pre_encounter.notes.v_1.update(
+  id: "id",
+  version: "version",
+  value: "value"
+)
 ```
 </dd>
 </dl>
@@ -13762,6 +15671,14 @@ client.pre_encounter.notes.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Notes::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13770,7 +15687,7 @@ client.pre_encounter.notes.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.notes.v_1.deactivate(id, version) -> </code></summary>
+<details><summary><code>client.pre_encounter.notes.v_1.<a href="/lib/candid/pre_encounter/notes/v_1/client.rb">deactivate</a>(id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -13797,7 +15714,10 @@ Sets a note as deactivated.  The path must contain the most recent version to pr
 <dd>
 
 ```ruby
-client.pre_encounter.notes.v_1.deactivate();
+client.pre_encounter.notes.v_1.deactivate(
+  id: "id",
+  version: "version"
+)
 ```
 </dd>
 </dl>
@@ -13824,6 +15744,14 @@ client.pre_encounter.notes.v_1.deactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Notes::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13833,7 +15761,7 @@ client.pre_encounter.notes.v_1.deactivate();
 </details>
 
 ## PreEncounter Patients V1
-<details><summary><code>client.pre_encounter.patients.v_1.create(request) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
 <dl>
 <dd>
 
@@ -13860,7 +15788,143 @@ Adds a patient.  VersionConflictError is returned when the patient's external ID
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.create();
+client.pre_encounter.patients.v_1.create(
+  name: {
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
+  },
+  other_names: [{
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
+  }, {
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
+  }],
+  birth_date: "2023-01-15",
+  biological_sex: "FEMALE",
+  primary_address: {
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+  },
+  other_addresses: [{
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+  }, {
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+  }],
+  other_telecoms: [{
+    value: "value",
+    use: "HOME"
+  }, {
+    value: "value",
+    use: "HOME"
+  }],
+  contacts: [{
+    relationship: %w[SELF SELF],
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }],
+    addresses: [{
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }, {
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }]
+  }, {
+    relationship: %w[SELF SELF],
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }],
+    addresses: [{
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }, {
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }]
+  }],
+  general_practitioners: [{
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }]
+  }, {
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }]
+  }],
+  filing_order: {
+    coverages: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32]
+  }
+)
 ```
 </dd>
 </dl>
@@ -13887,6 +15951,14 @@ client.pre_encounter.patients.v_1.create();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13895,7 +15967,7 @@ client.pre_encounter.patients.v_1.create();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.create_with_mrn(request) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">create_with_mrn</a>(request) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
 <dl>
 <dd>
 
@@ -13922,7 +15994,144 @@ Adds a patient and hydrates their MRN with a pre-existing MRN.  Once this patien
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.create_with_mrn();
+client.pre_encounter.patients.v_1.create_with_mrn(
+  name: {
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
+  },
+  other_names: [{
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
+  }, {
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
+  }],
+  birth_date: "2023-01-15",
+  biological_sex: "FEMALE",
+  primary_address: {
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+  },
+  other_addresses: [{
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+  }, {
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
+  }],
+  other_telecoms: [{
+    value: "value",
+    use: "HOME"
+  }, {
+    value: "value",
+    use: "HOME"
+  }],
+  contacts: [{
+    relationship: %w[SELF SELF],
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }],
+    addresses: [{
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }, {
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }]
+  }, {
+    relationship: %w[SELF SELF],
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }],
+    addresses: [{
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }, {
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
+    }]
+  }],
+  general_practitioners: [{
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }]
+  }, {
+    name: {
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
+    },
+    telecoms: [{
+      value: "value",
+      use: "HOME"
+    }, {
+      value: "value",
+      use: "HOME"
+    }]
+  }],
+  filing_order: {
+    coverages: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32]
+  },
+  mrn: "mrn"
+)
 ```
 </dd>
 </dl>
@@ -13949,6 +16158,14 @@ client.pre_encounter.patients.v_1.create_with_mrn();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13957,7 +16174,7 @@ client.pre_encounter.patients.v_1.create_with_mrn();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.get_multi() -> Candid::PreEncounter::Patients::V1::Types::PatientPage</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">get_multi</a>() -> Candid::PreEncounter::Patients::V1::Types::PatientPage</code></summary>
 <dl>
 <dd>
 
@@ -13984,7 +16201,7 @@ Searches for patients that match the query parameters.
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.get_multi();
+client.pre_encounter.patients.v_1.get_multi
 ```
 </dd>
 </dl>
@@ -14035,6 +16252,14 @@ client.pre_encounter.patients.v_1.get_multi();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14043,7 +16268,7 @@ client.pre_encounter.patients.v_1.get_multi();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.search_providers() -> Internal::Types::Array[Candid::PreEncounter::Common::Types::ExternalProvider]</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">search_providers</a>() -> Internal::Types::Array[Candid::PreEncounter::Common::Types::ExternalProvider]</code></summary>
 <dl>
 <dd>
 
@@ -14070,7 +16295,7 @@ Searches for referring providers that match the query parameters.  The search is
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.search_providers(searchCriteria: 'search_criteria');
+client.pre_encounter.patients.v_1.search_providers(search_criteria: "search_criteria")
 ```
 </dd>
 </dl>
@@ -14089,6 +16314,14 @@ client.pre_encounter.patients.v_1.search_providers(searchCriteria: 'search_crite
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14097,7 +16330,7 @@ client.pre_encounter.patients.v_1.search_providers(searchCriteria: 'search_crite
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.get(id) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
 <dl>
 <dd>
 
@@ -14124,7 +16357,7 @@ Gets a patient.
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.get();
+client.pre_encounter.patients.v_1.get(id: "id")
 ```
 </dd>
 </dl>
@@ -14143,6 +16376,14 @@ client.pre_encounter.patients.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14151,7 +16392,7 @@ client.pre_encounter.patients.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.get_by_mrn(mrn) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">get_by_mrn</a>(mrn) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
 <dl>
 <dd>
 
@@ -14178,7 +16419,7 @@ Gets a patient by mrn.
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.get_by_mrn();
+client.pre_encounter.patients.v_1.get_by_mrn(mrn: "mrn")
 ```
 </dd>
 </dl>
@@ -14197,6 +16438,14 @@ client.pre_encounter.patients.v_1.get_by_mrn();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14205,7 +16454,7 @@ client.pre_encounter.patients.v_1.get_by_mrn();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.get_history(id) -> Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">get_history</a>(id) -> Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]</code></summary>
 <dl>
 <dd>
 
@@ -14232,7 +16481,7 @@ Gets a patient along with it's full history.  The return list is ordered by vers
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.get_history();
+client.pre_encounter.patients.v_1.get_history(id: "id")
 ```
 </dd>
 </dl>
@@ -14251,6 +16500,14 @@ client.pre_encounter.patients.v_1.get_history();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14259,7 +16516,7 @@ client.pre_encounter.patients.v_1.get_history();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.get_coverage_snapshot(id) -> Candid::PreEncounter::Patients::V1::Types::PatientCoverageSnapshot</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">get_coverage_snapshot</a>(id) -> Candid::PreEncounter::Patients::V1::Types::PatientCoverageSnapshot</code></summary>
 <dl>
 <dd>
 
@@ -14286,7 +16543,7 @@ Gets a patient along with their coverages at a specific point in time. Note that
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.get_coverage_snapshot(id: 'id');
+client.pre_encounter.patients.v_1.get_coverage_snapshot(id: "id")
 ```
 </dd>
 </dl>
@@ -14313,6 +16570,14 @@ client.pre_encounter.patients.v_1.get_coverage_snapshot(id: 'id');
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14321,7 +16586,7 @@ client.pre_encounter.patients.v_1.get_coverage_snapshot(id: 'id');
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.update(id, version, request) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::Patients::V1::Types::Patient</code></summary>
 <dl>
 <dd>
 
@@ -14348,118 +16613,145 @@ Updates a patient. The path must contain the next version number to prevent race
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.update({
+client.pre_encounter.patients.v_1.update(
+  id: "id",
+  version: "version",
   name: {
-    family: 'family',
-    given: ['given', 'given']
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
   },
   other_names: [{
-    family: 'family',
-    given: ['given', 'given']
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
   }, {
-    family: 'family',
-    given: ['given', 'given']
+    family: "family",
+    given: %w[given given],
+    use: "USUAL"
   }],
-  birth_date: '2023-01-15',
+  birth_date: "2023-01-15",
+  biological_sex: "FEMALE",
   primary_address: {
-    line: ['line', 'line'],
-    city: 'city',
-    state: 'state',
-    postal_code: 'postal_code',
-    country: 'country'
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
   },
   other_addresses: [{
-    line: ['line', 'line'],
-    city: 'city',
-    state: 'state',
-    postal_code: 'postal_code',
-    country: 'country'
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
   }, {
-    line: ['line', 'line'],
-    city: 'city',
-    state: 'state',
-    postal_code: 'postal_code',
-    country: 'country'
+    use: "HOME",
+    line: %w[line line],
+    city: "city",
+    state: "state",
+    postal_code: "postal_code",
+    country: "country"
   }],
   other_telecoms: [{
-    value: 'value'
+    value: "value",
+    use: "HOME"
   }, {
-    value: 'value'
+    value: "value",
+    use: "HOME"
   }],
   contacts: [{
-    relationship: [],
+    relationship: %w[SELF SELF],
     name: {
-      family: 'family',
-      given: ['given', 'given']
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
     },
     telecoms: [{
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }, {
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }],
     addresses: [{
-      line: ['line', 'line'],
-      city: 'city',
-      state: 'state',
-      postal_code: 'postal_code',
-      country: 'country'
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
     }, {
-      line: ['line', 'line'],
-      city: 'city',
-      state: 'state',
-      postal_code: 'postal_code',
-      country: 'country'
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
     }]
   }, {
-    relationship: [],
+    relationship: %w[SELF SELF],
     name: {
-      family: 'family',
-      given: ['given', 'given']
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
     },
     telecoms: [{
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }, {
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }],
     addresses: [{
-      line: ['line', 'line'],
-      city: 'city',
-      state: 'state',
-      postal_code: 'postal_code',
-      country: 'country'
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
     }, {
-      line: ['line', 'line'],
-      city: 'city',
-      state: 'state',
-      postal_code: 'postal_code',
-      country: 'country'
+      use: "HOME",
+      line: %w[line line],
+      city: "city",
+      state: "state",
+      postal_code: "postal_code",
+      country: "country"
     }]
   }],
   general_practitioners: [{
     name: {
-      family: 'family',
-      given: ['given', 'given']
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
     },
     telecoms: [{
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }, {
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }]
   }, {
     name: {
-      family: 'family',
-      given: ['given', 'given']
+      family: "family",
+      given: %w[given given],
+      use: "USUAL"
     },
     telecoms: [{
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }, {
-      value: 'value'
+      value: "value",
+      use: "HOME"
     }]
   }],
   filing_order: {
-    coverages: ['d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32', 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32']
+    coverages: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32]
   }
-});
+)
 ```
 </dd>
 </dl>
@@ -14494,6 +16786,14 @@ client.pre_encounter.patients.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14502,7 +16802,7 @@ client.pre_encounter.patients.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.deactivate(id, version) -> </code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">deactivate</a>(id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -14529,7 +16829,10 @@ Sets a patient as deactivated.  The path must contain the most recent version pl
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.deactivate();
+client.pre_encounter.patients.v_1.deactivate(
+  id: "id",
+  version: "version"
+)
 ```
 </dd>
 </dl>
@@ -14556,6 +16859,14 @@ client.pre_encounter.patients.v_1.deactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14564,7 +16875,7 @@ client.pre_encounter.patients.v_1.deactivate();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.reactivate(id, version) -> </code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">reactivate</a>(id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -14591,7 +16902,10 @@ Removes the deactivated flag for a patient.  The path must contain the most rece
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.reactivate();
+client.pre_encounter.patients.v_1.reactivate(
+  id: "id",
+  version: "version"
+)
 ```
 </dd>
 </dl>
@@ -14618,6 +16932,14 @@ client.pre_encounter.patients.v_1.reactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14626,7 +16948,7 @@ client.pre_encounter.patients.v_1.reactivate();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.search() -> Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">search</a>() -> Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]</code></summary>
 <dl>
 <dd>
 
@@ -14653,7 +16975,7 @@ Returns a list of Patients based on the search criteria.
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.search();
+client.pre_encounter.patients.v_1.search
 ```
 </dd>
 </dl>
@@ -14680,6 +17002,14 @@ client.pre_encounter.patients.v_1.search();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14688,7 +17018,7 @@ client.pre_encounter.patients.v_1.search();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.patients.v_1.scan() -> Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]</code></summary>
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">scan</a>() -> Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::Patient]</code></summary>
 <dl>
 <dd>
 
@@ -14728,7 +17058,7 @@ To continuously poll for updates without gaps:
 <dd>
 
 ```ruby
-client.pre_encounter.patients.v_1.scan(since: '2024-01-15T09:30:00Z');
+client.pre_encounter.patients.v_1.scan(since: "2024-01-15T09:30:00Z")
 ```
 </dd>
 </dl>
@@ -14755,6 +17085,14 @@ client.pre_encounter.patients.v_1.scan(since: '2024-01-15T09:30:00Z');
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14764,7 +17102,7 @@ client.pre_encounter.patients.v_1.scan(since: '2024-01-15T09:30:00Z');
 </details>
 
 ## PreEncounter Tags V1
-<details><summary><code>client.pre_encounter.tags.v_1.get(id) -> Candid::PreEncounter::Tags::V1::Types::Tag</code></summary>
+<details><summary><code>client.pre_encounter.tags.v_1.<a href="/lib/candid/pre_encounter/tags/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Tags::V1::Types::Tag</code></summary>
 <dl>
 <dd>
 
@@ -14791,7 +17129,7 @@ Gets a tag by TagId.
 <dd>
 
 ```ruby
-client.pre_encounter.tags.v_1.get();
+client.pre_encounter.tags.v_1.get(id: "id")
 ```
 </dd>
 </dl>
@@ -14810,6 +17148,14 @@ client.pre_encounter.tags.v_1.get();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Tags::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14818,7 +17164,7 @@ client.pre_encounter.tags.v_1.get();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.tags.v_1.get_all() -> Candid::PreEncounter::Tags::V1::Types::TagPage</code></summary>
+<details><summary><code>client.pre_encounter.tags.v_1.<a href="/lib/candid/pre_encounter/tags/v_1/client.rb">get_all</a>() -> Candid::PreEncounter::Tags::V1::Types::TagPage</code></summary>
 <dl>
 <dd>
 
@@ -14845,7 +17191,7 @@ Gets all tags. Defaults to page size of 1000.
 <dd>
 
 ```ruby
-client.pre_encounter.tags.v_1.get_all();
+client.pre_encounter.tags.v_1.get_all
 ```
 </dd>
 </dl>
@@ -14872,6 +17218,14 @@ client.pre_encounter.tags.v_1.get_all();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Tags::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14880,7 +17234,7 @@ client.pre_encounter.tags.v_1.get_all();
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.tags.v_1.create(request) -> Candid::PreEncounter::Tags::V1::Types::Tag</code></summary>
+<details><summary><code>client.pre_encounter.tags.v_1.<a href="/lib/candid/pre_encounter/tags/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::Tags::V1::Types::Tag</code></summary>
 <dl>
 <dd>
 
@@ -14907,9 +17261,7 @@ Adds a new tag if it does not already exist, otherwise, returns the existing tag
 <dd>
 
 ```ruby
-client.pre_encounter.tags.v_1.create({
-  value: 'value'
-});
+client.pre_encounter.tags.v_1.create(value: "value")
 ```
 </dd>
 </dl>
@@ -14928,6 +17280,14 @@ client.pre_encounter.tags.v_1.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Tags::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14936,7 +17296,7 @@ client.pre_encounter.tags.v_1.create({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.tags.v_1.update(id, version, request) -> Candid::PreEncounter::Tags::V1::Types::Tag</code></summary>
+<details><summary><code>client.pre_encounter.tags.v_1.<a href="/lib/candid/pre_encounter/tags/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::Tags::V1::Types::Tag</code></summary>
 <dl>
 <dd>
 
@@ -14963,9 +17323,11 @@ Updates a tag. The path must contain the most recent version to prevent races.
 <dd>
 
 ```ruby
-client.pre_encounter.tags.v_1.update({
-  value: 'value'
-});
+client.pre_encounter.tags.v_1.update(
+  id: "id",
+  version: "version",
+  value: "value"
+)
 ```
 </dd>
 </dl>
@@ -15000,6 +17362,14 @@ client.pre_encounter.tags.v_1.update({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Tags::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15008,7 +17378,7 @@ client.pre_encounter.tags.v_1.update({
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.tags.v_1.deactivate(id, version) -> </code></summary>
+<details><summary><code>client.pre_encounter.tags.v_1.<a href="/lib/candid/pre_encounter/tags/v_1/client.rb">deactivate</a>(id, version) -> </code></summary>
 <dl>
 <dd>
 
@@ -15035,7 +17405,10 @@ Sets a tag as deactivated.  The path must contain the most recent version to pre
 <dd>
 
 ```ruby
-client.pre_encounter.tags.v_1.deactivate();
+client.pre_encounter.tags.v_1.deactivate(
+  id: "id",
+  version: "version"
+)
 ```
 </dd>
 </dl>
@@ -15062,6 +17435,14 @@ client.pre_encounter.tags.v_1.deactivate();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Tags::V1::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15071,7 +17452,7 @@ client.pre_encounter.tags.v_1.deactivate();
 </details>
 
 ## Diagnoses
-<details><summary><code>client.diagnoses.create(request) -> Candid::Diagnoses::Types::Diagnosis</code></summary>
+<details><summary><code>client.diagnoses.<a href="/lib/candid/diagnoses/client.rb">create</a>(request) -> Candid::Diagnoses::Types::Diagnosis</code></summary>
 <dl>
 <dd>
 
@@ -15098,10 +17479,11 @@ Creates a new diagnosis for an encounter
 <dd>
 
 ```ruby
-client.diagnoses.create({
-  encounter_id: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32',
-  code: 'code'
-});
+client.diagnoses.create(
+  encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  code_type: "ABF",
+  code: "code"
+)
 ```
 </dd>
 </dl>
@@ -15120,6 +17502,14 @@ client.diagnoses.create({
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Diagnoses::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15128,7 +17518,7 @@ client.diagnoses.create({
 </dl>
 </details>
 
-<details><summary><code>client.diagnoses.update(diagnosis_id, request) -> Candid::Diagnoses::Types::Diagnosis</code></summary>
+<details><summary><code>client.diagnoses.<a href="/lib/candid/diagnoses/client.rb">update</a>(diagnosis_id, request) -> Candid::Diagnoses::Types::Diagnosis</code></summary>
 <dl>
 <dd>
 
@@ -15155,7 +17545,7 @@ Updates the diagnosis record matching the provided `diagnosis_id`
 <dd>
 
 ```ruby
-client.diagnoses.update(diagnosisId: 'd5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32');
+client.diagnoses.update(diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -15220,6 +17610,14 @@ A "U" indicates that it is unknown whether the onset occurred prior to admission
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Diagnoses::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15228,7 +17626,7 @@ A "U" indicates that it is unknown whether the onset occurred prior to admission
 </dl>
 </details>
 
-<details><summary><code>client.diagnoses.delete(diagnosis_id) -> </code></summary>
+<details><summary><code>client.diagnoses.<a href="/lib/candid/diagnoses/client.rb">delete</a>(diagnosis_id) -> </code></summary>
 <dl>
 <dd>
 
@@ -15255,7 +17653,7 @@ Deletes the diagnosis record associated with the provided `diagnosis_id`
 <dd>
 
 ```ruby
-client.diagnoses.delete();
+client.diagnoses.delete(diagnosis_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 ```
 </dd>
 </dl>
@@ -15274,6 +17672,14 @@ client.diagnoses.delete();
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Diagnoses::RequestOptions` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15281,3 +17687,4 @@ client.diagnoses.delete();
 </dd>
 </dl>
 </details>
+

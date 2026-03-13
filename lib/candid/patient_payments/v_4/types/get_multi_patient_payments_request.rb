@@ -13,9 +13,8 @@ module Candid
           field :unattributed, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :invoice_id, -> { String }, optional: true, nullable: false
           field :sources, -> { Candid::Financials::Types::PatientTransactionSource }, optional: true, nullable: false
-          field :sort, lambda {
-            Candid::PatientPayments::V4::Types::PatientPaymentSortField
-          }, optional: true, nullable: false
+          field :source_internal_id, -> { String }, optional: true, nullable: false
+          field :sort, -> { Candid::PatientPayments::V4::Types::PatientPaymentSortField }, optional: true, nullable: false
           field :sort_direction, -> { Candid::Commons::Types::SortDirection }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
         end

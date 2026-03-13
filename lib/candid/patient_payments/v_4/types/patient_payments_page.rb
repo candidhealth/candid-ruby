@@ -5,9 +5,7 @@ module Candid
     module V4
       module Types
         class PatientPaymentsPage < Internal::Types::Model
-          field :items, lambda {
-            Internal::Types::Array[Candid::PatientPayments::V4::Types::PatientPayment]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::PatientPayments::V4::Types::PatientPayment] }, optional: false, nullable: false
         end
       end
     end

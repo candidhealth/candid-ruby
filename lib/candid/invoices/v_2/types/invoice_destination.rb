@@ -12,6 +12,7 @@ module Candid
           HEALTHIE = "HEALTHIE"
           COLLECTLY = "COLLECTLY"
           THIRD_PARTY_PAYERS = "THIRD_PARTY_PAYERS"
+          INSTAMED = "INSTAMED"
         end
       end
     end

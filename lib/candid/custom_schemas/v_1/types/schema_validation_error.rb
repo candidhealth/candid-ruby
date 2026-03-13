@@ -9,9 +9,7 @@ module Candid
 
           discriminant :type
 
-          member lambda {
-            Candid::CustomSchemas::V1::Types::SchemaWithNameAlreadyExistsError
-          }, key: "SCHEMA_NAME_ALREADY_EXISTS"
+          member -> { Candid::CustomSchemas::V1::Types::SchemaWithNameAlreadyExistsError }, key: "SCHEMA_NAME_ALREADY_EXISTS"
           member -> { Candid::CustomSchemas::V1::Types::KeyWithNameAlreadyExistsError }, key: "KEY_NAME_ALREADY_EXISTS"
         end
       end

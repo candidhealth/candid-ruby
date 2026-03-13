@@ -5,9 +5,7 @@ module Candid
     module V3
       module Types
         class RatesPage < Internal::Types::Model
-          field :rates, lambda {
-            Internal::Types::Array[Candid::FeeSchedules::V3::Types::Rate]
-          }, optional: false, nullable: false
+          field :rates, -> { Internal::Types::Array[Candid::FeeSchedules::V3::Types::Rate] }, optional: false, nullable: false
         end
       end
     end

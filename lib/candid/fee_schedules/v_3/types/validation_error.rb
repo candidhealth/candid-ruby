@@ -15,12 +15,8 @@ module Candid
           member -> { Object }, key: "DUPLICATE_RATE"
           member -> { Object }, key: "EMPTY_ENTRIES"
           member -> { Candid::Commons::Types::EntityNotFoundErrorMessage }, key: "PAYER_PLAN_GROUP_NOT_FOUND"
-          member lambda {
-            Candid::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError
-          }, key: "PAYER_PLAN_GROUP_DOES_NOT_MATCH_RATE_PAYER"
-          member lambda {
-            Candid::Commons::Types::EntityConflictErrorMessage
-          }, key: "PAYER_PLAN_GROUP_NETWORK_TYPE_MUTUAL_EXCLUSION"
+          member -> { Candid::FeeSchedules::V3::Types::PayerPlanGroupDoesNotMatchRatePayerError }, key: "PAYER_PLAN_GROUP_DOES_NOT_MATCH_RATE_PAYER"
+          member -> { Candid::Commons::Types::EntityConflictErrorMessage }, key: "PAYER_PLAN_GROUP_NETWORK_TYPE_MUTUAL_EXCLUSION"
         end
       end
     end

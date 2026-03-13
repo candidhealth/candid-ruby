@@ -6,9 +6,7 @@ module Candid
       module Types
         class EventScanPage < Internal::Types::Model
           field :next_page_token, -> { String }, optional: true, nullable: false
-          field :items, lambda {
-            Internal::Types::Array[Candid::Events::V1::Types::Event]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::Events::V1::Types::Event] }, optional: false, nullable: false
         end
       end
     end

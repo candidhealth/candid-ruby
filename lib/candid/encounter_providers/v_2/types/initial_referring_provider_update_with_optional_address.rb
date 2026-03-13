@@ -9,6 +9,7 @@ module Candid
           field :taxonomy_code, -> { String }, optional: true, nullable: false
           field :address, -> { Candid::Commons::Types::StreetAddressShortZipOptional }, optional: true, nullable: false
           field :qualifier, -> { Candid::Commons::Types::QualifierCode }, optional: true, nullable: false
+          field :secondary_identification, -> { Candid::EncounterProviders::V2::Types::ReferringProviderSecondaryIdentification }, optional: true, nullable: false
         end
       end
     end

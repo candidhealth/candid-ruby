@@ -7,9 +7,7 @@ module Candid
         module Types
           # An object representing a user-configured prompt recommendation from AI analysis
           class UserConfiguredPromptsRecommendation < Internal::Types::Model
-            field :payload, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::UserConfiguredPromptsRecommendationPayload
-            }, optional: false, nullable: false
+            field :payload, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::UserConfiguredPromptsRecommendationPayload }, optional: false, nullable: false
           end
         end
       end

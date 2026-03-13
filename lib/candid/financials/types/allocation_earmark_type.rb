@@ -3,7 +3,8 @@
 module Candid
   module Financials
     module Types
-      # If enabled for your organization, defines how a patient prepayment allocation should be earmarked for future auto-allocation.
+      # If enabled for your organization, defines how a patient prepayment allocation should be earmarked for future
+      # auto-allocation.
       # Earmarks hold the allocation until a matching encounter is created, then attempt to allocate to that encounter.
       # Only applicable for unattributed allocations.
       class AllocationEarmarkType < Internal::Types::Model

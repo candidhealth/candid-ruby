@@ -5,12 +5,8 @@ module Candid
     module V4
       module Types
         class PatientHistoryCategoryOptional < Internal::Types::Model
-          field :category, lambda {
-            Candid::Encounters::V4::Types::PatientHistoryCategoryEnum
-          }, optional: true, nullable: false
-          field :questions, lambda {
-            Internal::Types::Array[Candid::Encounters::V4::Types::IntakeQuestionOptional]
-          }, optional: true, nullable: false
+          field :category, -> { Candid::Encounters::V4::Types::PatientHistoryCategoryEnum }, optional: true, nullable: false
+          field :questions, -> { Internal::Types::Array[Candid::Encounters::V4::Types::IntakeQuestionOptional] }, optional: true, nullable: false
         end
       end
     end

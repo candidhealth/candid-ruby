@@ -5,9 +5,7 @@ module Candid
     module V2
       module Types
         class ProviderCredentialingSpanPage < Internal::Types::Model
-          field :items, lambda {
-            Internal::Types::Array[Candid::Credentialing::V2::Types::ProviderCredentialingSpan]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::Credentialing::V2::Types::ProviderCredentialingSpan] }, optional: false, nullable: false
         end
       end
     end

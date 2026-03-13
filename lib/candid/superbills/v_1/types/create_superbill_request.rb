@@ -9,9 +9,7 @@ module Candid
           field :date_range_min, -> { String }, optional: false, nullable: false
           field :date_range_max, -> { String }, optional: false, nullable: false
           field :pay_to_address, -> { Candid::Commons::Types::StreetAddressShortZip }, optional: true, nullable: false
-          field :output_format, lambda {
-            Candid::Superbills::V1::Types::SuperbillOutputFormat
-          }, optional: true, nullable: false
+          field :output_format, -> { Candid::Superbills::V1::Types::SuperbillOutputFormat }, optional: true, nullable: false
           field :include_merged_patient_data, -> { Internal::Types::Boolean }, optional: true, nullable: false
         end
       end

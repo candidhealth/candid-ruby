@@ -7,9 +7,7 @@ module Candid
         module Types
           # Payload for user-configured prompt recommendations from AI analysis
           class UserConfiguredPromptsRecommendationPayload < Internal::Types::Model
-            field :results, lambda {
-              Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::UserConfiguredPromptsResult]
-            }, optional: false, nullable: false
+            field :results, -> { Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::UserConfiguredPromptsResult] }, optional: false, nullable: false
           end
         end
       end

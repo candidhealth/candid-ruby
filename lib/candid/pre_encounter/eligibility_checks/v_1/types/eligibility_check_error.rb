@@ -6,12 +6,8 @@ module Candid
       module V1
         module Types
           class EligibilityCheckError < Internal::Types::Model
-            field :source, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckErrorSource
-            }, optional: false, nullable: false
-            field :error_details, lambda {
-              Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckErrorDetails
-            }, optional: false, nullable: false
+            field :source, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckErrorSource }, optional: false, nullable: false
+            field :error_details, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckErrorDetails }, optional: false, nullable: false, api_name: "errorDetails"
           end
         end
       end

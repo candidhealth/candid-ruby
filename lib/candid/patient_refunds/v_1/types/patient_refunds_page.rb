@@ -5,9 +5,7 @@ module Candid
     module V1
       module Types
         class PatientRefundsPage < Internal::Types::Model
-          field :items, lambda {
-            Internal::Types::Array[Candid::PatientRefunds::V1::Types::PatientRefund]
-          }, optional: false, nullable: false
+          field :items, -> { Internal::Types::Array[Candid::PatientRefunds::V1::Types::PatientRefund] }, optional: false, nullable: false
         end
       end
     end

@@ -16,6 +16,7 @@ module Candid
             field :type, -> { Candid::PreEncounter::Coverages::V1::Types::InsuranceTypeCode }, optional: true, nullable: false
             field :period, -> { Candid::PreEncounter::Common::Types::Period }, optional: true, nullable: false
             field :insurance_card_image_locator, -> { String }, optional: true, nullable: false
+            field :address, -> { Candid::PreEncounter::Common::Types::Address }, optional: true, nullable: false
             field :payer_plan_group_id, -> { String }, optional: true, nullable: false
           end
         end

@@ -32,11 +32,12 @@ module Candid
           # @option params [String, nil] :filters
           # @option params [Boolean, nil] :include_deactivated
           # @option params [Boolean, nil] :redirect_to_primary
+          # @option params [Boolean, nil] :hide_alternatives
           #
           # @return [Candid::PreEncounter::Lists::V1::Types::PatientListPage]
           def get_patient_list(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.normalize_keys(params)
-            query_param_names = %i[page_token limit sort_field sort_direction filters include_deactivated redirect_to_primary]
+            query_param_names = %i[page_token limit sort_field sort_direction filters include_deactivated redirect_to_primary hide_alternatives]
             query_params = {}
             query_params["page_token"] = params[:page_token] if params.key?(:page_token)
             query_params["limit"] = params[:limit] if params.key?(:limit)
@@ -45,6 +46,7 @@ module Candid
             query_params["filters"] = params[:filters] if params.key?(:filters)
             query_params["include_deactivated"] = params[:include_deactivated] if params.key?(:include_deactivated)
             query_params["redirect_to_primary"] = params[:redirect_to_primary] if params.key?(:redirect_to_primary)
+            query_params["hide_alternatives"] = params[:hide_alternatives] if params.key?(:hide_alternatives)
             params.except(*query_param_names)
 
             request = Candid::Internal::JSON::Request.new(

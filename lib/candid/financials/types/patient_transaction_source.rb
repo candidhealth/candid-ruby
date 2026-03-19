@@ -15,6 +15,7 @@ module Candid
         HEALTHIE = "HEALTHIE"
         REALLOCATION = "REALLOCATION"
         PHREESIA = "PHREESIA"
+        INSTAMED = "INSTAMED"
       end
     end
   end

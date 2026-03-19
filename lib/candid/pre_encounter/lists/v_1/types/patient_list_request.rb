@@ -13,6 +13,7 @@ module Candid
             field :filters, -> { String }, optional: true, nullable: false
             field :include_deactivated, -> { Internal::Types::Boolean }, optional: true, nullable: false
             field :redirect_to_primary, -> { Internal::Types::Boolean }, optional: true, nullable: false
+            field :hide_alternatives, -> { Internal::Types::Boolean }, optional: true, nullable: false
           end
         end
       end

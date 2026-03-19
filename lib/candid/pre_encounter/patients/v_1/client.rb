@@ -114,17 +114,19 @@ module Candid
           # @option params [String, nil] :page_token
           # @option params [String, nil] :sort_field
           # @option params [Candid::PreEncounter::Common::Types::SortDirection, nil] :sort_direction
+          # @option params [Boolean, nil] :redirect_to_primary
           #
           # @return [Candid::PreEncounter::Patients::V1::Types::PatientPage]
           def get_multi(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.normalize_keys(params)
-            query_param_names = %i[limit mrn page_token sort_field sort_direction]
+            query_param_names = %i[limit mrn page_token sort_field sort_direction redirect_to_primary]
             query_params = {}
             query_params["limit"] = params[:limit] if params.key?(:limit)
             query_params["mrn"] = params[:mrn] if params.key?(:mrn)
             query_params["page_token"] = params[:page_token] if params.key?(:page_token)
             query_params["sort_field"] = params[:sort_field] if params.key?(:sort_field)
             query_params["sort_direction"] = params[:sort_direction] if params.key?(:sort_direction)
+            query_params["redirect_to_primary"] = params[:redirect_to_primary] if params.key?(:redirect_to_primary)
             params.except(*query_param_names)
 
             request = Candid::Internal::JSON::Request.new(

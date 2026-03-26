@@ -13,6 +13,7 @@ module Candid
           field :organization_provider_ids, -> { String }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
           field :sort, -> { Candid::OrganizationProviders::V2::Types::OrganizationProviderSortOptions }, optional: true, nullable: false
+          field :organization_id, -> { String }, optional: true, nullable: false
         end
       end
     end

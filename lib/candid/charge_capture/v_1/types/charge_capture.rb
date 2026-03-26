@@ -14,6 +14,7 @@ module Candid
           field :ehr_source_url, -> { String }, optional: true, nullable: false
           field :originating_system, -> { String }, optional: true, nullable: false
           field :claim_creation_category, -> { String }, optional: true, nullable: false
+          field :metadata, -> { Internal::Types::Array[Candid::CustomSchemas::V1::Types::SchemaInstance] }, optional: true, nullable: false
           field :error, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureError }, optional: true, nullable: false
           field :updates, -> { Internal::Types::Array[Candid::ChargeCapture::V1::Types::ChargeCapturePostBilledChange] }, optional: false, nullable: false
           field :claim_creation_id, -> { String }, optional: true, nullable: false

@@ -15,6 +15,8 @@ module Candid
             field :encounter, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::Encounter }, optional: true, nullable: false
             field :get_existing_check_initiated_after, -> { String }, optional: true, nullable: false
             field :source, -> { String }, optional: true, nullable: false
+            field :portal_password, -> { String }, optional: true, nullable: false
+            field :portal_username, -> { String }, optional: true, nullable: false
           end
         end
       end

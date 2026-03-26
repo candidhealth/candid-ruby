@@ -24,6 +24,7 @@ module Candid
           UNKNOWN = "UNKNOWN"
           CONTRACTUAL_ADJUSTMENT = "CONTRACTUAL_ADJUSTMENT"
           PRIMARY_PAID_MAX_BENEFITS = "PRIMARY_PAID_MAX_BENEFITS"
+          INTEREST = "INTEREST"
         end
       end
     end

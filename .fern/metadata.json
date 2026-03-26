@@ -5,6 +5,6 @@
   "generatorConfig": {
     "flattenModuleStructure": true
   },
-  "originGitCommit": "ac7be88da6ef1d715eceb4fdaf15b00dab0df274",
-  "sdkVersion": "1.20.5"
+  "originGitCommit": "f01a5ba51c0a9acaeb4259da454d155586de261b",
+  "sdkVersion": "1.21.0"
 }

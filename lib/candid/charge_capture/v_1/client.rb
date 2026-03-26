@@ -326,6 +326,38 @@ module Candid
             raise error_class.new(response.body, code: code)
           end
         end
+
+        # @param request_options [Hash]
+        # @param params [Candid::ChargeCapture::V1::Types::FindByMetadataRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @return [Candid::ChargeCapture::V1::Types::ChargeCapturePage]
+        def find_by_metadata(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "POST",
+            path: "/api/charge_captures/v1/find-by-metadata",
+            body: Candid::ChargeCapture::V1::Types::FindByMetadataRequest.new(params).to_h,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::ChargeCapture::V1::Types::ChargeCapturePage.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
       end
     end
   end

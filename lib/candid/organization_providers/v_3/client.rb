@@ -62,11 +62,12 @@ module Candid
         # @option params [String, nil] :organization_provider_ids
         # @option params [String, nil] :page_token
         # @option params [Candid::OrganizationProviders::V2::Types::OrganizationProviderSortOptions, nil] :sort
+        # @option params [String, nil] :organization_id
         #
         # @return [Candid::OrganizationProviders::V3::Types::OrganizationProviderPageV2]
         def get_multi(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[limit search_term npi is_rendering is_billing organization_provider_ids page_token sort]
+          query_param_names = %i[limit search_term npi is_rendering is_billing organization_provider_ids page_token sort organization_id]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["search_term"] = params[:search_term] if params.key?(:search_term)
@@ -76,6 +77,7 @@ module Candid
           query_params["organization_provider_ids"] = params[:organization_provider_ids] if params.key?(:organization_provider_ids)
           query_params["page_token"] = params[:page_token] if params.key?(:page_token)
           query_params["sort"] = params[:sort] if params.key?(:sort)
+          query_params["organization_id"] = params[:organization_id] if params.key?(:organization_id)
           params.except(*query_param_names)
 
           request = Candid::Internal::JSON::Request.new(

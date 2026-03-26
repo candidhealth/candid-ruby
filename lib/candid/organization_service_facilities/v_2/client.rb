@@ -60,11 +60,12 @@ module Candid
         # @option params [String, nil] :external_ids
         # @option params [Candid::Commons::Types::FacilityTypeCode, nil] :place_of_service_code
         # @option params [String, nil] :page_token
+        # @option params [String, nil] :organization_id
         #
         # @return [Candid::OrganizationServiceFacilities::V2::Types::OrganizationServiceFacilityPage]
         def get_multi(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[limit name organization_service_facility_ids external_ids place_of_service_code page_token]
+          query_param_names = %i[limit name organization_service_facility_ids external_ids place_of_service_code page_token organization_id]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["name"] = params[:name] if params.key?(:name)
@@ -72,6 +73,7 @@ module Candid
           query_params["external_ids"] = params[:external_ids] if params.key?(:external_ids)
           query_params["place_of_service_code"] = params[:place_of_service_code] if params.key?(:place_of_service_code)
           query_params["page_token"] = params[:page_token] if params.key?(:page_token)
+          query_params["organization_id"] = params[:organization_id] if params.key?(:organization_id)
           params.except(*query_param_names)
 
           request = Candid::Internal::JSON::Request.new(

@@ -24,14 +24,21 @@ module Candid
         # @option request_options [Hash{String => Object}] :additional_query_parameters
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
+        # @option params [String, nil] :organization_id
         #
         # @return [Candid::CustomSchemas::V1::Types::SchemaGetMultiResponse]
         def get_multi(request_options: {}, **params)
-          Candid::Internal::Types::Utils.normalize_keys(params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          query_param_names = %i[organization_id]
+          query_params = {}
+          query_params["organization_id"] = params[:organization_id] if params.key?(:organization_id)
+          params.except(*query_param_names)
+
           request = Candid::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
             method: "GET",
             path: "/api/custom-schemas/v1",
+            query: query_params,
             request_options: request_options
           )
           begin

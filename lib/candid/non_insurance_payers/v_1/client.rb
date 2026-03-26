@@ -191,14 +191,21 @@ module Candid
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Candid::NonInsurancePayers::V1::Types::NonInsurancePayerId] :non_insurance_payer_id
+        # @option params [String, nil] :organization_id
         #
         # @return [Candid::NonInsurancePayers::V1::Types::NonInsurancePayer]
         def get(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
+          query_param_names = %i[organization_id]
+          query_params = {}
+          query_params["organization_id"] = params[:organization_id] if params.key?(:organization_id)
+          params = params.except(*query_param_names)
+
           request = Candid::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
             method: "GET",
             path: "/api/non-insurance-payers/v1/#{params[:non_insurance_payer_id]}",
+            query: query_params,
             request_options: request_options
           )
           begin

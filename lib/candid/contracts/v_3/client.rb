@@ -201,6 +201,127 @@ module Candid
         end
 
         # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::Contracts::V3::Types::ContractId] :contract_id
+        # @option params [String, nil] :page_token
+        # @option params [Integer, nil] :limit
+        #
+        # @return [Candid::Contracts::V3::Types::ContractProvidersPage]
+        def get_contract_providers(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          query_param_names = %i[page_token limit]
+          query_params = {}
+          query_params["page_token"] = params[:page_token] if params.key?(:page_token)
+          query_params["limit"] = params[:limit] if params.key?(:limit)
+          params = params.except(*query_param_names)
+
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "GET",
+            path: "/api/contracts/v3/#{params[:contract_id]}/providers",
+            query: query_params,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::Contracts::V3::Types::ContractProvidersPage.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
+        # Appends a list of rendering provider IDs to the contract. Provider IDs already on the contract are silently
+        # ignored.
+        #
+        # @param request_options [Hash]
+        # @param params [Candid::Contracts::V3::Types::AddContractProvidersRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::Contracts::V3::Types::ContractId] :contract_id
+        #
+        # @return [Candid::Contracts::V3::Types::AddContractProvidersResponse]
+        def add_contract_providers(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request_data = Candid::Contracts::V3::Types::AddContractProvidersRequest.new(params).to_h
+          non_body_param_names = ["contract_id"]
+          body = request_data.except(*non_body_param_names)
+
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "POST",
+            path: "/api/contracts/v3/#{params[:contract_id]}/providers",
+            body: body,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::Contracts::V3::Types::AddContractProvidersResponse.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
+        # Removes the specified rendering provider IDs from the contract. Returns a 404 if any of the provided IDs are
+        # not currently in the contract.
+        #
+        # @param request_options [Hash]
+        # @param params [Candid::Contracts::V3::Types::RemoveContractProvidersRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::Contracts::V3::Types::ContractId] :contract_id
+        #
+        # @return [Candid::Contracts::V3::Types::ContractProviderCount]
+        def remove_contract_providers(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request_data = Candid::Contracts::V3::Types::RemoveContractProvidersRequest.new(params).to_h
+          non_body_param_names = ["contract_id"]
+          body = request_data.except(*non_body_param_names)
+
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "DELETE",
+            path: "/api/contracts/v3/#{params[:contract_id]}/providers",
+            body: body,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::Contracts::V3::Types::ContractProviderCount.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
+        # @param request_options [Hash]
         # @param params [Candid::Contracts::V3::Types::ContractServiceFacilityCreate]
         # @option request_options [String] :base_url
         # @option request_options [Hash{String => Object}] :additional_headers

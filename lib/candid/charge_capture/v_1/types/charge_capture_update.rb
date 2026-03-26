@@ -14,6 +14,7 @@ module Candid
           field :patient_external_id, -> { String }, optional: true, nullable: false
           field :status, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureStatus }, optional: true, nullable: false
           field :attachment_external_document_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+          field :metadata, -> { Internal::Types::Array[Candid::CustomSchemas::V1::Types::SchemaInstance] }, optional: true, nullable: false
         end
       end
     end

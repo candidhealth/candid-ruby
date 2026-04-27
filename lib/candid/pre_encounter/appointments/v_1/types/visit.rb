@@ -8,6 +8,7 @@ module Candid
           # A visit is a collection of appointments that occur on the same day.
           class Visit < Internal::Types::Model
             field :patient_id, -> { String }, optional: false, nullable: false
+            field :organization_id, -> { String }, optional: false, nullable: false
             field :patient, -> { Candid::PreEncounter::Patients::V1::Types::MutablePatientWithMrn }, optional: false, nullable: false
             field :start_time, -> { String }, optional: false, nullable: false
             field :status, -> { Candid::PreEncounter::Appointments::V1::Types::AppointmentStatus }, optional: false, nullable: false

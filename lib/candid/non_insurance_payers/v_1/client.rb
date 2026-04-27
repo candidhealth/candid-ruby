@@ -96,11 +96,12 @@ module Candid
         # @option params [Candid::Commons::Types::SortDirection, nil] :sort_direction
         # @option params [Integer, nil] :limit
         # @option params [String, nil] :page_token
+        # @option params [String, nil] :organization_id
         #
         # @return [Candid::NonInsurancePayers::V1::Types::NonInsurancePayerPage]
         def get_multi(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[name category categories_exact clinical_trial_ids enabled sort sort_direction limit page_token]
+          query_param_names = %i[name category categories_exact clinical_trial_ids enabled sort sort_direction limit page_token organization_id]
           query_params = {}
           query_params["name"] = params[:name] if params.key?(:name)
           query_params["category"] = params[:category] if params.key?(:category)
@@ -111,6 +112,7 @@ module Candid
           query_params["sort_direction"] = params[:sort_direction] if params.key?(:sort_direction)
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["page_token"] = params[:page_token] if params.key?(:page_token)
+          query_params["organization_id"] = params[:organization_id] if params.key?(:organization_id)
           params.except(*query_param_names)
 
           request = Candid::Internal::JSON::Request.new(

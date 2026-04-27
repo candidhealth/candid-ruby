@@ -9,6 +9,7 @@ module Candid
         AV = "AV"
         AU = "AU"
         AW = "AW"
+        AY = "AY"
         SEVEN = "07"
         EIGHT = "08"
         NINE = "09"

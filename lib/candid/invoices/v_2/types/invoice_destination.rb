@@ -13,6 +13,7 @@ module Candid
           COLLECTLY = "COLLECTLY"
           THIRD_PARTY_PAYERS = "THIRD_PARTY_PAYERS"
           INSTAMED = "INSTAMED"
+          REVSPRING = "REVSPRING"
         end
       end
     end

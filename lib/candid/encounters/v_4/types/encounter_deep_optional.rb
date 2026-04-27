@@ -27,6 +27,7 @@ module Candid
           field :initial_referring_provider, -> { Candid::EncounterProviders::V2::Types::InitialReferringProviderUpdateWithOptionalAddress }, optional: true, nullable: false
           field :referring_provider, -> { Candid::EncounterProviders::V2::Types::ReferringProviderUpdateWithOptionalAddress }, optional: true, nullable: false
           field :supervising_provider, -> { Candid::EncounterProviders::V2::Types::SupervisingProviderUpdateWithOptionalAddress }, optional: true, nullable: false
+          field :treating_provider, -> { Candid::EncounterProviders::V2::Types::TreatingProvider }, optional: true, nullable: false
           field :billing_provider, -> { Candid::EncounterProviders::V2::Types::BillingProviderUpdateWithOptionalAddress }, optional: true, nullable: false
           field :pay_to_address, -> { Candid::Commons::Types::StreetAddressShortZipOptional }, optional: true, nullable: false
           field :related_causes_information, -> { Candid::RelatedCauses::V1::Types::RelatedCausesInformationCreate }, optional: true, nullable: false

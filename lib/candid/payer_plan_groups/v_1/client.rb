@@ -35,11 +35,12 @@ module Candid
         # @option params [Candid::PayerPlanGroups::V1::Types::PayerPlanGroupSortField, nil] :sort
         # @option params [Candid::Commons::Types::SortDirection, nil] :sort_direction
         # @option params [String, nil] :page_token
+        # @option params [String, nil] :organization_id
         #
         # @return [Candid::PayerPlanGroups::V1::Types::PayerPlanGroupPage]
         def get_multi(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[plan_group_name payer_uuid payer_id plan_type is_active payer_plan_group_id limit sort_by_similarity sort sort_direction page_token]
+          query_param_names = %i[plan_group_name payer_uuid payer_id plan_type is_active payer_plan_group_id limit sort_by_similarity sort sort_direction page_token organization_id]
           query_params = {}
           query_params["plan_group_name"] = params[:plan_group_name] if params.key?(:plan_group_name)
           query_params["payer_uuid"] = params[:payer_uuid] if params.key?(:payer_uuid)
@@ -52,6 +53,7 @@ module Candid
           query_params["sort"] = params[:sort] if params.key?(:sort)
           query_params["sort_direction"] = params[:sort_direction] if params.key?(:sort_direction)
           query_params["page_token"] = params[:page_token] if params.key?(:page_token)
+          query_params["organization_id"] = params[:organization_id] if params.key?(:organization_id)
           params.except(*query_param_names)
 
           request = Candid::Internal::JSON::Request.new(

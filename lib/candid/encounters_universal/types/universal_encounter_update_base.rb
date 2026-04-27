@@ -20,6 +20,7 @@ module Candid
         field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProviderUpdate }, optional: true, nullable: false
         field :service_facility, -> { Candid::ServiceFacility::Types::EncounterServiceFacilityUpdate }, optional: true, nullable: false
         field :supervising_provider, -> { Candid::EncounterProviders::V2::Types::SupervisingProviderUpdate }, optional: true, nullable: false
+        field :treating_provider, -> { Candid::EncounterProviders::V2::Types::TreatingProviderUpdate }, optional: true, nullable: false
         field :billing_provider, -> { Candid::EncounterProviders::V2::Types::BillingProviderUpdate }, optional: true, nullable: false
         field :place_of_service_code_as_submitted, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
         field :related_causes_information, -> { Candid::RelatedCauses::V1::Types::RelatedCausesInformationUpdate }, optional: true, nullable: false

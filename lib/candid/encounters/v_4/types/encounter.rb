@@ -22,6 +22,7 @@ module Candid
           field :discharge_status, -> { Candid::X12::V1::Types::PatientDischargeStatusCode }, optional: true, nullable: false
           field :operating_provider, -> { Candid::EncounterProviders::V2::Types::EncounterProvider }, optional: true, nullable: false
           field :other_operating_provider, -> { Candid::EncounterProviders::V2::Types::EncounterProvider }, optional: true, nullable: false
+          field :treating_provider, -> { Candid::EncounterProviders::V2::Types::EncounterAdditionalProvider }, optional: true, nullable: false
           field :related_causes_information, -> { Candid::RelatedCauses::V1::Types::RelatedCausesInformation }, optional: true, nullable: false
           field :property_casualty_claim_number, -> { String }, optional: true, nullable: false
           field :accident_date, -> { String }, optional: true, nullable: false
@@ -59,6 +60,7 @@ module Candid
           field :last_submitted_at, -> { String }, optional: true, nullable: false
           field :created_at, -> { String }, optional: false, nullable: false
           field :next_responsible_party, -> { Candid::Commons::Types::NextResponsibleParty }, optional: true, nullable: false
+          field :organization_id, -> { String }, optional: true, nullable: false
         end
       end
     end

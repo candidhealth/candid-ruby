@@ -44,6 +44,11 @@ module Candid
         @notes ||= Candid::PreEncounter::Notes::Client.new(client: @client, base_url: @base_url, environment: @environment)
       end
 
+      # @return [Candid::OrganizationExternalProviders::Client]
+      def organization_external_providers
+        @organization_external_providers ||= Candid::PreEncounter::OrganizationExternalProviders::Client.new(client: @client, base_url: @base_url, environment: @environment)
+      end
+
       # @return [Candid::Patients::Client]
       def patients
         @patients ||= Candid::PreEncounter::Patients::Client.new(client: @client, base_url: @base_url, environment: @environment)

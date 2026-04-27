@@ -18,6 +18,7 @@ module Candid
             field :period, -> { Candid::PreEncounter::Common::Types::Period }, optional: true, nullable: false
             field :notes, -> { String }, optional: true, nullable: false
             field :billing_provider_npi, -> { String }, optional: true, nullable: false
+            field :service_facility, -> { Candid::PreEncounter::Common::Types::PatientServiceFacility }, optional: true, nullable: false
           end
         end
       end

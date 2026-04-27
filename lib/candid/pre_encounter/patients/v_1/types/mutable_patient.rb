@@ -28,6 +28,7 @@ module Candid
             field :other_telecoms, -> { Internal::Types::Array[Candid::PreEncounter::Common::Types::ContactPoint] }, optional: false, nullable: false
             field :email, -> { String }, optional: true, nullable: false
             field :electronic_communication_opt_in, -> { Internal::Types::Boolean }, optional: true, nullable: false
+            field :electronic_communication_consent, -> { Candid::PreEncounter::Patients::V1::Types::ElectronicCommunicationConsent }, optional: true, nullable: false
             field :photo, -> { String }, optional: true, nullable: false
             field :language, -> { String }, optional: true, nullable: false
             field :external_provenance, -> { Candid::PreEncounter::Patients::V1::Types::ExternalProvenance }, optional: true, nullable: false

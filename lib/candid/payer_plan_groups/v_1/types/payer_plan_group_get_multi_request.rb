@@ -16,6 +16,7 @@ module Candid
           field :sort, -> { Candid::PayerPlanGroups::V1::Types::PayerPlanGroupSortField }, optional: true, nullable: false
           field :sort_direction, -> { Candid::Commons::Types::SortDirection }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
+          field :organization_id, -> { String }, optional: true, nullable: false
         end
       end
     end

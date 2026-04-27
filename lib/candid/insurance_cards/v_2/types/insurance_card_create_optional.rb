@@ -13,6 +13,7 @@ module Candid
           field :image_url_front, -> { String }, optional: true, nullable: false
           field :image_url_back, -> { String }, optional: true, nullable: false
           field :emr_payer_crosswalk, -> { Candid::Commons::Types::EmrPayerCrosswalk }, optional: true, nullable: false
+          field :payer_plan_group_name, -> { String }, optional: true, nullable: false
         end
       end
     end

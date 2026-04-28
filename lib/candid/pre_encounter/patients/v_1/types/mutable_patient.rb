@@ -50,6 +50,8 @@ module Candid
             field :origination_detail, -> { Candid::PreEncounter::Patients::V1::Types::OriginationDetail }, optional: true, nullable: false
             field :inferred_patient_metadata, -> { Candid::PreEncounter::Patients::V1::Types::InferredPatientMetadata }, optional: true, nullable: false
             field :orcon, -> { Internal::Types::Boolean }, optional: true, nullable: false
+            field :advanced_directives, -> { Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::AdvancedDirective] }, optional: true, nullable: false
+            field :hipaa_code, -> { String }, optional: true, nullable: false
           end
         end
       end

@@ -10,7 +10,6 @@ module Candid
             field :in_network_flat, -> { Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::CoverageDetails] }, optional: true, nullable: false
             field :out_of_network, -> { Candid::PreEncounter::Coverages::V1::Types::PlanCoverageDetails }, optional: true, nullable: false
             field :out_of_network_flat, -> { Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::CoverageDetails] }, optional: true, nullable: false
-            field :additional_details, -> { Internal::Types::Array[Candid::PreEncounter::Coverages::V1::Types::AdditionalDetail] }, optional: true, nullable: false
           end
         end
       end

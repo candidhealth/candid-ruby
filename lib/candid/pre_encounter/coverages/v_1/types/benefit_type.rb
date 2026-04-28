@@ -18,6 +18,8 @@ module Candid
             OOP_MAX_YEAR_TO_DATE = "OOP_MAX_YEAR_TO_DATE"
             COPAY = "COPAY"
             COINSURANCE = "COINSURANCE"
+            NON_COVERED = "NON_COVERED"
+            LIMITATION = "LIMITATION"
           end
         end
       end

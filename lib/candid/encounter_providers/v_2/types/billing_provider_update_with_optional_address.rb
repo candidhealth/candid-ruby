@@ -21,7 +21,7 @@ module Candid
           field :npi, -> { String }, optional: true, nullable: false
           field :taxonomy_code, -> { String }, optional: true, nullable: false
           field :provider_commercial_license_type, -> { Candid::Commons::Types::BillingProviderCommercialLicenseType }, optional: true, nullable: false
-          field :secondary_identification, -> { Candid::EncounterProviders::V2::Types::BillingProviderSecondaryIdentification }, optional: true, nullable: false
+          field :secondary_identification, -> { Candid::EncounterProviders::V2::Types::BillingProviderSecondaryIdentificationOptional }, optional: true, nullable: false
         end
       end
     end

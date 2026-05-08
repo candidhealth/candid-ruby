@@ -4,6 +4,7 @@ module Candid
   module Financials
     module Types
       class Allocation < Internal::Types::Model
+        field :allocation_id, -> { String }, optional: true, nullable: false
         field :amount_cents, -> { Integer }, optional: false, nullable: false
         field :target, -> { Candid::Financials::Types::AllocationTarget }, optional: false, nullable: false
         field :earmark, -> { Candid::Financials::Types::BalanceEarmark }, optional: true, nullable: false

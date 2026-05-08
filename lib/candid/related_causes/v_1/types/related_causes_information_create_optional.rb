@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+module Candid
+  module RelatedCauses
+    module V1
+      module Types
+        class RelatedCausesInformationCreateOptional < Internal::Types::Model
+          field :related_causes_code_1, -> { Candid::RelatedCauses::V1::Types::RelatedCausesCode }, optional: true, nullable: false
+          field :related_causes_code_2, -> { Candid::RelatedCauses::V1::Types::RelatedCausesCode }, optional: true, nullable: false
+          field :state_or_province_code, -> { String }, optional: true, nullable: false
+        end
+      end
+    end
+  end
+end

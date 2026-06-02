@@ -14,6 +14,7 @@ module Candid
           field :status, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureStatus }, optional: false, nullable: false
           field :attachment_external_document_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
           field :metadata, -> { Internal::Types::Array[Candid::CustomSchemas::V1::Types::SchemaInstance] }, optional: true, nullable: false
+          field :hl_7_message_type, -> { Candid::ChargeCapture::V1::Types::Hl7MessageType }, optional: true, nullable: false, api_name: "hl7_message_type"
         end
       end
     end

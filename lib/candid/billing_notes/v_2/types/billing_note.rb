@@ -10,6 +10,8 @@ module Candid
           field :created_at, -> { String }, optional: false, nullable: false
           field :author_auth_0_id, -> { String }, optional: true, nullable: false, api_name: "author_auth0_id"
           field :author_name, -> { String }, optional: true, nullable: false
+          field :billing_note_type, -> { Candid::BillingNotes::V2::Types::BillingNoteType }, optional: true, nullable: false
+          field :billing_note_metadata, -> { Candid::BillingNotes::V2::Types::BillingNoteMetadata }, optional: true, nullable: false
         end
       end
     end

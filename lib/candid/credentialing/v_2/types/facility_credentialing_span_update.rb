@@ -10,7 +10,6 @@ module Candid
           field :payer_uuid, -> { String }, optional: true, nullable: false
           field :start_date, -> { String }, optional: true, nullable: false
           field :end_date, -> { String }, optional: true, nullable: false
-          field :regions, -> { Candid::Commons::Types::Regions }, optional: true, nullable: false
           field :submitted_date, -> { String }, optional: true, nullable: false
           field :payer_loaded_date, -> { String }, optional: true, nullable: false
         end

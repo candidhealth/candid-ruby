@@ -8,7 +8,9 @@ module Candid
           field :limit, -> { Integer }, optional: true, nullable: false
           field :page_token, -> { String }, optional: true, nullable: false
           field :status, -> { Candid::Tasks::Commons::Types::TaskStatus }, optional: true, nullable: false
+          field :statuses, -> { String }, optional: true, nullable: false
           field :task_type, -> { Candid::Tasks::Commons::Types::TaskType }, optional: true, nullable: false
+          field :task_types, -> { String }, optional: true, nullable: false
           field :categories, -> { String }, optional: true, nullable: false
           field :updated_since, -> { String }, optional: true, nullable: false
           field :encounter_id, -> { String }, optional: true, nullable: false

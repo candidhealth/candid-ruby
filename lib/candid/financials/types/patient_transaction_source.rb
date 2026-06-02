@@ -16,6 +16,7 @@ module Candid
         REALLOCATION = "REALLOCATION"
         PHREESIA = "PHREESIA"
         INSTAMED = "INSTAMED"
+        SHERPA_HEALTH = "SHERPA_HEALTH"
       end
     end
   end

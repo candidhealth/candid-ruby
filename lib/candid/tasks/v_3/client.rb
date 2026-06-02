@@ -57,7 +57,9 @@ module Candid
         # @option params [Integer, nil] :limit
         # @option params [String, nil] :page_token
         # @option params [Candid::Tasks::Commons::Types::TaskStatus, nil] :status
+        # @option params [String, nil] :statuses
         # @option params [Candid::Tasks::Commons::Types::TaskType, nil] :task_type
+        # @option params [String, nil] :task_types
         # @option params [String, nil] :categories
         # @option params [String, nil] :updated_since
         # @option params [String, nil] :encounter_id
@@ -71,12 +73,14 @@ module Candid
         # @return [Candid::Tasks::V3::Types::TaskPage]
         def get_multi(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[limit page_token status task_type categories updated_since encounter_id search_term assigned_to_id date_of_service_min date_of_service_max billing_provider_npi sort]
+          query_param_names = %i[limit page_token status statuses task_type task_types categories updated_since encounter_id search_term assigned_to_id date_of_service_min date_of_service_max billing_provider_npi sort]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["page_token"] = params[:page_token] if params.key?(:page_token)
           query_params["status"] = params[:status] if params.key?(:status)
+          query_params["statuses"] = params[:statuses] if params.key?(:statuses)
           query_params["task_type"] = params[:task_type] if params.key?(:task_type)
+          query_params["task_types"] = params[:task_types] if params.key?(:task_types)
           query_params["categories"] = params[:categories] if params.key?(:categories)
           query_params["updated_since"] = params[:updated_since] if params.key?(:updated_since)
           query_params["encounter_id"] = params[:encounter_id] if params.key?(:encounter_id)

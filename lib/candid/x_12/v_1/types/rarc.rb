@@ -1194,6 +1194,7 @@ module Candid
           N_909 = "N909"
           N_910 = "N910"
           N_911 = "N911"
+          UNKNOWN = "UNKNOWN"
         end
       end
     end

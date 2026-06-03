@@ -13,7 +13,7 @@ module Candid
             field :names, -> { Internal::Types::Array[String] }, optional: false, nullable: false
             field :transaction_support, -> { Object }, optional: false, nullable: false
             field :employer_identification_numbers, -> { Internal::Types::Array[String] }, optional: true, nullable: false
-            field :payer_enrollment, -> { Object }, optional: false, nullable: false
+            field :payer_enrollment, -> { Object }, optional: true, nullable: false
             field :parent_payer_group, -> { String }, optional: true, nullable: false
             field :coverage_types, -> { Internal::Types::Array[String] }, optional: true, nullable: false
           end

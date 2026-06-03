@@ -10,6 +10,7 @@ module Candid
         field :supervising_provider, -> { Candid::EncounterProviders::V2::Types::SupervisingProvider }, optional: true, nullable: false
         field :treating_provider, -> { Candid::EncounterProviders::V2::Types::TreatingProvider }, optional: true, nullable: false
         field :service_facility, -> { Candid::ServiceFacility::Types::EncounterServiceFacilityBase }, optional: true, nullable: false
+        field :service_facility_id, -> { String }, optional: true, nullable: false
         field :subscriber_primary, -> { Candid::Individual::Types::SubscriberCreate }, optional: true, nullable: false
         field :subscriber_secondary, -> { Candid::Individual::Types::SubscriberCreate }, optional: true, nullable: false
         field :subscriber_tertiary, -> { Candid::Individual::Types::SubscriberCreate }, optional: true, nullable: false

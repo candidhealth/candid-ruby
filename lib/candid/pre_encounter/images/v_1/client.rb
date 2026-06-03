@@ -164,14 +164,22 @@ module Candid
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [String, nil] :patient_id
           # @option params [String, nil] :coverage_id
+          # @option params [String, nil] :file_type
+          # @option params [String, nil] :patient_notes
+          # @option params [Candid::PreEncounter::Images::V1::Types::ImageSortField, nil] :sort_field
+          # @option params [Candid::PreEncounter::Common::Types::SortDirection, nil] :sort_direction
           #
           # @return [Array[Candid::PreEncounter::Images::V1::Types::Image]]
           def get_multi(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.normalize_keys(params)
-            query_param_names = %i[patient_id coverage_id]
+            query_param_names = %i[patient_id coverage_id file_type patient_notes sort_field sort_direction]
             query_params = {}
             query_params["patient_id"] = params[:patient_id] if params.key?(:patient_id)
             query_params["coverage_id"] = params[:coverage_id] if params.key?(:coverage_id)
+            query_params["file_type"] = params[:file_type] if params.key?(:file_type)
+            query_params["patient_notes"] = params[:patient_notes] if params.key?(:patient_notes)
+            query_params["sort_field"] = params[:sort_field] if params.key?(:sort_field)
+            query_params["sort_direction"] = params[:sort_direction] if params.key?(:sort_direction)
             params.except(*query_param_names)
 
             request = Candid::Internal::JSON::Request.new(

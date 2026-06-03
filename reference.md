@@ -15734,6 +15734,38 @@ client.pre_encounter.images.v_1.get_multi
 <dl>
 <dd>
 
+**file_type:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**patient_notes:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_field:** `Candid::PreEncounter::Images::V1::Types::ImageSortField` — The field to order by. Defaults to updatedAt.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_direction:** `Candid::PreEncounter::Common::Types::SortDirection` — The direction to order by. Defaults to desc.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `Candid::PreEncounter::Images::V1::RequestOptions` 
     
 </dd>

@@ -19,6 +19,7 @@ module Candid
             field :notes, -> { String }, optional: true, nullable: false
             field :billing_provider_npi, -> { String }, optional: true, nullable: false
             field :service_facility, -> { Candid::PreEncounter::Common::Types::PatientServiceFacility }, optional: true, nullable: false
+            field :dx_codes, -> { Internal::Types::Array[String] }, optional: true, nullable: false
           end
         end
       end

@@ -23,6 +23,7 @@ module Candid
           field :billing_notes, -> { Internal::Types::Array[Candid::BillingNotes::V2::Types::BillingNoteBaseOptional] }, optional: true, nullable: false
           field :patient, -> { Candid::Individual::Types::PatientUpdateWithOptionalAddress }, optional: true, nullable: false
           field :service_facility, -> { Candid::ServiceFacility::Types::EncounterServiceFacilityUpdateWithOptionalAddress }, optional: true, nullable: false
+          field :service_facility_id, -> { String }, optional: true, nullable: false
           field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProviderUpdateWithOptionalAddress }, optional: true, nullable: false
           field :initial_referring_provider, -> { Candid::EncounterProviders::V2::Types::InitialReferringProviderUpdateWithOptionalAddress }, optional: true, nullable: false
           field :referring_provider, -> { Candid::EncounterProviders::V2::Types::ReferringProviderUpdateWithOptionalAddress }, optional: true, nullable: false

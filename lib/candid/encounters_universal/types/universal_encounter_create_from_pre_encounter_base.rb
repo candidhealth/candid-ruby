@@ -10,6 +10,7 @@ module Candid
         field :initial_referring_provider, -> { Candid::EncounterProviders::V2::Types::InitialReferringProvider }, optional: true, nullable: false
         field :supervising_provider, -> { Candid::EncounterProviders::V2::Types::SupervisingProvider }, optional: true, nullable: false
         field :service_facility, -> { Candid::ServiceFacility::Types::EncounterServiceFacilityBase }, optional: true, nullable: false
+        field :service_facility_id, -> { String }, optional: true, nullable: false
         field :clinical_notes, -> { Internal::Types::Array[Candid::Encounters::V4::Types::ClinicalNoteCategoryCreate] }, optional: true, nullable: false
         field :billing_notes, -> { Internal::Types::Array[Candid::BillingNotes::V2::Types::BillingNoteBase] }, optional: true, nullable: false
         field :patient_histories, -> { Internal::Types::Array[Candid::Encounters::V4::Types::PatientHistoryCategory] }, optional: true, nullable: false

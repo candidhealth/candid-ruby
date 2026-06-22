@@ -13,7 +13,10 @@ module Candid
             field :tax_id, -> { String }, optional: true, nullable: false
             field :taxonomy_code, -> { String }, optional: true, nullable: false
             field :phone_number, -> { String }, optional: true, nullable: false
+            field :other_phone_numbers, -> { Internal::Types::Array[String] }, optional: true, nullable: false
             field :fax_number, -> { String }, optional: true, nullable: false
+            field :other_fax_numbers, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+            field :emails, -> { Internal::Types::Array[String] }, optional: true, nullable: false
             field :license_type, -> { Candid::PreEncounter::OrganizationExternalProviders::V1::Types::LicenseType }, optional: true, nullable: false
             field :addresses, -> { Internal::Types::Array[Candid::PreEncounter::Common::Types::Address] }, optional: true, nullable: false
           end

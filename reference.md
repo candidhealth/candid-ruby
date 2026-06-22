@@ -6909,7 +6909,7 @@ client.fee_schedules.v_3.get_rate_history(rate_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd
 
 Uploads a new fee schedule.
 
-Each rate may either be totally new as qualified by it's dimensions or a new version for an existing rate.
+Each rate may either be totally new as qualified by its dimensions or a new version for an existing rate.
 
 If adding a new version to an existing rate, the rate must be posted with the next version number (previous version + 1) or a EntityConflictError will
 be returned.
@@ -7777,7 +7777,7 @@ client.import_invoice.v_1.import_invoice(
 <dl>
 <dd>
 
-Returns all Invoices for the authenticated user's organziation with all filters applied.
+Returns all Invoices for the authenticated user's organization with all filters applied.
 </dd>
 </dl>
 </dd>
@@ -13622,6 +13622,77 @@ Example: appointment.startTimestamp|gt|2024-01-01
 </dl>
 </details>
 
+<details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">get_counts</a>() -> Candid::PreEncounter::Appointments::V1::Types::CountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets aggregate counts for the visits matching the given filters.
+
+The counts respect all provided filters but are independent of pagination, so this can be fetched
+once when filters change instead of on every page of `get_visits`.
+
+**IMPORTANT:** Like `get_visits`, this endpoint requires a date filter on `appointment.startTimestamp`
+to ensure acceptable query performance.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.appointments.v_1.get_counts
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**filters:** `String` 
+
+**Required:** Must include a date filter on appointment.startTimestamp (using gt, lt, or eq operators).
+Example: appointment.startTimestamp|gt|2024-01-01
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Appointments::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.pre_encounter.appointments.v_1.<a href="/lib/candid/pre_encounter/appointments/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Appointments::V1::Types::Appointment</code></summary>
 <dl>
 <dd>
@@ -15369,6 +15440,152 @@ client.pre_encounter.eligibility_checks.v_1.get_multi
 <dd>
 
 **initiated_at_max:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">insurance_discovery</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends an insurance discovery check to find potential coverage matches for a patient through Stedi.
+Given patient demographics, this endpoint discovers what insurance coverages exist for the patient.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.insurance_discovery(
+  provider: {
+    npi: "npi"
+  },
+  subscriber: {
+    first_name: "first_name",
+    last_name: "last_name"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">coordination_of_benefits</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a coordination of benefits check through Stedi to determine whether a patient has
+coverage overlap across multiple payers and, if so, which payer is primary.
+Medicare and Medicare Advantage plans are not supported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.coordination_of_benefits(
+  trading_partner_service_id: "trading_partner_service_id",
+  provider: {
+    npi: "npi"
+  },
+  subscriber: {
+    first_name: "first_name",
+    last_name: "last_name",
+    date_of_birth: "date_of_birth"
+  },
+  encounter: {}
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRequest` 
     
 </dd>
 </dl>

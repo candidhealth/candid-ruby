@@ -13,6 +13,8 @@ module Candid
           field :period, -> { Candid::PreEncounter::Common::Types::Period }, optional: true, nullable: false
           field :canonical_id, -> { String }, optional: true, nullable: false
           field :fax, -> { String }, optional: true, nullable: false
+          field :other_fax_numbers, -> { Internal::Types::Array[String] }, optional: true, nullable: false
+          field :emails, -> { Internal::Types::Array[String] }, optional: true, nullable: false
           field :service_facilities, -> { Internal::Types::Array[Candid::PreEncounter::Common::Types::PatientServiceFacility] }, optional: true, nullable: false
         end
       end

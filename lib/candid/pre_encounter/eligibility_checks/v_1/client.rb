@@ -333,6 +333,77 @@ module Candid
               raise error_class.new(response.body, code: code)
             end
           end
+
+          # Sends an insurance discovery check to find potential coverage matches for a patient through Stedi.
+          # Given patient demographics, this endpoint discovers what insurance coverages exist for the patient.
+          #
+          # @param request_options [Hash]
+          # @param params [Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryResponse]
+          def insurance_discovery(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "POST",
+              path: "/eligibility-checks/v1/insurance-discovery",
+              body: Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest.new(params).to_h,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryResponse.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
+
+          # Sends a coordination of benefits check through Stedi to determine whether a patient has
+          # coverage overlap across multiple payers and, if so, which payer is primary.
+          # Medicare and Medicare Advantage plans are not supported.
+          #
+          # @param request_options [Hash]
+          # @param params [Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRequest]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsResponse]
+          def coordination_of_benefits(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "POST",
+              path: "/eligibility-checks/v1/coordination-of-benefits",
+              body: Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRequest.new(params).to_h,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsResponse.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
         end
       end
     end

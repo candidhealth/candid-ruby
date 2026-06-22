@@ -20,6 +20,10 @@ module Candid
           WORKERS_COMP = "WORKERS_COMP"
           OTHER_GOVERNMENT = "OTHER_GOVERNMENT"
           AUTO_TPL = "AUTO_TPL"
+          LIEN = "LIEN"
+          HUMANA = "HUMANA"
+          MOLINA = "MOLINA"
+          OTHER_FACILITY = "OTHER_FACILITY"
         end
       end
     end

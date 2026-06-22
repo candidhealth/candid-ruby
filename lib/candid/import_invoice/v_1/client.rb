@@ -49,7 +49,7 @@ module Candid
           end
         end
 
-        # Returns all Invoices for the authenticated user's organziation with all filters applied.
+        # Returns all Invoices for the authenticated user's organization with all filters applied.
         #
         # @param request_options [Hash]
         # @param params [Hash]

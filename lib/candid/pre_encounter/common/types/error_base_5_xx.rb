@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+module Candid
+  module PreEncounter
+    module Common
+      module Types
+        class ErrorBase5Xx < Internal::Types::Model
+          field :message, -> { String }, optional: false, nullable: false
+          field :data, -> { Object }, optional: true, nullable: false
+        end
+      end
+    end
+  end
+end

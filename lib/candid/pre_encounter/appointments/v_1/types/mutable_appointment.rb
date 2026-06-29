@@ -11,6 +11,7 @@ module Candid
             field :start_timestamp, -> { String }, optional: false, nullable: false
             field :status, -> { Candid::PreEncounter::Appointments::V1::Types::AppointmentStatus }, optional: true, nullable: false
             field :not_ready_reason, -> { Candid::PreEncounter::Appointments::V1::Types::NotReadyReason }, optional: true, nullable: false
+            field :ready_source, -> { Candid::PreEncounter::Appointments::V1::Types::ReadySource }, optional: true, nullable: false
             field :service_duration, -> { Integer }, optional: false, nullable: false
             field :services, -> { Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Service] }, optional: false, nullable: false
             field :placer_appointment_id, -> { String }, optional: true, nullable: false

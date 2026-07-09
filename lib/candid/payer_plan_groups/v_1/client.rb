@@ -15,7 +15,7 @@ module Candid
           @environment = environment
         end
 
-        # Returns all payer plan groups matching filter criteria.
+        # Returns all payer plans matching filter criteria.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -77,7 +77,7 @@ module Candid
           end
         end
 
-        # Return a plan group with a given ID.
+        # Return a payer plan with a given ID.
         #
         # @param request_options [Hash]
         # @param params [Hash]
@@ -111,7 +111,7 @@ module Candid
           end
         end
 
-        # Create a payer plan group
+        # Create a payer plan
         #
         # @param request_options [Hash]
         # @param params [Candid::PayerPlanGroups::V1::Types::MutablePayerPlanGroup]
@@ -145,7 +145,7 @@ module Candid
           end
         end
 
-        # Update any of the fields on a payer plan group
+        # Update any of the fields on a payer plan
         #
         # @param request_options [Hash]
         # @param params [Candid::PayerPlanGroups::V1::Types::MutablePayerPlanGroup]
@@ -180,7 +180,7 @@ module Candid
           end
         end
 
-        # Marks the payer plan group as deactivated
+        # Marks the payer plan as deactivated
         #
         # @param request_options [Hash]
         # @param params [Hash]

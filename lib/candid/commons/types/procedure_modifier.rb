@@ -43,6 +43,7 @@ module Candid
         SIXTY_TWO = "62"
         SIXTY_THREE = "63"
         SIXTY_SIX = "66"
+        SEVENTY_THREE = "73"
         SEVENTY_FOUR = "74"
         SEVENTY_SIX = "76"
         SEVENTY_SEVEN = "77"

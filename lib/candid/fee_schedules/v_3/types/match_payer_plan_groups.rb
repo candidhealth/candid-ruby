@@ -4,7 +4,7 @@ module Candid
   module FeeSchedules
     module V3
       module Types
-        # Match information for a payer plan group
+        # Match information for a payer plan
         class MatchPayerPlanGroups < Internal::Types::Model
           field :value, -> { Internal::Types::Array[String] }, optional: false, nullable: false
           field :match, -> { Internal::Types::Boolean }, optional: false, nullable: false

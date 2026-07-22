@@ -49,6 +49,7 @@ module Candid
           PENDING_MANUAL_REMIT_POSTING = "pending_manual_remit_posting"
           INCORRECT_REFERRING_PROVIDER_INFO = "incorrect_referring_provider_info"
           PAYER_CONFIGURATION_ERROR = "payer_configuration_error"
+          DOWNCODING_REVIEW = "downcoding_review"
         end
       end
     end

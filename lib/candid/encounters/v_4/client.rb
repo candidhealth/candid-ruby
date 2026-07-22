@@ -39,11 +39,12 @@ module Candid
         # @option params [Candid::Encounters::V4::Types::EncounterOwnerOfNextActionType, nil] :owner_of_next_action
         # @option params [String, nil] :patient_external_id
         # @option params [Boolean, nil] :include_merged_patient_data
+        # @option params [String, nil] :billing_provider_npis
         #
         # @return [Candid::Encounters::V4::Types::EncounterPage]
         def get_all(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[limit claim_status sort page_token date_of_service_min date_of_service_max primary_payer_names search_term external_id diagnoses_updated_since tag_ids work_queue_id billable_status responsible_party owner_of_next_action patient_external_id include_merged_patient_data]
+          query_param_names = %i[limit claim_status sort page_token date_of_service_min date_of_service_max primary_payer_names search_term external_id diagnoses_updated_since tag_ids work_queue_id billable_status responsible_party owner_of_next_action patient_external_id include_merged_patient_data billing_provider_npis]
           query_params = {}
           query_params["limit"] = params[:limit] if params.key?(:limit)
           query_params["claim_status"] = params[:claim_status] if params.key?(:claim_status)
@@ -62,6 +63,7 @@ module Candid
           query_params["owner_of_next_action"] = params[:owner_of_next_action] if params.key?(:owner_of_next_action)
           query_params["patient_external_id"] = params[:patient_external_id] if params.key?(:patient_external_id)
           query_params["include_merged_patient_data"] = params[:include_merged_patient_data] if params.key?(:include_merged_patient_data)
+          query_params["billing_provider_npis"] = params[:billing_provider_npis] if params.key?(:billing_provider_npis)
           params.except(*query_param_names)
 
           request = Candid::Internal::JSON::Request.new(

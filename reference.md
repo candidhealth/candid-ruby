@@ -2952,7 +2952,7 @@ client.credentialing.v_2.create_facility(
 <dl>
 <dd>
 
-**contracting_provider_id:** `String` — The ID of the billing provider for which the service facility is covered by the credentialing span.
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
     
 </dd>
 </dl>
@@ -3241,7 +3241,7 @@ client.credentialing.v_2.update_facility(
 <dl>
 <dd>
 
-**contracting_provider_id:** `String` — The ID of the billing provider for which the service facility is covered by the credentialing span.
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
     
 </dd>
 </dl>
@@ -3341,7 +3341,7 @@ client.credentialing.v_2.create(
 <dl>
 <dd>
 
-**contracting_provider_id:** `String` — The ID of the billing provider for which the service facility is covered by the credentialing span.
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
     
 </dd>
 </dl>
@@ -3643,7 +3643,7 @@ client.credentialing.v_2.update(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b
 <dl>
 <dd>
 
-**contracting_provider_id:** `String` — The ID of the billing provider for which the service facility is covered by the credentialing span.
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
     
 </dd>
 </dl>
@@ -5135,7 +5135,7 @@ client.encounter_supplemental_information.v_1.get(encounter_id: "d5e9c84f-c2b2-4
 client.encounter_supplemental_information.v_1.create(
   encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
   attachment_report_type_code: "03",
-  attachment_transmission_code: "BM",
+  attachment_transmission_code: "AA",
   attachment_inclusion: "not_included"
 )
 ```
@@ -5479,6 +5479,14 @@ or encounter external id.
 <dd>
 
 **include_merged_patient_data:** `Internal::Types::Boolean` — If true and patient_external_id is set, then also include the encounters of all alternative patients.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billing_provider_npis:** `String` — Filter to encounters whose billing provider matches any of these NPIs.
     
 </dd>
 </dl>
@@ -10973,6 +10981,18 @@ client.patient_payments.v_4.create(
 <dl>
 <dd>
 
+**allocation_restrictions:** `Internal::Types::Array[Candid::Financials::Types::AllocationRestrictionCreate]` 
+
+Optional restrictions constraining which claims this payment's credit can be
+auto-allocated to (e.g. billing provider NPI). Restriction (type, value) pairs must be
+unique. When omitted, the payment is unrestricted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `Candid::PatientPayments::V4::RequestOptions` 
     
 </dd>
@@ -11442,6 +11462,19 @@ client.patient_refunds.v_1.create(
 <dd>
 
 **refund_reason:** `Candid::Financials::Types::RefundReason` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allocation_restrictions:** `Internal::Types::Array[Candid::Financials::Types::AllocationRestrictionCreate]` 
+
+Optional restrictions constraining which claims this refund's credit can be
+auto-allocated to (e.g. billing provider NPI). Restriction (type, value) pairs must be
+unique. When omitted, the refund is unrestricted. Refunds created from an existing
+payment inherit that payment's restrictions instead.
     
 </dd>
 </dl>
@@ -18158,6 +18191,108 @@ client.pre_encounter.patients.v_1.get_coverage_snapshot(id: "id")
 <dd>
 
 **date:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Patients::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.patients.v_1.<a href="/lib/candid/pre_encounter/patients/v_1/client.rb">get_eligibility_timeline</a>(id) -> Candid::PreEncounter::Patients::V1::Types::EligibilityTimelinePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets a patient's eligibility audit timeline, newest-first.  Org-scoped and keyset-paginated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.patients.v_1.get_eligibility_timeline(id: "id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_types:** `Candid::PreEncounter::Patients::V1::Types::EligibilityAuditEventType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**coverage_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**appointment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` 
     
 </dd>
 </dl>

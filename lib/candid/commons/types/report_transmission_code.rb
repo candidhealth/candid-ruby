@@ -6,6 +6,7 @@ module Candid
       module ReportTransmissionCode
         extend Candid::Internal::Types::Enum
 
+        CAA = "AA"
         CBM = "BM"
         CEL = "EL"
         CFX = "FX"

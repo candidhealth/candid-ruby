@@ -16,6 +16,8 @@ module Candid
             field :secondary_coverage_status, -> { Candid::PreEncounter::Coverages::V1::Types::CoverageStatus }, optional: true, nullable: false
             field :primary_payer_name, -> { String }, optional: true, nullable: false
             field :primary_payer_plan_group_id, -> { String }, optional: true, nullable: false
+            field :secondary_payer_name, -> { String }, optional: true, nullable: false
+            field :secondary_payer_plan_group_id, -> { String }, optional: true, nullable: false
           end
         end
       end

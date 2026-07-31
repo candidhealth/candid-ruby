@@ -113,6 +113,9 @@ module Candid
           AUD = "AuD"
           ATC = "ATC"
           LAT = "LAT"
+          OTA = "OTA"
+          LSSP = "LSSP"
+          SLPA = "SLPA"
         end
       end
     end

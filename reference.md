@@ -6152,6 +6152,8 @@ Event types to filter on. Defaults to showing all event types.
 | `PreEncounter.Coverage.Updated` | When a patient's coverage has been updated |
 | `PreEncounter.Tag.Created` | When a new tag has been created for a patient |
 | `PreEncounter.Tag.Updated` | When a patient's tag has been updated |
+| `CandidApi.OrganizationProvider.Created` | When a new organization provider has been created |
+| `CandidApi.OrganizationProvider.Updated` | When an organization provider has been updated |
     
 </dd>
 </dl>
@@ -10078,6 +10080,150 @@ client.organization_providers.v_3.update(organization_provider_id: "d5e9c84f-c2b
 <dd>
 
 **request:** `Candid::OrganizationProviders::V3::Types::OrganizationProviderUpdateV2` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">list_attachments</a>(organization_provider_id) -> Internal::Types::Array[Candid::OrganizationProviders::V3::Types::ProviderAttachment]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.organization_providers.v_3.list_attachments(organization_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_provider_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">download_attachment</a>() -> Candid::OrganizationProviders::V3::Types::ProviderAttachmentResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.organization_providers.v_3.download_attachment(attachment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::OrganizationProviders::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organization_providers.v_3.<a href="/lib/candid/organization_providers/v_3/client.rb">delete_attachment</a>(attachment_id) -> </code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.organization_providers.v_3.delete_attachment(attachment_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
     
 </dd>
 </dl>

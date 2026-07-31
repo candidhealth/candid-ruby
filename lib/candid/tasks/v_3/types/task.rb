@@ -24,6 +24,7 @@ module Candid
           field :assignments, -> { Internal::Types::Array[Candid::Tasks::V3::Types::TaskAssignment] }, optional: false, nullable: false
           field :category, -> { Candid::Tasks::Commons::Types::TaskCategory }, optional: true, nullable: false
           field :configurable_rule_id, -> { String }, optional: true, nullable: false
+          field :persisted_rule_id, -> { String }, optional: true, nullable: false
         end
       end
     end

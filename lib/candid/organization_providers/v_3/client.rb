@@ -165,6 +165,151 @@ module Candid
             raise error_class.new(response.body, code: code)
           end
         end
+
+        # Uploads a file to the provider. Accepted file types are W9, PECOS_RECORD, and BANK_LETTER_OR_VOIDED_CHECK.
+        # Only one file per type is allowed per provider — uploading when a file of the same type already exists returns
+        # a 409.
+        #
+        # @param request_options [Hash]
+        # @param params [void]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::OrganizationProviders::V2::Types::OrganizationProviderId] :organization_provider_id
+        #
+        # @return [String]
+        def upload_attachment(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          body = Internal::Multipart::FormData.new
+
+          body.add_part(params[:attachment_file].to_form_data_part(name: "attachment_file")) if params[:attachment_file]
+          if params[:file_type]
+            body.add(
+              name: "file_type",
+              value: params[:file_type]
+            )
+          end
+
+          request = Candid::Internal::Multipart::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "PUT",
+            path: "/api/organization-providers/v3/#{params[:organization_provider_id]}/attachments",
+            body: body,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::OrganizationProviders::V3::Types::ProviderAttachmentId.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::OrganizationProviders::V2::Types::OrganizationProviderId] :organization_provider_id
+        #
+        # @return [Array[Candid::OrganizationProviders::V3::Types::ProviderAttachment]]
+        def list_attachments(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "GET",
+            path: "/api/organization-providers/v3/#{params[:organization_provider_id]}/attachments",
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          return if code.between?(200, 299)
+
+          error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::OrganizationProviders::V3::Types::ProviderAttachmentId] :attachment_id
+        #
+        # @return [Candid::OrganizationProviders::V3::Types::ProviderAttachmentResponse]
+        def download_attachment(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          query_param_names = %i[attachment_id]
+          query_params = {}
+          query_params["attachment_id"] = params[:attachment_id] if params.key?(:attachment_id)
+          params.except(*query_param_names)
+
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "GET",
+            path: "/api/organization-providers/v3/attachments/download",
+            query: query_params,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::OrganizationProviders::V3::Types::ProviderAttachmentResponse.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::OrganizationProviders::V3::Types::ProviderAttachmentId] :attachment_id
+        #
+        # @return [untyped]
+        def delete_attachment(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "DELETE",
+            path: "/api/organization-providers/v3/attachments/#{params[:attachment_id]}",
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          return if code.between?(200, 299)
+
+          error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
     end
   end

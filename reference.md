@@ -13179,6 +13179,72 @@ client.tasks.v_3.update(task_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
 </dl>
 </details>
 
+## Users V2
+<details><summary><code>client.users.v_2.<a href="/lib/candid/users/v_2/client.rb">create_m_2_m_user_v_2</a>(request) -> Candid::Users::V2::Types::M2MUserResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Provisions a machine-to-machine (M2M) API user. Requires `organization_id`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.users.v_2.create_m_2_m_user_v_2(
+  name: "name",
+  organization_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::Users::V2::Types::M2MUserCreateV2` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Users::V2::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## WriteOffs V1
 <details><summary><code>client.write_offs.v_1.<a href="/lib/candid/write_offs/v_1/client.rb">get_multi</a>() -> Candid::WriteOffs::V1::Types::WriteOffsPage</code></summary>
 <dl>

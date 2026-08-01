@@ -13,7 +13,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url || environment&.dig(:candid_api),
         headers: {
-          "User-Agent" => "candidhealth/1.29.0",
+          "User-Agent" => "candidhealth/1.30.0",
           "X-Fern-Language" => "Ruby"
         }
       )
@@ -192,6 +192,11 @@ module Candid
     # @return [Candid::Tasks::Client]
     def tasks
       @tasks ||= Candid::Tasks::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
+    # @return [Candid::Users::Client]
+    def users
+      @users ||= Candid::Users::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
     # @return [Candid::WriteOffs::Client]

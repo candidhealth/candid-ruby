@@ -15,6 +15,7 @@ module Candid
             field :service_duration, -> { Integer }, optional: false, nullable: false
             field :services, -> { Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Service] }, optional: false, nullable: false
             field :placer_appointment_id, -> { String }, optional: true, nullable: false
+            field :placer_system_name, -> { String }, optional: true, nullable: false
             field :attending_doctor, -> { Candid::PreEncounter::Common::Types::ExternalProvider }, optional: true, nullable: false
             field :estimated_copay_cents, -> { Integer }, optional: true, nullable: false
             field :estimated_patient_responsibility_cents, -> { Integer }, optional: true, nullable: false

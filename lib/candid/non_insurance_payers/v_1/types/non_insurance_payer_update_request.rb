@@ -8,6 +8,7 @@ module Candid
           field :name, -> { String }, optional: true, nullable: false
           field :description, -> { Candid::NonInsurancePayers::V1::Types::NonInsurancePayerDescriptionUpdate }, optional: true, nullable: false
           field :category, -> { Candid::NonInsurancePayers::V1::Types::NonInsurancePayerCategoryUpdate }, optional: true, nullable: false
+          field :payer_id, -> { Candid::NonInsurancePayers::V1::Types::NonInsurancePayerPayerIdUpdate }, optional: true, nullable: false
           field :address, -> { Candid::NonInsurancePayers::V1::Types::NonInsurancePayerAddressUpdate }, optional: true, nullable: false
         end
       end

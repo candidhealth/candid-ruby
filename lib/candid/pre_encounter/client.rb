@@ -39,6 +39,11 @@ module Candid
         @lists ||= Candid::PreEncounter::Lists::Client.new(client: @client, base_url: @base_url, environment: @environment)
       end
 
+      # @return [Candid::MetadataSchemas::Client]
+      def metadata_schemas
+        @metadata_schemas ||= Candid::PreEncounter::MetadataSchemas::Client.new(client: @client, base_url: @base_url, environment: @environment)
+      end
+
       # @return [Candid::Notes::Client]
       def notes
         @notes ||= Candid::PreEncounter::Notes::Client.new(client: @client, base_url: @base_url, environment: @environment)

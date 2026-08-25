@@ -12,6 +12,7 @@ module Candid
             field :patient_id, -> { String }, optional: false, nullable: false
             field :coverage_id, -> { String }, optional: true, nullable: false
             field :appointment_id, -> { String }, optional: true, nullable: false
+            field :appointment_date, -> { String }, optional: true, nullable: false
             field :timestamp, -> { String }, optional: false, nullable: false
             field :user_id, -> { String }, optional: false, nullable: false
             field :user_name, -> { String }, optional: false, nullable: false

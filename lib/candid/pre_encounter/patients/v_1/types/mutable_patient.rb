@@ -52,6 +52,7 @@ module Candid
             field :orcon, -> { Internal::Types::Boolean }, optional: true, nullable: false
             field :advanced_directives, -> { Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::AdvancedDirective] }, optional: true, nullable: false
             field :hipaa_code, -> { String }, optional: true, nullable: false
+            field :custom_metadata, -> { Internal::Types::Array[Candid::PreEncounter::Patients::V1::Types::CustomMetadataEntry] }, optional: true, nullable: false
           end
         end
       end

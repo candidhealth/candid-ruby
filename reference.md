@@ -16469,6 +16469,453 @@ client.pre_encounter.lists.v_1.get_appointment_list
 </dl>
 </details>
 
+## PreEncounter MetadataSchemas V1
+<details><summary><code>client.pre_encounter.metadata_schemas.v_1.<a href="/lib/candid/pre_encounter/metadata_schemas/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::MetadataSchemas::V1::Types::MetadataSchema</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets a custom metadata schema by MetadataSchemaId.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.metadata_schemas.v_1.get(id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::MetadataSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.metadata_schemas.v_1.<a href="/lib/candid/pre_encounter/metadata_schemas/v_1/client.rb">get_all</a>() -> Candid::PreEncounter::MetadataSchemas::V1::Types::MetadataSchemaPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets all custom metadata schemas for the organization, ordered by name. Defaults to page size of 100.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.metadata_schemas.v_1.get_all
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::MetadataSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.metadata_schemas.v_1.<a href="/lib/candid/pre_encounter/metadata_schemas/v_1/client.rb">create</a>(request) -> Candid::PreEncounter::MetadataSchemas::V1::Types::MetadataSchema</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new custom metadata schema. Schema names must be unique within an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.metadata_schemas.v_1.create(
+  name: "name",
+  fields: [{
+    key: "key",
+    type: "STRING"
+  }, {
+    key: "key",
+    type: "STRING"
+  }]
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::MetadataSchemas::V1::Types::MutableMetadataSchema` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::MetadataSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.metadata_schemas.v_1.<a href="/lib/candid/pre_encounter/metadata_schemas/v_1/client.rb">update</a>(id, version, request) -> Candid::PreEncounter::MetadataSchemas::V1::Types::MetadataSchema</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates a custom metadata schema. Updates are additive only: new fields may be added but existing fields may not be removed or have their type changed, and ENUM field value lists may be extended but not shrunk. The path must contain the most recent version to prevent races.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.metadata_schemas.v_1.update(
+  id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  version: "version",
+  name: "name",
+  fields: [{
+    key: "key",
+    type: "STRING"
+  }, {
+    key: "key",
+    type: "STRING"
+  }]
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::MetadataSchemas::V1::Types::MutableMetadataSchema` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::MetadataSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.metadata_schemas.v_1.<a href="/lib/candid/pre_encounter/metadata_schemas/v_1/client.rb">deactivate</a>(id, version) -> </code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets a custom metadata schema as deactivated. The path must contain the most recent version to prevent races.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.metadata_schemas.v_1.deactivate(
+  id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  version: "version"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::MetadataSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.metadata_schemas.v_1.<a href="/lib/candid/pre_encounter/metadata_schemas/v_1/client.rb">reactivate</a>(id, version) -> </code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes the deactivated flag for a custom metadata schema. The path must contain the most recent version to prevent races.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.metadata_schemas.v_1.reactivate(
+  id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  version: "version"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::MetadataSchemas::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## PreEncounter Notes V1
 <details><summary><code>client.pre_encounter.notes.v_1.<a href="/lib/candid/pre_encounter/notes/v_1/client.rb">get</a>(id) -> Candid::PreEncounter::Notes::V1::Types::Note</code></summary>
 <dl>
@@ -17569,6 +18016,69 @@ client.pre_encounter.patient_merges.v_1.scan(since: "2024-01-15T09:30:00Z")
 <dd>
 
 **max_results:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::PatientMerges::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.patient_merges.v_1.<a href="/lib/candid/pre_encounter/patient_merges/v_1/client.rb">search</a>(request) -> Candid::PreEncounter::PatientMerges::V1::Types::PatientMergePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a page of patient merge records for the given MRNs. A merge is included
+when the MRN matches either the alternative or the primary patient MRN.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.patient_merges.v_1.search(mrns: %w[mrns mrns])
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::PatientMerges::V1::Types::PatientMergeSearchRequest` 
     
 </dd>
 </dl>

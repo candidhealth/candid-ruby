@@ -11,6 +11,7 @@ module Candid
             BEHAVIORAL = "BEHAVIORAL"
             MEDICAL = "MEDICAL"
             THERAPY = "THERAPY"
+            OTHER = "OTHER"
           end
         end
       end

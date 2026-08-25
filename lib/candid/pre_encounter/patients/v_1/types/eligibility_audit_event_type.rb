@@ -14,6 +14,7 @@ module Candid
             COVERAGE_CREATED = "COVERAGE_CREATED"
             COVERAGE_UPDATED = "COVERAGE_UPDATED"
             ELIG_CHECK_COMPLETED = "ELIG_CHECK_COMPLETED"
+            PATIENT_TAGS_UPDATED = "PATIENT_TAGS_UPDATED"
           end
         end
       end

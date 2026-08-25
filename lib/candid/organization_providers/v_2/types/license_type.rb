@@ -116,6 +116,9 @@ module Candid
           OTA = "OTA"
           LSSP = "LSSP"
           SLPA = "SLPA"
+          ED_D = "EdD"
+          SWT = "SWT"
+          IMFT = "IMFT"
         end
       end
     end

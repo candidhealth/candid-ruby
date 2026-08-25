@@ -9,6 +9,7 @@ module Candid
         MANUAL_ENTRY = "MANUAL_ENTRY"
         PHREESIA = "PHREESIA"
         SHERPA_HEALTH = "SHERPA_HEALTH"
+        LOCKBOX = "LOCKBOX"
       end
     end
   end

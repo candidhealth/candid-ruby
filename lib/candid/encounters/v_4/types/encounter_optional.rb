@@ -18,6 +18,9 @@ module Candid
           field :appointment_type, -> { String }, optional: true, nullable: false
           field :end_date_of_service, -> { String }, optional: true, nullable: false
           field :additional_information, -> { String }, optional: true, nullable: false
+          field :outside_lab, -> { Internal::Types::Boolean }, optional: true, nullable: false
+          field :outside_lab_charges_amount_cents, -> { Integer }, optional: true, nullable: false
+          field :purchased_service_provider_npi, -> { String }, optional: true, nullable: false
           field :service_authorization_exception_code, -> { Candid::Encounters::V4::Types::ServiceAuthorizationExceptionCode }, optional: true, nullable: false
           field :admission_date, -> { String }, optional: true, nullable: false
           field :discharge_date, -> { String }, optional: true, nullable: false

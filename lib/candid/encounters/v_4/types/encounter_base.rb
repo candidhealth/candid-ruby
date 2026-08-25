@@ -19,6 +19,9 @@ module Candid
           field :vitals, -> { Candid::Encounters::V4::Types::Vitals }, optional: true, nullable: false
           field :billable_status, -> { Candid::Encounters::V4::Types::BillableStatusType }, optional: false, nullable: false
           field :additional_information, -> { String }, optional: true, nullable: false
+          field :outside_lab, -> { Internal::Types::Boolean }, optional: true, nullable: false
+          field :outside_lab_charges_amount_cents, -> { Integer }, optional: true, nullable: false
+          field :purchased_service_provider_npi, -> { String }, optional: true, nullable: false
           field :service_authorization_exception_code, -> { Candid::Encounters::V4::Types::ServiceAuthorizationExceptionCode }, optional: true, nullable: false
           field :admission_date, -> { String }, optional: true, nullable: false
           field :discharge_date, -> { String }, optional: true, nullable: false

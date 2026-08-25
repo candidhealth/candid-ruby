@@ -9,6 +9,7 @@ module Candid
           field :name, -> { String }, optional: false, nullable: false
           field :description, -> { String }, optional: true, nullable: false
           field :category, -> { String }, optional: true, nullable: false
+          field :payer_id, -> { String }, optional: true, nullable: false
           field :enabled, -> { Internal::Types::Boolean }, optional: false, nullable: false
           field :address, -> { Candid::Commons::Types::StreetAddressShortZip }, optional: true, nullable: false
           field :clinical_trials, -> { Internal::Types::Array[Candid::ClinicalTrials::V1::Types::ClinicalTrial] }, optional: false, nullable: false

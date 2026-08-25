@@ -17,6 +17,7 @@ module Candid
         PHREESIA = "PHREESIA"
         INSTAMED = "INSTAMED"
         SHERPA_HEALTH = "SHERPA_HEALTH"
+        LOCKBOX = "LOCKBOX"
       end
     end
   end

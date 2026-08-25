@@ -11,6 +11,7 @@ module Candid
           field :characteristics, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
           field :errors, -> { Internal::Types::Array[Candid::ChargeCapture::V1::Types::ChargeCaptureError] }, optional: false, nullable: false
           field :encounter_creation_input, -> { Candid::ChargeCapture::V1::Types::ChargeCaptureData }, optional: true, nullable: false
+          field :most_recent_claim_preview_id, -> { String }, optional: true, nullable: false
         end
       end
     end

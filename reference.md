@@ -4025,6 +4025,81 @@ client.custom_schemas.v_1.update(
 </dl>
 </details>
 
+## Dashboarding V1
+<details><summary><code>client.dashboarding.v_1.<a href="/lib/candid/dashboarding/v_1/client.rb">query_metrics</a>(request) -> Candid::Dashboarding::V1::Types::MetricsQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves values for one or more metrics. Each metric is computed independently, so a
+metric that cannot be resolved returns an `error` on its own result rather than failing
+the request.
+
+Each query reads current state by default. Count metrics also accept a `yesterday`
+snapshot, so day-over-day change is computed by querying both and taking the difference.
+
+See the [Metrics Reference](/docs/dashboarding-metrics) for the full catalog, including
+value types and staleness SLAs.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.dashboarding.v_1.query_metrics(request: [{
+  metric: "patient_total_balance_v1"
+}, {
+  metric: "patient_total_balance_v1"
+}])
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Internal::Types::Array[Candid::Dashboarding::V1::Types::MetricQuery]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Dashboarding::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Eligibility V2
 <details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">submit_eligibility_check_availity</a>() -> Object</code></summary>
 <dl>
@@ -6068,6 +6143,47 @@ client.encounters.v_4.update(encounter_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32
 <dd>
 
 **request_options:** `Candid::Encounters::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## EnterpriseConfig V1
+<details><summary><code>client.enterprise_config.v_1.<a href="/lib/candid/enterprise_config/v_1/client.rb">get</a>() -> Candid::EnterpriseConfig::V1::Types::EnterprisePermissions</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.enterprise_config.v_1.get
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::EnterpriseConfig::V1::RequestOptions` 
     
 </dd>
 </dl>

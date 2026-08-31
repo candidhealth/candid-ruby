@@ -13,7 +13,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url || environment&.dig(:candid_api),
         headers: {
-          "User-Agent" => "candidhealth/1.31.0",
+          "User-Agent" => "candidhealth/1.32.0",
           "X-Fern-Language" => "Ruby"
         }
       )
@@ -54,6 +54,11 @@ module Candid
       @custom_schemas ||= Candid::CustomSchemas::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
+    # @return [Candid::Dashboarding::Client]
+    def dashboarding
+      @dashboarding ||= Candid::Dashboarding::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
     # @return [Candid::Eligibility::Client]
     def eligibility
       @eligibility ||= Candid::Eligibility::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
@@ -77,6 +82,11 @@ module Candid
     # @return [Candid::Encounters::Client]
     def encounters
       @encounters ||= Candid::Encounters::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
+    # @return [Candid::EnterpriseConfig::Client]
+    def enterprise_config
+      @enterprise_config ||= Candid::EnterpriseConfig::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
     # @return [Candid::Events::Client]

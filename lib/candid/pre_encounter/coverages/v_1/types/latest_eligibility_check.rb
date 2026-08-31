@@ -11,6 +11,7 @@ module Candid
             field :status, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityStatus }, optional: false, nullable: false
             field :initiated_at, -> { String }, optional: false, nullable: false
             field :errors, -> { Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckErrorDetails] }, optional: true, nullable: false
+            field :request_corrections, -> { Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::RequestCorrection] }, optional: true, nullable: false
           end
         end
       end

@@ -68,6 +68,7 @@ module Candid
         WV = "WV"
         WI = "WI"
         WY = "WY"
+        FC = "FC"
       end
     end
   end

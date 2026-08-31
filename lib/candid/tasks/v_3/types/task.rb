@@ -25,6 +25,7 @@ module Candid
           field :category, -> { Candid::Tasks::Commons::Types::TaskCategory }, optional: true, nullable: false
           field :configurable_rule_id, -> { String }, optional: true, nullable: false
           field :persisted_rule_id, -> { String }, optional: true, nullable: false
+          field :organization_id, -> { String }, optional: true, nullable: false
         end
       end
     end

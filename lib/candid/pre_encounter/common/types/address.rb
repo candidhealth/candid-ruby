@@ -9,6 +9,7 @@ module Candid
           field :line, -> { Internal::Types::Array[String] }, optional: false, nullable: false
           field :city, -> { String }, optional: false, nullable: false
           field :state, -> { String }, optional: false, nullable: false
+          field :administrative_area, -> { String }, optional: true, nullable: false
           field :postal_code, -> { String }, optional: false, nullable: false
           field :country, -> { String }, optional: false, nullable: false
           field :county, -> { String }, optional: true, nullable: false

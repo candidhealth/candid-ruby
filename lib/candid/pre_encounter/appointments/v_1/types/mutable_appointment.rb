@@ -22,6 +22,10 @@ module Candid
             field :patient_deposit_cents, -> { Integer }, optional: true, nullable: false
             field :appointment_details, -> { String }, optional: true, nullable: false
             field :checked_in_timestamp, -> { String }, optional: true, nullable: false
+            field :checked_out_timestamp, -> { String }, optional: true, nullable: false
+            field :appointment_reason_detail, -> { Candid::PreEncounter::Appointments::V1::Types::AppointmentReasonDetail }, optional: true, nullable: false
+            field :medical_necessity_verified, -> { Internal::Types::Boolean }, optional: true, nullable: false
+            field :prior_authorization_status, -> { Candid::PreEncounter::Appointments::V1::Types::PriorAuthorizationStatus }, optional: true, nullable: false
             field :notes, -> { String }, optional: true, nullable: false
             field :location_resource_id, -> { String }, optional: true, nullable: false
             field :automated_eligibility_check_complete, -> { Internal::Types::Boolean }, optional: true, nullable: false

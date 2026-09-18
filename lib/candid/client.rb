@@ -13,7 +13,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url || environment&.dig(:candid_api),
         headers: {
-          "User-Agent" => "candidhealth/1.32.0",
+          "User-Agent" => "candidhealth/1.33.0",
           "X-Fern-Language" => "Ruby"
         }
       )
@@ -189,6 +189,11 @@ module Candid
       @payers ||= Candid::Payers::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
+    # @return [Candid::PreServiceRules::Client]
+    def pre_service_rules
+      @pre_service_rules ||= Candid::PreServiceRules::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
     # @return [Candid::ServiceLines::Client]
     def service_lines
       @service_lines ||= Candid::ServiceLines::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
@@ -207,6 +212,11 @@ module Candid
     # @return [Candid::Users::Client]
     def users
       @users ||= Candid::Users::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
+    # @return [Candid::Views::Client]
+    def views
+      @views ||= Candid::Views::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
     # @return [Candid::WriteOffs::Client]

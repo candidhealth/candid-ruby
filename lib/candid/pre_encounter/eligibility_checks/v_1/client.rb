@@ -404,6 +404,81 @@ module Candid
               raise error_class.new(response.body, code: code)
             end
           end
+
+          # Returns patient eligibility data regardless of clearinghouse. Uses the encounter id to get needed patient,
+          # date of service, etc data.
+          #
+          # @param request_options [Hash]
+          # @param params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [String] :encounter_id
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityResponse]
+          def encounter_eligibility(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            query_param_names = %i[encounter_id]
+            query_params = {}
+            query_params["encounter_id"] = params[:encounter_id] if params.key?(:encounter_id)
+            params.except(*query_param_names)
+
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "GET",
+              path: "/eligibility-checks/v1/encounter_eligibility",
+              query: query_params,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityResponse.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
+
+          # Fetch an eligibility check for the patient for the date of service, npi, and payer
+          #
+          # @param request_options [Hash]
+          # @param params [Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityRequest]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibility]
+          def create_encounter_eligibility(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "POST",
+              path: "/eligibility-checks/v1/eligibility",
+              body: Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityRequest.new(params).to_h,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibility.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
         end
       end
     end

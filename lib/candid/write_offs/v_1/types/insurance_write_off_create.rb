@@ -10,6 +10,7 @@ module Candid
           field :write_off_timestamp, -> { String }, optional: false, nullable: false
           field :write_off_note, -> { String }, optional: true, nullable: false
           field :write_off_reason, -> { Candid::WriteOffs::V1::Types::InsuranceWriteOffReason }, optional: false, nullable: false
+          field :custom_write_off_reason, -> { String }, optional: true, nullable: false
           field :amount_cents, -> { Integer }, optional: false, nullable: false
         end
       end

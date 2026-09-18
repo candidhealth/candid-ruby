@@ -4249,6 +4249,59 @@ client.eligibility.v_2.submit_eligibility_check_availity_post
 </dl>
 </details>
 
+<details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">find_availity_eligibility_results</a>(request) -> Candid::Eligibility::V2::Types::FindAvailityEligibilityResultsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.eligibility.v_2.find_availity_eligibility_results(
+  member_id: "member_id",
+  payer_id: "payer_id",
+  date_of_service: "2024-01-15T09:30:00Z",
+  provider_npi: "provider_npi"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::Eligibility::V2::Types::FindAvailityEligibilityResultsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Eligibility::V2::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## EncounterAttachments V1
 <details><summary><code>client.encounter_attachments.v_1.<a href="/lib/candid/encounter_attachments/v_1/client.rb">get</a>(encounter_id) -> Internal::Types::Array[Candid::EncounterAttachments::V1::Types::EncounterAttachment]</code></summary>
 <dl>
@@ -12570,6 +12623,255 @@ client.payers.v_4.get_all
 </dl>
 </details>
 
+## PreServiceRules V1
+<details><summary><code>client.pre_service_rules.v_1.<a href="/lib/candid/pre_service_rules/v_1/client.rb">create_encounter_run</a>(request) -> Candid::PreServiceRules::V1::Types::PreServiceRunCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submit a representation of an encounter to the Candid rules engine. Note that this encounter will not be created in Candid.
+Returns a run_id that can be polled via GET /runs/{run_id} to retrieve the results once complete.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_service_rules.v_1.create_encounter_run(
+  entity: {
+    external_id: "external_id",
+    patient_authorized_release: true,
+    benefits_assigned_to_provider: true,
+    provider_accepts_assignment: true,
+    patient: {
+      external_id: "external_id",
+      date_of_birth: "2023-01-15",
+      address: {
+        address_1: "address1",
+        city: "city",
+        state: "AA",
+        zip_code: "zip_code"
+      },
+      first_name: "first_name",
+      last_name: "last_name",
+      gender: "male"
+    },
+    responsible_party: "INSURANCE_PAY",
+    billing_provider: {
+      address: {
+        zip_plus_four_code: "zip_plus_four_code",
+        address_1: "address1",
+        city: "city",
+        state: "AA",
+        zip_code: "zip_code"
+      },
+      tax_id: "tax_id",
+      npi: "npi"
+    },
+    submission_expectation: "TARGET_PROFESSIONAL"
+  },
+  pipeline_id: "pipeline_id",
+  enabled_rule_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
+  disabled_rule_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
+  idempotency_key: "idempotency_key"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entity:** `Candid::PreServiceRules::V1::Types::PreServiceEncounterCreate` — The encounter to evaluate against the rules engine.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pipeline_id:** `String` — Identifies the set of rules to run against the encounter.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enabled_rule_ids:** `Internal::Types::Array[String]` — IDs of disabled rules to force-enable for this run (e.g. for testing new rules).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**disabled_rule_ids:** `Internal::Types::Array[String]` — IDs of enabled rules to force-disable for this run (e.g., to "override" or skip certain rules).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` — Prevents multiple rule runs from being dispatched in response to duplicate requests.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreServiceRules::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_service_rules.v_1.<a href="/lib/candid/pre_service_rules/v_1/client.rb">get_run</a>(run_id) -> Candid::PreServiceRules::V1::Types::PreServiceRun</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the result of a pre-service run. This endpoint supports long-polling.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_service_rules.v_1.get_run(run_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreServiceRules::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_service_rules.v_1.<a href="/lib/candid/pre_service_rules/v_1/client.rb">get_pipelines</a>() -> Internal::Types::Array[Candid::PreServiceRules::V1::Types::PreServicePipelineSummary]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the pre-service pipelines available to the authenticated organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_service_rules.v_1.get_pipelines
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreServiceRules::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ServiceLines V2
 <details><summary><code>client.service_lines.v_2.<a href="/lib/candid/service_lines/v_2/client.rb">create</a>(request) -> Candid::ServiceLines::V2::Types::ServiceLine</code></summary>
 <dl>
@@ -13350,6 +13652,78 @@ client.users.v_2.create_m_2_m_user_v_2(
 <dd>
 
 **request_options:** `Candid::Users::V2::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Views Dynamic V1
+<details><summary><code>client.views.dynamic.v_1.<a href="/lib/candid/views/dynamic/v_1/client.rb">resolve</a>(claim_dynamic_view_id, request) -> Candid::EncounterSummaries::V1::Types::EncounterSummaryPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resolves a dynamic view to the EncounterSummaries currently present in this view.
+Body parameters can include sorting controls.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.views.dynamic.v_1.resolve(claim_dynamic_view_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**claim_dynamic_view_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Defaults to 100
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Views::Dynamic::V1::RequestOptions` 
     
 </dd>
 </dl>
@@ -15947,6 +16321,130 @@ client.pre_encounter.eligibility_checks.v_1.coordination_of_benefits(
 <dd>
 
 **request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">encounter_eligibility</a>() -> Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns patient eligibility data regardless of clearinghouse. Uses the encounter id to get needed patient, date of service, etc data.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.encounter_eligibility(encounter_id: "encounter_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**encounter_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">create_encounter_eligibility</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibility</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetch an eligibility check for the patient for the date of service, npi, and payer
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.create_encounter_eligibility(encounter_id: "encounter_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityRequest` 
     
 </dd>
 </dl>

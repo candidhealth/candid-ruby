@@ -12,6 +12,8 @@ module Candid
             NOT_READY = "NOT_READY"
             READY = "READY"
             CHECKED_IN = "CHECKED_IN"
+            CHECKED_OUT = "CHECKED_OUT"
+            NO_SHOW = "NO_SHOW"
           end
         end
       end

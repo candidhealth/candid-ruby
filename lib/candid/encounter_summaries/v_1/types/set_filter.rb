@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+module Candid
+  module EncounterSummaries
+    module V1
+      module Types
+        # Filter on a field by matching against a set of allowed values, with optional negation.
+        class SetFilter < Internal::Types::Model
+          field :mode, -> { Candid::EncounterSummaries::V1::Types::SetMatchMode }, optional: true, nullable: false
+          field :values, -> { Internal::Types::Array[String] }, optional: false, nullable: false
+        end
+      end
+    end
+  end
+end

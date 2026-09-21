@@ -27,7 +27,7 @@ module Candid
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         #
-        # @return [Candid::PreServiceRules::V1::Types::PreServiceRunCreateResponse]
+        # @return [String]
         def create_encounter_run(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
           request = Candid::Internal::JSON::Request.new(
@@ -44,7 +44,7 @@ module Candid
           end
           code = response.code.to_i
           if code.between?(200, 299)
-            Candid::PreServiceRules::V1::Types::PreServiceRunCreateResponse.load(response.body)
+            Candid::PreServiceRules::V1::Types::PreServiceRunId.load(response.body)
           else
             error_class = Candid::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

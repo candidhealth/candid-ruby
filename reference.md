@@ -12624,7 +12624,7 @@ client.payers.v_4.get_all
 </details>
 
 ## PreServiceRules V1
-<details><summary><code>client.pre_service_rules.v_1.<a href="/lib/candid/pre_service_rules/v_1/client.rb">create_encounter_run</a>(request) -> Candid::PreServiceRules::V1::Types::PreServiceRunCreateResponse</code></summary>
+<details><summary><code>client.pre_service_rules.v_1.<a href="/lib/candid/pre_service_rules/v_1/client.rb">create_encounter_run</a>(request) -> String</code></summary>
 <dl>
 <dd>
 

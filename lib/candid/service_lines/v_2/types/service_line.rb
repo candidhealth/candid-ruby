@@ -33,6 +33,7 @@ module Candid
           field :place_of_service_code_as_submitted, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :service_line_id, -> { String }, optional: false, nullable: false
           field :procedure_code, -> { String }, optional: false, nullable: false
+          field :custom_procedure_code, -> { String }, optional: true, nullable: false
           field :ordering_provider, -> { Candid::EncounterProviders::V2::Types::EncounterProvider }, optional: true, nullable: false
           field :revenue_code, -> { String }, optional: true, nullable: false
           field :quantity, -> { String }, optional: false, nullable: false

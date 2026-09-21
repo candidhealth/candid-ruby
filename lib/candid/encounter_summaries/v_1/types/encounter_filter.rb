@@ -52,6 +52,7 @@ module Candid
           field :owner_of_next_action, -> { Candid::EncounterSummaries::V1::Types::SetFilter }, optional: true, nullable: false
           field :submission_expectation, -> { Candid::EncounterSummaries::V1::Types::SetFilter }, optional: true, nullable: false
           field :work_queue_id, -> { Candid::EncounterSummaries::V1::Types::SetFilter }, optional: true, nullable: false
+          field :work_queue_category, -> { Candid::EncounterSummaries::V1::Types::WorkQueueCategorySetFilter }, optional: true, nullable: false
           field :days_in_queue, -> { Candid::EncounterSummaries::V1::Types::IntRangeFilter }, optional: true, nullable: false
           field :tag_ids, -> { Candid::EncounterSummaries::V1::Types::SetFilter }, optional: true, nullable: false
           field :static_view_id, -> { String }, optional: true, nullable: false

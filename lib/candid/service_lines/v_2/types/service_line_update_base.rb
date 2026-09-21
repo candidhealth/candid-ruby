@@ -13,6 +13,7 @@ module Candid
           field :place_of_service_code, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :units, -> { Candid::Commons::Types::ServiceLineUnits }, optional: true, nullable: false
           field :procedure_code, -> { String }, optional: true, nullable: false
+          field :custom_procedure_code, -> { String }, optional: true, nullable: false
           field :quantity, -> { String }, optional: true, nullable: false
           field :description, -> { String }, optional: true, nullable: false
           field :date_of_service, -> { String }, optional: true, nullable: false

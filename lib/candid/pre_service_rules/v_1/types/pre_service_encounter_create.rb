@@ -52,6 +52,7 @@ module Candid
           field :related_causes_information, -> { Candid::RelatedCauses::V1::Types::RelatedCausesInformationCreate }, optional: true, nullable: false
           field :property_casualty_claim_number, -> { String }, optional: true, nullable: false
           field :accident_date, -> { String }, optional: true, nullable: false
+          field :initial_treatment_date, -> { String }, optional: true, nullable: false
           field :property_casualty_patient_identifier, -> { Candid::PropertyAndCasualty::V1::Types::PropertyCasualtyPatientIdentifierCreate }, optional: true, nullable: false
           field :admission_hour, -> { Integer }, optional: true, nullable: false
           field :admission_type_code, -> { Candid::X12::V1::Types::TypeOfAdmissionOrVisitCode }, optional: true, nullable: false

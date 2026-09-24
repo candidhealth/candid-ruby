@@ -20,6 +20,7 @@ module Candid
         field :related_causes_information, -> { Candid::RelatedCauses::V1::Types::RelatedCausesInformationCreate }, optional: true, nullable: false
         field :property_casualty_claim_number, -> { String }, optional: true, nullable: false
         field :accident_date, -> { String }, optional: true, nullable: false
+        field :initial_treatment_date, -> { String }, optional: true, nullable: false
         field :property_casualty_patient_identifier, -> { Candid::PropertyAndCasualty::V1::Types::PropertyCasualtyPatientIdentifierCreate }, optional: true, nullable: false
       end
     end

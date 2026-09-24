@@ -417,6 +417,74 @@ module Candid
               raise error_class.new(response.body, code: code)
             end
           end
+
+          # Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+          #
+          # @param request_options [Hash]
+          # @param params [Candid::PreEncounter::Coverages::V1::Types::CheckInsuranceDiscoveryRequest]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata]
+          def check_insurance_discovery(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "POST",
+              path: "/coverages/v1/insurance-discovery",
+              body: Candid::PreEncounter::Coverages::V1::Types::CheckInsuranceDiscoveryRequest.new(params).to_h,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
+
+          # Gets the insurance discovery of a patient if successful.
+          #
+          # @param request_options [Hash]
+          # @param params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [String] :check_id
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::AsyncInsuranceDiscoveryCheckResult]
+          def get_insurance_discovery(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "GET",
+              path: "/coverages/v1/insurance-discovery/#{params[:check_id]}",
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::AsyncInsuranceDiscoveryCheckResult.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
         end
       end
     end

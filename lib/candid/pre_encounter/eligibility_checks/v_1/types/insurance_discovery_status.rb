@@ -10,6 +10,8 @@ module Candid
 
             PENDING = "PENDING"
             COMPLETE = "COMPLETE"
+            ERROR = "ERROR"
+            UNKNOWN = "UNKNOWN"
           end
         end
       end

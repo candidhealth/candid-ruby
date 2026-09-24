@@ -15,6 +15,38 @@ module Candid
           @environment = environment
         end
 
+        # @param request_options [Hash]
+        # @param params [Candid::Eligibility::V2::Types::EligibilityRequest]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @return [String]
+        def create_availity_eligibility_check(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "POST",
+            path: "/api/eligibility/v2/avality-eligibility-check",
+            body: Candid::Eligibility::V2::Types::EligibilityRequest.new(params).to_h,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::Eligibility::V2::Types::EligibilityCheckId.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
         # <Tip>Candid is deprecating support for this endpoint. It is instead recommended to use [Candid's Stedi
         # passthrough
         # endpoint](https://docs.joincandidhealth.com/api-reference/pre-encounter/eligibility-checks/v-1/post).
@@ -157,6 +189,38 @@ module Candid
           code = response.code.to_i
           if code.between?(200, 299)
             Candid::Eligibility::V2::Types::FindAvailityEligibilityResultsResponse.load(response.body)
+          else
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+        end
+
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        # @option params [Candid::Eligibility::V2::Types::EligibilityCheckId] :eligibility_check_id
+        #
+        # @return [Candid::Eligibility::V2::Types::AvailityEligibilityResult]
+        def get_by_id(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "GET",
+            path: "/api/eligibility/v2/#{params[:eligibility_check_id]}",
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          if code.between?(200, 299)
+            Candid::Eligibility::V2::Types::AvailityEligibilityResult.load(response.body)
           else
             error_class = Candid::Errors::ResponseError.subclass_for_code(code)
             raise error_class.new(response.body, code: code)

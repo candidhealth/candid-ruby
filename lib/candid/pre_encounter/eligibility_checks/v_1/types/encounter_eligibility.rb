@@ -8,7 +8,7 @@ module Candid
           class EncounterEligibility < Internal::Types::Model
             field :id, -> { String }, optional: false, nullable: false
             field :source, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilitySource }, optional: false, nullable: false
-            field :date_of_service, -> { String }, optional: false, nullable: false, api_name: "dateOfService"
+            field :date_of_service, -> { String }, optional: true, nullable: false, api_name: "dateOfService"
             field :payer_id, -> { String }, optional: false, nullable: false, api_name: "payerId"
             field :provider_npi, -> { String }, optional: false, nullable: false, api_name: "providerNPI"
             field :dependent, -> { Candid::PreEncounter::EligibilityChecks::V1::Types::Dependent }, optional: true, nullable: false

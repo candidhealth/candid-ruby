@@ -4101,6 +4101,60 @@ client.dashboarding.v_1.query_metrics(request: [{
 </details>
 
 ## Eligibility V2
+<details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">create_availity_eligibility_check</a>(request) -> String</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.eligibility.v_2.create_availity_eligibility_check(
+  member_id: "member_id",
+  payer_id: "payer_id",
+  provider_npi: "provider_npi",
+  date_of_service: "2024-01-15T09:30:00Z",
+  service_type_codes: %w[service_type_codes service_type_codes]
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::Eligibility::V2::Types::EligibilityRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Eligibility::V2::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">submit_eligibility_check_availity</a>() -> Object</code></summary>
 <dl>
 <dd>
@@ -4283,6 +4337,54 @@ client.eligibility.v_2.find_availity_eligibility_results(
 <dd>
 
 **request:** `Candid::Eligibility::V2::Types::FindAvailityEligibilityResultsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Eligibility::V2::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.eligibility.v_2.<a href="/lib/candid/eligibility/v_2/client.rb">get_by_id</a>(eligibility_check_id) -> Candid::Eligibility::V2::Types::AvailityEligibilityResult</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.eligibility.v_2.get_by_id(eligibility_check_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**eligibility_check_id:** `String` 
     
 </dd>
 </dl>
@@ -14711,7 +14813,7 @@ client.pre_encounter.appointments.v_1.scan(since: "2024-01-15T09:30:00Z")
 <dl>
 <dd>
 
-Sets an appointment as deactivated.  The path must contain the most recent version to prevent race conditions.  Deactivating historic versions is not supported. Subsequent updates via PUT to the appointment will "reactivate" the appointment and set the deactivated flag to false.
+Sets an appointment as deactivated.  The path must contain the most recent version to prevent race conditions.  Deactivating historic versions is not supported. Subsequent updates via PUT to the appointment will "reactivate" the appointment, set the deactivated flag to false, and clear the cancellation reason.
 </dd>
 </dl>
 </dd>
@@ -14753,6 +14855,14 @@ client.pre_encounter.appointments.v_1.deactivate(
 <dd>
 
 **version:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cancellation_reason:** `String` — The reason the appointment is being cancelled.
     
 </dd>
 </dl>
@@ -15555,6 +15665,150 @@ client.pre_encounter.coverages.v_1.get_eligibility(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**check_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">check_insurance_discovery</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.coverages.v_1.check_insurance_discovery(
+  patient_id: "patient_id",
+  date_of_service: "2023-01-15",
+  npi: "npi"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**patient_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_of_service:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**npi:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_insurance_discovery</a>(check_id) -> Candid::PreEncounter::EligibilityChecks::V1::Types::AsyncInsuranceDiscoveryCheckResult</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets the insurance discovery of a patient if successful.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.coverages.v_1.get_insurance_discovery(check_id: "check_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
 
 <dl>
 <dd>
@@ -16445,6 +16699,68 @@ client.pre_encounter.eligibility_checks.v_1.create_encounter_eligibility(encount
 <dd>
 
 **request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">get_eligibility_check_by_id</a>(eligibility_check_id) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibility</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetch an eligibility check by it's primary key
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.eligibility_checks.v_1.get_eligibility_check_by_id(eligibility_check_id: "eligibility_check_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**eligibility_check_id:** `String` 
     
 </dd>
 </dl>

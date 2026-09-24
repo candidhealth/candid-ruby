@@ -26,6 +26,7 @@ module Candid
           field :related_causes_information, -> { Candid::RelatedCauses::V1::Types::RelatedCausesInformation }, optional: true, nullable: false
           field :property_casualty_claim_number, -> { String }, optional: true, nullable: false
           field :accident_date, -> { String }, optional: true, nullable: false
+          field :initial_treatment_date, -> { String }, optional: true, nullable: false
           field :property_casualty_patient_identifier, -> { Candid::PropertyAndCasualty::V1::Types::PropertyCasualtyPatientIdentifier }, optional: true, nullable: false
           field :submission_expectation, -> { Candid::Encounters::V4::Types::EncounterSubmissionExpectation }, optional: true, nullable: false
           field :type_of_bill, -> { Candid::X12::V1::Types::TypeOfBillComposite }, optional: true, nullable: false

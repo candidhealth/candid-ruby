@@ -30,6 +30,7 @@ module Candid
             field :location_resource_id, -> { String }, optional: true, nullable: false
             field :automated_eligibility_check_complete, -> { Internal::Types::Boolean }, optional: true, nullable: false
             field :work_queue, -> { Candid::PreEncounter::Appointments::V1::Types::AppointmentWorkQueue }, optional: true, nullable: false
+            field :cancellation_reason, -> { String }, optional: true, nullable: false
           end
         end
       end

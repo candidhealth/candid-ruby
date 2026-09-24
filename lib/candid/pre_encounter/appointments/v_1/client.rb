@@ -302,7 +302,7 @@ module Candid
 
           # Sets an appointment as deactivated.  The path must contain the most recent version to prevent race
           # conditions.  Deactivating historic versions is not supported. Subsequent updates via PUT to the appointment
-          # will "reactivate" the appointment and set the deactivated flag to false.
+          # will "reactivate" the appointment, set the deactivated flag to false, and clear the cancellation reason.
           #
           # @param request_options [Hash]
           # @param params [Hash]
@@ -313,14 +313,21 @@ module Candid
           # @option request_options [Integer] :timeout_in_seconds
           # @option params [Candid::PreEncounter::Common::Types::AppointmentId] :id
           # @option params [String] :version
+          # @option params [String, nil] :cancellation_reason
           #
           # @return [untyped]
           def deactivate(request_options: {}, **params)
             params = Candid::Internal::Types::Utils.normalize_keys(params)
+            query_param_names = %i[cancellation_reason]
+            query_params = {}
+            query_params["cancellation_reason"] = params[:cancellation_reason] if params.key?(:cancellation_reason)
+            params = params.except(*query_param_names)
+
             request = Candid::Internal::JSON::Request.new(
               base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
               method: "DELETE",
               path: "/appointments/v1/#{params[:id]}/#{params[:version]}",
+              query: query_params,
               request_options: request_options
             )
             begin

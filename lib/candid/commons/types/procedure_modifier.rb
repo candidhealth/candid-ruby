@@ -413,6 +413,8 @@ module Candid
         W_1 = "W1"
         W_2 = "W2"
         W_3 = "W3"
+        WC = "WC"
+        WH = "WH"
         X_4 = "X4"
         XE = "XE"
         XP = "XP"

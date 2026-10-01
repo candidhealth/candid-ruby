@@ -418,7 +418,9 @@ module Candid
             end
           end
 
-          # Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+          # Initiates an insurance discovery check via patientId. Returns the metadata of the check if successfully
+          # initiated. Prefer to use the eligibilityChecks insurance-discovery api as it will allow long running
+          # discovery requests to complete.
           #
           # @param request_options [Hash]
           # @param params [Candid::PreEncounter::Coverages::V1::Types::CheckInsuranceDiscoveryRequest]
@@ -452,7 +454,79 @@ module Candid
             end
           end
 
-          # Gets the insurance discovery of a patient if successful.
+          # Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+          #
+          # @param request_options [Hash]
+          # @param params [Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          #
+          # @return [Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata]
+          def check_insurance_discovery_passthrough(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "POST",
+              path: "/coverages/v1/insurance-discovery-passthrough",
+              body: Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest.new(params).to_h,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            if code.between?(200, 299)
+              Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata.load(response.body)
+            else
+              error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+              raise error_class.new(response.body, code: code)
+            end
+          end
+
+          # Returns insurance discovery check metadata, filterable by patient.
+          #
+          # @param request_options [Hash]
+          # @param params [Hash]
+          # @option request_options [String] :base_url
+          # @option request_options [Hash{String => Object}] :additional_headers
+          # @option request_options [Hash{String => Object}] :additional_query_parameters
+          # @option request_options [Hash{String => Object}] :additional_body_parameters
+          # @option request_options [Integer] :timeout_in_seconds
+          # @option params [Candid::PreEncounter::Common::Types::PatientId] :patient_id
+          #
+          # @return [Array[Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata]]
+          def get_insurance_discovery_check_metadata(request_options: {}, **params)
+            params = Candid::Internal::Types::Utils.normalize_keys(params)
+            query_param_names = %i[patient_id]
+            query_params = {}
+            query_params["patient_id"] = params[:patient_id] if params.key?(:patient_id)
+            params.except(*query_param_names)
+
+            request = Candid::Internal::JSON::Request.new(
+              base_url: request_options[:base_url] || @base_url || @environment&.dig(:pre_encounter),
+              method: "GET",
+              path: "/coverages/v1/insurance-discovery/check-metadata",
+              query: query_params,
+              request_options: request_options
+            )
+            begin
+              response = @client.send(request)
+            rescue Net::HTTPRequestTimeout
+              raise Candid::Errors::TimeoutError
+            end
+            code = response.code.to_i
+            return if code.between?(200, 299)
+
+            error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+            raise error_class.new(response.body, code: code)
+          end
+
+          # Gets the insurance discovery of a check id if successful.
           #
           # @param request_options [Hash]
           # @param params [Hash]

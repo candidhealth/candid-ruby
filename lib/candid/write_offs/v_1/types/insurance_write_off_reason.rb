@@ -8,6 +8,7 @@ module Candid
           extend Candid::Internal::Types::Enum
 
           SMALL_BALANCE = "SMALL_BALANCE"
+          OON_WRITE_OFF = "OON_WRITE_OFF"
           NO_AUTHORIZATION_REFERRAL = "NO_AUTHORIZATION_REFERRAL"
           TIMELY_FILING = "TIMELY_FILING"
           STALE_DATE = "STALE_DATE"

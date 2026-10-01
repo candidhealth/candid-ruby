@@ -15701,7 +15701,7 @@ client.pre_encounter.coverages.v_1.get_eligibility(
 <dl>
 <dd>
 
-Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+Initiates an insurance discovery check via patientId. Returns the metadata of the check if successfully initiated. Prefer to use the eligibilityChecks insurance-discovery api as it will allow long running discovery requests to complete.
 </dd>
 </dl>
 </dd>
@@ -15771,6 +15771,138 @@ client.pre_encounter.coverages.v_1.check_insurance_discovery(
 </dl>
 </details>
 
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">check_insurance_discovery_passthrough</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.coverages.v_1.check_insurance_discovery_passthrough(
+  provider: {
+    npi: "npi"
+  },
+  subscriber: {
+    first_name: "first_name",
+    last_name: "last_name"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_insurance_discovery_check_metadata</a>() -> Internal::Types::Array[Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryCheckMetadata]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns insurance discovery check metadata, filterable by patient.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.pre_encounter.coverages.v_1.get_insurance_discovery_check_metadata(patient_id: "patient_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**patient_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PreEncounter::Coverages::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.pre_encounter.coverages.v_1.<a href="/lib/candid/pre_encounter/coverages/v_1/client.rb">get_insurance_discovery</a>(check_id) -> Candid::PreEncounter::EligibilityChecks::V1::Types::AsyncInsuranceDiscoveryCheckResult</code></summary>
 <dl>
 <dd>
@@ -15783,7 +15915,7 @@ client.pre_encounter.coverages.v_1.check_insurance_discovery(
 <dl>
 <dd>
 
-Gets the insurance discovery of a patient if successful.
+Gets the insurance discovery of a check id if successful.
 </dd>
 </dl>
 </dd>
@@ -16196,71 +16328,6 @@ client.pre_encounter.eligibility_checks.v_1.recommendation
 </dl>
 </details>
 
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">create_recommendation</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create an eligibiilty recommendation based on the request.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.pre_encounter.eligibility_checks.v_1.create_recommendation(
-  eligibility_check_id: "eligibility_check_id",
-  patient: {}
-)
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::PostEligibilityRecommendationRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">vote_recommendation</a>(recommendation_id, version, request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityRecommendation</code></summary>
 <dl>
 <dd>
@@ -16325,110 +16392,6 @@ client.pre_encounter.eligibility_checks.v_1.vote_recommendation(
 <dd>
 
 **request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::Vote` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">get_multi</a>() -> Candid::PreEncounter::EligibilityChecks::V1::Types::EligibilityCheckPage</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.pre_encounter.eligibility_checks.v_1.get_multi
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**page_token:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**limit:** `Integer` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**subscriber_member_id:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**payer_id:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**provider_npi:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**date_of_service:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**initiated_at_min:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**initiated_at_max:** `String` 
     
 </dd>
 </dl>
@@ -16575,192 +16538,6 @@ client.pre_encounter.eligibility_checks.v_1.coordination_of_benefits(
 <dd>
 
 **request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::CoordinationOfBenefitsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">encounter_eligibility</a>() -> Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns patient eligibility data regardless of clearinghouse. Uses the encounter id to get needed patient, date of service, etc data.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.pre_encounter.eligibility_checks.v_1.encounter_eligibility(encounter_id: "encounter_id")
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**encounter_id:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">create_encounter_eligibility</a>(request) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibility</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Fetch an eligibility check for the patient for the date of service, npi, and payer
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.pre_encounter.eligibility_checks.v_1.create_encounter_eligibility(encounter_id: "encounter_id")
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibilityRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `Candid::PreEncounter::EligibilityChecks::V1::RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.pre_encounter.eligibility_checks.v_1.<a href="/lib/candid/pre_encounter/eligibility_checks/v_1/client.rb">get_eligibility_check_by_id</a>(eligibility_check_id) -> Candid::PreEncounter::EligibilityChecks::V1::Types::EncounterEligibility</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Fetch an eligibility check by it's primary key
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```ruby
-client.pre_encounter.eligibility_checks.v_1.get_eligibility_check_by_id(eligibility_check_id: "eligibility_check_id")
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**eligibility_check_id:** `String` 
     
 </dd>
 </dl>

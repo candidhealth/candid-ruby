@@ -5,8 +5,11 @@ module Candid
     module EligibilityChecks
       module V1
         module Types
-          class EncounterEligibilityHistoryRequest < Internal::Types::Model
-            field :encounter_id, -> { String }, optional: false, nullable: false
+          module ConfidenceLevel
+            extend Candid::Internal::Types::Enum
+
+            REVIEW_NEEDED = "REVIEW_NEEDED"
+            HIGH = "HIGH"
           end
         end
       end

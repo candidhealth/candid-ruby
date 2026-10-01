@@ -7,7 +7,7 @@ module Candid
         # Result for a single metric query.
         class MetricResult < Internal::Types::Model
           field :metric, -> { Candid::Dashboarding::V1::Types::MetricName }, optional: false, nullable: false
-          field :value, -> { Object }, optional: true, nullable: false
+          field :value, -> { Integer }, optional: true, nullable: false
           field :snapshot, -> { Candid::Dashboarding::V1::Types::MetricSnapshot }, optional: true, nullable: false
           field :error, -> { String }, optional: true, nullable: false
         end

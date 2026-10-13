@@ -26,6 +26,7 @@ module Candid
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [String, nil] :plan_group_name
         # @option params [String, nil] :payer_uuid
+        # @option params [String, nil] :payer_group_id
         # @option params [String, nil] :payer_id
         # @option params [Candid::Commons::Types::SourceOfPaymentCode, nil] :plan_type
         # @option params [Boolean, nil] :is_active
@@ -40,10 +41,11 @@ module Candid
         # @return [Candid::PayerPlanGroups::V1::Types::PayerPlanGroupPage]
         def get_multi(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
-          query_param_names = %i[plan_group_name payer_uuid payer_id plan_type is_active payer_plan_group_id limit sort_by_similarity sort sort_direction page_token organization_id]
+          query_param_names = %i[plan_group_name payer_uuid payer_group_id payer_id plan_type is_active payer_plan_group_id limit sort_by_similarity sort sort_direction page_token organization_id]
           query_params = {}
           query_params["plan_group_name"] = params[:plan_group_name] if params.key?(:plan_group_name)
           query_params["payer_uuid"] = params[:payer_uuid] if params.key?(:payer_uuid)
+          query_params["payer_group_id"] = params[:payer_group_id] if params.key?(:payer_group_id)
           query_params["payer_id"] = params[:payer_id] if params.key?(:payer_id)
           query_params["plan_type"] = params[:plan_type] if params.key?(:plan_type)
           query_params["is_active"] = params[:is_active] if params.key?(:is_active)

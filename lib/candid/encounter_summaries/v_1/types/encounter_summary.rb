@@ -32,6 +32,7 @@ module Candid
           field :secondary_payer_plan_name, -> { String }, optional: true, nullable: false
           field :secondary_group_number, -> { String }, optional: true, nullable: false
           field :primary_member_id, -> { String }, optional: true, nullable: false
+          field :prior_authorization_number, -> { String }, optional: true, nullable: false
           field :sum_allowed_amount_cents, -> { Integer }, optional: false, nullable: false
           field :sum_charge_amount_cents, -> { Integer }, optional: false, nullable: false
           field :sum_paid_amount_cents, -> { Integer }, optional: false, nullable: false

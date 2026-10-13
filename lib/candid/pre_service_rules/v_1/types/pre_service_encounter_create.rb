@@ -18,7 +18,7 @@ module Candid
           field :responsible_party, -> { Candid::Encounters::V4::Types::ResponsiblePartyType }, optional: false, nullable: false
           field :billing_provider, -> { Candid::EncounterProviders::V2::Types::BillingProvider }, optional: false, nullable: false
           field :submission_expectation, -> { Candid::Encounters::V4::Types::EncounterSubmissionExpectation }, optional: false, nullable: false
-          field :date_of_service, -> { String }, optional: true, nullable: false
+          field :date_of_service, -> { String }, optional: false, nullable: false
           field :end_date_of_service, -> { String }, optional: true, nullable: false
           field :pay_to_address, -> { Candid::Commons::Types::StreetAddressLongZip }, optional: true, nullable: false
           field :referring_provider, -> { Candid::EncounterProviders::V2::Types::ReferringProvider }, optional: true, nullable: false
@@ -30,8 +30,8 @@ module Candid
           field :schema_instances, -> { Internal::Types::Array[Candid::CustomSchemas::V1::Types::SchemaInstance] }, optional: true, nullable: false
           field :place_of_service_code, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProvider }, optional: true, nullable: false
-          field :service_lines, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::UniversalServiceLineCreate] }, optional: true, nullable: false
-          field :health_care_code_information, -> { Candid::HealthCareCodeInformation::V1::Types::HealthCareCodeInformationCreate }, optional: true, nullable: false
+          field :service_lines, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::UniversalServiceLineCreate] }, optional: false, nullable: false
+          field :health_care_code_information, -> { Candid::HealthCareCodeInformation::V1::Types::HealthCareCodeInformationCreate }, optional: false, nullable: false
           field :attending_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProvider }, optional: true, nullable: false
           field :initial_referring_provider, -> { Candid::EncounterProviders::V2::Types::InitialReferringProvider }, optional: true, nullable: false
           field :treating_provider, -> { Candid::EncounterProviders::V2::Types::TreatingProvider }, optional: true, nullable: false

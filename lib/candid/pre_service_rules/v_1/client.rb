@@ -61,14 +61,21 @@ module Candid
         # @option request_options [Hash{String => Object}] :additional_body_parameters
         # @option request_options [Integer] :timeout_in_seconds
         # @option params [Candid::PreServiceRules::V1::Types::PreServiceRunId] :run_id
+        # @option params [Boolean, nil] :include_initial_entity_state
         #
         # @return [Candid::PreServiceRules::V1::Types::PreServiceRun]
         def get_run(request_options: {}, **params)
           params = Candid::Internal::Types::Utils.normalize_keys(params)
+          query_param_names = %i[include_initial_entity_state]
+          query_params = {}
+          query_params["include_initial_entity_state"] = params[:include_initial_entity_state] if params.key?(:include_initial_entity_state)
+          params = params.except(*query_param_names)
+
           request = Candid::Internal::JSON::Request.new(
             base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
             method: "GET",
             path: "/api/pre-service/v1/runs/#{params[:run_id]}",
+            query: query_params,
             request_options: request_options
           )
           begin

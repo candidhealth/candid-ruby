@@ -419,8 +419,7 @@ module Candid
           end
 
           # Initiates an insurance discovery check via patientId. Returns the metadata of the check if successfully
-          # initiated. Prefer to use the eligibilityChecks insurance-discovery api as it will allow long running
-          # discovery requests to complete.
+          # initiated.
           #
           # @param request_options [Hash]
           # @param params [Candid::PreEncounter::Coverages::V1::Types::CheckInsuranceDiscoveryRequest]
@@ -454,7 +453,9 @@ module Candid
             end
           end
 
-          # Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+          # Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated. We
+          # recommend using this API over the eligibilityChecks insurance-discovery API, as it allows long-running
+          # discovery requests to complete.
           #
           # @param request_options [Hash]
           # @param params [Candid::PreEncounter::EligibilityChecks::V1::Types::InsuranceDiscoveryRequest]

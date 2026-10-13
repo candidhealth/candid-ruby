@@ -7,6 +7,7 @@ module Candid
         class PayerPlanGroupGetMultiRequest < Internal::Types::Model
           field :plan_group_name, -> { String }, optional: true, nullable: false
           field :payer_uuid, -> { String }, optional: true, nullable: false
+          field :payer_group_id, -> { String }, optional: true, nullable: false
           field :payer_id, -> { String }, optional: true, nullable: false
           field :plan_type, -> { Candid::Commons::Types::SourceOfPaymentCode }, optional: true, nullable: false
           field :is_active, -> { Internal::Types::Boolean }, optional: true, nullable: false

@@ -4117,6 +4117,7 @@ client.dashboarding.v_1.query_metrics(request: [{
 client.eligibility.v_2.create_availity_eligibility_check(
   member_id: "member_id",
   payer_id: "payer_id",
+  payer_name: "payer_name",
   provider_npi: "provider_npi",
   date_of_service: "2024-01-15T09:30:00Z",
   service_type_codes: %w[service_type_codes service_type_codes]
@@ -12134,6 +12135,14 @@ client.payer_plan_groups.v_1.get_multi
 <dl>
 <dd>
 
+**payer_group_id:** `String` — Filter to payer plans under the provided payer group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **payer_id:** `String` 
     
 </dd>
@@ -12756,41 +12765,72 @@ Returns a run_id that can be polled via GET /runs/{run_id} to retrieve the resul
 ```ruby
 client.pre_service_rules.v_1.create_encounter_run(
   entity: {
-    external_id: "external_id",
+    external_id: "enc-123",
     patient_authorized_release: true,
     benefits_assigned_to_provider: true,
     provider_accepts_assignment: true,
-    patient: {
-      external_id: "external_id",
-      date_of_birth: "2023-01-15",
-      address: {
-        address_1: "address1",
-        city: "city",
-        state: "AA",
-        zip_code: "zip_code"
-      },
-      first_name: "first_name",
-      last_name: "last_name",
-      gender: "male"
-    },
     responsible_party: "INSURANCE_PAY",
-    billing_provider: {
+    submission_expectation: "TARGET_PROFESSIONAL",
+    date_of_service: "2026-10-15",
+    patient: {
+      external_id: "p-456",
+      first_name: "Jane",
+      last_name: "Doe",
+      gender: "female",
+      date_of_birth: "1960-01-01",
       address: {
-        zip_plus_four_code: "zip_plus_four_code",
-        address_1: "address1",
-        city: "city",
-        state: "AA",
-        zip_code: "zip_code"
-      },
-      tax_id: "tax_id",
-      npi: "npi"
+        address_1: "1 Main St",
+        city: "Fairfax",
+        state: "VA",
+        zip_code: "22031"
+      }
     },
-    submission_expectation: "TARGET_PROFESSIONAL"
+    rendering_provider: {
+      first_name: "Ada",
+      last_name: "Lovelace",
+      npi: "1234567893"
+    },
+    billing_provider: {
+      npi: "1558375857",
+      tax_id: "202265068",
+      organization_name: "Example Clinic",
+      address: {
+        address_1: "1 Main St",
+        city: "Fairfax",
+        state: "VA",
+        zip_code: "22031",
+        zip_plus_four_code: "4634"
+      }
+    },
+    subscriber_primary: {
+      first_name: "Jane",
+      last_name: "Doe",
+      gender: "female",
+      patient_relationship_to_subscriber_code: "18",
+      insurance_card: {
+        member_id: "123456789",
+        payer_name: "Example Payer",
+        payer_id: "12345"
+      }
+    },
+    health_care_code_information: {
+      principal_diagnosis: {
+        primary_diagnosis_code: "Z01.411",
+        principal_diagnosis_code_qualifier: "ABK"
+      }
+    },
+    service_lines: [{
+      procedure_code: "99213",
+      quantity: "1",
+      units: "UN",
+      charge_amount_cents: 20600,
+      diagnosis_pointers: [0]
+    }]
   },
-  pipeline_id: "pipeline_id",
-  enabled_rule_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
-  disabled_rule_ids: %w[d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32 d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32],
-  idempotency_key: "idempotency_key"
+  pipeline_id: "pre-service-claim-athena",
+  enabled_rule_ids: [],
+  disabled_rule_ids: [],
+  idempotency_key: "enc-123-run-1"
 )
 ```
 </dd>
@@ -12901,6 +12941,14 @@ client.pre_service_rules.v_1.get_run(run_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc
 <dd>
 
 **run_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_initial_entity_state:** `Internal::Types::Boolean` — If true, the run result includes the entity exactly as it was submitted. Default = False
     
 </dd>
 </dl>
@@ -15701,7 +15749,7 @@ client.pre_encounter.coverages.v_1.get_eligibility(
 <dl>
 <dd>
 
-Initiates an insurance discovery check via patientId. Returns the metadata of the check if successfully initiated. Prefer to use the eligibilityChecks insurance-discovery api as it will allow long running discovery requests to complete.
+Initiates an insurance discovery check via patientId. Returns the metadata of the check if successfully initiated.
 </dd>
 </dl>
 </dd>
@@ -15783,7 +15831,7 @@ client.pre_encounter.coverages.v_1.check_insurance_discovery(
 <dl>
 <dd>
 
-Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated.
+Initiates an insurance discovery check. Returns the metadata of the check if successfully initiated. We recommend using this API over the eligibilityChecks insurance-discovery API, as it allows long-running discovery requests to complete.
 </dd>
 </dl>
 </dd>
@@ -16425,6 +16473,7 @@ client.pre_encounter.eligibility_checks.v_1.vote_recommendation(
 
 Sends an insurance discovery check to find potential coverage matches for a patient through Stedi.
 Given patient demographics, this endpoint discovers what insurance coverages exist for the patient.
+We recommend using the coverages check_insurance_discovery_passthrough API, as it allows long-running discovery requests to complete.
 </dd>
 </dl>
 </dd>

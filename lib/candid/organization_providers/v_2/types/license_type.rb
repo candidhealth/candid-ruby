@@ -119,6 +119,7 @@ module Candid
           ED_D = "EdD"
           SWT = "SWT"
           IMFT = "IMFT"
+          RT = "RT"
         end
       end
     end

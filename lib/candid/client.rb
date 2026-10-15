@@ -13,7 +13,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url || environment&.dig(:candid_api),
         headers: {
-          "User-Agent" => "candidhealth/1.36.0",
+          "User-Agent" => "candidhealth/1.37.0",
           "X-Fern-Language" => "Ruby"
         }
       )
@@ -97,6 +97,11 @@ module Candid
     # @return [Candid::Exports::Client]
     def exports
       @exports ||= Candid::Exports::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
+    # @return [Candid::ExternalConsolidatedRemit::Client]
+    def external_consolidated_remit
+      @external_consolidated_remit ||= Candid::ExternalConsolidatedRemit::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
     # @return [Candid::ExternalPaymentAccountConfig::Client]

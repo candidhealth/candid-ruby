@@ -83,6 +83,46 @@ module Candid
           end
         end
 
+        # Gets the rate that matches each of a list of dimension points, using the same matching as the service line
+        # match endpoint.
+        # Useful for showing rates before a service line exists in Candid.
+        #
+        # Results are returned in request order, one per point. A point with no matching rate has a null `match`.
+        #
+        # An omitted optional dimension only matches rates that have no restriction on that dimension. CPT codes are
+        # matched
+        # case-insensitively, and ZIP codes are matched on their first 5 digits.
+        #
+        # @param request_options [Hash]
+        # @param params [Hash]
+        # @option request_options [String] :base_url
+        # @option request_options [Hash{String => Object}] :additional_headers
+        # @option request_options [Hash{String => Object}] :additional_query_parameters
+        # @option request_options [Hash{String => Object}] :additional_body_parameters
+        # @option request_options [Integer] :timeout_in_seconds
+        #
+        # @return [Array[Candid::FeeSchedules::V3::Types::BatchMatchResult]]
+        def batch_match(request_options: {}, **params)
+          params = Candid::Internal::Types::Utils.normalize_keys(params)
+          request = Candid::Internal::JSON::Request.new(
+            base_url: request_options[:base_url] || @base_url || @environment&.dig(:candid_api),
+            method: "POST",
+            path: "/api/fee-schedules/v3/batch-match",
+            body: params,
+            request_options: request_options
+          )
+          begin
+            response = @client.send(request)
+          rescue Net::HTTPRequestTimeout
+            raise Candid::Errors::TimeoutError
+          end
+          code = response.code.to_i
+          return if code.between?(200, 299)
+
+          error_class = Candid::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+
         # Gets a list of dimensions with their rates. The rates returned will always be the most recent versions of
         # those rates.
         #

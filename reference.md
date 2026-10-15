@@ -6606,6 +6606,179 @@ Must be within 30 days of start_date.
 </dl>
 </details>
 
+## ExternalConsolidatedRemit V1
+<details><summary><code>client.external_consolidated_remit.v_1.<a href="/lib/candid/external_consolidated_remit/v_1/client.rb">get_era_payments</a>(consolidated_remit_id) -> Candid::ExternalConsolidatedRemit::V1::Types::ExternalConsolidatedRemitEraPaymentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns metadata for every ERA payment (835 transaction set) associated with a
+consolidated remit, including the source ERA document for each, and indicates which ERA
+payment is currently elected as primary.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.external_consolidated_remit.v_1.get_era_payments(consolidated_remit_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**consolidated_remit_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ExternalConsolidatedRemit::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.external_consolidated_remit.v_1.<a href="/lib/candid/external_consolidated_remit/v_1/client.rb">get_transactions</a>(consolidated_remit_id) -> Candid::ExternalConsolidatedRemit::V1::Types::ExternalConsolidatedRemitTransactionPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Paginated, combined list of InsurancePayment and InsuranceAdjustment transactions posted
+from a consolidated remit's ERA payments - covering service-payment-driven and
+payment-bundle-driven activity of both kinds, and both the posted and voided sides of each
+(see is_void). Each item is discriminated by type; fields common to both transaction types
+are always present alongside the type-specific ones. One combined, single-cursor
+pagination stream rather than two separate endpoints - filter to a single type with
+transaction_type if you only care about one.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.external_consolidated_remit.v_1.get_transactions(consolidated_remit_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**consolidated_remit_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Defaults to 100.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**era_payment_id:** `String` — Retrieve only transactions sourced from any of the given ERA payments (matches the transaction's remit_id).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transaction_id:** `String` — Retrieve only the given transaction(s), regardless of type.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transaction_type:** `Candid::ExternalConsolidatedRemit::V1::Types::TransactionType` — Retrieve only transactions of the given type(s). Defaults to both.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::ExternalConsolidatedRemit::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ExternalPaymentAccountConfig V1
 <details><summary><code>client.external_payment_account_config.v_1.<a href="/lib/candid/external_payment_account_config/v_1/client.rb">get_multi</a>() -> Candid::ExternalPaymentAccountConfig::V1::Types::ExternalPaymentAccountConfigPage</code></summary>
 <dl>
@@ -6780,6 +6953,84 @@ client.fee_schedules.v_3.test_match(
 <dd>
 
 **rate_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::FeeSchedules::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.fee_schedules.v_3.<a href="/lib/candid/fee_schedules/v_3/client.rb">batch_match</a>(request) -> Internal::Types::Array[Candid::FeeSchedules::V3::Types::BatchMatchResult]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Gets the rate that matches each of a list of dimension points, using the same matching as the service line match endpoint.
+Useful for showing rates before a service line exists in Candid.
+
+Results are returned in request order, one per point. A point with no matching rate has a null `match`.
+
+An omitted optional dimension only matches rates that have no restriction on that dimension. CPT codes are matched
+case-insensitively, and ZIP codes are matched on their first 5 digits.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.fee_schedules.v_3.batch_match(request: [{
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  organization_billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  cpt_code: "cpt_code",
+  date_of_service: "2023-01-15"
+}, {
+  payer_uuid: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  organization_billing_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  cpt_code: "cpt_code",
+  date_of_service: "2023-01-15"
+}])
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Internal::Types::Array[Candid::FeeSchedules::V3::Types::BatchMatchPoint]` 
     
 </dd>
 </dl>

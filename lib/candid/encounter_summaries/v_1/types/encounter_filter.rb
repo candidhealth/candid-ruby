@@ -42,6 +42,7 @@ module Candid
           field :attending_provider_npi, -> { Candid::EncounterSummaries::V1::Types::StringFilter }, optional: true, nullable: false
           field :attending_provider_name, -> { Candid::EncounterSummaries::V1::Types::StringFilter }, optional: true, nullable: false
           field :claim_status, -> { Candid::EncounterSummaries::V1::Types::SetFilter }, optional: true, nullable: false
+          field :claim_appeal_status, -> { Candid::EncounterSummaries::V1::Types::SetFilter }, optional: true, nullable: false
           field :external_id, -> { Candid::EncounterSummaries::V1::Types::StringFilter }, optional: true, nullable: false
           field :claim_id, -> { Candid::EncounterSummaries::V1::Types::UuidSetFilter }, optional: true, nullable: false
           field :patient_external_id, -> { Candid::EncounterSummaries::V1::Types::StringFilter }, optional: true, nullable: false

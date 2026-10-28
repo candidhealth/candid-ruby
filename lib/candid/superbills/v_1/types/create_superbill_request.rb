@@ -11,6 +11,7 @@ module Candid
           field :pay_to_address, -> { Candid::Commons::Types::StreetAddressShortZip }, optional: true, nullable: false
           field :output_format, -> { Candid::Superbills::V1::Types::SuperbillOutputFormat }, optional: true, nullable: false
           field :include_merged_patient_data, -> { Internal::Types::Boolean }, optional: true, nullable: false
+          field :include_unfinalized_claim_financials, -> { Internal::Types::Boolean }, optional: true, nullable: false
         end
       end
     end

@@ -17,6 +17,7 @@ module Candid
           field :end_date_of_service, -> { String }, optional: true, nullable: false
           field :drug_identification, -> { Candid::ServiceLines::V2::Types::DrugIdentification }, optional: true, nullable: false
           field :ordering_provider, -> { Candid::EncounterProviders::V2::Types::OrderingProvider }, optional: true, nullable: false
+          field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProvider }, optional: true, nullable: false
           field :test_results, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::TestResult] }, optional: true, nullable: false
           field :has_epsdt_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :has_family_planning_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false

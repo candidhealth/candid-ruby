@@ -9,6 +9,7 @@ module Candid
           field :patient_control_number, -> { String }, optional: true, nullable: false
           field :claim_id, -> { String }, optional: false, nullable: false
           field :claim_status, -> { Candid::Claims::Types::ClaimStatus }, optional: false, nullable: false
+          field :claim_appeal_status, -> { Candid::ClaimAppeals::V1::Types::ClaimAppealStatus }, optional: true, nullable: false
           field :billing_provider_npi, -> { String }, optional: false, nullable: false
           field :billing_provider_name, -> { String }, optional: false, nullable: false
           field :billing_provider_tin, -> { String }, optional: true, nullable: false

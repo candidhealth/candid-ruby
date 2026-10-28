@@ -35,6 +35,7 @@ module Candid
           field :procedure_code, -> { String }, optional: false, nullable: false
           field :custom_procedure_code, -> { String }, optional: true, nullable: false
           field :ordering_provider, -> { Candid::EncounterProviders::V2::Types::EncounterProvider }, optional: true, nullable: false
+          field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::EncounterProvider }, optional: true, nullable: false
           field :revenue_code, -> { String }, optional: true, nullable: false
           field :quantity, -> { String }, optional: false, nullable: false
           field :units, -> { Candid::Commons::Types::ServiceLineUnits }, optional: false, nullable: false

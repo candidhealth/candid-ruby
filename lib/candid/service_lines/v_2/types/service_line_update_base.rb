@@ -10,6 +10,7 @@ module Candid
           field :charge_amount_cents, -> { Integer }, optional: true, nullable: false
           field :drug_identification, -> { Candid::ServiceLines::V2::Types::DrugIdentification }, optional: true, nullable: false
           field :denial_reason, -> { Candid::ServiceLines::V2::Types::ServiceLineDenialReason }, optional: true, nullable: false
+          field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProviderUpdate }, optional: true, nullable: false
           field :place_of_service_code, -> { Candid::Commons::Types::FacilityTypeCode }, optional: true, nullable: false
           field :units, -> { Candid::Commons::Types::ServiceLineUnits }, optional: true, nullable: false
           field :procedure_code, -> { String }, optional: true, nullable: false

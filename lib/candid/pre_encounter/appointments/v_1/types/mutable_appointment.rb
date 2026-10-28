@@ -12,6 +12,7 @@ module Candid
             field :status, -> { Candid::PreEncounter::Appointments::V1::Types::AppointmentStatus }, optional: true, nullable: false
             field :not_ready_reason, -> { Candid::PreEncounter::Appointments::V1::Types::NotReadyReason }, optional: true, nullable: false
             field :ready_source, -> { Candid::PreEncounter::Appointments::V1::Types::ReadySource }, optional: true, nullable: false
+            field :ready_reason, -> { Candid::PreEncounter::Appointments::V1::Types::ReadyReason }, optional: true, nullable: false
             field :service_duration, -> { Integer }, optional: false, nullable: false
             field :services, -> { Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::Service] }, optional: false, nullable: false
             field :placer_appointment_id, -> { String }, optional: true, nullable: false
@@ -28,6 +29,8 @@ module Candid
             field :prior_authorization_status, -> { Candid::PreEncounter::Appointments::V1::Types::PriorAuthorizationStatus }, optional: true, nullable: false
             field :notes, -> { String }, optional: true, nullable: false
             field :location_resource_id, -> { String }, optional: true, nullable: false
+            field :rooms, -> { Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::AppointmentRoom] }, optional: true, nullable: false
+            field :devices, -> { Internal::Types::Array[Candid::PreEncounter::Appointments::V1::Types::AppointmentDevice] }, optional: true, nullable: false
             field :automated_eligibility_check_complete, -> { Internal::Types::Boolean }, optional: true, nullable: false
             field :work_queue, -> { Candid::PreEncounter::Appointments::V1::Types::AppointmentWorkQueue }, optional: true, nullable: false
             field :cancellation_reason, -> { String }, optional: true, nullable: false

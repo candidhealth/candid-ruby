@@ -10,6 +10,7 @@ module Candid
         DOUBLE = "DOUBLE"
         INTEGER = "INTEGER"
         STRING = "STRING"
+        DATE = "DATE"
       end
     end
   end

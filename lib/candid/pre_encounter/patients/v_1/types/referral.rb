@@ -15,6 +15,8 @@ module Candid
             field :quantity, -> { Integer }, optional: true, nullable: false
             field :cpt_codes, -> { Internal::Types::Array[String] }, optional: true, nullable: false, api_name: "cptCodes"
             field :apply_for_all_cpt_codes, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "applyForAllCptCodes"
+            field :payer_id, -> { String }, optional: true, nullable: false
+            field :payer_name, -> { String }, optional: true, nullable: false
           end
         end
       end

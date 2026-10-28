@@ -17,6 +17,7 @@ module Candid
           field :date_of_service, -> { String }, optional: true, nullable: false
           field :end_date_of_service, -> { String }, optional: true, nullable: false
           field :ordering_provider, -> { Candid::EncounterProviders::V2::Types::OrderingProvider }, optional: true, nullable: false
+          field :rendering_provider, -> { Candid::EncounterProviders::V2::Types::RenderingProvider }, optional: true, nullable: false
           field :test_results, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::TestResult] }, optional: true, nullable: false
           field :note, -> { String }, optional: true, nullable: false
           field :prior_authorization_number, -> { String }, optional: true, nullable: false

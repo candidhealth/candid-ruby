@@ -12,6 +12,13 @@ module Candid
             MEDICAL = "MEDICAL"
             THERAPY = "THERAPY"
             OTHER = "OTHER"
+            ABA = "ABA"
+            FWC = "FWC"
+            OT = "OT"
+            SLP = "SLP"
+            PT = "PT"
+            EEG = "EEG"
+            CES = "CES"
           end
         end
       end

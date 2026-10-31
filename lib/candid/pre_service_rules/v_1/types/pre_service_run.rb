@@ -13,6 +13,7 @@ module Candid
           field :edits, -> { Internal::Types::Hash[String, Object] }, optional: true, nullable: false
           field :actions, -> { Internal::Types::Array[Object] }, optional: false, nullable: false
           field :error, -> { Candid::PreServiceRules::V1::Types::PreServiceError }, optional: true, nullable: false
+          field :status, -> { Candid::PreServiceRules::V1::Types::PreServiceRunStatus }, optional: false, nullable: false
         end
       end
     end

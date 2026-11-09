@@ -2911,6 +2911,979 @@ client.contracts.v_3.update_contract_service_facility(
 </dl>
 </details>
 
+## Contracts V4
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">get</a>(contract_id) -> Candid::Contracts::V4::Types::ContractWithProvidersUnion</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.get(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">get_multi</a>() -> Candid::Contracts::V4::Types::ContractsPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.get_multi
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Max number of contracts returned. Defaults to 1000. Max is 1000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type:** `Candid::Contracts::V4::Types::ContractType` — The type of contract
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rendering_provider_ids:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_names:** `String` — Filter to contracts that include any of the included payer names.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_uuid:** `String` — Filter to contracts where the EDI payer UUID or payer group ID matches the provided value.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_group_id:** `String` — Filter to contracts for the provided payer group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**states:** `Candid::Commons::Types::State` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_status:** `Candid::Contracts::V2::Types::ContractStatus` — The status of the contract. Defaults to `pending`
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `Candid::Contracts::V2::Types::ContractSortField` — Potentially sort by a contract related attribute.  Defaults to created_at
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_direction:** `Candid::Commons::Types::SortDirection` — Direction of sort, defaulting to desc
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">create</a>(request) -> Candid::Contracts::V4::Types::ContractWithProvidersUnion</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new contract within the user's current organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.create
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::Contracts::V4::Types::ContractCreateUnion` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">delete</a>(contract_id) -> </code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.delete(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">update</a>(contract_id, request) -> Candid::Contracts::V4::Types::ContractWithProvidersUnion</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.update(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Candid::Contracts::V4::Types::ContractUpdateUnion` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">get_contract_providers</a>(contract_id) -> Candid::Contracts::V4::Types::ContractProvidersPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.get_contract_providers(contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search_term:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Max number of providers returned per page. Defaults to 100. Max is 1000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">add_contract_providers</a>(contract_id, request) -> Candid::Contracts::V4::Types::AddContractProvidersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Appends a list of rendering provider IDs to the contract. Provider IDs already on the contract are silently ignored.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.add_contract_providers(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  rendering_provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rendering_provider_ids:** `Internal::Types::Array[String]` — Provider IDs to add to the contract. Max 100,000 per request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">remove_contract_providers</a>(contract_id, request) -> Candid::Contracts::V4::Types::ContractProviderCount</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes the specified rendering provider IDs from the contract. Returns a 404 if any of the provided IDs are not currently in the contract.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.remove_contract_providers(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  rendering_provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rendering_provider_ids:** `Internal::Types::Array[String]` — Provider IDs to remove from the contract. Max 100,000 per request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">create_contract_service_facility</a>(contract_id, request) -> Candid::Contracts::V4::Types::ContractServiceFacility</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.create_contract_service_facility(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">update_contract_service_facility</a>(contract_id, contract_service_facility_id, request) -> Candid::Contracts::V4::Types::ContractServiceFacility</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deprecated. This endpoint is a temporary holdover from Contracts V3 and will be removed in a future release.
+Use the dedicated service facility provider endpoints to manage providers
+(GET/POST/DELETE /api/contracts/v4/{contract_id}/service-facilities/{contract_service_facility_id}/providers).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.update_contract_service_facility(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contract_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_service_facility_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**service_facility_id:** `String` — The UUID of the service facility
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider_ids:** `Internal::Types::Array[String]` — The providers who are authorized under the contract
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">get_contract_service_facility_providers</a>(contract_id, contract_service_facility_id) -> Candid::Contracts::V4::Types::ContractProvidersPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of providers associated with a contract service facility.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.get_contract_service_facility_providers(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contract_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_service_facility_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search_term:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Max number of providers returned per page. Defaults to 100. Max is 1000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">add_contract_service_facility_providers</a>(contract_id, contract_service_facility_id, request) -> Candid::Contracts::V4::Types::AddContractServiceFacilityProvidersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Appends provider IDs to the contract service facility. Provider IDs already on the facility are silently ignored.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.add_contract_service_facility_providers(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contract_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_service_facility_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider_ids:** `Internal::Types::Array[String]` — Provider IDs to add to the contract service facility. Max 100,000 per request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.contracts.v_4.<a href="/lib/candid/contracts/v_4/client.rb">remove_contract_service_facility_providers</a>(contract_id, contract_service_facility_id, request) -> Candid::Contracts::V4::Types::ContractServiceFacilityProviderCount</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes the specified provider IDs from the contract service facility. Returns a 404 if any of the provided IDs are not currently associated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.contracts.v_4.remove_contract_service_facility_providers(
+  contract_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contract_service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  provider_ids: Set.new(["d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32"])
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**contract_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contract_service_facility_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider_ids:** `Internal::Types::Array[String]` — Provider IDs to remove from the contract service facility. Max 100,000 per request.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Contracts::V4::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Credentialing V2
 <details><summary><code>client.credentialing.v_2.<a href="/lib/candid/credentialing/v_2/client.rb">create_facility</a>(request) -> Candid::Credentialing::V2::Types::FacilityCredentialingSpan</code></summary>
 <dl>
@@ -3700,6 +4673,819 @@ client.credentialing.v_2.update(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b
 <dd>
 
 **request_options:** `Candid::Credentialing::V2::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Credentialing V3
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">create_facility</a>(request) -> Candid::Credentialing::V3::Types::FacilityCredentialingSpan</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.create_facility(
+  service_facility_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  credentialing_payer: {}
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**service_facility_id:** `String` — The ID of the service facility covered by the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentialing_payer:** `Candid::Credentialing::V3::Types::CredentialingCreatePayer` — The payer doing the credentialing.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `String` — Start date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `String` — End date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**submitted_date:** `String` — Date that the credential paperwork was submitted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_loaded_date:** `String` — Date that the payer loaded the credentialing span into their system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">get_facility</a>(facility_credentialing_id) -> Candid::Credentialing::V3::Types::FacilityCredentialingSpan</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.get_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**facility_credentialing_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">get_all_facilities</a>() -> Candid::Credentialing::V3::Types::FacilityCredentialingSpanPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.get_all_facilities
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Maximum number of entities per page, defaults to 100.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_uuid:** `String` — Filter by EDI payer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_group_id:** `String` — Filter by payer group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` — Filter to a particular contracting provider.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**service_facility_id:** `String` — Filter to a particular service facility.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">delete_facility</a>(facility_credentialing_id) -> </code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Soft deletes a credentialing span rate from the system.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.delete_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**facility_credentialing_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">update_facility</a>(facility_credentialing_id, request) -> Candid::Credentialing::V3::Types::FacilityCredentialingSpan</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.update_facility(facility_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**facility_credentialing_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentialing_payer:** `Candid::Credentialing::V3::Types::CredentialingCreatePayer` — The payer doing the credentialing.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `String` — Start date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `String` — End date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**submitted_date:** `String` — Date that the credential paperwork was submitted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_loaded_date:** `String` — Date that the payer loaded the credentialing span into their system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">create</a>(request) -> Candid::Credentialing::V3::Types::ProviderCredentialingSpan</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.create(
+  rendering_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  contracting_provider_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  credentialing_payer: {}
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**rendering_provider_id:** `String` — The ID of the rendering provider covered by the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentialing_payer:** `Candid::Credentialing::V3::Types::CredentialingCreatePayer` — The payer doing the credentialing.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `String` — Start date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `String` — End date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regions:** `Candid::Commons::Types::Regions` — The states covered by the credentialing span. A span may be national and cover all states.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**submitted_date:** `String` — Date that the credential paperwork was submitted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_loaded_date:** `String` — Date that the payer loaded the credentialing span into their system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">get</a>(provider_credentialing_id) -> Candid::Credentialing::V3::Types::ProviderCredentialingSpan</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.get(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**provider_credentialing_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">get_all</a>() -> Candid::Credentialing::V3::Types::ProviderCredentialingSpanPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.get_all
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Maximum number of entities per page, defaults to 100.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_uuid:** `String` — Filter by EDI payer.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_group_id:** `String` — Filter by payer group.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider_id:** `String` — Filter to a particular provider. Use in conjunction as_rendering_provider and as_contracting_provider.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**as_rendering_provider:** `Internal::Types::Boolean` — Filter to credentialing spans where the provider is a rendering provider. To use this filter provider_id is required.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**as_contracting_provider:** `Internal::Types::Boolean` — Filter to credentialing spans where the provider is a contracting provider. To use this filter provider_id is required.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">delete</a>(provider_credentialing_id) -> </code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Soft deletes a credentialing span rate from the system.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.delete(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**provider_credentialing_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.credentialing.v_3.<a href="/lib/candid/credentialing/v_3/client.rb">update</a>(provider_credentialing_id, request) -> Candid::Credentialing::V3::Types::ProviderCredentialingSpan</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.credentialing.v_3.update(provider_credentialing_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**provider_credentialing_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contracting_provider_id:** `String` — The ID of the billing provider for which the rendering provider is covered by the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentialing_payer:** `Candid::Credentialing::V3::Types::CredentialingCreatePayer` — The payer doing the credentialing.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**start_date:** `String` — Start date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**end_date:** `String` — End date of the credentialing span.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regions:** `Candid::Commons::Types::Regions` — The states covered by the credentialing span. A span may be national and cover all states.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**submitted_date:** `String` — Date that the credential paperwork was submitted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_loaded_date:** `String` — Date that the payer loaded the credentialing span into their system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::Credentialing::V3::RequestOptions` 
     
 </dd>
 </dl>
@@ -12327,6 +14113,324 @@ client.patient_refunds.v_1.delete(patient_refund_id: "d5e9c84f-c2b2-4bf4-b4b0-7f
 </dl>
 </details>
 
+## PayerGroups V1
+<details><summary><code>client.payer_groups.v_1.<a href="/lib/candid/payer_groups/v_1/client.rb">get_multi</a>() -> Candid::PayerGroups::V1::Types::PayerGroupPage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns all payer groups matching filter criteria.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.payer_groups.v_1.get_multi
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_group_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payer_plan_group_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**min_payer_plan_count:** `Integer` — If provided, only returns payer groups that have at least this many active (non-deactivated) payer plans.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_archived:** `Internal::Types::Boolean` — If true, archived payer groups are included in the results. Defaults to false.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` — Defaults to 100. Cannot exceed 1000.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_direction:** `Candid::Commons::Types::SortDirection` — Sort direction. Defaults to ascending order if not provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_token:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payer_groups.v_1.<a href="/lib/candid/payer_groups/v_1/client.rb">get</a>(payer_group_id) -> Candid::PayerGroups::V1::Types::PayerGroup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return a payer group with a given ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.payer_groups.v_1.get(payer_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payer_group_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payer_groups.v_1.<a href="/lib/candid/payer_groups/v_1/client.rb">create</a>(request) -> Candid::PayerGroups::V1::Types::PayerGroup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a payer group. When `payer_plan_group_ids` is provided, moves those plans into
+the new group atomically (same transaction). On any failure the group is not created
+and no plans are moved.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.payer_groups.v_1.create(name: "name")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Candid::PayerGroups::V1::Types::CreatePayerGroupRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payer_groups.v_1.<a href="/lib/candid/payer_groups/v_1/client.rb">update</a>(payer_group_id, request) -> Candid::PayerGroups::V1::Types::PayerGroup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the name of a payer group
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.payer_groups.v_1.update(
+  payer_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7ffd7a9ffc32",
+  name: "name"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payer_group_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Candid::PayerGroups::V1::Types::MutablePayerGroup` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Candid::PayerGroups::V1::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## PayerPlanGroups V1
 <details><summary><code>client.payer_plan_groups.v_1.<a href="/lib/candid/payer_plan_groups/v_1/client.rb">get_multi</a>() -> Candid::PayerPlanGroups::V1::Types::PayerPlanGroupPage</code></summary>
 <dl>
@@ -12564,7 +14668,9 @@ client.payer_plan_groups.v_1.get(payer_plan_group_id: "d5e9c84f-c2b2-4bf4-b4b0-7
 <dl>
 <dd>
 
-Create a payer plan
+Create a payer plan.
+
+Note: If your org does not have access to Payer Plans, you cannot use APIs to create Payer Plans.
 </dd>
 </dl>
 </dd>
@@ -12630,7 +14736,9 @@ client.payer_plan_groups.v_1.create(
 <dl>
 <dd>
 
-Update any of the fields on a payer plan
+Update any of the fields on a payer plan.
+
+Note: If your org does not have access to Payer Plans, you cannot use APIs to update Payer Plans.
 </dd>
 </dl>
 </dd>
@@ -12705,7 +14813,9 @@ client.payer_plan_groups.v_1.update(
 <dl>
 <dd>
 
-Marks the payer plan as deactivated
+Marks the payer plan as deactivated.
+
+Note: If your org does not have access to Payer Plans, you cannot use APIs to deactivate Payer Plans.
 </dd>
 </dl>
 </dd>

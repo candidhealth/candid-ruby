@@ -47,6 +47,7 @@ module Candid
           field :test_results, -> { Internal::Types::Array[Candid::ServiceLines::V2::Types::TestResult] }, optional: true, nullable: false
           field :has_epsdt_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :has_family_planning_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
+          field :has_emergency_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :note, -> { String }, optional: true, nullable: false
           field :prior_authorization_number, -> { String }, optional: true, nullable: false
           field :external_id, -> { String }, optional: true, nullable: false

@@ -13,7 +13,7 @@ module Candid
       @raw_client = Candid::Internal::Http::RawClient.new(
         base_url: base_url || environment&.dig(:candid_api),
         headers: {
-          "User-Agent" => "candidhealth/1.39.0",
+          "User-Agent" => "candidhealth/1.40.0",
           "X-Fern-Language" => "Ruby"
         }
       )
@@ -182,6 +182,11 @@ module Candid
     # @return [Candid::PatientRefunds::Client]
     def patient_refunds
       @patient_refunds ||= Candid::PatientRefunds::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
+    end
+
+    # @return [Candid::PayerGroups::Client]
+    def payer_groups
+      @payer_groups ||= Candid::PayerGroups::Client.new(client: @raw_client, base_url: @base_url, environment: @environment)
     end
 
     # @return [Candid::PayerPlanGroups::Client]

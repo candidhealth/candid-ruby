@@ -113,7 +113,9 @@ module Candid
           end
         end
 
-        # Create a payer plan
+        # Create a payer plan.
+        #
+        # Note: If your org does not have access to Payer Plans, you cannot use APIs to create Payer Plans.
         #
         # @param request_options [Hash]
         # @param params [Candid::PayerPlanGroups::V1::Types::MutablePayerPlanGroup]
@@ -147,7 +149,9 @@ module Candid
           end
         end
 
-        # Update any of the fields on a payer plan
+        # Update any of the fields on a payer plan.
+        #
+        # Note: If your org does not have access to Payer Plans, you cannot use APIs to update Payer Plans.
         #
         # @param request_options [Hash]
         # @param params [Candid::PayerPlanGroups::V1::Types::MutablePayerPlanGroup]
@@ -182,7 +186,9 @@ module Candid
           end
         end
 
-        # Marks the payer plan as deactivated
+        # Marks the payer plan as deactivated.
+        #
+        # Note: If your org does not have access to Payer Plans, you cannot use APIs to deactivate Payer Plans.
         #
         # @param request_options [Hash]
         # @param params [Hash]

@@ -18,6 +18,11 @@ module Candid
       def v_2
         @v_2 ||= Candid::Credentialing::V2::Client.new(client: @client, base_url: @base_url, environment: @environment)
       end
+
+      # @return [Candid::V3::Client]
+      def v_3
+        @v_3 ||= Candid::Credentialing::V3::Client.new(client: @client, base_url: @base_url, environment: @environment)
+      end
     end
   end
 end

@@ -20,6 +20,7 @@ module Candid
             field :attending_doctor, -> { Candid::PreEncounter::Common::Types::ExternalProvider }, optional: true, nullable: false
             field :estimated_copay_cents, -> { Integer }, optional: true, nullable: false
             field :estimated_patient_responsibility_cents, -> { Integer }, optional: true, nullable: false
+            field :estimated_patient_responsibility_note, -> { String }, optional: true, nullable: false
             field :patient_deposit_cents, -> { Integer }, optional: true, nullable: false
             field :appointment_details, -> { String }, optional: true, nullable: false
             field :checked_in_timestamp, -> { String }, optional: true, nullable: false

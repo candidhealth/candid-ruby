@@ -23,6 +23,11 @@ module Candid
       def v_3
         @v_3 ||= Candid::Contracts::V3::Client.new(client: @client, base_url: @base_url, environment: @environment)
       end
+
+      # @return [Candid::V4::Client]
+      def v_4
+        @v_4 ||= Candid::Contracts::V4::Client.new(client: @client, base_url: @base_url, environment: @environment)
+      end
     end
   end
 end

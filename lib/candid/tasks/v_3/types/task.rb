@@ -26,6 +26,7 @@ module Candid
           field :configurable_rule_id, -> { String }, optional: true, nullable: false
           field :persisted_rule_id, -> { String }, optional: true, nullable: false
           field :organization_id, -> { String }, optional: true, nullable: false
+          field :created_by, -> { String }, optional: true, nullable: false
         end
       end
     end

@@ -8,6 +8,7 @@ module Candid
           field :modifiers, -> { Internal::Types::Array[Candid::Commons::Types::ProcedureModifier] }, optional: true, nullable: false
           field :has_epsdt_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :has_family_planning_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
+          field :has_emergency_indicator, -> { Internal::Types::Boolean }, optional: true, nullable: false
           field :quantity, -> { String }, optional: false, nullable: false
           field :units, -> { Candid::Commons::Types::ServiceLineUnits }, optional: false, nullable: false
           field :charge_amount_cents, -> { Integer }, optional: true, nullable: false

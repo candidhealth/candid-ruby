@@ -19,6 +19,13 @@ module Candid
         # created in Candid.
         # Returns a run_id that can be polled via GET /runs/{run_id} to retrieve the results once complete.
         #
+        # Retries:
+        # - 503 Service Unavailable is temporary. Retry with exponential backoff and jitter, wait at least the number of
+        # seconds in the Retry-After header, and send the same idempotency_key so the retry is deduplicated. Stop after
+        # 5 attempts.
+        # - 422 Unprocessable Entity means the request is invalid. Resending it unchanged returns the same error; fix
+        # the request first.
+        #
         # @param request_options [Hash]
         # @param params [Candid::PreServiceRules::V1::Types::PreServiceEncounterRunCreate]
         # @option request_options [String] :base_url

@@ -9,6 +9,8 @@ module Candid
 
           APPEALABLE = "appealable"
           PREPARING = "preparing"
+          READY_FOR_REVIEW = "ready_for_review"
+          NEEDS_ATTENTION = "needs_attention"
           SUBMITTED = "submitted"
           REQUIRES_ADDITIONAL_INFO = "requires_additional_info"
           OVERTURNED = "overturned"
